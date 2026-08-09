@@ -1,0 +1,30 @@
+# Diese Repositories bleiben eigenständig und gehören nie dem Control-Root.
+/hai-mcp/
+/MBP_HAI_MIGRATION/
+/HAI_UIV1/
+
+# Eingevendorte Abhängigkeiten aus Workbench-Läufen. 253 MB, und ihre kommentierte
+# tsconfig.json hat scripts/validate.sh zum Abbruch gebracht, wodurch der Root eine
+# Zeit lang gar nicht mehr validiert wurde.
+**/.worker-home/
+**/.worker-tmp/
+**/node_modules/
+
+# Aider-Verläufe: roher Chatinhalt, nicht kuratiert, gehört nicht in die Historie.
+.aider*
+
+# Lokale Laufzeit- und rohe Sessiondaten sind nicht versionierbar.
+/runtime/
+/sessions/raw/
+/sessions/**/*.jsonl
+/sessions/**/*.ndjson
+/sessions/**/*.log
+/.local/
+/tmp/
+
+# Lokale Konfiguration und Betriebssystemreste.
+.env
+.env.*
+*.local.json
+.DS_Store
+

@@ -1,0 +1,19 @@
+{
+  "$schema": "../../contracts/capability-agent.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "agent",
+  "id": "hermes",
+  "display_name": "Hermes",
+  "version": "0.18.2",
+  "state": "installed_provider_unconfigured",
+  "observed_at": "2026-08-07",
+  "observation": {
+    "source": "owner_supplied_local_observation",
+    "scope": ["installation", "version"],
+    "record_path": "registry/agents/hermes.json"
+  },
+  "notes": [
+    "Der Provider ist unkonfiguriert; Authentifizierung, Fähigkeiten und Eignung wurden nicht behauptet."
+  ]
+}
+

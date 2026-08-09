@@ -1,0 +1,23 @@
+{
+  "$schema": "../../contracts/capability-agent.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "component",
+  "id": "mcp-agent-mail",
+  "display_name": "MCP Agent Mail",
+  "state": "candidate_unverified",
+  "observed_at": "2026-08-09",
+  "role": "agent_coordination",
+  "upstream_url": "https://github.com/Dicklesworthstone/mcp_agent_mail",
+  "observation": {
+    "source": "owner_supplied_local_observation",
+    "scope": ["presence", "upstream_reference"],
+    "record_path": "registry/components/mcp-agent-mail.json"
+  },
+  "notes": [
+    "Lokal unter ~/Projects/05_INBOX/mcp_agent_mail; MIT (with OpenAI/Anthropic Rider), 22M, uv venv auf Python 3.14.6.",
+    "Smoke 2026-08-09: build_mcp_server() liefert 41 Tools, darunter register_agent, whois, fetch_inbox, file_reservation_paths, renew_file_reservations, release_file_reservations, force_release_file_reservation, macro_file_reservation_cycle.",
+    "Korrektur zur Planannahme: serve-stdio existiert — kein HTTP-Daemon und kein Port 8765 noetig. Dockt genau wie hai-mcp per stdio an.",
+    "State bleibt candidate_unverified: kein Live-Andock an hai-mcp, keine Reservierung im echten Repo, kein Pre-Commit-Hook installiert, keine Promotion.",
+    "Kein Ersatz fuer die Control Plane. Andock: Leases advisory mit ttl_seconds; constraints.allowed_paths des Mission-Contracts als Glob-Reservierung, ttl_seconds = duration_minutes x 60."
+  ]
+}

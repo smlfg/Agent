@@ -1,0 +1,34 @@
+{
+  "$schema": "../contracts/session-event.schema.json",
+  "schema_version": "1.0.0",
+  "event_id": "E-20260807T183230-feierabend",
+  "session_id": "S-20260807-cursor-hai-multi-agent",
+  "occurred_at": "2026-08-07T18:32:30Z",
+  "type": "parked",
+  "actor": {
+    "kind": "human",
+    "id": "samuel"
+  },
+  "payload": {
+    "signal": "feierabend",
+    "lane_id": "hai-multi-agent-tryout",
+    "run_id": "R-20260807T182212-cao-tryout",
+    "run_status": "DONE",
+    "lane_status": "PARKED",
+    "control_plane": "DEGRADED",
+    "hai_fail_id": "0002-hai-mcp-unavailable-in-cursor",
+    "active_after": ["MBP daily driver"]
+  },
+  "evidence_paths": [
+    "workbench/runs/R-20260807T182212-cao-tryout.json",
+    "workbench/runs/R-20260807T182212-cao-tryout.evidence.md",
+    "fails/0002-hai-mcp-unavailable-in-cursor.json",
+    "parking/multi-agent-owner-gate.md",
+    "../00_AKTUELL/JETZT.md"
+  ],
+  "next_step": "Owner Gate in parking/multi-agent-owner-gate.md entscheiden; bis dahin nur MBP-Lane aktiv.",
+  "content_policy": {
+    "secrets_stored": false,
+    "hidden_reasoning_stored": false
+  }
+}

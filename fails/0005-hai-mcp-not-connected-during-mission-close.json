@@ -1,0 +1,52 @@
+{
+  "$schema": "../contracts/hai-fail.schema.json",
+  "schema_version": "1.0.0",
+  "id": "0005-hai-mcp-not-connected-during-mission-close",
+  "title": "hai-mcp Not connected beim Owner-Reminder Close von M-20260809T131144",
+  "observed_at": "2026-08-09",
+  "status": "partially_resolved",
+  "expected": "Owner-Reminder kann hai_checkpoint und hai_close_mission (oder PARKED/BLOCKED) über hai-mcp ausführen.",
+  "observed": "GetMcpTools meldet serverStatus ready, CallMcpTool für hai_health/hai_checkpoint/hai_status liefert Not connected in dieser Cursor-Chat-Session. Peer-Host hat M-20260809T131144-7f380757 inzwischen abandoned (closed_at 2026-08-09T11:17:22Z, Checkpoint 20260809T131712). CLI learning_budget ok (balance 202). CallMcpTool in dieser Session bleibt tot; andere Hosts nutzen hai-mcp weiter. Kein stiller ~/.hai Mission-Bypass.",
+  "attempts": [
+    {
+      "method": "CallMcpTool_hai_health",
+      "result": "Not connected"
+    },
+    {
+      "method": "CallMcpTool_hai_checkpoint",
+      "result": "Not connected"
+    },
+    {
+      "method": "GetMcpTools_hai-mcp",
+      "result": "serverStatus ready (schema only)"
+    }
+  ],
+  "safety_boundary": "Kein direkter Write auf active_mission.json / mission.json. DEGRADED + Fail + Backfill in nächster MCP-Session.",
+  "evidence_paths": [
+    "fails/0005-hai-mcp-not-connected-during-mission-close.json",
+    "/Users/samuelfleig/.hai/missions/M-20260809T131144-7f380757/mission.json",
+    "/Users/samuelfleig/Projects/03_HAI/HAI_UIV1/Evidence/builds/worker-panel.md",
+    "/Users/samuelfleig/Projects/.cursor/debug-28c872.log"
+  ],
+  "regression_test": {
+    "status": "desired",
+    "goal": "Nach MCP-Reconnect Mission per hai_checkpoint + hai_close_mission abandon/PARKED schließen.",
+    "precondition": "Cursor hai-mcp connected; hai_health ok.",
+    "success": "M-20260809T131144-7f380757 nicht mehr active; Checkpoint + Audit vorhanden."
+  },
+  "content_policy": {
+    "secrets_stored": false,
+    "hidden_reasoning_stored": false
+  },
+  "next_step": "Neuen Cursor-Chat öffnen (CallMcpTool in dieser Session tot); Plan-Validation-Mission nur bei Bedarf unverändert neu öffnen.",
+  "backfill": {
+    "at": "2026-08-09T11:54:33Z",
+    "method": "ControlPlane_API_uv_run",
+    "missions_closed": [
+      "M-20260809T135057-6f54ed63"
+    ],
+    "checkpoint": "20260809T135433",
+    "audit_event_id": "A-20260809T135433-5c998b60"
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "$schema": "../../contracts/capability-agent.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "component",
+  "id": "hai-mcp",
+  "display_name": "HAI-MCP",
+  "state": "present_unqualified",
+  "observed_at": "2026-08-07",
+  "role": "mcp_binding",
+  "relative_path": "hai-mcp",
+  "observation": {
+    "source": "owner_supplied_local_observation",
+    "scope": ["presence"],
+    "record_path": "registry/components/hai-mcp.json"
+  },
+  "notes": [
+    "Vorhandene erste MCP-Bindung; funktionale Eignung und Promotion sind nicht qualifiziert.",
+    "Das eigenständige Repository wird vom Control-Root ignoriert und nicht besessen."
+  ]
+}
+

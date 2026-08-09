@@ -1,0 +1,64 @@
+{
+  "$schema": "../../contracts/run-contract.schema.json",
+  "schema_version": "1.0.0",
+  "run_id": "R-20260807T182212-cao-tryout",
+  "lane_id": "hai-multi-agent-tryout",
+  "created_at": "2026-08-07T18:22:12Z",
+  "goal": "cao als Execution-Harness funktional prüfen und Evidenz an HAI-Run-Contract andocken.",
+  "non_goal": "Kein Einbau von Delegation in hai-mcp; keine Stable-Promotion; kein voller Multi-Agent-Assign mit Live-Modellen in diesem Slice.",
+  "boundaries": {
+    "write_roots": [
+      "workbench/runs",
+      "fails",
+      "parking",
+      "registry/components"
+    ],
+    "forbidden_paths": [
+      "stable",
+      "hai-mcp"
+    ]
+  },
+  "dod": [
+    {
+      "criterion": "cao CLI aus lokalem Checkout antwortet (Functional Check)",
+      "evidence_paths": [
+        "workbench/runs/R-20260807T182212-cao-tryout.evidence.md"
+      ]
+    },
+    {
+      "criterion": "Run-Contract terminal mit control_plane DEGRADED und Fail-Backfill",
+      "evidence_paths": [
+        "workbench/runs/R-20260807T182212-cao-tryout.json",
+        "fails/0002-hai-mcp-unavailable-in-cursor.json"
+      ]
+    }
+  ],
+  "stop_criterion": "cao Functional Check fehlgeschlagen, uv-Sync untragbar blockiert, oder Owner stoppt.",
+  "harnesses": {
+    "worker": { "id": "cao" },
+    "reviewer": { "id": "claude-code", "read_only": true },
+    "same_harness_owner_exception": false
+  },
+  "control_plane": {
+    "primary_binding": "hai-mcp",
+    "path": "bootstrap_adapter",
+    "status": "DEGRADED",
+    "adapter_id": "cursor-bootstrap-file-adapter",
+    "hai_fail_id": "0002-hai-mcp-unavailable-in-cursor",
+    "backfill_required": true
+  },
+  "budgets": {
+    "hot_path_seconds": 120,
+    "feedback_seconds": 900
+  },
+  "status": "DONE",
+  "result": {
+    "summary": "cao 2.4.1 Functional Check OK (init, CLI, server /docs 200, ops-mcp Entrypoint). Kein Live-Assign. Control Plane DEGRADED wegen fehlendem hai-mcp in Cursor.",
+    "evidence_paths": [
+      "workbench/runs/R-20260807T182212-cao-tryout.evidence.md",
+      "workbench/runs/R-20260807T182212-cao-tryout.json",
+      "fails/0002-hai-mcp-unavailable-in-cursor.json"
+    ],
+    "next_step": "Owner-Gate: hai-mcp in Cursor MCP eintragen, dann cao-ops-mcp daneben und ein Live-Assign-Tryout — oder HAI-Lane wieder parken."
+  }
+}

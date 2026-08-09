@@ -1,0 +1,22 @@
+{
+  "$schema": "../../contracts/capability-agent.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "component",
+  "id": "plaud-mcp",
+  "display_name": "Plaud MCP",
+  "state": "candidate_unverified",
+  "observed_at": "2026-08-07",
+  "role": "capture_mcp",
+  "upstream_url": "https://www.npmjs.com/package/@plaud-ai/mcp",
+  "observation": {
+    "source": "owner_supplied_local_observation",
+    "scope": ["installation", "upstream_reference"],
+    "record_path": "registry/components/plaud-mcp.json"
+  },
+  "notes": [
+    "Offizielles @plaud-ai/mcp; Install via npx -y @plaud-ai/mcp@latest install.",
+    "Capture/Transkript-Quelle neben hai-mcp in derselben Session; kein Control-Plane-Baustein.",
+    "Client-Configs: Claude Code (~/.claude.json mcpServers.plaud + hai-mcp), Cursor (~/.cursor/mcp.json beide).",
+    "OAuth 2026-08-07 ok (tokens-mcp.json); Smoke tools/list + get_current_user ok. Qualify/Stable nicht verifiziert."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hai.local/contracts/tree-node.schema.json",
+  "title": "HAI tree node with graph references",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "id",
+    "kind",
+    "title",
+    "state",
+    "parent_id",
+    "children",
+    "graph_refs",
+    "artifact_paths",
+    "next_step"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "kind": { "enum": ["root", "lane", "project", "variant", "run", "artifact", "fail", "parking"] },
+    "title": { "type": "string", "minLength": 1 },
+    "state": { "enum": ["capture", "active", "parked", "blocked", "done", "candidate", "stable"] },
+    "parent_id": { "type": ["string", "null"] },
+    "variant_of": { "type": ["string", "null"] },
+    "children": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "graph_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["relation", "target_id"],
+        "properties": {
+          "relation": { "enum": ["contains", "depends_on", "evidence", "variant_of", "resumes"] },
+          "target_id": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "artifact_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "resume_point": { "type": "string", "minLength": 1 },
+    "next_step": { "type": "string", "minLength": 1 },
+    "limits": {
+      "type": "object",
+      "required": ["max_active_top_level_lanes", "max_writing_slices_per_lane"],
+      "properties": {
+        "max_active_top_level_lanes": { "const": 2 },
+        "max_writing_slices_per_lane": { "const": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
+

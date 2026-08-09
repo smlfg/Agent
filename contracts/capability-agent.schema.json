@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hai.local/contracts/capability-agent.schema.json",
+  "title": "HAI capability, agent, or component registry record",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "kind",
+    "id",
+    "display_name",
+    "state",
+    "observed_at",
+    "observation"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": "1.0.0" },
+    "kind": { "enum": ["agent", "component"] },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "state": {
+      "enum": [
+        "installed_unqualified",
+        "installed_provider_unconfigured",
+        "present_unqualified",
+        "candidate_unverified",
+        "qualified",
+        "stable"
+      ]
+    },
+    "observed_at": { "type": "string", "format": "date" },
+    "role": { "type": "string", "minLength": 1 },
+    "relative_path": { "type": "string", "pattern": "^[^/]" },
+    "upstream_url": { "type": "string", "format": "uri" },
+    "observation": {
+      "type": "object",
+      "required": ["source", "scope", "record_path"],
+      "properties": {
+        "source": {
+          "enum": ["owner_supplied_local_observation", "owner_supplied_reference"]
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["installation", "version", "presence", "upstream_reference"]
+          }
+        },
+        "record_path": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "state", "evidence_paths"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "state": { "enum": ["unverified", "qualified"] },
+          "evidence_paths": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "kind": { "const": "agent" } } },
+      "then": { "required": ["version"] }
+    },
+    {
+      "if": { "properties": { "kind": { "const": "component" } } },
+      "then": {
+        "required": ["role"],
+        "anyOf": [
+          { "required": ["relative_path"] },
+          { "required": ["upstream_url"] }
+        ]
+      }
+    }
+  ],
+  "additionalProperties": false
+}
+

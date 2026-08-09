@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hai.local/contracts/promotion.schema.json",
+  "title": "HAI fail-closed promotion record",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "promotion_id",
+    "artifact_id",
+    "state",
+    "pipeline",
+    "checks",
+    "owner_gate",
+    "evidence_paths",
+    "next_step"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schema_version": { "const": "1.0.0" },
+    "promotion_id": { "type": "string", "minLength": 1 },
+    "artifact_id": { "type": "string", "minLength": 1 },
+    "state": { "enum": ["candidate", "blocked", "rejected", "stable"] },
+    "pipeline": {
+      "const": [
+        "Discover",
+        "Qualify",
+        "Sandbox",
+        "Functional Check",
+        "Contract Validation",
+        "Tests/Conformance",
+        "Tryout",
+        "read-only Review",
+        "Owner Gate",
+        "Stable"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["stage", "status", "evidence_paths"],
+        "properties": {
+          "stage": {
+            "enum": [
+              "Discover",
+              "Qualify",
+              "Sandbox",
+              "Functional Check",
+              "Contract Validation",
+              "Tests/Conformance",
+              "Tryout",
+              "read-only Review",
+              "Owner Gate",
+              "Stable"
+            ]
+          },
+          "status": { "enum": ["pending", "passed", "failed", "blocked"] },
+          "evidence_paths": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "reviewer_harness": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "owner_gate": {
+      "type": "object",
+      "required": ["status", "approved_by", "evidence_paths"],
+      "properties": {
+        "status": { "enum": ["pending", "approved", "rejected"] },
+        "approved_by": { "type": ["string", "null"] },
+        "evidence_paths": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "next_step": { "type": "string", "minLength": 1 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "state": { "const": "stable" } } },
+      "then": {
+        "properties": {
+          "owner_gate": {
+            "properties": { "status": { "const": "approved" } }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}
+

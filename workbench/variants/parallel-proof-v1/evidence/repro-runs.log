@@ -1,0 +1,12 @@
+=== repro run 1 ===
+Ran 9 tests in 9.940s
+
+OK
+=== repro run 2 ===
+Ran 9 tests in 9.796s
+
+OK
+=== repro run 3 ===
+Ran 9 tests in 9.732s
+
+OK

@@ -1,0 +1,14 @@
+test_different_runs_identical_payload_share_one_blob (test_adversarial_races.ConcurrentHandoffTest) ... ok
+test_same_run_competing_writers_one_wins_handoff_exists_for_losers (test_adversarial_races.ConcurrentHandoffTest) ... ok
+test_concurrent_integrator_claims_exactly_one_atomic_winner (test_adversarial_races.IntegratorClaimRaceTest) ... ok
+test_eleventh_active_run_rejected_and_completion_frees_slot (test_adversarial_races.RunCapacityTest) ... ok
+test_rejects_absolute_traversal_and_invalid_ids (test_adversarial_races.RunIdValidationTest) ... ok
+test_rejects_symlink_escape_target (test_adversarial_races.RunIdValidationTest) ... ok
+test_snapshot_during_active_writers_never_partial (test_adversarial_races.StatusSnapshotRaceTest) ... ok
+test_fifty_full_repetition_runs (test_stress_repetitions.StressRepetitionTest) ... ok
+test_ten_way_parallel_race (test_ten_way_race.TenWayRaceTest) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 9.693s
+
+OK

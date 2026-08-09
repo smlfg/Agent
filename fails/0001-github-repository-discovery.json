@@ -1,0 +1,40 @@
+{
+  "$schema": "../contracts/hai-fail.schema.json",
+  "schema_version": "1.0.0",
+  "id": "0001-github-repository-discovery",
+  "title": "Matt-Pocock-Grill-Me-Repository nicht autonom bestätigt",
+  "observed_at": "2026-08-07",
+  "status": "open",
+  "expected": "Das bekannte Matt-Pocock-Grill-Me-Repository autonom über eine Primärquelle bestätigen.",
+  "observed": "Die Recherche lieferte keine bestätigte Primärquelle: Webresultate waren leer, lokales gh hatte keinen Netzwerkzugang und der Browserzugriff wurde abgelehnt.",
+  "attempts": [
+    {
+      "method": "web_search",
+      "result": "empty_results"
+    },
+    {
+      "method": "local_gh",
+      "result": "network_unavailable"
+    },
+    {
+      "method": "browser",
+      "result": "access_denied"
+    }
+  ],
+  "safety_boundary": "Keine Netzwerk-, Browser-, Authentifizierungs- oder andere Sicherheitsgrenze umgehen.",
+  "evidence_paths": [
+    "fails/0001-github-repository-discovery.json"
+  ],
+  "regression_test": {
+    "status": "desired",
+    "goal": "Eine Primärquelle autonom finden und mit Pfad oder URL belegen, ohne die Recherchearbeit an Samuel zurückzugeben.",
+    "precondition": "Ein berechtigter und qualifizierter Research-Agent mit erlaubtem Primärquellenzugriff ist verfügbar.",
+    "success": "Der Research-Agent liefert die bestätigte Primärquelle und reproduzierbare Evidenz; Samuel muss keine Suchschritte übernehmen."
+  },
+  "content_policy": {
+    "secrets_stored": false,
+    "hidden_reasoning_stored": false
+  },
+  "next_step": "Den Regressionstest ausführen, sobald ein berechtigter Research-Agent verfügbar ist."
+}
+
