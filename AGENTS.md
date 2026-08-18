@@ -30,10 +30,10 @@ Jede Selbständerung beginnt als versionierte Workbench-Variante. Vor Stable sin
 Kein Worker-Start ohne diesen Brief in genau dieser Form:
 
 - Goal (1 Satz)
-- Non-Goal (was explizit NICHT)
+- Non-Goal (was explizit NICHT; bei Code-Slices: kein neues Modul/Repo/Feature-Code außer dokumentierter Owner-Ausnahme)
 - Boundaries (Write-Root-Pfad; außerhalb = verboten)
-- DoD (woran Erfolg messbar ist, mit Datei-Pfaden)
-- Stop-Kriterium (wann abbrechen und zurückmelden)
+- DoD (woran Erfolg messbar ist, mit Datei-Pfaden; bei Code-Slices: Upstream-URL + Andock-Pfad + Smoke-Evidenz oder `UPSTREAM_SEARCH.md` mit PARKED)
+- Stop-Kriterium (wann abbrechen und zurückmelden; kein brauchbarer Upstream → PARKED mit Suchprotokoll, nicht selber bauen)
 
 Prüfe die Verfügbarkeit des vorgesehenen Harness vor Dispatch; kein stiller Fallback und kein Funktionsclaim aus bloßer Installation. Gleichzeitig maximal ein schreibender Worker plus ein read-only Prüfer. Worker und Prüfer verwenden unterschiedliche Harnesses, außer Samuel genehmigt die Ausnahme ausdrücklich.
 
@@ -53,3 +53,4 @@ Jede Stufe braucht Pfad-Evidenz. Eine fehlende, übersprungene oder fehlgeschlag
 - Signalisiert Samuel Overload, sichere den Zustand in `~/Projects/00_AKTUELL/JETZT.md`, reduziere auf genau einen nächsten Schritt und führe keine neue Architektur ein.
 - Untergeordnete `AGENTS.md` gelten zusätzlich. Diese Root-Gates bleiben immer in Kraft.
 - **Plan-Acceptance-Gate:** Keine Build-/Executer-Lane ohne `PLAN_VALIDATION_REPORT.md` mit Verdict `ACCEPT`. Bei `REPLAN` zurück zur Planning-Lane (max. 2 Zyklen); bei `REJECT`/`UNCLEAR` oder Bound erschöpft → Owner. Vertrag: [`docs/PLAN_ACCEPTANCE_GATE.md`](docs/PLAN_ACCEPTANCE_GATE.md). Getrennt vom post-Exec-Validator.
+- **Upstream-First-Gate:** Vor Feature-/App-Code (`*.py`/`*.ts`/`*.go`/… außerhalb Whitelist) ist `UPSTREAM_SEARCH.md` mit ≥3 Kandidaten Pflicht. Fehlt sie → `BLOCKED`/`PARKED`, kein Eigenbau. Whitelist: Verträge, Registry, Config/MCP, Shell-Wizards, Docs/Fails/STACK. Owner-Ausnahme nur mit LOC-Budget (Default ≤80 Zeilen Glue). Vertrag: [`docs/UPSTREAM_FIRST_GATE.md`](docs/UPSTREAM_FIRST_GATE.md). Fail: [`fails/0012-eigenbau-ohne-upstream-search.json`](fails/0012-eigenbau-ohne-upstream-search.json).
