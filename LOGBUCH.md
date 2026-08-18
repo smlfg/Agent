@@ -171,6 +171,34 @@ Ausnahme braucht ein neues, exaktes Owner-Gate.
 
 ---
 
+## 2026-08-18 — Überschreiben nur mit Verdichtung (Hot State ≠ Gedächtnis)
+
+Auslöser: Am selben Tag wurde `00_AKTUELL/JETZT.md` neu geschrieben und der Stand vom Morgen
+(die A/B/C-Scope-Frage zu „fix hai-mcp") ging dabei verloren — nur im Chat-Transkript überlebt.
+`~/Projects` ist kein Git-Repo; HAI-Checkpoints sichern `ACTIVE_CONTEXT.json`, aber **nicht**
+`JETZT.md` oder `ACTIVE_PROJECTS.md`.
+
+### 1. Hot State darf nur überschrieben werden, wenn die Verdichtung im Wiki liegt
+
+**Entscheidung:** Hot State — `JETZT.md`, `ACTIVE_CONTEXT.json`, `ACTIVE_PROJECTS.md` — ist
+überschreibbar, **aber nur**, wenn die verdichteten Kerninformationen des Vorgängerstands vorher
+im versionierten Wiki dokumentiert (oder implementiert) sind. Das Wiki ist das, was parallel zu
+HAI entsteht und in Git liegt: `LOGBUCH.md`, `fails/`, `docs/`, `INVENTUR-*`, `contracts/`.
+
+**Warum:** Hot State beantwortet „wo stehen wir jetzt", das Wiki beantwortet „warum stehen wir
+hier und was galt vorher". Wird Hot State ohne Verdichtung überschrieben, verliert HAI sein
+Gedächtnis, während es behauptet, eines zu haben. Append-only-Flächen (Inbox, Audit,
+Checkpoints, Intakes) zeigen, dass das System es anders längst richtig macht.
+
+**Fundstelle:** Verlust vom 18.08. (altes `JETZT.md`, Scope-Frage A/B/C); Inventur
+`INVENTUR-2026-08-18.md`; Intake `I-20260818T173852-d95132d8`.
+
+**Was nicht passieren darf:** Ein Tagesstand, Fokus oder Lane-Wechsel, der den Vorgänger
+kommentarlos ersetzt. Mindestverdichtung vor jedem Überschreiben: ein Satz im Wiki, was galt
+und warum es fällt. Wer das zu aufwendig findet, darf Hot State nicht anfassen — sondern parken.
+
+---
+
 ## Offen, bewusst nicht gelöst
 
 - **Umlenken ist kein Scheitern, aber HAI kennt nur `completed` und `abandoned`.** 15 gute
