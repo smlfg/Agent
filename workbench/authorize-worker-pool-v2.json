@@ -1,0 +1,12 @@
+{
+  "mission_id": "M-20260809T150918-3e57ac16",
+  "contract_version": 1,
+  "agent_identity": "cursor-main-kimi-k3",
+  "role": "main_session",
+  "contribution": "Main Session: orchestriert Slices 0-5 (Gate, cao-Qualifizierung, Fleet codex/claude/gemini, Fallback-Dispatch, Tryout, Docs), schreibt Glue/Vertraege, dispatcht Validator und Worker",
+  "expected_result": "Alle 5 Done-Criteria mit Pfad-Evidenz erfuellt; Dispatch blockiert nie mehr an einem einzelnen Harness",
+  "duration_minutes": 240,
+  "capabilities": ["read", "write", "test", "execute"],
+  "criterion_ids": ["plan_gate_accept", "cao_functional", "fleet_probed", "fallback_proven", "contracts_updated"],
+  "request_id": "req-20260809T1510-worker-pool-main-v2"
+}

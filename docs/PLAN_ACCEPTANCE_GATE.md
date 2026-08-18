@@ -77,14 +77,17 @@ allowed: yes|no
 - Nach dem zweiten REPLAN ohne brauchbaren Plan: Status `BLOCKED`, Evidenzpfad, genau ein Next Step an Samuel.
 - Kein stilles Weitermachen ohne Report.
 
-## Zwei Gates (nicht kollabieren)
+## Gates (nicht kollabieren)
 
-| Gate | Wann | Artefakt | Verdicts |
+| Gate | Wann | Artefakt | Verdicts / Wirkung |
 |---|---|---|---|
 | **Plan-Acceptance-Gate** | vor Build-Lane | `PLAN_VALIDATION_REPORT.md` | ACCEPT, REPLAN, REJECT, UNCLEAR |
+| **Continuous Authorize** | während Execute bei Pflicht-Triggern | Step-/Capability-Lease, Deny, Revoke | hält / widerruft Steps — kein Ersatz für ACCEPT |
 | **Post-Exec-Validator** | nach Execution-Report | `VALIDATION_REPORT_NEXT_STEP.md` | ACCEPT, REJECT, UNCLEAR |
 
-Owner-Gates (Commit, Push, Deploy, Secrets) bleiben unberührt und stehen **nach** beiden Agent-Gates.
+Plan-`ACCEPT` startet die Lane; Continuous Authorize hält die Aufsicht danach. Vertrag: [`CONTINUOUS_AUTHORIZE.md`](CONTINUOUS_AUTHORIZE.md). Fail: [`fails/0014-execute-ohne-continuous-authorize.json`](../fails/0014-execute-ohne-continuous-authorize.json).
+
+Owner-Gates (Commit, Push, Deploy, Secrets) bleiben unberührt und stehen **nach** den Agent-Gates.
 
 ## Dispatch-Brief (Gate Agent)
 

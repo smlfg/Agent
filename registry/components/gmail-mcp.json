@@ -1,0 +1,21 @@
+{
+  "$schema": "../../contracts/capability-agent.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "component",
+  "id": "gmail-mcp",
+  "display_name": "Gmail MCP (read-only)",
+  "state": "candidate_unverified",
+  "observed_at": "2026-08-10",
+  "role": "workflow_mail_read_mcp",
+  "upstream_url": "https://www.npmjs.com/package/@artymclabin/gmail-mcp",
+  "observation": {
+    "source": "owner_supplied_local_observation",
+    "scope": ["installation", "upstream_reference"],
+    "record_path": "registry/components/gmail-mcp.json"
+  },
+  "notes": [
+    "Arbeitsweg, kein BRUEGGEN-Produktbaustein. Host-Config: ~/.cursor/mcp.json server gmail-mcp.",
+    "Auth: npx -y @artymclabin/gmail-mcp auth --scopes=gmail.readonly; keys/credentials in ~/.gmail-mcp/.",
+    "Smoke 2026-08-10: Config + OAuth gmail.readonly + API inbox list OK. Cursor MCP reload noch Owner. Siehe docs/EMAIL_MCP_READ_PATH.md und docs/evidence/EMAIL_MCP_MISSION_STATE_2026-08-10.md."
+  ]
+}

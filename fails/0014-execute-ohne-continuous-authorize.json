@@ -1,0 +1,60 @@
+{
+  "$schema": "../contracts/hai-fail.schema.json",
+  "schema_version": "1.0.0",
+  "id": "0014-execute-ohne-continuous-authorize",
+  "title": "execute mit einmaligem ACCEPT — Owner musste Terminal killen",
+  "observed_at": "2026-08-18",
+  "status": "mitigated",
+  "expected": "Nach Plan-ACCEPT bleibt Autorisierung laufend: riskante Steps (Bulk-Upload, execute, Methodenwechsel) brauchen erneute Freigabe durch eine Aufsichtsrolle. Lease scoped+revocable; kein Session-Grant. Host-Ressourcen (RAM) sind Ceiling oder Stop-Kriterium. Agenten führen aus; Struktur autorisiert bis Close/Park/Block.",
+  "observed": "Schauen-Mission M-20260818T161614-7a7fbf93: Plan-ACCEPT + hai_authorize_session mit capability execute. Agent wechselte von hai-post.sh zu Python path.read_bytes() Multipart für ~2.4GB MP4s. Speicher explodierte; Owner beendete Terminal manuell (exit_code unknown). hai-mcp prüfte Write-Root/Lease, nicht Schritt-Freigabe oder RAM. Mission blieb active bis nachträgliches abandon.",
+  "attempts": [
+    {
+      "method": "plan_acceptance_once_then_execute",
+      "result": "PLAN_VALIDATION_REPORT ACCEPT prüfte Goal/DoD/Stop/Secrets — nicht Upload-Methode oder Ressourcen"
+    },
+    {
+      "method": "hai_authorize_session_broad_execute",
+      "result": "Lease erlaubte Shell/Python im Write-Root; keine One-Call-Authorize, kein Revoke bei Memory-Pressure"
+    },
+    {
+      "method": "owner_manual_terminal_kill",
+      "result": "Not-Stop außerhalb Control Plane; Writer-Lock hing bis abandon M-20260818T161614"
+    },
+    {
+      "method": "upstream_search_continuous_authorize",
+      "result": "workbench/continuous-authorize/UPSTREAM_SEARCH.md — Primary leasebroker + Companions agent-approval-gate + LangGraph interrupt (Mission M-20260818T164534-950ddfe3)"
+    },
+    {
+      "method": "leasebroker_sandbox_qualify",
+      "result": "leasebroker@0.3.0 Smoke deny/revoke PASS; registry/components/leasebroker.json candidate_unverified; QUALIFY_LEASEBROKER.md (Mission M-20260818T164814-da71496c). No hai-mcp runtime dock yet."
+    },
+    {
+      "method": "continuous_authorize_contract_doc",
+      "result": "docs/CONTINUOUS_AUTHORIZE.md aktiv (Doku-Gate); verdrahtet in PLAN_ACCEPTANCE_GATE, ARCHITECTURE, AGENTS.md (Mission M-20260818T165240-4b06e4f4). Enforcement in hai-mcp noch Folge-Slice."
+    }
+  ],
+  "safety_boundary": "Kein Feature-Code in diesem Fail-Slice. Continuous Authorize wird nur über Upstream-Andock + Verträge eingeführt; kein stiller Bypass der bestehenden Plan-/Upstream-Gates.",
+  "evidence_paths": [
+    "fails/0014-execute-ohne-continuous-authorize.json",
+    "docs/CONTINUOUS_AUTHORIZE.md",
+    "docs/PLAN_ACCEPTANCE_GATE.md",
+    "docs/ARCHITECTURE.md",
+    "AGENTS.md",
+    "workbench/continuous-authorize/UPSTREAM_SEARCH.md",
+    "workbench/continuous-authorize/QUALIFY_LEASEBROKER.md",
+    "workbench/continuous-authorize/sandbox/smoke-result.json",
+    "registry/components/leasebroker.json",
+    "Projek-Managment/PLAN_VALIDATION_REPORT.md"
+  ],
+  "regression_test": {
+    "status": "desired",
+    "goal": "Nach Plan-ACCEPT darf ein Executer keine neue Write/Execute-Methode ohne erneute Freigabe starten; RAM-/Bulk-Risiken sind Stop oder Gate.",
+    "precondition": "docs/CONTINUOUS_AUTHORIZE.md aktiv; Mission mit execute.",
+    "success": "Methodenwechsel oder Bulk-Media-Upload ohne Step-Approve endet BLOCKED/held; Owner muss kein Terminal killen; Lease revoke oder Gate-Deny ist sichtbar in Evidenz."
+  },
+  "content_policy": {
+    "secrets_stored": false,
+    "hidden_reasoning_stored": false
+  },
+  "next_step": "Optional: leasebroker serve --strict vor einem MCP; Companion-Qualify agent-approval-gate; später hai-mcp Enforcement nur nach Plan-Acceptance + Owner."
+}

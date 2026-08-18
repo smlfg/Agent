@@ -1,0 +1,38 @@
+{
+  "mission_id": "M-20260809T144350-e69605cf",
+  "contract_version": 1,
+  "reason": "Plan-Validator REPLAN (Attempt 1/2) + Owner-Entscheide 2026-08-09: Scope First-Run auf 3 Worker (codex, claude, gemini), 8 Slots geparkt; AGENTS.md-Aenderung owner-gegatet; Code-Ausnahme max 5 cao-Provider-Module + 1 CrewAI-Scaffold freigegeben. Via ControlPlane-Adapter (uv run), MCP Transport Not connected (DEGRADED, Muster fails 0005/0006).",
+  "owner_ack": true,
+  "mode": "normal",
+  "break_glass_marker": false,
+  "changes": {
+    "artifact": "03_HAI/dispatch/, 03_HAI/contracts/run-contract-v1.1.0.schema.json, 03_HAI/workbench/variants/worker-pool-v1/ (inkl. FLEET_STATUS.md, evidence/), 03_HAI/workbench/runs/, 03_HAI/fails/0007+0008, 03_HAI/Projek-Managment/PLAN_VALIDATION_REPORT_worker-pool.md, 03_HAI/AGENTS.md (owner-gegatet), STACK.md, 00_AKTUELL/JETZT.md",
+    "done_criteria": [
+      {
+        "id": "plan_gate_accept",
+        "description": "PLAN_VALIDATION_REPORT.md mit Verdict ACCEPT eines unabhaengigen Plan-Validators (anderer Harness als Planner) liegt vor, bevor eine Build-Lane startet.",
+        "verifiable": true
+      },
+      {
+        "id": "cao_functional",
+        "description": "cao global installiert (uv tool), cao-server erreichbar, cao-ops-mcp neben hai-mcp eingetragen, ein Live-Assign mit Mini-Task inkl. Evidenzpfad unter 03_HAI/workbench/variants/worker-pool-v1/evidence/.",
+        "verifiable": true
+      },
+      {
+        "id": "fleet_probed",
+        "description": "First-Run-Scope (Owner-Entscheid 2026-08-09): codex, claude, gemini haben je ein dokumentiertes Probe-Ergebnis (PASS/PARKED mit Grund) in 03_HAI/workbench/variants/worker-pool-v1/FLEET_STATUS.md; nur PASS-Slots stehen in der Kette; die uebrigen 8 Slots (cursor-agent, aider, opencode, hermes, pi, warp, crewai, aider/ollama) sind als geparkte Folge-Slices in FLEET_STATUS.md ausgewiesen.",
+        "verifiable": true
+      },
+      {
+        "id": "fallback_proven",
+        "description": "Tryout unter 03_HAI/workbench/runs/ beweist: Worker 1 failt erzwungen (mock_cli), naechster Worker uebernimmt sichtbar (attempts[] im Run-Contract), Run endet DONE mit Evidenzpfaden.",
+        "verifiable": true
+      },
+      {
+        "id": "contracts_updated",
+        "description": "run-contract-v1.1.0.schema.json angelegt (worker_pool, attempts[], selected_worker; v1 bleibt unveraendert; Abwaertskompatibilitaet per jsonschema-Check belegt), AGENTS.md Dispatch-Absatz angepasst (Owner-Gate 2026-08-09 erteilt, validate.sh-Needles erhalten), STACK.md auf Ist-Stand, fails/0007+0008 vorhanden, JETZT.md aktualisiert.",
+        "verifiable": true
+      }
+    ]
+  }
+}

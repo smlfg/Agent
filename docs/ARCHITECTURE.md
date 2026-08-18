@@ -14,9 +14,17 @@ Der Root ist Control Plane und dauerhafte Human-Agent-Schnittstelle. Er überset
 
 ## Arbeitsbaum und Nebenläufigkeit
 
-Die Baum-UX zeigt Root, Lanes, Projekte, Varianten, Runs und Artefakte. Interne Graphkanten dürfen Querverweise wie `variant_of`, Evidenz oder Resume-Punkte tragen. So bleibt die Oberfläche einfach, während nichtlineare Arbeit erhalten bleibt.
+Die Baum-UX zeigt Root, Lanes, Projekte, Familien, Varianten, Runs und Artefakte. Interne Graphkanten dürfen Querverweise wie `variant_of`, `related_to`, `family_of`, `consolidates_into`, Evidenz oder Resume-Punkte tragen. So bleibt die Oberfläche einfach, während nichtlineare Arbeit erhalten bleibt.
 
 Capture und Parking dürfen wachsen. Die operative Begrenzung liegt bei höchstens zwei aktiven Top-Level-Lanes und genau einem schreibenden Slice je Lane. Ein Scope- oder Drift-Fund wird abgezweigt, statt den laufenden Vertrag still zu verändern. Varianten erhalten eigene IDs und bleiben unabhängig promotierbar.
+
+## Konsolidierungs-Funnel
+
+Zwischen unbegrenztem FanOUT und begrenzter Implementierung sitzt die Verdichtungsschicht: Project Family → Consolidation Map (Default ≤3 Implementierungsziele) → Distill (1 Entscheidung) → Run-Contract. Denken darf breit sein; Schreiben bleibt knapp. Konsolidierung ist kein Monolith-Merge und erhöht keine Writer-Kapazität. Vertrag: [`docs/CONSOLIDATION_FUNNEL.md`](CONSOLIDATION_FUNNEL.md), Schema: [`contracts/consolidation-map.schema.json`](../contracts/consolidation-map.schema.json), Gap: [`fails/0013-planning-fanout-ohne-konsolidierung.json`](../fails/0013-planning-fanout-ohne-konsolidierung.json).
+
+## Continuous Authorize
+
+Agenten haben keine Verantwortung als Rolle. Haftung liegt in der Struktur: Plan-ACCEPT startet; Mission-Lease begrenzt Wer/Wo; Step-/Capability-Leases halten die Aufsicht während Execute (Methodenwechsel, Bulk, `execute`). Autorisierer ≠ Executer; Freigabe endet erst mit Close/Park/Block. Vertrag: [`CONTINUOUS_AUTHORIZE.md`](CONTINUOUS_AUTHORIZE.md), Fail: [`fails/0014-execute-ohne-continuous-authorize.json`](../fails/0014-execute-ohne-continuous-authorize.json), Upstream: [`leasebroker`](../registry/components/leasebroker.json).
 
 ## Harness on Demand
 

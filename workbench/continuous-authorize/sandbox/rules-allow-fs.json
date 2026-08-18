@@ -1,0 +1,9 @@
+[
+  {
+    "ruleId": "allow-fs-read-data",
+    "effect": "allow",
+    "capabilityKind": "fs.read",
+    "paths": ["./data/**"],
+    "maxDurationMs": 600000
+  }
+]

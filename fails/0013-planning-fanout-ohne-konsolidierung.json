@@ -1,0 +1,44 @@
+{
+  "$schema": "../contracts/hai-fail.schema.json",
+  "schema_version": "1.0.0",
+  "id": "0013-planning-fanout-ohne-konsolidierung",
+  "title": "Planning-FanOUT ohne Konsolidierungs-Schicht",
+  "observed_at": "2026-08-18",
+  "status": "mitigated",
+  "expected": "Gedanken-FanOUT persistiert unbegrenzt. Verwandte Projekte/Ideen verdichten sich über Project Families und eine Consolidation Map zu wenigen klaren Implementierungszielen. Schreiben bleibt knapp (Writer/Lanes). Distill bleibt 1 Entscheidung + 1 Schritt unter der Map.",
+  "observed": "Intake und Distill skalieren Capture flach: Distill parkt Geschwister ohne Family-Graph. tree-node kennt kein kind family und keine Relationen related_to / family_of / consolidates_into. ~100 teils verwandte STACK-/Inbox-Projekte bleiben Zeilen ohne Verdichtung zu Implementierungsdefinitionen. Owner denkt schneller als Agenten; HAI hält den Überschuss nicht als konsolidierbaren Baum.",
+  "attempts": [
+    {
+      "method": "unlimited_capture_plus_flat_distill",
+      "result": "hai_intake + hai_distill halten Kardinalität (1 decision), verlieren aber Cluster-Struktur verwandter Äste"
+    },
+    {
+      "method": "logbuch_themes_unlimited_writers_limited",
+      "result": "Asymmetrie Denken>>Schreiben ist dokumentiert, aber ohne Consolidation-Contract nicht operationalisierbar"
+    },
+    {
+      "method": "consolidation_funnel_contracts",
+      "result": "docs/CONSOLIDATION_FUNNEL.md, contracts/consolidation-map.schema.json, tree-node family/relations, ARCHITECTURE-Verweis (Mission M-20260818T162805-c9fd2152)"
+    }
+  ],
+  "safety_boundary": "Konsolidierung erhöht keine Writer-Kapazität und startet keine Implementierung. Kein Monolith-Merge, kein Feature-Code in diesem Slice. Capture/Park bleiben unbegrenzt; nur implementation_targets sind begrenzt (Default max 3).",
+  "evidence_paths": [
+    "fails/0013-planning-fanout-ohne-konsolidierung.json",
+    "docs/CONSOLIDATION_FUNNEL.md",
+    "docs/ARCHITECTURE.md",
+    "contracts/consolidation-map.schema.json",
+    "contracts/tree-node.schema.json",
+    "contracts/README.md"
+  ],
+  "regression_test": {
+    "status": "desired",
+    "goal": "≥10 verwandte Captures ergeben eine Consolidation Map mit ≤3 implementation_targets plus Parkliste; kein Writer wird dadurch gestartet.",
+    "precondition": "consolidation-map.schema.json aktiv; Familie mit ≥10 member_ids erfasst.",
+    "success": "Eine gültige Map-Instanz existiert; next_implementation ist höchstens ein Ziel oder null; parked enthält den Rest; writer_slots_in_use steigt nicht allein durch die Map."
+  },
+  "content_policy": {
+    "secrets_stored": false,
+    "hidden_reasoning_stored": false
+  },
+  "next_step": "Nach Owner-Go: erste echte Consolidation-Map als Workbench-JSON für eine bestehende Familie (z. B. Multi-Agent/STACK-Kandidaten) anlegen."
+}

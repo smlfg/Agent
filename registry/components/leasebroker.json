@@ -1,0 +1,23 @@
+{
+  "$schema": "../../contracts/capability-agent.schema.json",
+  "schema_version": "1.0.0",
+  "kind": "component",
+  "id": "leasebroker",
+  "display_name": "leasebroker — Capability Leases for Agents/MCP",
+  "state": "candidate_unverified",
+  "observed_at": "2026-08-18",
+  "role": "capability_lease_broker",
+  "upstream_url": "https://github.com/TomCruiseTorpedo/leasebroker",
+  "observation": {
+    "source": "sandbox_smoke",
+    "scope": ["presence", "upstream_reference", "functional_smoke"],
+    "record_path": "registry/components/leasebroker.json"
+  },
+  "notes": [
+    "npm leasebroker@0.3.0, Apache-2.0. Sandbox unter workbench/continuous-authorize/sandbox/.",
+    "Smoke 2026-08-18: deny ohne Allow-Regel; grant+path-scope; revoke → enforce fail (lease has been revoked); CLI deny exit 2 + CLI revoke. Evidenz: workbench/continuous-authorize/sandbox/smoke-result.json, QUALIFY_LEASEBROKER.md.",
+    "UPSTREAM_SEARCH Decision: Primary für Continuous Authorize (Mission M-20260818T164534 / Fail 0014).",
+    "State bleibt candidate_unverified: kein Andock an hai_authorize_session Runtime, kein MCP-serve vor hai-mcp, keine Stable-Promotion.",
+    "Kein Ersatz der Control Plane. Andock-Idee: Mission-Lease = wer darf schreiben; leasebroker = welche Capability/Pfad/Dauer pro Step; serve --strict für unmapped deny."
+  ]
+}

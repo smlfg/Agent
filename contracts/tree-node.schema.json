@@ -20,7 +20,7 @@
     "$schema": { "type": "string", "minLength": 1 },
     "schema_version": { "const": "1.0.0" },
     "id": { "type": "string", "minLength": 1 },
-    "kind": { "enum": ["root", "lane", "project", "variant", "run", "artifact", "fail", "parking"] },
+    "kind": { "enum": ["root", "lane", "project", "family", "variant", "run", "artifact", "fail", "parking"] },
     "title": { "type": "string", "minLength": 1 },
     "state": { "enum": ["capture", "active", "parked", "blocked", "done", "candidate", "stable"] },
     "parent_id": { "type": ["string", "null"] },
@@ -36,7 +36,7 @@
         "type": "object",
         "required": ["relation", "target_id"],
         "properties": {
-          "relation": { "enum": ["contains", "depends_on", "evidence", "variant_of", "resumes"] },
+          "relation": { "enum": ["contains", "depends_on", "evidence", "variant_of", "resumes", "related_to", "family_of", "consolidates_into"] },
           "target_id": { "type": "string", "minLength": 1 }
         },
         "additionalProperties": false

@@ -1,0 +1,46 @@
+{
+  "ok": true,
+  "out": [
+    {
+      "step": "deny_empty_rules",
+      "type": "denied",
+      "reason": "No matching allow-rule for capability kind 'fs.read' (agent: 'cursor-main')",
+      "at": "2026-08-18T14:49:51.499Z"
+    },
+    {
+      "step": "grant_with_rule",
+      "type": "granted",
+      "leaseId": "b894ec3e-a951-4c51-ab08-455692e4c56d",
+      "at": "2026-08-18T14:49:51.501Z"
+    },
+    {
+      "step": "enforce_before_revoke",
+      "ok": true,
+      "detail": null,
+      "at": "2026-08-18T14:49:51.503Z"
+    },
+    {
+      "step": "enforce_out_of_scope_path",
+      "ok": false,
+      "at": "2026-08-18T14:49:51.504Z"
+    },
+    {
+      "step": "revoke",
+      "leaseId": "b894ec3e-a951-4c51-ab08-455692e4c56d",
+      "at": "2026-08-18T14:49:51.504Z"
+    },
+    {
+      "step": "enforce_after_revoke",
+      "ok": false,
+      "reason": "lease has been revoked",
+      "at": "2026-08-18T14:49:51.505Z"
+    },
+    {
+      "step": "cli_deny_empty_rules",
+      "status": 2,
+      "stdout": "{\"type\":\"denied\",\"reason\":\"No matching allow-rule for capability kind 'fs.read' (agent: 'cursor-main')\"}",
+      "stderr": "",
+      "at": "2026-08-18T14:49:51.763Z"
+    }
+  ]
+}
