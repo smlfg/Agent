@@ -1,0 +1,7 @@
+{
+  "defaultModel": "MiniMax-M3",
+  "defaultProvider": "minimax",
+  "defaultThinkingLevel": "high",
+  "lastChangelogVersion": "0.84.2",
+  "theme": "dark"
+}

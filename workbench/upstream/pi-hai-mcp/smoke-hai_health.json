@@ -1,0 +1,16 @@
+{
+  "tool": "hai-mcp_hai_health",
+  "args": {},
+  "response": {
+    "hai_home": "/Users/samuelfleig/.hai",
+    "hai_home_writable": true,
+    "max_active_lanes": 0,
+    "model_calls": false,
+    "ok": true,
+    "server": "hai-mcp",
+    "version": "0.1.0"
+  },
+  "smoke_at": "2026-08-20T07:40:00Z",
+  "session_kind": "pi -p --no-session (fresh subprocess)",
+  "verdict": "PASS"
+}
