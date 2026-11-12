@@ -44,30 +44,44 @@ Damit Ziele, Entscheidungen und Belege nicht auseinanderlaufen, gilt im Repo:
    - Das Voice-System wird als **eigenes Modul** gekapselt (unter Wiederverwendung von
      `smlfg/hai-voice-builder`: deutsche Text-Guards + 140-Zeichen-Satz-Chunking sowie
      der Durable-Object-/TTS-Erfahrung aus `smlfg/MonesterAG-ent-`).
-5. **Die max. 3 Slider sind die direkten Parameter des H.A.I.:**
-   - Die Regler steuern nicht nur Optik, sondern die **Human-Agent-Interaction-Parameter**
-     selbst (vgl. `BIO-HAI` Cognitive-Load-Slider):
-     1. **Tempo / Tiefe:** `schnell ↔ tief` (sofortige Kurz-Antwort vs. tiefere Synthese)
-     2. **Input/Output-Dichte:** `knapp ↔ ausführlich` (wie viel Output/Rückfrage der Mensch gerade will)
-     3. **Atmosphäre / Ton:** `warm ↔ cold` (Farbtemperatur & sprachliche Nähe)
+5. **Die max. 3 Slider koppeln live CSS Visual Style × HAI Interaction Experience:**
+   - Jeder Regler steuert gleichzeitig die **visuelle CSS-Oberfläche** (Custom Properties +
+     Variable Fonts) und die **Interaktions-Parameter des H.A.I.** (vgl. `BIO-HAI` Cognitive-Load-Slider):
+     1. **`warm ↔ cold` (Atmosphäre & Nähe):**
+        - *CSS Visual Style:* Warmer Papier-/Holzton & Serif-Wärme ↔ kühles, klares Tech-Blau.
+        - *HAI Interaction:* Nahbarer, persönlicher Gesprächston ↔ nüchtern-präziser Fakten-Ton.
+     2. **`soft ↔ sharp` / `knapp ↔ ausführlich` (Form & Cognitive Load):**
+        - *CSS Visual Style:* Weiche Radien, sanfte Striche, luftiger Raum ↔ scharfe Kanten, kompakte Dichte.
+        - *HAI Interaction:* Sanft-ausführliche Erklärung ↔ radikal knapp und direkt auf den Punkt.
+     3. **`still ↔ alive` / `schnell ↔ tief` (Bewegung & Initiative/Tiefe):**
+        - *CSS Visual Style:* Ruhiges Feld, langsame Atmung ↔ lebendiger Puls, dynamischer Typewriter.
+        - *HAI Interaction:* Ruhige Sofort-Antwort ohne Nachfragen ↔ aktive DPPM-Synthese + 2 weiterführende Fäden.
+
+## Anti-Scope-Creep: 3 vertikale Build-Slices (HAI-Projektmanagement)
+
+Um Scope Creep („1 Task → 5 Schichten“) auszuschließen, wird die EINE Ownership-Version
+in **drei strikt getrennten vertikalen Slices** gebaut — jeder Slice hat ein eigenes
+`Not included`-Gate und muss Ende-zu-Ende laufen, bevor der nächste startet:
+
+| Slice | Was gebaut & verifiziert wird | Explizit `Not included` (Scope-Parkplatz) |
+| --- | --- | --- |
+| **Slice 1 — Core Vertical Slice (`What this is`)** | Polierte reaktive Augen (`BoopFace`-Mechanik) + 3 Dual-Channel-Slider (CSS Custom Properties + Prompt-Steuerung) + pulsierender Typewriter + Front-Agent (Text + Voice-Modul) + **1 Pathway (`What this is`)** mit „Bridge + max. 2 Fäden“ und **3 statischen JSON-Waypoints** (`What is HAI`, `hai-mcp`, `Website-Agent als Produkt`). | Keine mehrstufige DPPM-Hintergrund-Kaskade, noch nicht alle 8 Domains im Katalog, kein Bild-Upload. |
+| **Slice 2 — On-Demand DPPM & voller Portfolio-Katalog** | Caching-First + asynchrone On-Demand-Agents (DPPM-Synthese nachliefern) + Freischaltung der Pathways `creator` und `product for X` inkl. komplettem Waypoint-Katalog (alle 8 Domains, beste GitHub-Repos, Kontaktdaten, Buchungs-/Anfrage-Waypoint). | Keine neuen UI-Bedienelemente außerhalb der 3 Slider + 1 Waypoint-Card. |
+| **Slice 3 — Polish, Latenz-Messung & Live-Deploy** | E2E-Latenz- & Deutsch-Verifikation (`first_token_ms`, `first_audio_ms`), Graceful-Degradation-Tests und kontrollierter Deploy auf `agentfähig.de` nach Samuels Freigabe. | Kein Umbau der Kernarchitektur. |
 
 ## Stand der 5 Kernfragen vor dem ersten Build
 
-1. **Erster Besucherablauf:** *Entschieden* — Pathway `What this is` Ende-zu-Ende vom
-   Besucher über Front-Agent zum Schwarm-Agenten mit echter Live-Antwort. *(Noch zu
-   präzisieren: konkretes Abschluss-Ergebnis/CTA am Ende dieses Pathways.)*
-2. **Eingabemodalität & Reaktivität:** *Entschieden* — Mensch initiiert sofort (keine
-   5-s-Sperre); Text und Voice gehören beide rein; Text streamt sofort reaktiv vor TTS.
-   *(Noch zu bestätigen: Fingerfolgen als Handy-Standard + konkretes Mikrofon-Klick-UI.)*
-3. **Regler & sichtbare Effekte:** *Entschieden* — Standard-3 `warm ↔ cold`,
-   `soft ↔ sharp`, `still ↔ alive` (live gekoppelt an CSS Custom Properties, Variable
-   Fonts und System-Prompt-Buckets).
-4. **Backend-Aufruf:** *Entschieden* — Echter Live-Call über Cloudflare (`Front-Agent` →
-   `What this is`-Worker/Sub-Agent; deutsches STT über `WorkersAINova3STT({ language: "de" })`).
-   *(Noch zu entscheiden: konkretes Front-/Schwarm-Modell und TTS-Provider.)*
-5. **Prüfung von Reaktionszeit, Nutzerkontrolle und Fehlerverhalten:** *Offen* —
-   messbare Abnahmekriterien (`first_token_ms`, `first_audio_ms`, Verhalten bei
-   Netz-/Modell-Pause) vor Build-Freigabe gemeinsam festlegen.
+1. **Erster Besucherablauf:** *Entschieden* — Pathway `What this is` Ende-zu-Ende mit
+   „Bridge + max. 2 Fäden“ und genau 1 eingeblendeten Waypoint-Card zur Zeit.
+2. **Eingabemodalität & Reaktivität:** *Entschieden* — Mensch initiiert sofort (Zero-Popup);
+   Text streamt sofort reaktiv vor TTS; Fingerfolgen ist Handy-Standard.
+3. **Regler & sichtbare Effekte:** *Entschieden* — 3 Dual-Channel-Slider (`warm ↔ cold`,
+   `soft ↔ sharp`, `still ↔ alive`), die live CSS Visual Style + HAI-Interaktionsparameter koppeln.
+4. **Backend-Aufruf:** *Entschieden für Slice 1* — Echter Live-Call über Cloudflare
+   (`Front-Agent` + deutsches STT via `WorkersAINova3STT({ language: "de" })`).
+   *(Letzte offene Frage Q7 unten: konkretes Modell & Abnahmekriterien.)*
+5. **Prüfung von Reaktionszeit, Nutzerkontrolle und Fehlerverhalten:** *Offen (Q7)* —
+   konkrete Modellwahl + messbare Abnahmekriterien vor dem Start von Slice 1 bestätigen.
 
 ## Aktuell vorhanden
 

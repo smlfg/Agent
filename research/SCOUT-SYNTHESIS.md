@@ -278,6 +278,65 @@ Verifiziert anhand des neuen Plaud-Transkripts (`sketches/raw/2026-11-13-nightly
     2. **Cognitive Load (Input/Output-Menge):** `knapp ↔ ausführlich` (weniger vs. mehr Input/Output)
     3. **Atmosphäre / Ton:** `warm ↔ cold` (Farbtemperatur & sprachliche Nähe)
 
+### 5l. Scouts Q5b & Q5c (`ses_e2de968f5ffeb9KyqNckNfOOjr`, `ses_e2de7406dffe5QMTeGS1mFlEmd`, `ses_e2de68598ffe8R3ZoHF8jIOYIp`) — Portfolio-Waypoints & „How to carry the conversation“
+
+**1. Interne Inventur der Ziel-Waypoints (Domains, Produkte, Best GH, Agent-als-Produkt):**
+- **Domains (`Human-Agent-Interface/NewDomains/List`, `Domains/`, `project_domain_portfolio_2026_09.md`):**
+  `agentfähig.de` (+ `www`), `human-agent-interface.com`, `humanagentinterface.de`,
+  `humanagentcontrol.com` (+ `www`), `samuelfleig.com`, `agent-human-interface.com`.
+- **Produkte & beste GitHub-Projekte:**
+  - `hai-mcp` (`/home/smlflg/Projekte/Human-Agent-Interface/hai-mcp/`, `/home/smlflg/Projekte/hai-mcp-public`)
+  - `smlfg/hai-voice-builder`, `smlfg/MonesterAG-ent-`, `HAI-DPPM`, `HAI-Agent-Workflow`, `/home/smlflg/Projekte/best_of`
+- **„Solche Agents als Produkt anbieten“ (`for website` in Skizze Block 2):**
+  Belegt in Samuels Plaud-Strategien (`06-05 Versionierte AI-Agenten als Produkt`,
+  `06-06 Produktstrategie: Maßgeschneiderte KI-Agenten als eigenständiges, hochprofitables Produkt`)
+  sowie technisch vorbereitet durch den mandantenfähigen Worker-Ansatz in `Agentfägig.de/site/`.
+- **Kontaktdaten:** `/home/smlflg/Projekte/Human-Agent-Interface/samuel/` (`samuel@human-agent-interface.com`).
+
+**2. Prior Art — „How to carry the conversational HAI interaction across many pathways“:**
+
+```markdown
+## Prior Art
+Problem: Carry a visitor across 10+ destination waypoints (8 domains, hai-mcp, GitHub repos, website-agent-as-a-product, creator contact) through conversation without a menu wall, rigid wizard, or pushy sales script.
+Searched: internal ✓ (docs/visual-exploration/03-pathway-flow.md, sketches/:30-53) · official ✓ · external ✓ (OpenAI Agents Handoffs, Anthropic Routing/Orchestrator-Workers, NN/g Progressive Disclosure)
+Candidates:
+- OpenAI Agents SDK Triage & Handoffs — https://openai.github.io/openai-agents-python/handoffs/ — front triage agent delegates via tool-handoffs to domain specialists
+- Anthropic Routing + Orchestrator-Workers — https://www.anthropic.com/research/building-effective-agents — separates fast intent classification/routing from multi-worker synthesis
+- NN/g Progressive Disclosure — https://www.nngroup.com/articles/progressive-disclosure/ — defers secondary options until primary direction is chosen
+Decision: INTEGRATE (2-tier routing: 3 root currents [What this is / creator / product for X] -> specialist on-demand agent reveals the matching concrete waypoint via "Bridge + 2 Threads")
+Saved: avoids building a static navigation menu or 10-button link tree while keeping all 8 domains and products reachable in <= 2 turns
+Residual risk: tuning prompt guardrails so the front-agent suggests at most 2 natural next threads without sounding like a sales bot
+```
+
+**Konkrete Gesprächsmechanik („How to carry“):**
+1. **Nie alle Ziele gleichzeitig zeigen:** Vor oder zu Beginn des Gesprächs existieren nur
+   die **3 Grundströme** aus der Skizze (`What this is`, `creator`, `product for X`).
+2. **Bridge + max. 2 Fäden pro Turn:** Der Front-Agent antwortet in **1–2 kurzen Sätzen**
+   auf die aktuelle Frage (Caching-First) und legt am Ende **höchstens 2 Vokabel-nahe
+   Richtungs-Impulse** hin (z. B. *„Willst du sehen, wie so ein Agent auf deiner eigenen
+   Seite läuft — oder erst die Open-Source-Projekte wie `hai-mcp` dahinter?“*).
+3. **Silent Step + 1 Waypoint-Card bei klarem Intent:** Sobald die Richtung klar ist,
+   übernimmt der passende On-Demand-Agent und blendet **genau einen** passenden
+   End-Waypoint (z. B. `hai-mcp`, GitHub-Repo, Website-Agent-Anfrage, Domain oder Kontakt)
+   ein — ein Themenwechsel des Besuchers lässt den Waypoint sofort wieder ruhig zurücktreten.
+
+### 5m. Scout Prototype-Audit (`ses_e2de031c4ffeXk7moKY9WSTAkS`) — Warum `prototype/index.html` nicht das Zielbild trifft
+
+Geprüft gegen `prototype/index.html` (L1–440), `docs/notes/2026-11-13-nightly-status.md` und `DESIGN_COMMON.md`:
+1. **Tote Typografie (`prototype/index.html:30`):** Deklariert `"Bricolage Grotesque", "Newsreader"`,
+   bindet aber **keine einzige `@font-face`** ein → Browser fällt auf System-`Georgia` zurück.
+2. **Starre Rechteck-Augen statt `BoopFace`-Rig (`:81-106`):** Zwei tote `70×42px`-Divs mit
+   statischem `::after`-Punkt und einfachem `scaleY`-Lid — kein Pointer-/Fokus-Tracking,
+   kein 3D-Foreshortening, kein Squash-&-Stretch, keine echte Präsenz.
+3. **Wörtlicher Zufalls-Striche-Salat (`:328-351`):** `generateScribbles()` würfelt 60–110
+   zufällige Mini-Bögen in die Mitte — genau das wörtliche Abmalen der Handskizze, das Samuel
+   in der Plaud (`00:02:20`) ausgeschlossen hat.
+4. **Verstöße gegen `DESIGN_COMMON.md` (`:31, 149, 190, 311`):** Nutzt `backdrop-filter: blur(...)`
+   (Glassmorphism), `linear-gradient` und ein `🎙️`-Emoji statt klarer Materialität (Papierkorn,
+   1px-Linien, Tinte, SVG-Ikonografie).
+5. **Slider ohne HAI- & Typografie-Kopplung (`:354-376`):** Ändern nur 3 CSS-Variablen, aber
+   weder Variable-Font-Achsen noch Antwortstil/Länge noch die sichtbare Interaktions-Architektur.
+
 ## 6. Betriebsstand
 
 Direkte CLI-Aufrufe mit gesetztem Prozess-Arbeitsverzeichnis funktionieren.
