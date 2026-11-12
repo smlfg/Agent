@@ -9,6 +9,10 @@ einzigen Upstream: dem Agents SDK. Offen ist genau eine Anforderung der
 Skizze — „under 1 sec even with TTS". Cloudflares eigene Zahlen liegen bei
 800 bis 950 ms und damit an der Grenze; ob das hält, lässt sich nur messen.
 
+Dieses Dokument ist eine Einschätzung, keine Architekturentscheidung. Modell,
+Hosting und Aufbau entscheidet Samuel. Der Abgleich mit den
+Designentscheidungen steht in [`ABGLEICH.md`](ABGLEICH.md).
+
 Grundlagen: [`INTENT.md`](INTENT.md) (Fragen T1–T9),
 [`research/cloudflare-bausteine.md`](research/cloudflare-bausteine.md),
 [`research/konkurrenz.md`](research/konkurrenz.md),

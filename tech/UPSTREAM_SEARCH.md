@@ -25,7 +25,8 @@ Lizenz, letzter Push und Status am 12.11.2026 über die GitHub-API geprüft.
 
 ## Decision
 
-**Upstream gewählt: `cloudflare/agents`, Beispiel `examples/voice-agent`.**
+**Vorschlag: `cloudflare/agents`, Beispiel `examples/voice-agent`.** Die
+Entscheidung liegt bei Samuel und ist nicht bestätigt (siehe `AGENTS.md`).
 Es deckt sieben der neun technischen Fragen ab und ist der von Cloudflare
 gepflegte Weg. Für die Regler-Oberfläche bleibt `json-render` als Kandidat
 offen, bis das Design vorliegt.
