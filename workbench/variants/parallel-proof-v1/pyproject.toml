@@ -1,9 +1,0 @@
-[project]
-name = "hai-parallel-proof-v1"
-version = "0.1.0"
-description = "Filesystem-based HAI parallel state proof variant"
-requires-python = ">=3.9"
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["src"]

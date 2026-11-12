@@ -1,4 +1,0 @@
-{
-  "note": "Slice 0 DONE: Plan-Validator-Gate ACCEPT (Attempt 2/2, Validator=claude CLI != Planner), Build Release yes, Report: 03_HAI/Projek-Managment/PLAN_VALIDATION_REPORT_worker-pool.md. Auflagen: A1 Slice-1 write_root muss registry/components/cao.json decken; A2 Schema v1.1.0 mit schema_version enum [1.0.0, 1.1.0] + expliziten neuen Feldern. fails/0007+0008 angelegt. Owner-Entscheide: AGENTS.md-Gate ja, Code-Ausnahme ja (max 5 Module + 1 Scaffold), Scope 3 Worker (codex/claude/gemini), Solo-Lane. Naechstes: Slice 1 cao functional. Hinweis: MCP-Transport weiterhin Not connected, Control Plane laeuft via uv-Adapter (DEGRADED-Norm).",
-  "project_path": "/Users/samuelfleig/Projects"
-}
