@@ -7,6 +7,7 @@ Eine lauffähige Anwendung ist noch nicht enthalten.
 ## Einstieg
 
 - [Projektstand und nächste Entscheidungen](docs/PROJECT.md)
+- [HAI-Missionsvorschlag: Integration First](docs/missions/INTEGRATION-FIRST-WHAT-THIS-IS.md)
 - [Bestätigte Designentscheidungen](docs/DESIGN-DECISIONS.md)
 - [Nächtlicher Plaud-Zwischenstand vom 13.11.2026](docs/notes/2026-11-13-nightly-status.md)
 - [Aggregierte Scout-Befunde & Prior Art](research/SCOUT-SYNTHESIS.md)

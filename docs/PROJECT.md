@@ -14,6 +14,7 @@ Damit Ziele, Entscheidungen und Belege nicht auseinanderlaufen, gilt im Repo:
 | [`tech/CLOUDFLARE_MACHBARKEIT.md`](../tech/CLOUDFLARE_MACHBARKEIT.md) & [`tech/ABGLEICH.md`](../tech/ABGLEICH.md) | **Technische Machbarkeit** auf Cloudflare und Abgleich gegen das Design |
 | [`docs/notes/2026-11-13-nightly-status.md`](notes/2026-11-13-nightly-status.md) | **Nächtlicher Plaud-Zwischenstand (13.11.2026)** mit Fokus auf Pathways, DPPM, Voice-Modul und HAI-Slidern |
 | [`sketches/2026-11-12-agentfaehig.md`](../sketches/2026-11-12-agentfaehig.md) | **Unveränderte Primärquelle** der gezeichneten Skizze |
+| [`docs/missions/INTEGRATION-FIRST-WHAT-THIS-IS.md`](missions/INTEGRATION-FIRST-WHAT-THIS-IS.md) | **HAI-Missionsvorschlag** zur Integration des ersten Besucherablaufs; DRAFT, keine Build-Freigabe |
 
 ## Smarte Projektziele für den ersten Build (v1 — EINE Version mit Ownership)
 
