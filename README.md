@@ -8,6 +8,7 @@ Eine lauffähige Anwendung ist noch nicht enthalten.
 
 - [Projektstand und nächste Entscheidungen](docs/PROJECT.md)
 - [HAI-Missionsvorschlag: Integration First](docs/missions/INTEGRATION-FIRST-WHAT-THIS-IS.md)
+- [Nachgelagerte HAI-Mission: Evidence-Based ML Flywheel (COLD)](docs/missions/SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md)
 - [Bestätigte Designentscheidungen](docs/DESIGN-DECISIONS.md)
 - [Nächtlicher Plaud-Zwischenstand vom 13.11.2026](docs/notes/2026-11-13-nightly-status.md)
 - [Aggregierte Scout-Befunde & Prior Art](research/SCOUT-SYNTHESIS.md)

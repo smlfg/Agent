@@ -15,6 +15,7 @@ Damit Ziele, Entscheidungen und Belege nicht auseinanderlaufen, gilt im Repo:
 | [`docs/notes/2026-11-13-nightly-status.md`](notes/2026-11-13-nightly-status.md) | **Nächtlicher Plaud-Zwischenstand (13.11.2026)** mit Fokus auf Pathways, DPPM, Voice-Modul und HAI-Slidern |
 | [`sketches/2026-11-12-agentfaehig.md`](../sketches/2026-11-12-agentfaehig.md) | **Unveränderte Primärquelle** der gezeichneten Skizze |
 | [`docs/missions/INTEGRATION-FIRST-WHAT-THIS-IS.md`](missions/INTEGRATION-FIRST-WHAT-THIS-IS.md) | **HAI-Missionsvorschlag** zur Integration des ersten Besucherablaufs; DRAFT, keine Build-Freigabe |
+| [`docs/missions/SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md`](missions/SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md) | **Abhängige Secondary-Mission (COLD)**: Evidenz-basiertes Optimierungs-Flywheel erst nach erfolgreicher Integration und separatem Owner-GO |
 
 ## Smarte Projektziele für den ersten Build (v1 — EINE Version mit Ownership)
 

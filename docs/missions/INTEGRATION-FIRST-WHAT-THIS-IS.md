@@ -99,3 +99,8 @@ Alle Punkte brauchen eine reproduzierbare Prüfung, erwartetes und tatsächliche
 - Bekannte Mängel, Folge-Slice-Parkplatz, ein präziser nächster Schritt.
 
 **Arbeitsprinzip:** Jede neue Komponente schließt an etwas bereits Funktionierendes an — nicht an ein weiteres Stück Planung.
+
+
+## Abhängige Folgemission (nur Referenz)
+
+[Evidence-Based ML Optimization Flywheel](SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md) ist als **COLD / DEPENDENT** dokumentiert. Es beginnt **erst nach** unabhängiger Abnahme von C0–C3, geklärter Ground Truth, Datenschutz, Budgetgrenzen und separatem Owner-GO. Es verändert keine aktuellen Freigaben oder Scope-Grenzen dieser Primary Mission.
