@@ -1,0 +1,49 @@
+/* Bone Layer 5 · Typography Voice, Rhythm & Caret Presence (28 bones)
+   Controls independent font voices for visitor prompt vs. agent answer, weight,
+   leading, tracking, editorial tilt, and caret geometry. */
+
+html[data-bones-active="true"] .pair-entry {
+  gap: var(--bone-pair-gap, 0.85rem);
+}
+
+html[data-bones-active="true"] .pair-prompt {
+  font-family: var(--bone-prompt-font-stack, var(--font));
+  font-size: var(--bone-prompt-size, 0.9rem);
+  font-weight: var(--bone-prompt-weight, 450);
+  letter-spacing: var(--bone-prompt-tracking, 0em);
+  text-transform: var(--bone-prompt-transform, none);
+  font-style: var(--bone-prompt-style, normal);
+  opacity: var(--bone-prompt-opacity, 0.92);
+  color: var(--bone-prompt-color, var(--prompt));
+}
+
+html[data-bones-active="true"] .pair-answer {
+  font-family: var(--bone-answer-font-stack, var(--font-reading));
+  font-size: calc(clamp(1.15rem, 2.4vw, 1.5rem) * var(--bone-answer-scale, 1));
+  font-weight: var(--bone-answer-weight, 400);
+  line-height: var(--bone-answer-leading, 1.56);
+  letter-spacing: var(--bone-answer-tracking, 0em);
+  word-spacing: var(--bone-answer-word-spacing, 0em);
+  font-style: var(--bone-answer-style, normal);
+  color: var(--bone-text-color, var(--text));
+  transform: rotate(var(--bone-answer-tilt, 0deg));
+  text-shadow: 0 1px 10px rgba(0, 0, 0, var(--bone-answer-shadow-alpha, 0));
+  transition:
+    font-size var(--bone-transition-ms, 1100ms) var(--ease),
+    line-height var(--bone-transition-ms, 1100ms) var(--ease),
+    letter-spacing var(--bone-transition-ms, 1100ms) var(--ease),
+    transform var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+html[data-bones-active="true"] .tw-caret {
+  width: var(--bone-caret-width, 2.5px);
+  border-radius: var(--bone-caret-radius, 1px);
+  background: var(--bone-caret-color, currentColor);
+  animation-duration: var(--bone-caret-blink-ms, 1060ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bones-active="true"] .pair-answer {
+    transition: none !important;
+  }
+}

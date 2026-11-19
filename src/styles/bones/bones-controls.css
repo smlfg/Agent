@@ -1,0 +1,117 @@
+/* Bone Layer 6 · Controls, Composer Hairline & Watch-Index Dials (24 bones)
+   Harmonizes composer rule, send/mic chrome, footer legibility, and horological
+   dial geometry cleanly across both light and dark surface worlds. */
+
+html[data-bones-active="true"] .composer {
+  padding-block: var(--bone-composer-pad-y, 1.15rem) calc(0.8rem + env(safe-area-inset-bottom));
+  background: transparent;
+}
+
+html[data-bones-active="true"] .composer-input {
+  font-family: var(--bone-answer-font-stack, var(--font-reading));
+  font-size: calc(clamp(1.0625rem, 2.2vw, 1.25rem) * var(--bone-composer-input-scale, 1));
+  border-radius: 2px;
+  box-shadow: none;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--bone-composer-rule-color, var(--line)) var(--bone-composer-rule-fade, 10%),
+    var(--bone-composer-rule-color, var(--line)) calc(100% - var(--bone-composer-rule-fade, 10%)),
+    transparent 100%
+  );
+  background-size: 100% var(--bone-composer-rule-thickness, 1px);
+}
+
+html[data-bones-active="true"] .composer-input:focus {
+  border-radius: 2px;
+  box-shadow: none;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--focus-ring) 12%,
+    var(--focus-ring) 88%,
+    transparent 100%
+  );
+  background-size: 100% var(--bone-composer-focus-thickness, 2px);
+}
+
+html[data-bones-active="true"] .composer-send,
+html[data-bones-active="true"] .mic-toggle {
+  width: var(--bone-send-size, 2.75rem);
+  height: var(--bone-send-size, 2.75rem);
+}
+
+html[data-bones-active="true"] .composer-send svg,
+html[data-bones-active="true"] .mic-toggle svg {
+  stroke-width: var(--bone-send-icon-stroke, 1.6);
+}
+
+html[data-bones-active="true"] .composer-send:hover,
+html[data-bones-active="true"] .composer .composer-input:focus ~ .composer-send {
+  background-color: var(--bone-send-bg-hover, var(--surface-send-hover));
+}
+
+/* Horological top dials */
+html[data-bones-active="true"] .surface-controls {
+  opacity: var(--bone-dial-rest-opacity, 0.56);
+}
+
+html[data-bones-active="true"] .surface-controls:hover,
+html[data-bones-active="true"] .surface-controls:focus-within,
+html[data-bones-active="true"][data-surface-dragging="true"] .surface-controls {
+  opacity: 1;
+}
+
+html[data-bones-active="true"] .surface-controls-items {
+  gap: 0.3rem var(--bone-dial-gap, 1.05rem);
+}
+
+html[data-bones-active="true"] .surface-control {
+  grid-template-columns: auto minmax(4.2rem, var(--bone-dial-width, 5.4rem)) auto;
+}
+
+html[data-bones-active="true"] .surface-pole {
+  font-size: var(--bone-dial-pole-size, 0.78rem);
+  letter-spacing: var(--bone-dial-pole-tracking, 0.01em);
+}
+
+html[data-bones-active="true"] .surface-dial-rail {
+  opacity: var(--bone-dial-rail-opacity, 0.55);
+}
+
+html[data-bones-active="true"] .surface-dial-tick {
+  opacity: var(--bone-dial-tick-opacity, 0.42);
+}
+
+html[data-bones-active="true"] .surface-dial-needle {
+  stroke-width: var(--bone-dial-needle-width, 1.45);
+}
+
+html[data-bones-active="true"] .surface-dial-arc {
+  opacity: var(--bone-dial-arc-opacity, 0.78);
+}
+
+/* Footer & Toggle */
+html[data-bones-active="true"] .site-footer {
+  font-size: var(--bone-footer-size, 0.75rem);
+  letter-spacing: var(--bone-footer-tracking, 0.03em);
+  color: var(--muted);
+  opacity: var(--bone-footer-opacity, 0.85);
+}
+
+html[data-bones-active="true"] .motion-toggle {
+  border-radius: var(--bone-toggle-radius, 999px);
+  color: var(--muted);
+  border-color: var(--line);
+}
+
+@media (max-width: 640px) {
+  html[data-bones-active="true"] .composer {
+    padding-inline: 0.35rem;
+  }
+
+  html[data-bones-active="true"] .surface-control {
+    width: 100%;
+    grid-template-columns: 4.8rem 1fr 4.8rem;
+  }
+}

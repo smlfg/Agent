@@ -19,74 +19,49 @@
   will-change: transform;
 }
 
-.presence.is-waiting-1 .eye:not(.is-blinking) .eyelid-top { transform: translateY(-1%); }
-.presence.is-waiting-1 .eye:not(.is-blinking) .eyelid-bottom { transform: translateY(0.5%); }
-
-.presence.is-waiting-2 .eye:not(.is-blinking) .eyelid-top { transform: translateY(-2.5%); }
-.presence.is-waiting-2 .eye:not(.is-blinking) .eyelid-bottom { transform: translateY(1.5%); }
-
-.presence.is-waiting-3 .eye:not(.is-blinking) .eyelid-top { transform: translateY(-3.5%); }
-.presence.is-waiting-3 .eye:not(.is-blinking) .eyelid-bottom { transform: translateY(2.5%); }
-
-/* Slight pupil widening: the iris leans in a touch. Keep the saccade
-   translation that presence.js writes through --saccade-x/y. */
-.presence.is-waiting-2 .eye .pupil {
-  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px)) scale(1.03);
-}
-
-.presence.is-waiting-3 .eye .pupil {
-  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px)) scale(1.045);
-}
+.presence.is-waiting-1 { --idle-lid-top: -1%; --idle-lid-bottom: 0.5%; }
+.presence.is-waiting-2 { --idle-lid-top: -2.5%; --idle-lid-bottom: 1.5%; --idle-pupil-scale: 1.03; }
+.presence.is-waiting-3 { --idle-lid-top: -3.5%; --idle-lid-bottom: 2.5%; --idle-pupil-scale: 1.045; }
 
 /* The rare "still there?" impulse: 400 ms of widened attention. */
-.presence.is-asking .eye:not(.is-blinking) .eyelid-top { transform: translateY(-4.5%); }
-.presence.is-asking .eye:not(.is-blinking) .eyelid-bottom { transform: translateY(3%); }
+.presence.is-asking { --idle-lid-top: -4.5%; --idle-lid-bottom: 3%; --idle-pupil-scale: 1.08; }
 
 .presence.is-asking .eye .pupil {
-  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px)) scale(1.08);
   transition-duration: 400ms;
 }
 
 /* ── Reduced motion / paused: one static waiting state, no impulses ─────── */
 
-.presence.is-motion-paused .eye .pupil,
-.presence.is-reduced-motion .eye .pupil {
-  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px));
+.presence.is-motion-paused,
+.presence.is-reduced-motion {
+  --idle-pupil-scale: 1;
 }
 
 /* Stages 2/3 and the impulse are motion only; the calm waiting-1 lift stays
    as a still posture, without transitions. */
-.presence.is-motion-paused.is-waiting-2 .eye .eyelid-top,
-.presence.is-motion-paused.is-waiting-3 .eye .eyelid-top,
-.presence.is-reduced-motion.is-waiting-2 .eye .eyelid-top,
-.presence.is-reduced-motion.is-waiting-3 .eye .eyelid-top {
-  transform: translateY(-1%);
-}
-
-.presence.is-motion-paused.is-waiting-2 .eye .eyelid-bottom,
-.presence.is-motion-paused.is-waiting-3 .eye .eyelid-bottom,
-.presence.is-reduced-motion.is-waiting-2 .eye .eyelid-bottom,
-.presence.is-reduced-motion.is-waiting-3 .eye .eyelid-bottom {
-  transform: translateY(0.5%);
+.presence.is-motion-paused.is-waiting-2,
+.presence.is-motion-paused.is-waiting-3,
+.presence.is-reduced-motion.is-waiting-2,
+.presence.is-reduced-motion.is-waiting-3 {
+  --idle-lid-top: -1%;
+  --idle-lid-bottom: 0.5%;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .presence .eye .pupil {
-    transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px)) !important;
+    --idle-pupil-scale: 1;
     transition: none !important;
   }
 
-  .presence.is-waiting-1 .eye:not(.is-blinking) .eyelid-top,
-  .presence.is-waiting-2 .eye:not(.is-blinking) .eyelid-top,
-  .presence.is-waiting-3 .eye:not(.is-blinking) .eyelid-top {
-    transform: translateY(-1%) !important;
-    transition: none !important;
+  .presence.is-waiting-1,
+  .presence.is-waiting-2,
+  .presence.is-waiting-3 {
+    --idle-lid-top: -1%;
+    --idle-lid-bottom: 0.5%;
   }
 
-  .presence.is-waiting-1 .eye:not(.is-blinking) .eyelid-bottom,
-  .presence.is-waiting-2 .eye:not(.is-blinking) .eyelid-bottom,
-  .presence.is-waiting-3 .eye:not(.is-blinking) .eyelid-bottom {
-    transform: translateY(0.5%) !important;
+  .presence .eye:not(.is-blinking) .eyelid-top,
+  .presence .eye:not(.is-blinking) .eyelid-bottom {
     transition: none !important;
   }
 }

@@ -1,35 +1,75 @@
 // Presence (M1 contract, section A) — owns the eye face and the motion toggle.
-// Plain ES module. Uses the unmodified standalone EyeFace from vendor.
-//
-// Beyond the vendor eye, this module layers a hyperreal anatomy on top of the
-// existing markup (iris fibres, limbus, soft pupil, fixed catchlights, veins,
-// wet lid margins) and owns its own gaze-adjacent motion: asymmetric blinking
-// with occasional double blinks, rare microsaccades, and subtle pupil dilation
-// from state, ambient brightness and pointer proximity. Vendor files stay
-// untouched; everything here is additive and removable in destroy().
+// Plain ES module. Uses the CSS anatomy layered on top of the vendor eye
+// markup while driving all movement through the parametric Eye Motion System
+// (eye-motion-profiles.js + eye-motion-engine.js). Vendor files stay untouched.
 
-import { EyeFace } from '../vendor/openvoiceui/face/EyeFace.js';
 import { VALID_MOODS } from '../vendor/openvoiceui/face/BaseFace.js';
+import { createEyeMotionEngine } from './eye-motion-engine.js';
+import { EYE_STATE_PROFILES, normalizeEyeState } from './eye-motion-profiles.js';
 
-// Contract mapping: dormant closes the lids (own root class), every other
-// phase maps to one of the vendor moods.
+// Contract + extended eye-state mapping for mood compatibility.
 export const PHASE_MOOD = Object.freeze({
   dormant: 'neutral',
+  awakening: 'neutral',
+  present: 'neutral',
   idle: 'neutral',
   listening: 'listening',
   thinking: 'thinking',
+  processing: 'thinking',
   speaking: 'happy',
+  responding: 'happy',
+  adapting: 'neutral',
 });
 
 const BLINK_CLOSE_MS = 95;
 const BLINK_HOLD_MS = 55;
 const BLINK_OPEN_MS = 260;
-const DOUBLE_BLINK_CHANCE = 0.16;
+const AWAKEN_HOLD_MS = 1300;
+const PRESENT_SETTLE_MS = 1500;
+const ADAPT_HOLD_MS = 1400;
 
 const VAR_AMBIENT = '--pupil-ambient';
 const VAR_SACCADE_X = '--saccade-x';
 const VAR_SACCADE_Y = '--saccade-y';
-const OWN_VARS = [VAR_AMBIENT, VAR_SACCADE_X, VAR_SACCADE_Y];
+const MOTION_VARS = Object.freeze([
+  '--eye-pair-x',
+  '--eye-pair-y',
+  '--eye-pair-scale',
+  '--eye-pair-tilt',
+  '--eye-left-x',
+  '--eye-left-y',
+  '--eye-left-scale-x',
+  '--eye-left-scale-y',
+  '--eye-right-x',
+  '--eye-right-y',
+  '--eye-right-scale-x',
+  '--eye-right-scale-y',
+  '--eye-left-pupil-x',
+  '--eye-left-pupil-y',
+  '--eye-right-pupil-x',
+  '--eye-right-pupil-y',
+  '--eye-left-lid-top',
+  '--eye-left-lid-bottom',
+  '--eye-right-lid-top',
+  '--eye-right-lid-bottom',
+  '--eye-left-lid-tilt',
+  '--eye-right-lid-tilt',
+  '--eye-top-clearance',
+  '--eye-bottom-clearance',
+  '--eye-presence-opacity',
+  '--eye-shadow-y',
+  '--eye-shadow-blur',
+  '--eye-shadow-alpha',
+  '--eye-catchlight-opacity',
+  '--blink-close-ms',
+  '--blink-open-ms',
+  '--pupil-state',
+]);
+const OWN_VARS = [VAR_AMBIENT, VAR_SACCADE_X, VAR_SACCADE_Y, ...MOTION_VARS];
+
+function clamp(v, lo, hi) {
+  return v < lo ? lo : v > hi ? hi : v;
+}
 
 // Delicate scleral vessels. Drawn in a stretched viewBox so they hug the
 // corners of whichever eye size the viewport produces.
@@ -45,49 +85,75 @@ const VEIN_SVG = `
   </g>
 </svg>`;
 
-function normalizeMood(value) {
-  return VALID_MOODS.includes(value) ? value : 'neutral';
-}
-
 function element(className) {
   const node = document.createElement('span');
   node.className = className;
   return node;
 }
 
+function parseGapPx(el, win) {
+  if (!el || typeof win.getComputedStyle !== 'function') return undefined;
+  const style = win.getComputedStyle(el);
+  const raw = style.columnGap && style.columnGap !== 'normal' ? style.columnGap : style.gap;
+  const parsed = Number.parseFloat(raw);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
 /**
  * @param {{root: HTMLElement, store: {getState: Function, subscribe: Function}, reducedMotion?: boolean}} options
- * @returns {{pause(): void, resume(): void, destroy(): void}}
  */
 export function mountPresence({ root, store, reducedMotion = false } = {}) {
   if (!root) throw new Error('mountPresence: root element is required');
   if (!store) throw new Error('mountPresence: store is required');
 
+  const doc = root.ownerDocument ?? document;
+  const win = doc.defaultView ?? window;
   const faceBox = root.querySelector('.face-box');
-  const motionToggle = document.getElementById('motion-toggle');
+  const eyesContainer = root.querySelector('.eyes-container');
+  const leftEye = root.querySelector('#left-eye') ?? root.querySelector('.left-eye');
+  const rightEye = root.querySelector('#right-eye') ?? root.querySelector('.right-eye');
+  const motionToggle = doc.getElementById('motion-toggle');
 
-  let face = null;
-  let phase = store.getState().phase;
-  let mood = normalizeMood(PHASE_MOOD[phase] ?? 'neutral');
+  const motionMedia =
+    typeof win.matchMedia === 'function'
+      ? win.matchMedia('(prefers-reduced-motion: reduce)')
+      : null;
+  const darkMedia =
+    typeof win.matchMedia === 'function'
+      ? win.matchMedia('(prefers-color-scheme: dark)')
+      : null;
+
+  let reducedPref = Boolean(reducedMotion) || Boolean(motionMedia?.matches);
+  let phase = store.getState().phase ?? 'dormant';
+  let stateLocked = false;
   let paused = false;
   let destroyed = false;
   let motionRunning = false;
 
   const timers = new Set();
-  const darkMedia =
-    typeof window.matchMedia === 'function'
-      ? window.matchMedia('(prefers-color-scheme: dark)')
-      : null;
-
-  let lastPointer = null;
-  let lastPointerAt = 0;
-  let eyeCenters = [];
-  let measuredAt = 0;
+  let stateTimerId = null;
+  let rafId = 0;
+  let lastFrameAt = 0;
   let ambientFrame = 0;
 
-  root.classList.toggle('is-reduced-motion', Boolean(reducedMotion));
-  root.classList.toggle('is-dormant', phase === 'dormant');
-  root.dataset.phase = phase;
+  let lastPointer = null;
+  let eyeCenters = [];
+  let measuredAt = 0;
+  let cachedAnchor = { x: (win.innerWidth || 1280) / 2, y: (win.innerHeight || 800) * 0.18 };
+  let lastSurfaceLevel = doc.documentElement?.dataset?.surfaceLevel ?? '';
+  let adaptingPending = false;
+  const writtenVars = new Map();
+
+  const initialEngineState = phase === 'dormant'
+    ? 'dormant'
+    : phase === 'speaking'
+      ? 'responding'
+      : normalizeEyeState(phase);
+
+  const engine = createEyeMotionEngine({
+    state: initialEngineState,
+    reducedMotion: reducedPref,
+  });
 
   function eyes() {
     return root.querySelectorAll('.eye');
@@ -98,7 +164,92 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
   }
 
   function motionAllowed() {
-    return !destroyed && !paused && !reducedMotion;
+    return !destroyed && !paused && !reducedPref;
+  }
+
+  // ── Variable & DOM helpers ───────────────────────────────────────────────
+
+  function setVariable(name, value) {
+    if (writtenVars.get(name) === value) return;
+    writtenVars.set(name, value);
+    root.style.setProperty(name, value);
+  }
+
+  function renderFrame(frame) {
+    if (!frame) return;
+    setVariable('--eye-pair-x', `${frame.pair.x}px`);
+    setVariable('--eye-pair-y', `${frame.pair.y}px`);
+    setVariable('--eye-pair-scale', `${frame.pair.scale}`);
+    setVariable('--eye-pair-tilt', `${frame.pair.tiltDeg}deg`);
+    setVariable('--eye-left-x', `${frame.left.x}px`);
+    setVariable('--eye-left-y', `${frame.left.y}px`);
+    setVariable('--eye-left-scale-x', `${frame.left.scaleX}`);
+    setVariable('--eye-left-scale-y', `${frame.left.scaleY}`);
+    setVariable('--eye-right-x', `${frame.right.x}px`);
+    setVariable('--eye-right-y', `${frame.right.y}px`);
+    setVariable('--eye-right-scale-x', `${frame.right.scaleX}`);
+    setVariable('--eye-right-scale-y', `${frame.right.scaleY}`);
+    setVariable('--eye-left-pupil-x', `${frame.left.pupilX}px`);
+    setVariable('--eye-left-pupil-y', `${frame.left.pupilY}px`);
+    setVariable('--eye-right-pupil-x', `${frame.right.pupilX}px`);
+    setVariable('--eye-right-pupil-y', `${frame.right.pupilY}px`);
+    setVariable('--eye-left-lid-top', `${frame.left.lidTopPct}%`);
+    setVariable('--eye-left-lid-bottom', `${frame.left.lidBottomPct}%`);
+    setVariable('--eye-right-lid-top', `${frame.right.lidTopPct}%`);
+    setVariable('--eye-right-lid-bottom', `${frame.right.lidBottomPct}%`);
+    setVariable('--eye-left-lid-tilt', `${frame.left.lidTiltDeg ?? 0}deg`);
+    setVariable('--eye-right-lid-tilt', `${frame.right.lidTiltDeg ?? 0}deg`);
+    setVariable('--pupil-state', `${frame.pupilDilation}`);
+
+    const depth = clamp((frame.pair.scale - 1) / 0.45, -1, 1);
+    setVariable('--eye-shadow-y', `${Math.round(14 + depth * 10)}px`);
+    setVariable('--eye-shadow-blur', `${Math.round(28 + depth * 14)}px`);
+    setVariable('--eye-shadow-alpha', `${clamp(0.32 + depth * 0.18, 0.14, 0.54).toFixed(3)}`);
+    const presenceOpacity = depth < -0.15 ? clamp(1 + (depth + 0.15) * 0.42, 0.74, 1) : 1;
+    setVariable('--eye-presence-opacity', presenceOpacity.toFixed(3));
+    setVariable('--eye-catchlight-opacity', clamp(0.85 + depth * 0.18, 0.55, 1).toFixed(3));
+
+    const vw = win.innerWidth || 1280;
+    const baseTop = vw <= 640 ? 10 : 20;
+    const topClearance = Math.round(
+      baseTop + Math.max(0, -frame.pair.y) * 0.3 + Math.max(0, frame.pair.scale - 1) * (vw <= 640 ? 22 : 40),
+    );
+    const bottomClearance = Math.round(
+      (vw <= 640 ? 10 : 14)
+      + Math.max(0, frame.pair.y) * (vw <= 640 ? 0.35 : 0.55)
+      + Math.max(0, frame.pair.scale - 1) * (vw <= 640 ? 34 : 58),
+    );
+    setVariable('--eye-top-clearance', `${topClearance}px`);
+    setVariable('--eye-bottom-clearance', `${bottomClearance}px`);
+  }
+
+  function measureViewport() {
+    const viewportWidth = win.innerWidth || doc.documentElement?.clientWidth || 1280;
+    const viewportHeight = win.innerHeight || doc.documentElement?.clientHeight || 800;
+    const containerWidth = root.clientWidth || viewportWidth;
+
+    const eyeWidth = leftEye && leftEye.offsetWidth > 0 ? leftEye.offsetWidth : undefined;
+    const eyeHeight = leftEye && leftEye.offsetHeight > 0 ? leftEye.offsetHeight : undefined;
+    const baseGapPx = parseGapPx(eyesContainer, win);
+
+    if (faceBox && typeof faceBox.getBoundingClientRect === 'function') {
+      const box = faceBox.getBoundingClientRect();
+      if (box.width > 0 || box.height > 0) {
+        cachedAnchor = {
+          x: box.left + box.width / 2,
+          y: box.top + box.height * 0.5,
+        };
+      }
+    }
+
+    engine.setViewport({
+      viewportWidth,
+      viewportHeight,
+      containerWidth,
+      eyeWidth,
+      eyeHeight,
+      baseGapPx,
+    });
   }
 
   // ── Anatomy injection ────────────────────────────────────────────────────
@@ -114,7 +265,7 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
         veins,
         element('eye-catchlight eye-catchlight--main'),
         element('eye-catchlight eye-catchlight--window'),
-        element('eye-wetline')
+        element('eye-wetline'),
       );
     }
 
@@ -123,7 +274,7 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
         element('iris-fibers'),
         element('iris-sheen'),
         element('iris-limbus'),
-        element('pupil-core')
+        element('pupil-core'),
       );
     }
   }
@@ -138,10 +289,10 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     for (const node of root.querySelectorAll(selector)) node.remove();
   }
 
-  // ── Own timers (all cleared by pause/destroy) ────────────────────────────
+  // ── Timers ───────────────────────────────────────────────────────────────
 
   function after(ms, run) {
-    const id = window.setTimeout(() => {
+    const id = win.setTimeout(() => {
       timers.delete(id);
       run();
     }, ms);
@@ -149,14 +300,29 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     return id;
   }
 
+  function clearStateTimer() {
+    if (stateTimerId !== null) {
+      win.clearTimeout(stateTimerId);
+      timers.delete(stateTimerId);
+      stateTimerId = null;
+    }
+  }
+
+  function scheduleStateTransition(ms, run) {
+    clearStateTimer();
+    stateTimerId = after(ms, () => {
+      stateTimerId = null;
+      if (!destroyed && !stateLocked) run();
+    });
+  }
+
   function stopTimers() {
-    for (const id of timers) window.clearTimeout(id);
+    clearStateTimer();
+    for (const id of timers) win.clearTimeout(id);
     timers.clear();
   }
 
-  function setVariable(name, value) {
-    root.style.setProperty(name, value);
-  }
+  // ── Blinking ─────────────────────────────────────────────────────────────
 
   function setBlinkPose(pose) {
     for (const eye of eyes()) {
@@ -169,44 +335,55 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     setBlinkPose('none');
   }
 
-  function blinkOnce() {
+  function performBlink({
+    closeMs = BLINK_CLOSE_MS,
+    holdMs = BLINK_HOLD_MS,
+    openMs = BLINK_OPEN_MS,
+    doubleChance = null,
+  } = {}) {
     if (!motionAllowed() || isDormant()) return;
+    const profile = EYE_STATE_PROFILES[engine.getFrame().state] ?? EYE_STATE_PROFILES.present;
+    const params = engine.getSnapshot().params;
+    const calmOpen = params.intensity < 0.35 ? 480 : openMs;
+    const resolvedDouble = doubleChance !== null
+      ? doubleChance
+      : clamp((profile.doubleBlinkChance ?? 0.16) * (0.4 + params.intensity * 0.8), 0, 0.38);
+
+    setVariable('--blink-close-ms', `${closeMs}ms`);
+    setVariable('--blink-open-ms', `${calmOpen}ms`);
     setBlinkPose('close');
-    after(BLINK_CLOSE_MS + BLINK_HOLD_MS, () => {
+    after(closeMs + holdMs, () => {
       setBlinkPose('open');
-      after(BLINK_OPEN_MS, () => {
+      after(calmOpen, () => {
         clearBlinkPose();
-        if (Math.random() < DOUBLE_BLINK_CHANCE) {
-          after(120 + Math.random() * 80, blinkOnce);
+        if (Math.random() < resolvedDouble) {
+          after(120 + Math.random() * 80, () => performBlink({ closeMs, holdMs, openMs: calmOpen, doubleChance: 0 }));
         }
       });
     });
   }
 
+  function blinkOnce() {
+    performBlink();
+  }
+
   function scheduleBlink() {
     if (!motionAllowed()) return;
+    const profile = EYE_STATE_PROFILES[engine.getFrame().state] ?? EYE_STATE_PROFILES.present;
+    const params = engine.getSnapshot().params;
+    const energy = clamp(params.intensity ?? 1, 0.1, 1.5);
+    const speed = clamp(params.speed ?? 1, 0.35, 1.8);
+    // Low energy halves blink frequency (~5.5-10.5 s); lively/fast wakes the cadence.
+    const intervalScale = clamp(1.35 / (0.45 + 0.6 * energy + 0.3 * speed), 0.65, 2.3);
+    const minWait = (profile.blinkMinMs > 0 ? profile.blinkMinMs : 2400) * intervalScale;
+    const maxWait = (profile.blinkMaxMs > profile.blinkMinMs ? profile.blinkMaxMs : 5400) * intervalScale;
     const longPause = Math.random() < 0.12;
-    const wait = longPause ? 5600 + Math.random() * 3400 : 2400 + Math.random() * 3000;
+    const wait = longPause
+      ? maxWait + Math.random() * 2800
+      : minWait + Math.random() * (maxWait - minWait);
     after(wait, () => {
       if (motionAllowed() && !isDormant()) blinkOnce();
       scheduleBlink();
-    });
-  }
-
-  function scheduleSaccade() {
-    if (!motionAllowed()) return;
-    after(900 + Math.random() * 2300, () => {
-      const pointerIdle = performance.now() - lastPointerAt > 700;
-      if (motionAllowed() && !isDormant() && pointerIdle && Math.random() < 0.72) {
-        const reach = Math.random() < 0.12 ? 1.15 : 0.65;
-        setVariable(VAR_SACCADE_X, `${((Math.random() * 2 - 1) * reach).toFixed(2)}px`);
-        setVariable(VAR_SACCADE_Y, `${((Math.random() * 2 - 1) * reach * 0.72).toFixed(2)}px`);
-        after(80 + Math.random() * 70, () => {
-          setVariable(VAR_SACCADE_X, '0px');
-          setVariable(VAR_SACCADE_Y, '0px');
-        });
-      }
-      scheduleSaccade();
     });
   }
 
@@ -255,29 +432,35 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
 
   function queueAmbient() {
     if (ambientFrame) return;
-    ambientFrame = window.requestAnimationFrame(applyAmbient);
+    ambientFrame = win.requestAnimationFrame(applyAmbient);
   }
+
+  // ── Pointer & Resize listeners ───────────────────────────────────────────
 
   function onPointerSample(event) {
     if (!motionAllowed()) return;
     lastPointer = { x: event.clientX, y: event.clientY };
-    lastPointerAt = performance.now();
+    engine.setPointer(event.clientX, event.clientY, cachedAnchor);
     queueAmbient();
   }
 
   function onPointerLeave() {
     lastPointer = null;
+    engine.clearPointer();
     restingAmbient();
   }
 
   function onWindowBlur() {
     lastPointer = null;
+    engine.clearPointer();
     restingAmbient();
   }
 
   function onResize() {
     eyeCenters = [];
     measuredAt = 0;
+    measureViewport();
+    if (reducedPref) renderFrame(engine.settle());
   }
 
   function onSchemeChange() {
@@ -285,77 +468,168 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     else restingAmbient();
   }
 
+  // ── Animation loop (driven only when motion is allowed) ──────────────────
+
+  function stepFrame(now) {
+    if (!motionRunning || !motionAllowed()) {
+      rafId = 0;
+      return;
+    }
+    const dt = lastFrameAt > 0 ? now - lastFrameAt : 16.667;
+    lastFrameAt = now;
+    const frame = engine.step(dt);
+    renderFrame(frame);
+    rafId = win.requestAnimationFrame(stepFrame);
+  }
+
+  function startLoop() {
+    if (rafId || !motionAllowed()) return;
+    lastFrameAt = performance.now();
+    rafId = win.requestAnimationFrame(stepFrame);
+  }
+
+  function stopLoop() {
+    if (!rafId) return;
+    win.cancelAnimationFrame(rafId);
+    rafId = 0;
+    lastFrameAt = 0;
+  }
+
+  // ── State orchestration ──────────────────────────────────────────────────
+
+  function syncStateAttributes(nextEyeState) {
+    root.dataset.eyeState = nextEyeState;
+    const dormant = nextEyeState === 'dormant';
+    root.classList.toggle('is-dormant', dormant);
+  }
+
+  function applyEngineState(name) {
+    const canonical = engine.setState(name);
+    syncStateAttributes(canonical);
+    if (reducedPref) {
+      renderFrame(engine.settle());
+    }
+    return canonical;
+  }
+
+  function applyPhase(nextPhase, prevPhase = phase) {
+    phase = nextPhase;
+    root.dataset.phase = phase;
+    if (stateLocked) return;
+
+    clearStateTimer();
+
+    if (phase === 'dormant') {
+      applyEngineState('dormant');
+      return;
+    }
+
+    if (phase === 'listening') {
+      applyEngineState('listening');
+      return;
+    }
+
+    if (phase === 'thinking') {
+      applyEngineState('thinking');
+      return;
+    }
+
+    if (phase === 'speaking') {
+      applyEngineState('responding');
+      return;
+    }
+
+    // phase === 'idle' (or fallback)
+    if (prevPhase === 'dormant') {
+      if (!motionAllowed()) {
+        applyEngineState('present');
+        return;
+      }
+      applyEngineState('awakening');
+      scheduleStateTransition(AWAKEN_HOLD_MS, () => {
+        if (phase !== 'idle') return;
+        applyEngineState('present');
+        scheduleStateTransition(PRESENT_SETTLE_MS, () => {
+          if (phase === 'idle') applyEngineState('idle');
+        });
+      });
+      return;
+    }
+
+    if (prevPhase === 'speaking') {
+      const currentLevel = doc.documentElement?.dataset?.surfaceLevel ?? '';
+      const surfaceChanged = adaptingPending || currentLevel !== lastSurfaceLevel;
+      lastSurfaceLevel = currentLevel;
+      adaptingPending = false;
+
+      if (surfaceChanged && motionAllowed()) {
+        applyEngineState('adapting');
+        scheduleStateTransition(ADAPT_HOLD_MS, () => {
+          if (phase !== 'idle') return;
+          applyEngineState('present');
+          scheduleStateTransition(PRESENT_SETTLE_MS, () => {
+            if (phase === 'idle') applyEngineState('idle');
+          });
+        });
+        return;
+      }
+
+      if (motionAllowed()) {
+        applyEngineState('present');
+        scheduleStateTransition(PRESENT_SETTLE_MS, () => {
+          if (phase === 'idle') applyEngineState('idle');
+        });
+        return;
+      }
+    }
+
+    applyEngineState('idle');
+  }
+
   // ── Motion lifecycle ─────────────────────────────────────────────────────
 
   function startOwnMotion() {
     if (!motionAllowed() || motionRunning) return;
     motionRunning = true;
+    engine.setPaused(false);
+    measureViewport();
 
-    window.addEventListener('mousemove', onPointerSample, { passive: true });
-    window.addEventListener('pointerdown', onPointerSample, { passive: true });
-    document.addEventListener('pointerleave', onPointerLeave);
-    window.addEventListener('blur', onWindowBlur);
-    window.addEventListener('resize', onResize, { passive: true });
+    win.addEventListener('mousemove', onPointerSample, { passive: true });
+    win.addEventListener('pointerdown', onPointerSample, { passive: true });
+    doc.addEventListener('pointerleave', onPointerLeave);
+    win.addEventListener('blur', onWindowBlur);
     if (darkMedia && typeof darkMedia.addEventListener === 'function') {
       darkMedia.addEventListener('change', onSchemeChange);
     }
 
     restingAmbient();
     scheduleBlink();
-    scheduleSaccade();
+    startLoop();
   }
 
   function stopOwnMotion() {
     if (!motionRunning) return;
     motionRunning = false;
 
+    stopLoop();
     stopTimers();
     clearBlinkPose();
 
-    window.removeEventListener('mousemove', onPointerSample);
-    window.removeEventListener('pointerdown', onPointerSample);
-    document.removeEventListener('pointerleave', onPointerLeave);
-    window.removeEventListener('blur', onWindowBlur);
-    window.removeEventListener('resize', onResize);
+    win.removeEventListener('mousemove', onPointerSample);
+    win.removeEventListener('pointerdown', onPointerSample);
+    doc.removeEventListener('pointerleave', onPointerLeave);
+    win.removeEventListener('blur', onWindowBlur);
     if (darkMedia && typeof darkMedia.removeEventListener === 'function') {
       darkMedia.removeEventListener('change', onSchemeChange);
     }
 
     if (ambientFrame) {
-      window.cancelAnimationFrame(ambientFrame);
+      win.cancelAnimationFrame(ambientFrame);
       ambientFrame = 0;
     }
 
     setVariable(VAR_SACCADE_X, '0px');
     setVariable(VAR_SACCADE_Y, '0px');
-  }
-
-  // ── Mood / phase ─────────────────────────────────────────────────────────
-
-  // Direct class application: used while paused, when reduced motion is on,
-  // or when the face instance has been torn down.
-  function applyMoodClasses(value) {
-    const next = normalizeMood(value);
-    for (const eye of eyes()) {
-      for (const candidate of VALID_MOODS) eye.classList.remove(candidate);
-      if (next !== 'neutral') eye.classList.add(next);
-    }
-  }
-
-  function applyMood(value) {
-    mood = normalizeMood(value);
-    if (face) face.setMood(mood);
-    else applyMoodClasses(mood);
-  }
-
-  function applyPhase(next) {
-    phase = next;
-    root.dataset.phase = phase;
-    const dormant = phase === 'dormant';
-    root.classList.toggle('is-dormant', dormant);
-    // While dormant the lids are closed by CSS; keep the mood neutral so no
-    // residual mood classes fight the closed-lid rule.
-    applyMood(dormant ? 'neutral' : (PHASE_MOOD[phase] ?? 'neutral'));
   }
 
   function syncToggle() {
@@ -364,52 +638,22 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     motionToggle.textContent = paused ? 'Resume motion' : 'Pause motion';
   }
 
-  // Held gaze target from the gaze bridge below. While set, the vendor's own
-  // mouse/random look calls are ignored so caret/idle/ack targets win.
-  let gazeHold = null;
-
-  function startFace() {
-    if (destroyed || reducedMotion || paused || face || !faceBox) return;
-    face = new EyeFace();
-    face.init(faceBox);
-    const vendorLook = face.updateEyePosition.bind(face);
-    face.updateEyePosition = (x, y, fromGaze = false) => {
-      if (gazeHold && !fromGaze) return;
-      vendorLook(x, y);
-    };
-    // The vendor blink is symmetric (150 ms down and up) and would fight the
-    // asymmetric, occasionally doubled blink that our own timers drive.
-    face.blink = () => {};
-    face.setMood(mood);
-  }
-
-  function stopFace({ restore = true } = {}) {
-    if (!face) return;
-    // Tears down timers, mousemove listener and event-bus subscriptions.
-    // EyeFace.destroy() also clears its mood classes, so restore the pose
-    // directly to keep the eyes visually unchanged while paused.
-    face.destroy();
-    face = null;
-    if (restore) applyMoodClasses(mood);
-  }
-
   function pause() {
     if (destroyed || paused) return;
     paused = true;
+    engine.setPaused(true);
     root.classList.add('is-motion-paused');
     stopOwnMotion();
-    stopFace();
     syncToggle();
   }
 
   function resume() {
     if (destroyed || !paused) return;
     paused = false;
+    engine.setPaused(false);
     root.classList.remove('is-motion-paused');
-    startFace();
-    if (face) face.setMood(mood);
-    else applyMoodClasses(mood);
-    startOwnMotion();
+    if (motionAllowed()) startOwnMotion();
+    else renderFrame(engine.settle());
     syncToggle();
   }
 
@@ -418,62 +662,283 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     else pause();
   }
 
+  function onMotionPrefChange(event) {
+    reducedPref = Boolean(reducedMotion) || Boolean(event.matches);
+    root.classList.toggle('is-reduced-motion', reducedPref);
+    engine.setReducedMotion(reducedPref);
+    if (reducedPref) {
+      stopOwnMotion();
+      renderFrame(engine.settle());
+    } else if (!paused) {
+      startOwnMotion();
+    }
+  }
+
+  // ── External bridges (gaze, focus, params, state) ────────────────────────
+
+  function onGaze(event) {
+    const detail = event.detail || {};
+    if (detail.source === 'release') {
+      engine.clearFocusTarget();
+      if (reducedPref) renderFrame(engine.settle());
+      return;
+    }
+    if (typeof detail.x !== 'number' || typeof detail.y !== 'number') return;
+    engine.setFocusTarget({
+      x: detail.x,
+      y: detail.y,
+      anchor: cachedAnchor,
+      strength: Number.isFinite(detail.intensity) ? detail.intensity : 1,
+      source: typeof detail.source === 'string' ? detail.source : 'focus',
+    });
+    if (reducedPref) renderFrame(engine.settle());
+  }
+
+  function onFocusIn(event) {
+    const target = event.target;
+    if (!target || target.id !== 'composer-input') return;
+    const rect = typeof target.getBoundingClientRect === 'function'
+      ? target.getBoundingClientRect()
+      : null;
+    if (rect && (rect.width > 0 || rect.height > 0)) {
+      engine.setFocusTarget({
+        x: rect.left + rect.width * 0.5,
+        y: rect.top + rect.height * 0.5,
+        anchor: cachedAnchor,
+        strength: 0.72,
+        source: 'focus',
+      });
+      if (reducedPref) renderFrame(engine.settle());
+    }
+  }
+
+  function onFocusOut(event) {
+    const target = event.target;
+    if (!target || target.id !== 'composer-input') return;
+    engine.clearFocusTarget('focus');
+    if (reducedPref) renderFrame(engine.settle());
+  }
+
+  function onParamsSignal() {
+    adaptingPending = true;
+    if (!stateLocked && (phase === 'idle') && motionAllowed()) {
+      const currentEye = engine.getFrame().state;
+      if (currentEye === 'idle' || currentEye === 'present') {
+        adaptingPending = false;
+        applyEngineState('adapting');
+        scheduleStateTransition(ADAPT_HOLD_MS, () => {
+          if (phase !== 'idle') return;
+          applyEngineState('present');
+          scheduleStateTransition(PRESENT_SETTLE_MS, () => {
+            if (phase === 'idle') applyEngineState('idle');
+          });
+        });
+      }
+    }
+  }
+
+  function onEyeStateEvent(event) {
+    const detail = event.detail || {};
+    if (detail.lock === false) {
+      unlockState();
+      return;
+    }
+    if (typeof detail.state === 'string') {
+      setState(detail.state, { lock: detail.lock !== false });
+    }
+  }
+
+  function onEyeParamsEvent(event) {
+    const detail = event.detail || {};
+    if (detail.reset) {
+      resetParams();
+      return;
+    }
+    setParams(detail);
+  }
+
+  // ── Public control API ───────────────────────────────────────────────────
+
+  function setState(nextState, { lock = true } = {}) {
+    if (destroyed) return engine.getFrame().state;
+    stateLocked = Boolean(lock);
+    clearStateTimer();
+    return applyEngineState(nextState);
+  }
+
+  function unlockState() {
+    if (destroyed) return;
+    stateLocked = false;
+    applyPhase(store.getState().phase ?? 'idle', phase);
+  }
+
+  function setParams(partial) {
+    if (destroyed) return engine.getSnapshot().params;
+    const updated = engine.setParams(partial);
+    if (reducedPref) renderFrame(engine.settle());
+    return updated;
+  }
+
+  function resetParams() {
+    if (destroyed) return engine.getSnapshot().params;
+    const reset = engine.resetParams();
+    if (reducedPref) renderFrame(engine.settle());
+    return reset;
+  }
+
+  function setFocus(target) {
+    if (destroyed) return;
+    engine.setFocusTarget({ ...target, anchor: target?.anchor ?? cachedAnchor });
+    if (reducedPref) renderFrame(engine.settle());
+  }
+
+  function clearFocus(source = null) {
+    if (destroyed) return;
+    engine.clearFocusTarget(source);
+    if (reducedPref) renderFrame(engine.settle());
+  }
+
+  function getState() {
+    return engine.getSnapshot();
+  }
+
+  function setEyeShape(shape) {
+    if (destroyed) return 'neutral';
+    const allowed = new Set(['soft', 'neutral', 'sharp', 'wide']);
+    const next = allowed.has(shape) ? shape : 'neutral';
+    root.dataset.eyeShape = next;
+    return next;
+  }
+
+  function triggerCue(kind = 'adapt') {
+    if (destroyed) return;
+    if (kind === 'reset') {
+      root.classList.remove('is-cue-adapt');
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 130, holdMs: 110, openMs: 340, doubleChance: 0 });
+      }
+      return;
+    }
+    if (kind === 'adapt') {
+      onParamsSignal();
+      root.classList.add('is-cue-adapt');
+      after(360, () => {
+        if (!destroyed) root.classList.remove('is-cue-adapt');
+      });
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 75, holdMs: 35, openMs: 190, doubleChance: 0 });
+      }
+    }
+  }
+
   // ── Wiring ───────────────────────────────────────────────────────────────
 
+  root.classList.toggle('is-reduced-motion', reducedPref);
+  root.dataset.phase = phase;
+  syncStateAttributes(initialEngineState);
+
   decorate();
+  measureViewport();
+  renderFrame(engine.settle());
 
   if (motionToggle) {
     motionToggle.addEventListener('click', onToggle);
   }
   syncToggle();
 
-  // reducedMotion: never init the face — only static mood classes.
-  if (reducedMotion) applyMoodClasses(mood);
-  else {
-    startFace();
-    startOwnMotion();
+  win.addEventListener('resize', onResize, { passive: true });
+  let resizeObserver = null;
+  if (typeof win.ResizeObserver === 'function') {
+    resizeObserver = new win.ResizeObserver(() => onResize());
+    resizeObserver.observe(root);
   }
 
-  const unsubscribe = store.subscribe((state) => {
-    if (!destroyed) applyPhase(state.phase);
+  if (motionMedia && typeof motionMedia.addEventListener === 'function') {
+    motionMedia.addEventListener('change', onMotionPrefChange);
+  }
+
+  const surfaceObserver = typeof win.MutationObserver === 'function' && doc.documentElement
+    ? new win.MutationObserver((records) => {
+        for (const rec of records) {
+          if (rec.attributeName === 'data-surface-level') {
+            const nextLevel = doc.documentElement.dataset.surfaceLevel ?? '';
+            if (nextLevel !== lastSurfaceLevel) {
+              lastSurfaceLevel = nextLevel;
+              onParamsSignal();
+            }
+          }
+        }
+      })
+    : null;
+  if (surfaceObserver && doc.documentElement) {
+    surfaceObserver.observe(doc.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-surface-level'],
+    });
+  }
+
+  doc.addEventListener('agentfaehig:gaze', onGaze);
+  doc.addEventListener('focusin', onFocusIn);
+  doc.addEventListener('focusout', onFocusOut);
+  doc.addEventListener('agentfaehig:params', onParamsSignal);
+  doc.addEventListener('agentfaehig:eye-state', onEyeStateEvent);
+  doc.addEventListener('agentfaehig:eye-params', onEyeParamsEvent);
+
+  const unsubscribe = store.subscribe((state, prev) => {
+    if (!destroyed) applyPhase(state.phase, prev?.phase ?? phase);
   });
 
-  // ── Gaze bridge (integrator) ─────────────────────────────────────────────
-  // Other modules (caret gaze, idle waiting, interrupt ack) send
-  // 'agentfaehig:gaze' { x, y, source } or { source: 'release' }. While a
-  // target is held, the pupils look there and the vendor's idle wandering is
-  // kept quiet; on release the mouse takes over again.
-  function onGaze(event) {
-    const detail = event.detail || {};
-    if (detail.source === 'release') {
-      gazeHold = null;
-      return;
-    }
-    if (typeof detail.x !== 'number' || typeof detail.y !== 'number') return;
-    gazeHold = { x: detail.x, y: detail.y };
-    if (face && !paused && !isDormant()) {
-      face.updateEyePosition(detail.x, detail.y, true);
-    }
+  if (motionAllowed()) {
+    startOwnMotion();
+  } else {
+    restingAmbient();
   }
-  document.addEventListener('agentfaehig:gaze', onGaze);
 
   function destroy() {
     if (destroyed) return;
     destroyed = true;
-    document.removeEventListener('agentfaehig:gaze', onGaze);
     unsubscribe();
     stopOwnMotion();
-    stopFace({ restore: false });
+    if (resizeObserver) resizeObserver.disconnect();
+    if (surfaceObserver) surfaceObserver.disconnect();
+    win.removeEventListener('resize', onResize);
+    if (motionMedia && typeof motionMedia.removeEventListener === 'function') {
+      motionMedia.removeEventListener('change', onMotionPrefChange);
+    }
+    doc.removeEventListener('agentfaehig:gaze', onGaze);
+    doc.removeEventListener('focusin', onFocusIn);
+    doc.removeEventListener('focusout', onFocusOut);
+    doc.removeEventListener('agentfaehig:params', onParamsSignal);
+    doc.removeEventListener('agentfaehig:eye-state', onEyeStateEvent);
+    doc.removeEventListener('agentfaehig:eye-params', onEyeParamsEvent);
+    if (motionToggle) motionToggle.removeEventListener('click', onToggle);
+
     removeDecoration();
     for (const eye of eyes()) {
       for (const candidate of VALID_MOODS) eye.classList.remove(candidate);
       eye.classList.remove('is-blinking', 'is-reopening');
     }
     for (const name of OWN_VARS) root.style.removeProperty(name);
-    if (motionToggle) motionToggle.removeEventListener('click', onToggle);
-    root.classList.remove('is-motion-paused', 'is-reduced-motion', 'is-dormant');
+    writtenVars.clear();
+    root.classList.remove('is-motion-paused', 'is-reduced-motion', 'is-dormant', 'is-cue-adapt');
     delete root.dataset.phase;
+    delete root.dataset.eyeState;
+    delete root.dataset.eyeShape;
   }
 
-  return { pause, resume, destroy };
+  return {
+    pause,
+    resume,
+    destroy,
+    setState,
+    unlockState,
+    setParams,
+    resetParams,
+    setEyeShape,
+    triggerCue,
+    setFocus,
+    clearFocus,
+    getState,
+    engine,
+  };
 }

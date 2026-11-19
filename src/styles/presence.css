@@ -11,11 +11,40 @@
   pointer-events: none;
   user-select: none;
 
-  /* Pupil state (set per phase below) plus the tiny ambient term that
-     presence.js writes while the pointer moves. */
+  /* Parametric motion state variables written by presence.js from the
+     Eye Motion Engine, plus the ambient pupil dilation term. */
   --pupil-state: 1;
   --saccade-x: 0px;
   --saccade-y: 0px;
+  --eye-pair-x: 0px;
+  --eye-pair-y: 0px;
+  --eye-pair-scale: 1;
+  --eye-pair-tilt: 0deg;
+  --eye-left-x: 0px;
+  --eye-left-y: 0px;
+  --eye-left-scale-x: 1;
+  --eye-left-scale-y: 1;
+  --eye-right-x: 0px;
+  --eye-right-y: 0px;
+  --eye-right-scale-x: 1;
+  --eye-right-scale-y: 1;
+  --eye-left-pupil-x: 0px;
+  --eye-left-pupil-y: 0px;
+  --eye-right-pupil-x: 0px;
+  --eye-right-pupil-y: 0px;
+  --eye-left-lid-top: 0%;
+  --eye-left-lid-bottom: 0%;
+  --eye-right-lid-top: 0%;
+  --eye-right-lid-bottom: 0%;
+  --eye-left-lid-tilt: 0deg;
+  --eye-right-lid-tilt: 0deg;
+  --eye-top-clearance: clamp(20px, 3.8vh, 40px);
+  --eye-bottom-clearance: clamp(14px, 2.6vh, 28px);
+  --eye-presence-opacity: 1;
+  --eye-shadow-y: 14px;
+  --eye-shadow-blur: 28px;
+  --eye-shadow-alpha: 0.34;
+  --eye-catchlight-opacity: 0.9;
 
   /* Warm skin, sampled from base.css and nudged a little redder so the lids
      read as flesh without introducing a face. */
@@ -30,24 +59,66 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  /* Keep the eyes in the upper third of the surface. */
-  padding-top: clamp(4px, 3vh, 32px);
+  /* Clearance expands dynamically with vertical displacement and proximity scale. */
+  padding-block: var(--eye-top-clearance, clamp(20px, 3.8vh, 40px))
+    var(--eye-bottom-clearance, clamp(14px, 2.6vh, 28px));
+  transition: padding-block 0.7s var(--ease);
 }
 
 /* The vendor reserves bottom margin for other faces; the eyes stand alone. */
 .presence .eyes-container {
   margin-bottom: 0;
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  opacity: var(--eye-presence-opacity, 1);
+  transform: translate3d(var(--eye-pair-x, 0px), var(--eye-pair-y, 0px), 0)
+    scale(var(--eye-pair-scale, 1))
+    rotate(var(--eye-pair-tilt, 0deg));
+  transition: opacity 0.9s var(--ease);
+  will-change: transform;
+}
+
+.presence .left-eye {
+  transform: translate3d(var(--eye-left-x, 0px), var(--eye-left-y, 0px), 0)
+    scale(var(--eye-left-scale-x, 1), var(--eye-left-scale-y, 1));
+  will-change: transform;
+}
+
+.presence .right-eye {
+  transform: translate3d(var(--eye-right-x, 0px), var(--eye-right-y, 0px), 0)
+    scale(var(--eye-right-scale-x, 1), var(--eye-right-scale-y, 1));
+  will-change: transform;
 }
 
 /* Clip lids to the eyeball silhouette so the skin never shows as a slab,
-   and let the (unclipped) box-shadow on .eye carry the soft halo. */
+   and let the (unclipped) box-shadow on .eye carry depth + halo. */
 .presence .eye {
   border-radius: 50% 50% 45% 45%;
   overflow: hidden;
   box-shadow:
-    0 0 26px rgba(74, 63, 53, 0.14),
-    0 16px 30px -22px rgba(74, 53, 38, 0.4);
+    0 0 28px var(--surface-eye-halo, rgba(74, 63, 53, 0.14)),
+    0 var(--eye-shadow-y, 14px) var(--eye-shadow-blur, 28px) calc(var(--eye-shadow-blur, 28px) * -0.58) rgba(58, 39, 27, var(--eye-shadow-alpha, 0.34));
+}
+
+.presence[data-eye-shape="soft"] .eye {
+  border-radius: 50% 50% 49% 49%;
+  --iris-limbus-alpha: 0.76;
+}
+.presence[data-eye-shape="neutral"] .eye {
+  border-radius: 50% 50% 45% 45%;
+  --iris-limbus-alpha: 0.92;
+}
+.presence[data-eye-shape="sharp"] .eye {
+  border-radius: 42% 42% 36% 36%;
+  --iris-limbus-alpha: 1;
+}
+.presence[data-eye-shape="wide"] .eye {
+  border-radius: 52% 52% 52% 52%;
+  --iris-limbus-alpha: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye {
+    transition: border-radius 0.8s var(--ease);
+  }
 }
 
 .presence .eye .eye-cap-top {
@@ -187,6 +258,18 @@
   z-index: 2;
 }
 
+.presence .eyes-container .left-eye .pupil-container {
+  transition: none;
+  transform: translate3d(var(--eye-left-pupil-x, 0px), var(--eye-left-pupil-y, 0px), 0) !important;
+  will-change: transform;
+}
+
+.presence .eyes-container .right-eye .pupil-container {
+  transition: none;
+  transform: translate3d(var(--eye-right-pupil-x, 0px), var(--eye-right-pupil-y, 0px), 0) !important;
+  will-change: transform;
+}
+
 .presence .eye .pupil {
   width: min(54px, 13.5vw);
   height: min(54px, 13.5vw);
@@ -209,9 +292,8 @@
   animation: none;
   /* The iris sits slightly high so the lid rests on its upper edge. */
   top: -4%;
-  /* Microsaccades ride on top of the vendor's mouse tracking (which moves
-     .pupil-container). Only transform, so the compositor does the work. */
-  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px));
+  /* Microsaccades + idle widening ride cleanly in compositor transform. */
+  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px)) scale(var(--idle-pupil-scale, 1));
   transition: transform 110ms cubic-bezier(0.3, 0.65, 0.4, 1);
 }
 
@@ -245,10 +327,17 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
+  opacity: 0.72;
+  transition: opacity 420ms var(--ease);
   background:
     radial-gradient(circle at 50% 50%, transparent 0 26%, rgba(255, 197, 129, 0.13) 30% 40%, transparent 50%),
     radial-gradient(circle at 36% 26%, rgba(255, 236, 204, 0.42), rgba(255, 236, 204, 0.08) 38%, transparent 56%),
     radial-gradient(circle at 64% 82%, rgba(214, 140, 92, 0.18), transparent 55%);
+}
+
+.presence.is-cue-adapt .eye .pupil .iris-sheen {
+  opacity: 1;
+  transition: opacity 160ms ease-out;
 }
 
 /* Dark limbus ring where the iris meets the sclera. */
@@ -256,6 +345,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
+  opacity: var(--iris-limbus-alpha, 0.92);
   background: radial-gradient(circle at 50% 50%,
     transparent 0 78%,
     rgba(30, 17, 8, 0.18) 88%,
@@ -296,12 +386,13 @@
 
 /* ── Fixed catchlights: the eye turns, the reflection stays put ─────────── */
 
+/* Catchlights respond softly to proximity depth. */
 .presence .eye .eye-catchlight {
   position: absolute;
   z-index: 4;
   pointer-events: none;
-  opacity: 0.9;
-  transition: opacity 1.3s var(--ease);
+  opacity: var(--eye-catchlight-opacity, 0.9);
+  transition: opacity 0.8s var(--ease);
 }
 
 .presence .eye .eye-catchlight--main {
@@ -352,11 +443,25 @@
   opacity: 0.6;
 }
 
-/* ── State-driven pupil width (600 ms, transform only) ──────────────────── */
+/* ── State-driven lid posture when awake (rAF engine drives smooth springs) ── */
 
-.presence[data-phase="listening"] { --pupil-state: 1.14; }
-.presence[data-phase="thinking"]  { --pupil-state: 0.9; }
-.presence[data-phase="speaking"]  { --pupil-state: 1.05; }
+.presence:not(.is-dormant) .left-eye:not(.is-blinking) .eyelid-top {
+  transform: translateY(calc(var(--eye-left-lid-top, 0%) + var(--idle-lid-top, 0%)))
+    rotate(var(--eye-left-lid-tilt, 0deg));
+}
+
+.presence:not(.is-dormant) .left-eye:not(.is-blinking) .eyelid-bottom {
+  transform: translateY(calc(var(--eye-left-lid-bottom, 0%) + var(--idle-lid-bottom, 0%)));
+}
+
+.presence:not(.is-dormant) .right-eye:not(.is-blinking) .eyelid-top {
+  transform: translateY(calc(var(--eye-right-lid-top, 0%) + var(--idle-lid-top, 0%)))
+    rotate(var(--eye-right-lid-tilt, 0deg));
+}
+
+.presence:not(.is-dormant) .right-eye:not(.is-blinking) .eyelid-bottom {
+  transform: translateY(calc(var(--eye-right-lid-bottom, 0%) + var(--idle-lid-bottom, 0%)));
+}
 
 /* ── Dormant: lids closed, dimmed, calm ─────────────────────────────────── */
 
@@ -395,45 +500,29 @@
   transform: translateY(-26%);
 }
 
-/* ── Lid motion: ~1.2 s opening, blink keeps its own timing ─────────────── */
+/* ── Lid motion: rAF engine smooths posture; blinks & waking use timing vars ── */
 
 @media (prefers-reduced-motion: no-preference) {
-  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye .eyelid-top,
-  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye .eyelid-bottom {
-    transition: transform 1.2s var(--ease);
+  .presence.is-dormant .eyelid-top,
+  .presence.is-dormant .eyelid-bottom {
+    transition: transform 0.9s var(--ease);
   }
 
   .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-blinking .eyelid-top {
-    transition-duration: 95ms;
-    transition-timing-function: cubic-bezier(0.55, 0.06, 0.9, 0.35);
+    transition: transform var(--blink-close-ms, 95ms) cubic-bezier(0.55, 0.06, 0.9, 0.35);
   }
 
   .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-blinking .eyelid-bottom {
-    transition-duration: 115ms;
-    transition-timing-function: cubic-bezier(0.55, 0.06, 0.9, 0.35);
+    transition: transform calc(var(--blink-close-ms, 95ms) + 20ms) cubic-bezier(0.55, 0.06, 0.9, 0.35);
   }
 
   .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-reopening .eyelid-top {
-    transition-duration: 260ms;
-    transition-timing-function: cubic-bezier(0.16, 0.7, 0.3, 1);
+    transition: transform var(--blink-open-ms, 260ms) cubic-bezier(0.16, 0.7, 0.3, 1);
   }
 
   .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-reopening .eyelid-bottom {
-    transition-duration: 220ms;
-    transition-timing-function: cubic-bezier(0.16, 0.7, 0.3, 1);
+    transition: transform calc(var(--blink-open-ms, 260ms) * 0.85) cubic-bezier(0.16, 0.7, 0.3, 1);
   }
-}
-
-/* ── Breathing: only awake, only when motion is allowed ────────────────── */
-
-@keyframes presence-breathe {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.02); }
-}
-
-.presence[data-phase="idle"]:not(.is-dormant):not(.is-motion-paused):not(.is-reduced-motion)
-  .eyes-container {
-  animation: presence-breathe 6s ease-in-out infinite;
 }
 
 /* Motion toggle pauses blinking/looking (JS) and CSS animation (here). */
@@ -444,15 +533,15 @@
   animation: none;
 }
 
-/* ── Reduced motion: no transitions, no dilation, no drift ──────────────── */
+/* ── Reduced motion: no drift/transitions, keep static geometry & pupil scale ─ */
 
 .presence.is-reduced-motion .pupil-core {
-  transform: none;
+  transform: scale(var(--pupil-state, 1));
   transition: none;
 }
 
 .presence.is-reduced-motion .pupil {
-  transform: none;
+  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px));
 }
 
 .presence.is-reduced-motion,

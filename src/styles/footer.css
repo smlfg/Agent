@@ -1,0 +1,56 @@
+/* Quiet site footer: legal links and credit. Sits below the composer in normal
+   flow so it can never cover the input, and stays subtle at 12px / AA contrast. */
+
+.site-footer {
+  width: 100%;
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 0 0.25rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  color: #6B5C4E; /* >= 4.5:1 on the warm background */
+}
+
+.site-footer-line {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.15rem 0.45rem;
+}
+
+.site-footer a {
+  display: inline-block;
+  padding: 0.2rem 0.1rem;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  border-radius: 2px;
+}
+
+.site-footer a:hover {
+  color: var(--text);
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.site-footer-sep {
+  color: var(--line);
+}
+
+@media (prefers-contrast: more) {
+  .site-footer,
+  .site-footer-sep {
+    color: var(--text);
+  }
+}

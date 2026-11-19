@@ -1,0 +1,90 @@
+/* Bone Layer 1 · Light & 4-Orb Atmospheric Wash (36 bones)
+   Active whenever html[data-bones-active="true"]. Drives 3-stop angled gradient,
+   soft edge vignette, top ambient highlight, and 4 independent painterly orbs. */
+
+html[data-bones-active="true"] {
+  background:
+    linear-gradient(
+      var(--bone-bg-angle, 180deg),
+      var(--bone-bg-start, #F6F1E9) 0%,
+      var(--bone-bg-mid, #F1EADF) var(--bone-bg-mid-stop, 48%),
+      var(--bone-bg-end, #EDE4D3) 100%
+    );
+  background-attachment: fixed;
+}
+
+html[data-bones-active="true"] body {
+  background: transparent;
+}
+
+/* Soft edge vignette + subtle top ambient falloff */
+html[data-bones-active="true"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      120% 90% at 50% var(--bone-bg-highlight-y, -12%),
+      rgba(255, 255, 255, var(--bone-bg-highlight-alpha, 0.24)),
+      transparent 60%
+    ),
+    radial-gradient(
+      85% 85% at 50% 50%,
+      transparent 48%,
+      color-mix(in srgb, var(--bone-vignette-color, #2B211A) calc(var(--bone-vignette-alpha, 0.04) * 100%), transparent) 100%
+    );
+  transition: opacity var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+/* 4-Orb Painterly Light Field */
+html[data-bones-active="true"] body::before {
+  inset: -8%;
+  opacity: 1;
+  background:
+    radial-gradient(
+      var(--bone-orb-a-rx, 62%) var(--bone-orb-a-ry, 48%) at var(--bone-orb-a-x, 22%) var(--bone-orb-a-y, 18%),
+      var(--bone-orb-a-color, rgba(193, 122, 77, 0.18)),
+      transparent var(--bone-orb-a-fade, 72%)
+    ),
+    radial-gradient(
+      var(--bone-orb-b-rx, 58%) var(--bone-orb-b-ry, 46%) at var(--bone-orb-b-x, 80%) var(--bone-orb-b-y, 82%),
+      var(--bone-orb-b-color, rgba(138, 75, 34, 0.14)),
+      transparent var(--bone-orb-b-fade, 74%)
+    ),
+    radial-gradient(
+      var(--bone-orb-c-rx, 48%) var(--bone-orb-c-ry, 42%) at var(--bone-orb-c-x, 76%) var(--bone-orb-c-y, 14%),
+      var(--bone-orb-c-color, rgba(212, 160, 106, 0.08)),
+      transparent var(--bone-orb-c-fade, 72%)
+    ),
+    radial-gradient(
+      var(--bone-orb-d-rx, 46%) var(--bone-orb-d-ry, 38%) at var(--bone-orb-d-x, 20%) var(--bone-orb-d-y, 78%),
+      var(--bone-orb-d-color, rgba(193, 122, 77, 0.04)),
+      transparent var(--bone-orb-d-fade, 74%)
+    );
+  transition:
+    opacity var(--bone-transition-ms, 1100ms) var(--ease),
+    transform var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+@keyframes bone-aura-breathe {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-1.4%, 1.1%, 0) scale(var(--bone-aura-breath-scale, 1.04));
+  }
+}
+
+html[data-bones-active="true"][data-surface-alive="true"] body::before {
+  animation: bone-aura-breathe var(--bone-aura-breath-ms, 14000ms) ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bones-active="true"]::before,
+  html[data-bones-active="true"] body::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}

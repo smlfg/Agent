@@ -18,6 +18,7 @@ import { createSurfaceStore } from './surface/surface-state.js';
 import { buildAdaptationPromptBlock, createAdaptiveAgent } from './surface/surface-adapter.js';
 import { mountSurfaceProjector } from './surface/surface-projector.js';
 import { mountSurfaceControls } from './surface/surface-controls.js';
+import { mountKeyboardViewport } from './surface/keyboard-viewport.js';
 
 export const AWAKE_AFTER_MS = 5000;
 
@@ -80,9 +81,17 @@ if (isProductionHost(location.hostname)) {
   }
   adapters.push(styledDev);
 }
+const presence = mountPresence({ root: document.getElementById('presence'), store, reducedMotion });
+const surfaceProjector = mountSurfaceProjector({
+  surfaceStore,
+  presence,
+  root: document.documentElement,
+  reducedMotion,
+});
 const baseAgent = createAdaptiveAgent({
   innerAgent: createAgentChain(adapters),
   surfaceStore,
+  projector: surfaceProjector,
 });
 let currentAgent = baseAgent;
 // The DEV DATA badge shows only while answers actually come from dev data.
@@ -97,18 +106,13 @@ function setAgent(next) {
   currentAgent = next ?? baseAgent;
 }
 
-const presence = mountPresence({ root: document.getElementById('presence'), store, reducedMotion });
-const surfaceProjector = mountSurfaceProjector({
-  surfaceStore,
-  presence,
-  root: document.documentElement,
-  reducedMotion,
-});
 const surfaceControls = mountSurfaceControls({
   container: document.getElementById('surface-controls'),
   surfaceStore,
   reducedMotion,
 });
+// The eyes must survive the mobile keyboard (first mobile test, 20.11.2026).
+const keyboardViewport = mountKeyboardViewport();
 mountConversation({ root: stage, store, agent, reducedMotion });
 // Eyes follow the writing caret and look ahead while the visitor types.
 mountGaze({ input: document.getElementById('composer-input'), reducedMotion });
@@ -142,8 +146,19 @@ mountMic({
   reducedMotion,
 });
 
-// Gentle awakening: after ~5 s, or as soon as the visitor starts typing.
-setTimeout(() => store.dispatch({ type: 'AWAKE' }), AWAKE_AFTER_MS);
+// Gentle awakening: after ~5 s, or immediately if previewing a ?pose=<world|surprise>.
+const poseParam = search.get('pose');
+if (poseParam) {
+  store.dispatch({ type: 'AWAKE' });
+  if (poseParam.trim().toLowerCase() === 'surprise') {
+    const seedParam = Number(search.get('seed')) || 42;
+    surfaceProjector.surprise({ temperature: 0.95, seed: seedParam });
+  } else {
+    surfaceProjector.applyWorld(poseParam);
+  }
+} else {
+  setTimeout(() => store.dispatch({ type: 'AWAKE' }), AWAKE_AFTER_MS);
+}
 
 // Debug handle for local verification and dev tools only.
 window.__agentfaehig = {
@@ -152,6 +167,16 @@ window.__agentfaehig = {
   surface: surfaceStore,
   surfaceProjector,
   surfaceControls,
+  keyboard: keyboardViewport,
+  bones: {
+    count: surfaceProjector.boneCount,
+    getState: () => surfaceProjector.getActiveBones(),
+    apply: (patch) => surfaceProjector.applyBonePatch(patch),
+    applyWorld: (id) => surfaceProjector.applyWorld(id),
+    surprise: (opts) => surfaceProjector.surprise(opts),
+    listWorlds: () => surfaceProjector.listWorlds(),
+    reset: () => surfaceProjector.clearBones(),
+  },
   setAgent,
   devAgent,
   reducedMotion,

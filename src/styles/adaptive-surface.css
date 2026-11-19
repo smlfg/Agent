@@ -1,0 +1,382 @@
+/* Adaptive Surface Aura & Horological Watch-Index Controls (agentfähig.de)
+   Whisper-quiet top index marks above the eyes: no border box, no glassmorphism,
+   no numeric readouts — pure bipolar polarity and immediate 60fps tactile scrubbing. */
+
+@property --surface-aura-a {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(193, 122, 77, 0.16);
+}
+
+@property --surface-aura-b {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(138, 75, 34, 0.12);
+}
+
+@property --surface-aura-c {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(212, 160, 106, 0.06);
+}
+
+:root {
+  transition:
+    --bg-start var(--surface-transition-ms, 1.2s) var(--ease),
+    --bg-end var(--surface-transition-ms, 1.2s) var(--ease),
+    --text var(--surface-transition-ms, 1.2s) var(--ease),
+    --muted var(--surface-transition-ms, 1.2s) var(--ease),
+    --accent var(--surface-transition-ms, 1.2s) var(--ease),
+    --line var(--surface-transition-ms, 1.2s) var(--ease),
+    --focus-ring var(--surface-transition-ms, 1.2s) var(--ease),
+    --surface-aura-a var(--surface-transition-ms, 1.2s) var(--ease),
+    --surface-aura-b var(--surface-transition-ms, 1.2s) var(--ease),
+    --surface-aura-c var(--surface-transition-ms, 1.2s) var(--ease);
+}
+
+/* 60fps direct coupling while scrubbing any horological watch dial. */
+html[data-surface-dragging="true"],
+html[data-surface-dragging="true"] body::before,
+html[data-surface-dragging="true"] body::after,
+html[data-surface-dragging="true"] .stage,
+html[data-surface-dragging="true"] .pair,
+html[data-surface-dragging="true"] .pair-entry,
+html[data-surface-dragging="true"] .pair-answer {
+  transition-duration: 0ms !important;
+}
+
+/* Crisp exhale transition on full reset ("Mach alles rückgängig."). */
+html[data-surface-transition="reset"],
+html[data-surface-transition="reset"] body::before,
+html[data-surface-transition="reset"] .stage,
+html[data-surface-transition="reset"] .pair,
+html[data-surface-transition="reset"] .pair-answer {
+  transition-duration: 760ms !important;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body {
+  position: relative;
+}
+
+/* Multi-pole radial atmosphere light washes. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -6%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(62% 48% at 22% 18%, var(--surface-aura-a), transparent 72%),
+    radial-gradient(58% 46% at 80% 82%, var(--surface-aura-b), transparent 74%),
+    radial-gradient(48% 42% at 76% 14%, var(--surface-aura-c), transparent 72%);
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: opacity var(--surface-transition-ms, 1.1s) var(--ease);
+}
+
+/* Subtle paper grain texture (inlined SVG noise — no external network asset). */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--surface-grain-opacity, 0.015);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  transition: opacity 900ms var(--ease);
+}
+
+@keyframes surface-aura-breathe {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-1.5%, 1.2%, 0) scale(1.04); }
+}
+
+html[data-surface-alive="true"] body::before {
+  animation: surface-aura-breathe 14s ease-in-out infinite;
+}
+
+.stage {
+  z-index: 1;
+}
+
+.stage:has(> .surface-controls:not([hidden])) {
+  grid-template-rows: auto minmax(22vh, auto) 1fr auto;
+}
+
+/* Subtle background retreat while the agent is speaking. */
+.stage[data-phase="speaking"] :is(.site-footer, .motion-toggle, .surface-controls) {
+  opacity: 0.24;
+  transition: opacity 550ms var(--ease);
+}
+
+/* ── Horological Watch-Index Strip (perched above the eyes, zero box) ──── */
+
+.surface-controls {
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0.1rem 0.25rem 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  opacity: 0.56;
+  transform: translateY(0);
+  transition:
+    opacity 320ms var(--ease),
+    transform 260ms var(--ease);
+}
+
+.surface-controls:hover,
+.surface-controls:focus-within,
+html[data-surface-dragging="true"] .surface-controls {
+  opacity: 1;
+}
+
+.surface-controls.is-closing {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+.surface-controls[hidden] {
+  display: none;
+}
+
+.surface-controls-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem 1.05rem;
+  min-width: 0;
+}
+
+.surface-control {
+  display: inline-grid;
+  grid-template-columns: auto minmax(4.3rem, 5.8rem) auto;
+  align-items: center;
+  gap: 0.34rem;
+  min-width: 0;
+}
+
+.surface-pole {
+  border: 0;
+  background: transparent;
+  padding: 0.22rem 0.12rem;
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: 0.78rem;
+  line-height: 1.1;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 220ms var(--ease), color 220ms var(--ease);
+}
+
+.surface-pole--low {
+  opacity: calc(0.4 + 0.58 * (1 - var(--t, 0.5)));
+  font-weight: calc(400 + 180 * (1 - var(--t, 0.5)));
+}
+
+.surface-pole--high {
+  opacity: calc(0.4 + 0.58 * var(--t, 0.5));
+  font-weight: calc(400 + 180 * var(--t, 0.5));
+}
+
+.surface-pole:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.surface-pole:focus-visible {
+  outline: 1.5px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Watch-index micro dial */
+.surface-dial {
+  position: relative;
+  width: 100%;
+  height: 1.35rem;
+  display: flex;
+  align-items: center;
+}
+
+.surface-dial-svg {
+  width: 100%;
+  height: 18px;
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.surface-dial-rail {
+  stroke: var(--line);
+  stroke-width: 0.75;
+  opacity: 0.55;
+}
+
+.surface-dial-tick {
+  stroke: var(--muted);
+  stroke-width: 0.75;
+  opacity: 0.42;
+}
+
+.surface-dial-tick--origin {
+  stroke: var(--text);
+  stroke-width: 0.9;
+  opacity: 0.52;
+}
+
+.surface-dial-arc {
+  stroke: var(--accent);
+  stroke-width: 1.15;
+  opacity: 0.78;
+}
+
+.surface-dial-needle {
+  stroke: var(--accent);
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  transition: transform 90ms ease-out;
+}
+
+.surface-dial-pivot {
+  fill: var(--accent);
+}
+
+.surface-dial-input {
+  position: absolute;
+  inset: -0.4rem -0.2rem;
+  width: calc(100% + 0.4rem);
+  height: calc(100% + 0.8rem);
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+.surface-dial:has(.surface-dial-input:focus-visible)::after {
+  content: "";
+  position: absolute;
+  inset: 2px -2px;
+  border-radius: 4px;
+  outline: 1.5px solid var(--focus-ring);
+  pointer-events: none;
+}
+
+.surface-dial:hover .surface-dial-rail {
+  opacity: 0.9;
+}
+
+.surface-dial:hover .surface-dial-tick {
+  opacity: 0.7;
+}
+
+/* Delicate crown icons for Undo & Origin Reset */
+.surface-controls-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex: 0 0 auto;
+}
+
+.surface-crown-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 999px;
+  opacity: 0.72;
+  transition: color 180ms var(--ease), opacity 180ms var(--ease);
+}
+
+.surface-crown-btn[hidden] {
+  display: none;
+}
+
+.surface-crown-btn:hover:not(:disabled) {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.surface-crown-btn:focus-visible {
+  outline: 1.5px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .surface-controls {
+    margin-top: 1.85rem;
+    flex-direction: column;
+    gap: 0.08rem;
+    padding: 0 0.35rem;
+    opacity: 0.72;
+  }
+
+  .surface-controls-items {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+
+  .surface-control {
+    width: 100%;
+    grid-template-columns: 4.8rem 1fr 4.8rem;
+    gap: 0.45rem;
+  }
+
+  .surface-dial {
+    height: 1.15rem;
+  }
+
+  .surface-pole {
+    font-size: 0.74rem;
+    padding: 0.16rem 0;
+  }
+
+  .surface-pole--low {
+    text-align: right;
+  }
+
+  .surface-pole--high {
+    text-align: left;
+  }
+
+  .surface-controls-actions {
+    align-self: flex-end;
+    gap: 0.25rem;
+  }
+
+  .surface-crown-btn {
+    width: 1.55rem;
+    height: 1.55rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  body::before,
+  body::after,
+  .surface-controls,
+  .surface-pole,
+  .surface-dial-needle,
+  .surface-crown-btn {
+    transition: none !important;
+  }
+
+  html[data-surface-alive="true"] body::before {
+    animation: none !important;
+  }
+}

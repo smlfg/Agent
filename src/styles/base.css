@@ -34,7 +34,11 @@ html, body {
 }
 
 .stage {
-  min-height: 100dvh;
+  /* While the mobile keyboard is open, src/surface/keyboard-viewport.js writes
+     --keyboard-inset (Safari overlays the layout viewport); Chromium resizes
+     it natively via interactive-widget=resizes-content. Either way the stage
+     compresses to the visible band so the eyes stay on screen. */
+  min-height: calc(100dvh - var(--keyboard-inset, 0px));
   display: grid;
   grid-template-rows: minmax(28vh, auto) 1fr auto;
   justify-items: center;
@@ -75,4 +79,26 @@ html, body {
 /* Narrow screens: keep the motion toggle clear of the composer. */
 @media (max-width: 640px) {
   .stage .motion-toggle { top: max(12px, env(safe-area-inset-top)); bottom: auto; }
+}
+
+/* ── Mobile keyboard open (see src/surface/keyboard-viewport.js) ─────────── */
+
+/* The eye row may compress harder than at rest; the eyes still keep their
+   own clearance via .face-box padding. */
+html[data-keyboard="open"] .stage {
+  grid-template-rows: minmax(16vh, auto) 1fr auto;
+}
+
+html[data-keyboard="open"] .stage:has(> .surface-controls:not([hidden])) {
+  grid-template-rows: auto minmax(12vh, auto) 1fr auto;
+}
+
+/* Bones worlds read this variable for their stage rows (bones-stage.css). */
+html[data-keyboard="open"] {
+  --bone-stage-top-min: 12vh;
+}
+
+/* Fixed-position chrome rides above the keyboard instead of behind it. */
+html[data-keyboard="open"] .motion-toggle {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + var(--keyboard-inset, 0px));
 }
