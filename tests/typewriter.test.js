@@ -316,3 +316,108 @@ test('stop after completion does not emit onDone twice', () => {
   assert.equal(doneCalls.length, 1);
   assert.equal(updates.at(-1), 'One two');
 });
+
+// --- finishSentence (interrupt receipt) -----------------------------------
+
+test('finishSentence types the short sentence remainder fast and resolves finished', async () => {
+  const text = 'Hello world. Second sentence stays hidden.';
+  const { scheduler, updates, typewriter } = setup(text, {
+    charDelayMs: 30,
+    random: () => 0.5,
+  });
+
+  typewriter.start();
+  for (let i = 0; i < 5; i++) scheduler.step();
+  assert.equal(updates.at(-1), 'Hello');
+
+  const before = scheduler.delays.length;
+  const result = typewriter.finishSentence();
+  scheduler.flush();
+
+  assert.equal(await result, 'finished');
+  assert.equal(updates.at(-1), 'Hello world.');
+  assert.ok(!updates.at(-1).includes('Second'), 'stops at the sentence end');
+
+  const fastDelays = scheduler.delays.slice(before);
+  assert.ok(fastDelays.length > 0);
+  for (const delay of fastDelays) {
+    assert.ok(delay >= 1 && delay <= 8, `not ~4x cadence: ${delay}`);
+  }
+});
+
+test('finishSentence cuts a long sentence after the current word with an ellipsis', async () => {
+  const text = 'This is a very long sentence that will not be finished before the visitor returns.';
+  const { scheduler, updates, typewriter } = setup(text, {
+    charDelayMs: 30,
+    random: () => 0.5,
+  });
+
+  typewriter.start();
+  for (let i = 0; i < 11; i++) scheduler.step();
+  assert.equal(updates.at(-1), 'This is a v');
+
+  const result = typewriter.finishSentence();
+  scheduler.flush();
+
+  assert.equal(await result, 'cut');
+  assert.equal(updates.at(-1), 'This is a very…');
+});
+
+test('finishSentence honours maxChars for the finished/cut decision', async () => {
+  const text = 'One two three. Four five six.';
+  const { scheduler, updates, typewriter } = setup(text);
+
+  typewriter.start();
+  scheduler.step();
+  assert.equal(updates.at(-1), 'O');
+
+  const result = typewriter.finishSentence({ maxChars: 2, maxMs: 100 });
+  scheduler.flush();
+
+  assert.equal(await result, 'cut');
+  assert.equal(updates.at(-1), 'One…');
+});
+
+test('finishSentence respects the maxMs cap', async () => {
+  const text = `${'x'.repeat(39)}.`;
+  const { scheduler, typewriter } = setup(text, { charDelayMs: 30 });
+
+  typewriter.start();
+  scheduler.step();
+
+  const before = scheduler.delays.length;
+  const result = typewriter.finishSentence({ maxChars: 40, maxMs: 100 });
+  scheduler.flush();
+
+  assert.equal(await result, 'finished');
+  const fastDelays = scheduler.delays.slice(before);
+  const total = fastDelays.reduce((sum, delay) => sum + delay, 0);
+  assert.ok(total <= 100, `cap exceeded: ${total}`);
+  assert.ok(fastDelays.every((delay) => delay >= 1));
+});
+
+test('reducedMotion finishSentence jumps without scheduling', async () => {
+  const text = 'Short sentence. Another one here.';
+  const { scheduler, updates, typewriter } = setup(text, { reducedMotion: true });
+
+  typewriter.start();
+  assert.deepEqual(updates, [text]);
+  const pendingBefore = scheduler.size;
+
+  const result = typewriter.finishSentence();
+  assert.equal(await result, 'finished');
+  assert.equal(scheduler.size, pendingBefore);
+  assert.deepEqual(updates, [text]);
+});
+
+test('finishSentence after normal completion resolves finished and is idempotent', async () => {
+  const { scheduler, typewriter } = setup('Done already.');
+
+  typewriter.start();
+  scheduler.flush();
+
+  assert.equal(await typewriter.finishSentence(), 'finished');
+  assert.equal(await typewriter.finishSentence(), 'finished');
+  assert.equal(scheduler.size, 0);
+});
+

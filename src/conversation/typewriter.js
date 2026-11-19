@@ -18,6 +18,13 @@ const SENTENCE_PAUSE_MS = 320;
 const LINE_PAUSE_MS = 320;
 const PAUSE_THRESHOLD_MS = 100;
 
+// Interrupt finish: a short sentence remainder is typed out at roughly four
+// times the normal cadence, but never for longer than the cap.
+export const INTERRUPT_MAX_CHARS = 40;
+export const INTERRUPT_MAX_MS = 500;
+const INTERRUPT_SPEED_FACTOR = 4;
+const ELLIPSIS = '…';
+
 // Jitter factor: 0.72 .. 1.28 of the base delay, i.e. 30 ms becomes 22..38 ms.
 const JITTER_MIN = 0.72;
 const JITTER_SPAN = 0.56;
@@ -100,6 +107,124 @@ function isLineBreak(unit) {
   return /[\n\r\u2028\u2029]/.test(unit);
 }
 
+function isWhitespaceUnit(unit) {
+  return /^\s+$/.test(unit);
+}
+
+function clampIndex(value, total) {
+  const n = Math.floor(Number(value));
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  if (n >= total) return total;
+  return n;
+}
+
+/**
+ * The running sentence starts at `fromIndex` and ends at the next sentence
+ * mark (. ! ? … and their full-width forms) or at the next line end.
+ * Closing quotes/brackets after the mark still belong to the sentence.
+ * The returned `end` is an exclusive unit index; `restChars` counts the units
+ * that would still have to be typed.
+ */
+export function findSentenceRest(units, fromIndex = 0) {
+  const list = Array.isArray(units) ? units : Array.from(units ?? []);
+  const total = list.length;
+  const start = clampIndex(fromIndex, total);
+  let end = total;
+
+  for (let i = start; i < total; i++) {
+    const unit = list[i];
+    if (isLineBreak(unit)) {
+      end = i;
+      break;
+    }
+    if (SENTENCE_END.has(unit)) {
+      end = i + 1;
+      while (end < total && (SENTENCE_END.has(list[end]) || CLOSERS.has(list[end]))) {
+        end += 1;
+      }
+      break;
+    }
+  }
+
+  return { start, end, restChars: end - start };
+}
+
+/**
+ * End of the word that contains the current typing position (exclusive unit
+ * index). Whitespace and line ends count as word boundaries.
+ */
+export function findWordEnd(units, fromIndex = 0) {
+  const list = Array.isArray(units) ? units : Array.from(units ?? []);
+  const total = list.length;
+  let end = clampIndex(fromIndex, total);
+  while (end < total && !isWhitespaceUnit(list[end]) && !isLineBreak(list[end])) {
+    end += 1;
+  }
+  return end;
+}
+
+function fastDelay(steps, baseDelayMs, maxMs) {
+  if (steps <= 0) return 0;
+  const fastBase = Math.max(1, Math.round((Number(baseDelayMs) || 30) / INTERRUPT_SPEED_FACTOR));
+  const cap = Number(maxMs);
+  if (!Number.isFinite(cap) || cap <= 0) return 0;
+  return Math.max(1, Math.min(fastBase, Math.floor(cap / steps) || 1));
+}
+
+/**
+ * Pure decision for an interrupted answer:
+ * - if the current sentence has at most `maxChars` left, finish that sentence
+ *   (`result: 'finished'`);
+ * - otherwise finish only the current word and append an ellipsis
+ *   (`result: 'cut'`).
+ * Both paths type at ~4x cadence and stay within `maxMs`.
+ */
+export function planFinishSentence({
+  units,
+  index = 0,
+  maxChars = INTERRUPT_MAX_CHARS,
+  maxMs = INTERRUPT_MAX_MS,
+  baseDelayMs = 30,
+} = {}) {
+  const list = Array.isArray(units) ? units : Array.from(units ?? []);
+  const from = clampIndex(index, list.length);
+  const limitChars = Math.max(0, Math.floor(Number(maxChars) || 0));
+  const capMs = Math.max(0, Number(maxMs) || 0);
+  const rest = findSentenceRest(list, from);
+
+  if (rest.restChars <= limitChars) {
+    const steps = rest.restChars;
+    const delayMs = fastDelay(steps, baseDelayMs, capMs);
+    return {
+      result: 'finished',
+      appendEllipsis: false,
+      fromIndex: from,
+      endIndex: rest.end,
+      steps,
+      delayMs,
+      totalMs: steps * delayMs,
+      tail: list.slice(from, rest.end).join(''),
+    };
+  }
+
+  const endIndex = findWordEnd(list, from);
+  const steps = endIndex - from;
+  const delayMs = fastDelay(steps, baseDelayMs, capMs);
+  // A cut right after a finished sentence ("I hear you. |") needs no "…".
+  const visible = list.slice(0, endIndex).join('').trimEnd();
+  const endsSentence = visible.length > 0 && SENTENCE_END.has(visible.at(-1));
+  return {
+    result: 'cut',
+    appendEllipsis: !endsSentence,
+    fromIndex: from,
+    endIndex,
+    steps,
+    delayMs,
+    totalMs: steps * delayMs,
+    tail: `${list.slice(from, endIndex).join('')}${endsSentence ? '' : ELLIPSIS}`,
+  };
+}
+
 /**
  * @param {object} options
  * @param {string} options.text
@@ -112,7 +237,7 @@ function isLineBreak(unit) {
  * @param {() => number} [options.random]
  * @param {(visible: string, meta: {state: 'typing' | 'pausing' | 'done', delayMs: number, index: number, total: number, unit: 'char' | 'word'}) => void} [options.onUpdate]
  * @param {() => void} [options.onDone]
- * @returns {{start: () => void, stop: () => void}}
+ * @returns {{start: () => void, stop: () => void, finishSentence: (options?: {maxChars?: number, maxMs?: number}) => Promise<'finished' | 'cut'>}}
  */
 export function createTypewriter({
   text,
@@ -139,6 +264,8 @@ export function createTypewriter({
   let finished = false;
   let index = 0;
   let timerId = null;
+  let finishPromise = null;
+  let finishSettle = null;
 
   function finish() {
     if (finished) return;
@@ -219,13 +346,95 @@ export function createTypewriter({
     timerId = schedule(step, charMode ? baseDelay() : wordDelayMs);
   }
 
+  function settleFinish(result) {
+    if (!finishSettle) return;
+    const settle = finishSettle;
+    finishSettle = null;
+    settle(result);
+  }
+
+  // Interrupt path: stop at a clean sentence boundary. A short remainder is
+  // typed out quickly; a long one is cut after the current word with an
+  // ellipsis. Resolves with which branch ran. Deliberately does not call
+  // onDone: the caller decides how the interrupted pair leaves the surface.
+  function finishSentence({ maxChars = INTERRUPT_MAX_CHARS, maxMs = INTERRUPT_MAX_MS } = {}) {
+    if (finishPromise) return finishPromise;
+    if (finished) return Promise.resolve('finished');
+    if (stopped) return Promise.resolve('cut');
+
+    const plan = planFinishSentence({
+      units,
+      index,
+      maxChars,
+      maxMs,
+      baseDelayMs: charMode ? charDelayMs : wordDelayMs,
+    });
+
+    if (timerId !== null) {
+      cancel(timerId);
+      timerId = null;
+    }
+
+    if (reducedMotion || plan.steps === 0) {
+      index = plan.endIndex;
+      const visible = units.slice(0, plan.fromIndex).join('') + plan.tail;
+      emit(visible, { state: 'done', delayMs: 0, index, total, unit: unitName });
+      finished = true;
+      finishPromise = Promise.resolve(plan.result);
+      return finishPromise;
+    }
+
+    finishPromise = new Promise((resolve) => {
+      finishSettle = resolve;
+      let typed = 0;
+
+      function stepFast() {
+        timerId = null;
+        if (stopped) {
+          finished = true;
+          settleFinish('cut');
+          return;
+        }
+
+        typed += 1;
+        index += 1;
+
+        if (typed >= plan.steps) {
+          const visible = units.slice(0, plan.fromIndex).join('') + plan.tail;
+          emit(visible, { state: 'done', delayMs: 0, index, total, unit: unitName });
+          finished = true;
+          settleFinish(plan.result);
+          return;
+        }
+
+        const visible = units.slice(0, index).join('');
+        emit(visible, {
+          state: 'typing',
+          delayMs: plan.delayMs,
+          index,
+          total,
+          unit: unitName,
+        });
+        timerId = schedule(stepFast, plan.delayMs);
+      }
+
+      timerId = schedule(stepFast, plan.delayMs);
+    });
+
+    return finishPromise;
+  }
+
   function stop() {
     stopped = true;
     if (timerId !== null) {
       cancel(timerId);
       timerId = null;
     }
+    if (finishSettle) {
+      finished = true;
+      settleFinish('cut');
+    }
   }
 
-  return { start, stop };
+  return { start, stop, finishSentence };
 }

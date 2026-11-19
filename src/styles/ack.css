@@ -1,0 +1,53 @@
+/* Interrupt acknowledgement (Agent T).
+ *
+ * Loaded as a <link> by src/conversation/conversation.js, not from the HTML.
+ * While #presence carries `is-ack` (~420 ms) the eyes blink once and the
+ * pupils shift a little further towards the visitor. Transform-only keys, so
+ * the existing lid and pupil rules keep working afterwards.
+ */
+
+@keyframes ack-blink-top {
+  0%, 100% { transform: translateY(0); }
+  38%, 62% { transform: translateY(90%); }
+}
+
+@keyframes ack-blink-bottom {
+  0%, 100% { transform: translateY(0); }
+  38%, 62% { transform: translateY(-30%); }
+}
+
+@keyframes ack-pupil-near {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  45%, 65% { transform: translate(0, 6%) scale(1.05); }
+}
+
+.presence.is-ack .eye .eyelid-top {
+  animation: ack-blink-top 420ms ease-in-out both;
+}
+
+.presence.is-ack .eye .eyelid-bottom {
+  animation: ack-blink-bottom 420ms ease-in-out both;
+}
+
+.presence.is-ack .eye .pupil {
+  animation: ack-pupil-near 420ms ease-in-out both;
+}
+
+/* No blink while motion is reduced or explicitly paused. The ack event is
+   still dispatched from JS; only the visual receipt is skipped here. */
+.presence.is-ack.is-reduced-motion .eye .eyelid-top,
+.presence.is-ack.is-reduced-motion .eye .eyelid-bottom,
+.presence.is-ack.is-reduced-motion .eye .pupil,
+.presence.is-ack.is-motion-paused .eye .eyelid-top,
+.presence.is-ack.is-motion-paused .eye .eyelid-bottom,
+.presence.is-ack.is-motion-paused .eye .pupil {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .presence.is-ack .eye .eyelid-top,
+  .presence.is-ack .eye .eyelid-bottom,
+  .presence.is-ack .eye .pupil {
+    animation: none;
+  }
+}

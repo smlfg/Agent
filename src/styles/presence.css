@@ -1,4 +1,6 @@
-/* Presence (M1 contract, section A) — eye placement, dormant lids, breathing. */
+/* Presence (M1 contract, section A) — eye placement, hyperreal anatomy,
+   dormant lids, waking and motion. Vendor files stay untouched; every rule
+   here is scoped inside .presence so it overrides eyes.css by specificity. */
 
 .presence {
   position: relative;
@@ -8,6 +10,20 @@
   align-items: flex-start;
   pointer-events: none;
   user-select: none;
+
+  /* Pupil state (set per phase below) plus the tiny ambient term that
+     presence.js writes while the pointer moves. */
+  --pupil-state: 1;
+  --saccade-x: 0px;
+  --saccade-y: 0px;
+
+  /* Warm skin, sampled from base.css and nudged a little redder so the lids
+     read as flesh without introducing a face. */
+  --skin-hi: #F1E5D4;
+  --skin: #E6D4BB;
+  --skin-shade: #D6BE9F;
+  --skin-deep: #C6AC8B;
+  --lash: rgba(58, 39, 27, 0.4);
 }
 
 .presence .face-box {
@@ -24,6 +40,324 @@
   transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 
+/* Clip lids to the eyeball silhouette so the skin never shows as a slab,
+   and let the (unclipped) box-shadow on .eye carry the soft halo. */
+.presence .eye {
+  border-radius: 50% 50% 45% 45%;
+  overflow: hidden;
+  box-shadow:
+    0 0 26px rgba(74, 63, 53, 0.14),
+    0 16px 30px -22px rgba(74, 53, 38, 0.4);
+}
+
+.presence .eye .eye-cap-top {
+  display: none;
+}
+
+/* ── Eyelids: skin, soft shadow edge, lash line, wet margin ─────────────── */
+
+.presence .eye .eyelid-top,
+.presence .eye .eyelid-bottom {
+  background: linear-gradient(180deg, var(--skin-hi) 0%, var(--skin) 46%, var(--skin-shade) 80%, var(--skin-deep) 100%);
+  border-radius: 0 0 50% 50% / 0 0 9% 9%;
+  /* The lit edge of the lid plus the soft shadow it drops onto the eyeball. */
+  box-shadow:
+    0 14px 20px -12px rgba(63, 43, 29, 0.58),
+    0 4px 7px -4px rgba(63, 43, 29, 0.32),
+    inset 0 -2px 3px rgba(255, 252, 246, 0.52),
+    inset 0 4px 6px -4px rgba(120, 92, 66, 0.4);
+}
+
+.presence .eye .eyelid-bottom {
+  bottom: -31%;
+  background: linear-gradient(0deg, #EADAC3 0%, var(--skin) 52%, var(--skin-shade) 100%);
+  border-radius: 50% 50% 0 0 / 9% 9% 0 0;
+  box-shadow:
+    0 -9px 15px -10px rgba(63, 43, 29, 0.42),
+    inset 0 2px 3px rgba(255, 252, 246, 0.4);
+}
+
+/* Wet gloss along the free margin of each lid — moves with the lid. */
+.presence .eye .eyelid-top::before,
+.presence .eye .eyelid-bottom::before {
+  content: '';
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 251, 244, 0.7) 30%, rgba(255, 251, 244, 0.78) 50%, rgba(255, 251, 244, 0.66) 70%, transparent 100%);
+  opacity: 0.28;
+}
+
+.presence .eye .eyelid-top::before {
+  bottom: 0;
+}
+
+.presence .eye .eyelid-bottom::before {
+  top: 0;
+  opacity: 0.26;
+}
+
+/* A hinted lower lash line, much quieter than the upper one. */
+.presence .eye .eyelid-bottom::after {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -1px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: linear-gradient(0deg, rgba(58, 39, 27, 0.2), rgba(58, 39, 27, 0));
+  opacity: 0.45;
+}
+
+/* A hinted lash fringe: one soft, slightly uneven shadow line. */
+.presence .eye .eyelid-top::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -1px;
+  height: 4px;
+  border-radius: 50% 50% 45% 45%;
+  background: linear-gradient(180deg, var(--lash), rgba(58, 39, 27, 0));
+  opacity: 0.5;
+}
+
+/* ── Eyeball: rounded, warm, wet ────────────────────────────────────────── */
+
+.presence .eye .eye-white {
+  background:
+    radial-gradient(92% 72% at 50% 118%, rgba(208, 132, 88, 0.2), rgba(208, 132, 88, 0) 62%),
+    radial-gradient(120% 92% at 50% -18%, rgba(74, 52, 36, 0.22), rgba(74, 52, 36, 0) 58%),
+    radial-gradient(74% 62% at 50% 48%, #FFFDF9 0%, #F7EEE1 58%, #EDDFCC 82%, #DECBB3 100%);
+  box-shadow:
+    inset 0 14px 22px -10px rgba(60, 40, 28, 0.42),
+    inset 0 -16px 24px -16px rgba(120, 72, 42, 0.32),
+    inset 0 0 20px rgba(255, 255, 255, 0.85);
+}
+
+/* Broad corneal sheen, fixed like the catchlights. */
+.presence .eye .eye-white::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(58% 44% at 33% 26%, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 72%);
+}
+
+/* Lid shadow and canthus warmth sit in eye space, above the iris. */
+.presence .eye .eye-white::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(58, 38, 26, 0.2) 0%, rgba(58, 38, 26, 0.07) 10%, rgba(58, 38, 26, 0) 22%),
+    linear-gradient(0deg, rgba(96, 62, 42, 0.12) 0%, rgba(96, 62, 42, 0) 12%),
+    radial-gradient(46% 40% at 1% 52%, rgba(212, 146, 128, 0.16), rgba(212, 146, 128, 0) 72%),
+    radial-gradient(46% 40% at 99% 52%, rgba(212, 146, 128, 0.16), rgba(212, 146, 128, 0) 72%);
+}
+
+/* Very faint vessels, fading before they reach the iris. */
+.presence .eye .eye-veins {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  color: rgb(160, 96, 80);
+  opacity: 0.2;
+  -webkit-mask-image: radial-gradient(ellipse 60% 54% at 50% 52%, transparent 52%, #000 88%);
+  mask-image: radial-gradient(ellipse 60% 54% at 50% 52%, transparent 52%, #000 88%);
+}
+
+.presence .eye .eye-veins svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Iris and pupil ─────────────────────────────────────────────────────── */
+
+.presence .eye .pupil-container {
+  z-index: 2;
+}
+
+.presence .eye .pupil {
+  width: min(54px, 13.5vw);
+  height: min(54px, 13.5vw);
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 44%,
+      #96682F 0%,
+      #875B2A 22%,
+      #744B23 40%,
+      #5C3A1C 62%,
+      #452915 80%,
+      #301D10 94%,
+      #241609 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(28, 16, 8, 0.55),
+    inset 0 0 6px rgba(38, 22, 10, 0.55),
+    0 1px 2px rgba(46, 28, 16, 0.35);
+  /* The vendor's listening pulse is replaced by state-driven dilation below. */
+  animation: none;
+  /* The iris sits slightly high so the lid rests on its upper edge. */
+  top: -4%;
+  /* Microsaccades ride on top of the vendor's mouse tracking (which moves
+     .pupil-container). Only transform, so the compositor does the work. */
+  transform: translate(var(--saccade-x, 0px), var(--saccade-y, 0px));
+  transition: transform 110ms cubic-bezier(0.3, 0.65, 0.4, 1);
+}
+
+/* The vendor's two moving sparkles would fight the fixed catchlights. */
+.presence .eye .pupil::before,
+.presence .eye .pupil::after {
+  content: none;
+}
+
+/* Radially combed iris fibres, masked to the stroma between pupil and limbus. */
+.presence .eye .pupil .iris-fibers {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 12% 16% at 36% 34%, rgba(38, 21, 10, 0.22), transparent 72%),
+    radial-gradient(ellipse 10% 14% at 64% 62%, rgba(38, 21, 10, 0.18), transparent 72%),
+    radial-gradient(ellipse 8% 10% at 57% 28%, rgba(255, 220, 170, 0.16), transparent 75%),
+    radial-gradient(ellipse 9% 12% at 42% 68%, rgba(255, 220, 170, 0.12), transparent 75%),
+    repeating-conic-gradient(from 3deg at 50% 50%,
+      rgba(255, 220, 166, 0.16) 0deg, rgba(255, 220, 166, 0.16) 1.1deg,
+      rgba(52, 30, 12, 0.2) 1.1deg, rgba(52, 30, 12, 0.2) 2.6deg,
+      rgba(255, 232, 192, 0.08) 2.6deg, rgba(255, 232, 192, 0.08) 3.5deg);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 0 31%, #000 41% 80%, transparent 93%);
+  mask-image: radial-gradient(circle at 50% 50%, transparent 0 31%, #000 41% 80%, transparent 93%);
+  opacity: 0.85;
+}
+
+/* Corneal sheen: warm light catching the top-left, bounce light below. */
+.presence .eye .pupil .iris-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 26%, rgba(255, 197, 129, 0.13) 30% 40%, transparent 50%),
+    radial-gradient(circle at 36% 26%, rgba(255, 236, 204, 0.42), rgba(255, 236, 204, 0.08) 38%, transparent 56%),
+    radial-gradient(circle at 64% 82%, rgba(214, 140, 92, 0.18), transparent 55%);
+}
+
+/* Dark limbus ring where the iris meets the sclera. */
+.presence .eye .pupil .iris-limbus {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    transparent 0 78%,
+    rgba(30, 17, 8, 0.18) 88%,
+    rgba(22, 12, 6, 0.5) 97%,
+    rgba(16, 8, 4, 0.68) 100%);
+  box-shadow: inset 0 0 2px 1px rgba(24, 13, 6, 0.4);
+}
+
+/* Soft-edged pupil; its scale carries state and ambient dilation. */
+.presence .eye .pupil .pupil-core {
+  position: absolute;
+  inset: 27%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    #050404 0%,
+    #050404 58%,
+    rgba(16, 10, 7, 0.92) 76%,
+    rgba(30, 19, 12, 0.35) 92%,
+    rgba(30, 19, 12, 0) 100%);
+  box-shadow:
+    inset 0 0 3px rgba(0, 0, 0, 0.9),
+    inset 0 1px 2px rgba(120, 90, 60, 0.18);
+  transform: scale(calc(var(--pupil-state, 1) + var(--pupil-ambient, 0)));
+  transform-origin: 50% 50%;
+  transition: transform 600ms var(--ease);
+}
+
+.presence .eye .pupil .pupil-core::after {
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 6%;
+  height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(206, 156, 108, 0.32), rgba(206, 156, 108, 0) 72%);
+}
+
+/* ── Fixed catchlights: the eye turns, the reflection stays put ─────────── */
+
+.presence .eye .eye-catchlight {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 1.3s var(--ease);
+}
+
+.presence .eye .eye-catchlight--main {
+  top: 27%;
+  left: 37%;
+  width: 12%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.82) 38%,
+    rgba(255, 255, 255, 0.28) 62%,
+    rgba(255, 255, 255, 0) 78%);
+}
+
+.presence .eye .eye-catchlight--window {
+  top: 28%;
+  right: 22%;
+  width: 18%;
+  height: 22%;
+  border-radius: 42% 56% 46% 52%;
+  transform: rotate(-20deg);
+  background:
+    linear-gradient(90deg, transparent 0 42%, rgba(255, 255, 255, 0.1) 42% 58%, transparent 58% 100%),
+    linear-gradient(150deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.06) 54%,
+      rgba(255, 255, 255, 0.3) 100%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 38%, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 38%, transparent 78%);
+  opacity: 0.46;
+}
+
+/* Wet meniscus pooled against the lower lid. */
+.presence .eye .eye-wetline {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 2%;
+  height: 14%;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 100%,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 246, 235, 0.12) 48%,
+    rgba(255, 246, 235, 0) 76%);
+  opacity: 0.6;
+}
+
+/* ── State-driven pupil width (600 ms, transform only) ──────────────────── */
+
+.presence[data-phase="listening"] { --pupil-state: 1.14; }
+.presence[data-phase="thinking"]  { --pupil-state: 0.9; }
+.presence[data-phase="speaking"]  { --pupil-state: 1.05; }
+
 /* ── Dormant: lids closed, dimmed, calm ─────────────────────────────────── */
 
 .presence.is-dormant .eyes-container {
@@ -38,7 +372,30 @@
   transform: translateY(-30%);
 }
 
-/* ── Lid motion: ~1.2 s opening, blink stays quick ─────────────────────── */
+.presence.is-dormant .eye-catchlight {
+  opacity: 0;
+}
+
+/* A blink must never crack a sleeping lid open. */
+.presence.is-dormant .eye.is-blinking .eyelid-top {
+  transform: translateY(90%);
+}
+
+.presence.is-dormant .eye.is-blinking .eyelid-bottom {
+  transform: translateY(-30%);
+}
+
+/* ── Blink: asymmetric — down fast, up slow, sometimes twice ────────────── */
+
+.presence .eye.is-blinking .eyelid-top {
+  transform: translateY(94%);
+}
+
+.presence .eye.is-blinking .eyelid-bottom {
+  transform: translateY(-26%);
+}
+
+/* ── Lid motion: ~1.2 s opening, blink keeps its own timing ─────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
   .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye .eyelid-top,
@@ -46,9 +403,24 @@
     transition: transform 1.2s var(--ease);
   }
 
-  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.blinking .eyelid-top,
-  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.blinking .eyelid-bottom {
-    transition-duration: 0.15s;
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-blinking .eyelid-top {
+    transition-duration: 95ms;
+    transition-timing-function: cubic-bezier(0.55, 0.06, 0.9, 0.35);
+  }
+
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-blinking .eyelid-bottom {
+    transition-duration: 115ms;
+    transition-timing-function: cubic-bezier(0.55, 0.06, 0.9, 0.35);
+  }
+
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-reopening .eyelid-top {
+    transition-duration: 260ms;
+    transition-timing-function: cubic-bezier(0.16, 0.7, 0.3, 1);
+  }
+
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.is-reopening .eyelid-bottom {
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.16, 0.7, 0.3, 1);
   }
 }
 
@@ -72,7 +444,16 @@
   animation: none;
 }
 
-/* ── Reduced motion: no transitions or animations inside presence ───────── */
+/* ── Reduced motion: no transitions, no dilation, no drift ──────────────── */
+
+.presence.is-reduced-motion .pupil-core {
+  transform: none;
+  transition: none;
+}
+
+.presence.is-reduced-motion .pupil {
+  transform: none;
+}
 
 .presence.is-reduced-motion,
 .presence.is-reduced-motion *,
