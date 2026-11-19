@@ -180,3 +180,20 @@ graph LR
 
 Nicht korrigiert: Rechtschreibung, Grammatik und der Wechsel zwischen Deutsch
 und Englisch bleiben so, wie sie auf der Seite stehen.
+
+## Redaktionelle Anmerkungen (nachträglich)
+
+Die Transkriptionsliste oben bleibt unberührt; diese Anmerkungen ordnen nur
+zu, was aus ihr geworden ist:
+
+- Die unter Steps notierte Aufforderung „grill me" wurde als
+  [Grilling-Skill](../skills/grilling/SKILL.md) umgesetzt.
+- Die unter „outward" notierte Recherche (`inspiration · prior art! ·
+  what can we copy`) wurde als
+  [aggregierte Scout-Befunde](../research/SCOUT-SYNTHESIS.md) ausgeführt.
+- Als Inspiration- und Prior-Art-Quelle für diese Notizen liegt
+  [GreateWriting](../Agentfähig/GreateWriting.txt) im Repo; seine Kritik an
+  oberflächlicher Farbthemen-Wahl („bespoke principle") steht in einer
+  echten Spannung zur Skizzen-Idee, dass der Agent sein Aussehen selbst
+  erfragt (`colour · form · output style`) — relevant für die offene
+  Slider-Belegung.

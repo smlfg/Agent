@@ -7,6 +7,10 @@ Eine lauffähige Anwendung ist noch nicht enthalten.
 ## Einstieg
 
 - [Projektstand und nächste Entscheidungen](docs/PROJECT.md)
+- [Was liegt wo — Projektpfade](PROJEKTPFADE.md)
+- [Was ich vorhabe — in meinen Worten](docs/VISION-samuel.md)
+- [Bauplan mit Wenn-Dann-Wegen](docs/PLAN-ADREN.md)
+- [Entscheidungsgrundlagen (ADRs)](docs/adr/)
 - [Bestätigte Designentscheidungen](docs/DESIGN-DECISIONS.md)
 - [Aggregierte Scout-Befunde](research/SCOUT-SYNTHESIS.md)
 - [Grilling-Skill als Projektkopie](skills/grilling/SKILL.md)
