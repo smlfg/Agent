@@ -3,7 +3,7 @@
 Stand: 19.11.2026. Recherche im Auftrag von Samuel („11labs und es gibt noch
 viele weitere anbieter — subagent soll mal die kosten recherchieren").
 Alle Abrufe am 19.11.2026 gegen die genannten Primärquellen. Nach der
-Beleg-Regel aus [../INTENT.md](../INTENT.md): keine erfundenen Zahlen; die
+Beleg-Regel aus [../INTENT-TECHNIK.md](../INTENT-TECHNIK.md): keine erfundenen Zahlen; die
 Ungeklärt-Liste am Ende nennt Lücken ausdrücklich.
 
 ## Teil A — Deutsche TTS-Anbieter (für die geparkte deutsche Pipeline)
@@ -85,6 +85,17 @@ Wechsel/Tag**; mit `aura-2-en` statt `aura-1` ≈ 939 Neurons → **~10 Wechsel/
 Freikontingent locker ausreichend (~10.600 Neurons; knapp drüber, dann ~6 Cent).
 Für eine öffentliche Startseite bedeutet es: ~18 kostenlose Voice-Besuche/Tag
 — für einen echten Launch zu eng, für einen Beta-Betrieb mitbegrenzt brauchbar.
+
+**Korrektur vom 19.11. (gemessen, nicht gerechnet):** Die Turn-Rechnung greift
+zu kurz — **flux-STT rechnet pro gestreamter Audiominute**, unabhängig davon,
+ob Turns entstehen. Eine durchgehend offene Mikrofon-Session verbraucht ~700
+Neurons/Minute: **10.000 Neurons/Tag ≈ 14 Minuten offenes Mikrofon.** Der
+Messlauf des 19.11. hat das Tageskontingent allein über live geschaltete
+Mikrofone (zwei 15-Minuten-Handoff-Fenster plus Debugging) verbraucht
+(`4006: you have used up your daily free allocation of 10,000 neurons`,
+Beleg: `MESSPROTOKOLL-2026-11-19.md`). Produktkonsequenz für den Erstbau:
+Push-to-Talk bzw. VAD-Gating ist nicht nur UX, sondern **Kosten-Necessität** —
+ein dauerhaft lauschender Agent ist auf dem Free-Plan nach Minuten am Limit.
 
 **Rate-Limits bestätigt** (developers.cloudflare.com/workers-ai/platform/limits/):
 ASR **720 req/min**, Text Generation **300 req/min** (Defaults); 20/50 req/min

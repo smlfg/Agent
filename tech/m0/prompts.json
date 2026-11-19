@@ -1,0 +1,22 @@
+[
+  { "id": "p01", "text": "Reply with exactly: ready" },
+  { "id": "p02", "text": "Name one primary color. One word only." },
+  { "id": "p03", "text": "What is two plus two? Answer with the digit only." },
+  { "id": "p04", "text": "Say hello in three words." },
+  { "id": "p05", "text": "Name a day of the week. One word only." },
+  { "id": "p06", "text": "Reply with exactly: ok" },
+  { "id": "p07", "text": "Name one fruit. One word only." },
+  { "id": "p08", "text": "What is ten minus three? Answer with the digit only." },
+  { "id": "p09", "text": "Say goodbye in two words." },
+  { "id": "p10", "text": "Name one animal. One word only." },
+  { "id": "p11", "text": "Reply with exactly: done" },
+  { "id": "p12", "text": "Name one city. One word only." },
+  { "id": "p13", "text": "What is five plus five? Answer with the digit only." },
+  { "id": "p14", "text": "Say good morning in two words." },
+  { "id": "p15", "text": "Name one planet. One word only." },
+  { "id": "p16", "text": "Reply with exactly: yes" },
+  { "id": "p17", "text": "Name one musical instrument. One word only." },
+  { "id": "p18", "text": "What is nine minus four? Answer with the digit only." },
+  { "id": "p19", "text": "Say thank you in two words." },
+  { "id": "p20", "text": "Reply with exactly: finished" }
+]

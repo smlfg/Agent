@@ -8,16 +8,29 @@ Abschnitt 3 mit Zweck und Grund.
 
 | Pfad | Inhalt |
 |---|---|
-| `Idea` | Ursprüngliches Sprachtranskript, unverändert |
+| `IDEA-TRANSKRIPT.txt` | Ursprüngliches Sprachtranskript, unverändert |
 | `sketches/` | Handskizze als PDF/PNG, Ausschnitte und Rohdaten |
 | `Agentfähig/` | Designinspiration (`GreateWriting.txt`), keine Anforderung |
-| `docs/` | Projektstand, Vision, Plan, Designentscheidungen, Gutachten, ADRs |
-| `docs/adr/` | Fünf ADRs, alle auf „vorgeschlagen" |
-| `tech/` | Machbarkeit, Messlauf-Plan, Protokoll, Gate-Bericht, Recherchen |
+| `docs/` | Projektstand, Scope-Vertrag, Pläne, Designentscheidungen, Gutachten, ADRs, UX, Wireframes, Namensregel |
+| `docs/DATEINAMEN.md` | Namensregel N1–N4, Ist-Zustand und Umbenennungsprotokoll |
+| `docs/UNSOLVED-TECHNIK.md` | Entscheidungswarteschlange Technik/Planung (kein genehmigter Backlog) |
+| `docs/UNSOLVED-PLANUNG.md` | Entscheidungswarteschlange Produkt/Wireframes (kein genehmigter Backlog) |
+| `docs/DATEINAMEN.md` | Namensregel N1–N4, Ist-Zustand und Umbenennungen |
+| `docs/handoffs/` | Nicht angewendete Handoffs, `YYYY-MM-DD-thema.md`, mit Index |
+| `docs/PROJECT_CONTRACT.md` | Scope-Vertrag (Entwurf, nicht signiert) |
+| `docs/EXECUTION_PLAN-M0-M5.md` | Programmplan M0–M5 (Entwurf) |
+| `docs/PLAN-STUFEN-0-5.md` | Bauplan Stufen 0–5 mit Wenn-Dann-Wegen und ADR-Übersicht |
+| `docs/DATEINAMEN.md` | Namensregel, Ausnahmen und die durchgeführten Umbenennungen |
+| `docs/adr/` | Sechs ADRs (0001–0005 plus 0006 Zeitvertrag, 19.11. abends), alle auf „vorgeschlagen" |
+| `tech/` | Machbarkeit, Messlauf-Plan + Execution Plan, Protokoll, Gate-Bericht, Recherchen |
+| `tech/briefs/` | Recherche-Aufträge (`BRIEF-<thema>.md`), keine Ergebnisse |
+| `tech/research/` | Recherche-Ergebnisse zu denselben Themen (ohne `BRIEF-`-Präfix) |
 | `tech/evidence/` | Kopien von Belegen, die außerhalb des Repos entstanden |
-| `research/` | Scout-Synthese |
-| `UPSTREAM_SEARCH-*.md` | Upstream-Suchen (Root: vergleichbare Projekte, graphify) |
-| `skills/` | Projektkopie des Grilling-Skills |
+| `research/` | Scout-Synthese, Prior Art, Embodiment-Muster |
+| `research/PRIOR_ART_REPORT.md` | Prior Art mit Lizenz-/Reifegradprüfung (Build/Buy/Adapt) |
+| `research/EMBODIMENT-RECHERCHE.md` | Muster zu Präsenz, Typografie, adaptiver Oberfläche |
+| `UPSTREAM-SEARCH-*.md` | Upstream-Suchen (Root: vergleichbare Projekte, graphify) |
+| `skills/` | Projektkopien der Skills (Herkunft und Lizenzen in `skills/README.md`) |
 | `src/`, `tests/` | Noch leer, nur README |
 | `graphify-out/` | Generierter Graph, **kein** Projektinhalt (siehe Abschnitt 4) |
 
@@ -42,14 +55,18 @@ Dieser Hash passt **nicht** zur aktuellen `tech/MESSLAUF-PLAN.md`
 | `03_HAI/docs/UPSTREAM_FIRST_GATE.md`, `PLAN_ACCEPTANCE_GATE.md`, `CONTINUOUS_AUTHORIZE.md` | Geltende Verträge | Eine Quelle. Kopien würden auseinanderlaufen |
 | `03_HAI/docs/PLAN_VALIDATION_REPORT.md` | Kanonischer Anker des Plan-Validators | Enthält derzeit ein **fremdes** Verdict vom 24.08.2026 (anderes Projekt) |
 | `03_HAI/LOGBUCH.md`, `03_HAI/fails/` | Entscheidungen, Fails, Lernregeln | Kanonische HAI-Pfade, append-only |
-| `~/Projects/00_AKTUELL/claudeflareworkerhaus` | Zeugenquelle für SDK-Zitate in `docs/CLOUDFLARE-MACHBARKEIT.md` | Nur Pfadzitate, keine Kopie nötig |
+| `~/Projects/00_AKTUELL/claudeflareworkerhaus` | Zeugenquelle für SDK-Zitate in `docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md` | Nur Pfadzitate, keine Kopie nötig |
 | `03_HAI/registry/components/claudeflareworkerhaus.json` | Registry-Eintrag der Komponente | Registry ist eigene Quelle |
 | `~/Control/ACTIVE_PROJECTS.md` | Aktive Top-Level-Lanes | **Existiert nicht** (`~/Control` fehlt) — siehe Abschnitt 5 |
 
 ## 4 · Was nicht in die Historie gehört
 
-- `graphify-out/` — generierter Graph, 3,7 MB, enthält Cache-JSONs und kennt
-  die Dokumente vom 19.11. nicht. Wird nicht committet.
+- `graphify-out/` — generierter Graph, enthält Cache-JSONs und kennt die
+  Dokumente vom 19.11. nicht. **Widerspruch (20:09 geprüft):** entgegen der
+  ursprünglichen Absicht sind 96 Dateien (1,1 MB, nicht 3,7 MB) derzeit in Git
+  getrackt. Ob der Graph versioniert bleiben soll, ist offen
+  (`docs/handoffs/2026-11-19-unsolved-ergaenzungen.md` U02; dessen Aussage „untracked" ist
+  durch diesen Befund überholt).
 - Klon und `node_modules` — nie committen.
 
 ## 5 · Bekannte Abweichungen (offen, Stand 19.11.2026)
@@ -58,8 +75,31 @@ Dieser Hash passt **nicht** zur aktuellen `tech/MESSLAUF-PLAN.md`
    `a10b394c…`. „ACCEPT" ist damit nicht an den heutigen Plan gebunden.
 2. **Pflichtpfad fehlt:** `~/Control/ACTIVE_PROJECTS.md` existiert nicht,
    `~/Projects/00_AKTUELL/JETZT.md` nennt Agentfähig nicht.
-3. **Doppeltes Machbarkeitsdokument:** `tech/CLOUDFLARE_MACHBARKEIT.md`
-   (Stand 12.11.) und `docs/CLOUDFLARE-MACHBARKEIT.md` (19.11., mit Nachweisen).
+3. **Doppeltes Machbarkeitsdokument:** `tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md`
+   (Stand 12.11.) und `docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md` (19.11., mit Nachweisen).
    Gültig ist `docs/`.
-4. **Messlauf-Sprache:** `docs/PLAN-ADREN.md:82` plant deutsche Wechsel, die
-   Entscheidung vom 19.11. lautet englisch. Gültig ist englisch.
+4. **Messlauf-Sprache (Eintrag überholt — am 19.11. abends geprüft):** Hier stand,
+   `docs/PLAN-STUFEN-0-5.md:82` plane deutsche Wechsel. Das ist nicht (mehr) richtig:
+   `PLAN-STUFEN-0-5.md:5–6` hält fest, dass Stufe 1 **englisch** misst, und Zeile 82
+   gehört zum Abschnitt KI-Dialog. Die Abweichung besteht nicht; gültig ist
+   englisch (`DESIGN-DECISIONS.md`, „Voice-Sprache").
+5. **Lauf-Evidenz außerhalb des Repos und mutabel:** Das Protokoll zitiert das
+   DO-SQLite nur abgekürzt (`…5890aaec….sqlite`) und ändert sich mit jedem
+   Lauf; in `tech/evidence/` liegt nur der Council-Score. Reproduzierbar ist
+   der Befund derzeit nur über den Pfad im Klon, nicht über eine Kopie
+   (`docs/handoffs/2026-11-19-verifikation.md` V4).
+
+## 6 · Dateinamen
+
+Die verbindliche Regel N1–N4, der Ist-Zustand und alle ausgeführten
+Umbenennungen stehen in [`docs/DATEINAMEN.md`](docs/DATEINAMEN.md). Prüfung:
+
+```bash
+bash scripts/check-names.sh      # N1–N3
+bash scripts/validate.sh         # ruft check-names mit auf
+```
+
+Kurzfassung: ein Basisname genau einmal, jede Datei mit Endung, keine
+Leerzeichen/Umlaute, und der Name nennt Rolle und Gegenstand. Handoffs liegen
+historisch unter `docs/handoffs/`, die zwei Warteschlangen heißen
+`docs/UNSOLVED-PLANUNG.md` und `docs/UNSOLVED-TECHNIK.md`.

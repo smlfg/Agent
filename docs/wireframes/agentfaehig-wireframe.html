@@ -1,0 +1,2249 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentfähig — Wireframe-Konzept v0.1 (Lo-Fi, interaktiv)</title>
+<style>
+/* ============================================================
+   Dokument-Chrome (Spec-Seite) — nicht Produktcode, nicht Brand
+   ============================================================ */
+:root{
+  --paper:#f3f1ec; --ink:#16161a; --muted:#5a5a64; --line:#d2cdc2; --line2:#e6e1d6;
+  --card:#fbfaf6; --accent:#bd4a2e; --blue:#2b4f9e; --chip:#eae5da;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-underline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+code,kbd,samp{font-family:var(--mono);font-size:.92em}
+kbd{background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 .35em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-9999px;top:0;background:#fff;padding:10px 14px;z-index:99}
+.skip:focus{left:12px;top:12px}
+
+/* Header */
+.doc-head{padding:36px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.doc-head h1{font-size:clamp(30px,4.4vw,52px);line-height:1.04;letter-spacing:-.02em;margin:.28em 0 .3em;max-width:22ch}
+.doc-head .sub{font-size:clamp(16px,1.6vw,19px);color:#3c3c45;max-width:74ch;margin:0}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:26px}
+.meta div{border-top:1px solid var(--line);padding-top:8px}
+.meta dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.meta dd{margin:2px 0 0;font-size:14px}
+
+/* Banner */
+.banner{margin:18px 0 0;border:1px solid var(--accent);background:#fbeee9;border-radius:8px;padding:14px 16px;font-size:14px}
+.banner strong{color:var(--accent)}
+.banner.soft{border-color:var(--line);background:#f7f5ef}
+
+/* TOC */
+.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 94%, transparent);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.toc ul{display:flex;gap:6px;list-style:none;margin:0;padding:10px 0;overflow-x:auto;scrollbar-width:thin}
+.toc a{display:inline-block;white-space:nowrap;font-size:13px;padding:6px 10px;border-radius:99px;text-decoration:none;color:#33333b;border:1px solid transparent}
+.toc a:hover{border-color:var(--line);background:#fff}
+.toc b{font-family:var(--mono);font-size:11px;color:var(--accent);margin-right:6px}
+
+/* Sections */
+.sec{padding:54px 0;border-top:1px solid var(--line)}
+.sec:first-of-type{border-top:0}
+.sec>div>h2{font-size:clamp(23px,2.6vw,31px);letter-spacing:-.015em;margin:0 0 6px;line-height:1.16}
+.sec h2 .n{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--accent);display:block;margin-bottom:8px}
+h3{font-size:19px;letter-spacing:-.01em;margin:34px 0 10px}
+h4{font-size:15px;margin:22px 0 8px}
+.lead{max-width:78ch;color:#3a3a42;margin:10px 0 22px;font-size:17px}
+p{max-width:82ch}
+.small{font-size:13.5px;color:var(--muted)}
+hr{border:0;border-top:1px solid var(--line2);margin:28px 0}
+ul.tight li{margin:.28em 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:16px 18px}
+.card h4{margin-top:0}
+.note{border-left:3px solid var(--blue);background:#f2f4fa;padding:12px 14px;border-radius:0 6px 6px 0;font-size:14px;margin:16px 0}
+.note.warn{border-color:var(--accent);background:#fbeee9}
+.note.ok{border-color:#2f7d52;background:#eef6f0}
+.note p{max-width:76ch}
+
+/* Chips / Badges / Quellen */
+.src{display:inline-block;font-family:var(--mono);font-size:10px;line-height:1.5;letter-spacing:.04em;
+  padding:1px 5px;border:1px solid #c9c3b6;border-radius:3px;background:#fff;color:#4a4a53;vertical-align:2%}
+.src:hover{background:#fffdf5}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 6px;border-radius:3px;border:1px solid currentColor}
+.badge.t{color:#8a5a12;background:#fdf3df}
+.badge.e{color:#245c39;background:#e9f4ec}
+.badge.o{color:var(--accent);background:#fbeee9}
+.badge.n{color:#4a4a53;background:#f2f0ea}
+.badge.blue{color:var(--blue);background:#eef1fa}
+
+/* Tabellen */
+table.spec{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:13.5px;background:var(--card)}
+table.spec th,table.spec td{border-bottom:1px solid var(--line2);padding:8px 10px;text-align:left;vertical-align:top}
+table.spec thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--line);background:#f6f3ec;position:sticky;top:47px}
+table.spec td:first-child{font-weight:600}
+table.spec tr:hover td{background:#fdfbf5}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.table-scroll table.spec{margin:0;border:0}
+.table-scroll table.spec thead th{top:0}
+.mono{font-family:var(--mono);font-size:12px}
+
+/* ============================================================
+   Produkt-Bühne (Lo-Fi) — die eigentliche Komposition
+   ============================================================ */
+.stage{
+  --w:.62;                                   /* 0 = kühl, 1 = warm (Beispielachse) */
+  --open:1; --look:0; --eyeScale:1;
+  --s-bg:color-mix(in oklab,#faf3e4 calc(var(--w)*100%),#e9eef6);
+  --s-ink:color-mix(in oklab,#241a10 calc(var(--w)*100%),#121b2b);
+  --s-dim:color-mix(in oklab,rgba(36,26,16,.58) calc(var(--w)*100%),rgba(18,27,43,.58));
+  --s-line:color-mix(in oklab,rgba(36,26,16,.22) calc(var(--w)*100%),rgba(18,27,43,.22));
+  position:relative;overflow:hidden;border-radius:6px;background:var(--s-bg);color:var(--s-ink);
+  font-family:var(--sans);container-type:size;aspect-ratio:16/10;isolation:isolate;
+}
+.stage.live,#rzStage{transition:background .7s ease,color .7s ease}
+.stage.mobile{aspect-ratio:390/844;border-radius:14px}
+.stage.mobile .eye{width:12cqw;height:5.4cqw}
+.stage.mobile .eyes{gap:4cqw}
+.stage.mobile .answer .q{font-size:4.4cqw}
+.stage.mobile .answer .a{font-size:6.2cqw;line-height:1.36}
+.stage.mobile .fieldline .hint{font-size:3.2cqw}
+.stage.mobile .slider .lab{font-size:2.8cqw}
+.stage.mobile .slider .thumb{width:3.4cqw;height:3.4cqw}
+.stage.mobile .answer .undo{font-size:3cqw;padding:1.6cqw 3cqw}
+.stage.tall{aspect-ratio:4/5}
+.texture{position:absolute;inset:-10%;pointer-events:none;opacity:.5;
+  background:
+    repeating-linear-gradient(112deg,transparent 0 7px,color-mix(in oklab,var(--s-ink) 5%,transparent) 7px 7.6px),
+    repeating-linear-gradient(24deg,transparent 0 11px,color-mix(in oklab,var(--s-ink) 4%,transparent) 11px 11.5px),
+    radial-gradient(120% 80% at 50% 45%,transparent 40%,color-mix(in oklab,var(--s-ink) 6%,transparent) 100%);
+  mask-image:radial-gradient(130% 90% at 50% 40%,#000 20%,transparent 92%)}
+.eyes{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(var(--eyeScale));
+  display:flex;gap:2.1cqw}
+.stage.live .eyes{transition:top .52s cubic-bezier(.2,.7,.2,1),transform .52s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+.eye{width:7.2cqw;height:3.2cqw;border-radius:50%;background:var(--s-ink);position:relative;overflow:hidden;
+  transform:scaleY(var(--open,1));transform-origin:50% 50%}
+.eye::after{content:"";position:absolute;width:1.15cqw;height:1.15cqw;border-radius:50%;
+  background:color-mix(in oklab,var(--s-bg) 76%,#fff);left:50%;top:52%;
+  transform:translate(calc(-50% + var(--look)*1.5cqw),-50%)}
+.stage[data-focus="text"] .eyes{top:18%;transform:translate(-50%,-50%) scale(calc(var(--eyeScale)*.84))}
+.stage[data-focus="text"]{--eyeScale:.92}
+
+.fieldline{position:absolute;left:20%;right:20%;bottom:19%;display:flex;align-items:flex-end;gap:.5cqw;
+  border-bottom:1px solid var(--s-line);padding-bottom:.5cqw}
+.stage.live .fieldline{transition:bottom .42s cubic-bezier(.2,.7,.2,1),opacity .35s ease}
+.fieldline .typed{font-size:clamp(11px,2.05cqw,22px);line-height:1.3;letter-spacing:.002em;max-width:100%;overflow:hidden;white-space:nowrap}
+.fieldline .caret{display:inline-block;width:1.5px;height:2.3cqw;background:var(--s-ink);flex:0 0 auto;animation:caret 1.06s steps(1) infinite}
+@keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+.fieldline .hint{font-family:var(--mono);font-size:clamp(8px,1.05cqw,12px);letter-spacing:.08em;color:var(--s-dim);text-transform:uppercase}
+.stage[data-focus="text"] .fieldline{bottom:7.5%}
+
+.answer{position:absolute;left:20%;right:20%;top:34%}
+.stage.live .answer{transition:opacity .3s ease}
+.answer .q{font-size:clamp(10px,1.8cqw,18px);line-height:1.4;color:var(--s-dim);margin:0 0 1.6cqw;max-width:62ch}
+.answer .a{font-size:clamp(12px,2.5cqw,26px);line-height:1.34;letter-spacing:-.006em;margin:0;max-width:60ch;font-weight:450}
+.answer .a .tw-caret{display:inline-block;width:.9cqw;height:2.3cqw;background:var(--s-ink);vertical-align:-.15em;animation:caret 1.06s steps(1) infinite}
+.answer .hist{position:absolute;left:0;right:0;top:-4.4cqw;opacity:.34;font-size:clamp(9px,1.4cqw,14px);line-height:1.4;max-width:60ch}
+.answer .undo{display:inline-flex;align-items:center;gap:.6cqw;margin-top:1.6cqw;font-family:var(--mono);font-size:clamp(8px,1.15cqw,12px);
+  letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--s-line);border-radius:99px;padding:.55cqw 1.1cqw;color:color-mix(in oklab,var(--s-ink) 68%,transparent)}
+
+.slider{position:absolute;left:20%;right:20%;bottom:16.5%;opacity:0}
+.stage.live .slider,#rzStage .slider{transition:opacity .3s ease}
+.slider.show{opacity:1}
+.slider .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:clamp(8px,.95cqw,12px);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--s-dim);margin-bottom:.7cqw}
+.slider .groove{position:relative;height:1px;background:var(--s-line)}
+.slider .fill{position:absolute;left:0;top:0;height:1px;background:var(--s-ink);width:calc(var(--pos,0.5)*100%)}
+.slider .thumb{position:absolute;top:50%;left:calc(var(--pos,0.5)*100%);width:1.15cqw;height:1.15cqw;border-radius:50%;
+  background:var(--s-bg);border:1.5px solid var(--s-ink);transform:translate(-50%,-50%)}
+.slider .ticks{display:flex;justify-content:space-between;margin-top:.7cqw}
+.slider .ticks i{width:1px;height:.5cqw;background:var(--s-line)}
+
+.rail{position:absolute;right:3.2%;top:9%;width:23%;display:flex;flex-direction:column;gap:.8cqw;
+  font-family:var(--mono);font-size:.92cqw;letter-spacing:.04em;transition:opacity .3s ease}
+.rail .job{border-top:1px solid var(--s-line);padding-top:.9cqw;color:var(--s-dim);display:grid;gap:.45cqw}
+.rail .job b{font-weight:600;font-size:1.0cqw;color:color-mix(in oklab,var(--s-ink) 76%,transparent);letter-spacing:.02em}
+.rail .job .bar{height:2px;background:var(--s-line);overflow:hidden;position:relative}
+.rail .job .bar i{position:absolute;inset:0;width:38%;background:var(--s-ink);opacity:.55;animation:slide 3.2s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-40%)}100%{transform:translateX(280%)}}
+.rail .job.done .bar i{width:100%;animation:none;opacity:.8}
+.rail .job .new{font-family:var(--mono);font-size:.8cqw;letter-spacing:.12em;text-transform:uppercase;color:var(--s-ink)}
+
+.chips{position:absolute;left:20%;right:20%;bottom:26%;display:flex;gap:.8cqw;flex-wrap:wrap;opacity:0;transition:opacity .3s}
+.chips.show{opacity:1}
+.chip{font-family:var(--mono);font-size:1.0cqw;letter-spacing:.05em;border:1px solid var(--s-line,var(--line));border-radius:99px;
+  padding:.55cqw 1.15cqw;color:var(--s-dim,var(--muted));background:color-mix(in oklab,var(--s-bg,#fff) 70%,#fff)}
+.chip.solid{background:var(--s-ink,var(--ink));color:var(--s-bg,var(--paper));border-color:var(--s-ink,var(--ink))}
+
+.overlay{position:absolute;inset:auto 20% 27% 20%;border:1px solid var(--s-line);border-radius:.6cqw;
+  background:color-mix(in oklab,var(--s-bg) 88%,#fff);padding:1.6cqw 1.8cqw;display:grid;gap:.8cqw;
+  box-shadow:0 10px 30px -20px rgba(0,0,0,.5)}
+.overlay .ttl{font-size:1.5cqw;font-weight:600;letter-spacing:-.01em}
+.overlay .txt{font-size:1.25cqw;line-height:1.45;color:var(--s-dim)}
+.overlay .row{display:flex;gap:.7cqw;flex-wrap:wrap}
+.strip{position:absolute;left:0;right:0;top:0;padding:.9cqw 3.2%;display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:.95cqw;letter-spacing:.07em;text-transform:uppercase;
+  background:color-mix(in oklab,var(--s-ink) 10%,var(--s-bg));border-bottom:1px solid var(--s-line)}
+.mic{position:absolute;right:20%;bottom:18%;width:3.2cqw;height:3.2cqw;border-radius:50%;border:1px solid var(--s-line);
+  display:grid;place-items:center;opacity:0;transition:opacity .3s}
+.mic.show{opacity:1}
+.mic i{display:block;width:.8cqw;height:1.5cqw;border-radius:99px;background:var(--s-ink);position:relative}
+.mic i::after{content:"";position:absolute;left:50%;top:100%;width:1.6cqw;height:1px;background:var(--s-ink);transform:translateX(-50%)}
+
+/* Level-Meter (Voice) */
+.level{position:absolute;left:20%;right:20%;bottom:11%;display:flex;align-items:center;gap:.45cqw;opacity:0;transition:opacity .2s}
+.level.show{opacity:1}
+.level b{display:block;width:.45cqw;background:var(--s-ink);border-radius:1px;height:.6cqw;transition:height .09s linear}
+.level .lbl{font-family:var(--mono);font-size:.95cqw;letter-spacing:.1em;text-transform:uppercase;color:var(--s-dim);margin-left:.8cqw;white-space:nowrap}
+
+/* Fokusring + Markierungen */
+.focusring{position:absolute;inset:3.2%;border:1px solid var(--s-ink);border-radius:.4cqw;opacity:0;pointer-events:none}
+.stage[data-ring="1"] .focusring{opacity:.55}
+.mk{position:absolute;left:var(--x);top:var(--y);width:19px;height:19px;border-radius:50%;background:var(--accent);
+  color:#fff;font:600 11px/19px var(--mono);text-align:center;transform:translate(-50%,-50%);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--paper) 70%,transparent);z-index:5}
+
+/* Frames + Annotationen */
+.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:26px;margin-top:22px}
+@media (max-width:520px){.frames{grid-template-columns:1fr}}
+.frame-card{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:14px;display:flex;flex-direction:column;gap:12px}
+.frame-card>header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.frame-card h4{margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.frame-card .dims{font-size:12px;color:var(--muted)}
+.frame-card .an{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px}
+.frame-card .an li{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start}
+.frame-card .an b{font-family:var(--mono);font-size:11px;color:var(--accent);padding-top:1px}
+.frame-card .rule{font-size:12.5px;border-top:1px dashed var(--line);padding-top:9px;color:#4a4a52}
+.frame-card .rule em{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+
+/* Storyboard */
+.board{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:26px;align-items:start;margin-top:18px}
+@media (max-width:980px){.board{grid-template-columns:1fr}}
+.readout{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:14px 16px;font-size:13.5px}
+.readout .clock{font-family:var(--mono);font-size:26px;letter-spacing:-.02em;margin-bottom:2px}
+.readout dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:10px 0 0}
+.readout dt{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.readout dd{margin:0}
+.readout .say{margin-top:12px;padding-top:10px;border-top:1px solid var(--line2);color:#33333c}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.toolbar button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}
+.toolbar button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.toolbar .spacer{flex:1}
+.scrub{width:100%;margin-top:12px}
+.ruler{position:relative;height:44px;margin-top:4px}
+.ruler .track{position:absolute;left:0;right:0;top:20px;height:1px;background:var(--line)}
+.ruler .mark{position:absolute;top:11px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--muted);text-align:center;white-space:nowrap}
+.ruler .mark i{display:block;width:1px;height:9px;background:var(--line);margin:0 auto 3px}
+.ruler .mark.e i{background:var(--blue)}
+.ruler .mark.t i{background:#8a5a12}
+.ruler .mark.low{top:28px}
+.ruler .head{position:absolute;top:4px;width:1px;height:32px;background:var(--accent);left:0}
+.legend-inline{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:8px}
+
+/* Segmentkarten (Felder pro Zustand) */
+.seg{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:14px 16px;margin-top:12px}
+.seg h4{margin:0 0 8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.seg dl{display:grid;grid-template-columns:150px 1fr;gap:5px 14px;margin:0;font-size:13.5px}
+.seg dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.seg dd{margin:0}
+@media (max-width:620px){.seg dl{grid-template-columns:1fr}.seg dt{padding-top:6px}}
+
+/* State-Machine */
+.sm{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:10px}
+.sm svg{display:block;min-width:900px}
+.dimrow{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line2)}
+.dimrow:last-child{border-bottom:0}
+.dimrow .name{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.dimrow .vals{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.st{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:3px 9px}
+.st.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.st.bad{border-color:var(--accent);color:var(--accent);background:#fbeee9;text-decoration:line-through}
+
+/* Demo-Werkzeuge */
+.demo{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:16px}
+.demo .stage{margin:12px 0}
+.tw-out{font-size:clamp(19px,2.4vw,28px);line-height:1.35;letter-spacing:-.01em;min-height:5.4em;max-width:56ch}
+.tw-out .c{display:inline-block;width:2px;height:1.05em;background:var(--ink);vertical-align:-.16em;animation:caret 1.06s steps(1) infinite}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:var(--muted)}
+.controls input[type="range"]{accent-color:var(--ink)}
+.controls label{display:inline-flex;gap:8px;align-items:center}
+.bars{display:flex;gap:2px;align-items:flex-end;height:30px}
+.bars i{display:block;width:3px;background:var(--ink);height:3px;border-radius:1px}
+.devices{display:flex;gap:28px;flex-wrap:wrap;margin-top:18px}
+.device{flex:1 1 380px;max-width:520px}
+.device h4{margin:0 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.phone{max-width:250px}
+
+/* Reduced motion */
+body.reduced .stage *{transition:none!important;animation:none!important}
+body.reduced .stage[data-focus="text"] .eyes{top:18%}
+
+/* Print */
+@media print{
+  .toc,.toolbar,.scrub,.ruler,.skip{display:none!important}
+  body{background:#fff;font-size:11pt}
+  .sec{page-break-inside:avoid;border-top:1px solid #999}
+  .stage{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt</a>
+
+<header class="doc-head">
+  <div class="wrap">
+    <p class="eyebrow">Agentfähig.de · Phase: Malen · Wireframe-Konzept v0.1 · 19.11.2026</p>
+    <h1>Die Seite ist der Zustand des Agenten.</h1>
+    <p class="sub">Low-Fidelity-Kompositionen, ein zeitliches Storyboard der ersten 20 Sekunden,
+      eine orthogonale Zustandsmaschine, Motion- und Typografieregeln sowie ein anklickbarer
+      Lo-Fi-Prototyp. Jede Entscheidung trägt eine Quellen-ID auf eine bestehende Anforderung
+      oder ein ADR. Kein Produktivcode.</p>
+
+    <dl class="meta">
+      <div><dt>Status</dt><dd><span class="badge o">Entwurf zur Owner-Abnahme</span></dd></div>
+      <div><dt>Fidelity</dt><dd>Lo-Fi, keine Marke, keine Assets</dd></div>
+      <div><dt>Quellen</dt><dd>ADR-0001…0005, DESIGN-DECISIONS, Skizze 12.11., PROJECT_CONTRACT</dd></div>
+      <div><dt>Nicht enthalten</dt><dd>Produktivcode, Deploy, Commit, ADR-Statuswechsel</dd></div>
+    </dl>
+
+    <div class="banner">
+      <strong>Control Plane: DEGRADED — sichtbar, nicht still.</strong>
+      <code>hai_health</code> ist <code>ok</code>, aber <code>hai_open_mission</code> antwortet
+      <code>active_mission_exists</code> (M-20261119T194948-3db0ab44, T1-Messlauf) und das Lane-Limit
+      ist mit <code>prezero-clean</code> + <code>brueggen</code> erschöpft. Dieses Artefakt entsteht
+      deshalb <strong>ohne Mission und ohne Lease</strong>; es ist Designarbeit, kein autorisierter Lauf.
+      Backfill: Mission öffnen oder Orphan per Owner-Gate superseden, dieses Dokument als Evidenz nachtragen.
+      Nichts wurde committet, gepusht oder deployt.
+    </div>
+
+    <div class="banner soft">
+      <strong>Verhältnis zur parallelen Arbeit:</strong> Im selben Ordner liegt das
+      Markdown-Wireframe-System <a href="README.md">README.md</a> mit den Prüfankern
+      WF-01…WF-12, UF-01…UF-08 und OD-00…OD-19. Dieses HTML ist die
+      <em>visuelle und zeitliche</em> Ergänzung dazu: bewegte Komposition, Storyboard,
+      anklickbarer Lo-Fi-Prototyp. Es ersetzt jenes System nicht und widerspricht ihm
+      nicht; wo beide dieselbe Fläche beschreiben, gilt die gemeinsame Zustandslogik.
+    </div>
+
+    <div class="banner soft">
+      <strong>Was diese Seite nicht ist:</strong> keine Freigabe der fünf ADRs (alle bleiben
+      „vorgeschlagen"), keine Messung, kein Produktversprechen. Zahlen in Motion-Specs sind
+      <em>Vorschläge</em>, die im Prototyp geprüft werden — keine Latenz-Behauptungen.
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Inhalt">
+  <div class="wrap">
+    <ul>
+      <li><a href="#grundlagen"><b>0</b>Grundlagen</a></li>
+      <li><a href="#storyboard"><b>1</b>Erste 20 s</a></li>
+      <li><a href="#zustaende"><b>2</b>Zustände</a></li>
+      <li><a href="#motion"><b>3</b>Motion</a></li>
+      <li><a href="#typo"><b>4</b>Typografie</a></li>
+      <li><a href="#regler"><b>5</b>Personalisierung</a></li>
+      <li><a href="#fastslow"><b>6</b>Fast / Slow</a></li>
+      <li><a href="#voice"><b>7</b>Voice</a></li>
+      <li><a href="#responsive"><b>8</b>Desktop / Mobil</a></li>
+      <li><a href="#prototyp"><b>9</b>Prototyp</a></li>
+      <li><a href="#offen"><b>10</b>Offen</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- 0 ================================================================= -->
+<section class="sec" id="grundlagen"><div class="wrap">
+  <h2><span class="n">00 · Grundlagen und Beweislage</span>Worauf jede Entscheidung hier zurückgeht</h2>
+  <p class="lead">Dieses Konzept erfindet keine Produktabsicht. Es übersetzt vorhandene Entscheidungen
+    in Komposition, Zeit und Zustand. Wo etwas nicht entschieden ist, steht es als offener Punkt —
+    nicht als stille Annahme.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Die drei harten Randbedingungen</h4>
+      <ul class="tight small">
+        <li><strong>C1 — Agent ist das Interface.</strong> Die Antwort erscheint an einem Ort, nicht in
+          einem Verlauf; kein Chatfenster. <span class="src">ADR-0002</span></li>
+        <li><strong>C2 — Ein Regler ändert Oberfläche <em>und</em> Haltung.</strong> Sonst ist es ein
+          Theme-Switcher. <span class="src">ADR-0004</span></li>
+        <li><strong>C3 — Die Belegung entsteht im Gespräch.</strong> Der Agent fragt nach seinem
+          Aussehen; der Nutzer zieht danach selbst. <span class="src">DESIGN-DECISIONS:22</span></li>
+        <li><strong>C4 — Regler-Belegung im Gespräch, max. 3 Regler, V1 = 1.</strong>
+          <span class="src">DESIGN-DECISIONS:22</span> <span class="src">K5</span></li>
+        <li><strong>C5 — Ergebnis im Hintergrund erscheint still.</strong>
+          <span class="src">DESIGN-DECISIONS:23</span> <span class="src">F4</span></li>
+        <li><strong>C6 — Voice nur nach Klick, Text ist gleichwertig.</strong>
+          <span class="src">DESIGN-DECISIONS:21</span> <span class="src">F5</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Quellen-IDs (im ganzen Dokument verwendet)</h4>
+      <div class="table-scroll"><table class="spec">
+        <thead><tr><th>ID</th><th>Bedeutung</th><th>Ort</th></tr></thead>
+        <tbody>
+          <tr><td>F1–F7</td><td>Pflichtfunktionen V1</td><td><code>docs/PROJECT_CONTRACT.md</code> §2.2</td></tr>
+          <tr><td>P1–P4</td><td>Produkterfolg</td><td><code>PROJECT_CONTRACT</code> §1.1</td></tr>
+          <tr><td>T1–T6</td><td>Technischer Erfolg (T4 = stilles Hintergrund-Ergebnis)</td><td><code>PROJECT_CONTRACT</code> §1.2</td></tr>
+          <tr><td>Q1–Q7</td><td>Qualitätsminimum (Q1 = kein stiller Fehlschlag)</td><td><code>PROJECT_CONTRACT</code> §1.4</td></tr>
+          <tr><td>K1–K6</td><td>Skizzenabschnitte 1–6</td><td><code>sketches/2026-11-12-agentfaehig.md</code></td></tr>
+          <tr><td>DD</td><td>Bestätigte Designentscheidung</td><td><code>docs/DESIGN-DECISIONS.md</code></td></tr>
+          <tr><td>D1–D9</td><td>Offene Owner-Entscheidung</td><td><code>PROJECT_CONTRACT</code> §3</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <h3>Modellierungsentscheidung: orthogonal statt eine große Kette</h3>
+  <p>Die zwölf geforderten Zustände sind <em>nicht</em> eine lineare Zustandsmaschine. Sie sind
+    sieben unabhängige Dimensionen. Linear modelliert ergäben sich aus den sinnvollen Kombinationen
+    über hundert Zustände, darunter unmögliche wie „antwortet, während er schläft". Orthogonal
+    modelliert bleibt jede Dimension klein und prüfbar, und Recovery ist pro Dimension definierbar.</p>
+
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Dimension</th><th>Werte</th><th>Wer setzt sie</th><th>Überlebt Reload</th></tr></thead>
+    <tbody>
+      <tr><td><code>presence</code></td><td>DORMANT · AWAKENING · PRESENT</td><td>Timer (Erstbesuch) + jedes Eingabeereignis</td><td>ja (Server-Zustand, Q2)</td></tr>
+      <tr><td><code>input</code></td><td>TEXT_IDLE · TEXT_FOCUS · USER_TYPING · USER_SPEAKING · VOICE_BLOCKED</td><td>Nutzerereignisse</td><td>nur Modus, nicht Fokus</td></tr>
+      <tr><td><code>turn</code></td><td>IDLE · PROCESSING · RESPONDING · SETTLED</td><td>Agenten-/Netzereignisse</td><td>letzter Zustand ja</td></tr>
+      <tr><td><code>adaptation</code></td><td>NOT_OFFERED · OFFERED · ADAPTING · ADAPTED</td><td>Gesprächsereignis</td><td>ja</td></tr>
+      <tr><td><code>background</code></td><td>NONE · WORKING · RESULT_READY · FAILED</td><td>Sub-Agent-Ereignisse</td><td>ja</td></tr>
+      <tr><td><code>connection</code></td><td>CONNECTED · DEGRADED · DISCONNECTED · RECONNECTING</td><td>Transportereignisse</td><td>nein (neu ausgehandelt)</td></tr>
+      <tr><td><code>fault</code></td><td>NONE · TURN_ERROR · VOICE_ERROR · BACKGROUND_ERROR</td><td>Fehlerereignisse</td><td>nein</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note warn">
+    <p><strong>Regel gegen Schein-Präsenz:</strong> Es gibt keine simulierte Denkaktivität — keine
+      „Ich überlege…"-Schleife, keine erfundenen Zwischenschritte, keinen Fortschrittsbalken ohne
+      echten Fortschritt. Sichtbar sind nur beobachtbare Fakten: gesendet, verbunden, Ergebnis da,
+      Fehler. <span class="src">VISION-samuel.md:108–110</span> <span class="src">Q1</span></p>
+  </div>
+
+  <h3>Zeitgesteuert oder ereignisgesteuert?</h3>
+  <p>Jede Bewegung in diesem Dokument trägt genau eine Marke. Das ist keine Formsache: es entscheidet,
+    ob ein Zustand nach einer Uhr oder nach einer Tatsache wechselt — und damit, was ein Screenshot
+    oder ein Test überhaupt beweisen kann.</p>
+  <div class="grid2">
+    <div class="card">
+      <h4><span class="badge t">T</span> zeitgesteuert</h4>
+      <ul class="tight small">
+        <li>Erstes Erwachen (~5 s) und der Pre-Glow davor.</li>
+        <li>Eingabe erscheint ~1,2 s nach dem Erwachen.</li>
+        <li>Caret-Blinken, autonomes Blinzeln, langsames Atmen der Hintergrund-Anzeige.</li>
+        <li>Erinnerungshinweis nach 12 s Inaktivität (einmalig, Vorschlag).</li>
+      </ul>
+      <p class="small">Diese Bewegungen dürfen <em>nie</em> so aussehen, als hätte der Agent gerade
+        etwas verstanden. Sie laufen auch ohne Nutzer.</p>
+    </div>
+    <div class="card">
+      <h4><span class="badge e">E</span> ereignisgesteuert</h4>
+      <ul class="tight small">
+        <li>Alles nach einer Eingabe: Tippen, Senden, erster Token, Antwortende.</li>
+        <li>Augen treten zurück, wenn Text Fokus wird.</li>
+        <li>Regler entsteht, Oberfläche wandelt sich, Undo erscheint.</li>
+        <li>Hintergrund-Ergebnis trifft ein; Fehler; Verbindungsverlust.</li>
+        <li>Voice: Berechtigung, Pegel, Transkript, Sprechen, Abbruch.</li>
+      </ul>
+      <p class="small">Ein Ereignis darf nie durch einen Timer ersetzt werden. Kein „nach 3 s gilt es
+        als gesendet".</p>
+    </div>
+  </div>
+
+  <h3>Was hier ausdrücklich offen bleibt</h3>
+  <p class="small">Siehe <a href="#offen">§10</a>: Default des Reglers (D6), Beginn des Fokuswechsels,
+    Typewriter-Raten, Sprache des Textkanals (D5), proaktives Nachsprechen (T4) und Wiederkehr-Besuch.
+    Diese Punkte sind im Prototyp als Schalter sichtbar, nicht als Entscheidung getarnt.</p>
+</div></section>
+
+<!-- 1 ================================================================= -->
+<section class="sec" id="storyboard"><div class="wrap">
+  <h2><span class="n">01 · Erste 20 Sekunden · Deliverable B</span>Ein Ablauf, der ohne Erklärung funktioniert</h2>
+  <p class="lead">Die Bühne unten ist bedienbar: abspielen, ziehen, überspringen. Der Ablauf ist
+    bewusst als <em>ein</em> Durchlauf modelliert (Erstbesuch), weil genau dieser Durchlauf das
+    Produktversprechen trägt. Alles, was danach kommt, ist in §2 modelliert.</p>
+
+  <!-- LIVE-STORYBOARD -->
+  <div class="board">
+    <div>
+      <div class="stage live" id="liveStage" data-focus="field" data-phase="dormant">
+        <div class="texture"></div>
+        <div class="focusring"></div>
+        <div class="strip" id="liveStrip" hidden><span>Verbindung getrennt</span><span>Entwurf bleibt erhalten</span></div>
+        <div class="eyes" id="liveEyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" id="liveAnswer" hidden>
+          <p class="hist" id="liveHist"></p>
+          <p class="q" id="liveQ"></p>
+          <p class="a" id="liveA"></p>
+          <span class="undo" id="liveUndo">↺ rückgängig</span>
+        </div>
+        <div class="chips" id="liveChips">
+          <span class="chip">wärmer</span><span class="chip">kühler</span><span class="chip">so lassen</span>
+        </div>
+        <div class="fieldline" id="liveField" hidden>
+          <span class="typed" id="liveUser"></span><span class="hint" id="liveHint" style="display:none">Enter · als Nächstes vormerken</span><span class="caret"></span>
+        </div>
+        <div class="slider" id="liveSlider" style="--pos:.5">
+          <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
+          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
+          <div class="ticks"><i></i><i></i><i></i></div>
+        </div>
+        <div class="rail" id="liveRail" hidden>
+          <div class="job" id="liveJob"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
+        </div>
+        <i class="mk" id="liveMk" style="--x:50%;--y:11%" hidden>1</i>
+      </div>
+
+      <div class="toolbar">
+        <button id="playBtn" aria-pressed="false">▶ Abspielen</button>
+        <button id="replayBtn">↺ Von 0</button>
+        <button id="speedBtn" data-speed="1">1×</button>
+        <button id="skipBtn">Erwachen überspringen</button>
+        <span class="spacer"></span>
+        <button id="reducedBtn" aria-pressed="false">Reduzierte Bewegung</button>
+      </div>
+      <input class="scrub" id="scrub" type="range" min="0" max="20" step="0.05" value="0" aria-label="Zeitachse der ersten 20 Sekunden">
+      <div class="ruler" id="ruler" aria-hidden="true"><div class="track"></div><div class="head" id="rulerHead"></div></div>
+      <div class="legend-inline">
+        <span><span class="badge t">T</span> zeitgesteuert</span>
+        <span><span class="badge e">E</span> ereignisgesteuert</span>
+        <span>Die Bühne ist ein Wireframe, keine Marke.</span>
+      </div>
+    </div>
+
+    <aside class="readout" aria-live="polite">
+      <div class="clock" id="roClock">T+0,0 s</div>
+      <div class="small" id="roTitle">Ankunft · DORMANT</div>
+      <dl>
+        <dt>Präsenz</dt><dd id="roPresence">DORMANT</dd>
+        <dt>Eingabe</dt><dd id="roInput">—</dd>
+        <dt>Turn</dt><dd id="roTurn">IDLE</dd>
+        <dt>Adaption</dt><dd id="roAdapt">NOT_OFFERED</dd>
+        <dt>Auslöser</dt><dd id="roTrigger">Timer</dd>
+        <dt>Fokus</dt><dd id="roFocus">Feld</dd>
+      </dl>
+      <p class="say" id="roSay">Ein ruhiges Feld. Keine Augen, keine Eingabe, keine Aufforderung.</p>
+    </aside>
+  </div>
+
+  <h3>Die acht Momente im Detail</h3>
+  <p class="small">Jeder Moment nennt Komposition, Fokus, Bewegung, Nutzeraktion, Agentenreaktion,
+    Übergang, Unterbrechung und die reduzierte Variante. Die Zustandsnamen sind Dimensionswerte aus §2.</p>
+
+  <div class="seg">
+    <h4>① T+0,0 s — Ankunft <span class="badge t">T</span> <span class="src">F1</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Vollflächiges Papierfeld, sehr feine Graphit-Textur (≈5 % Kontrast), keine Kanten,
+        keine Navigation, kein Logo. Nichts, was wie ein Formular aussieht.</dd>
+      <dt>Primärer Fokus</dt><dd>Keiner. Das Feld selbst ist der Fokus; es gibt kein Ziel, das man treffen muss.</dd>
+      <dt>Bewegung / Timing</dt><dd>Absolut still. Keine Schleife, kein Puls, kein Ladeelement. <span class="src">T</span>
+        Erst bei 4,6 s ein Pre-Glow (Deckkraft 0,03 → 0,10 über 1,2 s).</dd>
+      <dt>Nutzeraktion</dt><dd>Keine erforderlich. Wer sofort tippt, klickt oder <kbd>Tab</kbd> drückt, löst das
+        Erwachen in 240 ms aus — die Wartezeit ist ein Angebot, keine Bedingung. <span class="src">P4</span></dd>
+      <dt>Agentenreaktion</dt><dd>Keine. Insbesondere keine Begrüßung, kein Autoplay-Ton, kein Cookie-Banner
+        im Feld.</dd>
+      <dt>Übergang</dt><dd>→ <code>AWAKENING</code> bei 5,0 s oder beim ersten Eingabeereignis.</dd>
+      <dt>Unterbrechung</dt><dd>Jede Eingabe beschleunigt; Tab lässt das Feld fokussierbar werden, ohne die
+        Augen zu zeigen.</dd>
+      <dt>Reduziert</dt><dd>Pre-Glow entfällt; die Augen erscheinen als Schnitt bei 5,0 s (oder sofort bei Eingabe).</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>② T+5,0 s — Augen erwachen <span class="badge t">T</span> <span class="src">F1</span> <span class="src">ADR-0003</span> <span class="src">K4</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Zwei ruhige Augen, optisch auf 38 % Höhe, zusammen ≈ 13 % der Feldbreite. Kein
+        Gesicht, kein Rahmen, kein Avatar. Der Rest bleibt Feld.</dd>
+      <dt>Primärer Fokus</dt><dd>Die Augen — aber als <em>Anwesenheit</em>, nicht als Aufforderung. Kein Blinken
+        in Richtung Eingabe, kein „Hier klicken".</dd>
+      <dt>Bewegung / Timing</dt><dd>Lider 0 → 100 % über 900 ms, ease-out-cubic. Pupillen wandern in 420 ms
+        zum Zeiger, sonst zur Feldmitte. Erster Blinzler bei 6,4 s (280 ms). <span class="src">T</span></dd>
+      <dt>Nutzeraktion</dt><dd>Zusehen oder sofort tippen. Beides ist richtig.</dd>
+      <dt>Agentenreaktion</dt><dd>Keine Sprache, kein Ton. Nur Blickkontakt. „Soft and not scary." <span class="src">K3</span></dd>
+      <dt>Übergang</dt><dd>→ <code>PRESENT</code>, sobald die Lider 100 % erreichen (Ereignis des Timers,
+        nicht ein zweiter Timer).</dd>
+      <dt>Unterbrechung</dt><dd>Tippen während des Öffnens: Lider springen auf 100 %, Eingabe erscheint sofort.</dd>
+      <dt>Reduziert</dt><dd>Kein Lid-Film: Augen sind da oder nicht. Kein Pupillen-Tracking, kein Blinzeln.</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>③ T+6,2 s — Einladung ohne Formular <span class="badge t">T</span> <span class="src">F2</span> <span class="src">P4</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Eine einzelne Haarlinie auf 19 % Höhe von unten, 60 % breit, mit Caret. Kein Kasten,
+        kein Label, kein Senden-Knopf. Das Mikrofon ist ein 24-px-Zeichen rechts, ohne Rahmen.</dd>
+      <dt>Primärer Fokus</dt><dd>Die Linie. Sie ist die einzige Einladung.</dd>
+      <dt>Bewegung / Timing</dt><dd>Einblenden 400 ms, 120 ms nach dem letzten Lid-Frame. Caret blinkt 1,06 s. <span class="src">T</span></dd>
+      <dt>Nutzeraktion</dt><dd>Einen natürlichen Satz schreiben. Kein Enter-Denken nötig: nach 3 Zeichen erscheint
+        einmalig der Hinweis „Enter · senden" in Mono 10 px, dann nie wieder in dieser Sitzung.</dd>
+      <dt>Agentenreaktion</dt><dd>Keine.</dd>
+      <dt>Übergang</dt><dd>→ <code>TEXT_FOCUS</code> bei Klick/Tab, → <code>USER_TYPING</code> beim ersten Zeichen.</dd>
+      <dt>Unterbrechung</dt><dd>Fokus jederzeit verlassbar; der Entwurf bleibt. Escape verlässt den Fokus, löscht nichts.</dd>
+      <dt>Reduziert</dt><dd>Linie erscheint ohne Fade. Caret blinkt weiter (Orientierung), aber ohne Animation
+        beim Fokuswechsel.</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>④ ca. T+8,5 s — Erster Satz <span class="badge e">E</span> <span class="src">F2</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Der Satz steht auf der Linie, linksbündig, 17 px, max. 60 Zeichen sichtbar. Die Augen
+        bleiben auf 38 %, die Pupillen folgen der Schreibposition. Keine Sprechblase.</dd>
+      <dt>Primärer Fokus</dt><dd>Der eigene Text. Er wird <em>nicht</em> animiert — Tippen ist sofort, ohne
+        Typewriter. <span class="src">Q1</span></dd>
+      <dt>Bewegung / Timing</dt><dd>Nur native Textdarstellung. Bei Fokus hebt sich die Linie 8 px; 180 ms. <span class="src">E</span></dd>
+      <dt>Nutzeraktion</dt><dd>Tippen, korrigieren, senden (<kbd>Enter</kbd>) oder lassen.</dd>
+      <dt>Agentenreaktion</dt><dd>Keine — der Agent liest nicht sichtbar mit und kommentiert nicht beim Tippen.</dd>
+      <dt>Übergang</dt><dd>→ <code>PROCESSING</code> bei Enter.</dd>
+      <dt>Unterbrechung</dt><dd>Senden ist jederzeit möglich; ein leerer Enter tut nichts (kein Fehlertext).</dd>
+      <dt>Reduziert</dt><dd>Kein Lift beim Fokus; der Fokusring genügt.</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>⑤ ca. T+10,0 s — Gesendet, ohne Denktheater <span class="badge e">E</span> <span class="src">Q1</span> <span class="src">VISION:108–110</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Die Nutzerzeile rückt nach oben (auf ≈ 26 %) und auf 55 % Deckkraft. In der Mitte
+        bleibt Platz für die Antwort — kein Spinner, kein „…", kein Fortschrittsbalken.</dd>
+      <dt>Primärer Fokus</dt><dd>Die Stelle, an der die Antwort erscheinen wird.</dd>
+      <dt>Bewegung / Timing</dt><dd>Eine 1-px-Haarlinie wandert einmalig von der Eingabe zu den Augen (320 ms) —
+        das ist das ehrliche Signal „gesendet". Pupillen weiten sich 6 % (120 ms). Danach Stille. <span class="src">E</span></dd>
+      <dt>Nutzeraktion</dt><dd>Warten, tippen, oder mit <kbd>Esc</kbd> abbrechen.</dd>
+      <dt>Agentenreaktion</dt><dd>Nichts Sichtbares, solange nichts Passiertes sichtbar ist. Erst der erste
+        echte Token ändert den Zustand.</dd>
+      <dt>Übergang</dt><dd>→ <code>RESPONDING</code> beim ersten Token; → <code>TURN_ERROR</code> bei Fehler
+        (sichtbar, §2); <code>Esc</code> → <code>IDLE</code> mit „abgebrochen", ohne Antwort zu erfinden.</dd>
+      <dt>Unterbrechung</dt><dd>Escape bricht den Turn ab. Ein neuer Enter während des Wartens ersetzt die
+        Frage nur, wenn noch kein Token da ist; danach erscheint ein Chip „als Nächstes vormerken".</dd>
+      <dt>Reduziert</dt><dd>Kein Sendepuls; die Nutzerzeile springt ohne Übergang nach oben.</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>⑥ ca. T+10,4 s — Antwort im Fokus <span class="badge e">E</span> <span class="src">F2</span> <span class="src">DD:17–19</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Augen treten auf 18 % zurück und werden 16 % kleiner. Die Antwort steht mittig,
+        2,15 cqw (~34 px Desktop), max. 60 Zeichen pro Zeile, linksbündig. Ältere Antworten darüber auf
+        42 % Deckkraft, angeschnitten — Verlauf ist lesbar, aber nicht die Hauptansicht.</dd>
+      <dt>Primärer Fokus</dt><dd>Die wachsende Antwort. Der Nutzer sieht der Seite beim Antworten zu.</dd>
+      <dt>Bewegung / Timing</dt><dd>Typewriter nach Wortlänge (§4): Basis 38 Zeichen/s, kurze Wörter ×1,35,
+        lange ×0,72. Pausen im Stream werden überbrückt, nie als leerer Puffer gezeigt. <span class="src">E</span></dd>
+      <dt>Nutzeraktion</dt><dd>Lesen; scrollen; unterbrechen.</dd>
+      <dt>Agentenreaktion</dt><dd>Antwort streamt. Kein Ton, keine Sprechblase, kein Avatar.</dd>
+      <dt>Übergang</dt><dd>→ <code>SETTLED</code>, wenn der letzte Token gesetzt und 400 ms lang nichts mehr kommt.</dd>
+      <dt>Unterbrechung</dt><dd>Tippen stoppt den Textfluss nicht; ein neuer Enter merkt die Frage vor.
+        <kbd>Esc</kbd> stoppt das Schreiben und markiert den Rest als „unvollständig" — sichtbar, nicht still.</dd>
+      <dt>Reduziert</dt><dd>Text erscheint als Ganzes (oder in Absätzen) mit 80 ms Fade; keine Zeichenanimation.</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>⑦ ca. T+13,4 s — Der Agent fragt nach sich selbst <span class="badge e">E</span> <span class="src">C3</span> <span class="src">DD:22</span> <span class="src">ADR-0004</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Eine ruhige Fragezeile unter der Antwort, gleiche Schrift, 15 % kleiner, plus drei
+        optionale Chips (<em>wärmer</em>, <em>kühler</em>, <em>so lassen</em>). Die Chips sind Abkürzungen,
+        kein Formular; der Textweg bleibt der Hauptweg.</dd>
+      <dt>Primärer Fokus</dt><dd>Die Frage. Sie ist die einzige neue Sache.</dd>
+      <dt>Bewegung / Timing</dt><dd>Erscheint 600 ms nach dem Antwortende, 220 ms Fade + 6 px. Genau eine
+        Frage pro Runde. <span class="src">E</span> <span class="src">DD:19</span></dd>
+      <dt>Nutzeraktion</dt><dd>In eigenen Worten antworten — oder Chip wählen — oder ignorieren und weiterfragen.</dd>
+      <dt>Agentenreaktion</dt><dd>Die Frage ist inhaltlich eine Frage: „Soll ich wärmer oder kühler für dich
+        aussehen — und dann auch so mit dir reden?" <em>Eine</em> Frage, zwei gekoppelte Wirkungen angekündigt.</dd>
+      <dt>Übergang</dt><dd>→ <code>OFFERED</code>. Bei Antwort → <code>ADAPTING</code>; bei Ignorieren bleibt
+        <code>OFFERED</code>, ohne Nachfragen (max. einmal pro Sitzung).</dd>
+      <dt>Unterbrechung</dt><dd>Frage ist überspringbar; sie darf den nächsten Turn nie blockieren.</dd>
+      <dt>Reduziert</dt><dd>Frage und Chips erscheinen als Schnitt. Keine Aufmerksamkeitsanimation.</dd>
+    </dl>
+  </div>
+
+  <div class="seg">
+    <h4>⑧ ca. T+15,0–17,0 s — Die Umgestaltung <span class="badge e">E</span> <span class="src">C2</span> <span class="src">ADR-0004</span> <span class="src">P3</span></h4>
+    <dl>
+      <dt>Komposition</dt><dd>Das Wort „wärmer" löst sich aus der Nutzerzeile, wandert 240 ms nach unten und wird
+        zum Label des Reglers. Die Rille zeichnet sich links→rechts (180 ms), der Griff erscheint bei 0,72.
+        Gleichzeitig verschieben sich Palette, Laufweite, Zeilenabstand und Schriftgewicht (700 ms).</dd>
+      <dt>Primärer Fokus</dt><dd>Der Regler und die Fläche, die sich ändert. Der Blick soll der Bewegung folgen
+        können, ohne Text zu verlieren.</dd>
+      <dt>Bewegung / Timing</dt><dd>Alle vier Wirkungen laufen gleichzeitig, nicht nacheinander. Kein Effekt
+        länger als 700 ms. Undo-Chip erscheint 300 ms nach Abschluss. <span class="src">E</span></dd>
+      <dt>Nutzeraktion</dt><dd>Zusehen, ziehen, rückgängig machen.</dd>
+      <dt>Agentenreaktion</dt><dd>Ein kurzer Satz in der <em>neuen</em> Haltung — der Beleg, dass sich nicht nur
+        Farbe geändert hat. Danach wieder Ruhe.</dd>
+      <dt>Übergang</dt><dd>→ <code>ADAPTED</code>. Der Zustand überlebt Reload (<span class="src">Q2</span>).</dd>
+      <dt>Unterbrechung</dt><dd>Ziehen ist jederzeit möglich; die Fläche folgt ohne Nachladen. Undo stellt den
+        vorherigen Wert in 400 ms wieder her.</dd>
+      <dt>Reduziert</dt><dd>Kein Wortflug, keine Rillenzeichnung: Regler erscheint fertig, Fläche wechselt per
+        Schnitt (oder 120 ms Fade), Undo sofort.</dd>
+    </dl>
+  </div>
+
+  <div class="note">
+    <p><strong>T+20 s — der eigentliche Endzustand.</strong> Nichts leuchtet, nichts feiert. Die Seite ist
+      ruhig, hat einen Regler, eine Antwort und Augen. Genau das ist der Unterschied zu einem Onboarding:
+      der Beweis ist <em>Zustand</em>, nicht Erfolgsmeldung. <span class="src">P2</span></p>
+  </div>
+</div></section>
+
+<!-- 2 ================================================================= -->
+<section class="sec" id="zustaende"><div class="wrap">
+  <h2><span class="n">02 · Zustände und Übergänge · Deliverables A + C</span>Dreizehn Kompositionen, sieben Dimensionen</h2>
+  <p class="lead">Die Galerie zeigt die zentralen Zustände als Wireframes. Jede Komposition ist eine
+    Antwort auf die Frage: „Was sieht der Besucher, wenn dieser Dimensionswert gilt?" — nicht ein
+    Screenshot einer fertigen Marke.</p>
+
+  <div class="frames" id="gallery">
+    <!-- DORMANT -->
+    <article class="frame-card" id="st-dormant">
+      <header><h4>DORMANT</h4><span class="badge t">T</span></header>
+      <div class="stage" data-focus="field" style="--open:0;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline" style="opacity:.3;border-bottom-style:dashed"><span class="hint">eingabe · unsichtbar</span></div>
+        <i class="mk" style="--x:50%;--y:27%">1</i>
+        <i class="mk" style="--x:62%;--y:73%">2</i>
+      </div>
+      <div class="dims">presence=DORMANT · input=— · turn=IDLE · background=NONE</div>
+      <ol class="an">
+        <li><b>1</b><span>Augen sind vorhanden, aber geschlossen (Lid 0 %). Kein Platzhalter, kein Ladesymbol.</span></li>
+        <li><b>2</b><span>Eingabe existiert im DOM, ist aber unsichtbar und nicht fokussierbar. Ein Tastendruck holt sie in 240 ms.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Autoplay-Ton, Begrüßungstext, Cookie-Banner im Feld, pulsierender Punkt.</p>
+      <p class="rule"><em>Reduziert:</em> identisch — hier bewegt sich ohnehin nichts.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F1</span> <span class="src">P4</span> <span class="src">K4</span></p>
+    </article>
+
+    <!-- AWAKENING -->
+    <article class="frame-card" id="st-awakening">
+      <header><h4>AWAKENING</h4><span class="badge t">T</span></header>
+      <div class="stage" data-focus="field" style="--open:.45;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline" style="opacity:.35"><span class="caret"></span></div>
+        <i class="mk" style="--x:50%;--y:28%">1</i>
+        <i class="mk" style="--x:50%;--y:79%">2</i>
+      </div>
+      <div class="dims">presence=AWAKENING · input=TEXT_IDLE (0,35) · turn=IDLE</div>
+      <ol class="an">
+        <li><b>1</b><span>Lider bei 45 %. Blick noch nicht auf den Zeiger; Pupillen kommen 220 ms später.</span></li>
+        <li><b>2</b><span>Die Eingabe wird schon vorbereitet, ist aber nicht bedienbar, bis die Augen offen sind.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Sprechen vor dem ersten Blick; ein zweiter Timer, der „fertig" verkündet.</p>
+      <p class="rule"><em>Reduziert:</em> Schnitt auf 100 % bei 5,0 s; Eingabe sofort sichtbar.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F1</span> <span class="src">ADR-0003</span> <span class="src">K4</span></p>
+    </article>
+
+    <!-- PRESENT -->
+    <article class="frame-card" id="st-present">
+      <header><h4>PRESENT</h4><span class="badge n">ruht</span></header>
+      <div class="stage" data-focus="field" style="--open:1;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline"><span class="caret"></span></div>
+        <div class="mic show"><i></i></div>
+        <i class="mk" style="--x:50%;--y:28%">1</i>
+        <i class="mk" style="--x:50%;--y:79%">2</i>
+        <i class="mk" style="--x:88%;--y:80%">3</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=IDLE</div>
+      <ol class="an">
+        <li><b>1</b><span>Augen offen, Blick ruhig. Blinzeln und leichte Sakkaden halten Präsenz, ohne zu fordern.</span></li>
+        <li><b>2</b><span>Eine Haarlinie mit Caret. Kein Kasten, kein Label, kein Senden-Knopf.</span></li>
+        <li><b>3</b><span>Mikrofon als 24-px-Zeichen, ohne Füllfläche. Erst der Klick öffnet Berechtigung (§7).</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Vorschlagschips vor dem ersten Intent; „Wie kann ich helfen?"; pulsierender CTA.</p>
+      <p class="rule"><em>Reduziert:</em> Kein Blinzeln, kein Tracking; statische offene Augen.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F1</span> <span class="src">F2</span> <span class="src">F5</span> <span class="src">P4</span></p>
+    </article>
+
+    <!-- USER_TYPING -->
+    <article class="frame-card" id="st-typing">
+      <header><h4>USER_TYPING</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="field" style="--open:1;--look:.45;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline" style="bottom:15%"><span class="typed">Was kannst du, das eine Website nicht kann?</span><span class="caret"></span></div>
+        <div class="mic show"><i></i></div>
+        <i class="mk" style="--x:50%;--y:28%">1</i>
+        <i class="mk" style="--x:44%;--y:72%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE</div>
+      <ol class="an">
+        <li><b>1</b><span>Pupillen folgen der Schreibposition (±6 px), nicht dem Mauszeiger — Aufmerksamkeit ohne Bühne.</span></li>
+        <li><b>2</b><span>Der eigene Text ist sofort da, ohne Typewriter. Die Zeile hebt sich 8 px und wächst mit.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Zeichenanimation auf Nutzereingaben; Autokorrektur-Angebote im Feld; „Tippe hier".</p>
+      <p class="rule"><em>Reduziert:</em> Kein Pupillen-Tracking, kein Lift; Text und Caret unverändert.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F2</span> <span class="src">P4</span> <span class="src">Q1</span></p>
+    </article>
+
+    <!-- PROCESSING -->
+    <article class="frame-card" id="st-processing">
+      <header><h4>PROCESSING</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="text" style="--open:.82;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" style="top:30%">
+          <p class="q">Du</p>
+          <p class="a" style="font-size:1.55cqw;opacity:.55;font-weight:400">Was kannst du, das eine Website nicht kann?</p>
+        </div>
+        <div class="fieldline" style="bottom:9%;opacity:.35"><span class="hint">gesendet</span></div>
+        <i class="mk" style="--x:50%;--y:18%">1</i>
+        <i class="mk" style="--x:50%;--y:48%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=PROCESSING</div>
+      <ol class="an">
+        <li><b>1</b><span>Augen treten zurück (18 %) und verengen sich leicht. Das ist Aufmerksamkeit, kein „Denken".</span></li>
+        <li><b>2</b><span>Die gesendete Zeile bleibt sichtbar und gedimmt. Kein Spinner, kein Fortschritt, keine Vermutung.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> „Ich überlege…", Fake-Schritte, Puls, der wie ein Herzschlag aussieht, geschätzte Dauer.</p>
+      <p class="rule"><em>Reduziert:</em> Zustandswechsel als Schnitt; keine Lid- oder Pupillenbewegung.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">VISION:108–110</span> <span class="src">Q1</span> <span class="src">T1</span></p>
+    </article>
+
+    <!-- RESPONDING -->
+    <article class="frame-card" id="st-responding">
+      <header><h4>RESPONDING</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="text" style="--open:1;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" style="top:33%">
+          <p class="q" style="opacity:.55">Was kannst du, das eine Website nicht kann?</p>
+          <p class="a">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.<span class="tw-caret"></span></p>
+        </div>
+        <div class="fieldline" style="bottom:8%;opacity:.35"><span class="hint">Enter · als Nächstes vormerken</span></div>
+        <i class="mk" style="--x:50%;--y:18%">1</i>
+        <i class="mk" style="--x:24%;--y:52%">2</i>
+        <i class="mk" style="--x:24%;--y:26%">3</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=RESPONDING</div>
+      <ol class="an">
+        <li><b>1</b><span>Augen klein und zurück: Text ist jetzt der Fokus. Kein Avatar, keine Sprechblase.</span></li>
+        <li><b>2</b><span>Antwort linksbündig, max. 60 Zeichen, 34 px, Typewriter nach Wortlänge (§4).</span></li>
+        <li><b>3</b><span>Ältere Antwort nur als angeschnittene, gedimmte Zeile — lesbar beim Scrollen, nie Hauptansicht.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Zeilenumbruch mitten im Wort; Scrollsprung; neue Antwort außerhalb des Sichtfelds.</p>
+      <p class="rule"><em>Reduziert:</em> Absatzweise Einblendung statt Zeichenstrom; Fokus springt identisch.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F2</span> <span class="src">DD:15–18</span> <span class="src">ADR-0002</span></p>
+    </article>
+
+    <!-- ADAPTING -->
+    <article class="frame-card" id="st-adapting">
+      <header><h4>ADAPTING</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="text" style="--open:1;--w:.72">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" style="top:31%">
+          <p class="q">Soll ich wärmer oder kühler aussehen?</p>
+          <p class="a" style="opacity:.55">Dann sag mir: wärmer.</p>
+        </div>
+        <div class="slider show" style="--pos:.44;opacity:.7">
+          <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
+          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
+          <div class="ticks"><i></i><i></i><i></i></div>
+        </div>
+        <div class="chips show" style="bottom:30%"><span class="chip">„wärmer"</span></div>
+        <i class="mk" style="--x:33%;--y:78%">1</i>
+        <i class="mk" style="--x:58%;--y:68%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · turn=SETTLED · adaptation=ADAPTING</div>
+      <ol class="an">
+        <li><b>1</b><span>Das Wort aus der Nutzerzeile wird zum Regler-Label. Die Rille zeichnet sich in 180 ms.</span></li>
+        <li><b>2</b><span>Fläche, Laufweite und Rhythmus wandeln sich gleichzeitig (700 ms) — nicht erst nach dem Regler.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Regler erscheint vor der Antwort; Theme-Dropdown; Änderung ohne Undo.</p>
+      <p class="rule"><em>Reduziert:</em> Regler erscheint fertig; Fläche wechselt per Schnitt; kein Wortflug.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">C2</span> <span class="src">ADR-0004</span> <span class="src">P3</span> <span class="src">K5</span></p>
+    </article>
+
+    <!-- ADAPTED -->
+    <article class="frame-card" id="st-adapted">
+      <header><h4>ADAPTED</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="text" style="--open:1;--w:.78">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" style="top:30%">
+          <p class="a" style="font-size:1.95cqw">Drei Dinge sind fertig: Augen, Text, Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Hintergrundagenten liefern still.</p>
+          <span class="undo">↺ rückgängig</span>
+        </div>
+        <div class="slider show" style="--pos:.78">
+          <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
+          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
+          <div class="ticks"><i></i><i></i><i></i></div>
+        </div>
+        <i class="mk" style="--x:78%;--y:89%">1</i>
+        <i class="mk" style="--x:26%;--y:60%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · turn=SETTLED · adaptation=ADAPTED</div>
+      <ol class="an">
+        <li><b>1</b><span>Regler bleibt sichtbar und ziehbar; Position und Label sind Zustand, nicht Dekoration.</span></li>
+        <li><b>2</b><span>Undo ist der einzige neue Bedienrest — kein „Einstellungen"-Link, keine Seite.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Bestätigungs-Toast, „Gespeichert"-Meldung, Änderung des Gesprächsinhalts rückwirkend.</p>
+      <p class="rule"><em>Reduziert:</em> identisch; Undo ohne Animation.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">P3</span> <span class="src">T3</span> <span class="src">Q2</span> <span class="src">ADR-0004</span></p>
+    </article>
+
+    <!-- BACKGROUND_WORKING -->
+    <article class="frame-card" id="st-bgworking">
+      <header><h4>BACKGROUND_WORKING</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="field" style="--open:1;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
+        <div class="rail">
+          <div class="job"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
+        </div>
+        <i class="mk" style="--x:88%;--y:16%">1</i>
+        <i class="mk" style="--x:50%;--y:28%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE · background=WORKING</div>
+      <ol class="an">
+        <li><b>1</b><span>Die Hintergrundarbeit lebt am Rand: 1-px-Balken, langsames Wandern, keine Zahl, kein Prozentversprechen.</span></li>
+        <li><b>2</b><span>Der Front-Agent bleibt voll bedienbar. Kein Overlay, keine Sperre, kein Wartecursor.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Modal, „Bitte warten", deaktivierte Eingabe, geschätzte Restzeit.</p>
+      <p class="rule"><em>Reduziert:</em> Balken steht still; ein statisches Zeichen genügt.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F4</span> <span class="src">T4</span> <span class="src">DD:23</span></p>
+    </article>
+
+    <!-- BACKGROUND_RESULT_READY -->
+    <article class="frame-card" id="st-bgready">
+      <header><h4>BACKGROUND_RESULT_READY</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="field" style="--open:1;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
+        <div class="rail">
+          <div class="job done"><span class="new">neu</span><b>3 Quellen verglichen</b><span>Ergebnis liegt am Rand</span><div class="bar"><i></i></div></div>
+        </div>
+        <i class="mk" style="--x:88%;--y:14%">1</i>
+        <i class="mk" style="--x:50%;--y:38%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE · background=RESULT_READY</div>
+      <ol class="an">
+        <li><b>1</b><span>Ergebnis erscheint als ruhige Karte am Rand, 8 px Aufstieg in 200 ms. Kein Fokuswechsel, kein Ton.</span></li>
+        <li><b>2</b><span>Der Fokus bleibt, wo er war — auch mitten im Tippen. Screenreader hören <em>eine</em> höfliche Zeile.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> automatisches Vorlesen; Scrollen zum Ergebnis; Badge mit Zahl, die Aufmerksamkeit erzwingt.</p>
+      <p class="rule"><em>Reduziert:</em> Karte erscheint ohne Aufstieg; dieselbe höfliche Ankündigung.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F4</span> <span class="src">T4</span> <span class="src">Q1</span></p>
+    </article>
+
+    <!-- ERROR -->
+    <article class="frame-card" id="st-error">
+      <header><h4>ERROR</h4><span class="badge o">Pflicht</span></header>
+      <div class="stage" data-focus="text" style="--open:.7;--w:.62">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="overlay">
+          <span class="ttl">Die Antwort ist nicht angekommen.</span>
+          <span class="txt">Deine Frage steht noch hier. Der Dienst hat nicht geantwortet — das liegt nicht an deiner Eingabe.</span>
+          <span class="row"><span class="chip solid">erneut senden</span><span class="chip">als Text behalten</span></span>
+        </div>
+        <div class="fieldline" style="bottom:8%;opacity:.5"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
+        <i class="mk" style="--x:50%;--y:44%">1</i>
+        <i class="mk" style="--x:50%;--y:38%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · turn=IDLE · fault=TURN_ERROR · background=WORKING</div>
+      <ol class="an">
+        <li><b>1</b><span>Fehler nennt Umfang, Ursache in Alltagssprache und was erhalten bleibt. Keine Schuldzuweisung, kein Code.</span></li>
+        <li><b>2</b><span>Augen bleiben da, aber gedämpft. Der Agent verschwindet nicht — das wäre ein stiller Fehlschlag.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> „Etwas ist schiefgelaufen", leeres Feld, verlorener Entwurf, Auto-Retry-Schleife.</p>
+      <p class="rule"><em>Reduziert:</em> Overlay erscheint als Schnitt; Fokus springt auf „erneut senden" (programmatisch, sichtbar).</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">Q1</span> <span class="src">Q7</span> <span class="src">T5</span></p>
+    </article>
+
+    <!-- DISCONNECTED -->
+    <article class="frame-card" id="st-disconnected">
+      <header><h4>DISCONNECTED</h4><span class="badge o">Pflicht</span></header>
+      <div class="stage" data-focus="field" style="--open:.6;--w:.62">
+        <div class="texture"></div>
+        <div class="strip"><span>Verbindung getrennt</span><span>Entwurf bleibt erhalten · neuer Versuch in 3 s</span></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline" style="opacity:.55"><span class="typed">Und was hat die Analyse ergeben?</span></div>
+        <div class="rail"><div class="job"><b>Analysing</b><span>pausiert</span><div class="bar"><i></i></div></div></div>
+        <i class="mk" style="--x:50%;--y:7%">1</i>
+        <i class="mk" style="--x:88%;--y:16%">2</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=TEXT_IDLE · connection=DISCONNECTED · background=WORKING (pausiert)</div>
+      <ol class="an">
+        <li><b>1</b><span>Ein 1-zeiliger Streifen oben, keine Modalseite. Er nennt den nächsten Versuch, nicht nur den Fehler.</span></li>
+        <li><b>2</b><span>Hintergrundarbeit wird als pausiert markiert, nicht als „läuft weiter" behauptet.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Eingabe löschen; „offline" ohne Folgewirkung; doppelte Antwort nach Reconnect.</p>
+      <p class="rule"><em>Reduziert:</em> identisch; Streifen ohne Einblendung.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">Q1</span> <span class="src">Q2</span> <span class="src">T6</span></p>
+    </article>
+
+    <!-- USER_SPEAKING -->
+    <article class="frame-card" id="st-speaking">
+      <header><h4>USER_SPEAKING</h4><span class="badge e">E</span></header>
+      <div class="stage" data-focus="field" style="--open:.92;--w:.62">
+        <div class="texture"></div>
+        <div class="focusring"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="fieldline" style="bottom:20%"><span class="typed" style="opacity:.7">… wie du aussiehst</span><span class="caret"></span></div>
+        <div class="level show">
+          <b style="height:6px"></b><b style="height:14px"></b><b style="height:22px"></b><b style="height:9px"></b>
+          <b style="height:26px"></b><b style="height:16px"></b><b style="height:5px"></b><b style="height:12px"></b>
+          <span class="lbl">hört zu · Stop mit Esc</span>
+        </div>
+        <i class="mk" style="--x:50%;--y:28%">1</i>
+        <i class="mk" style="--x:50%;--y:69%">2</i>
+        <i class="mk" style="--x:88%;--y:80%">3</i>
+      </div>
+      <div class="dims">presence=PRESENT · input=USER_SPEAKING · turn=IDLE</div>
+      <ol class="an">
+        <li><b>1</b><span>Der Ring um das ganze Feld ist das Listening-Signal, nicht ein roter Punkt. Augen bleiben ruhig.</span></li>
+        <li><b>2</b><span>Pegel kommt aus echter Audioenergie. Ohne Eingang bleibt der Pegel flach — kein tanzender Fake.</span></li>
+        <li><b>3</b><span>Stop ist immer sichtbar und 44 px groß; Esc und Tippen beenden ebenfalls.</span></li>
+      </ol>
+      <p class="rule"><em>Nicht erlaubt:</em> Aufnahme ohne Klick; „hört zu" ohne Berechtigung; Wellenform aus Zufall.</p>
+      <p class="rule"><em>Reduziert:</em> Ring und Pegel bleiben (Information), aber ohne Puls; aktualisiert in 200-ms-Schritten.</p>
+      <p class="rule"><em>Quelle:</em> <span class="src">F5</span> <span class="src">DD:21</span> <span class="src">Q4</span></p>
+    </article>
+  </div>
+
+  <h3>Die Zustandsdimensionen als Bild</h3>
+  <p class="small">Kein Spaghetti-Diagramm: jede Zeile ist eine Dimension mit ihren Werten. Durchgezogene
+    Pfeile sind Übergänge innerhalb der Dimension; gestrichelte Pfeile sind Kopplungen (ein Ereignis in
+    einer Dimension erlaubt/verbietet einen Wert in einer anderen).</p>
+
+  <div class="sm">
+    <svg viewBox="0 0 980 430" role="img" aria-label="Orthogonale Zustandsdimensionen von Agentfähig">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#3a3a42"/>
+        </marker>
+        <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#2b4f9e"/>
+        </marker>
+      </defs>
+      <style>
+        .lane{fill:#fff;stroke:#d2cdc2}
+        .lanelab{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.08em;fill:#5a5a64;text-transform:uppercase}
+        .node{fill:#fbfaf6;stroke:#3a3a42;rx:11}
+        .nodetext{font:500 11px ui-monospace,Menlo,monospace;fill:#16161a}
+        .edge{stroke:#3a3a42;stroke-width:1.2;fill:none;marker-end:url(#ar)}
+        .edgeb{stroke:#2b4f9e;stroke-width:1.1;fill:none;stroke-dasharray:4 3;marker-end:url(#arb)}
+        .etext{font:10px ui-monospace,Menlo,monospace;fill:#5a5a64}
+      </style>
+
+      <!-- presence -->
+      <rect class="lane" x="120" y="14" width="820" height="52" rx="8"/>
+      <text class="lanelab" x="20" y="45">presence</text>
+      <rect class="node" x="140" y="27" width="86" height="26"/><text class="nodetext" x="160" y="44">DORMANT</text>
+      <rect class="node" x="300" y="27" width="102" height="26"/><text class="nodetext" x="316" y="44">AWAKENING</text>
+      <rect class="node" x="478" y="27" width="90" height="26"/><text class="nodetext" x="500" y="44">PRESENT</text>
+      <path class="edge" d="M226 40 H296"/><text class="etext" x="240" y="24">T 5,0 s / Eingabe</text>
+      <path class="edge" d="M402 40 H474"/><text class="etext" x="414" y="24">Lider 100 %</text>
+
+      <!-- input -->
+      <rect class="lane" x="120" y="82" width="820" height="52" rx="8"/>
+      <text class="lanelab" x="20" y="113">input</text>
+      <rect class="node" x="140" y="95" width="80" height="26"/><text class="nodetext" x="158" y="112">TEXT_IDLE</text>
+      <rect class="node" x="258" y="95" width="90" height="26"/><text class="nodetext" x="272" y="112">TEXT_FOCUS</text>
+      <rect class="node" x="386" y="95" width="96" height="26"/><text class="nodetext" x="400" y="112">USER_TYPING</text>
+      <rect class="node" x="520" y="95" width="104" height="26"/><text class="nodetext" x="534" y="112">USER_SPEAKING</text>
+      <rect class="node" x="662" y="95" width="104" height="26"/><text class="nodetext" x="674" y="112">VOICE_BLOCKED</text>
+      <path class="edge" d="M220 108 H254"/><text class="etext" x="224" y="92">Klick/Tab</text>
+      <path class="edge" d="M348 108 H382"/><text class="etext" x="352" y="92">Zeichen</text>
+      <path class="edge" d="M482 108 H516"/><text class="etext" x="486" y="92">Mikro+Klick</text>
+      <path class="edge" d="M624 108 H658"/><text class="etext" x="628" y="92">verweigert</text>
+
+      <!-- turn -->
+      <rect class="lane" x="120" y="150" width="820" height="52" rx="8"/>
+      <text class="lanelab" x="20" y="181">turn</text>
+      <rect class="node" x="140" y="163" width="58" height="26"/><text class="nodetext" x="164" y="180">IDLE</text>
+      <rect class="node" x="236" y="163" width="102" height="26"/><text class="nodetext" x="248" y="180">PROCESSING</text>
+      <rect class="node" x="376" y="163" width="100" height="26"/><text class="nodetext" x="392" y="180">RESPONDING</text>
+      <rect class="node" x="514" y="163" width="80" height="26"/><text class="nodetext" x="536" y="180">SETTLED</text>
+      <path class="edge" d="M198 176 H232"/><text class="etext" x="200" y="160">Enter</text>
+      <path class="edge" d="M338 176 H372"/><text class="etext" x="342" y="160">1. Token</text>
+      <path class="edge" d="M476 176 H510"/><text class="etext" x="480" y="160">400 ms still</text>
+      <path class="edge" d="M554 189 C554 216 170 216 169 193"/>
+
+      <!-- adaptation -->
+      <rect class="lane" x="120" y="218" width="820" height="52" rx="8"/>
+      <text class="lanelab" x="20" y="249">adaptation</text>
+      <rect class="node" x="140" y="231" width="96" height="26"/><text class="nodetext" x="152" y="248">NOT_OFFERED</text>
+      <rect class="node" x="276" y="231" width="76" height="26"/><text class="nodetext" x="296" y="248">OFFERED</text>
+      <rect class="node" x="392" y="231" width="84" height="26"/><text class="nodetext" x="404" y="248">ADAPTING</text>
+      <rect class="node" x="516" y="231" width="76" height="26"/><text class="nodetext" x="532" y="248">ADAPTED</text>
+      <path class="edge" d="M236 244 H272"/><text class="etext" x="238" y="228">SETTLED</text>
+      <path class="edge" d="M352 244 H388"/><text class="etext" x="354" y="228">Antwort</text>
+      <path class="edge" d="M476 244 H512"/><text class="etext" x="480" y="228">700 ms</text>
+
+      <!-- background + connection -->
+      <rect class="lane" x="120" y="286" width="520" height="52" rx="8"/>
+      <text class="lanelab" x="20" y="317">background</text>
+      <rect class="node" x="140" y="299" width="60" height="26"/><text class="nodetext" x="160" y="316">NONE</text>
+      <rect class="node" x="232" y="299" width="80" height="26"/><text class="nodetext" x="244" y="316">WORKING</text>
+      <rect class="node" x="348" y="299" width="104" height="26"/><text class="nodetext" x="360" y="316">RESULT_READY</text>
+      <rect class="node" x="486" y="299" width="70" height="26"/><text class="nodetext" x="502" y="316">FAILED</text>
+      <path class="edge" d="M200 312 H228"/><text class="etext" x="200" y="296">Sub-Agent</text>
+      <path class="edge" d="M312 312 H344"/><text class="etext" x="314" y="296">Ergebnis</text>
+      <path class="edge" d="M292 325 C292 352 480 352 486 325"/><text class="etext" x="330" y="366">Fehler → sichtbar, kein Retry-Sturm</text>
+
+      <rect class="lane" x="660" y="286" width="280" height="52" rx="8"/>
+      <text class="lanelab" x="672" y="278">connection</text>
+      <rect class="node" x="680" y="299" width="74" height="26"/><text class="nodetext" x="692" y="316">CONNECTED</text>
+      <rect class="node" x="776" y="299" width="74" height="26"/><text class="nodetext" x="786" y="316">DEGRADED</text>
+      <rect class="node" x="862" y="299" width="68" height="26"/><text class="nodetext" x="871" y="316">RECONN.</text>
+      <path class="edge" d="M754 312 H772"/><path class="edge" d="M850 312 H858"/>
+
+      <!-- coupling -->
+      <path class="edgeb" d="M430 121 C430 140 430 148 430 160"/>
+      <text class="etext" x="440" y="143">Enter → PROCESSING</text>
+      <path class="edgeb" d="M590 193 C620 210 590 226 560 231"/>
+      <text class="etext" x="600" y="214">SETTLED → OFFERED</text>
+      <path class="edgeb" d="M330 121 C330 138 300 142 300 148"/>
+      <text class="etext" x="250" y="140">Tippen bricht Zuhören ab</text>
+      <text class="etext" x="20" y="405">FAULT (TURN_ERROR · VOICE_ERROR · BACKGROUND_ERROR) liegt orthogonal zu allen Zeilen.</text>
+    </svg>
+  </div>
+
+  <h3>Übergangstabelle</h3>
+  <p class="small">Vollständig für V1. „Wächter" ist die Bedingung, ohne die der Übergang nicht gilt —
+    jede Zeile ohne Wächter ist ein Fehler.</p>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Von</th><th>Nach</th><th>Auslöser</th><th>Wächter</th><th>Sichtbar</th><th>Quelle</th></tr></thead>
+    <tbody>
+      <tr><td>DORMANT</td><td>AWAKENING</td><td>Timer 4,6 s (Pre-Glow), 5,0 s (Lider)</td><td>Erstbesuch, kein <code>prefers-reduced-motion</code></td><td>Augen öffnen sich</td><td><span class="src">F1</span></td></tr>
+      <tr><td>DORMANT</td><td>AWAKENING</td><td>Erste Eingabe (Taste, Klick, Touch, Tab)</td><td>—</td><td>Augen springen auf 100 % in 240 ms</td><td><span class="src">P4</span></td></tr>
+      <tr><td>AWAKENING</td><td>PRESENT</td><td>Lider erreichen 100 %</td><td>Timer oder Eingabe hat den Film gestartet</td><td>Eingabe blendet ein</td><td><span class="src">F1</span></td></tr>
+      <tr><td>PRESENT</td><td>TEXT_FOCUS</td><td>Klick/Tab auf Eingabe</td><td>—</td><td>Fokusring, Caret</td><td><span class="src">F2</span></td></tr>
+      <tr><td>TEXT_FOCUS</td><td>USER_TYPING</td><td>Erstes Zeichen</td><td>Eingabe nicht gesperrt</td><td>Text sofort, Pupillen folgen</td><td><span class="src">F2</span></td></tr>
+      <tr><td>USER_TYPING</td><td>PROCESSING</td><td>Enter</td><td>Text nicht leer, Verbindung nicht getrennt</td><td>Zeile rückt hoch, Sendepuls</td><td><span class="src">T1</span></td></tr>
+      <tr><td>PROCESSING</td><td>RESPONDING</td><td>Erster Token</td><td>Turn nicht abgebrochen</td><td>Typewriter beginnt, Augen zurück</td><td><span class="src">T1</span></td></tr>
+      <tr><td>PROCESSING</td><td>IDLE</td><td>Escape / Abbrechen</td><td>—</td><td>„abgebrochen", keine erfundene Antwort</td><td><span class="src">Q1</span></td></tr>
+      <tr><td>PROCESSING</td><td>ERROR</td><td>Fehlerereignis</td><td>—</td><td>Fehlerkarte, Entwurf erhalten</td><td><span class="src">Q1</span></td></tr>
+      <tr><td>RESPONDING</td><td>SETTLED</td><td>Letzter Token + 400 ms Ruhe</td><td>Stream geschlossen</td><td>Caret verschwindet</td><td><span class="src">F2</span></td></tr>
+      <tr><td>RESPONDING</td><td>SETTLED</td><td>Escape</td><td>—</td><td>Rest als „unvollständig" markiert</td><td><span class="src">Q1</span></td></tr>
+      <tr><td>SETTLED</td><td>OFFERED</td><td>600 ms nach Antwort, max. 1×/Sitzung</td><td>Adaption noch nicht angeboten, kein Fehler</td><td>Eine Frage + Chips</td><td><span class="src">C3</span></td></tr>
+      <tr><td>OFFERED</td><td>ADAPTING</td><td>Antwort des Nutzers</td><td>Antwort enthält eine Richtung oder „so lassen"</td><td>Wort wird Label, Rille zeichnet</td><td><span class="src">C2</span></td></tr>
+      <tr><td>ADAPTING</td><td>ADAPTED</td><td>700 ms Theme + 220 ms Griff</td><td>—</td><td>Fläche, Typo, Rhythmus neu; Undo da</td><td><span class="src">T3</span></td></tr>
+      <tr><td>ADAPTED</td><td>ADAPTING</td><td>Ziehen / Undo</td><td>—</td><td>400 ms zurück oder live</td><td><span class="src">T3</span></td></tr>
+      <tr><td>TEXT_IDLE</td><td>USER_SPEAKING</td><td>Mikro-Klick + Berechtigung erteilt</td><td>Expliziter Klick, nicht beim Laden</td><td>Ring, echter Pegel, Stop</td><td><span class="src">F5</span></td></tr>
+      <tr><td>USER_SPEAKING</td><td>USER_TYPING</td><td>Transkript bestätigt / Tippen</td><td>—</td><td>Transkript wird zur Nutzerzeile</td><td><span class="src">F5</span></td></tr>
+      <tr><td>USER_SPEAKING</td><td>TEXT_IDLE</td><td>Stop, Escape, Berechtigung entzogen</td><td>—</td><td>Ring weg, Text bleibt gleichwertig</td><td><span class="src">F5</span></td></tr>
+      <tr><td>NONE</td><td>WORKING</td><td>Front-Agent startet Sub-Agent</td><td>Front-Antwort nicht blockiert</td><td>1-px-Balken am Rand</td><td><span class="src">F4</span></td></tr>
+      <tr><td>WORKING</td><td>RESULT_READY</td><td>Sub-Agent liefert Ergebnis</td><td>Antwort vollständig</td><td>Karte am Rand, kein Fokuswechsel</td><td><span class="src">T4</span></td></tr>
+      <tr><td>WORKING</td><td>FAILED</td><td>Sub-Agent scheitert</td><td>—</td><td>Rand-Karte „hat nicht geklappt"</td><td><span class="src">Q1</span></td></tr>
+      <tr><td>CONNECTED</td><td>DISCONNECTED</td><td>Transportabbruch</td><td>—</td><td>Streifen oben, Entwurf bleibt</td><td><span class="src">Q2</span></td></tr>
+      <tr><td>DISCONNECTED</td><td>RECONNECTING</td><td>Retry-Takt</td><td>Kein paralleler Retry</td><td>„neuer Versuch in N s"</td><td><span class="src">Q1</span></td></tr>
+      <tr><td>RECONNECTING</td><td>CONNECTED</td><td>Verbindung steht</td><td>—</td><td>Streifen weg, genau ein Re-Sync</td><td><span class="src">Q2</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Nicht erlaubte Übergänge</h3>
+  <div class="grid2">
+    <div class="card">
+      <ul class="tight small">
+        <li><span class="st bad">DORMANT → RESPONDING</span> — eine Antwort ohne Anwesenheit ist ein Chatbot-Effekt.</li>
+        <li><span class="st bad">PROCESSING → RESPONDING ohne Token</span> — leerer Puffer als „Antwort" ist ein stiller Fehlschlag.</li>
+        <li><span class="st bad">SETTLED → ADAPTING ohne OFFERED</span> — Umgestaltung ohne Frage ist Bevormundung.</li>
+        <li><span class="st bad">ADAPTING → neuer Gesprächsinhalt</span> — der Regler ändert nie rückwirkend Fakten.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <ul class="tight small">
+        <li><span class="st bad">USER_SPEAKING ohne Klick</span> — Aufnahme ohne ausdrückliche Handlung.</li>
+        <li><span class="st bad">RESULT_READY → auto-sprechen</span> — offene Produktentscheidung, nicht eingeführt (§6).</li>
+        <li><span class="st bad">DISCONNECTED → stille Wiederholung</span> — doppelte Antwort nach Reconnect.</li>
+        <li><span class="st bad">ERROR → stilles Zurücksetzen</span> — Zustand ohne sichtbare Erklärung.</li>
+        <li><span class="st bad">BACKGROUND FAILED → vorgetäuschte Antwort</span> — der Front-Agent erfindet keinen Ersatz.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Recovery bei Unterbrechungen</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Unterbrechung</th><th>Was bleibt</th><th>Was passiert</th><th>Was nie passiert</th></tr></thead>
+    <tbody>
+      <tr><td>Tab geschlossen / Reload mitten im Turn</td><td>Gesendete Frage, Reglerwert, letzte vollständige Antwort</td><td>Server-Zustand wird geladen; offener Turn gilt als abgebrochen und wird als solcher gezeigt</td><td>Antwort nachträglich „fertig" behaupten</td></tr>
+      <tr><td>Netz weg während RESPONDING</td><td>Erhaltener Textteil</td><td>Streifen + „unvollständig"; Reconnect holt den Rest oder bietet erneut an</td><td>Text verwerfen, doppelt anhängen</td></tr>
+      <tr><td>Escape während PROCESSING</td><td>Frage, Eingabe</td><td>Turn abgebrochen, Fokus zurück ins Feld</td><td>Später doch noch antworten</td></tr>
+      <tr><td>Mikrofon verweigert</td><td>Textweg, Entwurf</td><td>Einmalige, sachliche Notiz; kein erneuter Prompt</td><td>Berechtigung umgehen, erneut fragen</td></tr>
+      <tr><td>Sub-Agent scheitert</td><td>Front-Antwort, andere Jobs</td><td>Rand-Karte mit „erneut versuchen" (manuell)</td><td>Automatischer Retry-Sturm</td></tr>
+      <tr><td>Owner schließt Tab bei ADAPTING</td><td>Zielwert</td><td>Wert ist server-autoritativ; beim nächsten Laden gilt er</td><td>Halbzustand (Farbe neu, Haltung alt)</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 3 ================================================================= -->
+<section class="sec" id="motion"><div class="wrap">
+  <h2><span class="n">03 · Motion Specifications · Deliverable D</span>Bewegung, die etwas bedeutet</h2>
+  <p class="lead">Jede Bewegung hat eine Aufgabe: Aufmerksamkeit geben, Richtung zeigen, Zustand
+    bestätigen. Keine Bewegung existiert, weil sie hübsch ist. Dauern sind Vorschläge und werden im
+    Prototyp geprüft — nicht als Messwerte ausgegeben.</p>
+
+  <div class="note">
+    <p><strong>Drei globale Regeln.</strong> (1) Höchstens <em>eine</em> Aufmerksamkeitsanimation
+      gleichzeitig. (2) Keine Transformation bewegt Inhalt weiter als 24 px, außer dem bewussten
+      Wortflug beim Regler (240 px, einmalig, unterbrechbar). (3) Animation darf nie die
+      Eingabebereitschaft verzögern: das Feld ist bedienbar, bevor die Optik fertig ist. <span class="src">P4</span></p>
+  </div>
+
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Element</th><th>Auslöser</th><th>Eigenschaft</th><th>Von → Nach</th><th>Dauer</th><th>Easing</th><th>Unterbrechbar</th><th>Reduziert</th></tr></thead>
+    <tbody>
+      <tr><td>Pre-Glow</td><td><span class="badge t">T</span> 4,6 s</td><td>opacity</td><td>0,03 → 0,10</td><td>1200 ms</td><td>sine in-out</td><td>ja (Eingabe)</td><td>entfällt</td></tr>
+      <tr><td>Lider öffnen</td><td><span class="badge t">T</span> 5,0 s</td><td>scaleY (open)</td><td>0 → 1</td><td>900 ms</td><td>cubic-bezier(.2,.8,.2,1)</td><td>ja</td><td>Schnitt</td></tr>
+      <tr><td>Pupillen</td><td><span class="badge t">T</span> +220 ms / <span class="badge e">E</span> Zeiger</td><td>translateX/Y</td><td>0 → ±6 px</td><td>420 ms</td><td>ease-out</td><td>ja</td><td>kein Tracking</td></tr>
+      <tr><td>Blinzeln</td><td><span class="badge t">T</span> autonom 3–7 s</td><td>open</td><td>1 → 0 → 1</td><td>280 ms</td><td>linear</td><td>—</td><td>aus</td></tr>
+      <tr><td>Eingabe einblenden</td><td><span class="badge t">T</span> Lider fertig + 120 ms</td><td>opacity, translateY</td><td>0, 6 px → 1, 0</td><td>400 ms</td><td>ease-out</td><td>ja</td><td>opacity 80 ms</td></tr>
+      <tr><td>Caret</td><td><span class="badge t">T</span> immer</td><td>opacity</td><td>1 ↔ 0</td><td>1060 ms Takt</td><td>steps(1)</td><td>—</td><td>bleibt (Orientierung)</td></tr>
+      <tr><td>Fokus-Lift</td><td><span class="badge e">E</span> Fokus</td><td>translateY</td><td>0 → −8 px</td><td>180 ms</td><td>ease-out</td><td>ja</td><td>entfällt</td></tr>
+      <tr><td>Sendepuls</td><td><span class="badge e">E</span> Enter</td><td>1-px-Linie entlang Pfad</td><td>Eingabe → Augen</td><td>320 ms</td><td>ease-in-out</td><td>nein (einmalig)</td><td>entfällt</td></tr>
+      <tr><td>Nutzerzeile rückt hoch</td><td><span class="badge e">E</span> Enter</td><td>top, opacity, font-size</td><td>15 % → 26 %, 1 → 0,55</td><td>420 ms</td><td>cubic-bezier(.2,.7,.2,1)</td><td>nein</td><td>Schnitt</td></tr>
+      <tr><td>Augen zurück</td><td><span class="badge e">E</span> erster Token</td><td>top, scale</td><td>38 % → 18 %, 1 → 0,84</td><td>520 ms</td><td>cubic-bezier(.2,.7,.2,1)</td><td>ja</td><td>Schnitt</td></tr>
+      <tr><td>Typewriter</td><td><span class="badge e">E</span> Tokenstrom</td><td>Zeichenanzahl</td><td>0 → n</td><td>Basis 38 z/s, wortabhängig (§4)</td><td>linear + Pausen</td><td>ja (Esc)</td><td>absatzweise, 80 ms Fade</td></tr>
+      <tr><td>Frage erscheint</td><td><span class="badge e">E</span> SETTLED + 600 ms</td><td>opacity, translateY</td><td>0, 6 px → 1, 0</td><td>220 ms</td><td>ease-out</td><td>ja</td><td>Schnitt</td></tr>
+      <tr><td>Wortflug zum Regler</td><td><span class="badge e">E</span> Antwort auf die Frage</td><td>position, scale</td><td>Nutzerzeile → Rille</td><td>240 ms</td><td>ease-in-out</td><td>ja</td><td>entfällt (Label sitzt sofort)</td></tr>
+      <tr><td>Rille zeichnet</td><td><span class="badge e">E</span> danach</td><td>scaleX</td><td>0 → 1</td><td>180 ms</td><td>ease-out</td><td>ja</td><td>fertig sichtbar</td></tr>
+      <tr><td>Griff erscheint</td><td><span class="badge e">E</span> Rille fertig</td><td>scale</td><td>0,8 → 1</td><td>220 ms</td><td>ease-out-back (max. 1,06)</td><td>ja</td><td>Schnitt</td></tr>
+      <tr><td>Fläche / Typo / Rhythmus</td><td><span class="badge e">E</span> Reglerwert</td><td>CSS-Variablen</td><td>alt → neu</td><td>700 ms</td><td>ease</td><td>ja (Ziehen)</td><td>120 ms Fade oder Schnitt</td></tr>
+      <tr><td>Undo erscheint</td><td><span class="badge e">E</span> ADAPTED + 300 ms</td><td>opacity</td><td>0 → 1</td><td>160 ms</td><td>ease-out</td><td>—</td><td>Schnitt</td></tr>
+      <tr><td>Hintergrund-Balken</td><td><span class="badge e">E</span> WORKING</td><td>translateX</td><td>−40 % → 280 %</td><td>3200 ms loop</td><td>ease-in-out</td><td>—</td><td>statisch</td></tr>
+      <tr><td>Ergebnis-Karte</td><td><span class="badge e">E</span> RESULT_READY</td><td>opacity, translateY</td><td>0, 8 px → 1, 0</td><td>200 ms</td><td>ease-out</td><td>—</td><td>Schnitt</td></tr>
+      <tr><td>Fehlerkarte</td><td><span class="badge e">E</span> FAULT</td><td>opacity, scale</td><td>0, 0,98 → 1, 1</td><td>180 ms</td><td>ease-out</td><td>—</td><td>Schnitt</td></tr>
+      <tr><td>Verbindungsstreifen</td><td><span class="badge e">E</span> Verbindungsereignis</td><td>translateY</td><td>−100 % → 0</td><td>220 ms</td><td>ease-out</td><td>—</td><td>Schnitt</td></tr>
+      <tr><td>Pegel (Voice)</td><td><span class="badge e">E</span> echter Audiopegel</td><td>height</td><td>0 → RMS</td><td>90 ms linear</td><td>linear</td><td>—</td><td>200-ms-Schritte</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Bewegungs-Budget pro Interaktion</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>Was zählt</h4>
+      <ul class="tight small">
+        <li><strong>Ein</strong> Übergang pro Zustandswechsel, nicht drei gestaffelte „Delight"-Effekte.</li>
+        <li>Summe aller Transformationsdistanzen pro Turn ≤ 24 px (Ausnahme: Wortflug).</li>
+        <li>Kein Looping außer Caret, Blinzeln und Hintergrund-Balken.</li>
+        <li>Keine Feder auf Text; kein Parallax; kein Cursor-Effekt.</li>
+        <li>Alles, was länger als 300 ms läuft, ist unterbrechbar oder wird bei nächstem Ereignis abgelöst.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Was Bewegung darf</h4>
+      <ul class="tight small">
+        <li>Anwesenheit zeigen (Lider, Blick), ohne zu fordern.</li>
+        <li>Richtung zeigen (Wort → Regler), damit die Ursache sichtbar ist.</li>
+        <li>Bestätigen, dass <em>etwas passiert ist</em> (Sendepuls, Ergebnis-Karte).</li>
+        <li>Nicht: „denken" darstellen, Fortschritt erfinden, Aufmerksamkeit erzwingen.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- 4 ================================================================= -->
+<section class="sec" id="typo"><div class="wrap">
+  <h2><span class="n">04 · Typografie und Antwortdarstellung · Deliverable E</span>Text ist die Bühne, nicht ein Feld darin</h2>
+  <p class="lead">Die Antwort ist kein Chatblasen-Inhalt. Sie ist der einzige große Gegenstand auf der
+    Fläche. Deshalb: keine Blase, kein Avatar, keine Zeitstempel im Antwortraum, keine Buttons pro
+    Nachricht.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Rollen (Desktop)</h4>
+      <div class="table-scroll"><table class="spec">
+        <thead><tr><th>Rolle</th><th>Größe / Zeilen</th><th>Gewicht</th><th>Max. Breite</th></tr></thead>
+        <tbody>
+          <tr><td>Antwort</td><td>clamp(24 px, 2,15 cqw, 38 px) / 1,34</td><td>450</td><td>60 ch</td></tr>
+          <tr><td>Fragezeile des Agenten</td><td>0,72 × Antwort / 1,4</td><td>400</td><td>60 ch</td></tr>
+          <tr><td>Nutzerzeile</td><td>17 px / 1,3</td><td>400</td><td>60 Zeichen sichtbar</td></tr>
+          <tr><td>Ältere Antwort</td><td>0,62 × Antwort, 42 % Deckkraft</td><td>400</td><td>60 ch</td></tr>
+          <tr><td>Status / Labels / Chips</td><td>11–12 px, Mono</td><td>500</td><td>—</td></tr>
+          <tr><td>Fehlertext</td><td>16 px / 1,45</td><td>400</td><td>52 ch</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small">Mobile: Antwort 26 px / 1,4, Ränder 20 px, max. 42 Zeichen pro Zeile. Kein
+        horizontales Scrollen bei 200 % Zoom.</p>
+    </div>
+    <div class="card">
+      <h4>Regeln</h4>
+      <ul class="tight small">
+        <li><strong>Eine Antwort im Fokus.</strong> Ältere treten zurück, bleiben aber lesbar (≥ 4,5:1 auf
+          ihrer Deckkraft). <span class="src">DD:15</span></li>
+        <li><strong>Neue Antwort übernimmt den Fokus</strong> — außer der Nutzer scrollt gerade aktiv.
+          Dann erscheint ein Marker „neue Antwort" und der Fokus folgt 1,2 s nach Scrollende. Das ist
+          ein Vorschlag zur Spannung zwischen DD:16 und Lesefluss. <span class="badge n">Vorschlag</span></li>
+        <li><strong>Kein Layoutsprung:</strong> Die Antwort reserviert ihre Höhe erst ab dem ersten
+          sichtbaren Zeichen; darunter bleibt Platz, damit der Regler nicht springt.</li>
+        <li><strong>Kein Zeilenumbruch mitten im Wort</strong>, keine Silbentrennung in der Antwort.</li>
+        <li><strong>Struktur sparsam:</strong> Absätze, Listen, Inline-Code, Fett. Keine Tabellen
+          (brechen die Fläche), Code-Blöcke max. 8 Zeilen mit „mehr".</li>
+        <li><strong>Zahlen, Namen, Fakten sind tonunabhängig.</strong> Der Regler ändert Form, nie Inhalt
+          (§5). <span class="src">T3</span></li>
+        <li><strong>Screenreader:</strong> Der visuelle Typewriter ist <code>aria-hidden</code>; die
+          vollständige Antwort wird einmal am Ende in eine <code>aria-live="polite"</code>-Region gesetzt.
+          Sonst liest ein Screenreader jedes Zeichen vor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Typewriter live prüfen</h3>
+  <p class="small">Der Rhythmus ist eine Gestaltungshypothese, keine gemessene Lesbarkeitsregel
+    (<span class="src">research/SCOUT-SYNTHESIS.md §3</span>). Deshalb ist er hier einstellbar:
+    Basisgeschwindigkeit, Wortlängen-Faktor und ein simulierter Streaming-Stillstand.</p>
+
+  <div class="demo">
+    <div class="controls">
+      <label>Basis <input id="twRate" type="range" min="18" max="70" value="38"> <span id="twRateVal" class="mono">38 z/s</span></label>
+      <label>Wortlänge <input id="twWord" type="range" min="0" max="100" value="60"> <span id="twWordVal" class="mono">60 %</span></label>
+      <label><input id="twStall" type="checkbox"> Puffer-Stillstand (800 ms)</label>
+      <button id="twGo" class="chip solid" style="font-size:13px;cursor:pointer">Neu tippen</button>
+    </div>
+    <p class="tw-out" id="twOut" aria-live="off"></p>
+    <p class="small" id="twNote">Regel bei Stillstand: Der Caret hält 120 ms, dann bleibt der Text ruhig
+      stehen. Kein Ladekreis, kein „…", kein erneutes Tippen derselben Wörter.</p>
+  </div>
+
+  <div class="note">
+    <p><strong>Wortlängen-Regel (Vorschlag).</strong> ≤ 4 Zeichen × 1,35 · 5–8 Zeichen × 1,0 ·
+      ≥ 9 Zeichen × 0,72. Inter-Wort-Lücke 45 ms; Satzzeichen: Komma +90 ms, Punkt +160 ms. Ziel ist
+      nicht „schneller", sondern <em>sichtbar ungleichmäßig</em>, wie in
+      <span class="src">DD:17–18</span> verlangt. Die Regel wird gegen drei aufgezeichnete Antworten
+      geprüft, nicht gegen Bauchgefühl (<span class="src">T2</span>).</p>
+  </div>
+</div></section>
+
+<!-- 5 ================================================================= -->
+<section class="sec" id="regler"><div class="wrap">
+  <h2><span class="n">05 · Konversationelle Personalisierung · Deliverable F</span>Ein Regler, der aus einem Satz entsteht</h2>
+  <p class="lead">Keine Settings-Seite, kein Theme-Picker. Der Agent fragt im Gespräch, hört die Antwort,
+    und die Oberfläche wird zum Träger dieser Antwort. Maximal drei Regler; V1 hat genau einen.</p>
+
+  <h3>Ablauf</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>#</th><th>Schritt</th><th>Sichtbar</th><th>Regel</th><th>Quelle</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Antwort ist fertig (SETTLED)</td><td>Antwort im Fokus</td><td>Erst nach vollständiger Antwort fragen, nicht während des Streams</td><td><span class="src">DD:19</span></td></tr>
+      <tr><td>2</td><td>Agent stellt <em>eine</em> Frage</td><td>Fragezeile + 3 optionale Chips</td><td>Eine Frage pro Runde; überspringbar; max. 1× pro Sitzung</td><td><span class="src">DD:19</span> <span class="src">C3</span></td></tr>
+      <tr><td>3</td><td>Nutzer antwortet in eigenen Worten</td><td>Antwort erscheint in der Nutzerzeile</td><td>Chip ist Abkürzung, nie Pflicht; Text bleibt Hauptweg</td><td><span class="src">P4</span></td></tr>
+      <tr><td>4</td><td>Regler materialisiert sich</td><td>Wort wird Label, Rille zeichnet, Griff sitzt</td><td>Label stammt aus der Nutzerformulierung, nicht aus einer Preset-Liste</td><td><span class="src">C3</span></td></tr>
+      <tr><td>5</td><td>Fläche und Haltung wandeln sich</td><td>Palette, Typo, Rhythmus, nächster Satz</td><td>Alle Wirkungen gleichzeitig in ≤ 700 ms</td><td><span class="src">C2</span> <span class="src">ADR-0004</span></td></tr>
+      <tr><td>6</td><td>Undo ist da</td><td>Chip „rückgängig"</td><td>Genau ein Schritt zurück; Tastatur <kbd>⌘/Ctrl+Z</kbd> im Reglerfokus</td><td><span class="src">T3</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Live-Anpassung ausprobieren</h3>
+  <p class="small">Der Regler unten ist die Lo-Fi-Implementierung der Achse: links warm/erzählend, rechts
+    kühl/präzise. Er ändert Fläche, Typografie <em>und</em> den Ton des Beispielsatzes. Die Fakten in
+    beiden Sätzen sind identisch — das ist die Prüfung aus <span class="src">T3</span> in klein.</p>
+
+  <div class="demo">
+    <div class="stage" id="rzStage" data-focus="text" style="--w:.62">
+      <div class="texture"></div>
+      <div class="eyes" style="--open:1"><i class="eye"></i><i class="eye"></i></div>
+      <div class="answer" style="top:30%">
+        <p class="q" id="rzQ">Wie fühlt sich das an?</p>
+        <p class="a" id="rzA" style="font-size:2.0cqw">Kurz gesagt: Du siehst drei Dinge — Augen, ein Textfeld, eine Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Was im Hintergrund läuft, bleibt leise.</p>
+      </div>
+      <div class="slider show" style="--pos:.62" id="rzSlider">
+        <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
+        <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
+        <div class="ticks"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div class="controls" style="margin-top:14px">
+      <label style="flex:1">Achse
+        <input id="rzRange" type="range" min="0" max="100" value="62" style="width:100%">
+      </label>
+      <button id="rzUndo" class="chip" style="font-size:13px;cursor:pointer">↺ rückgängig</button>
+      <span class="mono small" id="rzVal">0,62 · warm</span>
+    </div>
+    <p class="small" style="margin-bottom:0"><strong>Unverändert bleiben:</strong> Fakten, Zahlen, Namen,
+      Fähigkeiten, Preise, Berechtigungen, Modell, Stimme. Nur Form und Haltung ändern sich.
+      <span class="src">ADR-0004</span></p>
+  </div>
+
+  <h3>Drei Ebenen, die nicht verwechselt werden dürfen</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Ebene</th><th>Was der Regler ändert</th><th>Was er nie ändert</th><th>Prüfung</th></tr></thead>
+    <tbody>
+      <tr><td>Visuelle Persönlichkeit</td><td>Palette, Kontrast, Schriftgewicht, Laufweite, Zeilenabstand, Lidform</td><td>Lesbarkeit unter 4,5:1; Trefferflächen; Fokusring</td><td>Zwei Screenshots, Kontrastmessung</td></tr>
+      <tr><td>Tonalität</td><td>Satzlänge, Direktheit, Wärme-Marker, Anrede</td><td>Aussagen, Zahlen, Unsicherheiten, Grenzen</td><td>Blindvergleich zweier Antworten (T3)</td></tr>
+      <tr><td>Agentenfähigkeiten</td><td><strong>nichts</strong></td><td>Tools, Modelle, Rechte, Stimme, Sprache, Latenz</td><td>Capability-Liste vor/nach identisch</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note warn">
+    <p><strong>Keine unvorhersehbaren Nebenwirkungen.</strong> Ein Reglerwechsel darf nie: den
+      Scrollstand verändern, den Entwurf im Feld berühren, eine Frage erneut senden, einen
+      Hintergrundjob starten/abbrechen, die Verbindung neu aufbauen, die Sprache umschalten oder
+      Berechtigungen anfassen. Diese Liste ist ein Testfall, kein Satz.</p>
+  </div>
+
+  <h3>Ausbaupfad (nicht V1)</h3>
+  <p class="small">1 → 2/3 → max. 3 Regler. Regeln für später, damit der Ausbau den Kern nicht bricht:
+    Jeder weitere Regler entsteht wieder aus einem Satz; nie mehr als drei gleichzeitig sichtbar; jeder
+    hat Undo; keiner ändert Fähigkeiten. Der zweite Kandidat ist „Form" (Dichte/Struktur), der dritte
+    „Antwortlänge". Ein Preset-Menü ist ausgeschlossen, weil es die Falle aus
+    <span class="src">ADR-0004</span> zurückbringt.</p>
+</div></section>
+
+<!-- 6 ================================================================= -->
+<section class="sec" id="fastslow"><div class="wrap">
+  <h2><span class="n">06 · Fast / Slow · Deliverable-Teil</span>Die Welt läuft weiter, nur leiser</h2>
+  <p class="lead">Der Front-Agent antwortet sofort und wartet nie auf einen Hintergrundagenten.
+    Hintergrundarbeit ist ein zweiter Kanal mit eigener, ruhiger Sprache — kein zweiter Chat.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Ein Zustand, zwei Ebenen</h4>
+      <ul class="tight small">
+        <li><code>turn</code> gehört dem Front-Agenten: PROCESSING → RESPONDING → SETTLED.</li>
+        <li><code>background[]</code> gehört den Sub-Agenten: WORKING → RESULT_READY / FAILED.</li>
+        <li><strong>Keine Kopplung nach oben:</strong> Ein Sub-Agent kann den Turn nie blockieren,
+          verlängern oder dessen Inhalt vorwegnehmen.</li>
+        <li><strong>Keine Kopplung nach unten:</strong> Eine neue Nutzerfrage bricht Hintergrundarbeit
+          nicht ab (Ausnahme: explizites „stopp" am Rand).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Wo es lebt</h4>
+      <ul class="tight small">
+        <li>Desktop: rechte Randspalte, 23 % Breite, nur wenn Jobs existieren.</li>
+        <li>Mobil: Bottom-Sheet-Griff mit Anzahl, nie automatisch geöffnet.</li>
+        <li>Ankündigung: eine höfliche Screenreader-Zeile (<code>aria-live="polite"</code>), kein Alarm.</li>
+        <li>Der Front-Agent darf <em>erwähnen</em>, dass etwas läuft — in einem Nebensatz, ohne Zeitzusage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Zwei Varianten für das Eintreffen — A und B</h3>
+  <p class="small">Beide Varianten sind hier umschaltbar. Die Simulation ist als Simulation markiert
+    (Timer), nicht als echter Sub-Agent. <strong>Automatisches, ungefragtes Sprechen ist eine offene
+    Produktentscheidung und wird hier nicht eingeführt.</strong> <span class="src">T4</span> <span class="src">VISION:119–122</span></p>
+
+  <div class="demo">
+    <div class="controls">
+      <button id="abSilent" class="chip solid" style="font-size:13px;cursor:pointer" aria-pressed="true">A · still sichtbar</button>
+      <button id="abOffer" class="chip" style="font-size:13px;cursor:pointer" aria-pressed="false">B · aktiv anbieten</button>
+      <button id="abStart" class="chip" style="font-size:13px;cursor:pointer">Hintergrundjob starten (simuliert)</button>
+      <span class="mono small" id="abState">background=NONE</span>
+    </div>
+    <div class="stage" id="abStage" data-focus="field" style="--open:1;--w:.62;margin-top:12px">
+      <div class="texture"></div>
+      <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+      <div class="fieldline"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
+      <div class="rail" id="abRail" hidden>
+        <div class="job" id="abJob"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
+      </div>
+      <div class="chips" id="abChips" style="bottom:30%">
+        <span class="chip solid">Ergebnis zeigen</span><span class="chip">später</span>
+      </div>
+    </div>
+    <p class="small" id="abSay" style="margin-bottom:0">Variante A: Das Ergebnis erscheint am Rand, der
+      Fokus bleibt im Feld. Keine Bewegung im Zentrum.</p>
+  </div>
+
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Situation</th><th>Variante A — still</th><th>Variante B — Angebot</th><th>Verboten (beide)</th></tr></thead>
+    <tbody>
+      <tr><td>Ergebnis trifft ein</td><td>Karte am Rand, 200 ms, kein Fokuswechsel, eine Screenreader-Zeile</td><td>Zusätzlich: ein Chip „Ergebnis zeigen" im nächsten Turn; der Agent <em>fragt</em>, ob er es mitteilen soll</td><td>Automatisch sprechen; Modal; Scrollen; Ton</td></tr>
+      <tr><td>Nutzer tippt gerade</td><td>Ergebnis wartet, bis der Satz gesendet oder verworfen ist</td><td>Angebot wartet ebenfalls; nie mitten im Satz</td><td>Fokus stehlen; Eingabe unterbrechen</td></tr>
+      <tr><td>Nutzer fragt etwas Neues</td><td>Front antwortet; Rand zeigt weiter „1 Ergebnis"</td><td>Front darf einen Nebensatz nutzen: „dazu liegt noch etwas am Rand"</td><td>Hintergrundantwort als Frontantwort ausgeben</td></tr>
+      <tr><td>Sub-Agent scheitert</td><td>Rand-Karte „hat nicht geklappt · erneut versuchen" (manuell)</td><td>Gleiche Karte; das Angebot entfällt ersatzlos</td><td>Erfundene Ersatzantwort; Retry-Sturm; stilles Verschwinden</td></tr>
+      <tr><td>Seite wird verlassen</td><td>Job-Status bleibt im Serverzustand; beim Rückkehren sichtbar</td><td>dito</td><td>„Ergebnis verloren" ohne Hinweis</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note warn">
+    <p><strong>Offene Entscheidung T4.</strong> Ob der Agent von sich aus <em>weiterspricht</em>, wenn
+      der langsame Pfad fertig ist, ist nicht entschieden. Diese Spezifikation implementiert es nicht und
+      simuliert es nicht als „fertig". Wenn es kommt, braucht es mindestens: eine Einwilligung, eine
+      sichtbare „nicht sprechen"-Möglichkeit, eine Regel gegen Unterbrechung von Lesen/Tippen und einen
+      eigenen ADR. <span class="src">VISION:119–122</span></p>
+  </div>
+</div></section>
+
+<!-- 7 ================================================================= -->
+<section class="sec" id="voice"><div class="wrap">
+  <h2><span class="n">07 · Voice-Interaktion · Deliverable G</span>Freiwillig, sichtbar, unterbrechbar</h2>
+  <p class="lead">Voice ist im Erstbau enthalten, aber nie der Eingang. Der Weg dahin ist ein Klick,
+    die Berechtigung ist eine Tatsache (kein Timer), und der Textweg ist zu jedem Zeitpunkt
+    gleichwertig.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Zustände</h4>
+      <div class="table-scroll"><table class="spec">
+        <thead><tr><th>Wert</th><th>Sichtbar</th><th>Auslöser</th></tr></thead>
+        <tbody>
+          <tr><td>VOICE_OFF</td><td>Mikro-Zeichen, kein Ring</td><td>Standard</td></tr>
+          <tr><td>PERMISSION_ASKED</td><td>Ein Satz Begründung + „erlauben"</td><td>Erster Klick</td></tr>
+          <tr><td>LISTENING</td><td>1-px-Ring um das Feld, Mono-Label „hört zu"</td><td>Berechtigung erteilt</td></tr>
+          <tr><td>HEARING</td><td>Pegel aus echter Energie, Teiltranskript</td><td>RMS über Schwelle</td></tr>
+          <tr><td>COMMITTED</td><td>Transkript wird zur Nutzerzeile</td><td>Sprechpause / Bestätigung</td></tr>
+          <tr><td>SPEAKING</td><td>Kein Avatar; Text läuft synchron mit</td><td>TTS startet</td></tr>
+          <tr><td>INTERRUPTED</td><td>Text bleibt stehen, TTS stoppt</td><td>Esc, Tippen, Stop</td></tr>
+          <tr><td>DENIED</td><td>Eine sachliche Notiz, Text unverändert</td><td>Browser verweigert</td></tr>
+          <tr><td>VOICE_ERROR</td><td>Scope + Text-Fallback</td><td>Gerät, Netz, STT/TTS</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h4>Regeln</h4>
+      <ul class="tight small">
+        <li><strong>Berechtigung erst nach Klick.</strong> Kein <code>getUserMedia</code> beim Laden,
+          kein Vorab-Prompt, kein „wir brauchen dein Mikrofon" als Modal beim Ankommen. <span class="src">Q4</span></li>
+        <li><strong>Ein Wahrheitskanal.</strong> Das Transkript ist die Nutzerzeile — kein zweiter,
+          unsichtbarer Text. Es ist vor dem Senden editierbar.</li>
+        <li><strong>Kein Fake-Pegel.</strong> Ohne Audioenergie bleibt der Pegel flach. Stille ist
+          sichtbar Stille.</li>
+        <li><strong>Unterbrechbar:</strong> Stop, Esc oder Tippen beenden Zuhören in ≤ 120 ms; beim
+          Sprechen stoppt TTS in ≤ 150 ms. Danach wird nie automatisch weitergesprochen.</li>
+        <li><strong>Gleichwertiger Fallback:</strong> Jede Voice-Funktion hat einen Textweg; ein
+          TTS-Fehler macht die Antwort nicht unsichtbar.</li>
+        <li><strong>Keine simulierte Denkaktivität:</strong> Zwischen Sprechende und erster Antwort
+          steht kein „Ich verarbeite…"-Theater, sondern derselbe ehrliche PROCESSING-Zustand wie bei Text.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Voice-Zustände ausprobieren</h3>
+  <p class="small">„Mikrofon testen" fragt den Browser nach Berechtigung — genau wie das Produkt, nur
+    nach deinem Klick. Wenn du nicht willst, zeigt „simulierter Pegel" die Zustände ohne Aufnahme; das
+    ist dann ausdrücklich als Simulation markiert.</p>
+
+  <div class="demo">
+    <div class="controls">
+      <button id="vMic" class="chip solid" style="font-size:13px;cursor:pointer">Mikrofon testen</button>
+      <button id="vSim" class="chip" style="font-size:13px;cursor:pointer">simulierter Pegel</button>
+      <button id="vStop" class="chip" style="font-size:13px;cursor:pointer">Stop</button>
+      <button id="vDeny" class="chip" style="font-size:13px;cursor:pointer">Verweigerung zeigen</button>
+      <span class="mono small" id="vState">input=TEXT_IDLE</span>
+    </div>
+    <div class="stage" id="vStage" data-focus="field" style="--open:1;--w:.62;margin-top:12px">
+      <div class="texture"></div>
+      <div class="focusring"></div>
+      <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+      <div class="fieldline"><span class="typed" id="vText" style="opacity:.7">…</span><span class="caret"></span></div>
+      <div class="level" id="vLevel"><span class="lbl" id="vLabel">hört zu · Stop mit Esc</span></div>
+      <div class="overlay" id="vNote" hidden style="inset:auto 18% 30% 18%">
+        <span class="ttl" id="vNoteTtl">Stimme ist aus.</span>
+        <span class="txt" id="vNoteTxt">Du kannst weiter tippen — alles, was die Stimme kann, geht auch als Text.</span>
+      </div>
+    </div>
+    <p class="small" id="vSay" style="margin-bottom:0">Voice ist aus. Kein Zugriff, keine Aufnahme,
+      kein Prompt.</p>
+  </div>
+
+  <div class="note">
+    <p><strong>Fehlerfälle, die sichtbar sein müssen</strong> (<span class="src">Q1</span>): Berechtigung
+      verweigert · kein Gerät · Gerät belegt · Netz weg während STT · TTS nicht verfügbar. Jeder Fall
+      nennt den <em>Umfang</em> („Stimme", nicht „etwas"), bietet den Textweg an und fragt nicht erneut
+      nach Berechtigung, bis der Nutzer selbst wieder klickt.</p>
+  </div>
+</div></section>
+
+<!-- 8 ================================================================= -->
+<section class="sec" id="responsive"><div class="wrap">
+  <h2><span class="n">08 · Desktop und Mobil · Deliverable H</span>Dieselbe Präsenz, andere Fläche</h2>
+  <p class="lead">Mobil ist keine verkleinerte Desktopseite. Die Augen bleiben das erste Ereignis, aber
+    Text bekommt mehr Raum, der Hintergrund wird zur Schublade, und alles, was Hover braucht, fällt weg.</p>
+
+  <div class="devices">
+    <div class="device">
+      <h4>Desktop ≥ 1024 px</h4>
+      <div class="stage" data-focus="text" style="--open:1;--w:.66;aspect-ratio:16/9">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" style="top:32%;left:18%;right:18%">
+          <p class="q">Soll ich wärmer oder kühler aussehen?</p>
+          <p class="a" style="font-size:2.0cqw">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.</p>
+        </div>
+        <div class="slider show" style="--pos:.7;left:18%;right:18%;bottom:18%">
+          <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
+          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
+        </div>
+        <div class="fieldline" style="left:18%;right:18%;bottom:8%"><span class="hint">Enter · senden</span><span class="caret"></span></div>
+        <div class="mic show" style="right:18%;bottom:15%"><i></i></div>
+      </div>
+      <ul class="tight small" style="margin-top:10px">
+        <li>Augen bei 18 % (Textfokus), Antwortspalte 60 ch, Regler in derselben Spalte.</li>
+        <li>Hintergrund: rechte Randspalte 23 %, nur bei Jobs.</li>
+        <li>Maus: Pupillen folgen dem Zeiger, solange kein Text Fokus ist.</li>
+        <li>Tastatur: Tab-Reihenfolge Feld → Stimme → Regler → Verlauf → Hintergrund.</li>
+      </ul>
+    </div>
+
+    <div class="device phone">
+      <h4>Mobil 390 × 844</h4>
+      <div class="stage mobile" data-focus="text" style="--open:1;--w:.66">
+        <div class="texture"></div>
+        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="answer" style="top:32%;left:9%;right:9%">
+          <p class="q">Soll ich wärmer oder kühler aussehen?</p>
+          <p class="a">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.</p>
+        </div>
+        <div class="slider show" style="--pos:.7;left:9%;right:9%;bottom:19%;opacity:1">
+          <div class="lab" style="font-size:2.2cqw"><span>wärmer</span><span>kühler</span></div>
+          <div class="groove"><div class="fill"></div><div class="thumb" style="width:3.4cqw;height:3.4cqw"></div></div>
+        </div>
+        <div class="fieldline" style="left:9%;right:9%;bottom:10%"><span class="hint">Enter</span><span class="caret"></span></div>
+        <div class="mic show" style="right:9%;bottom:8%;width:9cqw;height:9cqw"><i style="width:2.4cqw;height:4.4cqw"></i></div>
+      </div>
+      <ul class="tight small" style="margin-top:10px">
+        <li>Augen bei 30 %, 20 % kleiner; Antwort 26 px, 42 Zeichen, Ränder 20 px.</li>
+        <li>Hintergrund als Bottom-Sheet mit Griff + Anzahl; öffnet nur auf Tipp.</li>
+        <li>Trefferflächen ≥ 44 px; Regler-Griff visuell 14 px, Treffer 44 px.</li>
+        <li>Eingabe über der Tastatur, Safe-Area unten; kein Auto-Fokus (keine Tastatur beim Ankommen).</li>
+        <li>Kein Hover: alle Zustände über Tipp und Fokus erreichbar; Chips 44 px hoch.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-scroll" style="margin-top:22px"><table class="spec">
+    <thead><tr><th>Aspekt</th><th>Desktop</th><th>Mobil</th><th>Warum</th></tr></thead>
+    <tbody>
+      <tr><td>Erstes Erwachen</td><td>5,0 s, Pre-Glow ab 4,6 s</td><td>4,0 s (kürzere Aufmerksamkeitsspanne), Pre-Glow ab 3,6 s</td><td>Vorschlag, im Tryout prüfen — keine Messung</td></tr>
+      <tr><td>Textfokus</td><td>Augen 18 %, 16 % kleiner</td><td>Augen 26 %, 20 % kleiner</td><td>Mehr Textraum bei kleiner Fläche</td></tr>
+      <tr><td>Verlauf</td><td>2 ältere Antworten angeschnitten</td><td>1 ältere Antwort, Scrollen</td><td>Kein Hochleistungs-Scrollen auf kleinen Geräten</td></tr>
+      <tr><td>Hintergrund</td><td>Randspalte</td><td>Bottom-Sheet</td><td>Seitenleiste würde Antwortspalte töten</td></tr>
+      <tr><td>Voice</td><td>Mikro rechts neben Feld</td><td>Mikro als 44-px-Ziel in Daumenreichweite</td><td>Erreichbarkeit ohne Umgreifen</td></tr>
+      <tr><td>Bewegung</td><td>volle Spec</td><td>Distanzen × 0,6, Dauer × 0,8</td><td>Weniger Fläche, kürzere Wege</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 9 ================================================================= -->
+<section class="sec" id="prototyp"><div class="wrap">
+  <h2><span class="n">09 · Interaktive Lo-Fi-Spezifikation · Deliverable I</span>Was dieses Artefakt kann — und was nicht</h2>
+  <p class="lead">Diese Datei ist der Prototyp. Sie ist eine einzelne HTML-Datei ohne Netzwerk,
+    ohne Build, ohne Abhängigkeiten. Sie speichert nichts und sendet nichts. Genau deshalb darf sie
+    Entscheidungen zeigen, ohne sie zu behaupten.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>Bedienung</h4>
+      <ul class="tight small">
+        <li><strong>Storyboard:</strong> Abspielen/Pause, 1×, Zeitachse ziehen, Erwachen überspringen,
+          reduzierte Bewegung.</li>
+        <li><strong>Typewriter:</strong> Rate, Wortlängen-Einfluss, Puffer-Stillstand.</li>
+        <li><strong>Regler:</strong> Achse ziehen, Undo, Beispieltext wechselt mit.</li>
+        <li><strong>Fast/Slow:</strong> A/B umschalten, simulierten Job starten.</li>
+        <li><strong>Voice:</strong> echter Mikro-Test nach Klick, simulierter Pegel, Verweigerung.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Was simuliert ist (ehrlich benannt)</h4>
+      <ul class="tight small">
+        <li>Agentenantworten sind feste Beispieltexte, kein Modell.</li>
+        <li>Hintergrundjob ist ein Timer, kein Sub-Agent.</li>
+        <li>Tipp-Raten sind Vorschläge, keine Messung.</li>
+        <li>Latenz wird nicht gemessen; es gibt keine Latenzaussage.</li>
+        <li>Der Regler ist lokal; Persistenz über Reload ist <em>nicht</em> implementiert, aber als
+          Anforderung spezifiziert (<span class="src">Q2</span>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Abnahmekriterien für diesen Lo-Fi-Stand</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>#</th><th>Prüfung</th><th>Bestanden, wenn</th></tr></thead>
+    <tbody>
+      <tr><td>L1</td><td>20-Sekunden-Ablauf ohne Erklärung</td><td>Eine fremde Person kann nach dem Abspielen sagen, was die Seite gemacht hat (Selbstveränderung), ohne „Theme" zu sagen. <span class="src">P2</span></td></tr>
+      <tr><td>L2</td><td>Erstes Erwachen</td><td>Kein Klick nötig; Tippen beschleunigt; reduzierte Bewegung zeigt keine Lideranimation.</td></tr>
+      <tr><td>L3</td><td>Erste Eingabe</td><td>Kein Formular, kein Senden-Button, kein Pflichtfeld; Enter sendet; Esc bricht ab.</td></tr>
+      <tr><td>L4</td><td>Antwort</td><td>Typewriter wortlängen-abhängig; Stillstand erzeugt keinen leeren Puffer; Screenreader liest einmal vollständig.</td></tr>
+      <tr><td>L5</td><td>Regler</td><td>Entsteht aus einem Satz; ändert Fläche und Ton; Undo in einem Schritt; Fakten identisch.</td></tr>
+      <tr><td>L6</td><td>Fast/Slow</td><td>Ergebnis unterbricht nicht; Front bleibt bedienbar; A und B unterscheidbar; Auto-Sprechen nicht vorhanden.</td></tr>
+      <tr><td>L7</td><td>Voice</td><td>Keine Aufnahme vor Klick; Pegel nur aus echter Energie; Stop ≤ 120 ms; Textweg gleichwertig.</td></tr>
+      <tr><td>L8</td><td>Fehler / Verbindung</td><td>Drei injizierte Fehler erzeugen drei verständliche, sichtbare Zustände; Entwurf bleibt.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note">
+    <p><strong>Grenze zum Produktivcode.</strong> Dieses Artefakt liegt unter <code>docs/wireframe/</code>,
+      nicht unter <code>src/</code>. Nichts hier ist übernehmbarer Anwendungscode: es gibt keinen
+      Zustandsspeicher, keinen Transport, kein Modell, keine Tests. Ein späterer Erstbau beginnt mit
+      einem eigenen Run-Contract und der Upstream-First-Prüfung (<span class="src">ADR-0003</span>).</p>
+  </div>
+
+  <h3>Übergabe an den Erstbau (ohne Code zu schreiben)</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Was hier entschieden ist</th><th>Wohin es im Bau gehört</th><th>Was dort noch fehlt</th></tr></thead>
+    <tbody>
+      <tr><td>Sieben Dimensionswerte + Übergangstabelle</td><td>Ein Zustandsobjekt als einzige Wahrheit (<span class="src">Q2</span>)</td><td>Schema, Server-Autorität, Re-Sync-Regel</td></tr>
+      <tr><td>Augen-Zustände: geschlossen → offen → zurückgetreten</td><td>Mapping auf <code>EyeFace.js</code> (MIT)</td><td>Adapter-Funktion, Lizenznotiz (<span class="src">Q3</span>)</td></tr>
+      <tr><td>Regler → CSS-Variablen + Prompt-Fragment</td><td>Ein Zustandsfeld, zwei Verbraucher</td><td>Prompt-Fragment, Blindtest (T3)</td></tr>
+      <tr><td>Typewriter-Raten</td><td>Antwort-Renderer</td><td>Frame-Messung, Puffer-Regel bei echtem Stream</td></tr>
+      <tr><td>Voice-Zustände + Fallbacks</td><td>Transport/Adapter</td><td>Berechtigungsfluss, TTS-Provider, Datenschutz (D7)</td></tr>
+      <tr><td>Fehler- und Verbindungszustände</td><td>Fehlerinjektion in Tests</td><td>Drei Smoke-Checks (<span class="src">Q7</span>)</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 10 ================================================================ -->
+<section class="sec" id="offen"><div class="wrap">
+  <h2><span class="n">10 · Offene Entscheidungen</span>Was dieses Konzept nicht entscheidet</h2>
+  <p class="lead">Diese Punkte sind bewusst offen. Sie sind im Prototyp als Schalter sichtbar, damit
+    niemand sie später für beschlossen hält.</p>
+
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>#</th><th>Offen</th><th>Was hier steht</th><th>Was die Entscheidung braucht</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Default des ersten Reglers (<span class="src">D6</span>)</td><td>Start bei 0,62 „warm-neutral"; Achse warm↔kühl</td><td>Ein Satz von Samuel; danach ein Satz im Prototyp</td></tr>
+      <tr><td>2</td><td>Beginn des Fokuswechsels</td><td>Nach vollständiger Antwort (SETTLED)</td><td>Vergleich „ab erstem Token" vs. „ab Ende" im Tryout</td></tr>
+      <tr><td>3</td><td>Typewriter-Raten</td><td>Basis 38 z/s, Wortlängen-Faktoren</td><td>Drei aufgezeichnete Antworten, Frame-Auswertung (<span class="src">T2</span>)</td></tr>
+      <tr><td>4</td><td>Sprache des Textkanals (<span class="src">D5</span>)</td><td>Deutsch</td><td>Entscheidung; Voice bleibt vorerst englisch</td></tr>
+      <tr><td>5</td><td>Proaktives Nachsprechen (<span class="src">T4</span>)</td><td><strong>nicht</strong> enthalten; nur A/B-Angebot</td><td>Eigener ADR + Einwilligung + Unterbrechungsregel</td></tr>
+      <tr><td>6</td><td>Wiederkehr-Besuch</td><td>Erwachen erneut bei 5 s, aber ohne Pre-Glow</td><td>Messung, ob Präsenz beim zweiten Besuch noch trägt</td></tr>
+      <tr><td>7</td><td>Verlaufstiefe</td><td>Zwei angeschnittene ältere Antworten</td><td>Lesetest; ADR-0002 sagt „ein Ort", nicht „kein Verlauf"</td></tr>
+      <tr><td>8</td><td>Reduzierte Bewegung + Augen</td><td>Statische offene Augen, kein Blinzeln</td><td>Test, ob Präsenz ohne Autonomie erhalten bleibt</td></tr>
+      <tr><td>9</td><td>Mobile Erwachen 4 s statt 5 s</td><td>Vorschlag</td><td>Tryout; keine Messung vorhanden</td></tr>
+      <tr><td>10</td><td>Zweiter/dritter Regler</td><td>nicht in V1</td><td>Ausbaupfad, eigener Change Request</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note ok">
+    <h3 style="margin:0 0 6px">Nächster Schritt</h3>
+    <p style="margin:0">Dieses Dokument braucht <strong>eine</strong> Entscheidung, nicht zehn:
+      Samuel bestätigt oder verwirft die drei Kernkompositionen (DORMANT → PRESENT, RESPONDING,
+      ADAPTING/ADAPTED) und den Default des Reglers. Alles andere ist danach Detailarbeit im
+      Erstbau-Contract — nicht in diesem Artefakt.</p>
+  </div>
+
+  <p class="small" style="margin-top:26px">Quellen dieses Dokuments: <code>docs/PROJECT_CONTRACT.md</code>,
+    <code>docs/DESIGN-DECISIONS.md</code>, <code>docs/VISION-samuel.md</code>,
+    <code>docs/adr/ADR-0001…0005</code>, <code>sketches/2026-11-12-agentfaehig.md</code>,
+    <code>UPSTREAM-SEARCH-vergleichbare-projekte.md</code>,
+    <code>research/SCOUT-SYNTHESIS.md</code>, <code>docs/GUTACHTEN-wow-oder-scheitern.md</code>.</p>
+</div></section>
+
+</main>
+
+<script>
+/* ============================================================
+   Alles hier ist Prototyp-Logik für das Wireframe-Dokument.
+   Kein Produktcode: keine Netzwerke, kein Speicher, keine Modelle.
+   ============================================================ */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var reduceQuery = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------------------------------------------------------
+     1 · Storyboard der ersten 20 Sekunden
+     --------------------------------------------------------- */
+  var SEG = [
+    { t0: 0, t1: 4.6, phase: 'dormant', title: 'Ankunft · DORMANT', presence: 'DORMANT', input: '—', turn: 'IDLE',
+      adapt: 'NOT_OFFERED', trigger: 'Timer', focus: 'Feld',
+      say: 'Ein ruhiges Feld. Keine Augen, keine Eingabe, keine Aufforderung.' },
+    { t0: 4.6, t1: 5.0, phase: 'preglow', title: 'Pre-Glow · noch DORMANT', presence: 'DORMANT', input: '—', turn: 'IDLE',
+      adapt: 'NOT_OFFERED', trigger: 'Timer', focus: 'Feld',
+      say: 'Ein Hauch mehr Licht. Das ist der einzige Hinweis vor dem Erwachen — keine Aufforderung.' },
+    { t0: 5.0, t1: 6.2, phase: 'awake', title: 'Erwachen · AWAKENING', presence: 'AWAKENING', input: 'TEXT_IDLE (0,35)', turn: 'IDLE',
+      adapt: 'NOT_OFFERED', trigger: 'Timer 5,0 s oder erste Eingabe', focus: 'Augen',
+      say: 'Die Lider öffnen sich in 900 ms. Pupillen kommen nach, dann ein erster Blinzler.' },
+    { t0: 6.2, t1: 8.5, phase: 'ready', title: 'Einladung · PRESENT', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'IDLE',
+      adapt: 'NOT_OFFERED', trigger: 'Lider 100 %', focus: 'Eingabe',
+      say: 'Eine Haarlinie mit Caret. Kein Kasten, kein Button. Wer tippt, ist sofort dran.' },
+    { t0: 8.5, t1: 10.0, phase: 'typing', title: 'Erster Satz · USER_TYPING', presence: 'PRESENT', input: 'USER_TYPING', turn: 'IDLE',
+      adapt: 'NOT_OFFERED', trigger: 'Ereignis: erstes Zeichen', focus: 'eigener Text',
+      say: 'Der eigene Text erscheint sofort, ohne Animation. Die Pupillen folgen der Schreibposition.' },
+    { t0: 10.0, t1: 10.4, phase: 'processing', title: 'Gesendet · PROCESSING', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'PROCESSING',
+      adapt: 'NOT_OFFERED', trigger: 'Ereignis: Enter', focus: 'Platz der Antwort',
+      say: 'Ein einmaliger Sendepuls, danach Stille. Kein Spinner, keine Denk-Schleife, keine Dauer.' },
+    { t0: 10.4, t1: 13.4, phase: 'responding', title: 'Antwort · RESPONDING', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'RESPONDING',
+      adapt: 'NOT_OFFERED', trigger: 'Ereignis: erster Token', focus: 'Antwort',
+      say: 'Die Augen treten zurück. Der Text wächst wortlängen-abhängig — man sieht der Seite beim Antworten zu.' },
+    { t0: 13.4, t1: 15.0, phase: 'offer', title: 'Die Frage · OFFERED', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'SETTLED',
+      adapt: 'OFFERED', trigger: 'Ereignis: Antwortende + 600 ms', focus: 'Frage',
+      say: 'Eine Frage pro Runde, drei optionale Chips. Der Agent fragt nach seinem Aussehen — und kündigt beide Wirkungen an.' },
+    { t0: 15.0, t1: 16.4, phase: 'adapting', title: 'Umgestaltung · ADAPTING', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'SETTLED',
+      adapt: 'ADAPTING', trigger: 'Ereignis: Antwort „wärmer"', focus: 'Regler und Fläche',
+      say: 'Das Wort wird zum Label. Fläche, Laufweite und Rhythmus wandeln sich gleichzeitig.' },
+    { t0: 16.4, t1: 20.1, phase: 'adapted', title: 'Ruhe · ADAPTED', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'SETTLED',
+      adapt: 'ADAPTED', trigger: 'Ereignis: 700 ms Theme abgeschlossen', focus: 'Zustand',
+      say: 'Nichts leuchtet. Der Zustand ist der Beweis: Regler, Antwort, Undo — und dieselben Fakten, anderer Ton.' }
+  ];
+
+  var stage = $('liveStage');
+  if (stage) {
+    var elEyes = $('liveEyes'), elAnswer = $('liveAnswer'), elA = $('liveA'), elQ = $('liveQ'),
+        elHist = $('liveHist'), elField = $('liveField'), elUser = $('liveUser'),
+        elSlider = $('liveSlider'), elChips = $('liveChips'), elRail = $('liveRail'),
+        elStrip = $('liveStrip'), elUndo = $('liveUndo'), elMk = $('liveMk');
+
+    var USER = 'Was kannst du, das eine Website nicht kann?';
+    var ANSWER = 'Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.';
+    var QUESTION = 'Soll ich wärmer oder kühler für dich aussehen — und dann auch so mit dir reden?';
+    var WARM = 'Drei Dinge sind fertig: Augen, Text, Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Hintergrundagenten liefern still.';
+    var RESPOND_UNTIL = 13.4;
+
+    var state = { t: 0, playing: false, speed: 1, reduced: false, raf: 0, last: 0 };
+    var startT = parseFloat(new URLSearchParams(location.search).get('t') || '0');
+    if (!isNaN(startT)) state.t = Math.max(0, Math.min(20, startT));
+
+    /* Ruler-Marken */
+    var ruler = $('ruler');
+    var ticks = [
+      { t: 0, l: '0', k: 't' }, { t: 4.6, l: '', k: 't' }, { t: 5, l: '5,0', k: 't' },
+      { t: 6.2, l: '6,2', k: 't' }, { t: 8.5, l: '8,5', k: 'e' }, { t: 10, l: '10', k: 'e' },
+      { t: 10.4, l: '', k: 'e' }, { t: 13.4, l: '13,4', k: 'e' }, { t: 15, l: '15', k: 'e' },
+      { t: 16.4, l: '16,4', k: 'e' }, { t: 20, l: '20', k: '' }
+    ];
+    if (ruler) {
+      ticks.forEach(function (k, i) {
+        var d = document.createElement('div');
+        d.className = 'mark ' + k.k + (i % 2 ? ' low' : '');
+        d.style.left = (k.t / 20 * 100) + '%';
+        d.innerHTML = '<i></i>' + k.l;
+        ruler.appendChild(d);
+      });
+    }
+
+    function fmt(t) { return 'T+' + t.toFixed(1).replace('.', ',') + ' s'; }
+
+    function segAt(t) {
+      for (var i = 0; i < SEG.length; i++) { if (t >= SEG[i].t0 && t < SEG[i].t1) return SEG[i]; }
+      return SEG[SEG.length - 1];
+    }
+
+    function show(el, on, mode) {
+      if (!el) return;
+      if (on) { el.style.display = mode || ''; el.removeAttribute('hidden'); }
+      else { el.style.display = 'none'; }
+    }
+
+    function render() {
+      var t = state.t, s = segAt(t), p = (t - s.t0) / (s.t1 - s.t0);
+      p = Math.max(0, Math.min(1, p));
+
+      stage.setAttribute('data-phase', s.phase);
+      var textFocus = ['processing', 'responding', 'offer', 'adapting', 'adapted'].indexOf(s.phase) >= 0;
+      stage.setAttribute('data-focus', textFocus ? 'text' : 'field');
+
+      /* Augen */
+      var open = 0;
+      if (s.phase === 'dormant' || s.phase === 'preglow') open = 0;
+      else if (s.phase === 'awake') {
+        var lid = Math.min(1, Math.max(0, (t - 5.0) / 0.9));   /* 900 ms laut Motion-Spec */
+        open = state.reduced ? 1 : 1 - Math.pow(1 - lid, 3);   /* ease-out-cubic */
+      }
+      else open = 1;
+      stage.style.setProperty('--open', open.toFixed(3));
+      stage.style.setProperty('--look', s.phase === 'typing' ? '.45' : '0');
+
+      /* Eingabe */
+      var showField = ['ready', 'typing', 'processing', 'responding', 'offer', 'adapting', 'adapted'].indexOf(s.phase) >= 0;
+      show(elField, showField);
+      if (showField) {
+        var hint = $('liveHint');
+        if (s.phase === 'typing') {
+          elUser.textContent = USER.slice(0, Math.ceil(USER.length * Math.min(1, p * 1.6)));
+          elUser.style.display = ''; if (hint) hint.style.display = 'none';
+        } else if (s.phase === 'ready') {
+          elUser.textContent = ''; elUser.style.display = '';
+          if (hint) { hint.style.display = 'none'; }
+        } else if (s.phase === 'processing') {
+          elUser.textContent = ''; elUser.style.display = 'none';
+          if (hint) { hint.textContent = 'gesendet'; hint.style.display = ''; }
+        } else {
+          elUser.textContent = ''; elUser.style.display = 'none';
+          if (hint) { hint.textContent = 'Enter · als Nächstes vormerken'; hint.style.display = ''; }
+        }
+        elField.style.opacity = (s.phase === 'processing') ? '.4' : '1';
+        var caret = elField.querySelector('.caret');
+        if (caret) caret.style.display = (s.phase === 'typing' || s.phase === 'ready') ? '' : 'none';
+      }
+
+      /* Antwort */
+      var showAnswer = ['processing', 'responding', 'offer', 'adapting', 'adapted'].indexOf(s.phase) >= 0;
+      show(elAnswer, showAnswer);
+      if (showAnswer) {
+        elHist.style.display = s.phase === 'responding' ? '' : 'none';
+        elHist.textContent = 'Vorher: „Wie viel davon ist schon gebaut?"';
+        elUndo.style.display = (s.phase === 'adapted') ? '' : 'none';
+
+        if (s.phase === 'processing') {
+          elQ.textContent = 'Du'; elQ.style.opacity = '.6';
+          elA.textContent = USER;
+          elA.style.fontSize = '1.55cqw'; elA.style.opacity = '.55'; elA.style.fontWeight = '400';
+        } else if (s.phase === 'responding') {
+          elA.style.fontSize = ''; elA.style.opacity = ''; elA.style.fontWeight = '';
+          var rp = Math.min(1, (t - 10.4) / (RESPOND_UNTIL - 10.4 - 0.5));
+          elQ.textContent = USER;
+          elQ.style.opacity = '.5';
+          elA.textContent = ANSWER.slice(0, Math.ceil(ANSWER.length * rp)) + (rp < 1 ? '▍' : '');
+        } else if (s.phase === 'offer') {
+          elA.style.fontSize = ''; elA.style.opacity = ''; elA.style.fontWeight = '';
+          elQ.textContent = USER; elQ.style.opacity = '.5';
+          elA.textContent = ANSWER;
+        } else if (s.phase === 'adapting') {
+          elA.style.fontSize = ''; elA.style.opacity = ''; elA.style.fontWeight = '';
+          elQ.textContent = 'Dann sag mir: wärmer.';
+          elQ.style.opacity = '.75';
+          elA.textContent = 'Gut. Ich werde wärmer — und erzähle dir künftig etwas mehr.';
+        } else {
+          elA.style.fontSize = ''; elA.style.opacity = ''; elA.style.fontWeight = '';
+          elQ.textContent = '';
+          elA.textContent = WARM;
+        }
+      }
+
+      /* Chips */
+      elChips.classList.toggle('show', s.phase === 'offer');
+
+      /* Regler */
+      var sliderOn = ['adapting', 'adapted'].indexOf(s.phase) >= 0;
+      elSlider.classList.toggle('show', sliderOn);
+      if (sliderOn) {
+        var pos = s.phase === 'adapting' ? (0.5 + 0.28 * Math.min(1, p * 1.4)) : 0.78;
+        elSlider.style.setProperty('--pos', pos.toFixed(3));
+        stage.style.setProperty('--w', (0.62 + (pos - 0.62) * 0.5).toFixed(3));
+      } else {
+        stage.style.setProperty('--w', '.62');
+      }
+
+      /* Rand / Streifen / Marke */
+      show(elRail, false); show(elStrip, false);
+      if (elMk) elMk.hidden = true;
+
+      /* Ausgabe */
+      $('roClock').textContent = fmt(t);
+      $('roTitle').textContent = s.title;
+      $('roPresence').textContent = s.presence;
+      $('roInput').textContent = s.input;
+      $('roTurn').textContent = s.turn;
+      $('roAdapt').textContent = s.adapt;
+      $('roTrigger').textContent = s.trigger;
+      $('roFocus').textContent = s.focus;
+      $('roSay').textContent = state.reduced
+        ? s.say + ' — reduzierte Bewegung: Zustandswechsel als Schnitt, keine Lider, kein Wortflug.'
+        : s.say;
+
+      var head = $('rulerHead');
+      if (head) head.style.left = (t / 20 * 100) + '%';
+      var scrub = $('scrub');
+      if (scrub && document.activeElement !== scrub) scrub.value = String(t);
+    }
+
+    function tick(now) {
+      if (!state.playing) return;
+      if (!state.last) state.last = now;
+      var dt = (now - state.last) / 1000;
+      state.last = now;
+      state.t = Math.min(20, state.t + dt * state.speed);
+      render();
+      if (state.t >= 20) { setPlaying(false); }
+      else { state.raf = requestAnimationFrame(tick); }
+    }
+
+    function setPlaying(on) {
+      state.playing = on;
+      state.last = 0;
+      var b = $('playBtn');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.textContent = on ? '❚❚ Pause' : '▶ Abspielen';
+      if (on) {
+        if (state.t >= 20) state.t = 0;
+        state.raf = requestAnimationFrame(tick);
+      } else if (state.raf) {
+        cancelAnimationFrame(state.raf);
+      }
+    }
+
+    if ($('playBtn')) $('playBtn').addEventListener('click', function () { setPlaying(!state.playing); });
+    if ($('replayBtn')) $('replayBtn').addEventListener('click', function () { state.t = 0; render(); if (!state.playing) setPlaying(true); });
+    if ($('speedBtn')) $('speedBtn').addEventListener('click', function () {
+      state.speed = state.speed === 1 ? 0.5 : state.speed === 0.5 ? 2 : 1;
+      this.textContent = state.speed + '×';
+    });
+    if ($('skipBtn')) $('skipBtn').addEventListener('click', function () {
+      if (state.t < 6.2) { state.t = 6.2; render(); }
+    });
+    if ($('scrub')) $('scrub').addEventListener('input', function () {
+      state.t = parseFloat(this.value); render();
+    });
+    if ($('reducedBtn')) $('reducedBtn').addEventListener('click', function () {
+      state.reduced = !state.reduced;
+      this.setAttribute('aria-pressed', state.reduced ? 'true' : 'false');
+      document.body.classList.toggle('reduced', state.reduced);
+      render();
+    });
+    if (reduceQuery && reduceQuery.matches) {
+      state.reduced = true;
+      document.body.classList.add('reduced');
+      var rb = $('reducedBtn'); if (rb) rb.setAttribute('aria-pressed', 'true');
+    }
+
+    /* Tastatur: Escape bricht im Storyboard eine laufende Wiedergabe ab */
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+      if (state.playing) { setPlaying(false); }
+    });
+
+    render();
+  }
+
+  /* ---------------------------------------------------------
+     2 · Typewriter-Demo
+     --------------------------------------------------------- */
+  var tw = { timer: 0, gen: 0 };
+  function twStart() {
+    var out = $('twOut'); if (!out) return;
+    var rate = parseFloat(($('twRate') || {}).value || 38);
+    var inf = parseFloat(($('twWord') || {}).value || 60) / 100;
+    var stall = !!($('twStall') && $('twStall').checked);
+    var text = 'Ich bin die Seite. Wenn du mir sagst, wie du mich haben willst, ändere ich mich — und meine Art zu antworten mit. Das ist kein Effekt, das ist eine Entscheidung, die du siehst.';
+    var myGen = ++tw.gen;
+    clearTimeout(tw.timer);
+    out.textContent = '';
+    var i = 0;
+    var budget = 0;
+
+    function step() {
+      if (myGen !== tw.gen) return;
+      if (i >= text.length) {
+        out.innerHTML = text;
+        return;
+      }
+      var ch = text[i];
+      var nextSpace = text.indexOf(' ', i);
+      var word = text.slice(i, nextSpace === -1 ? text.length : nextSpace);
+      var len = word.replace(/[^\wäöüÄÖÜß]/g, '').length || 1;
+      var factor = len <= 4 ? 1.35 : len >= 9 ? 0.72 : 1;
+      factor = 1 + (factor - 1) * inf;
+      var delay = (1000 / rate) / factor;
+      if (ch === ' ') delay = 45;
+      if (ch === ',') delay += 90;
+      if (ch === '.' || ch === '!' || ch === '?') delay += 160;
+      if (stall && i > 0 && Math.abs(i - Math.floor(text.length * 0.58)) < 2) delay += 800;
+
+      i++;
+      out.textContent = text.slice(0, i);
+      var caret = document.createElement('span');
+      caret.className = 'c';
+      out.appendChild(caret);
+      tw.timer = setTimeout(step, delay);
+    }
+    step();
+  }
+  ['twRate', 'twWord'].forEach(function (id) {
+    var el = $(id); if (!el) return;
+    el.addEventListener('input', function () {
+      if (id === 'twRate') $('twRateVal').textContent = this.value + ' z/s';
+      else $('twWordVal').textContent = this.value + ' %';
+    });
+  });
+  if ($('twGo')) $('twGo').addEventListener('click', twStart);
+  if ($('twOut')) twStart();
+
+  /* ---------------------------------------------------------
+     3 · Regler-Demo (Oberfläche + Haltung, Fakten identisch)
+     --------------------------------------------------------- */
+  var rz = { stack: [], val: 62 };
+  var RZ = {
+    warm: 'Kurz gesagt: Du siehst drei Dinge — Augen, ein Textfeld, eine Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Was im Hintergrund läuft, bleibt leise.',
+    mid: 'Drei Dinge sind fertig: Augen, Textfeld, Stimme nach Klick. Ein Regler verändert Aussehen und Ton. Hintergrundprozesse bleiben still.',
+    cool: 'Drei Dinge sind fertig: Augen, Textfeld, Stimme nach Klick. Ein Regler verändert Aussehen und Ton. Hintergrundprozesse bleiben still.'
+  };
+  function rzApply(v, record) {
+    var s = $('rzStage'); if (!s) return;
+    if (record) { rz.stack.push(rz.val); if (rz.stack.length > 20) rz.stack.shift(); }
+    rz.val = v;
+    s.style.setProperty('--w', (v / 100).toFixed(3));
+    var sl = $('rzSlider'); if (sl) sl.style.setProperty('--pos', (v / 100).toFixed(3));
+    var label = v < 42 ? 'kühl' : v > 58 ? 'warm' : 'neutral';
+    var t = v < 42 ? RZ.cool : v > 58 ? RZ.warm : RZ.mid;
+    var a = $('rzA'); if (a) a.textContent = t;
+    var q = $('rzQ'); if (q) q.textContent = v < 42 ? 'Wie ist der Stand — sachlich?' : v > 58 ? 'Wie fühlt sich das an?' : 'Wie ist der Stand?';
+    if ($('rzVal')) $('rzVal').textContent = (v / 100).toFixed(2).replace('.', ',') + ' · ' + label;
+  }
+  if ($('rzRange')) {
+    $('rzRange').addEventListener('input', function () { rzApply(parseInt(this.value, 10), true); });
+    $('rzRange').value = String(rz.val);
+    rzApply(rz.val, false);
+  }
+  if ($('rzUndo')) $('rzUndo').addEventListener('click', function () {
+    var v = rz.stack.length ? rz.stack.pop() : 62;
+    if ($('rzRange')) $('rzRange').value = String(v);
+    rzApply(v, false);
+  });
+
+  /* ---------------------------------------------------------
+     4 · Fast / Slow — A still, B Angebot (simulierter Job)
+     --------------------------------------------------------- */
+  var ab = { variant: 'A', timer: 0 };
+  function abSetVariant(v) {
+    ab.variant = v;
+    var a = $('abSilent'), b = $('abOffer');
+    if (a) { a.setAttribute('aria-pressed', v === 'A' ? 'true' : 'false'); a.classList.toggle('solid', v === 'A'); }
+    if (b) { b.setAttribute('aria-pressed', v === 'B' ? 'true' : 'false'); b.classList.toggle('solid', v === 'B'); }
+    if ($('abSay')) $('abSay').textContent = v === 'A'
+      ? 'Variante A: Das Ergebnis erscheint am Rand, der Fokus bleibt im Feld. Keine Bewegung im Zentrum, keine Aufforderung.'
+      : 'Variante B: Das Ergebnis erscheint ebenfalls still, zusätzlich bietet der Agent im nächsten Turn an, es zu zeigen. Er spricht nicht ungefragt.';
+  }
+  if ($('abSilent')) $('abSilent').addEventListener('click', function () { abSetVariant('A'); });
+  if ($('abOffer')) $('abOffer').addEventListener('click', function () { abSetVariant('B'); });
+  if ($('abStart')) $('abStart').addEventListener('click', function () {
+    var rail = $('abRail'), job = $('abJob'), chips = $('abChips'), st = $('abState');
+    if (!rail) return;
+    clearTimeout(ab.timer);
+    chips.classList.remove('show');
+    rail.removeAttribute('hidden'); rail.style.display = 'flex';
+    job.className = 'job';
+    job.innerHTML = '<b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div>';
+    if (st) st.textContent = 'background=WORKING · simuliert';
+    if ($('abSay')) $('abSay').textContent = 'Der Job läuft am Rand. Der Front-Agent bleibt voll bedienbar — kein Overlay, keine Sperre.';
+    ab.timer = setTimeout(function () {
+      job.className = 'job done';
+      job.innerHTML = '<span class="new">neu</span><b>3 Quellen verglichen</b><span>Ergebnis liegt am Rand</span><div class="bar"><i></i></div>';
+      if (st) st.textContent = 'background=RESULT_READY · simuliert';
+      if (ab.variant === 'B') chips.classList.add('show');
+      if ($('abSay')) $('abSay').textContent = ab.variant === 'A'
+        ? 'Ergebnis da. Kein Fokuswechsel, kein Ton, eine höfliche Screenreader-Zeile. Der Nutzer entscheidet, wann er hinschaut.'
+        : 'Ergebnis da und zusätzlich als Angebot markiert. Der Agent würde jetzt fragen — nicht sprechen.';
+    }, 2600);
+  });
+  abSetVariant('A');
+
+  /* ---------------------------------------------------------
+     5 · Voice-Demo (echtes Mikro nur nach Klick)
+     --------------------------------------------------------- */
+  var vc = { stream: null, ctx: null, raf: 0, sim: 0, bars: [] };
+  function vLevelBars() {
+    var box = $('vLevel'); if (!box) return vc.bars;
+    if (!vc.bars.length) {
+      for (var i = 0; i < 14; i++) {
+        var b = document.createElement('b');
+        box.insertBefore(b, box.querySelector('.lbl'));
+        vc.bars.push(b);
+      }
+    }
+    return vc.bars;
+  }
+  function vSetLevel(vals) {
+    vLevelBars().forEach(function (b, i) { b.style.height = Math.max(3, Math.round(vals[i] || 3)) + 'px'; });
+  }
+  function vStop(keepNote) {
+    cancelAnimationFrame(vc.raf);
+    if (vc.stream) { vc.stream.getTracks().forEach(function (t) { t.stop(); }); vc.stream = null; }
+    if (vc.ctx) { try { vc.ctx.close(); } catch (e) {} vc.ctx = null; }
+    var lvl = $('vLevel'); if (lvl) lvl.classList.remove('show');
+    var st = $('vStage'); if (st) st.removeAttribute('data-ring');
+    if ($('vState')) $('vState').textContent = 'input=TEXT_IDLE';
+    if (!keepNote && $('vSay')) $('vSay').textContent = 'Voice ist aus. Kein Zugriff, keine Aufnahme, kein Prompt.';
+    if ($('vLabel')) $('vLabel').textContent = 'hört zu · Stop mit Esc';
+  }
+  function vNote(title, text) {
+    var n = $('vNote'); if (!n) return;
+    n.hidden = false;
+    if ($('vNoteTtl')) $('vNoteTtl').textContent = title;
+    if ($('vNoteTxt')) $('vNoteTxt').textContent = text;
+  }
+  function vHideNote() { var n = $('vNote'); if (n) n.hidden = true; }
+
+  if ($('vMic')) $('vMic').addEventListener('click', function () {
+    vHideNote();
+    var st = $('vStage');
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      vNote('Kein Mikrofon verfügbar.', 'Dein Browser gibt keinen Zugriff auf ein Aufnahmegerät. Der Textweg bleibt vollständig.');
+      if ($('vState')) $('vState').textContent = 'input=VOICE_BLOCKED';
+      return;
+    }
+    if ($('vState')) $('vState').textContent = 'input=PERMISSION_ASKED';
+    if ($('vSay')) $('vSay').textContent = 'Der Browser fragt jetzt nach Berechtigung. Erst dieser Klick hat die Frage ausgelöst.';
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      vc.stream = stream;
+      if (st) st.setAttribute('data-ring', '1');
+      var lvl = $('vLevel'); if (lvl) lvl.classList.add('show');
+      if ($('vState')) $('vState').textContent = 'input=USER_SPEAKING';
+      if ($('vSay')) $('vSay').textContent = 'Es wird aufgenommen — sichtbar durch Ring und echten Pegel. Stop, Esc oder Tippen beendet sofort.';
+      var AC = window.AudioContext || window.webkitAudioContext;
+      try {
+        vc.ctx = new AC();
+        var src = vc.ctx.createMediaStreamSource(stream);
+        var an = vc.ctx.createAnalyser();
+        an.fftSize = 256;
+        src.connect(an);
+        var data = new Uint8Array(an.frequencyBinCount);
+        var loop = function () {
+          an.getByteFrequencyData(data);
+          var vals = [];
+          for (var i = 0; i < 14; i++) {
+            var idx = Math.floor(i / 14 * data.length);
+            vals.push(3 + (data[idx] / 255) * 26);
+          }
+          vSetLevel(vals);
+          vc.raf = requestAnimationFrame(loop);
+        };
+        loop();
+      } catch (e) {
+        vSetLevel([8, 12, 6, 16, 10, 20, 8, 14, 6, 11, 18, 9, 7, 13]);
+      }
+    }).catch(function (err) {
+      var denied = err && (err.name === 'NotAllowedError' || err.name === 'SecurityError');
+      vNote(denied ? 'Stimme ist aus.' : 'Das Mikrofon hat nicht geantwortet.',
+        denied ? 'Du hast die Berechtigung nicht erteilt. Alles, was die Stimme kann, geht auch als Text. Wir fragen nicht erneut, bis du wieder klickst.'
+               : 'Es liegt kein nutzbares Gerät vor oder es ist belegt. Der Textweg bleibt vollständig.');
+      if ($('vState')) $('vState').textContent = 'input=VOICE_BLOCKED';
+      if ($('vSay')) $('vSay').textContent = denied ? 'Berechtigung verweigert — sichtbar und ohne Retry-Schleife.' : 'Voice-Fehler — sichtbar, Text unverändert.';
+    });
+  });
+
+  if ($('vSim')) $('vSim').addEventListener('click', function () {
+    vHideNote(); vStop(true);
+    var st = $('vStage'); if (st) st.setAttribute('data-ring', '1');
+    var lvl = $('vLevel'); if (lvl) lvl.classList.add('show');
+    if ($('vLabel')) $('vLabel').textContent = 'SIMULIERT · Prototyp (kein Audio)';
+    if ($('vState')) $('vState').textContent = 'input=USER_SPEAKING · simuliert';
+    if ($('vSay')) $('vSay').textContent = 'Simulierter Pegel. Er zeigt die Zustandsform, nicht echte Audioenergie — deshalb ist er so beschriftet.';
+    var n = 0;
+    var loop = function () {
+      n += 0.12;
+      var vals = [];
+      for (var i = 0; i < 14; i++) vals.push(4 + Math.abs(Math.sin(n + i * 0.55)) * 22);
+      vSetLevel(vals);
+      vc.raf = requestAnimationFrame(loop);
+    };
+    loop();
+  });
+
+  if ($('vStop')) $('vStop').addEventListener('click', function () {
+    vStop();
+    vHideNote();
+    if ($('vText')) $('vText').textContent = 'Sag mir, wie du aussehen sollst.';
+    if ($('vState')) $('vState').textContent = 'input=TEXT_IDLE';
+    if ($('vSay')) $('vSay').textContent = 'Gestoppt in ≤ 120 ms. Im Prototyp ist das Transkript fest; die Produktion zeigt hier das echte STT-Ergebnis.';
+  });
+
+  if ($('vDeny')) $('vDeny').addEventListener('click', function () {
+    vStop(true);
+    vNote('Stimme ist aus.', 'Du hast die Berechtigung nicht erteilt. Alles, was die Stimme kann, geht auch als Text. Wir fragen nicht erneut, bis du wieder klickst.');
+    if ($('vState')) $('vState').textContent = 'input=VOICE_BLOCKED';
+    if ($('vSay')) $('vSay').textContent = 'Verweigerung ist ein normaler Zustand, kein Fehler. Der Textweg ist unverändert.';
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && (vc.stream || vc.sim)) { vStop(); vHideNote(); }
+  });
+
+  /* ---------------------------------------------------------
+     6 · Kleine Hilfe: Scrub-Tastatur
+     --------------------------------------------------------- */
+  if ($('scrub')) {
+    $('scrub').addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') e.stopPropagation();
+    });
+  }
+})();
+</script>
+</body>
+</html>

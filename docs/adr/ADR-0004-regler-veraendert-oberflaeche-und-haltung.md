@@ -17,7 +17,7 @@ Designinspiration warnt wörtlich:
 
 > „True adaptation is behavioral: 'Personalization' today is superficial:
 > picking a dark mode or a color theme. **That is decoration, not adaptation.**"
-> — [`Agentfähig/GreateWriting.txt`](../../Agentf%C3%A4hig/GreateWriting.txt), Z. 222
+> — [`Agentfähig/GreateWriting.txt`](../../Agentfähig/GreateWriting.txt), Z. 222
 
 Ein Regler, der CSS-Farben von Blau auf Braun schiebt, ist ein Dark-Mode-
 Schalter mit Extra-Schritten. Der Besucher sieht nach fünf Sekunden: *nur*

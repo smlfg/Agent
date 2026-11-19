@@ -1,0 +1,199 @@
+{
+  "schema": "m0-latency-manifest/1",
+  "runId": "m0-verify-2026-11-19T19-28-00-711Z-a465",
+  "mode": "verify",
+  "createdAt": "2026-11-19T19:28:00.779Z",
+  "target": {
+    "url": "http://localhost:5173",
+    "llmQueryParam": "deepseek",
+    "uiModelLabel": "DeepSeek (label maps to glm)",
+    "clone": "~/Projects/05_INBOX/cloudflare-agents",
+    "voiceApp": "~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent",
+    "gitHead": "81726f7d18206a0864d183c219fad9fa6e7e28e6",
+    "gitStatusVoiceAgent": " M examples/voice-agent/package.json\n M examples/voice-agent/src/server.ts",
+    "serverTsSha256": "4077277c2717a0a425ba499a4770da8ee9511ca610803a210e8f2273f7647e62",
+    "serverTsDiff": "diff --git a/examples/voice-agent/src/server.ts b/examples/voice-agent/src/server.ts\nindex 6c59b7d..4ca832d 100644\n--- a/examples/voice-agent/src/server.ts\n+++ b/examples/voice-agent/src/server.ts\n@@ -136,7 +136,7 @@ export class MyVoiceAgent extends VoiceAgent<Env> {\n     const llmModel =\n       llm === \"qwen\"\n         ? \"@cf/qwen/qwen3.8-27b\"\n-        : \"@cf/deepseek-ai/deepseek-v4.1-flash-1017\";\n+        : \"@cf/zai-org/glm-4.7-flash\";\n \n     const result = streamText({\n       model: workersAi(llmModel as Parameters<typeof workersAi>[0], {",
+    "serverMapping": {
+      "expression": "llm === \"qwen\" ? \"@cf/qwen/qwen3.8-27b\" : \"@cf/zai-org/glm-4.7-flash\"",
+      "modelIds": [
+        "@cf/qwen/qwen3.8-27b",
+        "@cf/zai-org/glm-4.7-flash"
+      ],
+      "resolvedModelId": "@cf/zai-org/glm-4.7-flash",
+      "note": "Model ID is resolved from the served source mapping; the voice protocol does not echo a model ID at runtime."
+    }
+  },
+  "versions": {
+    "node": "v22.23.1",
+    "playwright": "1.63.0",
+    "agents": "0.33.0",
+    "ai": "7.0.177",
+    "workers-ai-provider": "4.0.1",
+    "wrangler": "4.165.0",
+    "vite": "8.3.8",
+    "browser": "158.0.8127.36",
+    "chromeChannel": "chrome"
+  },
+  "instrumentation": {
+    "file": "tech/m0/instrument.js",
+    "sha256": "38c19e4e68aa51e7207a19e62729a848dad87e26afe3a8c937a61cf2074a56bc",
+    "version": 1,
+    "clock": "performance.now() (monotonic, one page)",
+    "serverClock": "Worker Date.now(), copied verbatim from turn_metrics"
+  },
+  "isolation": {
+    "conversationId": "m0-verify-2026-11-19T19-28-00-711Z-a465",
+    "mechanism": "localStorage['voice-agent-session-id'] = runId before app load; one browser context, one page",
+    "devServerUrl": "http://localhost:5173",
+    "devServerPidsBefore": [
+      "31990"
+    ],
+    "devServerShared": true,
+    "durableObjectStoreFilesBefore": [
+      {
+        "file": "06c5c0e6cca64ecc18b4604a5f8cf4e596c6392fb29fd41cc7935c612af1a48f.sqlite",
+        "size": 147456,
+        "mtime": "2026-11-19T19:25:17.687Z"
+      },
+      {
+        "file": "10ab206d1047c2baabb2ad54c15a20531f0afb9eb96b1835bd8e73c452fe5acf.sqlite",
+        "size": 135168,
+        "mtime": "2026-11-19T19:25:05.634Z"
+      },
+      {
+        "file": "58898ad21b47793c5356b79d0eeefaea89a79893b1d195bfa515449006b8886f.sqlite",
+        "size": 135168,
+        "mtime": "2026-11-19T19:20:38.717Z"
+      },
+      {
+        "file": "5890aaec866ec4c8540a4f05c46ab94023c7fa36cadd2f8add8b29c147f50d1f.sqlite",
+        "size": 151552,
+        "mtime": "2026-11-19T19:20:53.178Z"
+      },
+      {
+        "file": "76076d3f2e01be7f45013503586fb68abb3aab511c5845e2a2a56ef3ed19221a.sqlite",
+        "size": 4096,
+        "mtime": "2026-11-19T19:27:54.392Z"
+      },
+      {
+        "file": "metadata.sqlite",
+        "size": 4096,
+        "mtime": "2026-11-19T16:45:36.118Z"
+      }
+    ],
+    "sessionIdSeen": "m0-verify-2026-11-19T19-28-00-711Z-a465"
+  },
+  "measurement": {
+    "turnsPlanned": 1,
+    "prompts": [
+      "verify-01"
+    ],
+    "primaryMetric": "t_first_visible_text - t_send (performance.now, ms)",
+    "secondaryMetrics": [
+      "t_first_visible_text_dom - t_send",
+      "first audio bytes received - t_send",
+      "t_first_audible_audio - t_send"
+    ],
+    "serverMetrics": [
+      "turn_metrics.modelToFirstTextMs",
+      "turn_metrics.turnTotalMs",
+      "turn_metrics.outcome",
+      "metrics.llm_ms/tts_ms/first_audio_ms/total_ms (when sent)"
+    ],
+    "timeoutMsPerTurn": 20000
+  },
+  "limits": [
+    "Text path only. A voice call cannot start while STT startup fails, so no TTS audio is produced for these turns.",
+    "t_first_visible_text is DOM text plus two animation frames; compositor paint is not observable from JS.",
+    "Server timings use the Worker clock and are reported separately, never combined with client timings.",
+    "p95 at n=20 is close to the maximum; the report states the estimator explicitly.",
+    "The dev server on :5173 is shared with other sessions; only the Durable Object instance is isolated."
+  ],
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "language": "en-US",
+    "hardwareConcurrency": 16,
+    "deviceMemory": 32,
+    "timeOrigin": 1795116481240.9
+  },
+  "run": {
+    "finishedAt": "2026-11-19T19:28:02.863Z",
+    "attemptedTurns": 1,
+    "completedTurns": 1,
+    "aborted": "quota_exhausted",
+    "rawEventCount": 30,
+    "doStoreFilesAfter": [
+      {
+        "file": "06c5c0e6cca64ecc18b4604a5f8cf4e596c6392fb29fd41cc7935c612af1a48f.sqlite",
+        "size": 147456,
+        "mtime": "2026-11-19T19:25:17.687Z"
+      },
+      {
+        "file": "10ab206d1047c2baabb2ad54c15a20531f0afb9eb96b1835bd8e73c452fe5acf.sqlite",
+        "size": 135168,
+        "mtime": "2026-11-19T19:25:05.634Z"
+      },
+      {
+        "file": "58898ad21b47793c5356b79d0eeefaea89a79893b1d195bfa515449006b8886f.sqlite",
+        "size": 135168,
+        "mtime": "2026-11-19T19:20:38.717Z"
+      },
+      {
+        "file": "5890aaec866ec4c8540a4f05c46ab94023c7fa36cadd2f8add8b29c147f50d1f.sqlite",
+        "size": 151552,
+        "mtime": "2026-11-19T19:20:53.178Z"
+      },
+      {
+        "file": "76076d3f2e01be7f45013503586fb68abb3aab511c5845e2a2a56ef3ed19221a.sqlite",
+        "size": 4096,
+        "mtime": "2026-11-19T19:27:54.392Z"
+      },
+      {
+        "file": "9a1574d9856027d118bc74037c4f0d4a38478cf7a7aa23ce3b5ecfeabaf1cd5a.sqlite",
+        "size": 4096,
+        "mtime": "2026-11-19T19:28:02.252Z"
+      },
+      {
+        "file": "metadata.sqlite",
+        "size": 4096,
+        "mtime": "2026-11-19T16:45:36.118Z"
+      }
+    ],
+    "devServerPidsAfter": [
+      "31990"
+    ]
+  },
+  "evidence": {
+    "serverModelRuntime": {
+      "file": "server-model-evidence.txt",
+      "sha256": "9f7b149457cefa12e9f1f22c703bd0031438f5dd97c3990f204710ed7082814c",
+      "sourceLog": "/private/var/folders/cp/51bmm8v964s4mtd3ydyys65m0000gn/T/opencode/voice-agent-dev.log",
+      "sourceLine": 761,
+      "url": "workers-ai:binding/run/@cf/zai-org/glm-4.7-flash"
+    },
+    "durableObjectStore": {
+      "file": "do-store-evidence.txt",
+      "sha256": "a53263ea89ee329e0d1662e74de5377c787dca8c4e6cb2a9278def5d8bfb40a0",
+      "snapshot": "do-store-snapshot.sqlite",
+      "snapshotSha256": "9310f76acd2a4dd513c974b5d665ab048e4a69aa1cf1bfe1d2b701a67fa9560c",
+      "rows": {
+        "user": 1,
+        "assistant": 0
+      }
+    }
+  },
+  "blocker": {
+    "code": "workers-ai-4006",
+    "message": "4006: you have used up your daily free allocation of 10,000 neurons, please upgrade to Cloudflare's Workers Paid plan if you would like to continue usage.",
+    "scope": "account-level Workers AI free daily allocation",
+    "reset": "00:00 UTC",
+    "measuredAt": "2026-11-19T19:28:02Z",
+    "effect": "The request reaches the model provider and is rejected before any token; no assistant text, no latency value.",
+    "evidence": [
+      "turns.jsonl",
+      "raw-events.jsonl",
+      "server-model-evidence.txt",
+      "console.log"
+    ]
+  }
+}

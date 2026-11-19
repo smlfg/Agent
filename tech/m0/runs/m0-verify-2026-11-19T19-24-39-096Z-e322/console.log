@@ -1,0 +1,25 @@
+2026-11-19T19:24:39.190Z info run m0-verify-2026-11-19T19-24-39-096Z-e322 mode=verify turns=1
+2026-11-19T19:24:39.190Z info resolved model: @cf/zai-org/glm-4.7-flash
+2026-11-19T19:24:39.190Z info server.ts sha256: 4077277c2717a0a425ba499a4770da8ee9511ca610803a210e8f2273f7647e62
+2026-11-19T19:24:39.632Z pageerror TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.
+2026-11-19T19:24:40.613Z console.info %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2026-11-19T19:24:40.634Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:24:40.685Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:24:40.702Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:24:40.705Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:24:40.934Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association

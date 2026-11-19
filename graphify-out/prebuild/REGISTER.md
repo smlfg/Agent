@@ -24,6 +24,11 @@ Stand: 19.11.2026. Quellen: 13 Prüfläufe, Berichte unter
 | Q2 | Slider: Design-Parameter oder Interaktionsanzeige? | **Design-Parameter** — „ich als Bediener kann ihn einstellen" | Mensch ist der Akteur, nicht der Agent → kein Injection-Vektor |
 | Q3 | Nur Mensch oder auch Agent? | **Beides** — Mensch (explizit) und Interaktion (implizit) schreiben in denselben Zustand; der bestimmt **Werdegang** und **Gestalt** | Ein Zustand, zwei Schreiber, eine Projektion (= A-1, bestätigt) |
 | Q4 | Übersetzt eine feste Regel oder das Modell? | **Beides, feste Regel zuerst** (erreichbarer) | Erstbau: deterministische Projektion, ~50 LOC. Modell-Abbildung später, dann nur als Vorschlag |
+| Q7 | Ist „Tiefe" Gestalt oder Werdegang? | **Beides** — Anzeige sofort, Agenten-Aufwand nachgelagert | Tiefe braucht Entkopplung über den Ereignisstrom, sonst wird der Regler zur Wartezeit |
+| Q8 | Voice im Erstbau? | **A — Text-first.** Voice kommt später, „am besten kostenlos"; als Telefon-Anwendung darf es beste Qualität sein | Erstbau ohne TTS. `docs/DESIGN-DECISIONS.md:21` („Voice ist Teil des Erstbaus") muss revidiert werden; das Mess-Gate (C-11) misst sonst den falschen Weg |
+
+**Geparkt — Voice-Zweig (nach dem Erstbau):** Bausteine liegen schon im Material, aber unverbunden: Twilio / Plivo / Telnyx (`tech/research/cloudflare-bausteine.md`), LiveKit Agents (`tech/research/konkurrenz.md`), `phonecall`-Repo (`UPSTREAM_SEARCH.md`), ElevenLabs/Deepgram Aura-2-de (B-5).
+**Kosten-Kollision:** „kostenlos" und „als Telefon" schließen sich aus — Telefonie kostet pro Nummer und pro Minute, unabhängig vom TTS. Kostenlos ist nur Web-Voice (Browser/Web Speech, mittlere Qualität). Entscheidung nötig, wenn der Zweig startet.
 
 Konsequenz: Der Agent beeinflusst die Gestalt durch das, was er **tut** (Ereignisse), nicht durch das, was er **vorschreibt** (Stile). Der Branchen-Einwand (A2UI/MCP Apps schließen Agent→Styling aus) betrifft den Erstbau damit nicht.
 
@@ -35,11 +40,48 @@ Offen und jetzt blockierend: **welche Regler und welche Werte** (C-3) und **welc
 |---|---|---|---|---|---|
 | 1 | **warm ↔ cold** | warmhearted / wooden / gentle ↔ techy / blueish | Gestalt (Farbe, Radius, Textur) | ja | `sketches:102-104` |
 | 2 | **Präsenz** | ruhig ↔ ausdrucksstark | Gestalt (Augen, Bewegung, Effekte) | ja | `sketches:71-75` („on wind", „soft and not scary") |
-| 3 | **Tiefe** | knapp/schnell ↔ forschend/tief | Werdegang (ob der Analysing-Agent anspringt) | ja | `tech/INTENT.md:23` („output style"), `sketches:111` (`fast/slow`) |
+| 3 | **Tiefe** | knapp/schnell ↔ forschend/tief | **beides** (Owner): Gestalt *und* Werdegang — Anzeige sofort, Agenten-Aufwand nachgelagert | ja | `tech/INTENT.md:23` („output style"), `sketches:111` (`fast/slow`); Owner 19.11. |
 | 4 | reserviert („2 more when this") | offen | offen | nein | `sketches:105` |
 | 5 | reserviert | offen | offen | nein | `sketches:105` |
 
 **Nicht als Regler:** Tempo — ist bereits durch A-5 (Segment- und Uhrenvertrag) determiniert; ein Regler wäre ein zweiter Name für dieselbe Größe.
+
+**Token-Unterbau (Upstream geprüft, 19.11.):**
+
+| Baustein | Upstream | Eigenbau | Beleg |
+|---|---|---|---|
+| Token-Dateiformat | W3C DTCG Format Module 2025.10 (CG Report, **kein** W3C-Standard) | Token-Vertrag **12–18 Z.** (statt 40–60) | `UPSTREAM-SEARCH-design-tokens.md` |
+| Kontrast-Prüfung | `colorjs.io` 0.7.1 (MIT, 32,4 kB, 0 Deps) — WCAG **und** APCA | Kontrast-Gate **20–30 Z.** (statt 60–100) | ebd. |
+| warm ↔ cold ohne Kontrastbruch | OKLCH mit konstantem L: Drift +3,4–3,5 % (niedriges Chroma), +14–15 % (gesättigte Akzente); HSL dagegen Faktor **2,25×**; CIE-LCH kippt ins Purpur | Hue-Bereiche + Bedeutung | ebd. |
+| „Mensch setzt Design-Parameter live" | **kein Upstream-Modell** in 15 geprüften Kandidaten | Rest | ebd. |
+
+**Gesamt: 32–48 Zeilen statt 100–160 (−52…−80 %).** Damit ist der *rechnerische* Teil innerhalb des 80-Zeilen-Glue-Budgets; was darüber bleibt, ist Produkt-UI (Slider), kein Infrastruktur-Eigenbau. Das ist der Unterschied, auf den K23 zielt.
+
+**Einschränkung:** WCAG 3.0 schreibt selbst „The contrast algorithm used in WCAG 3 is yet to be determined" — WCAG 2.2 (4,5:1) bleibt die einzige verabschiedete Schwelle. `apca-w3` scheidet aus („Limited W3 License / Patent(s) pending").
+
+| Q9 | Erster Besucherablauf? | **A — Minimal:** Klick → Augen → Eingabe → Antwort tippt sich → drei Regler verändern sofort die Gestalt | Erstbau ohne Werdegang-Beweis, ohne zweiten Agenten |
+
+## Erstbau-Abgrenzung (nach Q9 = A)
+
+**Drin:**
+
+| Baustein | Quelle | Umfang |
+|---|---|---|
+| Ein DO (Front) mit WebSocket, ein Textmodell | A-2 reduziert, `tech/CLOUDFLARE_MACHBARKEIT.md:59` | — |
+| Ereignisstrom + `seq` + eine Uhr (A-1 + A-5, **ein** Vertrag) | S1 + S4 | Kern |
+| Typewriter als Play-out-Puffer des Streams | A-5 | — |
+| Regler **warm** (volle Wirkung) und **Präsenz** (Augen, Ruhe/Bewegung) | Skizze `:71-75,102-104` | Token 12–18 Z., Gate 20–30 Z. |
+| Regler **Tiefe** — **nur Gestalt-Hälfte** (Ausgabelänge), Werdegang-Hälfte erst später | Q7 + Q9=A | — |
+| Feste Projektionsregel Ereignis → Gestalt | Q4 | ~50 Z. |
+| Text-first, kein TTS | Q8 | — |
+
+**Nicht drin (bewusst):** Voice/TTS · zweiter Agent (Analysing/Looking-up) · Werdegang-Wirkung von Tiefe · Gedächtnis (B-6/B-7) · Notion zur Laufzeit · Payments · Multi-Agent-Orchestrierung.
+
+**Konsequenzen, die sauber notiert sein müssen:**
+
+1. **A-2 (Task-Modell) entfällt für den Erstbau** — kein zweiter Agent, also auch kein Queues-vs-`subAgent`-Konflikt (C-1), kein Rate-Limit-Risiko (B-8) im Erstbau. Beides bleibt für Stufe 2 relevant.
+2. **Tiefe ist im Erstbau nur Gestalt.** Der Erstbau darf nicht behaupten, den Werdegang zu zeigen — Q7 bleibt Produktabsicht, nicht Erstbau-Zusage.
+3. **Das Mess-Gate (C-11) ist gegenstandslos**, solange es `first_audio_ms` prüft. Für den Erstbau braucht es `first_glyph_ms` (erster sichtbarer Buchstabe) — sonst ist der Hauptweg ungemessen.
 
 ## Register A — TRÄGT (Synergie mit gemeinsamem Anker)
 

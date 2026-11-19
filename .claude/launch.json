@@ -3,11 +3,11 @@
   "configurations": [
     {
       "name": "cwh-11-explain",
-      "runtimeExecutable": "/Users/samuelfleig/Projects/00_AKTUELL/claudeflareworkerhaus/node_modules/.bin/wrangler",
+      "runtimeExecutable": "~/Projects/00_AKTUELL/claudeflareworkerhaus/node_modules/.bin/wrangler",
       "runtimeArgs": [
         "dev",
         "-c",
-        "/Users/samuelfleig/Projects/00_AKTUELL/claudeflareworkerhaus/fleet/11-explain/wrangler.jsonc",
+        "~/Projects/00_AKTUELL/claudeflareworkerhaus/fleet/11-explain/wrangler.jsonc",
         "--port",
         "8790"
       ],
@@ -15,11 +15,11 @@
     },
     {
       "name": "hai-site",
-      "runtimeExecutable": "/Users/samuelfleig/Projects/00_AKTUELL/claudeflareworkerhaus/node_modules/.bin/wrangler",
+      "runtimeExecutable": "~/Projects/00_AKTUELL/claudeflareworkerhaus/node_modules/.bin/wrangler",
       "runtimeArgs": [
         "dev",
         "-c",
-        "/Users/samuelfleig/Projects/00_AKTUELL/human-agent-interface/wrangler.jsonc",
+        "~/Projects/00_AKTUELL/human-agent-interface/wrangler.jsonc",
         "--port",
         "8787",
         "--persist-to",

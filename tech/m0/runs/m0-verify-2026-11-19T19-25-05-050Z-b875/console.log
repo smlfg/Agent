@@ -1,0 +1,56 @@
+2026-11-19T19:25:05.143Z info run m0-verify-2026-11-19T19-25-05-050Z-b875 mode=verify turns=1
+2026-11-19T19:25:05.144Z info resolved model: @cf/zai-org/glm-4.7-flash
+2026-11-19T19:25:05.144Z info server.ts sha256: 4077277c2717a0a425ba499a4770da8ee9511ca610803a210e8f2273f7647e62
+2026-11-19T19:25:06.547Z console.info %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2026-11-19T19:25:06.569Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.592Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.623Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.627Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.633Z info connected, isolated session m0-verify-2026-11-19T19-25-05-050Z-b875
+2026-11-19T19:25:06.653Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.685Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.723Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.727Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:06.877Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:07.242Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:07.245Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:07.248Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:25:07.251Z info turn 1/1 e2e=nullms server_model_to_first_text=n/ams outcome=error audio=none
+2026-11-19T19:25:07.673Z info done: attempted=1 recorded=1 aborted=no
+2026-11-19T19:25:07.674Z info output: /Users/samuelfleig/Projects/03_HAI/Agentfaehig/Agent/tech/m0/runs/m0-verify-2026-11-19T19-25-05-050Z-b875

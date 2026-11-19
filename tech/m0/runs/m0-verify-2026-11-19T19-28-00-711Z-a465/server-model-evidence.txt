@@ -1,0 +1,27 @@
+# Runtime model evidence for run m0-verify-2026-11-19T19-28-00-711Z-a465
+# Source (read-only excerpt): /private/var/folders/cp/51bmm8v964s4mtd3ydyys65m0000gn/T/opencode/voice-agent-dev.log
+# Lines 744-766, captured 2026-11-19T19:30Z. Full log sha256: 5b9b10f93f2d6104f1f8bdeb9a7c524bc3b317142ff423672f35f7187c608f91
+#
+   744	APICallError [AI_APICallError]: 4006: you have used up your daily free allocation of 10,000 neurons, please upgrade to Cloudflare's Workers Paid plan if you would like to continue usage.
+   745	    at normalizeBindingError (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/workers-ai-provider/dist/index.mjs:22:9)
+   746	    at WorkersAIChatLanguageModel.doStream (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/workers-ai-provider/dist/index.mjs:1329:10)
+   747	    at execute (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:8922:19)
+   748	    ... 5 lines matching cause stack trace ...
+   749	    at ~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:11060:4 {
+   750	  cause: InferenceUpstreamError [AiError]: 4006: you have used up your daily free allocation of 10,000 neurons, please upgrade to Cloudflare's Workers Paid plan if you would like to continue usage.
+   751	      at Ai._parseError (cloudflare-internal:ai-api:220:24)
+   752	      at Ai.run (cloudflare-internal:ai-api:198:19)
+   753	      at WorkersAIChatLanguageModel.doStream (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/workers-ai-provider/dist/index.mjs:1324:15)
+   754	      at execute (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:8922:19)
+   755	      at runWithTracingChannelSpan (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:4329:80)
+   756	      at executeLanguageModelCall (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:4667:11)
+   757	      at streamLanguageModelCall (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:8919:61)
+   758	      at retryWithExponentialBackoffInternal (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/@ai-sdk/provider-utils/dist/index.js:3794:10)
+   759	      at streamStep (~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:10581:34)
+   760	      at ~/Projects/05_INBOX/cloudflare-agents/examples/voice-agent/node_modules/ai/dist/index.js:11060:4,
+   761	  url: 'workers-ai:binding/run/@cf/zai-org/glm-4.7-flash',
+   762	  requestBodyValues: {
+   763	    max_tokens: undefined,
+   764	    messages: [ [Object], [Object] ],
+   765	    temperature: undefined,
+   766	    tools: [ [Object], [Object], [Object] ],

@@ -1,6 +1,9 @@
 # Projektstand — Agentfähig
 
-Stand: 19.11.2026. Phase: Planung — Reihenfolge und Wenn-Dann-Wege festgelegt.
+Stand: 19.11.2026. Phase: Planungsdokumente fertig, **Owner-Entscheidungen
+offen** — Messlauf (Stufe 1) angelaufen; Laufversuch 1 an der Paid-Wand
+gescheitert, Laufversuch 2 belegt den Free-Pfad, ist aber an der STT-Stufe
+blockiert. Eine Latenzzahl entstand noch nicht.
 
 ## Planungsstand
 
@@ -10,19 +13,55 @@ Ein unabhängiges Zweitgutachten (Argon/Gemini und ich) zur Frage „WOW oder zu
 Scheitern verurteilt" mit drei Produktfallen und der fehlenden Teststufe:
 [`GUTACHTEN-wow-oder-scheitern.md`](GUTACHTEN-wow-oder-scheitern.md).
 
-Der Bauplan steht in [`PLAN-ADREN.md`](PLAN-ADREN.md): fünf Stufen von der
-Planung bis zum Erstbau, mit Wenn-Dann-Diagramm, Mess-Gates und drei ADRs in
+Der Bauplan steht in [`PLAN-STUFEN-0-5.md`](PLAN-STUFEN-0-5.md): fünf Stufen von der
+Planung bis zum Erstbau, mit Wenn-Dann-Diagramm, Mess-Gates und fünf ADRs in
 [`adr/`](adr/). Der nächste Schritt ist der Messlauf (Stufe 1), kein
 Anwendungscode.
 
+Der Scope-Vertrag liegt als [`PROJECT_CONTRACT.md`](PROJECT_CONTRACT.md) vor, ist
+aber **nicht genehmigt**: Status `VORSCHLAG`, O1–O11 unbeantwortet, Sign-off leer.
+Bis zur Signatur sind D1–D5 Empfehlungen; D2–D5 sind durch `F4` gesperrt.
+Ausführbar ist allein D1 (Messlauf).
+
+Der UI-Implementierungsplan (Wireframe → Code) steht als Kapitel 10 in
+[`EXECUTION_PLAN-M0-M5.md`](EXECUTION_PLAN-M0-M5.md). Er ist ein Vorschlag und derzeit
+blockiert durch D4/D5/D6 sowie die offenen Designentscheidungen OD-00 bis OD-17
+(davon sieben P0) und die fehlende Lane.
+
+Der Messlauf ist angelaufen und in Laufversuch 1 **gescheitert**: Der Klon läuft,
+der Free-Account trägt das Default-Modell des Beispiels nicht
+(`AI_APICallError 5035`, 5 User- und 0 Assistant-Nachrichten, keine
+`turn_metrics`). Die 5/0 gelten für das Fenster 17:47–17:50; später enthält
+dieselbe Tabelle eine nicht zugeordnete Session mit fünf Assistant-Antworten
+(Gegenprüfung in [`tech/MESSPROTOKOLL-2026-11-19.md`](../tech/MESSPROTOKOLL-2026-11-19.md),
+Abschnitt „Gegenprüfung der Laufversuch-1-Zahlen"). Beleg und Konsequenz:
+[`tech/MESSPROTOKOLL-2026-11-19.md`](../tech/MESSPROTOKOLL-2026-11-19.md).
+
+**Vorprüfung 19:57** hat den Modellpfad geklärt: Mit dem in einer Zeile
+getauschten Modell `@cf/zai-org/glm-4.7-flash` antwortet der Free-Plan — zwei
+Text-Turns, keine Konsolenfehler (Beleg ebd., Abschnitt „Vorprüfung 19:57").
+Damit ist der Modellpfad für die Messung belegt. Der Voice-Pfad ist dagegen
+**instabil**: Sprach-Turns gelangen 19:44–19:47, danach scheiterte der Start der
+Spracherkennung fünfmal (`Flux STT WebSocket upgrade failed`, ebd. „Messversuch
+20:01–20:04"). Ein Turn hat vier Metrikwerte, aber die zwei von `AC-D1-2`
+geforderten Stage-Timings fehlen. Offen sind damit zwei Entscheidungen: der
+Erfassungsweg ([`UNSOLVED-TECHNIK.md`](UNSOLVED-TECHNIK.md) U1) und der Umgang mit der
+STT-Instabilität (U12).
+
 Vergleichbare Projekte wurden gesucht:
-[`UPSTREAM_SEARCH-vergleichbare-projekte.md`](../UPSTREAM_SEARCH-vergleichbare-projekte.md).
-Darin ist ein früheres Risiko ausgeräumt — für Augen mit Präsenz und für die
-live erzeugte Oberfläche gibt es inzwischen Upstreams.
+[`UPSTREAM-SEARCH-vergleichbare-projekte.md`](../UPSTREAM-SEARCH-vergleichbare-projekte.md).
+Für Augen mit Präsenz gibt es einen übernehmbaren Baustein (`EyeFace.js`, MIT);
+für die live erzeugte Oberfläche gibt es Muster, aber keinen belastbaren Code.
+Das Kernversprechen — der Agent verhandelt seine eigene Präsenz — bleibt
+Eigenbau. Die technische
+Muster-Ebene (Präsenz-Zustände, Streaming-Typografie, Turn-Taking, stille
+Hintergrundarbeit) steht in
+[`research/EMBODIMENT-RECHERCHE.md`](../research/EMBODIMENT-RECHERCHE.md); sie
+stützt ADR-0002/0004 und ändert keine Entscheidung.
 
 ## Ausgangspunkt
 
-Samuels lokales Transkript `Idea` beschreibt die Reihenfolge Planen, Malen,
+Samuels lokales Transkript in `IDEA-TRANSKRIPT.txt` beschreibt die Reihenfolge Planen, Malen,
 Strukturieren und Bauen. Ziel ist ein Embodiment des Human-Agent Interface auf
 Agentfähig, mit Voice, Text, Kontext und Skills. Cloudflare ist die genannte
 technische Richtung; eine konkrete Implementierung ist noch nicht festgelegt.
@@ -67,21 +106,72 @@ Nächster Schritt: Der Messlauf-Plan liegt ausgearbeitet vor
 Sprach-Wechsel auf dem unveränderten Beispiel, Auswertung von `first_audio_ms`
 und Stage-Timings. Die deutsche Pipeline bleibt wünschbares Feature und ist
 näher dran als gedacht: deutsches STT via `nova-3` ist SDK-seitig belegt
-([CLOUDFLARE-MACHBARKEIT.md](CLOUDFLARE-MACHBARKEIT.md), Missions-Artefakt vom
-19.11., Audit `A-20261119T161858-753a2d1e`), nur TTS braucht einen externen
-Provider — Kostenrecherche läuft. Freigabe für Klon und Lauf ist erteilt
-(mit Plan-Validator); Annahme Free-Account (Samuel: „free ist immer besser
-als paid"), der LLM-Tausch im Klon ist damit der erwartete Fall. Danach
-entscheidet die Build-Freigabe. Noch keine abschließende gemeinsame
-Designabnahme: offen sind Regler-Default, das Ergebnis des Besuchs im Detail,
-Fehler-UX und die Sprache des Text-Kanals neben dem englischen Voice-Kanal.
+([CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md](CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md), Missions-Artefakt vom
+19.11., Audit `A-20261119T161858-753a2d1e`); die Turn-Erkennung ist allerdings
+strittig (U26). Nur TTS braucht einen externen Provider — Kostenrecherche läuft.
+Freigabe für Klon und Lauf ist erteilt (mit Plan-Validator); der Modellpfad auf
+dem Free-Plan ist in Laufversuch 2 belegt, die STT-Stufe ist instabil. Offen
+sind Erfassungsweg (U1) und STT-Entscheidung (U12). Danach entscheidet die
+Build-Freigabe. Noch keine abschließende gemeinsame Designabnahme: offen sind
+die Fokusregel für Hintergrund-Ergebnisse, Fehler-UX und die Sprache des
+Text-Kanals neben dem englischen Voice-Kanal.
+
+**Addendum 19.11., ~20:30 (Messlauf-Slice, BLOCKED):** Der deployte Lauf
+(https://voice-agent.smlflg.workers.dev, von Samuel freigegebene Abweichung)
+ist am **4006-Neuronen-Limit** gescheitert: Tageskontingent durch offene
+Mikro-Sessions verbraucht, Reset 00:00 UTC. Wiederholung nach Reset, Mikrofon
+nur beim Sprechen. Details: [MESSPROTOKOLL-2026-11-19.md](../tech/MESSPROTOKOLL-2026-11-19.md)
+und U32 in [UNSOLVED-TECHNIK.md](UNSOLVED-TECHNIK.md).
+
+## Prüfstand 19.11.2026 (HCI-Review, keine Messung)
+
+| Gate | Urteil | Basis |
+|---|---|---|
+| UX | **NOT TESTED** | kein lauffähiger Prototyp, 0 Fremdtests |
+| VOICE | **NOT TESTED** | 0 von 20 Messzeilen; Lauf 1 und 2 ungültig |
+| CONTROL | **NOT TESTED** | Kontrollwege sind spezifiziert, aber nicht gebaut |
+| EVIDENCE | **FAIL** | keine Testbelege; „FAIL" heißt nicht belegt, nicht widerlegt |
+
+Daraus ist keine Freigabe ableitbar. „NOT TESTED" ist kein „bestanden".
+
+**Domain ≠ Prüfgegenstand.** `agentfähig.de` liefert heute eine redaktionelle
+Einstiegsseite mit Kacheln und Chat-Widget (HTTP 200, abgerufen 19.11.2026).
+Dass dort Worker 05 liegt, ist in
+[`CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md`](CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md) §4.1 belegt; neu ist,
+dass ein 20-Sekunden-Test auf der Domain das falsche Produkt messen würde. Der
+Test braucht eine eigene, ungelistete URL (→ [`UNSOLVED-TECHNIK.md`](UNSOLVED-TECHNIK.md) U29).
+
+Prüfprotokoll der ersten Runde: [`FREMDTEST-PLAN.md`](../tech/FREMDTEST-PLAN.md)
+(Vorschlag, n = 5).
 
 ## Aktuell vorhanden
 
-- Ursprüngliche Idee als Sprachtranskript in `Idea`.
+- Ursprüngliche Idee als Sprachtranskript in `IDEA-TRANSKRIPT.txt`.
 - Versionierte Skizze mit PDF, PNG, Ausschnitten und Rohdaten.
+- Low-Fidelity-Wireframe-System für V1 als **Vorschlag zur Owner-Abnahme**
+  (kein Build): [`wireframes/README.md`](wireframes/README.md). Es enthält
+  WF-01…WF-12, Zustandsmatrix, Komponenten und die offenen
+  Designentscheidungen OD-00…OD-17.
+- Interaktiver Lo-Fi-Prototyp als **visuelle und zeitliche Ergänzung** dazu
+  (kein Produktivcode, keine Abhängigkeiten):
+  [`wireframes/agentfaehig-wireframe.html`](wireframes/agentfaehig-wireframe.html)
+  mit 20-Sekunden-Storyboard, dreizehn Zustandskompositionen, orthogonaler
+  Zustandsmaschine, Motion- und Typografieregeln und Voice-Demo; Spezifikation und
+  ehrliche Simulationsliste in
+  [`wireframes/wireframe-prototype-interactive.md`](wireframes/wireframe-prototype-interactive.md).
 - Projektanweisungen und Ablage für die nächsten Arbeitsschritte.
 - Strukturprüfung über `bash scripts/validate.sh`.
+- Klar benannte Ablage (19.11. abends): Warteschlangen
+  [`docs/UNSOLVED-TECHNIK.md`](UNSOLVED-TECHNIK.md) und
+  [`docs/UNSOLVED-PLANUNG.md`](UNSOLVED-PLANUNG.md), Handoffs in
+  [`docs/handoffs/`](handoffs/README.md), keine Root-`UNSOLVED.md` mehr.
+- Namensregel prüfbar (19.11., 20:45): [`DATEINAMEN.md`](DATEINAMEN.md) hält
+  N1–N4 fest, `scripts/check-names.sh` prüft sie und läuft in
+  `scripts/validate.sh` mit. Letzte drei Verstöße behoben:
+  `Idea` → `IDEA-TRANSKRIPT.txt`, doppelte `konkurrenz.md` /
+  `cloudflare-bausteine.md` in `tech/briefs/` → `BRIEF-…`. Zusätzlich
+  `PLAN-ADREN` → `PLAN-STUFEN-0-5`, `INTENT` → `INTENT-TECHNIK`,
+  `MISSION_BRIEF` → `MISSION-BRIEF`.
 
 Noch offen: Produktabnahme, technische Architektur, Anwendung, Verhaltenstests
 und Deployment. Keine dieser Leistungen ist durch das Gerüst bereits erbracht.

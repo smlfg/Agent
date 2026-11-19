@@ -2,8 +2,8 @@
 
 Stand: 19.11.2026, zweite Fassung. Status: **PLAN — nicht ausgeführt.** Der Lauf
 braucht Plan-Modus und die Freigabe des Owners
-([CLOUDFLARE_MACHBARKEIT.md](CLOUDFLARE_MACHBARKEIT.md) „Nächster Schritt";
-[LUECKEN.md](LUECKEN.md) Z. 92–93).
+([CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md](CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md) „Nächster Schritt";
+[LUECKEN-2026-11-12.md](LUECKEN-2026-11-12.md) Z. 92–93).
 
 **Änderung gegenüber der ersten Fassung (gleicher Tag):** Samuel hat entschieden,
 dass die Voice-Pipeline **auf Englisch** läuft („kein Deutsch, das ist jetzt
@@ -16,7 +16,7 @@ Pipeline ist unten geparkt.
 
 Die offene Skizzen-Anforderung „under 1 sec even with TTS" durch **Messung statt
 Raten** klären, bevor irgendeine Build-Entscheidung fällt. Beantwortet: T2
-(Latenzbudget, [INTENT.md](INTENT.md) Z. 20), Stille-Erkennung, und ob der
+(Latenzbudget, [INTENT-TECHNIK.md](INTENT-TECHNIK.md) Z. 20), Stille-Erkennung, und ob der
 lokale Lauf (Voice-WebSocket) funktioniert. Die Deutsch-Frage ist durch
 Samuels Entscheidung geklärt (Englisch akzeptiert), nicht durch Messung.
 
@@ -62,7 +62,7 @@ Befund hat zur Sprach-Entscheidung geführt und bleibt als Beleg dokumentiert:
 Die abgeschlossene HAI-Mission „Cloudflare-Machbarkeit für Agentfähig …"
 (`M-20261119T160534-30b4d0f9`, Audit `A-20261119T161858-753a2d1e`) hat die
 Befunde am lokal installierten SDK (`agents@0.27.0` in `claudeflareworkerhaus`)
-verifiziert — [CLOUDFLARE-MACHBARKEIT.md](../docs/CLOUDFLARE-MACHBARKEIT.md),
+verifiziert — [CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md](../docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md),
 sha256 am 19.11. gegen das Audit verifiziert:
 
 - **Deutsches STT ist SDK-seitig möglich:** `WorkersAINova3STT` reicht
@@ -96,7 +96,7 @@ sha256 am 19.11. gegen das Audit verifiziert:
 ## Phase 0 — Voraussetzungen und Checks
 
 1. **Freigabe einholen:** Klon nach `~/Projects/05_INBOX/cloudflare-agents`
-   (Zielordner gemäß [UPSTREAM_SEARCH-cloudflare.md](UPSTREAM_SEARCH-cloudflare.md)
+   (Zielordner gemäß [UPSTREAM-SEARCH-cloudflare.md](UPSTREAM-SEARCH-cloudflare.md)
    Z. 40; auf Wunsch Samuels auch innerhalb des Projekts). Plan-Modus +
    Owner-Freigabe ist Pflicht.
 2. **Node.js 18+** (offizielle Vorgabe der Agents-Doku; das Repo pinnt keine
@@ -107,7 +107,7 @@ sha256 am 19.11. gegen das Audit verifiziert:
    im Klon auf ein Free-fähiges Modell wird als erwarteter Schritt geführt,
    nicht nur als Ausweichpfad. Kandidaten ohne Deprecation und mit vollem
    300-req/min-Limit (laut
-   [CLOUDFLARE-MACHBARKEIT.md](../docs/CLOUDFLARE-MACHBARKEIT.md)):
+   [CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md](../docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md)):
    `@cf/zai-org/glm-4.7-flash` oder `@cf/openai/gpt-oss-20b`. Der
    Account-Status wird im Lauf geprüft und protokolliert.
 4. **Auth für die Remote-AI-Binding:** `wrangler login` bzw.
@@ -131,12 +131,12 @@ Sprach-Wechsel** (kurze Frage → Antwort). Je Wechsel protokollieren:
   serverseitige Turn-Erkennung des STT-Modells.
 
 **Beantwortet:** T2 (wo geht die Zeit hin — Cloudflares Budget 40 + 300 + 400
-+ 150 = 890 ms, [CLOUDFLARE_MACHBARKEIT.md](CLOUDFLARE_MACHBARKEIT.md) Z. 73–81),
++ 150 = 890 ms, [CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md](CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md) Z. 73–81),
 Stille-Erkennung, ob der lokale Voice-Lauf funktioniert, und die Free/Paid-Frage
 aus Phase 0.
 
 **Ausweichpfad, falls die Messung über 1 s landet** (bereits dokumentiert,
-[ABGLEICH.md](ABGLEICH.md) Z. 88–92): kleineres Front-Modell oder Cloudflare
+[ABGLEICH-DESIGN-TECHNIK.md](ABGLEICH-DESIGN-TECHNIK.md) Z. 88–92): kleineres Front-Modell oder Cloudflare
 Realtime Agents (WebRTC, offene Beta). Diese Pfade sind keine Entscheidung,
 nur Reserve.
 
@@ -161,7 +161,7 @@ und Freigabe des kostenpflichtigen Dienstes.
 
 - Protokoll nach `tech/MESSPROTOKOLL-<Datum>.md`: je Wechsel eine Zeile,
   Rohwerte ungeschönt; Turns nur mit Begründung aussortieren (z. B. Outcome
-  `aborted`). Keine erfundenen Zahlen ([INTENT.md](INTENT.md) Z. 36–37).
+  `aborted`). Keine erfundenen Zahlen ([INTENT-TECHNIK.md](INTENT-TECHNIK.md) Z. 36–37).
 - Auswertung: Min / Median / P90 von `first_audio_ms` über 20 Wechsel.
   Vergleichspunkte: Cloudflare-Budget 890 ms, Skizzenwunsch „under 1 sec"
   (Skizze Z. 119), Pipecat-Referenz 500–800 ms
@@ -183,3 +183,77 @@ und Freigabe des kostenpflichtigen Dienstes.
 - Ob die Remote-Binding im lokalen Modus zwingend `wrangler login` verlangt.
 - Ob die Task-Typ-Limits (720/300 req/min) pro Konto oder global gelten
   (für 20 Wechsel ohnehin unkritisch).
+
+---
+
+## Nachtrag 19.11.2026 (abends) — was die Messgröße misst
+
+**Status: Befund + Vorschlag. Kein Teil des freigegebenen Plans.** Der Plan oben
+bleibt unverändert; die Vorschläge brauchen die Freigabe des Owners. Quelle der
+Recherche: [`research/PRIOR_ART_REPORT.md`](../research/PRIOR_ART_REPORT.md).
+
+### Befund 1 — `first_audio_ms` ist eine Servergröße (VERIFIED)
+
+Die Turn-Metriken des SDK laufen laut Doku
+([`docs/agents/voice.md`](https://github.com/cloudflare/agents/blob/main/docs/agents/voice.md),
+gelesen 19.11.2026) auf der **Worker-Uhr**, überlappen und sind **nicht
+additiv**. `finalInputToFirstAudioMs` bezeichnet „finales Transkript → erstes
+**gesendetes** Audiopaket“. Der Plan wertet `first_audio_ms` aus; die aktuelle
+Doku führt die vier kompakten Felder nicht mehr einzeln, sondern
+`VoiceTurnMetrics`. Dass beide Namen dieselbe Größe meinen, ist **nicht wörtlich
+belegt** und vor dem Lauf zu klären.
+
+**Folge:** Der Plan misst die Pipeline bis zum Versand, nicht den Beginn
+hörbarer Antwort im Browser. Netz, Decoder und Wiedergabepuffer fehlen.
+
+### Befund 2 — Wiedergabefehler bleiben in dieser Metrik unsichtbar (VERIFIED)
+
+- [`cloudflare/agents#1747`](https://github.com/cloudflare/agents/pull/1747)
+  (closed 12.06.2026): hörbare Klicks an jeder Audiopaket-Grenze, weil der
+  nächste Block auf ein `ended`-Event wartete.
+- [`#1816`](https://github.com/cloudflare/agents/pull/1816) (closed 25.06.2026):
+  zweite Antwort nach einer Gesprächspause in Zeitlupe, verursacht durch eine
+  wiederverwendete Wiedergabe-Brücke; gefunden an einem Messestand-Demo.
+
+Beide wären in `first_audio_ms` unauffällig geblieben, weil sie **nach** dem
+ersten Paket passieren.
+
+### Befund 3 — Erfassungsweg offen (Befund im Arbeitsbaum, nicht committet)
+
+[`MESSPROTOKOLL-2026-11-19.md`](MESSPROTOKOLL-2026-11-19.md), Laufversuch 2:
+`turn_metrics` ist im unveränderten Beispiel nicht sichtbar (keine Anzeige für
+Text-Turns, keine WS-Aufzeichnung, kein Treffer im Observability-Store). Das
+betrifft die Annahme in [`EXECUTION_PLAN-M1-MESSLAUF.md`](EXECUTION_PLAN-M1-MESSLAUF.md) §1, die Werte
+seien „ohne Codeänderung ablesbar“. Nicht in diesem Lauf geprüft.
+
+### Vorschlag (RECOMMENDED — nicht beschlossen)
+
+1. **Zwei Messnähte je Turn:** Worker-Wert **und** Client-Zeitstempel (Ende der
+   Äußerung → erster hörbarer Ton). Gate auf die Client-Zahl; Median **und** p90.
+2. **Reproduzierbarkeit:** Commit-SHA, `agents`-Version und **effektive
+   Modell-ID** protokollieren. Nicht das UI-Label: im Arbeitsbaum belegt, dass
+   es nach dem Modelltausch das falsche Modell anzeigt.
+3. **Kriterium weiterhin erst nach der Messung** ableiten (unverändert).
+
+### Unverändert
+
+Scope, 20 Wechsel, Sprache Englisch, Non-Goals und Stop-Kriterien. Keine
+Anwendungscode-Änderung durch diesen Nachtrag.
+
+### Ergänzung (Konsolidierung 19.11.) — p95, Kaltstart, Fehlerquote
+
+**RECOMMENDED — nicht beschlossen.** Betrifft die Auswertung, nicht den Scope.
+
+- **n = 20 trägt keinen p95.** Bei 20 Werten ist „p95" praktisch das Maximum.
+  Entweder n erhöhen (Vorschlag: ≥ 50 warme Turns) oder ausdrücklich nur
+  Median/P90/Max berichten und p95 als „indikativ, n zu klein" kennzeichnen.
+- **Kalt und warm trennen.** Kaltstart = erster Turn nach ≥ 10 min Idle bzw.
+  nach Instanz-Evakuierung; mindestens 10 kalte Turns separat ausweisen.
+- **Fehlerquote mit Nenner.** Timeout vorab definieren (Vorschlag: keine hörbare
+  Antwort in 10 s), `no_output`/`aborted`/ungültige Turns getrennt zählen.
+- **Ungültig ist kein Messwert.** Account-/Quota-Fehler, nicht verfügbares
+  Modell, keine erkannte Sprache, defekter Messaufbau → Lauf INVALID, keine
+  Zahl. Laufversuch 1 und der STT-Blocker fallen darunter.
+
+Die Messgröße selbst (hörbarer Ton statt Server-Versand) steht bereits im
+Nachtrag oben; hier kommt nur die Statistik hinzu.

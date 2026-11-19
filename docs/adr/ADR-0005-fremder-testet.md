@@ -3,7 +3,7 @@
 - **Status:** vorgeschlagen (Owner-Entscheidung ausstehend)
 - **Datum:** 19.11.2026
 - **Bezieht sich auf:** `docs/GUTACHTEN-wow-oder-scheitern.md`,
-  `docs/PLAN-ADREN.md` (Stufe 3), `docs/DESIGN-DECISIONS.md`
+  `docs/PLAN-STUFEN-0-5.md` (Stufe 3), `docs/DESIGN-DECISIONS.md`
 
 ## Kontext
 

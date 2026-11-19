@@ -1,7 +1,7 @@
 # Technische Konkurrenz-Recherche
 
 Stand: 12.11.2026 · HAI-Mission `M-20261112T230610-fd237a98` · Bearbeitung: MiniMax M3.1 Flash (OpenCode)
-Auftrag: [`tech/briefs/konkurrenz.md`](../briefs/konkurrenz.md) · Grundlage: [`tech/INTENT.md`](../INTENT.md)
+Auftrag: [`tech/briefs/BRIEF-konkurrenz.md`](../briefs/BRIEF-konkurrenz.md) · Grundlage: [`tech/INTENT-TECHNIK.md`](../INTENT-TECHNIK.md)
 
 Regeln dieses Laufs: Jede Aussage trägt eine URL, die in diesem Lauf abgerufen
 wurde. Was nicht belegt ist, steht als `unbelegt`. Keine Empfehlung, kein Code,

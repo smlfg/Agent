@@ -44,7 +44,7 @@ Der Beleg dafür steht wörtlich in der Designinspiration:
 
 > „True adaptation is behavioral: 'Personalization' today is superficial: picking
 > a dark mode or a color theme. **That is decoration, not adaptation.**"
-> — [`Agentfähig/GreateWriting.txt`](../Agentf%C3%A4hig/GreateWriting.txt), Z. 222
+> — [`Agentfähig/GreateWriting.txt`](../Agentfähig/GreateWriting.txt), Z. 222
 
 Ich hatte diese Warnung in [`DESIGN-DECISIONS.md`](DESIGN-DECISIONS.md) nur als
 „Designrisiko notiert" geführt. Das war zu schwach gewichtet. Sie ist die
@@ -88,7 +88,7 @@ Technik. Dann darf die Technik nicht das tragende Argument sein.
 ### 2. „Text-Streaming startet in < 400 ms" — eine Behauptung ohne Messung
 
 Das steht so in Argons Antwort, ist aber nicht belegt. In
-[`tech/CLOUDFLARE_MACHBARKEIT.md`](../tech/CLOUDFLARE_MACHBARKEIT.md) steht
+[`tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md`](../tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md) steht
 eine *Beispiel*-Angabe (`llm_ms: 850`), und die Quelle sagt ausdrücklich nicht,
 ob das gemessen ist. Diese Zahl gehört als **Messgröße M0** in Stufe 1, nicht
 in die Beschreibung eines Ergebnisses.
@@ -114,7 +114,7 @@ Das ist nicht dasselbe wie Latenz, und es steht in keiner der drei Argon-Fallen.
 
 `@cf/deepgram/nova-3` versteht deutschen Text (`language: "de"`, gegen den
 lokalen SDK-Quellcode `agents@0.27.0` geprüft, siehe
-[`docs/CLOUDFLARE-MACHBARKEIT.md`](CLOUDFLARE-MACHBARKEIT.md)). Das ist der
+[`docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md`](CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md)). Das ist der
 **Eingang** — er trägt.
 
 Die **Ausgabe** braucht einen anderen Anbieter (ElevenLabs, Telnyx, Inworld).
@@ -178,11 +178,11 @@ machen und Voice erst nach bestandenem Deutsch-Messlauf dazuzuschalten.
 
 | Punkt | Zielort | Status |
 |---|---|---|
-| Falle 1 — Regler verändert Oberfläche **und** Haltung | eigene ADR | offen |
-| Stufe 3b — Fremder testet | Plan und Diagramm | offen |
-| Falle 4 / M3b — deutsche Stimme über zwei Anbieter | Stufe 1, Messgrößen | offen |
-| M0 — echte Text-Streaming-Latenz messen | Stufe 1, Messgrößen | offen |
-| Sub-Agenten in den ersten Durchstich | Stufe 3, Umfang | offen |
+| Falle 1 — Regler verändert Oberfläche **und** Haltung | eigene ADR | erledigt: [`ADR-0004`](adr/ADR-0004-regler-veraendert-oberflaeche-und-haltung.md), vorgeschlagen |
+| Stufe 3b — Fremder testet | Plan und Diagramm | erledigt: [`ADR-0005`](adr/ADR-0005-fremder-testet.md) + [`PLAN-STUFEN-0-5.md`](PLAN-STUFEN-0-5.md), Stufe 3b |
+| Falle 4 / M3b — deutsche Stimme über zwei Anbieter | Stufe 1, Messgrößen | geändert: Deutsch am 19.11. geparkt, Lauf misst englisch (`DESIGN-DECISIONS.md`) |
+| M0 — echte Text-Streaming-Latenz messen | Stufe 1, Messgrößen | offen, als M0 geführt (`PLAN-STUFEN-0-5.md`) |
+| Sub-Agenten in den ersten Durchstich | Stufe 3, Umfang | erledigt: [`PLAN-STUFEN-0-5.md`](PLAN-STUFEN-0-5.md), Stufe 3 |
 | Argon-Befunde als Quelle | Upstream-Search | offen |
 
 Kein Code. Keine Entscheidung. Alles Vorlage für Samuels Freigabe.

@@ -1,0 +1,114 @@
+{
+  "schema": "m0-latency-summary/1",
+  "runId": "m0-verify-2026-11-19T19-28-00-711Z-a465",
+  "mode": "verify",
+  "source": {
+    "manifest": "manifest.json",
+    "turns": "turns.jsonl",
+    "rawEvents": "raw-events.jsonl"
+  },
+  "model": {
+    "uiLabel": "DeepSeek (label maps to glm)",
+    "llmQueryParam": "deepseek",
+    "resolvedModelId": "@cf/zai-org/glm-4.7-flash",
+    "mappingExpression": "llm === \"qwen\" ? \"@cf/qwen/qwen3.8-27b\" : \"@cf/zai-org/glm-4.7-flash\"",
+    "serverTsSha256": "4077277c2717a0a425ba499a4770da8ee9511ca610803a210e8f2273f7647e62"
+  },
+  "isolation": {
+    "conversationId": "m0-verify-2026-11-19T19-28-00-711Z-a465",
+    "sessionIdSeen": "m0-verify-2026-11-19T19-28-00-711Z-a465",
+    "isolated": true,
+    "newDurableObjectStoreFiles": [
+      "9a1574d9856027d118bc74037c4f0d4a38478cf7a7aa23ce3b5ecfeabaf1cd5a.sqlite"
+    ],
+    "devServerShared": true,
+    "devServerPidsBefore": [
+      "31990"
+    ],
+    "devServerPidsAfter": [
+      "31990"
+    ]
+  },
+  "attempts": 1,
+  "planned": 1,
+  "notAttempted": 0,
+  "runComplete": false,
+  "successes": 0,
+  "failures": 1,
+  "errorRate": 1,
+  "errorRateDefinition": "failures / attempted turns; a failure is a turn without measured first visible text or with outcome != completed. Not-attempted turns are excluded and reported separately.",
+  "errorBreakdown": {
+    "quota_4006": 1
+  },
+  "aborted": "quota_exhausted",
+  "latency": {
+    "primary_e2e_first_visible_text_ms": {
+      "n": 0,
+      "note": "no measured values; no statistic computed"
+    },
+    "secondary_e2e_first_visible_text_dom_ms": {
+      "n": 0,
+      "note": "no measured values; no statistic computed"
+    },
+    "warm_excluding_turn_1_ms": {
+      "n": 0,
+      "note": "no measured values; no statistic computed"
+    },
+    "server_modelToFirstTextMs": {
+      "n": 0,
+      "note": "no measured values; no statistic computed"
+    },
+    "server_turnTotalMs": {
+      "n": 1,
+      "min": 491,
+      "median": 491,
+      "p90": 491,
+      "p95": 491,
+      "max": 491,
+      "mean": 491,
+      "estimator": "nearest-rank for p90/p95; median is the middle value or the mean of the two middle values"
+    },
+    "server_modelStreamConsumptionMs": {
+      "n": 1,
+      "min": 491,
+      "median": 491,
+      "p90": 491,
+      "p95": 491,
+      "max": 491,
+      "mean": 491,
+      "estimator": "nearest-rank for p90/p95; median is the middle value or the mean of the two middle values"
+    }
+  },
+  "audio": {
+    "measuredFirstAudibleAudioTurns": 0,
+    "note": "No TTS audio on the measured text-only path (no active call, STT startup blocked). First audible audio is therefore not a measured value in this run."
+  },
+  "rawVerification": {
+    "text_sends_match_turns": true,
+    "dom_events_match_records": true,
+    "recomputed_e2e_matches_records": true,
+    "turn_metrics_match_records": true,
+    "server_source_is_text": true,
+    "isolated_session": true,
+    "server_mapping_matches_manifest": true,
+    "failures": []
+  },
+  "turns": [
+    {
+      "index": 1,
+      "promptId": "verify-01",
+      "outcome": "model_error",
+      "timeout": false,
+      "e2e_first_visible_text_ms": null,
+      "e2e_first_visible_text_dom_ms": null,
+      "server_modelToFirstTextMs": null,
+      "server_turnTotalMs": 491,
+      "first_audio_bytes_ms": null,
+      "first_audible_audio_ms": null,
+      "visibleText": null,
+      "error": {
+        "message": "4006: you have used up your daily free allocation of 10,000 neurons, please upgrade to Cloudflare's Workers Paid plan if you would like to continue usage."
+      }
+    }
+  ]
+}

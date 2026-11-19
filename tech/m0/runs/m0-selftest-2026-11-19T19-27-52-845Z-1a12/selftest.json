@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "visible": {
+    "dom_mutation_recorded": true,
+    "frame_recorded": true,
+    "sample": "selftest visible text"
+  },
+  "audio": {
+    "source_started": true,
+    "audible_recorded": true,
+    "error": null
+  },
+  "turn": {
+    "id": 1,
+    "text": "selftest",
+    "t_send": 1058.3999999994412,
+    "t_send_wall": "2026-11-19T19:27:54.430Z",
+    "closed": true,
+    "outcome": "completed",
+    "t_first_visible_text": 1081.0999999996275,
+    "t_first_visible_text_dom": 1058.699999999255,
+    "t_first_visible_text_sample": "selftest visible text",
+    "t_first_audible_audio": 1253.5,
+    "t_first_audio_bytes": null,
+    "binary_frames": 0,
+    "server": {},
+    "error": null,
+    "_assistCountAtStart": 0,
+    "_rafPending": true,
+    "t_closed": 1335.699999999255
+  },
+  "events": [
+    {
+      "i": 14,
+      "t": 1058.5,
+      "wall": "2026-11-19T19:27:54.430Z",
+      "kind": "turn.send",
+      "turn": 1,
+      "chars": 8
+    },
+    {
+      "i": 15,
+      "t": 1058.699999999255,
+      "wall": "2026-11-19T19:27:54.430Z",
+      "kind": "dom.first_visible_text_mutation",
+      "turn": 1,
+      "chars": 21,
+      "sample": "selftest visible text"
+    },
+    {
+      "i": 16,
+      "t": 1081.0999999996275,
+      "wall": "2026-11-19T19:27:54.452Z",
+      "kind": "dom.first_visible_text_frame",
+      "turn": 1,
+      "chars": 21
+    },
+    {
+      "i": 17,
+      "t": 1253.5999999996275,
+      "wall": "2026-11-19T19:27:54.625Z",
+      "kind": "audio.source_start",
+      "turn": 1,
+      "leadMs": 0,
+      "durationS": 0.05
+    },
+    {
+      "i": 18,
+      "t": 1253.5999999996275,
+      "wall": "2026-11-19T19:27:54.625Z",
+      "kind": "turn.first_audible_audio",
+      "turn": 1,
+      "leadMs": 0
+    },
+    {
+      "i": 19,
+      "t": 1284.2999999998137,
+      "wall": "2026-11-19T19:27:54.656Z",
+      "kind": "ws.out",
+      "type": "custom",
+      "bytes": 317,
+      "msg": {
+        "type": "custom",
+        "event": "vite:forward-console",
+        "data": {
+          "type": "log",
+          "data": {
+            "level": "warn",
+            "message": "[Kumo Input]: Input must have an accessible name. Provide either:\n  - label prop: <Input label='Email' />\n  - aria-label: <Input aria-label='Email address' />\n  - aria-labelledby for custom label association"
+          }
+        }
+      }
+    },
+    {
+      "i": 20,
+      "t": 1335.699999999255,
+      "wall": "2026-11-19T19:27:54.707Z",
+      "kind": "turn.closed",
+      "turn": 1,
+      "outcome": "completed"
+    }
+  ]
+}

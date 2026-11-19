@@ -2,12 +2,12 @@
 
 - **Status:** vorgeschlagen (Owner-Entscheidung ausstehend)
 - **Datum:** 19.11.2026
-- **Bezieht sich auf:** `UPSTREAM_SEARCH-vergleichbare-projekte.md`,
-  `tech/UPSTREAM_SEARCH-cloudflare.md`
+- **Bezieht sich auf:** `UPSTREAM-SEARCH-vergleichbare-projekte.md`,
+  `tech/UPSTREAM-SEARCH-cloudflare.md`
 
 ## Kontext
 
-`tech/CLOUDFLARE_MACHBARKEIT.md` führt als Risiko:
+`tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md` führt als Risiko:
 
 > „Keine Vorlage für den Kern der Idee. Die Konkurrenz-Recherche fand kein
 > Projekt, bei dem der Agent die eigene Seite per Regler live umgestaltet."

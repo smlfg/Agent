@@ -8,7 +8,7 @@
     "qwen3.6:35b-a3b",
     "qwen3:8b"
   ],
-  "plan_path": "/Users/samuelfleig/Projects/03_HAI/Agentfaehig/Agent/tech/MESSLAUF-PLAN.md",
+  "plan_path": "~/Projects/03_HAI/Agentfaehig/Agent/tech/MESSLAUF-PLAN.md",
   "plan_sha256": "29e81d628928e85ee58575ea5fb6e987c6aae2f04a455303845bdfe94e2f2f52",
   "threshold": 0.75,
   "overall": 0.792,

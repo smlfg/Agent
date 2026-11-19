@@ -1,6 +1,6 @@
 # Was ich vorhabe — in meinen Worten
 
-Stand: 19.11.2026 · Samuel Flg · Grundlage: `Idea` (eigenes Transkript),
+Stand: 19.11.2026 · Samuel Flg · Grundlage: `IDEA-TRANSKRIPT.txt` (eigenes Transkript),
 `sketches/2026-11-12-agentfaehig.md` (Handskizze auf dem reMarkable),
 `docs/DESIGN-DECISIONS.md` (meine eigenen Antworten aus dem Grilling)
 
@@ -153,6 +153,10 @@ einem Weg, der stockt. Und ich habe jetzt nachgesehen: Workers AI hat aktuell
 **kein deutsches TTS** im Katalog. Deutsch rein geht, deutsch raus ist die
 offene Stelle.
 
+> *Redaktioneller Nachtrag 19.11.2026:* Die Voice-Entscheidung der zweiten Runde
+> lautet Englisch (`DESIGN-DECISIONS.md`, „Voice-Sprache"). Die deutsche
+> Formulierung oben ist der Stand davor; Deutsch bleibt geparktes Feature.
+
 Also: erst planen, dann malen, dann strukturieren — und der letzte Schritt wird
 das Bauen sein.
 
@@ -165,13 +169,13 @@ lässt sich prüfen, ob ich etwas erfunden oder umgedeutet habe.
 
 | Zitat | Quelle |
 |---|---|
-| „Es geht darum dem Human Agent Interface ein Embodiment zu geben auf der Webseite agentfähig" | `Idea`, 00:00:57 |
-| „Professionelles Vibe Coding" | `Idea`, 00:00:57 |
-| „Ich will etwas bauen. / Erst etwas planen. / Dann will ich malen." | `Idea`, 00:00:43–00:00:48 |
-| „der letzte Schritt wird das Bauen sein" | `Idea`, 00:00:50 |
-| „Dass die Webseite selbst ein fetter Agent ist" | `Idea`, 00:01:21 |
-| „Dass das keine Webseite ist" | `Idea`, 00:01:29 |
-| „Voice, Text. Context, Skills." | `Idea`, 00:01:46–00:01:50 |
+| „Es geht darum dem Human Agent Interface ein Embodiment zu geben auf der Webseite agentfähig" | `IDEA-TRANSKRIPT.txt`, 00:00:57 |
+| „Professionelles Vibe Coding" | `IDEA-TRANSKRIPT.txt`, 00:00:57 |
+| „Ich will etwas bauen. / Erst etwas planen. / Dann will ich malen." | `IDEA-TRANSKRIPT.txt`, 00:00:43–00:00:48 |
+| „der letzte Schritt wird das Bauen sein" | `IDEA-TRANSKRIPT.txt`, 00:00:50 |
+| „Dass die Webseite selbst ein fetter Agent ist" | `IDEA-TRANSKRIPT.txt`, 00:01:21 |
+| „Dass das keine Webseite ist" | `IDEA-TRANSKRIPT.txt`, 00:01:29 |
+| „Voice, Text. Context, Skills." | `IDEA-TRANSKRIPT.txt`, 00:01:46–00:01:50 |
 | „nicht bevormundend" | Skizze, Abschnitt 3 „Gefühl und Textur" |
 | „vibrant · alive · vivid", „welcomed", „kinder leicht" | Skizze, Abschnitt 3 |
 | „soft and not scary" | Skizze, Abschnitt 4 „Screens: Ruhe und Bewegung" |
@@ -197,5 +201,5 @@ Dokument — die Sache, nicht der Wortlaut.
 
 *Transkript und Skizze liegen im Repo, damit niemand — auch ich nicht — später
 behaupten kann, es sei immer eine Website mit einem Chatbot daneben gewesen.
-Siehe [`Idea`](../Idea) und
+Siehe [`IDEA-TRANSKRIPT.txt`](../IDEA-TRANSKRIPT.txt) und
 [`sketches/2026-11-12-agentfaehig.md`](../sketches/2026-11-12-agentfaehig.md).*

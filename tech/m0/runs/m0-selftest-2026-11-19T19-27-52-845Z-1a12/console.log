@@ -1,0 +1,25 @@
+2026-11-19T19:27:52.940Z info run m0-selftest-2026-11-19T19-27-52-845Z-1a12 mode=selftest turns=0
+2026-11-19T19:27:52.941Z info resolved model: @cf/zai-org/glm-4.7-flash
+2026-11-19T19:27:52.941Z info server.ts sha256: 4077277c2717a0a425ba499a4770da8ee9511ca610803a210e8f2273f7647e62
+2026-11-19T19:27:54.345Z console.info %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+2026-11-19T19:27:54.372Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:27:54.390Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:27:54.421Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:27:54.427Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:27:54.656Z console.warning [Kumo Input]: Input must have an accessible name. Provide either:
+  - label prop: <Input label='Email' />
+  - aria-label: <Input aria-label='Email address' />
+  - aria-labelledby for custom label association
+2026-11-19T19:27:54.761Z info selftest passed=true visible={"dom_mutation_recorded":true,"frame_recorded":true,"sample":"selftest visible text"} audio={"source_started":true,"audible_recorded":true,"error":null}

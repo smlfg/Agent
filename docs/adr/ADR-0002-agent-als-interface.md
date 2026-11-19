@@ -69,7 +69,7 @@ Daraus folgen drei Regeln für die Umsetzung:
 
 - Wie genau wird der gültige Zustand modelliert? Ein flacher Schlüssel-Wert-
   Zustand (wie `setState` im Agents SDK) oder ein typisiertes Schema
-  (Kandidat aus `tech/UPSTREAM_SEARCH-cloudflare.md`: `json-render`)? → siehe
-  [`docs/PLAN-ADREN.md`](../PLAN-ADREN.md), ADR-0005.
+  (Kandidat aus `tech/UPSTREAM-SEARCH-cloudflare.md`: `json-render`)? → offen,
+  es gibt dafür noch kein ADR; Kandidat nur laut Worker-Bericht.
 - Der erste Regler: Farbe, Temperatur oder Form? In `docs/DESIGN-DECISIONS.md`
   als offene Frage vermerkt.

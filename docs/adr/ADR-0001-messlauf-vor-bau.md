@@ -1,8 +1,13 @@
 # ADR-0001 — Erst bauen: Messlauf vor Anwendungscode
 
 - **Status:** vorgeschlagen (Owner-Entscheidung ausstehend)
+  **Nachtrag 19.11.2026:** Die Entscheidung zur Laufsprache fiel nach diesem
+  ADR: Der Messlauf misst **englisch**, Deutsch ist geparktes Feature
+  ([`DESIGN-DECISIONS.md`](../DESIGN-DECISIONS.md), Voice-Sprache). Die
+  Deutsch-Recherche unten bleibt als Begründung des geparkten Pfads gültig,
+  ist aber kein Messziel mehr.
 - **Datum:** 19.11.2026
-- **Bezieht sich auf:** `docs/PROJECT.md`, `tech/CLOUDFLARE_MACHBARKEIT.md`
+- **Bezieht sich auf:** `docs/PROJECT.md`, `tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md`
 
 ## Kontext
 
@@ -31,8 +36,9 @@ Ohne Messung baut man möglicherweise auf einem Weg, der Deutsch nicht kann.
 **Kein Anwendungscode, bevor ein Messlauf die offenen Fragen beantwortet.**
 
 Der Messlauf ist ein Wegwerf-Experiment: `examples/voice-agent` aus
-`cloudflare/agents` klonen, lokal mit `wrangler dev` starten, zwanzig deutsche
-Sprachwechsel aufnehmen, `first_audio_ms` auswerten. Er dient **nicht** als
+`cloudflare/agents` klonen, lokal mit `wrangler dev` starten, zwanzig
+Sprachwechsel aufnehmen (Sprache: englisch, siehe Nachtrag oben),
+`first_audio_ms` auswerten. Er dient **nicht** als
 Anwendungscode und geht **nicht** in `src/`.
 
 Der Messlauf beantwortet drei Fragen in einem Durchgang:
@@ -70,8 +76,8 @@ Der Messlauf beantwortet drei Fragen in einem Durchgang:
   Workers AI aber nicht im Katalog), oder ein externer Anbieter über
   `agents/voice` (`ElevenLabs`, `Telnyx`, `AssemblyAI` sind im Beispiel
   bereits als STT-Anbieter verdrahtet). → siehe
-  [`docs/PLAN-ADREN.md`](../PLAN-ADREN.md), ADR-0004.
-- Der parallele Prüfbericht [`docs/CLOUDFLARE-MACHBARKEIT.md`](../CLOUDFLARE-MACHBARKEIT.md)
+  [`docs/PLAN-STUFEN-0-5.md`](../PLAN-STUFEN-0-5.md), Stufe 4.
+- Der parallele Prüfbericht [`docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md`](../CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md)
   belegt gegen den lokalen SDK-Quellcode (`agents@0.27.0`), dass ein
   `TTSProvider`-Adapter für deutsche Ausgabe genügt (≈15 Zeilen). Das ist der
   billigste mögliche Ausweg — vor dem Wechsel des Anbieters (Stufe 4) also

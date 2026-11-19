@@ -23,6 +23,11 @@ Die Fragestellungen stammen aus der
 | Backend-Aufrufe (19.11.) | Der Front-Agent ist ein schneller echter Duplex-Sprachagent; dahinter laufen echte schlaue Agenten (Analysing, Looking-up) statt Simulationen. Ergebnisse erscheinen still über State-Sync. |
 | Prüfung (19.11.) | Messlauf als Gate vor dem Erstbau: `examples/voice-agent` lokal, Auswertung von `first_audio_ms` und Stage-Timings. Benötigt Plan-Modus und Owner-Freigabe. Laufsprache: 20 englische Wechsel (2. Runde, 19.11.; ursprünglich deutsch geplant). Freigabe erteilt — Lauf vorbehaltlich des Plan-Validators. |
 | Voice-Sprache (19.11., 2. Runde) | Die Voice-Pipeline (STT/TTS) läuft auf Englisch; die englischsprachigen Default-Bausteine (`flux`, `aura-1`) sind damit bewusst gewählt. Deutsch bleibt **wünschbares Feature** (Samuel: „schönes Feature, aber wenn es nicht geht, dann halt Englisch") — geparkt, erreichbar über externen TTS (Samuel nennt ElevenLabs, weitere Anbieter; Kostenrecherche läuft). Messlauf dadurch entzerrt: 20 englische Wechsel statt deutsche Pipeline. |
+| Regler-Belegung (19.11., Abend) | Der Mensch stellt den Agenten ein: der Bediener zieht den Regler. Zusätzlich wirkt die H2A-Interaktion selbst auf Werdegang und Gestalt. Beides schreibt in denselben Zustand; die Oberfläche ist dessen Projektion. |
+| Erster Regler (19.11., Abend) | **warm ↔ cold** — beantwortet die bisher offene Default-Belegung. Einziger Regler, der in der Skizze zweimal vorkommt und direkt auf einen Token-Vertrag abbildbar ist (Farbtemperatur, Radius, Textur) mit messbarer Kontrastprüfung. |
+| Ausbaupfad der Regler (19.11., Abend) | Fünf geplant, max. drei gleichzeitig sichtbar (Skizze „2 more when this / maybe 5 options but only show 3"). Sichtbar: 1 warm↔cold, 2 Präsenz (ruhig ↔ ausdrucksstark), 3 Tiefe (knapp ↔ forschend). Tempo ist **kein** Regler — bereits durch den Segmentvertrag bestimmt. |
+| Tiefe wirkt doppelt (19.11., Abend) | Tiefe ist **Gestalt und Werdegang**: Anzeige springt sofort um, der Agenten-Aufwand folgt nachgelagert. Im ersten Ablauf ist nur die Gestalt-Hälfte sichtbar. |
+| Projektion der Gestalt (19.11., Abend) | Feste, deterministische Regel zuerst (Ereignis → Gestalt). Eine Modell-Abbildung folgt später und nur als Vorschlag. |
 
 ## Hypothese und technische Abhängigkeiten
 
@@ -46,7 +51,7 @@ mit gewähltem Modell, Browser und gegebenenfalls Sprache fehlt noch.
   messen (Cloudflares Budget 890 ms bleibt unaufgelöst), Beta-Verhalten im
   Live-Betrieb, Modell-Wahl unter den Deprecations vom 20.11.2026 und der
   LLM-Pfad auf einem Free-Account. Evidenz mit SDK-Quellcode-Nachweisen:
-  [CLOUDFLARE-MACHBARKEIT.md](CLOUDFLARE-MACHBARKEIT.md) (Missions-Artefakt vom
+  [CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md](CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md) (Missions-Artefakt vom
   19.11.).
 - Das Umgestaltungs-Verhalten (Agent erfragt sein Aussehen und wirkt live) hat
   keine gefundene Vorlage ([konkurrenz.md](../tech/research/konkurrenz.md));
@@ -62,10 +67,13 @@ mit gewähltem Modell, Browser und gegebenenfalls Sprache fehlt noch.
 Stand 19.11.2026 — die fünf Produktfragen aus `PROJECT.md` sind geklärt; folgende
 Punkte bleiben offen:
 
-- Konkretes Ergebnis des Besuchs: bleibt eine sichtbare Umgestaltung der Seite
-  Teil des ersten Ablaufs oder folgt sie erst dem Ausbaupfad der Regler?
-- Default-Belegung des ersten Reglers, solange der Nutzer noch nichts gesagt hat
-  (Kandidat aus der Skizze: die warm↔cold-Achse).
+- ~~Konkretes Ergebnis des Besuchs: bleibt eine sichtbare Umgestaltung der Seite
+  Teil des ersten Ablaufs oder folgt sie erst dem Ausbaupfad der Regler?~~
+  **Beantwortet 19.11. abends:** sie ist Teil des ersten Ablaufs — der Regler
+  wirkt sofort auf die Gestalt (feste Projektionsregel, s. o.).
+- ~~Default-Belegung des ersten Reglers, solange der Nutzer noch nichts gesagt hat
+  (Kandidat aus der Skizze: die warm↔cold-Achse).~~
+  **Beantwortet 19.11. abends:** warm ↔ cold (s. o.).
 - Beginn des Fokuswechsels beim ersten Text oder erst bei vollständiger Antwort.
 - Typewriter-Tempo, Übergänge, Verhalten bei Streaming-Pausen und langen
   Antworten (Regel für leerlaufenden Puffer).

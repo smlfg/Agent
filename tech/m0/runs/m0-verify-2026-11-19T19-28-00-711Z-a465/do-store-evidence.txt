@@ -1,0 +1,11 @@
+# Durable Object store evidence for run m0-verify-2026-11-19T19-28-00-711Z-a465
+# Instance name (DO name): m0-verify-2026-11-19T19-28-00-711Z-a465
+# Store file: 9a1574d9856027d118bc74037c4f0d4a38478cf7a7aa23ce3b5ecfeabaf1cd5a.sqlite
+# Snapshot: do-store-snapshot.sqlite (copy including WAL, read-only query)
+# Query output:
+id  role  text                                  timestamp
+1   user  Reply with exactly: verification-ok  1795116482347
+role|count
+user|1
+# No assistant row: the model call failed before producing output.
+# No foreign rows: the instance was created for this run's conversation id.
