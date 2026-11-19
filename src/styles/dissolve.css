@@ -1,0 +1,44 @@
+/* Dissolve animation for the leaving pair (Agent M).
+ *
+ * The old pair lifts off upward like smoke: per-glyph drift, a short blur and
+ * a staggered fade. Motion is driven by the Web Animations API in
+ * src/conversation/dissolve.js; this file only prepares the geometry.
+ *
+ * The base .pair-entry.is-leaving rule in conversation.css belongs to another
+ * agent and stays untouched. This selector is more specific on purpose.
+ */
+
+.pair .pair-entry.is-dissolving {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: none;
+  /* No paint containment here: it would clip the upward drift and blur. */
+}
+
+.pair .pair-entry.is-dissolving .pair-prompt,
+.pair .pair-entry.is-dissolving .pair-answer {
+  /* The leaving copy is aria-hidden; keep its boxes from growing the stage. */
+  overflow: visible;
+}
+
+.pair .pair-entry.is-dissolving .dissolve-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.pair .pair-entry.is-dissolving .dissolve-glyph,
+.pair .pair-entry.is-dissolving .dissolve-token {
+  display: inline-block;
+  transform-origin: 50% 80%;
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pair .pair-entry.is-dissolving {
+    opacity: 0;
+    animation: none;
+  }
+}

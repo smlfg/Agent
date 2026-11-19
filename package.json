@@ -5,7 +5,8 @@
   "description": "Ein Human-Agent Interface, bei dem die Website selbst als Agent erlebbar wird. Dieses Repository sammelt derzeit die Idee, Designquellen und das Projektgerüst. Eine lauffähige Anwendung ist noch nicht enthalten.",
   "type": "module",
   "scripts": {
-    "test": "bash scripts/validate.sh",
+    "dev": "python3 -c \"import http.server as h,functools as f;C=type('C',(h.SimpleHTTPRequestHandler,),{'end_headers':lambda s:(s.send_header('Cache-Control','no-store'),h.SimpleHTTPRequestHandler.end_headers(s))});print('agentfaehig dev: http://127.0.0.1:5173/living-surface.html',flush=True);h.ThreadingHTTPServer(('127.0.0.1',5173),f.partial(C,directory='src')).serve_forever()\"",
+    "test": "bash scripts/validate.sh && node --test tests/*.test.js",
     "validate": "bash scripts/validate.sh"
   },
   "repository": {

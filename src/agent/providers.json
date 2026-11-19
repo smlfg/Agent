@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "note": "Priority order for the fallback chain. Names, models and timeouts only - no API keys and no endpoints live in the browser. Adapters are built by the integrator; this file is configuration notation.",
+  "chain": [
+    { "id": "primary", "provider": "anthropic", "model": "configured-by-backend", "timeoutMs": 8000 },
+    { "id": "fallback-1", "provider": "openai", "model": "configured-by-backend", "timeoutMs": 8000 },
+    { "id": "fallback-2", "provider": "google", "model": "configured-by-backend", "timeoutMs": 8000 }
+  ],
+  "defaults": {
+    "timeoutMs": 8000,
+    "quotaTripAfter": 3,
+    "quotaCooldownMs": 60000,
+    "retryBackoffMs": 150
+  }
+}

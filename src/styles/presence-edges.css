@@ -1,0 +1,138 @@
+/* Weiche Kanten um die Augen (Agent K).
+   Wird nach presence.css geladen und greift nur innerhalb von .presence.
+   Nur Masken, Kanten und Schattenränder: Farben, Iris und Deckflächen
+   über dem Auge bleiben unverändert. Die Lider decken das Auge beim
+   Blinzeln und im dormant-Zustand weiterhin vollständig ab, weil nur
+   die äußeren Überstände transparent auslaufen. */
+
+/* ── Lider: die 130 % Breite links/rechts federt weich aus ───────────────
+   Der senkrechte Deckbereich bleibt voll deckend; weich wird nur der
+   seitliche Überstand, der sonst als harte Kante im Verlauf steht. */
+
+.presence .eyelid-top,
+.presence .eyelid-bottom {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+
+/* ── Unterlid: zusätzlich die Unterkante weich auslaufen lassen ──────────
+   Der Fade beginnt erst unterhalb des Auges (auch bei translateY(-30 %)),
+   damit die Lidlinie selbst scharf und deckend bleibt. */
+
+.presence .eyelid-bottom {
+  -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 9%,
+      #000 91%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, #000 0 52%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 9%,
+      #000 91%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, #000 0 52%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* ── Cap: Rechteck an allen vier Kanten auflösen ─────────────────────────
+   Oben ausfaden (liegt über dem Auge), unten in den Augapfel auslaufen,
+   seitlich die 120 % Breite ausfedern. Über der Augenmitte bleibt
+   genug Deckung, dass die Lidnaht verdeckt bleibt. */
+
+.presence .eye-cap-top {
+  -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0, #000 52%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0, #000 52%, #000 82%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* ── Augapfel: breiter grauer Halo raus, weicher warmer Rand ─────────────
+   Die alte Border war ein 30-px-Schein in --border-strong. Ersetzt durch
+   zwei enge, warme Schatten; die elliptische Maske lässt den Rand des
+   Auges selbst sanft in den Verlauf übergehen statt als Kante zu stehen. */
+
+.presence .eye-white {
+  box-shadow: 0 1px 8px rgba(74, 63, 53, 0.09),
+    0 8px 22px rgba(74, 63, 53, 0.06), inset 0 -8px 20px rgba(74, 63, 53, 0.05);
+  -webkit-mask-image: radial-gradient(
+    ellipse 62% 60% at 50% 50%,
+    #000 0 78%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 62% 60% at 50% 50%,
+    #000 0 78%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+
+/* ── Schmale Screens: Augen schrumpfen mit, das Cap bleibt 27 px hoch ────
+   Etwas früherer Fade hält den Rechteck-Überstand auch bei 375 px weich. */
+
+@media (max-width: 480px) {
+  .presence .eye-cap-top {
+    -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0,
+        #000 6%,
+        #000 94%,
+        transparent 100%
+      ),
+      linear-gradient(180deg, transparent 0, #000 50%, #000 84%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(
+        90deg,
+        transparent 0,
+        #000 6%,
+        #000 94%,
+        transparent 100%
+      ),
+      linear-gradient(180deg, transparent 0, #000 50%, #000 84%, transparent 100%);
+  }
+}

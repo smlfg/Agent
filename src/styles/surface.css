@@ -1,0 +1,43 @@
+/* Layer 3 surface: reads the --p-* parameters and their derived variables.
+   Loaded by src/metrics/surface.js at runtime, after the base styles. */
+
+.pair {
+  max-width: var(--pair-measure, 38rem);
+  transition: max-width 1.6s ease;
+}
+
+.pair-entry {
+  gap: var(--pair-gap, 0.75rem);
+  transition: gap 1.6s ease;
+}
+
+.pair-prompt {
+  color: var(--accent, currentColor);
+  opacity: calc(0.82 + var(--accent-warmth, 0.5) * 0.18);
+  transition: color 1.6s ease, opacity 1.6s ease;
+}
+
+.pair-answer {
+  line-height: var(--pair-line-height, 1.5);
+  font-weight: var(--answer-weight, 400);
+  letter-spacing: var(--letter-spacing, 0);
+  transform: rotate(var(--pair-tilt-deg, 0deg));
+  transition:
+    line-height 1.6s ease,
+    font-weight 1.6s ease,
+    letter-spacing 1.6s ease,
+    transform 1.6s ease;
+}
+
+.pair-answer .thinking-dots span {
+  animation-duration: var(--thinking-dots-ms, 1200ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pair,
+  .pair-entry,
+  .pair-prompt,
+  .pair-answer {
+    transition: none;
+  }
+}
