@@ -15,8 +15,9 @@ Status: **VORSCHLAG zur Owner-Abnahme — nicht freigegeben, kein Build.**
 
 Ein vollständiges Low-Fidelity-System für **Agentfähig V1**: Screens,
 Zustände, Responsive-Varianten, Komponenten, Flow-Diagramme und die offenen
-Designentscheidungen. Kein Frontend-Code, keine Farben, keine Animationen, keine
-dekorativen Details.
+Designentscheidungen. **Die sechs Markdown-Dateien dieses Systems enthalten
+keinen Frontend-Code**, keine Farben, keine Animationen, keine dekorativen
+Details.
 
 **Wichtig gegen die naive Lesart:** Die zwölf `WF`-IDs sind **Prüfanker für
 Review und Abnahme, keine zwölf Bausteine.** Es gibt genau **eine** Fläche
@@ -30,6 +31,13 @@ Wer zwölf Seiten baut, hat das Produkt missverstanden.
 | [`02-components.md`](02-components.md) | Wiederverwendbare Bausteine, Upstreams, Accessibility, Responsive-Regeln |
 | [`03-state-matrix.md`](03-state-matrix.md) | Zustandsmatrix, Feedback-Regeln, Lade- und Fehlerverhalten |
 | [`04-open-decisions.md`](04-open-decisions.md) | OD-00 bis OD-19 zur Owner-Freigabe |
+
+**Parallel im selben Ordner:** `agentfaehig-wireframe.html` und
+`wireframe-prototype-interactive.md` stammen aus einer anderen Session. Sie sind
+ein interaktiver HTML-Prototyp mit eigener Spezifikation, **nicht Teil dieses
+Markdown-Systems** und nicht von mir bewertet. Die Ablage ist im Fluss: Der
+Prototyp ist während der Arbeit von `docs/wireframe/` nach `docs/wireframes/`
+gewandert.
 
 ## Wichtiger Befund zur Auftragsgrundlage
 

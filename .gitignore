@@ -36,6 +36,12 @@
 # Entfernt werden der Cache, der Tages-Snapshot und die Grossdateien, die ein
 # neuer Lauf reproduziert (graphify update .).
 /.archify/
+
+# Deploy-Build ist generiert (build.sh) und nicht versioniert.
+/deploy/agentfaehig-site/public/
+/deploy/agentfaehig-site/.wrangler/
+/deploy/agentfaehig-site/.dev.vars
+
 /graphify-out/cache/
 /graphify-out/20*/
 /graphify-out/.graphify_*

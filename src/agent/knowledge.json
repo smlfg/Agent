@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "status": "DRAFT — every fact needs Samuel's approval before publication",
+  "owner": {
+    "name": "Samuel Flg",
+    "role": "Builds Human-Agent Interfaces",
+    "one_liner": "Samuel builds interfaces where the page itself is the agent.",
+    "source": "docs/VISION-samuel.md:11-14, README.md:3"
+  },
+  "offerings": [
+    {
+      "id": "website-as-agent",
+      "title": "A website that is the agent",
+      "what": "An interface that is the agent itself, not a page with a chat box beside it. One conversation, one look.",
+      "for_whom": "Studios and small teams who want a site that answers instead of a brochure.",
+      "example": "A studio owner asks what is possible; the surface answers in a few short lines and asks one real question back.",
+      "source": "README.md:3, docs/VISION-samuel.md:48-50, src/dev/conversation-pathways.json:133-142",
+      "approved": false
+    },
+    {
+      "id": "person-agent",
+      "title": "A version of one person",
+      "what": "The same behaviour, filled with that person's words and boundaries.",
+      "for_whom": "Someone who wants an agent that speaks as them and is unsure what that would take.",
+      "example": "Three things you would say at a first meeting, and one thing you would never say.",
+      "source": "src/dev/conversation-pathways.json:632-645",
+      "approved": false
+    },
+    {
+      "id": "team-knowledge-interface",
+      "title": "An interface for a team's knowledge",
+      "what": "An interface for an internal knowledge team, built around retrieval first and surface second.",
+      "for_whom": "A company evaluating an interface for its internal knowledge team.",
+      "example": "Eight people, four documents and a wiki. The agent starts by asking for three real questions the team asked last week.",
+      "source": "src/dev/conversation-pathways.json:393-427",
+      "approved": false
+    }
+  ],
+  "approach": [
+    {
+      "point": "Read first, draw second, structure third, build last.",
+      "source": "docs/VISION-samuel.md:16-29, docs/VISION-samuel.md:160-161"
+    },
+    {
+      "point": "Search what already exists before building anything new.",
+      "source": "docs/VISION-samuel.md:142-147"
+    },
+    {
+      "point": "Measure the risky assumption before building on it.",
+      "source": "docs/VISION-samuel.md:149-154"
+    },
+    {
+      "point": "Text first; voice comes later and starts on click.",
+      "source": "docs/VISION-samuel.md:101-103"
+    },
+    {
+      "point": "Answer fast in front; slower agents work behind and do not interrupt.",
+      "source": "docs/VISION-samuel.md:107-117, src/dev/conversation-pathways.json:347"
+    },
+    {
+      "point": "The agent can ask what it should look like, and the page changes live.",
+      "source": "docs/VISION-samuel.md:71-76, sketches/2026-11-12-agentfaehig.md:24-28"
+    },
+    {
+      "point": "Not patronising: the page never tells the visitor what to do.",
+      "source": "docs/VISION-samuel.md:93-99, sketches/2026-11-12-agentfaehig.md:65"
+    }
+  ],
+  "projects_public": [
+    {
+      "id": "agentfaehig",
+      "title": "Agentfähig",
+      "what": "The public embodiment of the Human-Agent Interface, in development.",
+      "status": "in development, not a finished product",
+      "source": "docs/VISION-samuel.md:11-14, docs/PROJECT.md:3-6, sketches/2026-11-12-agentfaehig.md:137"
+    },
+    {
+      "id": "hai",
+      "title": "Human Agent Interface (HAI)",
+      "what": "An interface where human and agent work as one system, with the human's ability to act as the measure.",
+      "status": "concept and method",
+      "source": "docs/VISION-samuel.md:11-14, docs/PROJECT.md:68-71"
+    },
+    {
+      "id": "plaud-thoughts",
+      "title": "Plaud thoughts",
+      "what": "A planned way to bring recorded thoughts into the agent's context.",
+      "status": "planned, not built",
+      "source": "sketches/2026-11-12-agentfaehig.md:136, src/dev/conversation-pathways.json:375"
+    }
+  ],
+  "contact": {
+    "method": null,
+    "text": null,
+    "approved": false
+  },
+  "pricing": {
+    "stance": null,
+    "approved": false
+  },
+  "faq": [
+    {
+      "q": "What is this?",
+      "a": "An interface that is the agent itself, not a page with a chat window next to it.",
+      "source": "README.md:3, docs/VISION-samuel.md:48-50",
+      "approved": false
+    },
+    {
+      "q": "Is it a chatbot?",
+      "a": "No. A chatbot is something a page has. Here the page is the agent, and it changes while you talk to it.",
+      "source": "docs/VISION-samuel.md:48-50, docs/VISION-samuel.md:71-76",
+      "approved": false
+    },
+    {
+      "q": "Can it be built for me or my team?",
+      "a": "That is what it is for. The shape depends on what the interface has to do, not on a fixed package.",
+      "source": "sketches/2026-11-12-agentfaehig.md:41-42, src/dev/conversation-pathways.json:393-427",
+      "approved": false
+    },
+    {
+      "q": "Can it run internally only?",
+      "a": "That is a deployment question. The build supports it; the policy is the client's.",
+      "source": "src/dev/conversation-pathways.json:420",
+      "approved": false
+    },
+    {
+      "q": "Does it remember me?",
+      "a": "It answers from what is in the current conversation, not from memory. It can shape an answer around what you say, not recall you later.",
+      "source": "src/dev/conversation-pathways.json:375, docs/missions/M-20261119T220518-4585e9fd-M1-CONTRACT.md:4",
+      "approved": false
+    },
+    {
+      "q": "What does it cost?",
+      "a": "There is no price list here yet. Samuel quotes after he has heard what you actually need.",
+      "source": "src/dev/conversation-pathways.json:153",
+      "approved": false
+    }
+  ],
+  "open_questions_for_samuel": [
+    {
+      "question": "How should a visitor reach you? The knowledge base has contact.method and contact.text as null, so the agent can only say the way is not here yet.",
+      "context": "Owner decision 5 allows the agent to pass contact on. No route (address, form, booking link) is confirmed anywhere in the sources.",
+      "source": "docs/missions/M-20261119T220518-4585e9fd-ANALYSEN-N1-N7.md:883"
+    },
+    {
+      "question": "May the agent accept a visitor's own address in the chat and forward it to you — and is that forwarding actually built?",
+      "context": "The hurried-decider pathway promises it. Nothing in src/ implements forwarding.",
+      "source": "src/dev/conversation-pathways.json:167"
+    },
+    {
+      "question": "Is 'I do not quote. Samuel does, after he has heard what you actually need.' the approved pricing stance, or should pricing stay entirely out of the conversation?",
+      "context": "pricing.stance is null until you decide.",
+      "source": "src/dev/conversation-pathways.json:153"
+    },
+    {
+      "question": "May the agent say anything about timelines or availability?",
+      "context": "The pathway offers 'a thin one' within a week. That is a promise the agent cannot verify today.",
+      "source": "src/dev/conversation-pathways.json:163-169"
+    },
+    {
+      "question": "Which offerings may be named publicly: website, person, team, and what about company-wide builds?",
+      "context": "The sketch lists website, person, team and company; the pathways only show a website, a person and a team case.",
+      "source": "sketches/2026-11-12-agentfaehig.md:41-42"
+    },
+    {
+      "question": "Which projects may appear as public references? None are approved yet, so the agent must not present any.",
+      "context": "No reference is verifiable from these sources. Client and employer work is excluded by the privacy rule.",
+      "source": "docs/missions/M-20261119T220518-4585e9fd-ANALYSEN-N1-N7.md:883"
+    },
+    {
+      "question": "Which role label do you want in public: 'AI engineer', 'builder', or something else?",
+      "context": "The knowledge base currently says 'Builds Human-Agent Interfaces' from the vision document.",
+      "source": "docs/VISION-samuel.md:11-14"
+    },
+    {
+      "question": "Is English the only public language, or should the agent answer in German too?",
+      "context": "English is decided for voice and text; German is parked as a later feature.",
+      "source": "docs/missions/M-20261119T220518-4585e9fd-M1-CONTRACT.md:4, docs/VISION-samuel.md:156-158"
+    },
+    {
+      "question": "Is agentfähig.de the canonical public address for this agent, or a separate unlisted URL?",
+      "context": "The domain currently serves a different editorial page.",
+      "source": "docs/PROJECT.md:180-185"
+    }
+  ]
+}

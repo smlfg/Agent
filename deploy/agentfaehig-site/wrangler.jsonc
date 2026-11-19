@@ -1,0 +1,17 @@
+// agentfähig.de (Worker "agentfaehig"). Living Surface as homepage + /api/agent.
+// KEINE routes: die bestehenden Custom Domains (xn--agentfhig-02a.de, www.xn--agentfhig-02a.de) bleiben.
+// Vorherige Startseite unter /classic/. Secret MINIMAX_API_KEY setzt der Owner selbst.
+{
+  "name": "agentfaehig",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-25",
+  "workers_dev": false,
+  "preview_urls": false,
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": { "MINIMAX_MODEL": "MiniMax-M3.1-Flash" },
+  "observability": { "enabled": true }
+}

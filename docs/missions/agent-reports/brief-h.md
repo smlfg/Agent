@@ -1,0 +1,13 @@
+HAI-Mission M-20261119T220518-4585e9fd, Lease S-20261119T220524-ff2cce7b (Integrator Claude Code). Projekt agentfähig: eine Website, die sich wie ein Agent verhält. Lies zuerst docs/missions/M-20261119T220518-4585e9fd-M1-CONTRACT.md und docs/missions/M-20261119T220518-4585e9fd-M1-BERICHT.md. Seite: src/living-surface.html (Dev: npm run dev, Port 5173). Plain ES modules + CSS, kein Framework, kein Build, keine npm-Installation, kein git. Vendor-Dateien in src/vendor/ NICHT ändern. Ändere AUSSCHLIESSLICH die unten genannten Dateien. Englische UI-Texte. Der Owner sagt: Es ist nur Design, Details dürfen gern overengineered sein — Qualität vor Kürze.
+
+ROLLE: AGENT H — TYPEWRITER "tick, tick, tick"
+DATEIEN: src/conversation/typewriter.js, src/conversation/conversation.js (nur die Typewriter-/Caret-Anbindung), src/styles/typewriter.css, tests/typewriter.test.js.
+OWNER: "Die Antwort sollte wie eine Typewriter-Animation sein … tick, tick, tick, tick. Dafür gibt es garantiert schon fertiges CSS von anderen Leuten."
+UPSTREAM-FIRST: Nutze bekannte, permissiv lizenzierte Muster (z. B. CSS-Caret mit steps()-Blinken; Kadenz-Ideen aus tameemsafi/typewriter-effect, MIT). typed.js und TypeIt sind GPL-3.0 → NICHT verwenden oder kopieren. Wenn du ein Muster übernimmst, nenne Quelle + Lizenz in einem Kommentar oben in der Datei. Nichts herunterladen.
+ZIEL:
+- Zeichenweise statt wortweise (Standard unit: 'char'), Grundtakt ~30 ms, natürlich: kleine deterministische Jitter (injizierbare random-Funktion, Standard: seeded PRNG pro Text, damit Tests stabil sind), längere Pausen nach , ; : (~140 ms) und . ! ? (~320 ms) und Zeilenumbruch.
+- Schnittstelle bleibt kompatibel: createTypewriter({ text, unit = 'char', charDelayMs = 30, wordDelayMs = 45, reducedMotion, schedule, cancel, random, onUpdate, onDone }) → { start, stop }. unit 'word' verhält sich wie bisher.
+- Caret: während des Tippens ein schmaler Block/Balken-Caret (span.tw-caret, aria-hidden) am Ende der sichtbaren Antwort, blinkt mit CSS steps(1) nur in Tipp-Pausen, bleibt beim Tippen ruhig sichtbar, verschwindet ~600 ms nach onDone sanft. Antworttext bleibt reiner Text (textContent) + Caret-Span, keine HTML-Injektion aus dem Antworttext.
+- prefers-reduced-motion / reducedMotion: sofort voller Text, kein Caret-Blinken.
+- tests/typewriter.test.js anpassen und erweitern: char-Modus (Reihenfolge, Präfix, endet mit Volltext, Pausen nach Satzzeichen länger als normal über den Fake-Scheduler mit ms), word-Modus wie bisher, reducedMotion, stop() idempotent ohne onDone, Determinismus bei gleichem Text.
+VERIFIKATION: node --test tests/*.test.js grün. STOP nach Umsetzung, antworte mit geänderten Dateien + Testergebnis.

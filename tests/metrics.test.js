@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 import { createCollector } from '../src/metrics/collect.js';
-import { computeMetrics } from '../src/metrics/compute.js';
+import { AFFECT_METRIC_IDS, computeMetrics } from '../src/metrics/compute.js';
 import { createParameterEngine } from '../src/metrics/engine.js';
 import {
   PARAMETER_IDS,
@@ -85,20 +85,23 @@ test('catalog exposes 12 parameters and 109 metrics', () => {
   assert.deepEqual(catalog.parameters, [...PARAMETER_IDS]);
 });
 
-test('computeMetrics covers exactly the library-free metrics and skips the rest', () => {
+test('computeMetrics covers the library-free metrics plus the local affect set', () => {
   const libraryFree = catalog.metrics.filter((m) => /none/i.test(m.library));
   const libraryBound = catalog.metrics.filter((m) => !/none/i.test(m.library));
+  const affect = catalog.metrics.filter((m) => AFFECT_METRIC_IDS.includes(m.id));
+  const computed = [...libraryFree, ...affect];
   const inputs = buildTurnInputs(pathways.pathways[0].turns[0], 0, 500, 0);
   const metrics = computeMetrics(pathways.pathways[0].turns[0].user, inputs, []);
 
   assert.equal(libraryFree.length, 50);
+  assert.equal(affect.length, AFFECT_METRIC_IDS.length);
   assert.equal(libraryBound.length, catalog.metrics.length - libraryFree.length);
-  assert.deepEqual(Object.keys(metrics).sort(), libraryFree.map((m) => m.id).sort());
+  assert.deepEqual(Object.keys(metrics).sort(), computed.map((m) => m.id).sort());
   for (const [id, value] of Object.entries(metrics)) {
     assert.ok(Number.isFinite(value), `${id} is finite`);
     assert.ok(value >= 0 && value <= 1, `${id} in 0..1`);
   }
-  console.log(`[metrics] computed ${libraryFree.length}, skipped ${libraryBound.length}`);
+  console.log(`[metrics] computed ${computed.length} (${AFFECT_METRIC_IDS.length} local affect), skipped ${catalog.metrics.length - computed.length}`);
 });
 
 test('collector yields one TurnInputs snapshot per turn', () => {

@@ -1,0 +1,12 @@
+HAI-Mission M-20261119T220518-4585e9fd (Integrator Claude Code). Projekt agentfähig: Website, die sich wie ein Agent verhält. Plain CSS, kein Framework, kein git, keine Installation. Vendor-Dateien in src/vendor/ NICHT ändern. Ändere AUSSCHLIESSLICH src/styles/presence-edges.css (wird nach presence.css geladen, siehe src/living-surface.html).
+
+ROLLE: AGENT K — WEICHE KANTEN UM DIE AUGEN
+OWNER: "Die CSS-Border der Augen soll nicht boxy sein — ein smoother Fade-Out, that's it."
+BEFUND: Die Augen aus src/vendor/openvoiceui/styles/eyes.css nutzen Lid-Masken (.eyelid-top, .eyelid-bottom, .eye-cap-top) in einer Vollfarbe var(--dark-bg) und box-shadow am .eye-white. Vor dem warmen Verlaufshintergrund (src/styles/base.css: linear-gradient von --bg-start zu --bg-end) zeichnen sich dadurch harte rechteckige/ovale Flächen und Kanten ab (besonders .eye-cap-top ist ein Rechteck, die Lider sind breiter als das Auge).
+ZIEL: Rund um die Augen keine sichtbaren Kästen oder harten Kanten mehr; alles läuft weich in den Hintergrund aus.
+Techniken (wähle selbst, gern kombinieren): mask-image / -webkit-mask-image mit radial-gradient oder linear-gradient an Lidern und Cap, sodass deren Ränder transparent auslaufen; Cap an den Seiten ausfedern; box-shadow durch weichere, farblich passende Schatten ersetzen; ggf. eine weiche radiale Vignette um .eyes-container. Das Lid muss das Auge beim Blinzeln und im dormant-Zustand (.presence.is-dormant: Lider geschlossen) weiterhin vollständig abdecken — nur die ÄUSSEREN Ränder dürfen ausfaden, nicht die Deckfläche über dem Auge.
+WICHTIG: Ein anderer Agent macht parallel die Augen realistischer (presence.css: Iris, Hautton der Lider). Fasse Farben/Iris NICHT an — nur Kanten, Masken, Schattenränder. Selektoren mit .presence-Präfix verwenden.
+Mobile 375 px und Desktop beachten (Augen sind per min(…vw) skaliert). prefers-reduced-motion irrelevant (keine Animation hinzufügen).
+VERIFIKATION: CSS syntaktisch gültig; node --test tests/*.test.js bleibt grün. STOP nach Umsetzung, antworte mit 5 Zeilen, welche Kanten wie entschärft wurden.
+
+WICHTIG (zweiter Versuch, der erste endete ohne Änderung): Lies NUR src/vendor/openvoiceui/styles/eyes.css, src/styles/presence.css und src/styles/base.css. Danach SCHREIBE sofort die vollständige Datei src/styles/presence-edges.css (mindestens 40 Zeilen echtes CSS). Kein weiteres Erkunden, keine Tests vor dem Schreiben. Erst danach node --test tests/*.test.js.

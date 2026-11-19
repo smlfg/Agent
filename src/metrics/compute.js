@@ -1,6 +1,38 @@
 // Layer 1: turn text and typing events -> normalized metrics (0..1).
-// Only catalog metrics that need no NLP library are computed here. Metrics that
-// require winkNLP, compromise or a sentiment package are deliberately skipped.
+// Metrics that need no NLP library are computed here. The affect set is also
+// computed locally: AFINN-111 (Apache-2.0) plus own seed lists stand in for the
+// sentiment/vader packages, so no dependency is installed.
+
+import { AFINN, AFINN_MAX, AFINN_MIN } from './lexicons/afinn.js';
+import {
+  BOOSTERS,
+  EMOJI_SCORES,
+  EMOTICON_SCORES,
+  FEELING_WORDS,
+  HEDGE_PHRASES,
+  IMPERATIVE_VERBS,
+  INTENSIFIERS,
+  NEGATORS,
+  POLITENESS_PHRASES,
+  SECOND_PERSON,
+  SENTENCE_FILLERS,
+} from './lexicons/affect.js';
+
+export const AFFECT_METRIC_IDS = Object.freeze([
+  'sentiment_valence',
+  'sentiment_balance',
+  'arousal_vader',
+  'self_disclosure',
+  'hedges',
+  'boosters',
+  'politeness_markers',
+  'imperative_mood',
+  'negation_ratio',
+  'second_person_ratio',
+]);
+
+const EMOTICON_PATTERN = /[:;=8][-']?[)(dDpPoO/\\|*]/g;
+const FIRST_PERSON_SINGULAR = new Set(['i', 'me', 'my', 'mine', 'myself', "i'm", 'im', 'ive']);
 
 const clamp = (value, lo = 0, hi = 1) => {
   const n = Number(value);
@@ -192,8 +224,122 @@ export function computeMetrics(text, turnInputs = {}, history = []) {
   metrics.curiosity_words = clamp01(1 - Math.exp(-curiosityCount / 2));
 
   Object.assign(metrics, computeInteractionMetrics(source, turnInputs, history));
+  Object.assign(metrics, computeAffectMetrics(source, lower, words, sentences));
 
   return metrics;
+}
+
+function computeAffectMetrics(source, lower, words, sentences) {
+  const tokenCount = Math.max(1, words.length);
+  const sentenceCount = Math.max(1, sentences.length);
+
+  const emojiScores = emoticonAndEmojiScores(source);
+  const tokenScores = [];
+  for (let i = 0; i < words.length; i++) {
+    const score = afinnTokenScore(words[i]);
+    if (!score) continue;
+    let negated = false;
+    for (let j = i - 1; j >= 0 && j >= i - 3; j--) {
+      if (NEGATORS.has(words[j])) { negated = true; break; }
+    }
+    tokenScores.push(negated ? -score * 0.9 : score);
+  }
+
+  const scores = tokenScores.concat(emojiScores);
+  const hits = scores.length;
+  const sum = scores.reduce((total, score) => total + score, 0);
+  const mean = hits ? sum / hits : 0;
+  const confidence = hits / (hits + 1.5);
+  const valence = mean * confidence;
+  const positive = scores.filter((score) => score > 0).length;
+  const negative = scores.filter((score) => score < 0).length;
+
+  const exclamations = countChar(source, '!');
+  const capsWords = (source.match(/\b[A-Z]{2,}\b/g) ?? []).length;
+  const repeatedPunctuation = (source.match(/[!?]{2,}/g) ?? []).length;
+  const elongations = (lower.match(/([a-z])\1{2,}/g) ?? []).length;
+  const intensifiers = INTENSIFIERS.reduce(
+    (total, phrase) => total + countPhrase(lower, phrase), 0,
+  );
+  const negations = words.reduce(
+    (total, word) => total + (NEGATORS.has(word) || /n['’]t$/.test(word) ? 1 : 0), 0,
+  );
+  const intensityCue = exclamations * 0.7
+    + capsWords * 0.5
+    + repeatedPunctuation * 0.5
+    + elongations * 0.4
+    + intensifiers * 0.5
+    + emojiScores.length * 0.4
+    + negations * 0.2;
+
+  let disclosureHits = 0;
+  let imperativeHits = 0;
+  for (const sentence of sentences) {
+    const sentenceWords = tokensOf(sentence);
+    if (sentenceWords.length === 0) continue;
+    if (sentenceWords.some((word) => FIRST_PERSON_SINGULAR.has(word))
+      && sentenceWords.some((word) => FEELING_WORDS.has(word))) {
+      disclosureHits += 1;
+    }
+    let start = 0;
+    while (start < sentenceWords.length && SENTENCE_FILLERS.has(sentenceWords[start])) start += 1;
+    if (start < sentenceWords.length && IMPERATIVE_VERBS.has(sentenceWords[start])) {
+      imperativeHits += 1;
+    }
+  }
+
+  const hedgeCount = HEDGE_PHRASES.reduce(
+    (total, phrase) => total + countPhrase(lower, phrase), 0,
+  );
+  const boosterCount = BOOSTERS.reduce(
+    (total, phrase) => total + countPhrase(lower, phrase), 0,
+  );
+  const politenessCount = POLITENESS_PHRASES.reduce(
+    (total, phrase) => total + countPhrase(lower, phrase), 0,
+  );
+  const secondPersonHits = words.reduce(
+    (total, word) => total + (SECOND_PERSON.has(word) ? 1 : 0), 0,
+  );
+
+  return {
+    sentiment_valence: clamp01((valence - AFINN_MIN) / (AFINN_MAX - AFINN_MIN)),
+    sentiment_balance: clamp01(((positive - negative) / (positive + negative + 1) + 1) / 2),
+    arousal_vader: clamp01(1 - Math.exp(-intensityCue / 2.2)),
+    self_disclosure: clamp01(disclosureHits / sentenceCount),
+    hedges: clamp01((hedgeCount / tokenCount) * 10),
+    boosters: clamp01((boosterCount / tokenCount) * 10),
+    politeness_markers: clamp01(1 - Math.exp(-politenessCount / 2)),
+    imperative_mood: clamp01(imperativeHits / sentenceCount),
+    negation_ratio: clamp01((negations / tokenCount) / 0.08),
+    second_person_ratio: clamp01((secondPersonHits / tokenCount) / 0.1),
+  };
+}
+
+function afinnTokenScore(word) {
+  return Object.prototype.hasOwnProperty.call(AFINN, word) ? AFINN[word] : 0;
+}
+
+function emoticonAndEmojiScores(source) {
+  const scores = [];
+  const text = String(source);
+  for (const match of text.match(EMOTICON_PATTERN) ?? []) {
+    const key = match.toLowerCase();
+    if (Object.prototype.hasOwnProperty.call(EMOTICON_SCORES, key)) {
+      scores.push(EMOTICON_SCORES[key]);
+    }
+  }
+  let emojiMatches = [];
+  try {
+    emojiMatches = [...text.matchAll(/\p{Extended_Pictographic}\uFE0F?/gu)].map((m) => m[0]);
+  } catch {
+    emojiMatches = [];
+  }
+  for (const glyph of emojiMatches) {
+    const bare = glyph.replace(/\uFE0F/g, '');
+    const value = EMOJI_SCORES[glyph] ?? EMOJI_SCORES[bare];
+    if (Number.isFinite(value)) scores.push(value);
+  }
+  return scores;
 }
 
 function computeInteractionMetrics(source, turnInputs, history) {

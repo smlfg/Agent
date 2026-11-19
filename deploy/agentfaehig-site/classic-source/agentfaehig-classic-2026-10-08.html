@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agentfähig.de — Was willst du heute erledigen lassen?</title>
+<meta name="description" content="Die Startseite von agentfähig.de, von Samuel: Sag, was du erledigen willst, und bekomm den passenden Agenten-Typ plus einen fertigen ersten Auftrag zum Kopieren. Für Einsteiger, ohne Vorwissen.">
+<style>
+  /* ---------- Schriften (selbst gehostet, keine externen Ressourcen) ---------- */
+  @font-face { font-family: 'Newsreader'; src: url('fonts/newsreader.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Special Elite'; src: url('fonts/special-elite.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Caveat'; src: url('fonts/caveat.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Plex Mono'; src: url('fonts/plex-mono.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+
+  :root {
+    --paper: #f6f0e1;          /* Papierweiß, warm */
+    --paper-deep: #efe6d1;     /* vertiefte Flächen */
+    --ink: #1d3557;            /* Tintenblau */
+    --ink-soft: #52617a;
+    --ink-faint: #606a7c;
+    --line: #dcd0b4;           /* feine 1px-Linien */
+    --line-strong: #c6b891;
+    --note: #f6e27a;           /* Notizzettel-Gelb */
+    --note-ink: #1d3557;
+    --stamp: #b7322c;          /* Stempel-Rot, sparsam */
+    --stamp-note: #b7322c;     /* Stempel auf dem gelben Zettel (konstant) */
+    --ok: #2f6b45;
+    --mark: rgba(246, 226, 122, .6);   /* Marker-Highlight */
+    --tape: rgba(255, 255, 255, .5);   /* Klebestreifen */
+    --card-line: #c6b891;      /* harte Papierkante */
+    --maxw: 1040px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #181c25;         /* tiefes Tintenblau, warm statt schwarz */
+      --paper-deep: #212734;
+      --ink: #ece5d5;
+      --ink-soft: #aab2bf;
+      --ink-faint: #7d8696;
+      --line: #323a49;
+      --line-strong: #475064;
+      --note: #e9d15f;
+      --note-ink: #1d3557;
+      --stamp: #e07866;
+      --stamp-note: #b7322c;
+      --ok: #7fc795;
+      --mark: rgba(233, 209, 95, .30);
+      --tape: rgba(255, 255, 255, .16);
+      --card-line: #0c0e13;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    background-color: var(--paper);
+    font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+    line-height: 1.5;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Papierkorn über der ganzen Seite (sehr dezent) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: .05;
+    mix-blend-mode: multiply;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body::before { opacity: .06; mix-blend-mode: screen; }
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 26px 18px 0;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--stamp);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1, h2, h3 { font-family: 'Newsreader', Georgia, serif; }
+
+  h1 {
+    font-size: clamp(2.1rem, 7.5vw, 3.6rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    font-weight: 520;
+    text-wrap: balance;
+  }
+
+  h2 {
+    font-size: clamp(1.45rem, 4.4vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+    font-weight: 560;
+  }
+
+  p { margin: 0 0 12px; }
+
+  mark { background: var(--mark); color: inherit; padding: 0 2px; border-radius: 2px; }
+
+  /* ---------- Brand & Hero ---------- */
+  .hero { padding: 4px 0 6px; }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Plex Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+
+  .brand .dot {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    flex: none;
+    border: 2px solid var(--stamp);
+    box-shadow: inset 0 0 0 2px var(--paper), inset 0 0 0 3px var(--stamp);
+  }
+
+  .lede {
+    margin: 0 0 8px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    font-size: 1.12rem;
+    line-height: 1.45;
+  }
+
+  .nudge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 6px 0 4px;
+    font-size: .92rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  .nudge svg { flex: none; }
+
+  /* Persönliche Handschrift-Zeile über der Headline */
+  .hero-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin: -2px 0 16px;
+    color: var(--stamp);
+  }
+
+  .hero-note .scribble { font-size: 1.35rem; }
+
+  .hero-note svg { flex: none; margin-top: 3px; }
+
+  /* ---------- Demo: erst tun, dann lesen ---------- */
+  .demo { margin: 26px 0 0; position: relative; }
+
+  .demo-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--line-strong);
+    border-radius: 11px;
+    background: var(--paper-deep);
+  }
+
+  .demo-tab {
+    font: inherit;
+    font-weight: 600;
+    font-size: .95rem;
+    line-height: 1.2;
+    cursor: pointer;
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 8px 15px;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+  }
+
+  .demo-tab:hover { color: var(--ink); }
+
+  .demo-tab[aria-selected="true"] {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--line-strong);
+  }
+
+  .demo-stage { margin-top: 20px; }
+
+  .demo-pane {
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 720px) {
+    .demo-pane { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; }
+  }
+
+  .demo-card {
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 16px 18px;
+    position: relative;
+  }
+
+  .demo-card h3 {
+    font-family: 'Plex Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+  }
+
+  .demo-say {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.35;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .parts { list-style: none; margin: 0; padding: 0; }
+
+  .parts li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  .parts li:first-child { border-top: none; }
+
+  .parts .k {
+    font-family: 'Plex Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--stamp);
+    font-weight: 600;
+    padding-top: 3px;
+  }
+
+  .parts .v { font-size: 1rem; line-height: 1.4; }
+
+  .preview-note {
+    margin: 0;
+    font-family: 'Special Elite', monospace;
+    font-size: .88rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 13px;
+  }
+
+  .preview-note .halt {
+    background: var(--mark);
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .preview-tag {
+    display: inline-block;
+    font-family: 'Plex Mono', monospace;
+    font-size: .66rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid var(--line-strong);
+    border-radius: 5px;
+    padding: 2px 8px;
+    margin-bottom: 9px;
+    color: var(--ink-faint);
+  }
+
+  .preview-tag.klar { color: var(--ok); border-color: var(--ok); }
+  .preview-tag.vage { color: var(--ink-faint); border-color: var(--line-strong); }
+
+  /* Handschrift-Randnotizen (Caveat, sparsam) */
+  .scribble {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 3px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: var(--stamp);
+    transform: rotate(-3deg);
+    font-weight: 500;
+  }
+
+  .scribble svg { flex: none; margin-top: -5px; }
+
+  .tiles-scribble { margin: 4px 0 18px; font-size: 1.45rem; }
+
+  /* ---------- Kacheln: Karteikarten auf dem Schreibtisch ---------- */
+  .tiles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 20px 18px;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 560px) {
+    .tiles { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (min-width: 880px) {
+    .tiles { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .tiles li {
+    display: flex;
+    transition: transform .18s ease;
+  }
+
+  .tiles li:nth-child(3n+1) { transform: rotate(-1.1deg); }
+  .tiles li:nth-child(3n+2) { transform: rotate(.8deg); }
+  .tiles li:nth-child(3n)   { transform: rotate(-.6deg); }
+
+  .tiles li:hover,
+  .tiles li:focus-within { transform: translateY(-3px) rotate(0deg); z-index: 1; }
+
+  @media (max-width: 559px) {
+    .tiles li { transform: none; }
+    .tiles li:hover, .tiles li:focus-within { transform: translateY(-3px); }
+  }
+
+  .tile-btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 18px 22px;
+    position: relative;
+    box-shadow: 2px 2px 0 var(--card-line);
+    transition: box-shadow .18s ease, border-color .18s ease;
+  }
+
+  .tiles li:hover .tile-btn,
+  .tiles li:focus-within .tile-btn {
+    box-shadow: 4px 6px 0 var(--line-strong);
+    border-color: var(--line-strong);
+  }
+
+  .tile-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    color: var(--ink-soft);
+    transition: color .18s ease;
+  }
+
+  .tile-icon svg { width: 30px; height: 30px; display: block; stroke-width: 1.5; }
+
+  .tiles li:hover .tile-icon,
+  .tiles li:focus-within .tile-icon { color: var(--stamp); }
+
+  .tile-label {
+    font-weight: 620;
+    font-size: 1.12rem;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  .tile-hint {
+    font-size: .9rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: auto;
+  }
+
+  /* ---------- Ergebnis: der Auftragszettel ---------- */
+  .result { margin-top: 34px; }
+
+  .result-card {
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 18px 24px;
+    animation: popIn .32s cubic-bezier(.2, .8, .25, 1) both;
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(14px) scale(.985); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .result-eyebrow {
+    font-family: 'Plex Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 8px;
+  }
+
+  .result-card h3 {
+    font-size: clamp(1.5rem, 5.4vw, 2rem);
+    margin: 0 0 6px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+
+  .result-card h3:focus { outline: none; }
+
+  .result-wofuer { color: var(--ink-soft); margin: 0 0 14px; font-size: 1.05rem; }
+
+  .examples {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+    margin: 0 0 22px;
+  }
+
+  .examples-label {
+    font-family: 'Plex Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .chip {
+    font-family: 'Special Elite', monospace;
+    font-size: .82rem;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line-strong);
+    padding-bottom: 1px;
+  }
+
+  /* Der gelbe Zettel */
+  .zettel {
+    position: relative;
+    background: var(--note);
+    color: var(--note-ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 32px 18px 26px;
+    margin: 0 0 24px;
+    box-shadow: 3px 4px 0 var(--card-line);
+    transform: rotate(-.5deg);
+  }
+
+  .zettel::before {
+    content: "";
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 96px;
+    height: 26px;
+    background: var(--tape);
+    border: 1px solid rgba(0, 0, 0, .07);
+    border-radius: 1px;
+  }
+
+  .prompt-block { margin: 0; }
+
+  .prompt-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 0 6px;
+  }
+
+  .prompt-head h4 {
+    margin: 0;
+    font-family: 'Newsreader', serif;
+    font-size: 1.05rem;
+    font-weight: 620;
+    color: var(--note-ink);
+  }
+
+  .prompt-head h4 span {
+    display: block;
+    font-family: 'Plex Mono', monospace;
+    font-size: .68rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    color: rgba(29, 53, 87, .65);
+  }
+
+  .prompt-box {
+    margin: 0;
+    background: transparent;
+    border: none;
+    font-family: 'Special Elite', monospace;
+    font-size: .92rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: var(--note-ink);
+  }
+
+  .copy-status {
+    font-family: 'Special Elite', monospace;
+    font-size: .8rem;
+    color: var(--note-ink);
+    min-height: 1.2em;
+    margin-top: 6px;
+  }
+
+  /* Stempel: FREIGABE: DU */
+  .stamp {
+    position: absolute;
+    right: -8px;
+    bottom: -16px;
+    width: 104px;
+    height: 104px;
+    color: var(--stamp-note);
+    transform: rotate(-13deg);
+    opacity: .95;
+    pointer-events: none;
+  }
+
+  @media (max-width: 420px) {
+    .stamp { width: 84px; height: 84px; right: -4px; bottom: -12px; }
+  }
+
+  .btn {
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    transition: transform .14s ease, background-color .16s ease, border-color .16s ease, color .16s ease;
+  }
+
+  .btn:active { transform: translateY(1px); }
+
+  .btn-stamp {
+    background: transparent;
+    color: var(--stamp);
+    border: 2px solid var(--stamp);
+    border-radius: 8px;
+    font-family: 'Plex Mono', monospace;
+    font-size: .74rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    transform: rotate(-1.5deg);
+  }
+
+  .btn-stamp:hover { background: var(--stamp); color: var(--paper); }
+  .btn-stamp:active { transform: rotate(-1.5deg) translateY(1px); }
+
+  .btn-stamp.is-ok { color: var(--ok); border-color: var(--ok); }
+  .btn-stamp.is-ok:hover { background: var(--ok); color: var(--paper); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink-soft);
+    border-color: var(--line-strong);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+  }
+
+  .btn-ghost:hover { color: var(--stamp); border-color: var(--stamp); }
+
+  .steps { margin: 0 0 20px; }
+
+  .steps h4 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+
+  .steps ol {
+    counter-reset: schritt;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .steps li {
+    position: relative;
+    padding: 2px 0 12px 42px;
+  }
+
+  .steps li:last-child { padding-bottom: 0; }
+
+  .steps li::before {
+    counter-increment: schritt;
+    content: counter(schritt) ".";
+    position: absolute;
+    left: 0;
+    top: -4px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.9rem;
+    line-height: 1;
+    color: var(--stamp);
+    transform: rotate(-4deg);
+  }
+
+  .achtung {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--stamp);
+    border-radius: 8px;
+    padding: 13px 14px;
+    margin: 0 0 20px;
+  }
+
+  .achtung svg { flex: none; color: var(--stamp); margin-top: 2px; }
+  .achtung p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+  .achtung strong {
+    display: block;
+    font-family: 'Plex Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    color: var(--stamp);
+  }
+
+  /* ---------- Was ist ein Agent ---------- */
+  .section { margin: 46px 0 0; }
+
+  .explain {
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 18px;
+  }
+
+  .explain p { margin: 0 0 12px; font-size: 1.06rem; }
+  .explain p:last-child { margin-bottom: 0; }
+  .explain strong { color: var(--ink); font-weight: 650; }
+
+  /* ---------- Warum ich das mache: der Brief ---------- */
+  .letter {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 24px 22px;
+    box-shadow: 3px 4px 0 var(--card-line);
+    transform: rotate(-.45deg);
+    max-width: 680px;
+  }
+
+  .letter p {
+    margin: 0 0 13px;
+    font-size: 1.08rem;
+    line-height: 1.55;
+  }
+
+  .letter p:last-child { margin-bottom: 0; }
+
+  .letter-core {
+    font-size: clamp(1.55rem, 5.5vw, 2.2rem);
+    font-weight: 620;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 24px 0 10px !important;
+    text-wrap: balance;
+  }
+
+  .letter-sign {
+    font-family: 'Caveat', cursive;
+    font-size: 2.15rem;
+    line-height: 1;
+    color: var(--stamp);
+    transform: rotate(-2deg);
+    margin: 2px 0 18px !important;
+  }
+
+  .letter-ps {
+    font-size: .95rem !important;
+    font-style: italic;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--line-strong);
+    padding-top: 14px;
+    margin: 0 !important;
+  }
+
+  /* Handschrift-Randnotizen (Caveat, sparsam) */
+  .demo-scribble { margin: 18px 0 0; }
+  .result-scribble { margin: 4px 4px 20px; font-size: 1.35rem; }
+
+  /* ---------- Übersicht ---------- */
+  .cats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .cats li {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .cats li:first-child { border-top: none; }
+
+  @media (min-width: 640px) {
+    .cats li {
+      grid-template-columns: minmax(160px, 1.1fr) 2fr auto;
+      align-items: center;
+      gap: 14px;
+    }
+  }
+
+  .cat-name { font-weight: 620; font-size: 1.02rem; }
+  .cat-ex { font-size: .92rem; color: var(--ink-soft); }
+
+  .badge {
+    justify-self: start;
+    font-family: 'Plex Mono', monospace;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: 1px solid var(--line-strong);
+    border-radius: 5px;
+    padding: 3px 9px;
+    background: var(--paper);
+    color: var(--ink-soft);
+    transform: rotate(-2deg);
+  }
+
+  .badge-leicht { color: var(--ok); border-color: var(--ok); }
+  .badge-mittel { color: var(--stamp); border-color: var(--stamp); }
+
+  .note {
+    font-size: .84rem;
+    color: var(--ink-faint);
+    margin: 10px 2px 0;
+    font-style: italic;
+  }
+
+  /* ---------- Abschluss ---------- */
+  .outro {
+    margin: 46px 0 0;
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 20px;
+  }
+
+  .outro h2 { color: var(--ink); }
+
+  .outro p { color: var(--ink-soft); max-width: 55ch; }
+
+  .outro .btn {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--stamp);
+    color: #fff;
+    margin-top: 6px;
+    font-family: 'Plex Mono', monospace;
+    font-size: .8rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: 8px;
+  }
+
+  .outro .btn:hover { background: var(--ink); color: var(--paper); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+    padding: 20px 16px 36px;
+  }
+
+  .foot-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--ink-soft);
+    font-size: .9rem;
+  }
+
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+
+  footer a { text-decoration: underline; text-underline-offset: 2px; }
+  footer a:hover { color: var(--stamp); }
+
+  [hidden] { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+    .tiles li,
+    .zettel,
+    .scribble,
+    .btn-stamp,
+    .stamp,
+    .steps li::before,
+    .badge { transform: none !important; }
+    .letter,
+    .letter-sign { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="brand"><span class="dot" aria-hidden="true"></span>agentfähig.de</p>
+    <p class="hero-note">
+      <span class="scribble">Ich arbeite nicht mit einem Computer, sondern mit einem Agenten. — Samuel</span>
+      <svg width="24" height="42" viewBox="0 0 24 42" fill="none" aria-hidden="true"><path d="M12 2 C 12 14, 12 24, 12 32 M12 32 l-6 -6 M12 32 l6 -6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </p>
+    <h1>Was willst du heute erledigen lassen?</h1>
+    <p class="lede">Tipp auf eine Kachel. Du bekommst sofort den passenden Agenten-Typ und einen fertigen ersten Auftrag zum Kopieren.</p>
+    <p class="nudge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Kein Formular. Die Kacheln senden nichts. Du klickst nur.
+    </p>
+
+    <section class="demo" aria-label="Einzeiler oder Auftrag">
+      <div class="demo-toggle" role="tablist" aria-label="So fragst du — oder so gibst du einen Auftrag">
+        <button class="demo-tab" type="button" role="tab" id="tab-frage" aria-selected="true" aria-controls="pane-frage">So fragen die meisten</button>
+        <button class="demo-tab" type="button" role="tab" id="tab-auftrag" aria-selected="false" aria-controls="pane-auftrag">So gibst du einen Auftrag</button>
+      </div>
+
+      <div class="demo-stage">
+        <div class="demo-pane" id="pane-frage" role="tabpanel" aria-labelledby="tab-frage">
+          <div class="demo-card">
+            <h3>Was du sagst</h3>
+            <p class="demo-say">„Recherchiere mal Wärmepumpen für mich."</p>
+          </div>
+          <div class="demo-card">
+            <h3>Was du zurückbekommst</h3>
+            <p class="preview-tag vage">vager Murks</p>
+            <p class="preview-note">Ein langer, allgemeiner Text ohne Quellen. Danach fünf Rückfragen, bevor klar ist, was du eigentlich wolltest.</p>
+          </div>
+        </div>
+
+        <div class="demo-pane" id="pane-auftrag" role="tabpanel" aria-labelledby="tab-auftrag">
+          <div class="demo-card">
+            <h3>Was du sagst — fünf Zeilen</h3>
+            <ul class="parts">
+              <li><span class="k">Ziel</span><span class="v">Eine Empfehlung, welche Wärmepumpe passt — mit Preisspanne und Amortisation. <span class="scribble">das ist der Trick <svg width="42" height="26" viewBox="0 0 42 26" fill="none" aria-hidden="true"><path d="M3 23 C 12 3, 30 2, 40 7 M40 7 l-9 -2 M40 7 l-1 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></span></li>
+              <li><span class="k">Kontext</span><span class="v">Reihenhaus mit Fußbodenheizung, kein Gasanschluss.</span></li>
+              <li><span class="k">Grenzen</span><span class="v">Nichts kaufen lassen. Nur recherchieren und vergleichen.</span></li>
+              <li><span class="k">Fertig, wenn</span><span class="v">Drei Modelle mit Quelle, Preisspanne und Amortisationszeit.</span></li>
+              <li><span class="k">Bei Unklarheit</span><span class="v">„Erfinde nichts. Schreib ‚unbekannt' oder frag mich."</span></li>
+            </ul>
+          </div>
+          <div class="demo-card">
+            <h3>Was du zurückbekommst</h3>
+            <p class="preview-tag klar">klarer Plan</p>
+            <p class="preview-note">Plan: erst Quellen sichten, dann drei Modelle vergleichen, am Ende eine Empfehlung mit Quellen.<br><span class="halt">Warte auf dein OK, bevor ich weitermache.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="scribble demo-scribble">Du formulierst, was du willst — dabei wirst du klüger.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="frage-titel">
+      <h2 id="frage-titel" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Wähle eine Situation</h2>
+      <p class="scribble tiles-scribble">und jetzt: wähl einen Zettel <svg width="44" height="26" viewBox="0 0 44 26" fill="none" aria-hidden="true"><path d="M3 3 C 8 20, 26 22, 42 10 M42 10 l-8 2 M42 10 l-4 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></p>
+      <ul class="tiles" id="tiles">
+        <li>
+          <button type="button" class="tile-btn" data-key="mail">
+            <span class="tile-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <span class="tile-label">Eine schwierige Mail schreiben</span>
+            <span class="tile-hint">Zum Beispiel: eine Bitte, eine Absage, ein Widerspruch.</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="tile-btn" data-key="recherche">
+            <span class="tile-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+            </span>
+            <span class="tile-label">Etwas herausfinden</span>
+            <span class="tile-hint">Eine Frage, viele Quellen, eine klare Zusammenfassung.</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="tile-btn" data-key="meeting">
+            <span class="tile-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/><path d="M8 21h8"/></svg>
+            </span>
+            <span class="tile-label">Ein Meeting festhalten</span>
+            <span class="tile-hint">Mitschrift und Aufgaben, ohne selbst mitzuschreiben.</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="tile-btn" data-key="aufraeumen">
+            <span class="tile-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M9 9v11"/><path d="M13 13h5"/><path d="M13 16h5"/></svg>
+            </span>
+            <span class="tile-label">Eine Tabelle oder ein Dokument aufräumen</span>
+            <span class="tile-hint">Sortieren, doppelte Zeilen weg, sauber formatieren.</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="tile-btn" data-key="webseite">
+            <span class="tile-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M2.5 8h19"/><circle cx="5.5" cy="6" r=".6" fill="currentColor" stroke="none"/><circle cx="7.7" cy="6" r=".6" fill="currentColor" stroke="none"/><path d="m13 12 4 1.6-1.7.7-.7 1.7z" fill="currentColor" stroke="none"/></svg>
+            </span>
+            <span class="tile-label">Etwas auf einer Webseite erledigen</span>
+            <span class="tile-hint">Formular ausfüllen, Preise vergleichen, Termin finden.</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="tile-btn" data-key="wiederkehrend">
+            <span class="tile-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 4v4h-4"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 20v-4h4"/></svg>
+            </span>
+            <span class="tile-label">Eine wiederkehrende Aufgabe abgeben</span>
+            <span class="tile-hint">Jede Woche dasselbe? Lass es automatisch laufen.</span>
+          </button>
+        </li>
+      </ul>
+    </section>
+
+    <section class="result" id="ergebnis" hidden aria-labelledby="ergebnis-titel" aria-live="polite">
+      <div class="result-card" id="ergebnis-card"></div>
+    </section>
+
+    <section class="section" aria-labelledby="warum-titel">
+      <h2 id="warum-titel">Warum ich das mache</h2>
+      <div class="letter">
+        <p>Ich habe vor etwa zwei Jahren angefangen — wie alle: mit Chatten. Neugierig, ausprobierend.</p>
+        <p>Dann kam der Wendepunkt: Ich habe aufgehört zu fragen und angefangen, Aufträge zu geben.</p>
+        <p>Seitdem: über 3.000 Arbeitssitzungen mit KI-Agenten.</p>
+        <p>Was ich dabei gelernt habe: Die beste KI nützt nichts, wenn die Arbeitsweise falsch ist. Es geht um das Wie, nicht um das Tool. Und Vertrauen wächst durch Prüfen, nicht vorab.</p>
+        <p class="letter-core">„Andere machen Agenten fähiger.<br>Ich mache <mark>Menschen agentenfähig</mark>.“</p>
+        <p class="letter-sign"><a href="https://www.samuelfleig.com" style="text-decoration:none" title="Mehr über Samuel">Samuel</a></p>
+        <p class="letter-ps">Der eigene Sprung ist bei mir lange her — diese Seite ist die Abkürzung, die ich selbst gern gehabt hätte.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="was-titel">
+      <h2 id="was-titel">Was ist ein Agent?</h2>
+      <div class="explain">
+        <p>Ein <mark>Agent</mark> ist ein KI-Programm, das nicht nur antwortet, sondern Schritte für dich erledigt.</p>
+        <p>Du sagst ihm ein Ziel. Er plant die Schritte und nutzt dafür Werkzeuge wie Suche, Mail oder Kalender.</p>
+        <p>Du behältst die Kontrolle: Du prüfst, du gibst frei, du entscheidest.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="uebersicht-titel">
+      <h2 id="uebersicht-titel">Alle Agenten-Typen im Überblick</h2>
+      <ul class="cats">
+        <li>
+          <span class="cat-name">Chat-Assistenten</span>
+          <span class="cat-ex">ChatGPT, Claude, Gemini — Fragen stellen, Texte schreiben, Dinge erklären lassen.</span>
+          <span class="badge badge-leicht">leicht</span>
+        </li>
+        <li>
+          <span class="cat-name">Recherche-Agenten</span>
+          <span class="cat-ex">Perplexity, Deep Research in ChatGPT/Gemini — sucht im Netz, liest viele Quellen, fasst mit Quellen zusammen.</span>
+          <span class="badge badge-leicht">leicht</span>
+        </li>
+        <li>
+          <span class="cat-name">Office-Assistenten</span>
+          <span class="cat-ex">Microsoft Copilot, Gemini in Google Workspace — hilft direkt in Mail, Dokumenten, Tabellen.</span>
+          <span class="badge badge-leicht">leicht</span>
+        </li>
+        <li>
+          <span class="cat-name">Sprach- und Notiz-Agenten</span>
+          <span class="cat-ex">Plaud, Otter — nimmt Gespräche auf, schreibt mit, fasst zusammen.</span>
+          <span class="badge badge-leicht">leicht</span>
+        </li>
+        <li>
+          <span class="cat-name">Browser-Agenten</span>
+          <span class="cat-ex">ChatGPT Agent, Claude in Chrome — klickt sich selbst durch Webseiten und erledigt Aufgaben.</span>
+          <span class="badge badge-mittel">mittel</span>
+        </li>
+        <li>
+          <span class="cat-name">Automatisierungs-Agenten</span>
+          <span class="cat-ex">Zapier Agents, n8n — verbindet Apps und erledigt wiederkehrende Abläufe.</span>
+          <span class="badge badge-mittel">mittel</span>
+        </li>
+      </ul>
+      <p class="note">Beispiele, keine Werbung. Stand: September 2026.</p>
+    </section>
+
+    <section class="outro" aria-labelledby="outro-titel">
+      <h2 id="outro-titel">Geschafft? Mit HAI behältst du den Überblick, wenn es mehr Agenten werden.</h2>
+      <p>HAI ist die nächste Stufe: ein Ort, an dem du mehrere Agenten steuerst und ihre Ergebnisse siehst.</p>
+      <a class="btn" href="https://human-agent-interface.com" rel="noopener">Zu HAI</a>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <span>agentfähig.de · von <a href="https://www.samuelfleig.com">Samuel</a> · ein Einstieg vor HAI</span>
+    <nav class="foot-links" aria-label="Rechtliches">
+      <a href="https://human-agent-interface.com" rel="noopener">HAI</a>
+      <a href="https://www.human-agent-interface.com/impressum/">Impressum</a>
+      <a href="https://www.human-agent-interface.com/datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var DATA = {
+    mail: {
+      typ: "Chat-Assistenten",
+      wofuer: "Fragen stellen, Texte schreiben, Dinge erklären lassen.",
+      beispiele: ["ChatGPT", "Claude", "Gemini"],
+      prompt: "Hilf mir, eine schwierige Mail zu schreiben.\n\nDie Situation: [beschreibe kurz, worum es geht].\nDie Person ist [z. B. meine Vermieterin].\nIch möchte freundlich bleiben und trotzdem klar sagen, was ich brauche.\n\nSchreibe mir zwei Versionen: eine kurze und eine ausführlichere.",
+      schritte: [
+        "Öffne ChatGPT, Claude oder Gemini.",
+        "Kopiere den Auftrag hinein und ersetze die [Klammern] mit deinen Worten.",
+        "Lies die Antwort, sag „kürzer“ oder „freundlicher“ und übernimm sie."
+      ],
+      achtung: "Prüfe Namen, Beträge und Zusagen selbst, bevor du die Mail abschickst. Der Agent kann sich irren."
+    },
+    recherche: {
+      typ: "Recherche-Agenten",
+      wofuer: "Sucht im Netz, liest viele Quellen, fasst mit Quellen zusammen.",
+      beispiele: ["Perplexity", "Deep Research in ChatGPT", "Deep Research in Gemini"],
+      prompt: "Finde heraus: [deine Frage].\n\nFasse das in 5 Punkten zusammen.\nNenne zu jedem Punkt die Quelle mit Link.\nSag mir am Ende, was unsicher oder umstritten ist.",
+      schritte: [
+        "Öffne Perplexity oder Deep Research.",
+        "Stelle die Frage so genau wie möglich.",
+        "Klick mindestens zwei Quellen an und prüfe sie selbst."
+      ],
+      achtung: "Klick die Quellen an. Eine Zusammenfassung ohne geprüfte Quelle ist nur ein Hinweis, keine Antwort."
+    },
+    meeting: {
+      typ: "Sprach- und Notiz-Agenten",
+      wofuer: "Nimmt Gespräche auf, schreibt mit, fasst zusammen.",
+      beispiele: ["Plaud", "Otter"],
+      prompt: "Hier ist das Transkript von unserem Meeting: [Transkript einfügen].\n\nMach mir daraus:\n1. eine kurze Zusammenfassung in 5 Sätzen,\n2. eine Liste der Aufgaben mit der zuständigen Person,\n3. die offenen Fragen.",
+      schritte: [
+        "Frag vorher alle im Raum, ob du aufnehmen darfst.",
+        "Nimm das Meeting mit der App auf.",
+        "Schick den Auftrag hinterher und verteile die Aufgaben."
+      ],
+      achtung: "Ohne die Erlaubnis aller Beteiligten nicht aufnehmen. Das gilt auch im Homeoffice."
+    },
+    aufraeumen: {
+      typ: "Office-Assistenten",
+      wofuer: "Hilft direkt in Mail, Dokumenten und Tabellen.",
+      beispiele: ["Microsoft Copilot", "Gemini in Google Workspace"],
+      prompt: "Räume diese Tabelle auf: [Inhalt einfügen].\n\nBitte: doppelte Zeilen entfernen, nach Datum sortieren und eine Spalte „Summe“ ergänzen.\nZeig mir zuerst, was du ändern willst, bevor du es umsetzt.",
+      schritte: [
+        "Öffne Copilot in Word/Excel oder Gemini in Docs/Sheets.",
+        "Füge den Auftrag und den Inhalt ein.",
+        "Prüfe den Vorschlag und lass dir jede Änderung zeigen."
+      ],
+      achtung: "Deine Daten gehen an den Anbieter. Bei vertraulichen Inhalten vorher fragen, ob das erlaubt ist."
+    },
+    webseite: {
+      typ: "Browser-Agenten",
+      wofuer: "Klickt sich selbst durch Webseiten und erledigt Aufgaben.",
+      beispiele: ["ChatGPT Agent", "Claude in Chrome"],
+      prompt: "Hier ist die Webseite: [Link einfügen].\n\nSuche nach [was du brauchst] und fülle das Formular mit diesen Angaben aus: [deine Angaben].\nZeig mir vor dem Absenden jeden Schritt und warte auf mein OK.",
+      schritte: [
+        "Öffne den Browser-Agenten und gib ihm die Seite.",
+        "Beschreibe die Aufgabe Schritt für Schritt.",
+        "Schau beim ersten Mal live zu und bestätige jeden Schritt."
+      ],
+      achtung: "Nichts bestellen, buchen, zahlen oder absenden lassen, ohne dass du vorher zustimmst."
+    },
+    wiederkehrend: {
+      typ: "Automatisierungs-Agenten",
+      wofuer: "Verbindet Apps und erledigt wiederkehrende Abläufe.",
+      beispiele: ["Zapier Agents", "n8n"],
+      prompt: "Jeden Montag um 8 Uhr:\n\nSammle alle neuen Anhänge aus meinem Mail-Ordner „Rechnungen“ und lege sie in meinem Cloud-Ordner „Belege 2026“ ab.\nSchick mir danach eine kurze Liste, was abgelegt wurde.",
+      schritte: [
+        "Öffne Zapier oder n8n.",
+        "Verbinde die zwei Apps (zum Beispiel Mail und Cloud-Ordner).",
+        "Bau den Ablauf, teste ihn von Hand und beobachte den ersten echten Lauf."
+      ],
+      achtung: "Lass den Ablauf erst testen, bevor er scharf ist. Ein Automat ohne Test macht Fehler in Serie."
+    }
+  };
+
+  var tiles = document.getElementById("tiles");
+  var ergebnis = document.getElementById("ergebnis");
+  var card = document.getElementById("ergebnis-card");
+
+  function esc(text) {
+    return String(text).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function reducedMotion() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function render(key) {
+    var d = DATA[key];
+    if (!d) return;
+
+    var chips = d.beispiele.map(function (b) {
+      return '<span class="chip">' + esc(b) + "</span>";
+    }).join("");
+
+    var schritte = d.schritte.map(function (s) {
+      return "<li>" + esc(s) + "</li>";
+    }).join("");
+
+    card.innerHTML =
+      '<p class="result-eyebrow">Dein Agenten-Typ</p>' +
+      '<h3 id="ergebnis-titel" tabindex="-1">' + esc(d.typ) + "</h3>" +
+      '<p class="result-wofuer">' + esc(d.wofuer) + "</p>" +
+      '<div class="examples"><span class="examples-label">Beispiele</span>' + chips + "</div>" +
+
+      '<div class="zettel">' +
+        '<div class="prompt-block">' +
+          '<div class="prompt-head">' +
+            '<h4>Dein erster Auftrag<span>Kopieren, [Klammern] ersetzen, einfügen.</span></h4>' +
+            '<button type="button" class="btn btn-stamp" id="copy-btn">Auftrag kopieren</button>' +
+          "</div>" +
+          '<pre class="prompt-box" id="prompt-text" tabindex="0"></pre>' +
+          '<p class="copy-status" id="copy-status" role="status"></p>' +
+        "</div>" +
+        '<svg class="stamp" viewBox="0 0 120 120" aria-hidden="true" focusable="false">' +
+          '<circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="3"/>' +
+          '<circle cx="60" cy="60" r="47" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
+          '<text x="60" y="44" text-anchor="middle" font-family="Plex Mono, monospace" font-size="11" letter-spacing="1.5" fill="currentColor">FREIGABE</text>' +
+          '<text x="60" y="74" text-anchor="middle" font-family="Plex Mono, monospace" font-size="25" font-weight="700" fill="currentColor">DU</text>' +
+          '<text x="60" y="86" text-anchor="middle" font-family="Plex Mono, monospace" font-size="9" letter-spacing="2" fill="currentColor">&#9733; &#9733; &#9733;</text>' +
+        "</svg>" +
+        '<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Freigabe: du</span>' +
+      "</div>" +
+
+      '<p class="scribble result-scribble">Du entscheidest, der Agent arbeitet.</p>' +
+
+      '<div class="steps">' +
+        "<h4>So gehst du vor</h4>" +
+        "<ol>" + schritte + "</ol>" +
+      "</div>" +
+
+      '<div class="achtung">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>' +
+        "<p><strong>Achte darauf</strong>" + esc(d.achtung) + "</p>" +
+      "</div>" +
+
+      '<button type="button" class="btn btn-ghost" id="reset-btn">Andere Aufgabe wählen</button>';
+
+    document.getElementById("prompt-text").textContent = d.prompt;
+
+    var copyBtn = document.getElementById("copy-btn");
+    var status = document.getElementById("copy-status");
+    var promptText = document.getElementById("prompt-text");
+
+    copyBtn.addEventListener("click", function () {
+      copyText(d.prompt, copyBtn, status, promptText);
+    });
+
+    document.getElementById("reset-btn").addEventListener("click", function () {
+      resetToTiles(key);
+    });
+
+    ergebnis.hidden = false;
+
+    var titel = document.getElementById("ergebnis-titel");
+    if (titel) titel.focus({ preventScroll: true });
+
+    if (reducedMotion()) {
+      ergebnis.scrollIntoView({ block: "start" });
+    } else {
+      ergebnis.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  function copyText(text, btn, status, promptEl) {
+    var done = function () {
+      btn.textContent = "Kopiert!";
+      btn.classList.add("is-ok");
+      status.textContent = "Der Auftrag ist in deiner Zwischenablage.";
+      window.setTimeout(function () {
+        btn.textContent = "Auftrag kopieren";
+        btn.classList.remove("is-ok");
+        status.textContent = "";
+      }, 2200);
+    };
+
+    var fallback = function () {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) {
+        done();
+      } else {
+        selectNode(promptEl);
+        status.textContent = "Automatisch kopieren ging nicht. Der Text ist markiert – drück jetzt Strg+C (Mac: Cmd+C).";
+      }
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  function selectNode(node) {
+    try {
+      var range = document.createRange();
+      range.selectNodeContents(node);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      node.focus({ preventScroll: true });
+    } catch (e) { /* nichts weiter möglich */ }
+  }
+
+  function resetToTiles(key) {
+    ergebnis.hidden = true;
+    card.innerHTML = "";
+    var btn = tiles.querySelector('[data-key="' + key + '"]');
+    if (btn) btn.focus({ preventScroll: true });
+    var hero = document.getElementById("frage-titel");
+    if (hero) hero.scrollIntoView({ block: "start" });
+  }
+
+  tiles.addEventListener("click", function (event) {
+    var btn = event.target.closest(".tile-btn");
+    if (!btn || !tiles.contains(btn)) return;
+    render(btn.getAttribute("data-key"));
+  });
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  document.documentElement.classList.add("js");
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".demo-tab"));
+  var panes = Array.prototype.slice.call(document.querySelectorAll(".demo-pane"));
+
+  function activate(id) {
+    tabs.forEach(function (t) {
+      t.setAttribute("aria-selected", t.id === id ? "true" : "false");
+    });
+    panes.forEach(function (p) {
+      p.hidden = (p.id !== id);
+    });
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () { activate(t.id); });
+  });
+
+  // Start: die häufige (vage) Variante, damit der Unterschied beim Umschalten sichtbar wird.
+  activate("tab-frage");
+})();
+</script>
+<!-- Erklär-Agent (cwh-11-explain, Mandant agentfaehig) – vor </body> einfügen. Kein externes Script, keine Cookies außer der Session-Cookie von /api/explain. -->
+<style>
+  .explain-fab { position: fixed; right: 16px; bottom: 16px; z-index: 50; padding: 12px 18px; border: 2px solid var(--ink); border-radius: 999px; background: var(--note); color: var(--note-ink); font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: 0 2px 0 var(--line-strong); }
+  .explain-fab:focus-visible, .explain-form button:focus-visible, .explain-form input:focus-visible, .explain-close:focus-visible { outline: 3px solid var(--stamp); outline-offset: 2px; }
+  .explain-box { position: fixed; right: 16px; bottom: 76px; z-index: 50; width: min(380px, calc(100vw - 32px)); max-height: min(540px, 72vh); display: flex; flex-direction: column; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--paper); color: var(--ink); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+  .explain-box[hidden] { display: none; }
+  .explain-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .explain-close { border: 0; background: transparent; color: var(--ink); font-size: 1.3rem; line-height: 1; cursor: pointer; padding: 4px 8px; }
+  .explain-log { flex: 1; overflow-y: auto; padding: 14px; display: grid; gap: 10px; font-size: 0.98rem; line-height: 1.45; }
+  .explain-log p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .explain-log .q { color: var(--ink-soft); font-style: italic; }
+  .explain-log .hint { color: var(--ink-faint); font-size: 0.86rem; }
+  .explain-log .hint a { color: inherit; text-decoration: underline; }
+  .explain-form { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--line); }
+  .explain-form input { flex: 1; min-width: 0; padding: 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--paper-deep); color: var(--ink); font-family: inherit; font-size: 1rem; }
+  .explain-form button { padding: 10px 14px; border: 0; border-radius: 8px; background: var(--ink); color: var(--paper); font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  @media (max-width: 520px) { .explain-box { right: 8px; left: 8px; bottom: 72px; width: auto; max-height: 70vh; } }
+</style>
+<button class="explain-fab" id="explainFab" type="button" aria-expanded="false" aria-controls="explainBox">Lass es dir erklären</button>
+<section class="explain-box" id="explainBox" hidden role="dialog" aria-label="Erklär-Agent">
+  <div class="explain-head"><span>Erklär-Agent</span><button class="explain-close" id="explainClose" type="button" aria-label="Schließen">×</button></div>
+  <div class="explain-log" id="explainLog" aria-live="polite">
+    <p>Ich bin ein Agent und erkläre dir diese Seite. Frag einfach, z. B. „Welcher Agent hilft mir bei einer Mail?“</p>
+    <p class="hint"><strong>Du sprichst mit einer KI.</strong> Sie antwortet nur aus den Inhalten dieser Seite und kann sich irren. Deine Nachrichten werden über Cloudflare verarbeitet, bitte gib keine persönlichen Daten ein. <a href="https://www.human-agent-interface.com/datenschutz/#ki-chat">Datenschutz</a></p>
+  </div>
+  <form class="explain-form" id="explainForm">
+    <input id="explainInput" maxlength="500" autocomplete="off" placeholder="Deine Frage" aria-label="Deine Frage" required>
+    <button type="submit">Fragen</button>
+  </form>
+</section>
+<script>
+  (() => {
+    const fab = document.getElementById("explainFab"), box = document.getElementById("explainBox"), closeBtn = document.getElementById("explainClose");
+    const log = document.getElementById("explainLog"), form = document.getElementById("explainForm"), input = document.getElementById("explainInput");
+    let ready = false, busy = false;
+    const say = (text, cls) => { const p = document.createElement("p"); if (cls) p.className = cls; p.textContent = text; log.append(p); log.scrollTop = log.scrollHeight; return p; };
+    const post = (path, body) => fetch("/api/explain/" + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body || {}) })
+      .then(async (r) => ({ status: r.status, data: await r.json().catch(() => ({})) }));
+    const setOpen = (open) => { box.hidden = !open; fab.setAttribute("aria-expanded", String(open)); if (open) input.focus(); else fab.focus(); };
+    fab.addEventListener("click", () => setOpen(box.hidden));
+    closeBtn.addEventListener("click", () => setOpen(false));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !box.hidden) setOpen(false); });
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question || busy) return;
+      busy = true; input.value = ""; say(question, "q");
+      const pending = say("…", "hint");
+      try {
+        if (!ready) {
+          const c = await post("checkout");
+          if (c.status === 429) throw new Error("Für heute sind alle Erklär-Gespräche verbraucht. Die Kacheln oben funktionieren weiter.");
+          if (!c.data.ok) throw new Error("Der Erklär-Agent ist gerade nicht erreichbar. Die Kacheln oben funktionieren weiter.");
+          await post("session/start"); ready = true;
+        }
+        const a = await post("session/advisory", { message: question });
+        if (a.data.error === "secret_like_input_rejected") throw new Error("Das sah nach einem Passwort oder Schlüssel aus. Bitte keine Geheimnisse eingeben.");
+        if (a.status === 401) { ready = false; throw new Error("Das Gespräch ist abgelaufen. Stell deine Frage bitte noch einmal."); }
+        if (a.status === 429) throw new Error("Dieses Gespräch ist am Limit. Die Kacheln oben helfen dir weiter.");
+        if (!a.data.ok) throw new Error("Die Antwort konnte nicht erzeugt werden.");
+        pending.className = ""; pending.textContent = a.data.message;
+      } catch (err) { pending.className = "hint"; pending.textContent = err.message; }
+      finally { busy = false; }
+    });
+  })();
+</script>
+
+</body>
+</html>
