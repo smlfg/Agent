@@ -1,0 +1,239 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1794518906.4034472,
+    "seen": 1795013775.925388,
+    "ast_hash": "206608a85f55d3945fa0b80c09e23964",
+    "semantic_hash": "206608a85f55d3945fa0b80c09e23964",
+    "ast_empty": true
+  },
+  ".github/workflows/validate.yml": {
+    "mtime": 1794518906.403671,
+    "seen": 1795013775.9253929,
+    "ast_hash": "0205397f210774f3496d34fac112e378",
+    "semantic_hash": "0205397f210774f3496d34fac112e378"
+  },
+  "scripts/validate.sh": {
+    "mtime": 1794521647.538557,
+    "seen": 1795013775.925429,
+    "ast_hash": "60df1ec8347719e065c4ab0cfdd949c2",
+    "semantic_hash": "60df1ec8347719e065c4ab0cfdd949c2"
+  },
+  "sketches/raw/2026-11-12-agentfaehig.content.json": {
+    "mtime": 1794518548.4820728,
+    "seen": 1795013775.9254541,
+    "ast_hash": "ae72bd6f3d135849b36cf64c16f7af5e",
+    "semantic_hash": "ae72bd6f3d135849b36cf64c16f7af5e",
+    "ast_empty": true
+  },
+  "sketches/raw/2026-11-12-agentfaehig.metadata.json": {
+    "mtime": 1794518548.4846103,
+    "seen": 1795013775.925455,
+    "ast_hash": "82e5e5bd25f268e2be9b309ac799197f",
+    "semantic_hash": "82e5e5bd25f268e2be9b309ac799197f",
+    "ast_empty": true
+  },
+  "AGENTS.md": {
+    "mtime": 1794521647.5378106,
+    "seen": 1795013775.9254558,
+    "ast_hash": "f3ec3b7b7bc1feb0eaf129d2abfba6aa",
+    "semantic_hash": "f3ec3b7b7bc1feb0eaf129d2abfba6aa"
+  },
+  "Agentf\u00e4hig/GreateWriting.txt": {
+    "mtime": 1794518906.403932,
+    "seen": 1795013775.925477,
+    "ast_hash": "d7b1dc2f2f957566a2a75835e15a2f6b",
+    "semantic_hash": "d7b1dc2f2f957566a2a75835e15a2f6b"
+  },
+  "README.md": {
+    "mtime": 1794521647.5380013,
+    "seen": 1795013775.925505,
+    "ast_hash": "71e50dc7564ceb4fe197d0370a978bb1",
+    "semantic_hash": "71e50dc7564ceb4fe197d0370a978bb1"
+  },
+  "docs/DESIGN-DECISIONS.md": {
+    "mtime": 1795018493.5837564,
+    "seen": 1795019851.641012,
+    "ast_hash": "d3818eb26ac7971dbb3e401069e03bf2",
+    "semantic_hash": "d3818eb26ac7971dbb3e401069e03bf2"
+  },
+  "docs/PROJECT.md": {
+    "mtime": 1794521647.5382206,
+    "seen": 1795013775.925546,
+    "ast_hash": "c611b1afccd260a7cf62555d5cc317b5",
+    "semantic_hash": "c611b1afccd260a7cf62555d5cc317b5"
+  },
+  "research/SCOUT-SYNTHESIS.md": {
+    "mtime": 1794521647.538434,
+    "seen": 1795013775.925567,
+    "ast_hash": "5fb9ce9e38dd45e71e06cdcea1eaed7a",
+    "semantic_hash": "5fb9ce9e38dd45e71e06cdcea1eaed7a"
+  },
+  "sketches/2026-11-12-agentfaehig.md": {
+    "mtime": 1795018335.3737319,
+    "seen": 1795019851.641095,
+    "ast_hash": "28248d697bc76d36f523304ce18b92ae",
+    "semantic_hash": "28248d697bc76d36f523304ce18b92ae"
+  },
+  "tech/ABGLEICH.md": {
+    "mtime": 1795018449.9132264,
+    "seen": 1795019851.64115,
+    "ast_hash": "18818c6a664a54991c411eaa158b84d6",
+    "semantic_hash": "18818c6a664a54991c411eaa158b84d6"
+  },
+  "tech/CLOUDFLARE_MACHBARKEIT.md": {
+    "mtime": 1794522569.3824768,
+    "seen": 1795013775.925633,
+    "ast_hash": "9469e251dc67fdf8fef6cf0e3c960296",
+    "semantic_hash": "9469e251dc67fdf8fef6cf0e3c960296"
+  },
+  "tech/INTENT.md": {
+    "mtime": 1795018449.9172983,
+    "seen": 1795019851.641174,
+    "ast_hash": "e7c203b64cd82f38df03c9c4844232f3",
+    "semantic_hash": "e7c203b64cd82f38df03c9c4844232f3"
+  },
+  "tech/LUECKEN.md": {
+    "mtime": 1794522844.6028798,
+    "seen": 1795013775.925674,
+    "ast_hash": "31de9dc7ed6676f32b266d75c7d8210e",
+    "semantic_hash": "31de9dc7ed6676f32b266d75c7d8210e"
+  },
+  "tech/UPSTREAM_SEARCH.md": {
+    "mtime": 1795018457.3061762,
+    "seen": 1795019851.641212,
+    "ast_hash": "a0b57a1f25880a7db92de40cfd16d588",
+    "semantic_hash": "a0b57a1f25880a7db92de40cfd16d588"
+  },
+  "tech/briefs/cloudflare-bausteine.md": {
+    "mtime": 1795018476.990222,
+    "seen": 1795019851.641213,
+    "ast_hash": "609f37ac12ca2da084efb101d4cceaa7",
+    "semantic_hash": "609f37ac12ca2da084efb101d4cceaa7"
+  },
+  "tech/briefs/konkurrenz.md": {
+    "mtime": 1795018476.9902136,
+    "seen": 1795019851.641213,
+    "ast_hash": "9a9a16ac50d81393faf699398463483d",
+    "semantic_hash": "9a9a16ac50d81393faf699398463483d"
+  },
+  "tech/research/cloudflare-bausteine.md": {
+    "mtime": 1795018476.9853878,
+    "seen": 1795019851.641214,
+    "ast_hash": "48ad3cf13a278cef4fbb55860a9b5a4f",
+    "semantic_hash": "48ad3cf13a278cef4fbb55860a9b5a4f"
+  },
+  "tech/research/konkurrenz.md": {
+    "mtime": 1794522053.518638,
+    "seen": 1795013775.925784,
+    "ast_hash": "fc627dc5f8469fd50cb6f7f051e69a4b",
+    "semantic_hash": "fc627dc5f8469fd50cb6f7f051e69a4b"
+  },
+  "UPSTREAM_SEARCH.md": {
+    "mtime": 1795018346.8269253,
+    "seen": 1795019851.6410089,
+    "ast_hash": "8773fcc40012a5594ebea76ca4eb7091",
+    "semantic_hash": "8773fcc40012a5594ebea76ca4eb7091"
+  },
+  "notion/README.md": {
+    "mtime": 1794520410.0219958,
+    "seen": 1795014224.411725,
+    "ast_hash": "1ce14873393f213e6210d9e4e0e83ec1",
+    "semantic_hash": "1ce14873393f213e6210d9e4e0e83ec1"
+  },
+  "research/README.md": {
+    "mtime": 1794521647.5383399,
+    "seen": 1795014224.411726,
+    "ast_hash": "3280b5385df4d4e8eb845d26aa35ba0f",
+    "semantic_hash": "3280b5385df4d4e8eb845d26aa35ba0f"
+  },
+  "skills/grilling/SKILL.md": {
+    "mtime": 1794521647.5387635,
+    "seen": 1795014224.4117272,
+    "ast_hash": "4ea8eded5259df4e57780e91e194bd29",
+    "semantic_hash": "4ea8eded5259df4e57780e91e194bd29"
+  },
+  "src/README.md": {
+    "mtime": 1794521647.538903,
+    "seen": 1795014224.411728,
+    "ast_hash": "fb7b293f88832a518962680a48487209",
+    "semantic_hash": "fb7b293f88832a518962680a48487209"
+  },
+  "tests/README.md": {
+    "mtime": 1795018493.5837789,
+    "seen": 1795019851.641255,
+    "ast_hash": "256d3358e59e70d316d9b7429d0ed59a",
+    "semantic_hash": "256d3358e59e70d316d9b7429d0ed59a"
+  },
+  "sketches/blocks/01-einstieg.png": {
+    "mtime": 1794518796.7198517,
+    "seen": 1795014224.4117298,
+    "ast_hash": "8670be1c651a798146a23d71d3cfd394",
+    "semantic_hash": "8670be1c651a798146a23d71d3cfd394"
+  },
+  "sketches/blocks/02-vom-user-zum-agent.png": {
+    "mtime": 1794518796.7468534,
+    "seen": 1795014224.411732,
+    "ast_hash": "f64ebac0c07757fc8cb659dc885c6d82",
+    "semantic_hash": "f64ebac0c07757fc8cb659dc885c6d82"
+  },
+  "sketches/blocks/03-gefuehl-und-textur.png": {
+    "mtime": 1794518796.7709587,
+    "seen": 1795014224.411733,
+    "ast_hash": "861f2e9aa725a916901c157328a86ce0",
+    "semantic_hash": "861f2e9aa725a916901c157328a86ce0"
+  },
+  "sketches/blocks/04-screens-ruhe-und-bewegung.png": {
+    "mtime": 1794518796.792341,
+    "seen": 1795014224.411734,
+    "ast_hash": "94c744f81468f39b0e7f4c1015119090",
+    "semantic_hash": "94c744f81468f39b0e7f4c1015119090"
+  },
+  "sketches/blocks/05-screens-input-und-slider.png": {
+    "mtime": 1794518796.8255808,
+    "seen": 1795014224.411735,
+    "ast_hash": "c74f11a91754c5ce51726849b377a0e1",
+    "semantic_hash": "c74f11a91754c5ce51726849b377a0e1"
+  },
+  "sketches/blocks/06-hai-interaction-und-design.png": {
+    "mtime": 1794518796.840597,
+    "seen": 1795014224.411736,
+    "ast_hash": "40ff36020e679b7294b261c893c922aa",
+    "semantic_hash": "40ff36020e679b7294b261c893c922aa"
+  },
+  "sketches/blocks/07-agent-architektur.png": {
+    "mtime": 1794518796.8621783,
+    "seen": 1795014224.411736,
+    "ast_hash": "03a5410648e51240287c8b483cf89af8",
+    "semantic_hash": "03a5410648e51240287c8b483cf89af8"
+  },
+  "sketches/blocks/08-meta-und-philosophie.png": {
+    "mtime": 1794518796.8745046,
+    "seen": 1795014224.4117372,
+    "ast_hash": "24a12eace4cba3052ec82db08ee553af",
+    "semantic_hash": "24a12eace4cba3052ec82db08ee553af"
+  },
+  "sketches/blocks/09-steps-und-recherche.png": {
+    "mtime": 1794518796.8939674,
+    "seen": 1795014224.4117382,
+    "ast_hash": "cd78440c1297aecc51211393e072d9d3",
+    "semantic_hash": "cd78440c1297aecc51211393e072d9d3"
+  },
+  "sketches/blocks/10-technik-und-ausblick.png": {
+    "mtime": 1794518796.9076555,
+    "seen": 1795014224.4117389,
+    "ast_hash": "6263dcca5109505fb0effd69d8c50388",
+    "semantic_hash": "6263dcca5109505fb0effd69d8c50388"
+  },
+  "sketches/2026-11-12-agentfaehig.png": {
+    "mtime": 1794518548.47674,
+    "seen": 1795014258.101948,
+    "ast_hash": "ef6c89de5726764437957c7fe271184c",
+    "semantic_hash": "ef6c89de5726764437957c7fe271184c"
+  },
+  "sketches/2026-11-12-agentfaehig.pdf": {
+    "mtime": 1794518548.4734519,
+    "seen": 1795017609.3226082,
+    "ast_hash": "de4ab46cef3e23f7c046b035e46278fd",
+    "semantic_hash": "de4ab46cef3e23f7c046b035e46278fd"
+  }
+}

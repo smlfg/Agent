@@ -1,0 +1,366 @@
+{
+  "communities": {
+    "0": [
+      "agentfaehig_greatewriting",
+      "agents",
+      "blocks_dir",
+      "css",
+      "docs_design_decisions",
+      "docs_project",
+      "greate_writing",
+      "grilling_skill",
+      "hai_interaction",
+      "pathways",
+      "pypdfium2",
+      "raw_dir",
+      "readme",
+      "remarkable_paper_pro",
+      "research_scout_synthesis",
+      "sketches_2026_11_12_agentfaehig",
+      "skills_grilling_skill",
+      "sliders",
+      "tech_briefs_konkurrenz"
+    ],
+    "1": [
+      "agents_sdk_voice",
+      "cloudflare_agents_sdk",
+      "cloudflare_queues",
+      "cloudflare_workflows",
+      "deepgram",
+      "elevenlabs",
+      "latency_budget_800ms",
+      "machine_payments_protocol",
+      "plivo",
+      "tech_research_cloudflare_bausteine",
+      "telnyx",
+      "twilio",
+      "workers_ai_models_llm",
+      "workers_ai_models_stt",
+      "workers_ai_models_tts",
+      "workers_ai_models_vision",
+      "x402_payments"
+    ],
+    "2": [
+      "a2ui",
+      "async_agent_pattern",
+      "generative_ui",
+      "hume_evi",
+      "json_render",
+      "langchain_deep_agents",
+      "latency_target_800ms",
+      "livekit_agents",
+      "moshi",
+      "open_webui",
+      "openai_agents_sdk",
+      "pipecat",
+      "stimm",
+      "tech_research_konkurrenz",
+      "vercel_ai_sdk",
+      "voice_pipeline"
+    ],
+    "3": [
+      "agents_skills_graphify_mesh",
+      "anthropic_openai_deepseek",
+      "foambubble_foam",
+      "graphify_labs_graphify",
+      "graphify_out_graph_html",
+      "graphify_out_graph_json",
+      "graphify_out_graph_report_md",
+      "graphifyy",
+      "kimi_moonshot",
+      "lucasrosati_claude_code_memory_setup",
+      "minimax_3_1_flash",
+      "ollama",
+      "qwen2_5vl_7b",
+      "qwen3_6_35b_a3b_64k",
+      "tttrz_graphify_rs",
+      "upstream_search"
+    ],
+    "4": [
+      "ai_gateway",
+      "ai_search",
+      "analysing_agent",
+      "backup_agent",
+      "cloudflare_ai_gateway",
+      "cloudflare_realtime",
+      "durable_objects",
+      "front_man_agent",
+      "looking_up_agent",
+      "queues",
+      "tech_briefs_cloudflare_bausteine",
+      "tech_cloudflare_machbarkeit_front_agent",
+      "tech_cloudflare_machbarkeit_websocket",
+      "vectorize",
+      "workers_ai",
+      "workflows"
+    ],
+    "5": [
+      "github_workflows_validate",
+      "github_workflows_validate_jobs",
+      "github_workflows_validate_jobs_validate",
+      "github_workflows_validate_name",
+      "github_workflows_validate_on",
+      "github_workflows_validate_on_pull_request",
+      "github_workflows_validate_on_push",
+      "github_workflows_validate_on_workflow_dispatch",
+      "github_workflows_validate_permissions",
+      "github_workflows_validate_permissions_contents",
+      "github_workflows_validate_steps_run",
+      "github_workflows_validate_steps_uses",
+      "github_workflows_validate_validate_runs_on",
+      "github_workflows_validate_validate_steps"
+    ],
+    "6": [
+      "gedanken_ideen_1",
+      "gedanken_ideen_2",
+      "hai_agenten_architektur_page",
+      "mcp_server_notion",
+      "mensch_heute_page",
+      "notion_readme",
+      "projekte_db",
+      "sketches_2026_11_12_agentfaehig_pdf",
+      "sketches_dir",
+      "tasks_db",
+      "tp_control_center_hub",
+      "user_notion_connector"
+    ],
+    "7": [
+      "abgleich",
+      "agentfaehig",
+      "claude",
+      "claudeflareworkerhaus",
+      "cloudflare_bausteine",
+      "cloudflare_machbarkeit",
+      "glm_5_3_flash",
+      "human_agent_interface",
+      "konkurrenz",
+      "minimax_m3_1_flash",
+      "tech_intent"
+    ],
+    "8": [
+      "a2ui_project_a2ui",
+      "anomalyco_phonecall",
+      "cloudflare_agents",
+      "cloudflare_agents_starter",
+      "cloudflare_realtime_examples",
+      "pipecat_ai_pipecat",
+      "stimm_ai_stimm",
+      "tech_upstream_search",
+      "vercel_labs_json_render"
+    ],
+    "9": [
+      "agents_sdk",
+      "cloudflare",
+      "scout_synthesis",
+      "tech_abgleich",
+      "tech_abgleich__ref__cloudflare_machbarkeit",
+      "tech_abgleich__ref__docs_design_decisions",
+      "tech_abgleich__ref__docs_project",
+      "tech_cloudflare_machbarkeit_agentfaehig"
+    ],
+    "10": [
+      "research_readme",
+      "scout_synthesis_md"
+    ],
+    "11": [
+      "scripts_validate",
+      "scripts_validate_sh__entry"
+    ],
+    "12": [
+      "tech_cloudflare_machbarkeit_samuel",
+      "tech_luecken_samuel_decisions"
+    ],
+    "13": [
+      "sketches_2026-11-12-agentfaehig"
+    ],
+    "14": [
+      "sketches_blocks_01-einstieg"
+    ],
+    "15": [
+      "sketches_blocks_02_vom_user_zum_agent"
+    ],
+    "16": [
+      "sketches_blocks_03_gefuehl_und_textur"
+    ],
+    "17": [
+      "sketches_blocks_04_screens_ruhe_und_bewegung"
+    ],
+    "18": [
+      "sketches_blocks_05_screens_input_und_slider"
+    ],
+    "19": [
+      "sketches_blocks_06_hai_interaction_und_design_png"
+    ],
+    "20": [
+      "sketches_blocks_07_agent_architektur"
+    ],
+    "21": [
+      "sketches_blocks_08_meta_und_philosophie"
+    ],
+    "22": [
+      "sketches_blocks_09_steps_und_recherche"
+    ],
+    "23": [
+      "sketches_blocks_10_technik_und_ausblick"
+    ],
+    "24": [
+      "src_readme"
+    ],
+    "25": [
+      "tech_cloudflare_machbarkeit_latenz_budget"
+    ],
+    "26": [
+      "tech_cloudflare_machbarkeit_state_sync"
+    ],
+    "27": [
+      "tests_readme"
+    ],
+    "28": [
+      "typewriter"
+    ]
+  },
+  "cohesion": {
+    "0": 0.1695906432748538,
+    "1": 0.13970588235294118,
+    "2": 0.16666666666666666,
+    "3": 0.13333333333333333,
+    "4": 0.19166666666666668,
+    "5": 0.14285714285714285,
+    "6": 0.19696969696969696,
+    "7": 0.18181818181818182,
+    "8": 0.2222222222222222,
+    "9": 0.25,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0
+  },
+  "gods": [
+    {
+      "id": "tech_research_cloudflare_bausteine",
+      "label": "Cloudflare-Bausteine Research",
+      "degree": 22
+    },
+    {
+      "id": "sketches_2026_11_12_agentfaehig",
+      "label": "Agentf\u00e4hig Sketch",
+      "degree": 21
+    },
+    {
+      "id": "tech_intent",
+      "label": "Agentf\u00e4hig Technical Intent",
+      "degree": 20
+    },
+    {
+      "id": "upstream_search",
+      "label": "Upstream Search Document",
+      "degree": 14
+    },
+    {
+      "id": "notion_readme",
+      "label": "Notion README Status Document",
+      "degree": 11
+    },
+    {
+      "id": "tech_briefs_cloudflare_bausteine",
+      "label": "Brief Cloudflare-Bausteine",
+      "degree": 11
+    },
+    {
+      "id": "tech_research_konkurrenz",
+      "label": "Konkurrenz Recherche",
+      "degree": 11
+    },
+    {
+      "id": "tech_upstream_search",
+      "label": "UPSTREAM_SEARCH (Tech)",
+      "degree": 9
+    },
+    {
+      "id": "tech_cloudflare_machbarkeit_front_agent",
+      "label": "Front-Agent",
+      "degree": 6
+    },
+    {
+      "id": "durable_objects",
+      "label": "Durable Objects",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Notion README Status Document",
+      "target": "Agentfaehig Sketch PDF",
+      "source_files": [
+        "notion/README.md",
+        "sketches/2026-11-12-agentfaehig.pdf"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 paper); connects across different repos/directories; peripheral node `Agentfaehig Sketch PDF` unexpectedly reaches hub `Notion README Status Document`"
+    },
+    {
+      "source": "Agentf\u00e4hig Sketch",
+      "target": "cloudflare/agents",
+      "source_files": [
+        "sketches/2026-11-12-agentfaehig.md",
+        "tech/UPSTREAM_SEARCH.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities; peripheral node `cloudflare/agents` unexpectedly reaches hub `Agentf\u00e4hig Sketch`"
+    },
+    {
+      "source": "Agentf\u00e4hig Technical Intent",
+      "target": "Upstream Search Document",
+      "source_files": [
+        "tech/INTENT.md",
+        "UPSTREAM_SEARCH.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "cites",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Abgleich Document",
+      "target": "aggregierte Scout-Befunde",
+      "source_files": [
+        "tech/ABGLEICH.md",
+        "sketches/2026-11-12-agentfaehig.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; peripheral node `aggregierte Scout-Befunde` unexpectedly reaches hub `Abgleich Document`"
+    },
+    {
+      "source": "Front-Agent",
+      "target": "Analysing Agent",
+      "source_files": [
+        "tech/CLOUDFLARE_MACHBARKEIT.md",
+        "sketches/2026-11-12-agentfaehig.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; peripheral node `Analysing Agent` unexpectedly reaches hub `Front-Agent`"
+    }
+  ],
+  "tokens": {
+    "input": 4694,
+    "output": 15219
+  }
+}
