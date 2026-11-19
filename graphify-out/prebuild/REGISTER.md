@@ -7,6 +7,35 @@ Berichtspfad). Status: `GESICHERT` = Prüfer fertig, `OFFEN` = Prüfer läuft no
 Stand: 19.11.2026. Quellen: 13 Prüfläufe, Berichte unter
 `graphify-out/synergie/`, `graphify-out/prebuild/`, `graphify-out/triage/`.
 
+## Index der Prüfberichte
+
+Dieses Register ist der Einstieg in die Auswertungen. Die einzelnen Berichte
+sind klickbar verlinkt, damit sie von hier aus erreichbar sind:
+
+**Synergie-Prüfungen (S1–S6):**
+[`S1 Echtzeit-Sprachschicht`](../synergie/S1-echtzeit-sprachschicht.md) ·
+[`S2 Agenten-Orchestrierung`](../synergie/S2-agenten-orchestrierung.md) ·
+[`S3 Generative UI`](../synergie/S3-generative-ui.md) ·
+[`S4 Zustands-Streaming`](../synergie/S4-zustand-streaming.md) ·
+[`S5 Kontext-Gedächtnis`](../synergie/S5-kontext-gedaechtnis.md) ·
+[`S6 Payments und Tools`](../synergie/S6-payments-und-tools.md)
+
+**Triage / Verifikation (P1–P5):**
+[`P1 Image-Edges`](../triage/P1-image-edges.md) ·
+[`P2 INFERRED-Kanten verifiziert`](../triage/P2-inferred-verified.md) ·
+[`P3 Grad-1 A`](../triage/P3-grad1-a.md) ·
+[`P4 Grad-1 B`](../triage/P4-grad1-b.md) ·
+[`P5 Grad-0 und Rauschen`](../triage/P5-grad0-und-rauschen.md)
+
+**Weitere Prebuild-Recherchen:**
+[`S7 technische Grenzen`](S7-technische-grenzen.md) ·
+[`S8 Anforderungs-Kollisionen`](S8-anforderungs-kollisionen.md) ·
+[`Upstream-Search Generative UI`](UPSTREAM-SEARCH-generative-ui.md) ·
+[`Upstream-Search Design-Tokens`](UPSTREAM-SEARCH-design-tokens.md)
+
+Der übergeordnete Graph-Bericht liegt in
+[`GRAPH_REPORT.md`](../GRAPH_REPORT.md).
+
 ## Gate 0 — Vorbedingungen (blockieren alles andere)
 
 | # | Befund | Beleg | Status |

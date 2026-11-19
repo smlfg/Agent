@@ -166,6 +166,11 @@ und Freigabe des kostenpflichtigen Dienstes.
   Vergleichspunkte: Cloudflare-Budget 890 ms, Skizzenwunsch „under 1 sec"
   (Skizze Z. 119), Pipecat-Referenz 500–800 ms
   ([research/konkurrenz.md](research/konkurrenz.md)).
+- Die instrumentierte Latenzmessung liegt in
+  [`M0-LATENZMESSUNG-2026-11-19.md`](M0-LATENZMESSUNG-2026-11-19.md) — die
+  kontrollierte Auswertung mit Skripten (`tech/m0/`), nicht die manuelle
+  Protokolltabelle. Bei Abweichungen gilt dieses Dokument als Messvorschrift
+  und die M0-Datei als Durchführung.
 - **Latenz-Kriterien werden aus den Messwerten abgeleitet** (Entscheidung 5 vom
   19.11.), nicht vorab erfunden.
 

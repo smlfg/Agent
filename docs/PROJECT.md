@@ -202,6 +202,15 @@ Prüfprotokoll der ersten Runde: [`FREMDTEST-PLAN.md`](../tech/FREMDTEST-PLAN.md
   Zustandsmaschine, Motion- und Typografieregeln und Voice-Demo; Spezifikation und
   ehrliche Simulationsliste in
   [`wireframes/wireframe-prototype-interactive.md`](wireframes/wireframe-prototype-interactive.md).
+- **Visual Exploration** (13.11.2026, Scope: nur visuelles und Motion-Design,
+  kein Code): die ausgearbeitete Beschreibung des Kernkonzepts — wie aus dem
+  Gekritzel Augen werden, wie der Blick folgt, wie der Pathway-Fluss läuft.
+  - [`visual-exploration/01-idle-presence.md`](visual-exploration/01-idle-presence.md)
+    — der Ruhezustand: atmende Textur, die zu zwei weichen Augen coalesziert
+  - [`visual-exploration/02-active-conversation-ui.md`](visual-exploration/02-active-conversation-ui.md)
+    — die Oberfläche im Gespräch
+  - [`visual-exploration/03-pathway-flow.md`](visual-exploration/03-pathway-flow.md)
+    — die drei Pathways und ihre Fäden
 - Projektanweisungen und Ablage für die nächsten Arbeitsschritte.
 
 Um Scope Creep („1 Task → 5 Schichten“) auszuschließen, wird die EINE Ownership-Version
