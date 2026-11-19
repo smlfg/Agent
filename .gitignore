@@ -30,14 +30,17 @@
 
 # Generierter Output, kein Projektwissen. Wird bei jedem Lauf neu erzeugt und
 # wuerde das Repo unlesbar machen.
-#   .archify/     — erzeugte Architektur-Diagramme und deren Review-JSON
-#   graphify-out/ — Wissensgraph: Cache, HTML, JSON, Tages-Snapshots
+#
+# In graphify-out/ bleiben nur die Auswertungen mit Belegen:
+#   prebuild/  synergie/  triage/  GRAPH_REPORT.md
+# Entfernt werden der Cache, der Tages-Snapshot und die Grossdateien, die ein
+# neuer Lauf reproduziert (graphify update .).
 /.archify/
 /graphify-out/cache/
-/graphify-out/prebuild/
 /graphify-out/20*/
 /graphify-out/.graphify_*
-/graphify-out/manifest.json
 /graphify-out/graph.json
 /graphify-out/graph.html
+/graphify-out/manifest.json
+/graphify-out/cost.json
 

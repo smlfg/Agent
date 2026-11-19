@@ -59,11 +59,15 @@ Was bei einem Lauf zu beachten ist:
 2. ~~`uv tool install graphifyy`~~ — inkl. Extras `[ollama,pdf]` installiert
    (ohne `[ollama]` bricht der Backend ab, ohne `[pdf]` werden PDFs still
    übersprungen).
-3. Mesh über dieses Repo gebaut: [`graphify-out/graph.html`](graphify-out/graph.html)
-   (klickbarer Mesh), [`GRAPH_REPORT.md`](graphify-out/GRAPH_REPORT.md)
-   (God-Nodes, Communities) und [`graph.json`](graphify-out/graph.json)
-   (querybar). Deep-Mode: 130 Knoten, 128 Kanten, 28 Communities; komplett
-   lokal über Ollama (Modell `qwen3.6:35b-a3b-64k`, Bilder über `qwen2.5vl:7b`).
+3. Mesh über dieses Repo gebaut: klickbarer Mesh (`graph.html`), Bericht
+   [`GRAPH_REPORT.md`](graphify-out/GRAPH_REPORT.md) (God-Nodes, Communities)
+   und `graph.json` (querybar). Deep-Mode: 130 Knoten, 128 Kanten,
+   28 Communities; komplett lokal über Ollama (Modell `qwen3.6:35b-a3b-64k`,
+   Bilder über `qwen2.5vl:7b`).
+   Die Graph-Dateien selbst sind **nicht** im Repo — sie sind großer
+   Maschinen-Output und bei jedem Lauf reproduzierbar (`graphify update .`).
+   Dauerhaft im Repo liegen die Auswertungen mit Belegen:
+   `graphify-out/prebuild/`, `graphify-out/synergie/`, `graphify-out/triage/`.
 4. Known Gaps: die Skizzen-PDF hat keinen Textlayer (das PNG deckt den Inhalt
    ab). Behoben am 19.11.: das Transkript heißt jetzt
    [`IDEA-TRANSKRIPT.txt`](IDEA-TRANSKRIPT.txt) und hat eine Endung — graphify

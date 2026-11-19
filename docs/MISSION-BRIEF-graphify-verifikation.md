@@ -9,7 +9,12 @@ Die 25 INFERRED-Kanten (Ø 0,78 Konfidenz) und die 84 schwach verbundenen Knoten
 ## Artifact
 
 - `graphify-out/GRAPH_REPORT.md` – aktualisiert, mit Abschnitt „Verifikation der INFERRED-Kanten"
-- `graphify-out/graph.json` und `graphify-out/graph.html` – neuer Lauf aus aktuellem HEAD
+- `graphify-out/graph.json` und `graphify-out/graph.html` – neuer Lauf aus
+  aktuellem HEAD. **Diese beiden Dateien sind kein Repo-Artefakt:** sie sind
+  Maschinen-Output, der bei jedem Lauf neu entsteht (`graphify update .`) und
+  deshalb in `.gitignore` steht. Dauerhaft abgelegt werden die Auswertungen mit
+  Belegen: `graphify-out/prebuild/`, `graphify-out/synergie/`,
+  `graphify-out/triage/`.
 
 ## Done Criteria
 
