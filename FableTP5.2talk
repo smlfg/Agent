@@ -1,0 +1,117 @@
+  blinzelt, schaut weg und hört zu wie ein Mensch, sieht aber nicht aus wie einer. Er hat zwei weiche Augen, die aus Gekritzel
+  entstehen, und kein Gesicht. Das passt zu „soft and not scary", denn je mehr Gesicht er bekommt, desto eher wird es
+  unheimlich. Es passt auch zu deiner Skizze, in der sich die Augen aus Blöcken und Strichen bilden.
+
+  Wenn das stimmt, ergeben sich daraus weitere Verhaltensweisen:
+
+  - Atmen: Im Ruhezustand bewegt sich das Gekritzel ganz leicht, wie Brustkorb oder Gras im Wind. Die Seite steht nie ganz
+    still.
+  - Blinzeln: Die Augen blinzeln unregelmäßig, nicht im Takt.
+  - Aufmerksamkeit: Wenn du tippst, schauen die Augen auf das Eingabefeld. Wenn du aufhörst, schauen sie wieder dich an.
+  - Einschlafen: Wenn lange nichts passiert, lösen sich die Augen wieder in Gekritzel auf. Die Seite kehrt zur Ruhe zurück und
+    wacht beim nächsten Kontakt neu auf.
+
+  Ich würde für den ersten Build nur zwei davon nehmen, Atmen und Aufmerksamkeit, damit es lebendig wirkt und nicht überladen.
+
+  Stimmt die Trennung zwischen menschlichem Verhalten und amorpher Gestalt? Welche der vier Verhaltensweisen sollen rein?
+
+  Die Regler-Achsen und die Pathways sind noch offen, die hole ich danach wieder hoch.
+
+✻ Brewed for 15s · done 23:25
+
+❯ 3. das müssen cheap swarm agents machen, die pathways
+
+● Meine Lesart: Die Pathways sind die Arbeitsteilung hinter dem Agenten, nicht nur Gesprächsthemen. Das deckt sich mit Skizze 7.
+
+  - Der Front-Agent ist das Gegenüber mit den Augen. Er reagiert sofort, hält das Gespräch und erkennt, wohin der Besucher will.
+  - Hinter ihm arbeitet pro Pathway ein günstiger Schwarm-Agent: einer für „What this is", einer für „creator", einer für
+    „product for X". Der Front-Agent gibt den „call" dorthin weiter, und der Besucher bestimmt durch seine Frage, wohin er geht.
+
+  Das löst auch dein Latenz-Ziel. Der Front-Agent muss nichts wissen, sondern nur schnell sein. Während ein Schwarm-Agent die
+  Antwort holt, schauen die Augen kurz weg, und das Wegschauen aus Punkt 2 bekommt damit einen echten Grund. Billig dürfen die
+  Schwarm-Agenten sein, weil jeder nur ein enges Thema kennt.
+
+  Falls du etwas anderes meintest, nämlich dass günstige Agenten die Pathways bauen sollen (also OpenCode-Worker statt dem
+  Mac-Fable), sag es mir. Das wäre eine Aussage über die Arbeitsteilung beim Bauen, nicht über die Seite.
+
+  Wenn meine Lesart stimmt, habe ich einen Vorschlag für den Umfang: Der erste Build verdrahtet einen Pathway komplett, vom
+  Besucher über den Front-Agenten zum Schwarm-Agenten und zurück zur Antwort. Wenn diese Übergabe einmal schnell und sichtbar
+  funktioniert, sind die anderen beiden nur noch Kopien mit anderem Wissen. Drei auf einmal zu bauen, bevor einer läuft, wäre
+  der klassische Fall von viel Architektur ohne Beweis.
+
+  Ich würde mit „What this is" anfangen. Das ist die Frage, die jeder Besucher zuerst stellt, und das Wissen dafür liefert das
+  Aggregat, das Codex gerade zusammensucht. „creator" würde ich bewusst später machen, weil du dort entscheiden musst, was über
+  dich öffentlich auf der Seite stehen darf.
+
+  Stimmt die Lesart, und passt „What this is" als erster Pathway?
+
+✻ Cooked for 16s · done 23:25
+
+❯ ja
+
+* Cascading… (13s · still thinking)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  9% main Sidecar: waiting...
+  ⏵⏵ auto mode on (shift+tab to cycle) · ← 1 agent
+  blinzelt, schaut weg und hört zu wie ein Mensch, sieht aber nicht aus wie einer. Er hat zwei weiche Augen, die aus Gekritzel
+  entstehen, und kein Gesicht. Das passt zu „soft and not scary", denn je mehr Gesicht er bekommt, desto eher wird es
+  unheimlich. Es passt auch zu deiner Skizze, in der sich die Augen aus Blöcken und Strichen bilden.
+
+  Wenn das stimmt, ergeben sich daraus weitere Verhaltensweisen:
+
+  - Atmen: Im Ruhezustand bewegt sich das Gekritzel ganz leicht, wie Brustkorb oder Gras im Wind. Die Seite steht nie ganz
+    still.
+  - Blinzeln: Die Augen blinzeln unregelmäßig, nicht im Takt.
+  - Aufmerksamkeit: Wenn du tippst, schauen die Augen auf das Eingabefeld. Wenn du aufhörst, schauen sie wieder dich an.
+  - Einschlafen: Wenn lange nichts passiert, lösen sich die Augen wieder in Gekritzel auf. Die Seite kehrt zur Ruhe zurück und
+    wacht beim nächsten Kontakt neu auf.
+
+  Ich würde für den ersten Build nur zwei davon nehmen, Atmen und Aufmerksamkeit, damit es lebendig wirkt und nicht überladen.
+
+  Stimmt die Trennung zwischen menschlichem Verhalten und amorpher Gestalt? Welche der vier Verhaltensweisen sollen rein?
+
+  Die Regler-Achsen und die Pathways sind noch offen, die hole ich danach wieder hoch.
+
+✻ Brewed for 15s · done 23:25
+
+❯ 3. das müssen cheap swarm agents machen, die pathways
+
+● Meine Lesart: Die Pathways sind die Arbeitsteilung hinter dem Agenten, nicht nur Gesprächsthemen. Das deckt sich mit Skizze 7.
+
+  - Der Front-Agent ist das Gegenüber mit den Augen. Er reagiert sofort, hält das Gespräch und erkennt, wohin der Besucher will.
+  - Hinter ihm arbeitet pro Pathway ein günstiger Schwarm-Agent: einer für „What this is", einer für „creator", einer für
+    „product for X". Der Front-Agent gibt den „call" dorthin weiter, und der Besucher bestimmt durch seine Frage, wohin er geht.
+
+  Das löst auch dein Latenz-Ziel. Der Front-Agent muss nichts wissen, sondern nur schnell sein. Während ein Schwarm-Agent die
+  Antwort holt, schauen die Augen kurz weg, und das Wegschauen aus Punkt 2 bekommt damit einen echten Grund. Billig dürfen die
+  Schwarm-Agenten sein, weil jeder nur ein enges Thema kennt.
+
+  Falls du etwas anderes meintest, nämlich dass günstige Agenten die Pathways bauen sollen (also OpenCode-Worker statt dem
+  Mac-Fable), sag es mir. Das wäre eine Aussage über die Arbeitsteilung beim Bauen, nicht über die Seite.
+
+  Wenn meine Lesart stimmt, habe ich einen Vorschlag für den Umfang: Der erste Build verdrahtet einen Pathway komplett, vom
+  Besucher über den Front-Agenten zum Schwarm-Agenten und zurück zur Antwort. Wenn diese Übergabe einmal schnell und sichtbar
+  funktioniert, sind die anderen beiden nur noch Kopien mit anderem Wissen. Drei auf einmal zu bauen, bevor einer läuft, wäre
+  der klassische Fall von viel Architektur ohne Beweis.
+
+  Ich würde mit „What this is" anfangen. Das ist die Frage, die jeder Besucher zuerst stellt, und das Wissen dafür liefert das
+  Aggregat, das Codex gerade zusammensucht. „creator" würde ich bewusst später machen, weil du dort entscheiden musst, was über
+  dich öffentlich auf der Seite stehen darf.
+
+  Stimmt die Lesart, und passt „What this is" als erster Pathway?
+
+✻ Cooked for 16s · done 23:25
+
+❯ ja
+
+* Cascading… (13s · still thinking)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  9% main Sidecar: waiting...
+  ⏵⏵ auto mode on (shift+tab to cycle) · ← 1 agent
+

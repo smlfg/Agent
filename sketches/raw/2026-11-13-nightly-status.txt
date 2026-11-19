@@ -1,0 +1,104 @@
+00:00:01 Speaker 1
+Das ist der nächtliche Zwischenstand. Ich gehe jetzt mal eine rauchen. Ich war jetzt konzentriert am Arbeiten, keine Ahnung, zwei Stunden oder so, und dann kam wieder der eine Inder und hat mich genervt. Oh Mann, und ich wollte über das Projekt reden.
+
+00:00:22 Speaker 1
+Bis jetzt läuft es super gut. Die Struktur stimmt, die Arbeitsteilung stimmt. Token Span stimmt nicht.
+
+00:00:31 Speaker 1
+Astra und Fable Out of Tokens.
+
+00:00:37 Speaker 1
+Ein bisschen schade.
+
+00:00:39 Speaker 1
+Ich arbeite jetzt mit Open Code Go Gemini Argon weiter. Auch ein schönes Modell. Mag ich sehr.
+
+00:00:51 Speaker 1
+Und ich glaube, ich baue heute noch nicht.
+
+00:00:54 Speaker 1
+Sondern hebe mir das auf.
+
+00:00:58 Speaker 1
+Für eine neue Mission, einen neuen Tag, wenn ich frisch im Kopf bin.
+
+00:01:03 Speaker 1
+Weil es jetzt 00 Uhr ist und das wird sicherlich nicht so einfach
+
+00:01:13 Speaker 1
+Das so umzusetzen. Und dann kann ich morgen
+
+00:01:18 Speaker 1
+Morgen will ich eigentlich Brügge machen.
+
+00:01:23 Speaker 2
+Schauen, wie und ob ich das orchestriert umsetzen kann. Ich könnte mir aber auch vorstellen, dass ich Open Code.
+
+00:01:50 Speaker 1
+Ja, ich will keinen Prototyp davon haben. Ich will nicht mehrere Versionen machen, ich will eine und davon Ownership haben. Und wo ich noch definitiv mehr leisten muss, ist die Pathways.
+
+00:02:02 Speaker 1
+Der Gesprächsfluss nimmt starken Einfluss darauf, wie und was da passiert.
+
+00:02:10 Speaker 1
+Nicht von der technischen Implementierung, sondern von der agentischen Art und Weise der Interaction, also konkret.
+
+00:02:20 Speaker 1
+Hallo, ich gehe auf die Webseite und dann macht erst mal diese Animation dies das und dann auch das. Da sollte nicht genau jetzt meine Skizze sein. Ich bin nicht so gut im Zeichnen. Das war einfach nur, ich wollte die Form vorgeben.
+
+00:02:39 Speaker 1
+Es können ruhig gute Augen sein. Da gibt es sicherlich ein paar Leute, die dort schon stark Code geschrieben haben, reaktive Augen je.
+
+00:02:50 Speaker 1
+Krasser Außenwirkung des Projekts
+
+00:02:53 Speaker 1
+Desto cooler ist es.
+
+00:02:59 Speaker 1
+Und dann ja
+
+00:03:01 Speaker 1
+Was bist du? Es wäre beispielsweise die erste Frage eines Nutzers.
+
+00:03:05 Speaker 1
+Um so eine User Story aufzumachen. Und dann antwortet er: Hey, ich bin ein Agent.
+
+00:03:14 Speaker 1
+Bin dynamisch adaptiv, wie auch immer. Was möchtest du wissen? Ja, was soll das hier? Also, das ist so und Samuel macht das und das. Ja, das war vielleicht schon zu viel von der agentischen Seite. Der Mensch soll bestimmen, wohin die Reise geht. Also brauchen wir quasi mehrere Kommunikationspathways.
+
+00:03:44 Speaker 1
+Sowas, wie ich auch bei Variation Workflow habe
+
+00:03:49 Speaker 1
+Sowas und dann, na klar, die Determined End Waypoints könnten dann Conversions sein oder Leads oder was auch immer. Formulare zum Buchen oder zum Informieren, zum Reinlesen, zum Installieren. Aber ja, das soll so eine.
+
+00:04:11 Speaker 1
+Schöne reaktive Website, wo Cloudflare auch selber stolz drauf wäre, was jemand mit ihrer Agent SDK umgesetzt hat.
+
+00:04:20 Speaker 1
+Und ich habe genug Skills und Session History.
+
+00:04:31 Speaker 1
+Genug Human Agent Interaction und an dem können wir uns orientieren. Was ist mein.
+
+00:04:39 Speaker 1
+Status Quo. Wie sehen meine Agenten aus?
+
+00:04:47 Speaker 1
+Aus. Weil wir haben ja den Front Worker, der die Kommunikation mit dem Menschen macht und im Hintergrund können durchaus ein paar bereitlegen, die dann nur reaktiviert werden. Also On Demand Agents quasi.
+
+00:05:05 Speaker 1
+Die verschiedenen Komponenten machen. Und DPPM, wie damals bei SelfAI, würde mich auch jucken. Dass man da zum Beispiel ein Planning-Modul macht, Dispatch, parallelize und dann merge und das zurück feedet und vielleicht auch schon dynamischen Flow State hat.
+
+00:05:33 Speaker 1
+So ein Caching, wenn jetzt schon eine Antwort da ist, wird diese zuerst ausgegeben und dann gibt es eine Synthese. Auch mit meinen HAI Voice Skills habe ich ein eigenes Repo dazu. Da können wir vielleicht auch noch etwas kopieren. Voice ist definitiv ein Kernfeature. Vielleicht müssen wir das auch auslagern in ein eigenes Modul.
+
+00:06:02 Speaker 1
+Vielleicht könnte ein Slider sein: schneller
+
+00:06:06 Speaker 1
+Mehr, weniger Input, mehr Input, Output so mäßig.
+
+00:06:13 Speaker 1
+Die Parameter des H. A. I. S sind diese Slider. 

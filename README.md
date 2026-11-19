@@ -7,6 +7,8 @@ Eine lauffähige Anwendung ist noch nicht enthalten.
 ## Einstieg
 
 - [Projektstand und nächste Entscheidungen](docs/PROJECT.md)
+- [HAI-Missionsvorschlag: Integration First](docs/missions/INTEGRATION-FIRST-WHAT-THIS-IS.md)
+- [Nachgelagerte HAI-Mission: Evidence-Based ML Flywheel (COLD)](docs/missions/SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md)
 - [Projektvertrag — Erfolgsdefinition, Scope, offene Owner-Entscheidungen](docs/PROJECT_CONTRACT.md)
 - [Prior-Art- und Embodiment-Recherche](research/PRIOR_ART_REPORT.md)
 - [Offene Owner-Entscheidungen](docs/UNSOLVED-PLANUNG.md)
@@ -21,6 +23,8 @@ Eine lauffähige Anwendung ist noch nicht enthalten.
 - [Bestätigte Designentscheidungen](docs/DESIGN-DECISIONS.md)
 - [UX und Informationsarchitektur — Nutzerführung vor Screens](docs/UX-INFORMATIONSARCHITEKTUR.md)
 - [Low-Fidelity-Wireframes V1 (Vorschlag)](docs/wireframes/README.md)
+- [Visual Exploration — Idle Presence, Conversation UI, Pathway Flow](docs/visual-exploration/)
+- [Nächtlicher Plaud-Zwischenstand vom 13.11.2026](docs/notes/2026-11-13-nightly-status.md)
 - [Aggregierte Scout-Befunde](research/SCOUT-SYNTHESIS.md)
 - [CodeCanvas — Setup, Werkzeuge, Agent Notes](docs/CODECANVAS.md)
 - [Skills im Projekt — Herkunft, Lizenzen, Einsatz](skills/README.md)
@@ -38,6 +42,7 @@ Agentfähig/     Vorhandenes Inspirationsmaterial
 sketches/       Skizzen, Transkription, Bilder und Rohdaten
 docs/           Projektstand, Anforderungen und Entscheidungen
 research/       Gezielte Recherche mit Quellen und offenen Fragen
+tech/           Cloudflare-Machbarkeit, Technik-Abgleich und Lücken-Check
 src/            Künftiger Anwendungscode
 tests/          Künftige Verhaltenstests
 scripts/        Lokale Checks und Automatisierung
