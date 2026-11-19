@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "mode": "live",
+  "provider": "ollama",
+  "execution": "sequential",
+  "models": [
+    "gemma4:26b",
+    "qwen3.6:35b-a3b",
+    "qwen3:8b"
+  ],
+  "plan_path": "/Users/samuelfleig/Projects/03_HAI/Agentfaehig/Agent/tech/MESSLAUF-PLAN.md",
+  "plan_sha256": "29e81d628928e85ee58575ea5fb6e987c6aae2f04a455303845bdfe94e2f2f52",
+  "threshold": 0.75,
+  "overall": 0.792,
+  "per_metric": {
+    "intelligence": 0.917,
+    "feasibility": 0.667,
+    "ease": 0.833,
+    "efficiency": 0.75
+  },
+  "verdict": "SCORE_OK",
+  "judges": 3,
+  "judge_results": [
+    {
+      "model": "gemma4:26b",
+      "scores": {
+        "intelligence": 1.0,
+        "feasibility": 0.75,
+        "ease": 1.0,
+        "efficiency": 1.0
+      },
+      "reasons": {
+        "intelligence": "The plan explicitly checks assumptions (Free vs Paid account), identifies drift (English vs German), and uses empirical measurement to validate goals.",
+        "feasibility": "Boundaries and measurable DoD are clear, but the dependency on 'wrangler login' and remote binding behavior remains an unverified technical risk.",
+        "ease": "The task is a single-stage measurement run with a clearly defined, small, and manageable slice (20 turns).",
+        "efficiency": "The budget is strictly bounded (2h) and the scope is limited to configuration/measurement without any 'write-fanout' or custom development."
+      },
+      "overall": 0.938,
+      "total_duration_ns": 17571891709,
+      "eval_count": 199
+    },
+    {
+      "model": "qwen3.6:35b-a3b",
+      "scores": {
+        "intelligence": 1.0,
+        "feasibility": 0.75,
+        "ease": 0.75,
+        "efficiency": 1.0
+      },
+      "reasons": {
+        "intelligence": "Goal is precise (measure latency for English voice pipeline); assumptions are explicitly checked against provider docs and SDK capabilities; drift is prevented by strict non-goals.",
+        "feasibility": "Boundaries are clear (local run, no deploy, specific metric set); however, it relies on external account status (Free vs Paid) which introduces a potential blocker not fully mitigated in the plan logic.",
+        "ease": "Smallest sensible slice: measuring an existing example with 20 turns is low-risk and resume-friendly; scope is tightly defined without unnecessary complexity.",
+        "efficiency": "Budget is bounded (2h max, 20 turns); no write-fanout or expensive resource usage; clear stop criteria prevent runaway costs."
+      },
+      "overall": 0.875,
+      "total_duration_ns": 17681244625,
+      "eval_count": 225
+    },
+    {
+      "model": "qwen3:8b",
+      "scores": {
+        "intelligence": 0.75,
+        "feasibility": 0.5,
+        "ease": 0.75,
+        "efficiency": 0.25
+      },
+      "reasons": {
+        "intelligence": "Clear goal to measure latency, but assumptions about model availability and language support are not fully validated.",
+        "feasibility": "Boundaries are mentioned but not clearly defined; upstream-first and measurable DoD are not explicitly present.",
+        "ease": "Smallest sensible slice (20 English voice switches) and resume is possible with local testing.",
+        "efficiency": "Budget is not bounded; write-fanout explosion is not addressed."
+      },
+      "overall": 0.562,
+      "total_duration_ns": 16293440375,
+      "eval_count": 154
+    }
+  ],
+  "aggregation": "mean-across-distinct-models",
+  "ordinal_aggregation": "mean",
+  "completion_cost": 0.0,
+  "note": "live local Ollama council; plan body graded sequentially",
+  "graded_at": "20261119T152952Z"
+}
