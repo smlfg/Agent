@@ -202,10 +202,10 @@ Beleglegende: „Worker" heißt ungeprüft
 - „Mikrofon nach Klick" als allgemeines Browserverhalten, „in dieser Mission
   nicht nachgeschlagen" (`tech/ABGLEICH.md:39`).
 - json-render: `Slider`-Baustein nur laut Worker
-  (`tech/UPSTREAM_SEARCH.md:19`; `tech/research/konkurrenz.md:41` — beide
+  (`tech/UPSTREAM_SEARCH-cloudflare.md:19`; `tech/research/konkurrenz.md:41` — beide
   Worker-Läufe, kein eigener Abgleich).
 - `realtime-examples` ohne Lizenz-Feld; vor Übernahme prüfen
-  (`tech/UPSTREAM_SEARCH.md:23`).
+  (`tech/UPSTREAM_SEARCH-cloudflare.md:23`).
 - Doku-Metriken `llm_ms: 850 …` — die Seite sagt nicht, ob gemessen oder nur
   ein Beispiel (`tech/CLOUDFLARE_MACHBARKEIT.md:74`).
 - Unbelegt-Einträge aus der Konkurrenz-Recherche: Stack von Docket und

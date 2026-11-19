@@ -12,7 +12,7 @@ Front-Agent antwortet in unter einer Sekunde (auch mit Sprachausgabe) und
 reicht Arbeit an langsamere Agenten weiter (Analyse, Nachschlagen). Der Agent
 verändert das Aussehen der Seite in Echtzeit (Farbe, Form, Ausgabestil) über
 höchstens drei Schieberegler. Geplant ist der Bau auf Cloudflare. Lies zuerst
-`tech/INTENT.md` und `sketches/2026-11-12-agentfaehig.md`.
+[`tech/INTENT.md`](../INTENT.md) und `sketches/2026-11-12-agentfaehig.md`.
 
 ## Goal
 
@@ -38,7 +38,7 @@ behauptete Latenz mit Quelle, Lizenz bei offenen Projekten, und was wir davon
 
 ## Boundaries
 
-- Schreibe genau eine Datei: `tech/research/konkurrenz.md`. Sonst nichts ändern, nichts installieren, kein git.
+- Schreibe genau eine Datei: [`tech/research/konkurrenz.md`](../research/konkurrenz.md). Sonst nichts ändern, nichts installieren, kein git.
 - Jede Aussage braucht eine URL, die du in diesem Lauf selbst abgerufen hast. Was du nur aus dem Gedächtnis weißt, kennzeichnest du in der Zeile mit `unbelegt`.
 - Erfinde keine URLs, Zahlen oder Projektnamen. Lieber weniger Funde als falsche.
 

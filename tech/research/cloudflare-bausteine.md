@@ -5,6 +5,8 @@ Mission `M-20261112T230610-fd237a98` · Stand 12.11.2026 · alle URLs in diesem 
 STATUS: VERIFIZIERT (dieser Lauf) — alle Anforderungszuordnungen, Limits,
 Latenzaussagen und Repo-Metadaten belegt aus direkt abgerufenen Quellen
 vom 12.11.2026. Entscheidungen/Architektur bewusst nicht getroffen (Brief).
+Auftrag: [`tech/briefs/cloudflare-bausteine.md`](../briefs/cloudflare-bausteine.md) ·
+Grundlage: [`tech/INTENT.md`](../INTENT.md).
 
 ## Tabelle T1–T9
 

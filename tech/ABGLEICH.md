@@ -40,7 +40,7 @@ nichts davon gilt als bestätigt.
 | Fokuswechsel beim ersten Text oder bei vollständiger Antwort | Beides geht. Streaming liefert den Zeitpunkt des ersten Textes, das Ende der Antwort ist ebenfalls ein eigenes Ereignis. |
 | Verhalten bei Streaming-Pausen und langen Antworten | Hier liegt die Folgefrage des Typewriters. Der Sprach-Client meldet die Zustände „denkt" und „spricht"; für reinen Text müsste das Frontend Pausen selbst erkennen. |
 | Belegung der bis zu drei Slider | Technisch frei: Jeder Reglerwert ist ein Feld im Agent-Zustand und kommt in Echtzeit bei allen verbundenen Browsern an (geprüft). |
-| Modellprovider, Voice-Pipeline, Architektur | Vorschlag in `CLOUDFLARE_MACHBARKEIT.md` und `UPSTREAM_SEARCH.md`. Nicht entschieden. |
+| Modellprovider, Voice-Pipeline, Architektur | Vorschlag in [`CLOUDFLARE_MACHBARKEIT.md`](CLOUDFLARE_MACHBARKEIT.md) und [`UPSTREAM_SEARCH-cloudflare.md`](UPSTREAM_SEARCH-cloudflare.md). Nicht entschieden. |
 | Abnahmekriterien | Der Sprach-Client liefert je Wechsel Messwerte (`first_audio_ms` und weitere). Daraus lassen sich Latenz-Kriterien direkt ableiten. |
 
 ## Neu: Typewriter und Stimme laufen nicht von selbst synchron

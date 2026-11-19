@@ -11,7 +11,7 @@ als Startseite. Der Besucher spricht, tippt oder zeigt ein Bild. Ein schneller
 Front-Agent antwortet in unter einer Sekunde (auch mit Sprachausgabe) und
 reicht Arbeit an langsamere Agenten weiter (Analyse, Nachschlagen, Backup). Der
 Agent verändert das Aussehen der Seite in Echtzeit über höchstens drei
-Schieberegler. Gebaut werden soll auf Cloudflare. Lies zuerst `tech/INTENT.md`
+Schieberegler. Gebaut werden soll auf Cloudflare. Lies zuerst [`tech/INTENT.md`](../INTENT.md)
 (dort stehen die Anforderungen T1 bis T9) und `sketches/2026-11-12-agentfaehig.md`.
 
 ## Goal
@@ -41,7 +41,7 @@ Je Repo: URL, Lizenz, letzter Commit (Datum), was es abdeckt, an welches T es an
 
 ## Boundaries
 
-- Schreibe genau eine Datei: `tech/research/cloudflare-bausteine.md`. Sonst nichts ändern, nichts installieren, kein git.
+- Schreibe genau eine Datei: [`tech/research/cloudflare-bausteine.md`](../research/cloudflare-bausteine.md). Sonst nichts ändern, nichts installieren, kein git.
 - Jede Aussage braucht eine URL, die du in diesem Lauf selbst abgerufen hast. Was du nur aus dem Gedächtnis weißt, kennzeichnest du in der Zeile mit `unbelegt`.
 - Erfinde keine URLs, Modellnamen, Limits oder Zahlen. Modellnamen wörtlich aus der Dokumentation übernehmen.
 - Wenn etwas als Beta, experimentell oder eingestellt markiert ist, schreib das dazu.

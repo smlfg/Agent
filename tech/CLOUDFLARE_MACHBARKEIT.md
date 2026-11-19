@@ -16,7 +16,7 @@ Designentscheidungen steht in [`ABGLEICH.md`](ABGLEICH.md).
 Grundlagen: [`INTENT.md`](INTENT.md) (Fragen T1–T9),
 [`research/cloudflare-bausteine.md`](research/cloudflare-bausteine.md),
 [`research/konkurrenz.md`](research/konkurrenz.md),
-[`UPSTREAM_SEARCH.md`](UPSTREAM_SEARCH.md).
+[`UPSTREAM_SEARCH-cloudflare.md`](UPSTREAM_SEARCH-cloudflare.md).
 
 **Zur Beleglage:** „geprüft" heißt, ich habe die Aussage am 12.11.2026 selbst
 gegen die genannte Seite abgleichen lassen. „Worker" heißt, sie stammt aus dem
@@ -106,6 +106,19 @@ Eine Messung, kein Bau: das Beispiel `examples/voice-agent` aus
 aufzeichnen. Der Client liefert `first_audio_ms` je Wechsel. Damit sind T2,
 die Deutsch-Frage und die Stille-Erkennung in einem Durchgang beantwortet.
 Das braucht einen Klon und damit Plan-Modus und Freigabe des Owners.
+
+**Update 19.11.2026 (nach der 12.11.-Prüfung):** Die Deutsch-Frage (Z. 98) ist
+geklärt — `flux`/`aura-1` sind nur Englisch; deutsches STT über
+`WorkersAINova3STT({ language: "de" })` ist SDK-seitig belegt, deutsches TTS
+braucht einen externen Provider. Die Stille-Angabe (Z. 82) stackt nicht auf die
+Server-Latenz: der Server ignoriert `end_of_speech`, das Turn-Ende bestimmt das
+STT-Modell. Die Limits (Z. 97) sind präzisiert: 720/300 req/min je Task-Typ,
+20/50 nur für Paid-Modelle. Vollständige Evidenz mit SDK-Quellcode-Nachweisen:
+[docs/CLOUDFLARE-MACHBARKEIT.md](../docs/CLOUDFLARE-MACHBARKEIT.md)
+(Missions-Artefakt vom 19.11., sha256 verifiziert). Der Messlauf ist
+ausgearbeitet in [MESSLAUF-PLAN.md](MESSLAUF-PLAN.md) — Laufsprache Englisch
+(Samuels Entscheidung vom 19.11.); die Deutsch-Klärung per Messung entfällt
+dadurch.
 
 ## Offen für den Abgleich mit Requirements und Design
 

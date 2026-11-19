@@ -31,7 +31,7 @@ Machbarkeitsdefinition, kein Code.
 - **Plattform:** Cloudflare. Andockpunkt im Stack ist `claudeflareworkerhaus`
   (11 Worker, SQLite-Durable-Objects, Workers AI) und die Site
   `human-agent-interface`. Beide bleiben in dieser Mission unangetastet.
-- **Kein eigener Code.** Upstream zuerst: `tech/UPSTREAM_SEARCH.md` mit
+- **Kein eigener Code.** Upstream zuerst: [`tech/UPSTREAM_SEARCH-cloudflare.md`](UPSTREAM_SEARCH-cloudflare.md) mit
   mindestens drei Kandidaten ist Pflicht, bevor irgendetwas gebaut wird.
 - **Jede Aussage mit Quelle** (URL, abgerufen am 12.11.2026). Was nicht belegt
   ist, steht als `unbelegt` da.
@@ -42,14 +42,14 @@ Machbarkeitsdefinition, kein Code.
 | Wer | Auftrag | Liefert |
 |---|---|---|
 | Owner | Design und Requirements | Push ins Repo |
-| MiniMax M3.1 Flash (OpenCode, frei) | Technische Konkurrenz: Wer baut Agent-statt-Website, Voice-Agenten, generative Oberflächen — mit welchem Stack und welcher Latenz? | `tech/research/konkurrenz.md` |
-| GLM 5.3 Flash (OpenCode, frei) | Cloudflare-Bausteine und Upstream-Repos zu T1–T9 | `tech/research/cloudflare-bausteine.md` |
-| Claude | Briefs, Stichprobenprüfung der Quellen, Verdichtung | `tech/UPSTREAM_SEARCH.md`, `tech/CLOUDFLARE_MACHBARKEIT.md` |
+| MiniMax M3.1 Flash (OpenCode, frei) | Technische Konkurrenz: Wer baut Agent-statt-Website, Voice-Agenten, generative Oberflächen — mit welchem Stack und welcher Latenz? | [`tech/research/konkurrenz.md`](research/konkurrenz.md) |
+| GLM 5.3 Flash (OpenCode, frei) | Cloudflare-Bausteine und Upstream-Repos zu T1–T9 | [`tech/research/cloudflare-bausteine.md`](research/cloudflare-bausteine.md) |
+| Claude | Briefs, Stichprobenprüfung der Quellen, Verdichtung | `tech/UPSTREAM_SEARCH-cloudflare.md`, `tech/CLOUDFLARE_MACHBARKEIT.md` |
 
 Briefs der beiden Worker liegen in [`briefs/`](briefs/).
 
 ## Wo es zusammenläuft
 
-`tech/CLOUDFLARE_MACHBARKEIT.md`: ein Verdrahtungsbild, das Latenzbudget, je
+[`tech/CLOUDFLARE_MACHBARKEIT.md`](CLOUDFLARE_MACHBARKEIT.md): ein Verdrahtungsbild, das Latenzbudget, je
 Baustein ein Urteil (machbar / unklar / nicht machbar) und die offenen Risiken.
-Sobald die Requirements des Owners da sind, werden sie gegen T1–T9 gelegt.
+Sobald die Requirements des Owners da sind, werden sie gegen T1–T9 gelegt ([`ABGLEICH.md`](ABGLEICH.md)).

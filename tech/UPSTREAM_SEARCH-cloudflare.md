@@ -27,7 +27,7 @@ Lizenz, letzter Push und Status am 12.11.2026 über die GitHub-API geprüft.
 
 **Vorschlag: `cloudflare/agents`, Beispiel `examples/voice-agent`.** Die
 Entscheidung liegt bei Samuel und ist nicht bestätigt (siehe `AGENTS.md`).
-Es deckt sieben der neun technischen Fragen ab und ist der von Cloudflare
+Es deckt sieben der neun technischen Fragen ([`INTENT.md`](INTENT.md)) ab und ist der von Cloudflare
 gepflegte Weg. Für die Regler-Oberfläche bleibt `json-render` als Kandidat
 offen, bis das Design vorliegt.
 
@@ -38,7 +38,7 @@ Suche.
 ## Installationsweg (noch nicht ausgeführt)
 
 1. `git clone https://github.com/cloudflare/agents` in `05_INBOX`, Beispiel `examples/voice-agent` lokal mit `wrangler dev` starten.
-2. Latenz messen (siehe `CLOUDFLARE_MACHBARKEIT.md`, Abschnitt „Nächster Schritt").
+2. Latenz messen (siehe [`CLOUDFLARE_MACHBARKEIT.md`](CLOUDFLARE_MACHBARKEIT.md), Abschnitt „Nächster Schritt").
 3. Erst bei bestandener Messung: Eintrag in `STACK.md` und `registry/components/`, Platz neben `claudeflareworkerhaus`.
 
 Der Klon ist ein Eingriff, der installiert. Er braucht Plan-Modus und die
