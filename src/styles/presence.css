@@ -1,0 +1,123 @@
+/* Presence (M1 contract, section A) — eye placement, dormant lids, breathing. */
+
+.presence {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+  user-select: none;
+}
+
+.presence .face-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Keep the eyes in the upper third of the surface. */
+  padding-top: clamp(4px, 3vh, 32px);
+}
+
+/* The vendor reserves bottom margin for other faces; the eyes stand alone. */
+.presence .eyes-container {
+  margin-bottom: 0;
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+/* ── Dormant: lids closed, dimmed, calm ─────────────────────────────────── */
+
+.presence.is-dormant .eyes-container {
+  opacity: 0.55;
+}
+
+.presence.is-dormant .eyelid-top {
+  transform: translateY(90%);
+}
+
+.presence.is-dormant .eyelid-bottom {
+  transform: translateY(-30%);
+}
+
+/* ── Lid motion: ~1.2 s opening, blink stays quick ─────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye .eyelid-top,
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye .eyelid-bottom {
+    transition: transform 1.2s var(--ease);
+  }
+
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.blinking .eyelid-top,
+  .presence:not(.is-reduced-motion):not(.is-motion-paused) .eye.blinking .eyelid-bottom {
+    transition-duration: 0.15s;
+  }
+}
+
+/* ── Breathing: only awake, only when motion is allowed ────────────────── */
+
+@keyframes presence-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.02); }
+}
+
+.presence[data-phase="idle"]:not(.is-dormant):not(.is-motion-paused):not(.is-reduced-motion)
+  .eyes-container {
+  animation: presence-breathe 6s ease-in-out infinite;
+}
+
+/* Motion toggle pauses blinking/looking (JS) and CSS animation (here). */
+.presence.is-motion-paused .eyes-container,
+.presence.is-motion-paused .pupil,
+.presence.is-reduced-motion .eyes-container,
+.presence.is-reduced-motion .pupil {
+  animation: none;
+}
+
+/* ── Reduced motion: no transitions or animations inside presence ───────── */
+
+.presence.is-reduced-motion,
+.presence.is-reduced-motion *,
+.presence.is-motion-paused,
+.presence.is-motion-paused * {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .presence,
+  .presence * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ── Motion toggle: small, bottom left, clearly focusable ──────────────── */
+
+.motion-toggle {
+  position: fixed;
+  left: max(12px, env(safe-area-inset-left));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 20;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.6);
+  color: var(--muted);
+  font: 500 12px/1.1 var(--font);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+    background-color 0.2s var(--ease);
+}
+
+.motion-toggle:hover {
+  color: var(--text);
+  border-color: var(--border-accent);
+}
+
+.motion-toggle[aria-pressed="true"] {
+  color: var(--text);
+  background: rgba(193, 122, 77, 0.14);
+  border-color: var(--border-accent);
+}

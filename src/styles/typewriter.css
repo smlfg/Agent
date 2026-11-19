@@ -1,0 +1,61 @@
+/* Typewriter answer and caret (Agent H).
+ *
+ * The blinking block caret uses the standard CSS steps() technique: a hard
+ * on/off animation that only runs while the typist is in a pause. No third-party
+ * code: the pattern is documented on MDN under "Using CSS animations".
+ * Cadence inspiration: tameemsafi/typewriter-effect (MIT); see typewriter.js.
+ */
+
+.pair-answer .tw-text {
+  /* Newlines typed by the answer stay real line breaks; spaces stay literal. */
+  white-space: pre-wrap;
+}
+
+.tw-caret {
+  display: inline-block;
+  width: 0.09em;
+  min-width: 2px;
+  height: 1.05em;
+  margin-left: 0.08em;
+  border-radius: 1px;
+  background: currentColor;
+  vertical-align: -0.16em;
+  opacity: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Steady while characters keep landing; the JS marks real pauses only. */
+.pair-answer.is-typing .tw-caret {
+  animation: none;
+  opacity: 1;
+}
+
+/* Blink in the gaps after , ; : . ! ? and line breaks. */
+.pair-answer.is-pausing .tw-caret {
+  animation: tw-caret-blink 1.06s steps(1, end) infinite;
+}
+
+/* After onDone the caret fades out and is removed ~600 ms later. */
+.pair-answer.is-done .tw-caret {
+  animation: none;
+  opacity: 0;
+  transition: opacity 380ms ease;
+}
+
+@keyframes tw-caret-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pair-answer.is-pausing .tw-caret {
+    animation: none;
+    opacity: 1;
+  }
+
+  .pair-answer.is-done .tw-caret {
+    transition: none;
+  }
+}

@@ -1,0 +1,129 @@
+/* Excerpt of src/styles/face.css lines 100-216 and 290-300 (eyes, eyelids, blink, moods), OpenVoiceUI @ efd921f576c4992d3714b2b2829abc356f338dd3, MIT. Unmodified except extraction. */
+        .eyes-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: min(30px, 6vw);
+            margin-bottom: min(40px, 8.4vw);
+            position: relative;
+        }
+
+        .eye {
+            position: relative;
+            width: min(100px, 22vw);
+            height: min(115px, 25vw);
+        }
+
+        .eye-white {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, var(--neutral-50) 0%, var(--neutral-100) 70%, var(--neutral-200) 100%);
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 0 0 30px var(--border-strong), inset 0 -10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .pupil-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.1s ease-out;
+        }
+
+        .pupil {
+            width: min(40px, 10vw);
+            height: min(40px, 10vw);
+            background: radial-gradient(circle at 30% 30%, #333 0%, #000 70%);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .pupil::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            top: 8px;
+            left: 8px;
+        }
+
+        .pupil::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            top: 20px;
+            right: 12px;
+        }
+
+        /* Eyelids */
+        .eyelid-top {
+            position: absolute;
+            width: 130%; height: 75%;
+            background: var(--dark-bg);
+            top: -60%; left: -15%;
+            border-radius: 0 0 50% 50%;
+            transition: transform 0.15s ease-in-out;
+            z-index: 10;
+        }
+
+        .eyelid-bottom {
+            position: absolute;
+            width: 130%; height: 40%;
+            background: var(--dark-bg);
+            bottom: -35%; left: -15%;
+            border-radius: 50% 50% 0 0;
+            transition: transform 0.15s ease-in-out;
+            z-index: 10;
+        }
+
+        .eye-cap-top {
+            position: absolute;
+            width: 120%; height: 27px;
+            background: var(--dark-bg);
+            top: -15px; left: -10%;
+            z-index: 11;
+        }
+
+        /* Blink animation */
+        .eye.blinking .eyelid-top { transform: translateY(90%); }
+        .eye.blinking .eyelid-bottom { transform: translateY(-30%); }
+
+        /* Mood: Angry */
+        .eye.angry .eyelid-top { transform: translateY(40%) rotate(var(--angry-rotate, 0deg)); }
+        .left-eye.angry .eyelid-top { --angry-rotate: 15deg; transform-origin: right center; }
+        .right-eye.angry .eyelid-top { --angry-rotate: -15deg; transform-origin: left center; }
+
+        /* Mood: Sad */
+        .eye.sad .eyelid-top { transform: translateY(30%) rotate(var(--sad-rotate, 0deg)); }
+        .left-eye.sad .eyelid-top { --sad-rotate: -10deg; transform-origin: left center; }
+        .right-eye.sad .eyelid-top { --sad-rotate: 10deg; transform-origin: right center; }
+
+        /* Mood: Happy */
+        .eye.happy .eyelid-bottom { transform: translateY(-60%); }
+
+        /* Mood: Thinking */
+        .eye.thinking .pupil-container { transform: translate(15px, -15px) !important; }
+        .left-eye.thinking .eyelid-top { transform: translateY(25%); }
+
+        /* Thought Bubbles */
+        /* Mood: Surprised */
+        .eye.surprised .eye-white { transform: scale(1.1); }
+        .eye.surprised .pupil { transform: scale(0.8); }
+
+        /* Mood: Listening */
+        .eye.listening .pupil { animation: listening-pulse 1.5s ease-in-out infinite; }
+        @keyframes listening-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+

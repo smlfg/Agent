@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "agentfaehig-m1",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173
+    },
+    {
       "name": "cwh-11-explain",
       "runtimeExecutable": "~/Projects/00_AKTUELL/claudeflareworkerhaus/node_modules/.bin/wrangler",
       "runtimeArgs": [
