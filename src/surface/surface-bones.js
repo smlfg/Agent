@@ -461,6 +461,13 @@ export function compileBonesToCssVars(rawBones = DEFAULT_BONES) {
   vars['--bone-eye-aspect-w'] = String(Number(clamp(b.eyeAspect, 0.86, 1.24).toFixed(3)));
   vars['--bone-eye-aspect-h'] = String(Number((1 / b.eyeAspect).toFixed(3)));
 
+  // "One Light Truth": derive one global light vector from the primary orb position so
+  // cast shadows, specular highlights and light spill all agree with the same source.
+  const lightX = round(clamp((50 - b.orbAX) / 50, -1, 1), 3);
+  const lightY = round(clamp((50 - b.orbAY) / 50, -1, 1), 3);
+  vars['--depth-light-x'] = String(lightX);
+  vars['--depth-light-y'] = String(lightY);
+
   // Sync legacy/base tokens so vendor, composer, footer, and presence share one voice.
   const endRgb = parseColorRgb(b.bgEnd) ?? [237, 228, 211];
   const accentRgb = parseColorRgb(b.accentColor) ?? [193, 122, 77];
@@ -701,4 +708,70 @@ export function mutateBonesCreative({ seed = Date.now(), temperature = 0.9, base
     bones: Object.freeze(ensureWcagContrast(validated.nextBones)),
     changedBones: validated.changedBones,
   };
+}
+
+/**
+ * Modulate an anchor 180-bone set (Default or Curated World) with live Layer-2
+ * conversation metric parameters (0..1, neutral 0.5). At neutral (all 0.5),
+ * returns the anchor bones unchanged; as conversation deepens or warms, shifts
+ * spatial shadow, halo, horizon aperture, aura breath, and corneal presence.
+ */
+export function modulateBonesWithMetrics(baseBones = DEFAULT_BONES, metricParams = null) {
+  const base = { ...DEFAULT_BONES, ...(baseBones || {}) };
+  if (!metricParams || typeof metricParams !== 'object') {
+    return Object.freeze(ensureWcagContrast(base));
+  }
+
+  const p = (key) => {
+    const n = Number(metricParams[key]);
+    return Number.isFinite(n) ? clamp(n, 0, 1) : 0.5;
+  };
+
+  const depth = p('depth');
+  const openness = p('openness');
+  const closeness = p('closeness');
+  const attention = p('attention');
+  const warmth = p('warmth');
+  const calm = p('calm');
+  const energy = p('energy');
+  const certainty = p('certainty');
+  const formality = p('formality');
+  const density = p('density');
+  const tempo = p('tempo');
+
+  const keys = [depth, openness, closeness, attention, warmth, calm, energy, certainty, formality, density, tempo];
+  const isNeutral = keys.every((v) => Math.abs(v - 0.5) < 1e-4);
+  if (isNeutral) {
+    return Object.freeze(ensureWcagContrast(base));
+  }
+
+  const depthIntensity = clamp(0.50 + 0.32 * (depth - 0.5) + 0.18 * (openness - 0.5) + 0.14 * (attention - 0.5), 0.15, 0.95);
+  const cornealDepth = clamp(0.65 + 0.35 * (closeness - 0.5) + 0.25 * (attention - 0.5) + 0.15 * (warmth - 0.5), 0.25, 1.0);
+  const atmosphericHaze = clamp(0.35 + 0.30 * (openness - 0.5) + 0.20 * (depth - 0.5) - 0.25 * (certainty - 0.5) - 0.20 * (formality - 0.5), 0.08, 0.78);
+  const focalSeparation = clamp(0.50 + 0.35 * (attention - 0.5) + 0.25 * (density - 0.5) + 0.15 * (certainty - 0.5) - 0.15 * (openness - 0.5), 0.15, 0.95);
+
+  const lightX = clamp((50 - base.orbAX) / 50 + 0.18 * (warmth - 0.5), -1, 1);
+  const shadowDeltaY = Math.round(12 * (depth - 0.5) - 8 * (closeness - 0.5) + 4 * (calm - 0.5));
+  const nextShadowY = clamp(base.eyeShadowY + shadowDeltaY, 6, 32);
+  const nextShadowX = Math.round(clamp(base.eyeShadowX + lightX * nextShadowY * 0.45, -12, 12));
+  const nextShadowBlur = Math.round(clamp(base.eyeShadowBlur + shadowDeltaY * 1.4, 10, 56));
+  const nextHaloBlur = Math.round(clamp(base.eyeHaloBlur * (0.8 + 0.45 * depthIntensity), 6, 64));
+
+  const patch = {
+    eyeShadowX: nextShadowX,
+    eyeShadowY: nextShadowY,
+    eyeShadowBlur: nextShadowBlur,
+    eyeHaloBlur: nextHaloBlur,
+    catchlightMainOpacity: round(clamp(base.catchlightMainOpacity + 0.14 * (cornealDepth - 0.65), 0.3, 1), 2),
+    pupilSizeBias: round(clamp(base.pupilSizeBias + 0.12 * (closeness - 0.5) + 0.08 * (warmth - 0.5), 0.72, 1.3), 2),
+    horizonLineAlpha: round(clamp(Math.max(base.horizonLineAlpha, 0.12 * (depthIntensity - 0.35)) * (1 - 0.3 * atmosphericHaze), 0, 0.85), 2),
+    sedimentOpacity: round(clamp(Math.max(base.sedimentOpacity, 0.08 * (depthIntensity - 0.35)), 0, 0.36), 2),
+    auraOpacity: round(clamp(base.auraOpacity + 0.16 * (depthIntensity - 0.5) + 0.1 * (warmth - 0.5), 0.05, 1), 2),
+    auraBreathMs: Math.round(clamp(base.auraBreathMs * (1 + 0.3 * (calm - 0.5) - 0.22 * (energy - 0.5)), 6000, 28000)),
+    vignetteAlpha: round(clamp(base.vignetteAlpha + 0.12 * (focalSeparation - 0.5), 0, 0.65), 2),
+    answerShadowAlpha: round(clamp(base.answerShadowAlpha + 0.06 * (focalSeparation - 0.3), 0, 0.18), 3),
+  };
+
+  const validated = validateBonePatch(patch, base);
+  return Object.freeze(ensureWcagContrast(validated.nextBones));
 }

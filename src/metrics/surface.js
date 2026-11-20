@@ -151,6 +151,8 @@ export function mountMetrics({ store, input = null, root = defaultRoot(), catalo
   let applied = 0;
 
   const link = ensureStylesheet(root);
+  // Resolved up front: commit() runs before the listeners below are attached.
+  const doc = documentFor(root);
 
   const catalogReady = engine ? Promise.resolve(engine) : loadCatalog().then((loaded) => {
     if (!engine) engine = createParameterEngine({ catalog: loaded });
@@ -161,6 +163,13 @@ export function mountMetrics({ store, input = null, root = defaultRoot(), catalo
     applySurface(params, root);
     applied += 1;
     if (root?.dataset) root.dataset.surfaceLevel = String(applied);
+    // One event per applied turn so other surfaces (scene, tests) can follow
+    // the same params without re-deriving them.
+    if (doc && typeof doc.dispatchEvent === 'function' && typeof CustomEvent === 'function') {
+      doc.dispatchEvent(new CustomEvent('agentfaehig:metrics-commit', {
+        detail: { params: { ...params }, behaviour: lastBehaviour },
+      }));
+    }
   }
 
   // Dev preview only when the URL actually carries mood/params.
@@ -205,7 +214,6 @@ export function mountMetrics({ store, input = null, root = defaultRoot(), catalo
     if (pendingInputs) pendingInputs = null;
   });
 
-  const doc = documentFor(root);
   function onOverride(event) {
     if (!event || typeof event.detail !== 'object' || event.detail === null) return;
     pendingOverride = { ...event.detail };
@@ -223,6 +231,120 @@ export function mountMetrics({ store, input = null, root = defaultRoot(), catalo
         doc.removeEventListener('agentfaehig:params', onOverride);
       }
       if (link && link.parentNode) link.parentNode.removeChild(link);
+    },
+  };
+}
+
+// Layer 2 spatial depth: the same 12 parameters, read as a scene instead of a
+// page. Everything here is deterministic and side-effect free; --surface-spatial
+// is the single summary scalar, the --depth-* tokens carry the layers.
+export function deriveSpatialDepth(params = {}, options = {}) {
+  const p = {};
+  for (const id of PARAMETER_IDS) p[id] = clamp01(params?.[id]);
+
+  const {
+    tempo, density, warmth, calm, closeness, openness,
+    attention, certainty, playfulness, formality, depth, energy,
+  } = p;
+
+  const reducedMotion = Boolean(options?.reducedMotion ?? prefersReducedMotion());
+  const orbAX = Number.isFinite(options?.orbAX) ? options.orbAX : 22;
+  const orbAY = Number.isFinite(options?.orbAY) ? options.orbAY : 18;
+
+  const spatiality = Number(clamp(
+    2.4 * (0.45 * (depth - 0.5) + 0.30 * (openness - 0.5) + 0.25 * (closeness - 0.5)),
+    -1,
+    1,
+  ).toFixed(4));
+
+  const depthIntensity = Number(clamp(
+    0.50 + 0.32 * (depth - 0.5) + 0.18 * (openness - 0.5) + 0.14 * (attention - 0.5),
+    0.15,
+    0.95,
+  ).toFixed(3));
+
+  const parallaxGain = reducedMotion
+    ? 0
+    : Number(clamp(
+        0.85 + 0.35 * (openness - 0.5) + 0.25 * (energy - 0.5) + 0.20 * (playfulness - 0.5) - 0.20 * (formality - 0.5),
+        0.20,
+        1.35,
+      ).toFixed(3));
+
+  const cornealDepth = Number(clamp(
+    0.65 + 0.35 * (closeness - 0.5) + 0.25 * (attention - 0.5) + 0.15 * (warmth - 0.5),
+    0.25,
+    1.00,
+  ).toFixed(3));
+
+  const baseLightX = (50 - orbAX) / 50;
+  const baseLightY = (50 - orbAY) / 50;
+  const lightX = Number(clamp(baseLightX + 0.18 * (warmth - 0.5), -1, 1).toFixed(3));
+  const lightY = Number(clamp(baseLightY + 0.15 * (calm - 0.5), -1, 1).toFixed(3));
+
+  const shadowLengthPx = Math.round(clamp(
+    14 + 16 * (depth - 0.5) - 10 * (closeness - 0.5) + 6 * (calm - 0.5),
+    8,
+    32,
+  ));
+  const contactAlpha = Number(clamp(
+    0.28 + 0.18 * (closeness - 0.5) + 0.12 * (certainty - 0.5),
+    0.14,
+    0.48,
+  ).toFixed(3));
+
+  const atmosphericHaze = Number(clamp(
+    0.35 + 0.30 * (openness - 0.5) + 0.20 * (depth - 0.5) - 0.25 * (certainty - 0.5) - 0.20 * (formality - 0.5),
+    0.08,
+    0.78,
+  ).toFixed(3));
+
+  const focalSeparation = Number(clamp(
+    0.50 + 0.35 * (attention - 0.5) + 0.25 * (density - 0.5) + 0.15 * (certainty - 0.5) - 0.15 * (openness - 0.5),
+    0.15,
+    0.95,
+  ).toFixed(3));
+
+  const visualGravity = Number(clamp(
+    0.45 * (calm - 0.5) + 0.35 * (depth - 0.5) - 0.45 * (energy - 0.5) - 0.25 * (tempo - 0.5),
+    -0.85,
+    0.85,
+  ).toFixed(3));
+
+  const lagFarMs = Math.round(clamp(1250 + 350 * (calm - 0.5) - 200 * (tempo - 0.5), 850, 1650));
+  const lagMidMs = Math.round(clamp(650 + 180 * (calm - 0.5) - 120 * (tempo - 0.5), 420, 920));
+  const lagNearMs = Math.round(clamp(280 + 80 * (calm - 0.5) - 60 * (tempo - 0.5), 180, 420));
+
+  return {
+    spatiality,
+    depthIntensity,
+    parallaxGain,
+    cornealDepth,
+    lightX,
+    lightY,
+    shadowLengthPx,
+    contactAlpha,
+    atmosphericHaze,
+    focalSeparation,
+    visualGravity,
+    lagFarMs,
+    lagMidMs,
+    lagNearMs,
+    variables: {
+      '--surface-spatial': String(spatiality),
+      '--depth-intensity': String(depthIntensity),
+      '--depth-parallax': String(parallaxGain),
+      '--depth-cornea': String(cornealDepth),
+      '--depth-light-x': String(lightX),
+      '--depth-light-y': String(lightY),
+      '--depth-shadow-length': `${shadowLengthPx}px`,
+      '--depth-contact-alpha': String(contactAlpha),
+      '--depth-haze': String(atmosphericHaze),
+      '--depth-focal-contrast': String(focalSeparation),
+      '--depth-gravity': String(visualGravity),
+      '--scene-lag-far': `${lagFarMs}ms`,
+      '--scene-lag-mid': `${lagMidMs}ms`,
+      '--scene-lag-near': `${lagNearMs}ms`,
     },
   };
 }
@@ -257,6 +379,13 @@ export function deriveSurface(params, options = {}) {
   const nervousUp = Math.max(0, nervousness);
   const calmDown = Math.max(0, -nervousness);
   const reducedMotion = Boolean(options?.reducedMotion ?? prefersReducedMotion());
+
+  // Layer 2 reads the same clamped params as a scene, not a page.
+  const spatial = deriveSpatialDepth(p, {
+    reducedMotion,
+    orbAX: options?.orbAX,
+    orbAY: options?.orbAY,
+  });
 
   // ── Rhythm (behaviour; consumed by typewriter and, once wired, presence).
   const baseCharMs = tempo <= 0.5 ? 48 - 36 * tempo : 30 - 16 * (tempo - 0.5);
@@ -434,6 +563,9 @@ export function deriveSurface(params, options = {}) {
     '--iris-bright': String(irisBright),
     '--font': font,
     '--font-reading': fontReading,
+
+    // Layer 2 scene tokens (--surface-spatial + --depth-*, --scene-lag-*).
+    ...spatial.variables,
   };
 
   return {
@@ -487,6 +619,7 @@ export function deriveSurface(params, options = {}) {
       typeScale,
       eyeGapPx,
     },
+    spatial,
     prompt: { fragment: '' },
   };
 }

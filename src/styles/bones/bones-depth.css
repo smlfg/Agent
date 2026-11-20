@@ -1,0 +1,51 @@
+/* Small 2.5D relief: one light source, three response times, no layout motion. */
+html[data-bones-active="true"] body::before {
+  translate: calc(var(--scene-px, 0px) * -0.8 * var(--depth-parallax, 0.85))
+    calc(var(--scene-py, 0px) * -0.8 * var(--depth-parallax, 0.85));
+  transition: translate var(--scene-lag-far, 1300ms) var(--ease);
+}
+
+html[data-bones-active="true"] .stage::before {
+  translate: calc(var(--scene-px, 0px) * -0.3 * var(--depth-parallax, 0.85))
+    calc(var(--scene-py, 0px) * -0.3 * var(--depth-parallax, 0.85));
+  transition: translate var(--scene-lag-mid, 680ms) var(--ease);
+}
+
+html[data-bones-active="true"] .presence .eye {
+  box-shadow:
+    0 2px 5px -2px rgba(40, 29, 22, var(--depth-contact-alpha, 0.28)),
+    calc(var(--depth-light-x, 0) * var(--bone-eye-shadow-y, 14px) * 0.55)
+      calc(var(--depth-light-y, 0) * var(--bone-eye-shadow-y, 14px) * 0.55)
+      var(--bone-eye-shadow-blur, 28px)
+      calc(var(--bone-eye-shadow-blur, 28px) * -0.52)
+      var(--bone-eye-shadow-color, rgba(58, 39, 27, 0.34)),
+    0 0 var(--bone-eye-halo-blur, 28px) var(--bone-eye-halo-spread, 0px)
+      var(--bone-eye-halo-color, rgba(74, 63, 53, 0.14));
+  transition: box-shadow var(--scene-lag-mid, 680ms) var(--ease);
+}
+
+html[data-bones-active="true"] .presence .eye .eye-catchlight {
+  translate: calc(var(--scene-px, 0px) * -0.45 * var(--depth-cornea, 0.65))
+    calc(var(--scene-py, 0px) * -0.45 * var(--depth-cornea, 0.65));
+}
+
+html[data-bones-active="true"] .pair {
+  translate: calc(var(--scene-px, 0px) * 0.45 * var(--depth-parallax, 0.85))
+    calc(var(--scene-py, 0px) * 0.45 * var(--depth-parallax, 0.85));
+  transition: translate var(--scene-lag-near, 320ms) var(--ease);
+}
+
+@media (max-width: 640px), (prefers-reduced-motion: reduce) {
+  html[data-bones-active="true"] body::before,
+  html[data-bones-active="true"] .stage::before,
+  html[data-bones-active="true"] .pair,
+  html[data-bones-active="true"] .presence .eye .eye-catchlight {
+    translate: none;
+    transition: none;
+  }
+}
+
+.presence.is-motion-paused ~ .focus .pair { translate: none; }
+html:has(.presence.is-motion-paused) body::before,
+html:has(.presence.is-motion-paused) .stage::before,
+.presence.is-motion-paused .eye .eye-catchlight { translate: none; }

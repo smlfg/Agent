@@ -2,7 +2,13 @@
 // properties, typography, atmosphere aura, and the Eye Motion Engine.
 // Single authoritative DOM projection writer so parameters and CSS stay in sync.
 
-import { applySurface, currentBehaviour } from '../metrics/surface.js';
+import {
+  PARAMETER_IDS,
+  applySurface,
+  currentBehaviour,
+  deriveSpatialDepth,
+  deriveSurface,
+} from '../metrics/surface.js';
 import { DEFAULT_SURFACE_STATE, toLegacyParams } from './surface-state.js';
 import {
   BONE_SCHEMA,
@@ -128,13 +134,155 @@ function toRgba(rgb, alpha) {
   return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${Number(clamp(alpha, 0, 1).toFixed(3))})`;
 }
 
+// ── Layer 2 <-> Layer 3 bridge ───────────────────────────────────────────────
+// Conversation metrics arrive as a vector of 12 parameters around the neutral
+// 0.5 point. They are folded additively into the SurfaceState anchor parameters
+// instead of replacing them, so a later reapply() cannot erase the conversation.
+
+const DEFAULT_METRIC_WEIGHT = 0.35;
+
+// Tokens whose value should follow the (metric-modulated) conversation instead
+// of the static SurfaceState anchor. Palette and layout tokens stay authored by
+// projectSurfaceState, so the surface keeps its designed identity.
+const DERIVED_MOTION_TOKENS = Object.freeze([
+  '--type-jitter-ms',
+  '--leave-ms',
+  '--onset-delay-ms',
+  '--blink-interval-ms',
+  '--blink-jitter-ms',
+  '--saccade-interval-ms',
+  '--saccade-radius-px',
+  '--pupil-scale',
+  '--lid-open-ratio',
+  '--gaze-gain',
+  '--gaze-hold-ms',
+  '--breathe-ms',
+  '--breathe-amplitude',
+  '--thinking-dots-ms',
+  '--surface-jitter-amp',
+  '--surface-jitter-state',
+  '--surface-jitter-cycle',
+]);
+
+function param01(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return 0.5;
+  return n < 0 ? 0 : n > 1 ? 1 : n;
+}
+
+function round3(value) {
+  return Number(clamp(value, 0, 1).toFixed(3));
+}
+
+/**
+ * Fold the conversation metric parameters into the 12 anchor parameters.
+ * Δp = (metricParams[id] - 0.5) * weight, added to the anchor, clamped to [0, 1]
+ * and rounded to three decimals so DOM output stays stable.
+ *
+ * @param {object} anchorParams output of toLegacyParams(state)
+ * @param {object|null} metricParams 12 conversation parameters (null = no conversation)
+ * @param {number} [weight=0.35] how strongly the conversation pulls the surface
+ */
+export function blendLegacyWithMetrics(anchorParams, metricParams, weight = DEFAULT_METRIC_WEIGHT) {
+  if (!metricParams || typeof metricParams !== 'object') return anchorParams;
+  const anchor = anchorParams && typeof anchorParams === 'object' ? anchorParams : {};
+  const requested = Number(weight);
+  const w = Number.isFinite(requested) ? clamp(requested, 0, 1) : DEFAULT_METRIC_WEIGHT;
+
+  const out = {};
+  for (const [id, anchorValue] of Object.entries(anchor)) {
+    const anchorNumber = Number(anchorValue);
+    const base = Number.isFinite(anchorNumber) ? clamp(anchorNumber, 0, 1) : 0.5;
+    const metricValue = metricParams[id];
+    const hasMetric = metricValue !== undefined
+      && metricValue !== null
+      && Number.isFinite(Number(metricValue));
+    const delta = hasMetric ? (param01(metricValue) - 0.5) * w : 0;
+    out[id] = round3(base + delta);
+  }
+  return out;
+}
+
+/**
+ * Additive metric modulation of the live 180-bone layer. Only depth, light and
+ * physics bones move; authored colours, fonts and layout keep the world's
+ * identity and stay WCAG-guarded. Values are clamped to BONE_SCHEMA bounds.
+ */
+export function modulateBonesWithMetrics(bones, params = {}, spatial = null) {
+  const base = bones && typeof bones === 'object' ? bones : DEFAULT_BONES;
+  const out = { ...base };
+
+  const p = {};
+  for (const id of PARAMETER_IDS) p[id] = param01(params?.[id]);
+  const s = spatial && typeof spatial === 'object'
+    ? spatial
+    : deriveSpatialDepth(p, { reducedMotion: false });
+
+  const set = (id, value) => {
+    const spec = BONE_SCHEMA[id];
+    if (!spec || spec.type !== 'number') return;
+    const n = Number(value);
+    if (!Number.isFinite(n)) return;
+    out[id] = Number(clamp(n, spec.min, spec.max).toFixed(4));
+  };
+
+  set('pupilSizeBias', base.pupilSizeBias + 0.12 * (p.closeness - 0.5) + 0.08 * (p.warmth - 0.5));
+  set('horizonLineAlpha', Math.max(base.horizonLineAlpha, 0.12 * s.depthIntensity) * (1 - 0.35 * s.atmosphericHaze));
+  set('sedimentOpacity', Math.max(base.sedimentOpacity, 0.08 * s.depthIntensity));
+  set('auraOpacity', base.auraOpacity + 0.18 * (s.depthIntensity - 0.5) + 0.12 * (p.warmth - 0.5));
+  set('auraBreathMs', base.auraBreathMs * (1 + 0.35 * (p.calm - 0.5) - 0.25 * (p.energy - 0.5)));
+  set('vignetteAlpha', base.vignetteAlpha + 0.14 * (s.focalSeparation - 0.5));
+  set('answerShadowAlpha', base.answerShadowAlpha + 0.08 * s.focalSeparation);
+  set('eyeShadowX', base.eyeShadowX + s.lightX * 6);
+  set('eyeShadowY', base.eyeShadowY + (s.shadowLengthPx - 14) * 0.45);
+  set('eyeShadowBlur', base.eyeShadowBlur + (s.shadowLengthPx - 14) * 0.6);
+  set('eyeRimGlowBlur', base.eyeRimGlowBlur + 10 * Math.max(0, s.cornealDepth - 0.65));
+  set('catchlightMainX', base.catchlightMainX + s.lightX * 5);
+  set('catchlightMainY', base.catchlightMainY + s.lightY * 4);
+  set('irisLimbusAlpha', base.irisLimbusAlpha + 0.04 * Math.max(0, s.cornealDepth - 0.5));
+  set('focusPull', base.focusPull + 0.18 * (s.focalSeparation - 0.5));
+  set('saccadeAmp', base.saccadeAmp + 0.2 * (s.depthIntensity - 0.5));
+  set('driftFreqScale', base.driftFreqScale + 0.25 * (s.parallaxGain - 0.85));
+
+  return out;
+}
+
+function pickMotionTokens(behaviour) {
+  const source = behaviour?.variables;
+  const out = {};
+  if (!source) return out;
+  for (const name of DERIVED_MOTION_TOKENS) {
+    if (source[name] !== undefined) out[name] = source[name];
+  }
+  return out;
+}
+
 /**
  * Pure projection of SurfaceState -> CSS variables and presence parameters.
  * Exported separately so tests can verify exact token output without a browser.
+ *
+ * `metricParams` (the 12 conversation parameters) is folded additively into the
+ * state anchor, so conversation-driven depth survives every reapply().
  */
-export function projectSurfaceState(state = DEFAULT_SURFACE_STATE) {
+export function projectSurfaceState(
+  state = DEFAULT_SURFACE_STATE,
+  {
+    metricParams = null,
+    metricWeight = DEFAULT_METRIC_WEIGHT,
+    reducedMotion = false,
+    orbAX,
+    orbAY,
+  } = {},
+) {
   const s = state || DEFAULT_SURFACE_STATE;
   const { embodiment, motion, atmosphere, communication } = s;
+
+  const anchorParams = toLegacyParams(s);
+  const effectiveLegacyParams = metricParams
+    ? blendLegacyWithMetrics(anchorParams, metricParams, metricWeight)
+    : anchorParams;
+  const spatial = deriveSpatialDepth(effectiveLegacyParams, { reducedMotion, orbAX, orbAY });
+  const motionTokens = pickMotionTokens(deriveSurface(effectiveLegacyParams, { reducedMotion }));
 
   const pal = BACKGROUND_PALETTES[atmosphere.background] ?? BACKGROUND_PALETTES.paper;
   const primaryRgb = parseHex(atmosphere.primaryColor) ?? pal.accent;
@@ -215,6 +363,7 @@ export function projectSurfaceState(state = DEFAULT_SURFACE_STATE) {
   const transitionMs = motion.energy <= 0.2 ? 2200 : 1100;
 
   const variables = {
+    ...motionTokens,
     '--bg-start': toHex(bgStart),
     '--bg-end': toHex(bgEnd),
     '--text': toHex(textRgb),
@@ -249,6 +398,7 @@ export function projectSurfaceState(state = DEFAULT_SURFACE_STATE) {
     '--type-char-ms': String(charDelayMs),
     '--surface-eye-gap': `${eyeGapPx}px`,
     '--surface-transition-ms': `${transitionMs}ms`,
+    ...spatial.variables,
   };
 
   const presenceParams = {
@@ -265,7 +415,9 @@ export function projectSurfaceState(state = DEFAULT_SURFACE_STATE) {
   };
 
   return {
-    legacyParams: toLegacyParams(s),
+    legacyParams: anchorParams,
+    effectiveLegacyParams,
+    spatial,
     variables,
     presenceParams,
     eyeShape: embodiment.eyeShape,
@@ -285,9 +437,11 @@ export function mountSurfaceProjector({
 } = {}) {
   if (!surfaceStore) throw new TypeError('mountSurfaceProjector requires surfaceStore');
 
+  const doc = root?.ownerDocument ?? (typeof document !== 'undefined' ? document : null);
   let resetTimerId = 0;
   let activeBones = null;
   let activeWorldId = null;
+  let activeMetricParams = null;
   const writtenBoneVars = new Set();
 
   function clearBoneCssVars() {
@@ -302,10 +456,19 @@ export function mountSurfaceProjector({
   }
 
   function apply(state = surfaceStore.getState()) {
-    const projected = projectSurfaceState(state);
+    // Conversation metrics are transient state of this mount: they modulate the
+    // anchor additively, so a reapply() rebuilds the same surface + conversation.
+    const metricWeight = surfaceStore.isModified() ? DEFAULT_METRIC_WEIGHT : 0.75;
+    const projected = projectSurfaceState(state, {
+      metricParams: activeMetricParams,
+      metricWeight,
+      reducedMotion,
+      orbAX: activeBones?.orbAX,
+      orbAY: activeBones?.orbAY,
+    });
 
     // 1. Update legacy behaviour registry + baseline variables first.
-    applySurface(projected.legacyParams, root, { reducedMotion });
+    applySurface(projected.effectiveLegacyParams, root, { reducedMotion });
     const behaviour = currentBehaviour();
     if (behaviour && typeof behaviour === 'object') {
       behaviour.charDelayMs = projected.charDelayMs;
@@ -330,7 +493,7 @@ export function mountSurfaceProjector({
     // 3. Apply articulated 180-bone layer if active, merged live with dial changes.
     let finalPresenceParams = projected.presenceParams;
     if (activeBones) {
-      const mergedBones = ensureWcagContrast({
+      const liveBones = ensureWcagContrast({
         ...activeBones,
         eyeScale: state.embodiment.eyeScale,
         eyeSpacing: state.embodiment.eyeSpacing,
@@ -344,11 +507,24 @@ export function mountSurfaceProjector({
         responsiveness: state.motion.responsiveness,
         answerScale: state.communication.typographyScale,
       });
+      // Conversation delta modulates depth, light and physics bones on top of
+      // the authored world without replacing its colours or typography.
+      const modulatedBones = activeMetricParams
+        ? modulateBonesWithMetrics(liveBones, projected.effectiveLegacyParams, projected.spatial)
+        : null;
+      const mergedBones = modulatedBones ?? liveBones;
       const boneVars = compileBonesToCssVars(mergedBones);
       if (root && root.style && typeof root.style.setProperty === 'function') {
         for (const [name, value] of Object.entries(boneVars)) {
           root.style.setProperty(name, value);
           writtenBoneVars.add(name);
+        }
+        // Only a live conversation re-writes the light origin; without metrics
+        // the 180-bone orb stays the single source of truth for --depth-light-*.
+        if (modulatedBones) {
+          for (const [name, value] of Object.entries(projected.spatial.variables)) {
+            root.style.setProperty(name, value);
+          }
         }
       }
       if (root && root.dataset) {
@@ -452,6 +628,25 @@ export function mountSurfaceProjector({
     apply(surfaceStore.getState());
   }
 
+  function getMetricParams() {
+    return activeMetricParams ? { ...activeMetricParams } : null;
+  }
+
+  // Single entry point for the metrics layer (layer 3 -> layer 2 -> surface).
+  function setMetricParams(params) {
+    const next = params && typeof params === 'object' && !Array.isArray(params) ? { ...params } : null;
+    activeMetricParams = next;
+    apply(surfaceStore.getState());
+    return getMetricParams();
+  }
+
+  function onMetricsCommit(event) {
+    setMetricParams(event?.detail?.params ?? null);
+  }
+  if (doc && typeof doc.addEventListener === 'function') {
+    doc.addEventListener('agentfaehig:metrics-commit', onMetricsCommit);
+  }
+
   const unsubscribe = surfaceStore.subscribe((nextState, change) => {
     if (change?.action === 'reset') {
       activeBones = null;
@@ -488,10 +683,15 @@ export function mountSurfaceProjector({
     getActiveWorldId: () => activeWorldId,
     listWorlds: () => WORLD_LIST.map((w) => ({ id: w.id, name: w.name, feeling: w.feeling })),
     boneCount: Object.keys(BONE_SCHEMA).length,
+    setMetricParams,
+    getMetricParams,
     destroy() {
       clearTimeout(resetTimerId);
       clearBoneCssVars();
       unsubscribe();
+      if (doc && typeof doc.removeEventListener === 'function') {
+        doc.removeEventListener('agentfaehig:metrics-commit', onMetricsCommit);
+      }
     },
   };
 }

@@ -177,6 +177,11 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
 
   function renderFrame(frame) {
     if (!frame) return;
+    const scene = doc.documentElement;
+    if (scene?.style && motionAllowed()) {
+      scene.style.setProperty('--scene-px', `${clamp(frame.pair.x * 0.025, -4, 4).toFixed(2)}px`);
+      scene.style.setProperty('--scene-py', `${clamp(frame.pair.y * 0.025, -4, 4).toFixed(2)}px`);
+    }
     setVariable('--eye-pair-x', `${frame.pair.x}px`);
     setVariable('--eye-pair-y', `${frame.pair.y}px`);
     setVariable('--eye-pair-scale', `${frame.pair.scale}`);
@@ -919,6 +924,8 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
       eye.classList.remove('is-blinking', 'is-reopening');
     }
     for (const name of OWN_VARS) root.style.removeProperty(name);
+    doc.documentElement?.style.removeProperty('--scene-px');
+    doc.documentElement?.style.removeProperty('--scene-py');
     writtenVars.clear();
     root.classList.remove('is-motion-paused', 'is-reduced-motion', 'is-dormant', 'is-cue-adapt');
     delete root.dataset.phase;
