@@ -89,7 +89,7 @@ const surfaceProjector = mountSurfaceProjector({
   reducedMotion,
 });
 const baseAgent = createAdaptiveAgent({
-  innerAgent: createAgentChain(adapters),
+  innerAgent: createAgentChain(adapters, { timeoutMs: 10000 }),
   surfaceStore,
   projector: surfaceProjector,
 });

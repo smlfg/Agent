@@ -6,7 +6,7 @@
 // on the deployed page cannot redirect the API call.
 
 const ADAPTER_ID = 'remote';
-const DEFAULT_TIMEOUT_MS = 12000;
+const DEFAULT_TIMEOUT_MS = 10000;
 const DEFAULT_HISTORY_TURNS = 3;
 
 const PRODUCTION_HOSTS = new Set([

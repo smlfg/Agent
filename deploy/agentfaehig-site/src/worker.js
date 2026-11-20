@@ -1,11 +1,20 @@
-// agentfähig.de worker: Living Surface as homepage (static assets) + POST /api/agent (MiniMax, OpenAI fallback).
+// agentfähig.de worker: Living Surface as homepage (static assets) + POST /api/agent
+// (MiniMax → OpenAI-kompatibel → Workers AI als letzte, schlüsselfreie Stufe).
 // Agent endpoint code taken from DeepSeek agent D1 (tested in deploy/site/test/agent-endpoint.test.mjs).
 
 const MINIMAX_BASE_URL = "https://api.minimax.io/v1";
 const MINIMAX_ANTHROPIC_BASE_URL = "https://api.minimax.io/anthropic";
 const DEFAULT_MINIMAX_MODEL = "MiniMax-M3.1-Flash";
+// Zweiter, echter Anbieter über die OpenAI-kompatible Schnittstelle (OpenRouter).
+// Bleibt optional: ohne OPENAI_API_KEY und OPENAI_MODEL wird er übersprungen.
+const DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1";
+// Dritte Stufe: Workers AI über das native Binding. Braucht keinen Schlüssel und
+// kein Guthaben; läuft auf dem freien Neuronen-Kontingent. Modell per Var änderbar.
+const DEFAULT_WORKERS_AI_MODEL = "@cf/zai-org/glm-4.7-flash";
 const AGENT_SYSTEM_DEFAULT = "You are the presence on agentfähig.de, a website that behaves like an agent, built by Samuel. Answer in one to three short sentences. React to what the visitor says. Never say 'How can I help'. Be warm, curious and honest. No lists, no markdown.";
-const AGENT_TIMEOUT_MS = 9000;
+const AGENT_TIMEOUT_MS = 4000; // pro Anbieter; Responsiveness-Vorgabe: Gesamtzeit klein halten
+const AGENT_TOTAL_BUDGET_MS = 9000; // Gesamtbudget aller Stufen; Client bricht bei 10 s ab
+const AGENT_MIN_STAGE_MS = 1500;
 const AGENT_MAX_TOKENS = 900; // M3.1-Flash always reasons; reasoning tokens count against this budget
 const AGENT_TEMPERATURE = 0.8;
 const AGENT_PROMPT_MAX = 600;
@@ -64,21 +73,37 @@ async function handleAgent(request, env) {
 
   const messages = buildAgentMessages(input.value);
 
+  const attempted = [];
+  const startedAt = Date.now();
+  const stageMs = () => Math.min(AGENT_TIMEOUT_MS, AGENT_TOTAL_BUDGET_MS - (Date.now() - startedAt));
+  const hasTime = () => stageMs() >= AGENT_MIN_STAGE_MS;
+
   if (env.MINIMAX_API_KEY) {
-    const result = await callMiniMax(messages, env);
+    attempted.push("minimax");
+    const result = await callMiniMax(messages, env, stageMs());
     if (result.ok) {
       return json({ text: result.text, provider: "minimax", model: result.model });
     }
   }
 
-  if (env.OPENAI_API_KEY && env.OPENAI_MODEL) {
-    const result = await callOpenAI(messages, env);
+  if (env.OPENAI_API_KEY && env.OPENAI_MODEL && hasTime()) {
+    attempted.push("openai");
+    const result = await callOpenAI(messages, env, stageMs());
     if (result.ok) {
-      return json({ text: result.text, provider: "openai", model: result.model });
+      return json({ text: result.text, provider: result.provider, model: result.model });
     }
   }
 
-  return json({ error: "no_provider" }, 503);
+  if (env.AI && hasTime()) {
+    attempted.push("workers-ai");
+    const result = await callWorkersAI(messages, env, stageMs());
+    if (result.ok) {
+      return json({ text: result.text, provider: "workers-ai", model: result.model });
+    }
+  }
+
+  if (!attempted.length) return json({ error: "no_provider" }, 503);
+  return json({ error: "providers_unavailable", attempts: attempted }, 503);
 }
 
 function normalizeAgentInput(payload) {
@@ -116,13 +141,13 @@ function buildAgentMessages({ prompt, system, history }) {
   return messages;
 }
 
-async function callMiniMax(messages, env) {
+async function callMiniMax(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
   // MiniMax keys from Samuel's Token/Coding plan work on the Anthropic-compatible
   // endpoint (same as Hermes: https://api.minimax.io/anthropic, model MiniMax-M3.1-Flash).
   const model = env.MINIMAX_MODEL || DEFAULT_MINIMAX_MODEL;
   const base = env.MINIMAX_BASE_URL || MINIMAX_ANTHROPIC_BASE_URL;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), AGENT_TIMEOUT_MS);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   const system = messages.filter((m) => m.role === "system").map((m) => m.content).join("\n\n");
   const turns = messages.filter((m) => m.role === "user" || m.role === "assistant")
     .map((m) => ({ role: m.role, content: m.content }));
@@ -182,18 +207,28 @@ async function callMiniMax(messages, env) {
   }
 }
 
-async function callOpenAI(messages, env) {
+async function callOpenAI(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
   const model = env.OPENAI_MODEL;
+  const base = String(env.OPENAI_BASE_URL || DEFAULT_OPENAI_BASE_URL).replace(/\/+$/, "");
+  const provider = env.OPENAI_PROVIDER || (base.includes("openrouter.ai") ? "openrouter" : "openai");
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), AGENT_TIMEOUT_MS);
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  // OpenRouter empfiehlt Herkunfts-Header; ohne sie funktioniert der Aufruf,
+  // die Zuordnung im Dashboard fehlt aber.
+  const headers = {
+    "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
+    "Content-Type": "application/json",
+  };
+  if (base.includes("openrouter.ai")) {
+    headers["HTTP-Referer"] = "https://www.xn--agentfhig-02a.de/";
+    headers["X-Title"] = "agentfaehig.de";
+  }
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch(`${base}/chat/completions`, {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({
         model,
         messages,
@@ -203,14 +238,27 @@ async function callOpenAI(messages, env) {
       signal: controller.signal,
     });
 
-    if (!response.ok) return { ok: false };
+    if (!response.ok) {
+      // Nur Status und Fehlertyp protokollieren, nie Schlüssel oder Besucherinhalt.
+      let detail = null;
+      try {
+        const body = await response.json();
+        detail = {
+          type: body?.error?.type ?? body?.type ?? null,
+          message: String(body?.error?.message ?? "").slice(0, 200),
+        };
+      } catch {}
+      console.warn("agent_provider_status", provider, response.status, JSON.stringify(detail));
+      return { ok: false };
+    }
 
     const data = await response.json();
     const text = stripThinking(extractChatText(data));
     if (!text) return { ok: false };
 
-    return { ok: true, text, model };
+    return { ok: true, text, provider, model };
   } catch (error) {
+    console.warn("agent_provider_error", provider, error?.name ?? "error");
     return { ok: false };
   } finally {
     clearTimeout(timer);
@@ -220,6 +268,48 @@ async function callOpenAI(messages, env) {
 function extractChatText(data) {
   const content = data?.choices?.[0]?.message?.content;
   return typeof content === "string" ? content.trim() : "";
+}
+
+async function callWorkersAI(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
+  const model = env.WORKERS_AI_MODEL || DEFAULT_WORKERS_AI_MODEL;
+  try {
+    // AI.run kennt kein AbortSignal; die Zeitgrenze wird deshalb um das Promise gelegt.
+    const run = env.AI.run(model, {
+      messages,
+      max_tokens: AGENT_MAX_TOKENS,
+      temperature: AGENT_TEMPERATURE,
+    });
+    const data = await withTimeout(run, timeoutMs);
+    const text = stripThinking(workersAiText(data));
+    if (!text) {
+      console.warn("agent_provider_empty", "workers-ai", model);
+      return { ok: false };
+    }
+    return { ok: true, text, model };
+  } catch (error) {
+    console.warn("agent_provider_error", "workers-ai", error?.name ?? "error");
+    return { ok: false };
+  }
+}
+
+// Workers AI liefert je nach Modell { response } oder { choices: [...] }.
+function workersAiText(data) {
+  if (typeof data === "string") return data;
+  if (typeof data?.response === "string") return data.response;
+  const content = data?.choices?.[0]?.message?.content;
+  return typeof content === "string" ? content : "";
+}
+
+function withTimeout(promise, ms) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      const error = new Error(`timed out after ${ms}ms`);
+      error.name = "TimeoutError";
+      reject(error);
+    }, ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
 function stripThinking(text) {
