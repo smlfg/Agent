@@ -1,0 +1,24 @@
+{
+  "name": "ask_worker",
+  "description": "Ask one focused worker a single narrow question about the selected waypoint. Call at most once per turn when DECISION.waypoint is set. The worker may return \"NOT_COVERED\" if the waypoint does not cover the visitor's question.",
+  "parameters": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "question": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The visitor's actual question for this turn, kept narrow and specific."
+      },
+      "waypoint_id": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The exact id from DECISION.waypoint."
+      }
+    },
+    "required": [
+      "question",
+      "waypoint_id"
+    ]
+  }
+}

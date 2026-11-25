@@ -177,19 +177,68 @@ function readMarketing(persona) {
 }
 
 function collectFacts(knowledge) {
+  if (!knowledge) return [];
+
+  const facts = [];
+  const pushFact = (value) => {
+    if (typeof value === 'string' && value.trim() && facts.length < 60) {
+      facts.push(value.trim());
+    }
+  };
+
   const raw = Array.isArray(knowledge)
     ? knowledge
     : knowledge?.facts ?? knowledge?.entries ?? knowledge?.items ?? null;
 
-  if (!raw) return [];
+  if (raw) {
+    for (const entry of Array.isArray(raw) ? raw : [raw]) {
+      const fact = typeof entry === 'string'
+        ? entry
+        : entry?.fact ?? entry?.text ?? entry?.statement ?? entry?.detail ?? null;
+      pushFact(fact);
+      if (facts.length >= 60) break;
+    }
+  }
 
-  const facts = [];
-  for (const entry of Array.isArray(raw) ? raw : [raw]) {
-    const fact = typeof entry === 'string'
-      ? entry
-      : entry?.fact ?? entry?.text ?? entry?.statement ?? entry?.detail ?? null;
-    if (typeof fact === 'string' && fact.trim()) facts.push(fact.trim());
-    if (facts.length >= 60) break;
+  if (!Array.isArray(knowledge) && typeof knowledge === 'object') {
+    if (knowledge.owner && typeof knowledge.owner === 'object') {
+      const { name, role, one_liner: oneLiner } = knowledge.owner;
+      const head = name && role ? `${name} (${role})` : (name || role || '');
+      const ownerLine = [head, oneLiner].filter(Boolean).join(': ');
+      pushFact(ownerLine);
+    }
+
+    if (Array.isArray(knowledge.projects_public)) {
+      for (const item of knowledge.projects_public) {
+        if (!item || typeof item !== 'object') continue;
+        const prefix = item.title ? `${item.title}: ` : '';
+        const status = item.status ? ` (${item.status})` : '';
+        if (item.what) pushFact(`${prefix}${item.what}${status}`);
+      }
+    }
+
+    if (Array.isArray(knowledge.offerings)) {
+      for (const item of knowledge.offerings) {
+        if (!item || typeof item !== 'object') continue;
+        const prefix = item.title ? `${item.title}: ` : '';
+        const audience = item.for_whom ? ` For: ${item.for_whom}` : '';
+        if (item.what) pushFact(`${prefix}${item.what}${audience}`);
+      }
+    }
+
+    if (Array.isArray(knowledge.approach)) {
+      for (const item of knowledge.approach) {
+        const point = typeof item === 'string' ? item : item?.point;
+        pushFact(point);
+      }
+    }
+
+    if (Array.isArray(knowledge.faq)) {
+      for (const item of knowledge.faq) {
+        if (!item || typeof item !== 'object') continue;
+        if (item.q && item.a) pushFact(`Q: ${item.q} A: ${item.a}`);
+      }
+    }
   }
 
   return facts.length ? trimFacts(facts, 4000) : [];

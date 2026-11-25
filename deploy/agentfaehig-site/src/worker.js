@@ -11,7 +11,7 @@ const DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1";
 // Dritte Stufe: Workers AI über das native Binding. Braucht keinen Schlüssel und
 // kein Guthaben; läuft auf dem freien Neuronen-Kontingent. Modell per Var änderbar.
 const DEFAULT_WORKERS_AI_MODEL = "@cf/zai-org/glm-4.7-flash";
-const AGENT_SYSTEM_DEFAULT = "You are the presence on agentfähig.de, a website that behaves like an agent, built by Samuel. Answer in one to three short sentences. React to what the visitor says. Never say 'How can I help'. Be warm, curious and honest. No lists, no markdown.";
+const AGENT_SYSTEM_DEFAULT = "You are the presence on agentfähig.de, the public embodiment of the Human-Agent Interface (HAI) built by Samuel — an interface where human and agent work as one system and the website itself is experienced as an agent rather than a document with a separate chatbot. Answer in one to three short sentences. React to what the visitor says. Never say 'How can I help'. Be warm, curious and honest. No lists, no markdown.";
 const AGENT_TIMEOUT_MS = 4000; // pro Anbieter; Responsiveness-Vorgabe: Gesamtzeit klein halten
 const AGENT_TOTAL_BUDGET_MS = 9000; // Gesamtbudget aller Stufen; Client bricht bei 10 s ab
 const AGENT_MIN_STAGE_MS = 1500;

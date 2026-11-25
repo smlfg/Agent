@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import { deriveStyle, styleFragment } from '../src/agent/style.js';
 import { buildSystemPrompt, buildMessages } from '../src/agent/prompt.js';
@@ -111,6 +112,18 @@ test('buildSystemPrompt includes supplied knowledge and marks it as the boundary
   assert.match(prompt, /Samuel builds agent surfaces\./);
   assert.match(prompt, /hello@example\.com/);
   assert.match(prompt, /do not extend them/i);
+});
+
+test('buildSystemPrompt extracts structured facts from real knowledge.json (HAI, owner, offerings)', () => {
+  const persona = JSON.parse(readFileSync(new URL('../src/agent/persona.json', import.meta.url), 'utf8'));
+  const knowledge = JSON.parse(readFileSync(new URL('../src/agent/knowledge.json', import.meta.url), 'utf8'));
+
+  const prompt = buildSystemPrompt({ persona, knowledge, style: deriveStyle({}) });
+
+  assert.match(prompt, /Human Agent Interface \(HAI\)/);
+  assert.match(prompt, /An interface where human and agent work as one system/);
+  assert.match(prompt, /Samuel/);
+  assert.doesNotMatch(prompt, /This conversation is the only source/);
 });
 
 test('buildSystemPrompt survives without persona or knowledge', () => {

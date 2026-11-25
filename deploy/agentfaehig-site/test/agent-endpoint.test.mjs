@@ -184,3 +184,20 @@ test('Leerer Prompt wird abgelehnt', async () => {
   const res = await worker.fetch(request({ prompt: '   ' }), { ASSETS });
   assert.equal(res.status, 400);
 });
+
+test('Default system prompt defines Human-Agent Interface (HAI) when system is omitted', async () => {
+  let capturedMessages = null;
+  const res = await worker.fetch(request({ prompt: 'was ist humanagent interface' }), {
+    ASSETS,
+    AI: {
+      run: async (_model, input) => {
+        capturedMessages = input.messages;
+        return { response: 'HAI ist eine Schnittstelle.' };
+      },
+    },
+  });
+  assert.equal(res.status, 200);
+  assert.equal(capturedMessages?.[0]?.role, 'system');
+  assert.match(capturedMessages?.[0]?.content || '', /Human-Agent Interface \(HAI\)/);
+  assert.match(capturedMessages?.[0]?.content || '', /human and agent work as one system/i);
+});

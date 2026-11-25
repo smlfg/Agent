@@ -1,0 +1,25 @@
+{
+  "ok": false,
+  "mode": "live",
+  "provider": "none",
+  "plan_path": "/Users/samuelfleig/Projects/03_HAI/Agentfaehig/Agent/PLAN-SLICE-A.md",
+  "plan_sha256": "653e0b461b7dbc890a5461027a6a3cc67c577309e6dfc60a284daa145da3b3fe",
+  "threshold": 0.75,
+  "overall": 0.0,
+  "per_metric": {
+    "intelligence": 0.0,
+    "feasibility": 0.0,
+    "ease": 0.0,
+    "efficiency": 0.0
+  },
+  "verdict": "NO_JUDGMENT",
+  "judges": 0,
+  "aggregation": "none",
+  "provider_errors": [
+    "minimax: minimax subprocess rc=1: live mode requires MINIMAX_API_KEY (env or /Users/samuelfleig/dspy-playground/.env); no fixture fallback",
+    "ollama: local grade missing Ollama models: qwen3.5:35b",
+    "opencode: opencode judge failed rc=1: opencode: Gmail-Go-Abo am Limit, wechsle auf hallo@\nopencode: beide Go-Abos am Limit, weiter mit opencode/glm-5.3-flash-free\n"
+  ],
+  "note": "no judge available; bootstrap path allowed",
+  "graded_at": "20261125T175512Z"
+}
