@@ -1,0 +1,9 @@
+{
+  "id": "manual-fixture",
+  "source_kind": "manual",
+  "url": "https://example.com/source",
+  "title": "Fixture",
+  "text": "Samuel baut Interfaces. https://example.com/source",
+  "meta": {},
+  "source_hash": "fixture-hash"
+}

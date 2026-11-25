@@ -1,0 +1,13 @@
+{
+  "rule": "aliasHit || cosTop >= cosThreshold",
+  "params": {
+    "cosThreshold": 0.56
+  },
+  "calibrated_on": 50,
+  "result": {
+    "t": 0.56,
+    "falseGiven": 2,
+    "hit": 19,
+    "correct": 42
+  }
+}

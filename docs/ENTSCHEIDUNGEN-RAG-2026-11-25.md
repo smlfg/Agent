@@ -38,6 +38,19 @@ Ursache (Recherche 25.11.):
 | Q14 | `knowledge.json` | **Abgelöst.** Ein Chunk pro Datei in `src/agent/knowledge/*.md`, Build → `chunks.json` + Embeddings. Schalter (`approved`, Preis-Haltung, Kontakt) → `site-config.json` |
 | Q15 | Zitate | Quellen-Chips unter der Antwort; optionales Frontmatter-Feld `link:` (Website/Repo), Chip verlinkt wörtlich. Voice liest Chips nicht vor |
 
+### Nachträge (25.11., nach dem Grilling)
+
+| # | Frage | Entscheidung |
+|---|---|---|
+| Q16 | Definition of Done | übernommen (siehe unten) |
+| Q17 | Plaud / Notion | Samuels eigene Repräsentation → Hauptquelle für alles über ihn; nur Plaud-Summaries, nie Transkripte. Inhalte über andere Personen/Projekte entscheidet Samuels **Veröffentlichungsfreigabe**, ein Namensfilter ist nur Hinweis |
+| Q18 | Freigabe | Samuel skimmt alle Chunks; Freigabe ist an den Inhalts-Hash gebunden (`approved_hash`) |
+| Q19 | Repos | **alle** öffentlichen Nicht-Fork-Repos (Luck Surface Area), aktuell 91 |
+| Q20 | Gewichtung | kein Tiering |
+| **Q3/Q6 revidiert** | Tool-Calling | **Kein Tool-Calling in V1.** „Für ‚Wer ist Samuel?' braucht es keinen Agenten, der erst entscheidet, ob er suchen soll. Es braucht eine gute Suche." → Server sucht immer vor dem einen LLM-Aufruf (Pre-Retrieval), mit Alias-Garantie, Multi-Query und Gesprächsanker. Tool-Calling nur als gemessene Ausbaustufe |
+| Plan-Review | Härtung | Coverage empirisch kalibriert; Server-Budget ≤ 9 s passend zum 10-s-Client-Timeout; Zitate serverseitig gegen abgerufene IDs geprüft; Persona-Parameter nur per Whitelist; Golden-Set mit unbekannten, mehrdeutigen, Rückfrage- und adversarialen Fragen |
+| Umsetzung | Schreiber | Codex schreibt den Code; Chunk-Verdichtung mit `gpt-5.6-luna`; HAI-Mission `M-20261125T212109-5dd54792` |
+
 ## Chunk-Format
 
 ```yaml
@@ -49,8 +62,11 @@ topics: [person, owner, about]
 aliases: [Samuel, wer hat das gebaut, Autor, Owner]
 link: null                # optional, wörtlich übernommene URL
 source: kontext-wiki/01_SAMUEL_CORE
+source_kind: manual       # github | web | notion | plaud | manual
+source_hash: sha256:…
 updated_at: 2026-11-25
 visibility: public
+approved_hash: sha256:…   # Hash des Chunks bei Freigabe; Build nimmt nur passende
 ---
 ```
 
@@ -67,6 +83,13 @@ visibility: public
 **Nicht in V1:** Formular, Worker-Schicht, Vektor-DB, Klassifikator-Feintuning.
 
 ## Offen
+
+- **Chunk-Qualität — später nochmal ran (Samuel, Screening 25.11.):** Chunks sind zu kurz,
+  5 waren leer, inhaltlich eher zu schwach und unpersönlich — das Risiko ist *zu wenig*
+  Persönliches, nicht zu viel. Jetzt bewusst kein Overengineering; V1 geht mit 125
+  freigegebenen Chunks weiter. Ansatzpunkte für später: längere Chunks (statt ≤120 Wörter),
+  Notion/Plaud als Quellen für Samuels eigene Stimme, README-Kürzung prüfen, leere Repos
+  ohne README gar nicht erst verdichten.
 
 - Fundort der vorbereiteten 5–9 Website-Chunks (im Repo nicht gefunden).
 - `about-samuel`-Entwurf: Satz über Privates und lokale Pfade in `source` entfernen, dann Freigabe.

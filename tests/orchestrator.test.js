@@ -13,7 +13,7 @@ import {
 import { assertAtMostOneWorkerCall } from '../src/voice/build-prompt.js';
 
 const knowledge = JSON.parse(
-  readFileSync(new URL('../src/agent/knowledge.json', import.meta.url), 'utf8'),
+  readFileSync(new URL('./fixtures/knowledge.legacy.json', import.meta.url), 'utf8'),
 );
 
 test('DEFAULT_THRESHOLDS matches the calibrated application-code constants', () => {

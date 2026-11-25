@@ -66,7 +66,7 @@ export function isProductionHost(hostname) {
 
 /**
  * Remote adapter, same interface as the dev agent and chain adapters.
- * @param {{endpoint?: string, getSystem?: (() => string) | null, historyTurns?: number,
+ * @param {{endpoint?: string, getSystem?: (() => string) | null, getParams?: (() => object) | null, historyTurns?: number,
  *          fetchImpl?: typeof fetch, timeoutMs?: number}} [options]
  * @returns {{id: 'remote', respond: (prompt: string, opts?: {signal?: AbortSignal}) =>
  *   Promise<{text: string, dev: false, provider: string, model: string | null}>}}
@@ -74,6 +74,7 @@ export function isProductionHost(hostname) {
 export function createRemoteAgent(options = {}) {
   const url = resolveEndpoint(options.endpoint ?? '/api/agent');
   const getSystem = typeof options.getSystem === 'function' ? options.getSystem : null;
+  const getParams = typeof options.getParams === 'function' ? options.getParams : null;
   const historyTurns = Number.isFinite(options.historyTurns)
     ? Math.max(0, Math.floor(options.historyTurns))
     : DEFAULT_HISTORY_TURNS;
@@ -86,6 +87,7 @@ export function createRemoteAgent(options = {}) {
 
   // Session memory only: a reload starts over.
   const history = [];
+  let lastSourceIds = [];
 
   async function readSystem() {
     if (!getSystem) return null;
@@ -148,9 +150,11 @@ export function createRemoteAgent(options = {}) {
 
     const request = (async () => {
       const body = { prompt: text };
-      const system = await readSystem();
-      if (system) body.system = system;
+      if (getParams) {
+        try { body.params = await getParams(); } catch { /* defaults on server */ }
+      }
       if (history.length) body.history = history.map((turn) => ({ ...turn }));
+      if (lastSourceIds.length) body.last_source_ids = [...lastSourceIds];
 
       const response = await fetchImpl(url, {
         method: 'POST',
@@ -178,11 +182,15 @@ export function createRemoteAgent(options = {}) {
         dev: false,
         provider: typeof data.provider === 'string' && data.provider ? data.provider : ADAPTER_ID,
         model: data.model ?? null,
+        sources: Array.isArray(data.sources) ? data.sources : [],
+        contact_card: Boolean(data.contact_card),
+        coverage: data.coverage ?? null,
       };
     })();
 
     try {
       const result = await Promise.race([request, timeoutPromise, abortPromise]);
+      lastSourceIds = result.sources.map((source) => source.id).filter(Boolean).slice(0, 5);
       remember(text, result.text);
       return result;
     } catch (error) {

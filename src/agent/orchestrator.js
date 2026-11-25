@@ -5,7 +5,8 @@ import {
   buildTurnInput,
 } from '../voice/build-prompt.js';
 
-const DEFAULT_KNOWLEDGE_URL = new URL('./knowledge.json', import.meta.url);
+// Entwurf, durch ENTSCHEIDUNGEN-RAG überholt.
+const DEFAULT_KNOWLEDGE_URL = new URL('../../tests/fixtures/knowledge.legacy.json', import.meta.url);
 
 const DEFAULT_SITE = 'Agentfähig';
 const DEFAULT_ABOUT = [

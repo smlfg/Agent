@@ -1,0 +1,11 @@
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { hints } from './check.mjs';
+const esc = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+export async function makeSkim({ outDir = 'scripts/chunks/.out', knowledgeDir = 'src/agent/knowledge' } = {}) {
+  const files = await readdir(knowledgeDir).catch(() => []); const rows = [];
+  for (const file of files.filter((n) => n.endsWith('.md'))) { const raw = await readFile(`${knowledgeDir}/${file}`, 'utf8'); const body = raw.split('---').slice(2).join('---').trim(); const meta = Object.fromEntries((raw.split('---')[1] ?? '').split('\n').map((l) => l.match(/^(\w+):\s*(.*)$/)).filter(Boolean).map((m) => [m[1], m[2]])); rows.push({ id: meta.id, title: meta.title?.replace(/^"|"$/g, ''), text: body, source: meta.source, link: meta.link === 'null' ? null : meta.link, hints: hints(body), kind: meta.source_kind }); }
+  rows.sort((a, b) => (a.kind === 'web' ? 1 : a.kind === 'github' ? 2 : 0) - (b.kind === 'web' ? 1 : b.kind === 'github' ? 2 : 0));
+  const html = `<!doctype html><meta charset="utf-8"><title>Chunk-Freigabe</title><style>body{font:16px system-ui;max-width:900px;margin:2rem auto}article{border:1px solid #ccc;padding:1rem;margin:1rem 0}label{display:block}small{color:#666}</style><h1>Veröffentlichungsfreigabe</h1>${rows.map((r) => `<article><label><input type="checkbox" data-id="${esc(r.id)}" ${r.hints.length ? '' : 'checked'}> <strong>${esc(r.title)}</strong></label><p>${esc(r.text)}</p><small>Quelle: ${esc(r.source)}${r.link ? ` · ${esc(r.link)}` : ''} · ${esc(r.kind)}${r.hints.length ? ` · Hinweise: ${r.hints.join(', ')}` : ''}</small></article>`).join('')}<button id="export">Freigaben exportieren</button><script>export.onclick=()=>{const approved=[...document.querySelectorAll('input:checked')].map(x=>x.dataset.id);const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({approved},null,2)],{type:'application/json'}));a.download='approvals.json';a.click()}</script>`;
+  await mkdir(outDir, { recursive: true }); await writeFile(`${outDir}/skim.html`, html); return rows;
+}
+if (import.meta.url === `file://${process.argv[1]}`) await makeSkim();
