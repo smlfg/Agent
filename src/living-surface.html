@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+  <title>agentfähig</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="vendor/openvoiceui/styles/eyes.css" />
+  <link rel="stylesheet" href="styles/presence.css" />
+  <link rel="stylesheet" href="styles/presence-edges.css" />
+  <link rel="stylesheet" href="styles/conversation.css" />
+  <link rel="stylesheet" href="styles/typewriter.css" />
+  <link rel="stylesheet" href="styles/dissolve.css" />
+  <link rel="stylesheet" href="styles/adaptive-surface.css" />
+  <link rel="stylesheet" href="styles/footer.css" />
+  <link rel="stylesheet" href="styles/bones/bones-light.css" />
+  <link rel="stylesheet" href="styles/bones/bones-texture.css" />
+  <link rel="stylesheet" href="styles/bones/bones-stage.css" />
+  <link rel="stylesheet" href="styles/bones/bones-eyes.css" />
+  <link rel="stylesheet" href="styles/bones/bones-typography.css" />
+  <link rel="stylesheet" href="styles/bones/bones-controls.css" />
+  <link rel="stylesheet" href="styles/bones/bones-depth.css" />
+</head>
+<body>
+  <a class="skip-link" href="#composer-input">Skip to input</a>
+
+  <main id="stage" class="stage" data-phase="dormant">
+    <h1 class="sr-only">agentfähig</h1>
+
+    <!-- C-08 Contextual Watch-Index Controls (max 3 poles above the eyes + Undo/Reset). -->
+    <section id="surface-controls" class="surface-controls" aria-label="Surface controls" hidden></section>
+
+    <!-- C-02 EyePresence — owned by presence (Agent A). Markup required by EyeFace.js. -->
+    <section id="presence" class="presence" aria-hidden="true">
+      <div class="face-box">
+        <div class="eyes-container">
+          <div class="eye left-eye" id="left-eye">
+            <div class="eye-white">
+              <div class="pupil-container" id="left-pupil-container"><div class="pupil"></div></div>
+            </div>
+            <div class="eyelid-top"></div>
+            <div class="eyelid-bottom"></div>
+            <div class="eye-cap-top"></div>
+          </div>
+          <div class="eye right-eye" id="right-eye">
+            <div class="eye-white">
+              <div class="pupil-container" id="right-pupil-container"><div class="pupil"></div></div>
+            </div>
+            <div class="eyelid-top"></div>
+            <div class="eyelid-bottom"></div>
+            <div class="eye-cap-top"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- C-03 FocusAnswer — owned by conversation (Agent B). Only the current pair. -->
+    <section id="focus" class="focus" aria-label="Current exchange">
+      <div id="pair" class="pair"></div>
+    </section>
+
+    <!-- C-04 Composer — owned by conversation (Agent B). Never locked. -->
+    <form id="composer" class="composer" autocomplete="off">
+      <label for="composer-input" class="sr-only">Say something to the agent</label>
+      <input id="composer-input" class="composer-input" type="text" enterkeyhint="send" placeholder="…" spellcheck="false" />
+      <button type="submit" class="composer-send" aria-label="Send">
+        <span class="sr-only">Send</span>
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M10 16.5V3.5M4.8 8.7 10 3.5l5.2 5.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button id="mic-toggle" class="mic-toggle" type="button" aria-pressed="false" aria-label="Speak instead of typing" hidden>
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M10 2.9a2.7 2.7 0 0 1 2.7 2.7v4.9a2.7 2.7 0 0 1-5.4 0V5.6A2.7 2.7 0 0 1 10 2.9Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M6.3 10.9a3.7 3.7 0 0 0 7.4 0M10 14.6v2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </form>
+
+    <!-- C-13 LiveRegion — written by conversation (Agent B). -->
+    <div id="live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- C-15 MotionToggle — wired by presence (Agent A). WCAG 2.2.2. -->
+    <button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
+
+    <!-- Development data marker — shown while answers are canned. -->
+    <p id="dev-badge" class="dev-badge" hidden>DEV DATA</p>
+
+    <footer class="site-footer">
+      <p class="site-footer-line">
+        <a href="/impressum/">Imprint</a>
+        <span class="site-footer-sep" aria-hidden="true">·</span>
+        <a href="/datenschutz/">Privacy</a>
+        <span class="site-footer-sep" aria-hidden="true">·</span>
+        <span class="site-footer-credit">Built by Samuel</span>
+      </p>
+    </footer>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

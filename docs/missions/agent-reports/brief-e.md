@@ -1,0 +1,13 @@
+HAI-Mission M-20261119T220518-4585e9fd, Lease S-20261119T220524-ff2cce7b (Integrator Claude Code). Projekt agentfähig: eine Website, die sich wie ein Agent verhält. Lies zuerst docs/missions/M-20261119T220518-4585e9fd-M1-CONTRACT.md und docs/missions/M-20261119T220518-4585e9fd-M1-BERICHT.md. Seite: src/living-surface.html (Dev: npm run dev, Port 5173). Plain ES modules + CSS, kein Framework, kein Build, keine npm-Installation, kein git. Vendor-Dateien in src/vendor/ NICHT ändern. Ändere AUSSCHLIESSLICH die unten genannten Dateien. Englische UI-Texte. Der Owner sagt: Es ist nur Design, Details dürfen gern overengineered sein — Qualität vor Kürze.
+
+ROLLE: AGENT E — GESPRÄCHSMETRIKEN (Konzept + Recherche, NUR LESEN, keine Datei ändern)
+PROBLEM: Die eigentliche Neuheit von agentfähig ist, dass Gesprächsmetriken die UI steuern. Owner-Entscheidung: Die UI ergibt sich dynamisch aus dem Gespräch, gesteuert vor allem durch NLP-Metriken der Gesprächsführung; der Agent selbst ändert nur ein bisschen. Falle (ADR-0004, docs/adr/ADR-0004-regler-veraendert-oberflaeche-und-haltung.md): Wenn sich nur Farbe ändert, ist es Dekoration, keine Anpassung. Lies auch docs/adr/ADR-0002-agent-als-interface.md, src/state/store.js, src/conversation/conversation.js, src/presence/presence.js.
+Rahmen: Englisch, nur Text (Voice später), läuft komplett im Browser, Reload = Neustart, nur das aktuelle Paar sichtbar, strikt Prompt/Response, Agent ohne Eingabe still, Unterbrechen erlaubt.
+LIEFERE (Markdown, Deutsch, max. 1400 Wörter):
+1. Metrik-Katalog: welche Signale im Browser ohne Server messbar sind (z. B. Tippgeschwindigkeit, Pausen und Korrekturen aus input-Events, Nachrichtenlänge, Fragenanteil, Antwortlatenz des Nutzers, Unterbrechungen, Sentiment/Valenz, Themenwechsel). Je Signal: Berechnung in 1–2 Sätzen, Rauschen/Fallstricke.
+2. Abbildung Signal → Oberfläche. Pro Zeile markieren: VERHALTEN (Agent/Seite handelt anders: Tempo, Länge, Rhythmus, Augenverhalten, Platz, Stille) oder DEKORATION (nur Optik). Mindestens zwei Drittel müssen VERHALTEN sein.
+3. Zustandsschema-Vorschlag: ein Feld metrics im Store (Namen, Wertebereiche, Glättung über Turns) und welche Events es aktualisieren.
+4. Kleinster erster Durchstich: genau EIN Signal → EINE Verhaltensänderung, die ein Fremder in 20 s bemerkt. Mit Akzeptanzkriterium.
+5. Anti-Muster (was es kitschig oder übergriffig macht, z. B. Stimmung spiegeln wirkt manipulativ).
+6. Upstreams: 3–5 Bibliotheken/Projekte mit URL und Lizenz (MIT/Apache bevorzugt; GPL markieren), englisch, browserfähig (z. B. winkNLP, compromise, vader-sentiment-JS).
+Belege aus dem Projekt mit datei:zeile. STOP nach der Antwort.

@@ -1,0 +1,85 @@
+/* Bone Layer 3 · Spatial Stage, Asymmetric Gravity & Editorial Margin Accent (16 bones)
+   Shifts eyes and typography independently across the field on desktop while keeping
+   mobile (<= 640px) centered and strictly free of horizontal overflow. */
+
+html[data-bones-active="true"] .stage {
+  padding:
+    max(var(--bone-stage-pad-top, 24px), env(safe-area-inset-top))
+    var(--bone-stage-pad-x, 16px)
+    max(16px, env(safe-area-inset-bottom));
+  row-gap: var(--bone-stage-row-gap, 16px);
+}
+
+html[data-bones-active="true"] .stage:has(> .surface-controls:not([hidden])) {
+  grid-template-rows: auto minmax(var(--bone-stage-top-min, 22vh), auto) 1fr auto;
+}
+
+html[data-bones-active="true"] .stage:not(:has(> .surface-controls:not([hidden]))) {
+  grid-template-rows: minmax(var(--bone-stage-top-min, 22vh), auto) 1fr auto;
+}
+
+html[data-bones-active="true"] .surface-controls,
+html[data-bones-active="true"] .presence,
+html[data-bones-active="true"] .focus,
+html[data-bones-active="true"] .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-bones-active="true"] .motion-toggle,
+html[data-bones-active="true"] .dev-badge {
+  z-index: 5;
+}
+
+html[data-bones-active="true"] .presence {
+  transform: translate3d(var(--bone-presence-offset-x, 0px), var(--bone-presence-offset-y, 0px), 0);
+  transition: transform var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+html[data-bones-active="true"] .focus {
+  padding-top: var(--bone-focus-pad-top, 0px);
+}
+
+html[data-bones-active="true"] .pair {
+  max-width: var(--bone-focus-measure, 38rem);
+  text-align: var(--bone-focus-align, left);
+  transform: translate3d(var(--bone-focus-offset-x, 0px), var(--bone-focus-offset-y, 0px), 0);
+  border-left: var(--bone-focus-accent-bar-w, 0px) solid var(--bone-focus-accent-bar-color, #C17A4D);
+  padding-left: var(--bone-focus-accent-bar-gap, 0px);
+  transition:
+    max-width var(--bone-transition-ms, 1100ms) var(--ease),
+    transform var(--bone-transition-ms, 1100ms) var(--ease),
+    border-color var(--bone-transition-ms, 1100ms) var(--ease),
+    padding-left var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+html[data-bones-active="true"] .composer {
+  max-width: var(--bone-composer-max-w, 38rem);
+}
+
+html[data-bones-active="true"] .stage[data-phase="speaking"] :is(.site-footer, .motion-toggle, .surface-controls) {
+  opacity: var(--bone-speaking-chrome-opacity, 0.24);
+}
+
+@media (max-width: 640px) {
+  html[data-bones-active="true"] .stage {
+    padding-inline: 12px;
+  }
+
+  html[data-bones-active="true"] .presence,
+  html[data-bones-active="true"] .pair {
+    transform: none;
+  }
+
+  html[data-bones-active="true"] .pair {
+    max-width: 100%;
+    padding-left: calc(min(var(--bone-focus-accent-bar-gap, 0px), 12px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bones-active="true"] .presence,
+  html[data-bones-active="true"] .pair {
+    transition: none !important;
+  }
+}

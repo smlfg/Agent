@@ -1,0 +1,67 @@
+/* Idle / waiting (Agent R) — the eyes wait, expectant and attentive.
+   Only transform/opacity on the existing eye parts; no new elements, no
+   colours, no layout. Loaded by src/presence/idle.js as <link id="...">.
+
+   Stages (see src/presence/idle.js):
+     is-waiting-1  lid lifts a hair — quietly awake, looking at the visitor
+     is-waiting-2  slight pupil widening, a little more lid — curious
+     is-waiting-3  attentive, ready for the rare "still there?" impulse
+     is-asking     the 400 ms widening of that impulse
+
+   Never sleepy, never insistent: amplitudes stay tiny and no keyframes are
+   used, so nothing can speed up on its own. prefers-reduced-motion and the
+   page's own motion pause neutralise every transform below.
+*/
+
+.presence.is-waiting-1 .eye .eyelid-top,
+.presence.is-waiting-2 .eye .eyelid-top,
+.presence.is-waiting-3 .eye .eyelid-top {
+  will-change: transform;
+}
+
+.presence.is-waiting-1 { --idle-lid-top: -1%; --idle-lid-bottom: 0.5%; }
+.presence.is-waiting-2 { --idle-lid-top: -2.5%; --idle-lid-bottom: 1.5%; --idle-pupil-scale: 1.03; }
+.presence.is-waiting-3 { --idle-lid-top: -3.5%; --idle-lid-bottom: 2.5%; --idle-pupil-scale: 1.045; }
+
+/* The rare "still there?" impulse: 400 ms of widened attention. */
+.presence.is-asking { --idle-lid-top: -4.5%; --idle-lid-bottom: 3%; --idle-pupil-scale: 1.08; }
+
+.presence.is-asking .eye .pupil {
+  transition-duration: 400ms;
+}
+
+/* ── Reduced motion / paused: one static waiting state, no impulses ─────── */
+
+.presence.is-motion-paused,
+.presence.is-reduced-motion {
+  --idle-pupil-scale: 1;
+}
+
+/* Stages 2/3 and the impulse are motion only; the calm waiting-1 lift stays
+   as a still posture, without transitions. */
+.presence.is-motion-paused.is-waiting-2,
+.presence.is-motion-paused.is-waiting-3,
+.presence.is-reduced-motion.is-waiting-2,
+.presence.is-reduced-motion.is-waiting-3 {
+  --idle-lid-top: -1%;
+  --idle-lid-bottom: 0.5%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .presence .eye .pupil {
+    --idle-pupil-scale: 1;
+    transition: none !important;
+  }
+
+  .presence.is-waiting-1,
+  .presence.is-waiting-2,
+  .presence.is-waiting-3 {
+    --idle-lid-top: -1%;
+    --idle-lid-bottom: 0.5%;
+  }
+
+  .presence .eye:not(.is-blinking) .eyelid-top,
+  .presence .eye:not(.is-blinking) .eyelid-bottom {
+    transition: none !important;
+  }
+}

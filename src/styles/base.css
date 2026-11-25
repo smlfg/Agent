@@ -1,0 +1,104 @@
+/* Base tokens and layout (owned by Claude Code). Warm palette from prototype/index.html. */
+:root {
+  --bg-start: #F6F1E9;
+  --bg-end: #EDE4D3;
+  --text: #3D3229;
+  --muted: #7A6B5D;
+  --accent: #C17A4D;
+  --line: rgba(74, 63, 53, 0.28);
+  --focus-ring: #8A4B22;
+
+  /* Tokens expected by vendor/openvoiceui/styles/eyes.css */
+  --neutral-50: #FFFCF7;
+  --neutral-100: #F3ECE1;
+  --neutral-200: #E2D6C4;
+  --border-strong: rgba(74, 63, 53, 0.18);
+  --border-accent: rgba(193, 122, 77, 0.5);
+  --border-default: rgba(74, 63, 53, 0.12);
+  --dark-bg: #F4EEE5; /* eyelid colour ≈ background at eye height */
+
+  --font: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-reading: "Newsreader", Georgia, "Times New Roman", serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.stage {
+  /* While the mobile keyboard is open, src/surface/keyboard-viewport.js writes
+     --keyboard-inset (Safari overlays the layout viewport); Chromium resizes
+     it natively via interactive-widget=resizes-content. Either way the stage
+     compresses to the visible band so the eyes stay on screen. */
+  min-height: calc(100dvh - var(--keyboard-inset, 0px));
+  display: grid;
+  grid-template-rows: minmax(28vh, auto) 1fr auto;
+  justify-items: center;
+  align-items: center;
+  padding: max(24px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  gap: 16px;
+  position: relative;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: 16px; top: -48px;
+  background: var(--text); color: var(--bg-start);
+  padding: 8px 12px; border-radius: 8px; z-index: 100;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+
+.dev-badge {
+  position: fixed; right: 12px; top: 12px; margin: 0;
+  font: 600 11px/1 var(--font); letter-spacing: .08em;
+  color: var(--muted); border: 1px dashed var(--line);
+  padding: 6px 8px; border-radius: 6px; background: rgba(255,255,255,.4);
+}
+
+/* Grid items fill the column so the pair does not jump between states. */
+.presence, .focus, .composer { width: 100%; }
+.focus { align-self: start; }
+
+/* Narrow screens: keep the motion toggle clear of the composer. */
+@media (max-width: 640px) {
+  .stage .motion-toggle { top: max(12px, env(safe-area-inset-top)); bottom: auto; }
+}
+
+/* ── Mobile keyboard open (see src/surface/keyboard-viewport.js) ─────────── */
+
+/* The eye row may compress harder than at rest; the eyes still keep their
+   own clearance via .face-box padding. */
+html[data-keyboard="open"] .stage {
+  grid-template-rows: minmax(16vh, auto) 1fr auto;
+}
+
+html[data-keyboard="open"] .stage:has(> .surface-controls:not([hidden])) {
+  grid-template-rows: auto minmax(12vh, auto) 1fr auto;
+}
+
+/* Bones worlds read this variable for their stage rows (bones-stage.css). */
+html[data-keyboard="open"] {
+  --bone-stage-top-min: 12vh;
+}
+
+/* Fixed-position chrome rides above the keyboard instead of behind it. */
+html[data-keyboard="open"] .motion-toggle {
+  bottom: calc(max(12px, env(safe-area-inset-bottom)) + var(--keyboard-inset, 0px));
+}

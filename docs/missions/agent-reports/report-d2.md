@@ -1,0 +1,5 @@
+DONE — `src/agent/remoteAgent.js`: Remote-Adapter (`id: 'remote'`), `{text, dev:false, provider, model}`, In-Memory-History (3 Turns), origin-absolute Endpoint-Auflösung, Fehler-Kinds network/server/quota/timeout + AbortError; `isProductionHost()` exportiert.
+Tests — `tests/remoteAgent.test.js` deckt Erfolg, 503→server, 429→quota, Netzwerk, Timeout, Abort, Endpoint-Auflösung, History und Hosts ab; `node --test tests/*.test.js`: 165/165 grün, `node --check` ok.
+Footer — in `living-surface.html` am Ende von `<main>` plus `styles/footer.css` im `<head>`; dezent 12px, AA-Kontrast, absolute Pfade `/impressum/`, `/datenschutz/`, „Built by Samuel“, im Fluss unter dem Composer und damit mobil nicht verdeckend, auch auf localhost sichtbar.
+Verifikation — Dev-Server-Smoke: Seite/CSS/Modul je HTTP 200; `scripts/validate.sh` scheitert nur in `check-names.sh` wegen fehlendem Git-Repo (auftragsgemäß kein git).
+Offen für Integrator — Verdrahtung in `src/main.js`; keine Commits/Deployments ausgeführt.

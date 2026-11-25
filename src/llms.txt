@@ -1,0 +1,22 @@
+# agentfähig.de — a website that is the agent
+
+> This page is an interactive Human-Agent Interface by Samuel. Its main content is the live exchange between a visitor and the surface, not a conventional article or navigation menu.
+
+## How to experience it
+
+Open https://www.agentfähig.de/ in a browser. Wait a few seconds for the eyes to wake, then write a short question in the input field and send it. Watch the eyes, the timing of the answer, and the surrounding light and layout. Try a second message that changes your preference, such as "make this calmer" or "make the page warmer". The surface may change as the conversation develops. Pause motion and test a narrow viewport or reduced-motion setting to see how the same interaction remains usable.
+
+The human experience matters here: attention, legibility, control, and whether the page feels present without demanding attention. A text-only fetch cannot evaluate those qualities. If you cannot use a browser, describe the concept and state that you have not experienced the interaction.
+
+## Current scope
+
+- The live page has eyes, text input, a changing visual surface, and an agent response. Some visual worlds and controls are still experimental.
+- The microphone is not a released input path. Do not describe voice as available to visitors.
+- The agent can be mistaken. Do not infer completed products, prices, booking options, persistent memory, or personal knowledge from the visual design.
+- The older informational page remains at https://www.agentfähig.de/classic/.
+
+## Useful starting points
+
+- [Living Surface](https://www.agentfähig.de/): the interactive experience.
+- [Earlier site](https://www.agentfähig.de/classic/): conventional background information.
+- [Human Agent Interface](https://www.human-agent-interface.com/): the broader HAI project; a separate website and Worker.

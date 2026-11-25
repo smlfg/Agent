@@ -1,0 +1,4 @@
+.archify/
+graphify-out/
+node_modules/
+.opencode/

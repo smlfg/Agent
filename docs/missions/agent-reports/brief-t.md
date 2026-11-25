@@ -1,0 +1,13 @@
+HAI-Mission M-20261119T220518-4585e9fd (Integrator Claude Code). Projekt agentfähig: Website, die sich wie ein Agent verhält; der Besucher darf den Agenten jederzeit unterbrechen (neues Senden, während die Antwort noch tippt). Plain ES modules + CSS, kein Framework, kein Build, keine npm-Installation, kein git. Vendor-Dateien und src/presence/presence.js NICHT ändern.
+
+ROLLE: AGENT T — UNTERBRECHEN MIT QUITTUNG
+OWNER-ENTSCHEIDUNG 4: Kombination aus (b) "kleine Quittung: Augen blinzeln einmal kurz und schauen zum Besucher, dann löst sich die halbe Antwort auf" und (c) "der Agent tippt den angefangenen Satz noch zu Ende".
+VERHALTEN:
+1. Beim Unterbrechen (SUBMIT während phase thinking oder speaking): sofort Quittung — Event document.dispatchEvent(new CustomEvent('agentfaehig:ack', { detail: { kind: 'interrupt' } })) und Klasse is-ack für ~420 ms auf #presence (CSS in src/styles/ack.css: ein kurzes Blinzeln über .eyelid-top/.eyelid-bottom transform, Pupillen minimal weiter; Blick-Ziel zum Besucher per 'agentfaehig:gaze' { x: Bildschirmmitte, y: knapp unter den Augen, source: 'ack' }, nach 600 ms { source: 'release' }).
+2. Satz-Ende: Wenn der laufende Satz (bis zum nächsten . ! ? oder Zeilenende) höchstens ~40 Zeichen Rest hat, wird er beschleunigt (≈4× Takt, Deckel 500 ms) zu Ende getippt; sonst endet die Antwort nach dem aktuellen Wort mit einem "…". Erst danach startet das Auflösen des alten Paars (dissolve aus src/conversation/dissolve.js) — das neue Paar erscheint sofort mit Denk-Punkten; der neue Turn wird SOFORT an den Agenten gesendet (keine Wartezeit für die neue Anfrage).
+3. Während thinking (noch kein Text): nur Quittung, dann sofort Auflösen wie bisher.
+4. reducedMotion: keine Blinzel-Animation, kein Nachtippen — sofort ganze Satz-Rest-Regel ohne Animation anwenden (Text springt), dann entfernen.
+DATEIEN (nur diese): src/conversation/typewriter.js (neue Methode finishSentence({ maxChars = 40, maxMs = 500 }) → Promise<'finished'|'cut'>, bestehende Schnittstelle unverändert lassen), tests/typewriter.test.js (erweitern), src/conversation/conversation.js NUR die Unterbrechungslogik (stopTurn/onSubmit), neu src/styles/ack.css (per JS als <link> einfügen, nicht in living-surface.html), neu tests/interrupt.test.js (reine Logik: Satz-Rest-Berechnung, cut vs finished, Deckel).
+Store: falls nötig ein Event RESPONSE_INTERRUPTED {turn} — NICHT src/state/store.js ändern; der alte Turn wird durch SUBMIT bereits ersetzt, das reicht.
+ACHTUNG: Ein anderer Agent ändert parallel in conversation.js nur den Fehlerpfad (Fehlertext). Fasse den Fehlerpfad nicht an.
+VERIFIKATION: node --check für geänderte JS-Dateien; node --test tests/*.test.js grün. STOP danach; antworte mit geänderten Dateien + 5 Zeilen.

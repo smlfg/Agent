@@ -1,0 +1,187 @@
+/* Bone Layer 4 · Ocular Sculpting & Material Anatomy (48 bones)
+   Shapes eyelid palettes (including seamless dark-mode lids), muted sclera tones,
+   4-corner eye silhouette, almond aspect ratio without distorting circular iris,
+   unclipped depth shadows + rim glow, catchlights, veins, and lid offsets. */
+
+html[data-bones-active="true"] .presence {
+  --skin-hi: var(--bone-skin-hi, #F1E5D4);
+  --skin: var(--bone-skin-mid, #E6D4BB);
+  --skin-shade: var(--bone-skin-shade, #D6BE9F);
+  --skin-deep: var(--bone-skin-deep, #C6AC8B);
+  --lash: var(--bone-lash-color, rgba(58, 39, 27, 0.4));
+}
+
+html[data-bones-active="true"] .presence:not(.is-dormant) .eyes-container {
+  opacity: min(var(--eye-presence-opacity, 1), var(--bone-eye-opacity, 1));
+}
+
+html[data-bones-active="true"] .presence .left-eye {
+  transform: translate3d(var(--eye-left-x, 0px), calc(var(--eye-left-y, 0px) + var(--bone-eye-vert-asym-px, 0px)), 0)
+    scale(
+      calc(var(--eye-left-scale-x, 1) * var(--bone-eye-left-scale-bias, 1)),
+      calc(var(--eye-left-scale-y, 1) * var(--bone-eye-left-scale-bias, 1))
+    );
+}
+
+html[data-bones-active="true"] .presence .right-eye {
+  transform: translate3d(var(--eye-right-x, 0px), calc(var(--eye-right-y, 0px) - var(--bone-eye-vert-asym-px, 0px)), 0)
+    scale(
+      calc(var(--eye-right-scale-x, 1) * var(--bone-eye-right-scale-bias, 1)),
+      calc(var(--eye-right-scale-y, 1) * var(--bone-eye-right-scale-bias, 1))
+    );
+}
+
+/* Eye contour & aspect ratio via width/height so circular iris inside never distorts */
+html[data-bones-active="true"] .presence .eye {
+  width: calc(min(100px, 22vw) * var(--bone-eye-aspect-w, 1));
+  height: calc(min(115px, 25vw) * var(--bone-eye-aspect-h, 1));
+  border-radius:
+    var(--bone-eye-radius-tl, 50%)
+    var(--bone-eye-radius-tr, 50%)
+    var(--bone-eye-radius-br, 45%)
+    var(--bone-eye-radius-bl, 45%);
+  box-shadow:
+    0 0 var(--bone-eye-halo-blur, 28px) var(--bone-eye-halo-spread, 0px) var(--bone-eye-halo-color, rgba(74, 63, 53, 0.14)),
+    var(--bone-eye-shadow-x, 0px) var(--bone-eye-shadow-y, 14px) var(--bone-eye-shadow-blur, 28px) calc(var(--bone-eye-shadow-blur, 28px) * -0.52) var(--bone-eye-shadow-color, rgba(58, 39, 27, 0.34)),
+    0 0 var(--bone-eye-rim-glow-blur, 0px) var(--bone-eye-rim-glow-color, rgba(193, 122, 77, 0));
+  transition:
+    width 0.8s var(--ease),
+    height 0.8s var(--ease),
+    border-radius 0.8s var(--ease),
+    box-shadow 0.8s var(--ease);
+}
+
+html[data-bones-active="true"] .presence .eye .eye-white {
+  border-radius: inherit;
+  -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 0 80%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 0 80%, transparent 100%);
+  background:
+    radial-gradient(92% 72% at 50% 118%, var(--bone-sclera-warm-tint, rgba(208, 132, 88, 0.2)), transparent 62%),
+    radial-gradient(120% 92% at 50% -18%, color-mix(in srgb, var(--bone-skin-deep, #7A5C44) 24%, transparent), transparent 58%),
+    radial-gradient(
+      74% 62% at 50% 48%,
+      var(--bone-sclera-hi, #FFFDF9) 0%,
+      var(--bone-sclera-mid, #F7EEE1) 60%,
+      var(--bone-sclera-edge, #DECBB3) 100%
+    );
+  box-shadow:
+    inset 0 14px 22px -10px color-mix(in srgb, var(--bone-skin-deep, #3C281C) 60%, rgba(0, 0, 0, 0.34)),
+    inset 0 -14px 22px -14px color-mix(in srgb, var(--bone-skin-deep, #78482A) 48%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--bone-sclera-hi, #FFFDF9) 38%, transparent);
+}
+
+html[data-bones-active="true"] .presence .eye .eyelid-top {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  background: linear-gradient(180deg, var(--skin-hi) 0%, var(--skin) 48%, var(--skin-shade) 82%, var(--skin-deep) 100%);
+  border-radius: 0 0 50% 50% / 0 0 22% 22%;
+  box-shadow:
+    0 12px 18px -10px color-mix(in srgb, var(--skin-deep) 70%, rgba(0, 0, 0, 0.44)),
+    0 4px 7px -4px color-mix(in srgb, var(--skin-deep) 56%, rgba(0, 0, 0, 0.28)),
+    inset 0 -2px 3px color-mix(in srgb, var(--bone-sclera-hi, #FFFDF9) 34%, transparent),
+    inset 0 4px 6px -4px color-mix(in srgb, var(--skin-deep) 52%, transparent);
+}
+
+html[data-bones-active="true"] .presence .eye .eyelid-bottom {
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%),
+    linear-gradient(180deg, #000 0 52%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%),
+    linear-gradient(180deg, #000 0 52%, transparent 100%);
+  mask-composite: intersect;
+  background: linear-gradient(0deg, var(--skin-hi) 0%, var(--skin) 54%, var(--skin-shade) 100%);
+  border-radius: 50% 50% 0 0 / 16% 16% 0 0;
+  box-shadow:
+    0 -9px 15px -10px color-mix(in srgb, var(--skin-deep) 56%, rgba(0, 0, 0, 0.34)),
+    inset 0 2px 3px color-mix(in srgb, var(--bone-sclera-hi, #FFFDF9) 28%, transparent);
+}
+
+html[data-bones-active="true"] .presence .eye .eyelid-top::before,
+html[data-bones-active="true"] .presence .eye .eyelid-bottom::before {
+  opacity: 0.16;
+}
+
+html[data-bones-active="true"] .presence .eye .eye-veins {
+  opacity: var(--bone-vein-opacity, 0.2);
+}
+
+html[data-bones-active="true"] .presence .eye .eye-wetline {
+  opacity: var(--bone-wetline-opacity, 0.6);
+}
+
+html[data-bones-active="true"] .presence .eye .eyelid-top::after {
+  opacity: var(--bone-lash-opacity, 0.5);
+}
+
+/* Iris & Pupil */
+html[data-bones-active="true"] .presence .eye .pupil {
+  width: min(var(--bone-iris-size, 54px), 13.5vw);
+  height: min(var(--bone-iris-size, 54px), 13.5vw);
+  filter: hue-rotate(var(--bone-iris-hue, 0deg)) saturate(var(--bone-iris-sat, 1)) brightness(var(--bone-iris-bright, 1));
+}
+
+html[data-bones-active="true"] .presence .eye .pupil .iris-fibers {
+  opacity: var(--bone-iris-fibers-opacity, 0.85);
+}
+
+html[data-bones-active="true"] .presence .eye .pupil .iris-sheen {
+  opacity: var(--bone-iris-sheen-opacity, 0.72);
+}
+
+html[data-bones-active="true"] .presence .eye .pupil .iris-limbus {
+  opacity: var(--bone-iris-limbus-alpha, 0.92);
+}
+
+html[data-bones-active="true"] .presence:not(.is-reduced-motion) .eye .pupil .pupil-core {
+  transform: scale(calc((var(--pupil-state, 1) + var(--pupil-ambient, 0)) * var(--bone-pupil-size-bias, 1)));
+}
+
+html[data-bones-active="true"] .presence.is-reduced-motion .eye .pupil .pupil-core {
+  transform: scale(calc(var(--pupil-state, 1) * var(--bone-pupil-size-bias, 1)));
+}
+
+/* Catchlights */
+html[data-bones-active="true"] .presence:not(.is-dormant) .eye .eye-catchlight--main {
+  top: var(--bone-catchlight-main-y, 27%);
+  left: var(--bone-catchlight-main-x, 37%);
+  width: var(--bone-catchlight-main-size, 12%);
+  opacity: min(var(--eye-catchlight-opacity, 0.9), var(--bone-catchlight-main-opacity, 0.9));
+}
+
+html[data-bones-active="true"] .presence:not(.is-dormant) .eye .eye-catchlight--window {
+  opacity: var(--bone-catchlight-win-opacity, 0.46);
+}
+
+/* Additive lid posture biases */
+html[data-bones-active="true"] .presence:not(.is-dormant) .left-eye:not(.is-blinking) .eyelid-top {
+  transform: translateY(calc(var(--eye-left-lid-top, 0%) + var(--idle-lid-top, 0%) + var(--bone-lid-top-bias, 0%)))
+    rotate(var(--eye-left-lid-tilt, 0deg));
+}
+
+html[data-bones-active="true"] .presence:not(.is-dormant) .right-eye:not(.is-blinking) .eyelid-top {
+  transform: translateY(calc(var(--eye-right-lid-top, 0%) + var(--idle-lid-top, 0%) + var(--bone-lid-top-bias, 0%)))
+    rotate(var(--eye-right-lid-tilt, 0deg));
+}
+
+html[data-bones-active="true"] .presence:not(.is-dormant) .left-eye:not(.is-blinking) .eyelid-bottom {
+  transform: translateY(calc(var(--eye-left-lid-bottom, 0%) + var(--idle-lid-bottom, 0%) + var(--bone-lid-bottom-bias, 0%)));
+}
+
+html[data-bones-active="true"] .presence:not(.is-dormant) .right-eye:not(.is-blinking) .eyelid-bottom {
+  transform: translateY(calc(var(--eye-right-lid-bottom, 0%) + var(--idle-lid-bottom, 0%) + var(--bone-lid-bottom-bias, 0%)));
+}
+
+@media (max-width: 640px) {
+  html[data-bones-active="true"] .presence .eye {
+    width: calc(min(92px, 21vw) * clamp(0.88, var(--bone-eye-aspect-w, 1), 1.12));
+    height: calc(min(106px, 24vw) * clamp(0.74, var(--bone-eye-aspect-h, 1), 1.08));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bones-active="true"] .presence .eye {
+    transition: none !important;
+  }
+}

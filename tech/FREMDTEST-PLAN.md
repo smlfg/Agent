@@ -46,12 +46,21 @@ als UX-Evidenz): Tab-Reihenfolge, Fokusring, Esc-Stop, Regler per Pfeiltasten,
 
 ## 3 · Aufbau
 
-- **Eigene, ungelistete URL.** Nicht `agentfähig.de`: die Domain liefert eine
-  andere Oberfläche (siehe `docs/UNSOLVED-TECHNIK.md` U29).
+- **URL:** `agentfähig.de` oder eine ungelistete Preview — aber nur nach dem
+  Preflight in §3a. Die Domain zeigt seit 19.11. die Living Surface; ohne
+  Provider antwortet sie `DEV DATA` (siehe `docs/UNSOLVED-TECHNIK.md` U29).
 - Frisches Browserprofil, keine Extensions, Zoom 100 %, 1440×900 (P2 eigenes Gerät).
 - Bildschirm **und** Audio in **einer** Aufnahme (gemeinsame Uhr).
 - Kein Think-Aloud in den ersten 20 Sekunden.
 - Moderation sitzt seitlich, schweigt, notiert nur Zeitmarken und Hinweise.
+
+### 3a · Preflight vor jeder Sitzung (sonst INVALID)
+
+1. `curl -s -X POST https://www.xn--agentfhig-02a.de/api/agent -H 'content-type: application/json' -d '{"prompt":"preflight"}'`
+   → HTTP 200 und JSON mit `text`.
+2. Seite laden, eine Testnachricht senden, im DOM prüfen: kein „DEV DATA".
+3. Erst dann Teilnehmer einladen. Schlägt 1 oder 2 fehl, ist die Sitzung
+   **INVALID** — kein Datenpunkt, kein „interessantes Ergebnis".
 
 **Startwortlaut (wörtlich, nicht erweitern):**
 

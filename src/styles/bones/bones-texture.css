@@ -1,0 +1,58 @@
+/* Bone Layer 2 · Material Texture, Sediment Bands & Architectural Horizon Line (14 bones)
+   Renders SVG paper/mineral grain, angled color-field sediment bands, and a crisp
+   optional hairline datum without altering DOM layout. */
+
+html[data-bones-active="true"] body::after {
+  opacity: var(--bone-grain-opacity, 0.015);
+  background-size: calc(120px * var(--bone-grain-scale, 1)) calc(120px * var(--bone-grain-scale, 1));
+  transition: opacity var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+html[data-bones-active="true"] body::before,
+html[data-bones-active="true"] .stage::before {
+  filter: saturate(var(--bone-canvas-sat, 1)) contrast(var(--bone-canvas-contrast, 1));
+}
+
+/* Sediment band + architectural datum line layered strictly behind content */
+html[data-bones-active="true"] .stage::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(
+      180deg,
+      transparent calc(var(--bone-horizon-line-y, 38%) - 0.5px),
+      color-mix(in srgb, var(--bone-horizon-line-color, #7A6B5D) calc(var(--bone-horizon-line-alpha, 0) * 100%), transparent) var(--bone-horizon-line-y, 38%),
+      transparent calc(var(--bone-horizon-line-y, 38%) + 1px)
+    ),
+    linear-gradient(
+      var(--bone-sediment-angle, 170deg),
+      transparent calc(var(--bone-sediment-band-pos, 46%) - var(--bone-sediment-band-width, 20%)),
+      color-mix(in srgb, var(--bone-sediment-color1, #D9C7B0) calc(var(--bone-sediment-opacity, 0) * 100%), transparent) calc(var(--bone-sediment-band-pos, 46%) - var(--bone-sediment-band-width, 20%) * 0.35),
+      color-mix(in srgb, var(--bone-sediment-color2, #C8A682) calc(var(--bone-sediment-opacity, 0) * 100%), transparent) calc(var(--bone-sediment-band-pos, 46%) + var(--bone-sediment-band-width, 20%) * 0.35),
+      transparent calc(var(--bone-sediment-band-pos, 46%) + var(--bone-sediment-band-width, 20%))
+    );
+  transition: opacity var(--bone-transition-ms, 1100ms) var(--ease);
+}
+
+@media (max-width: 640px) {
+  html[data-bones-active="true"] .stage::before {
+    background:
+      linear-gradient(
+        var(--bone-sediment-angle, 170deg),
+        transparent calc(var(--bone-sediment-band-pos, 46%) - var(--bone-sediment-band-width, 20%)),
+        color-mix(in srgb, var(--bone-sediment-color1, #D9C7B0) calc(var(--bone-sediment-opacity, 0) * 100%), transparent) calc(var(--bone-sediment-band-pos, 46%) - var(--bone-sediment-band-width, 20%) * 0.35),
+        color-mix(in srgb, var(--bone-sediment-color2, #C8A682) calc(var(--bone-sediment-opacity, 0) * 100%), transparent) calc(var(--bone-sediment-band-pos, 46%) + var(--bone-sediment-band-width, 20%) * 0.35),
+        transparent calc(var(--bone-sediment-band-pos, 46%) + var(--bone-sediment-band-width, 20%))
+      );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bones-active="true"] body::after,
+  html[data-bones-active="true"] .stage::before {
+    transition: none !important;
+  }
+}

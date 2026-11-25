@@ -1,0 +1,140 @@
+/* 2.5D Spatial Depth Vertical Slice:
+   1. Coupled light & shadow direction ("One Light Truth" from orbA / --depth-light-x/y).
+   2. Subtle multi-layer parallax across Z = -3..+2 without layout motion.
+   3. Ocular sub-layer depth (corneal catchlight counter-parallax + recessed pupil core).
+   4. Staggered inertia timing (--scene-lag-far / --scene-lag-mid / --scene-lag-near). */
+
+html:root:root::before {
+  transition: opacity var(--scene-lag-far, 1250ms) var(--ease);
+}
+
+html:root:root body::before {
+  translate: calc(var(--scene-px, 0px) * -0.8 * var(--depth-parallax, 0.85))
+    calc(var(--scene-py, 0px) * -0.8 * var(--depth-parallax, 0.85));
+  transition:
+    translate var(--scene-lag-far, 1250ms) var(--ease),
+    opacity var(--scene-lag-far, 1250ms) var(--ease),
+    transform var(--scene-lag-far, 1250ms) var(--ease);
+}
+
+html:root:root .stage::before {
+  inset: -6px;
+  translate: calc(var(--scene-px, 0px) * -0.3 * var(--depth-parallax, 0.85))
+    calc(var(--scene-py, 0px) * -0.3 * var(--depth-parallax, 0.85));
+  transition:
+    translate var(--scene-lag-mid, 650ms) var(--ease),
+    opacity var(--scene-lag-mid, 650ms) var(--ease);
+}
+
+html:root:root body::after {
+  transition: opacity var(--scene-lag-mid, 650ms) var(--ease);
+}
+
+html:root:root .presence {
+  transition: transform var(--scene-lag-mid, 650ms) var(--ease);
+}
+
+/* Coupled directional contact + ambient cast shadow + socket halo + rim glow. */
+html:root:root .presence .eye {
+  box-shadow:
+    calc(var(--depth-light-x, 0.56) * 2.5px)
+      calc(max(1.5px, var(--depth-light-y, 0.64) * 3px))
+      5px
+      -2px
+      rgba(40, 29, 22, var(--depth-contact-alpha, 0.28)),
+    calc(var(--depth-light-x, 0.56) * var(--bone-eye-shadow-y, var(--depth-shadow-length, 14px)) * 0.55)
+      calc(var(--depth-light-y, 0.64) * var(--bone-eye-shadow-y, var(--depth-shadow-length, 14px)) * 0.55)
+      var(--bone-eye-shadow-blur, calc(var(--depth-shadow-length, 14px) * 1.85))
+      calc(var(--bone-eye-shadow-blur, calc(var(--depth-shadow-length, 14px) * 1.85)) * -0.52)
+      var(--bone-eye-shadow-color, var(--surface-eye-drop, rgba(58, 39, 27, 0.34))),
+    0 0 var(--bone-eye-halo-blur, 28px) var(--bone-eye-halo-spread, 0px)
+      var(--bone-eye-halo-color, var(--surface-eye-halo, rgba(74, 63, 53, 0.14))),
+    0 0 var(--bone-eye-rim-glow-blur, 0px)
+      var(--bone-eye-rim-glow-color, rgba(193, 122, 77, 0));
+  transition:
+    width 0.8s var(--ease),
+    height 0.8s var(--ease),
+    border-radius 0.8s var(--ease),
+    box-shadow var(--scene-lag-mid, 650ms) var(--ease);
+}
+
+/* Ocular depth: convex corneal catchlight counter-parallax (clamped <= +-2.5px)
+   and recessed pupil-core forward parallax (clamped <= +-1.5px). */
+html:root:root .presence .left-eye .eye-catchlight {
+  translate:
+    clamp(-2.5px, calc((var(--eye-left-pupil-x, 0px) * -0.18 + var(--scene-px, 0px) * -0.25) * var(--depth-cornea, 0.65)), 2.5px)
+    clamp(-2.5px, calc((var(--eye-left-pupil-y, 0px) * -0.18 + var(--scene-py, 0px) * -0.25) * var(--depth-cornea, 0.65)), 2.5px);
+}
+
+html:root:root .presence .right-eye .eye-catchlight {
+  translate:
+    clamp(-2.5px, calc((var(--eye-right-pupil-x, 0px) * -0.18 + var(--scene-px, 0px) * -0.25) * var(--depth-cornea, 0.65)), 2.5px)
+    clamp(-2.5px, calc((var(--eye-right-pupil-y, 0px) * -0.18 + var(--scene-py, 0px) * -0.25) * var(--depth-cornea, 0.65)), 2.5px);
+}
+
+html:root:root .presence .left-eye .pupil .pupil-core {
+  translate:
+    clamp(-1.5px, calc(var(--eye-left-pupil-x, 0px) * 0.06 * var(--depth-cornea, 0.65)), 1.5px)
+    clamp(-1.5px, calc(var(--eye-left-pupil-y, 0px) * 0.06 * var(--depth-cornea, 0.65)), 1.5px);
+}
+
+html:root:root .presence .right-eye .pupil .pupil-core {
+  translate:
+    clamp(-1.5px, calc(var(--eye-right-pupil-x, 0px) * 0.06 * var(--depth-cornea, 0.65)), 1.5px)
+    clamp(-1.5px, calc(var(--eye-right-pupil-y, 0px) * 0.06 * var(--depth-cornea, 0.65)), 1.5px);
+}
+
+/* Foreground focus & controls (near lag). */
+html:root:root .pair {
+  translate: calc(var(--scene-px, 0px) * 0.45 * var(--depth-parallax, 0.85))
+    calc(var(--scene-py, 0px) * 0.45 * var(--depth-parallax, 0.85) + var(--depth-gravity, 0) * 4px);
+  transition:
+    translate var(--scene-lag-near, 280ms) var(--ease),
+    transform var(--scene-lag-near, 280ms) var(--ease),
+    max-width var(--scene-lag-near, 280ms) var(--ease),
+    border-color var(--scene-lag-near, 280ms) var(--ease),
+    padding-left var(--scene-lag-near, 280ms) var(--ease);
+}
+
+html:root:root .surface-controls {
+  transition:
+    opacity var(--scene-lag-near, 280ms) var(--ease),
+    transform var(--scene-lag-near, 280ms) var(--ease);
+}
+
+/* Mobile: disable outer plane parallax to preserve narrow viewport stability. */
+@media (max-width: 640px) {
+  html:root:root body::before,
+  html:root:root .stage::before,
+  html:root:root .pair {
+    translate: none;
+    transition: none;
+  }
+}
+
+/* Reduced motion: "Ruhe mit Tiefe" — keep static directional shadows & depth,
+   disable parallax and transitions. */
+@media (prefers-reduced-motion: reduce) {
+  html:root:root::before,
+  html:root:root body::before,
+  html:root:root body::after,
+  html:root:root .stage::before,
+  html:root:root .presence,
+  html:root:root .presence .eye,
+  html:root:root .pair,
+  html:root:root .surface-controls,
+  html:root:root .presence .eye .eye-catchlight,
+  html:root:root .presence .eye .pupil .pupil-core {
+    translate: none;
+    transition: none;
+  }
+}
+
+html:root:root .presence.is-motion-paused ~ .focus .pair,
+html:root:root:has(.presence.is-motion-paused) body::before,
+html:root:root:has(.presence.is-motion-paused) .stage::before,
+html:root:root .presence.is-motion-paused .eye .eye-catchlight,
+html:root:root .presence.is-motion-paused .eye .pupil .pupil-core {
+  translate: none;
+  transition: none;
+}

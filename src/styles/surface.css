@@ -1,0 +1,307 @@
+/* Layer 3 surface: reads the --p-* parameters and the derived mood variables.
+   Loaded by src/metrics/surface.js at runtime, after the base styles.
+   Own work, no third-party code.
+
+   Three axes reach the whole page:
+   - temperature (warm <-> cold): palette, type, shadows, eye surroundings
+   - nervousness (nervous <-> calm): micro-motion, spacing, rhythm variables
+   - compactness (dense/near <-> airy): measure, gaps, type scale
+   Every value is written once at turn end, so the surface shifts once per
+   message and then stays still while an answer types. */
+
+@property --bg-start { syntax: "<color>"; inherits: true; initial-value: #F6F1E9; }
+@property --bg-end { syntax: "<color>"; inherits: true; initial-value: #EDE4D3; }
+@property --text { syntax: "<color>"; inherits: true; initial-value: #3D3229; }
+@property --muted { syntax: "<color>"; inherits: true; initial-value: #6B5B4C; }
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #C17A4D; }
+@property --line { syntax: "<color>"; inherits: true; initial-value: rgba(74, 63, 53, 0.28); }
+@property --focus-ring { syntax: "<color>"; inherits: true; initial-value: #8A4B22; }
+
+/* Registered colours interpolate, so the page tint fades instead of snapping. */
+:root {
+  transition:
+    --bg-start var(--surface-transition-ms, 1.2s) var(--ease),
+    --bg-end var(--surface-transition-ms, 1.2s) var(--ease),
+    --text var(--surface-transition-ms, 1.2s) var(--ease),
+    --muted var(--surface-transition-ms, 1.2s) var(--ease),
+    --accent var(--surface-transition-ms, 1.2s) var(--ease),
+    --line var(--surface-transition-ms, 1.2s) var(--ease),
+    --focus-ring var(--surface-transition-ms, 1.2s) var(--ease),
+    --surface-aura-a var(--surface-transition-ms, 1.2s) var(--ease),
+    --surface-aura-b var(--surface-transition-ms, 1.2s) var(--ease),
+    --surface-aura-c var(--surface-transition-ms, 1.2s) var(--ease);
+}
+
+/* Warm cream/amber ↔ cool steel wash. The registered colours carry the fade. */
+html,
+body {
+  background:
+    radial-gradient(120% 92% at 50% -12%, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  background-attachment: fixed;
+  color: var(--text);
+}
+
+/* ── Pair: measure, leading, tracking, weight, tilt ─────────────────────── */
+
+.pair {
+  max-width: var(--pair-measure, 38rem);
+  transition: max-width 2s var(--ease);
+}
+
+.pair-entry {
+  gap: var(--pair-gap, 0.75rem);
+  transition: gap 2s var(--ease);
+}
+
+.pair-prompt {
+  /* --prompt is a darkened accent, kept ≥ 4.5:1 on both gradient ends. */
+  color: var(--prompt, var(--muted));
+  opacity: 1;
+  letter-spacing: calc(var(--surface-tracking, 0em) * 0.5);
+  transition: color 2s var(--ease), letter-spacing 2s var(--ease);
+}
+
+.pair-answer {
+  font-size: calc(clamp(1.15rem, 2.4vw, 1.5rem) * var(--surface-type-scale, 1));
+  line-height: var(--pair-line-height, 1.5);
+  font-weight: var(--answer-weight, 400);
+  letter-spacing: var(--letter-spacing, 0);
+  transform: rotate(var(--pair-tilt-deg, 0deg));
+  transition:
+    font-size 2s var(--ease),
+    line-height 2s var(--ease),
+    font-weight 2s var(--ease),
+    letter-spacing 2s var(--ease),
+    transform 2s var(--ease);
+}
+
+.pair-answer .thinking-dots span {
+  animation-duration: var(--thinking-dots-ms, 1200ms);
+}
+
+/* ── Eye ↔ text distance and the whole-page mood tint ───────────────────── */
+
+.stage {
+  row-gap: var(--surface-eye-gap, 16px);
+  transition: row-gap 2s var(--ease);
+}
+
+/* ── Composer: the line and the veil follow the palette ─────────────────── */
+
+.composer {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    var(--surface-veil-38, rgba(237, 228, 211, 0.82)) 38%,
+    var(--surface-veil-96, rgba(237, 228, 211, 0.96)) 100%
+  );
+}
+
+.composer-input {
+  caret-color: var(--accent, currentColor);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    var(--surface-rule, rgba(74, 63, 53, 0.26)) 10%,
+    var(--surface-rule, rgba(74, 63, 53, 0.26)) 90%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  transition:
+    background-size 260ms var(--ease),
+    box-shadow 260ms var(--ease),
+    border-radius 260ms var(--ease),
+    color 2s var(--ease);
+}
+
+.composer-input:focus {
+  box-shadow: 0 8px 24px -16px var(--surface-focus-shadow, rgba(138, 75, 34, 0.55));
+}
+
+.composer-input::placeholder {
+  /* Full opacity keeps the placeholder at the same AA contrast as --muted. */
+  color: var(--placeholder, var(--muted));
+  opacity: 1;
+  transition: color 2s var(--ease);
+}
+
+.composer-send {
+  color: var(--muted);
+  transition:
+    color 2s var(--ease),
+    background-color 2s var(--ease),
+    opacity 220ms var(--ease),
+    transform 220ms var(--ease),
+    box-shadow 220ms var(--ease);
+}
+
+.composer:has(.composer-input:not(:placeholder-shown)) .composer-send,
+.composer .composer-input:focus ~ .composer-send,
+.composer-send:hover {
+  background-color: var(--surface-send-hover, rgba(193, 122, 77, 0.14));
+}
+
+.composer-send:hover {
+  box-shadow: 0 6px 18px -14px var(--surface-focus-shadow, rgba(138, 75, 34, 0.75));
+}
+
+.motion-toggle,
+.dev-badge {
+  background: var(--surface-chip, rgba(255, 252, 247, 0.6));
+}
+
+.motion-toggle {
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    background-color 2s var(--ease);
+}
+
+.motion-toggle[aria-pressed="true"] {
+  background: var(--surface-send-hover, rgba(193, 122, 77, 0.14));
+  border-color: var(--border-accent, rgba(193, 122, 77, 0.5));
+}
+
+/* ── Eyes: skin, lids, sclera and iris tone follow temperature ──────────── */
+
+.presence {
+  --skin-hi: var(--surface-skin-hi);
+  --skin: var(--surface-skin);
+  --skin-shade: var(--surface-skin-shade);
+  --skin-deep: var(--surface-skin-deep);
+  --lash: var(--surface-lash);
+}
+
+.presence .eye {
+  box-shadow:
+    0 0 28px var(--surface-eye-halo, rgba(74, 63, 53, 0.14)),
+    0 var(--eye-shadow-y, 14px) var(--eye-shadow-blur, 28px) calc(var(--eye-shadow-blur, 28px) * -0.58) rgba(58, 39, 27, var(--eye-shadow-alpha, 0.34));
+}
+
+.presence .eye .eyelid-bottom {
+  background: linear-gradient(0deg, var(--skin-hi) 0%, var(--skin) 52%, var(--skin-shade) 100%);
+}
+
+.presence .eye .eyelid-top,
+.presence .eye .eyelid-bottom {
+  box-shadow:
+    0 14px 20px -12px var(--surface-lid-shadow, rgba(63, 43, 29, 0.58)),
+    0 4px 7px -4px var(--surface-lid-soft, rgba(63, 43, 29, 0.32)),
+    inset 0 -2px 3px rgba(255, 255, 255, 0.52),
+    inset 0 4px 6px -4px var(--surface-lid-rim, rgba(120, 92, 66, 0.4));
+}
+
+.presence .eye .eyelid-bottom {
+  box-shadow:
+    0 -9px 15px -10px var(--surface-lid-shadow, rgba(63, 43, 29, 0.42)),
+    inset 0 2px 3px rgba(255, 255, 255, 0.4);
+}
+
+.presence .eye .eye-white {
+  background:
+    radial-gradient(92% 72% at 50% 118%, var(--surface-sclera-warm, rgba(208, 132, 88, 0.2)), rgba(0, 0, 0, 0) 62%),
+    radial-gradient(120% 92% at 50% -18%, var(--surface-sclera-shade, rgba(74, 52, 36, 0.22)), rgba(0, 0, 0, 0) 58%),
+    radial-gradient(
+      74% 62% at 50% 48%,
+      var(--surface-sclera-hi, #FFFDF9) 0%,
+      var(--surface-sclera-mid, #F7EEE1) 58%,
+      var(--surface-sclera-low, #EDDFCC) 82%,
+      var(--surface-sclera-edge, #DECBB3) 100%
+    );
+  box-shadow:
+    inset 0 14px 22px -10px var(--surface-sclera-inner, rgba(60, 40, 28, 0.42)),
+    inset 0 -16px 24px -16px var(--surface-sclera-shade, rgba(120, 72, 42, 0.32)),
+    inset 0 0 20px rgba(255, 255, 255, 0.85);
+}
+
+.presence .eye .eye-white::after {
+  background:
+    linear-gradient(180deg, var(--surface-sclera-shade, rgba(58, 38, 26, 0.2)) 0%, rgba(0, 0, 0, 0) 22%),
+    linear-gradient(0deg, var(--surface-sclera-shade, rgba(96, 62, 42, 0.12)) 0%, rgba(0, 0, 0, 0) 12%),
+    radial-gradient(46% 40% at 1% 52%, var(--surface-sclera-warm, rgba(212, 146, 128, 0.16)), rgba(0, 0, 0, 0) 72%),
+    radial-gradient(46% 40% at 99% 52%, var(--surface-sclera-warm, rgba(212, 146, 128, 0.16)), rgba(0, 0, 0, 0) 72%);
+}
+
+.presence .eye .eye-veins {
+  color: var(--surface-vein, rgb(160, 96, 80));
+}
+
+/* A gentle iris tint: warm keeps amber, cold rotates toward slate blue. */
+.presence .eye .pupil {
+  filter: hue-rotate(var(--iris-hue, 0deg)) saturate(var(--iris-sat, 1)) brightness(var(--iris-bright, 1));
+  transition:
+    transform 110ms cubic-bezier(0.3, 0.65, 0.4, 1),
+    filter 2s var(--ease);
+}
+
+/* ── Breathing & organic motion belong to the Eye Motion Engine in presence.js.
+   Avoid animating transform on .eyes-container or .presence with CSS keyframes,
+   which would override --eye-pair-* and cause stepped position jumps. ── */
+
+.focus {
+  animation-name: surface-drift-focus;
+  animation-duration: calc(var(--surface-jitter-cycle, 3400ms) * 0.82);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: var(--surface-jitter-state, paused);
+}
+
+@keyframes surface-drift-focus {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(var(--surface-jitter-amp, 0px), calc(var(--surface-jitter-amp, 0px) * 0.55), 0); }
+}
+
+@keyframes surface-drift-text {
+  0%, 100% { transform: rotate(var(--pair-tilt-deg, 0deg)) translate3d(0, 0, 0); }
+  50% { transform: rotate(var(--pair-tilt-deg, 0deg)) translate3d(calc(var(--surface-jitter-amp, 0px) * 0.45), calc(var(--surface-jitter-amp, 0px) * -0.35), 0); }
+}
+
+/* Text only drifts in silence; while an answer types the copy stays put. */
+.stage[data-phase="idle"] .pair-answer {
+  animation-name: surface-drift-text;
+  animation-duration: calc(var(--surface-jitter-cycle, 3400ms) * 1.16);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: var(--surface-jitter-state, paused);
+}
+
+/* The pause toggle and reduced-motion mode stop every drift. */
+.presence.is-motion-paused,
+.presence.is-reduced-motion,
+.stage:has(.presence.is-motion-paused) .focus,
+.stage:has(.presence.is-reduced-motion) .focus,
+.stage:has(.presence.is-motion-paused)[data-phase="idle"] .pair-answer,
+.stage:has(.presence.is-reduced-motion)[data-phase="idle"] .pair-answer {
+  animation: none;
+}
+
+/* ── Reduced motion: colours and spacing change, nothing animates ───────── */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    transition: none !important;
+  }
+
+  html,
+  body,
+  .stage,
+  .pair,
+  .pair-entry,
+  .pair-prompt,
+  .pair-answer,
+  .composer-input,
+  .composer-send,
+  .motion-toggle,
+  .presence .eye .pupil,
+  .presence .eye .eye-white,
+  .presence .eye .eyelid-top,
+  .presence .eye .eyelid-bottom {
+    transition: none !important;
+  }
+
+  .presence,
+  .focus,
+  .stage[data-phase="idle"] .pair-answer {
+    animation: none !important;
+  }
+}

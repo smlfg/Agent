@@ -1,0 +1,157 @@
+/* Voice: mic toggle, provisional transcript, first-use consent line.
+   Loaded from src/voice/mic.js (no <link> in living-surface.html).
+   Same shape as .composer-send: a circle on the surface, no box. */
+
+.composer {
+  /* The consent line wraps under the input row; it never sits beside it. */
+  flex-wrap: wrap;
+}
+
+.mic-toggle {
+  flex: 0 0 auto;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  font-family: var(--font);
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition:
+    color 220ms var(--ease),
+    background-color 220ms var(--ease),
+    opacity 220ms var(--ease),
+    transform 220ms var(--ease);
+}
+
+.mic-toggle[hidden] {
+  display: none;
+}
+
+.mic-toggle svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 220ms var(--ease);
+}
+
+.mic-toggle:hover {
+  color: var(--text);
+  opacity: 1;
+  background-color: rgba(193, 122, 77, 0.14);
+}
+
+.mic-toggle:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.mic-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Listening: a quiet pulsing ring, no filled box. */
+.mic-toggle.is-listening {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.mic-toggle.is-listening::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--focus-ring);
+  opacity: 0.55;
+  animation: mic-ring 1.8s var(--ease) infinite;
+  pointer-events: none;
+}
+
+.mic-toggle.is-listening svg {
+  transform: scale(1.04);
+}
+
+/* Error: the same quiet shape, only colour, and only briefly. */
+.mic-toggle.is-error {
+  color: var(--focus-ring);
+  opacity: 1;
+}
+
+/* The provisional transcript is visible but clearly not settled text. */
+.composer-input.is-interim {
+  color: var(--muted);
+}
+
+.composer-input.is-interim::placeholder {
+  color: var(--muted);
+  opacity: 0.55;
+}
+
+/* First use only: one quiet line under the field, then gone. */
+.mic-consent {
+  flex: 1 0 100%;
+  margin: 0 0.35rem;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 360ms var(--ease);
+}
+
+.mic-consent.is-visible {
+  opacity: 0.8;
+}
+
+@keyframes mic-ring {
+  0% { transform: scale(0.92); opacity: 0.55; }
+  70% { transform: scale(1.28); opacity: 0; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+
+@media (prefers-contrast: more) {
+  .mic-toggle {
+    color: var(--text);
+    opacity: 1;
+    border: 1px solid var(--text);
+  }
+
+  .mic-toggle.is-listening::after {
+    border-width: 2px;
+    opacity: 1;
+  }
+
+  .mic-consent.is-visible {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mic-toggle,
+  .mic-toggle svg,
+  .mic-consent {
+    transition: none;
+  }
+
+  .mic-toggle:hover,
+  .mic-toggle:active,
+  .mic-toggle.is-listening svg {
+    transform: none;
+  }
+
+  .mic-toggle.is-listening::after,
+  .mic-toggle.is-reduced-motion::after {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+.mic-toggle.is-reduced-motion::after {
+  animation: none;
+  opacity: 0.5;
+}
