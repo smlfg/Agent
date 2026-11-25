@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <title>Embodiment perceptibility harness</title>
+  <style>
+    :root {
+      font-family: system-ui, sans-serif;
+    }
+    body {
+      margin: 1rem;
+      max-width: 40rem;
+    }
+    #presence, #stage {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+    }
+    #readout {
+      font-family: ui-monospace, monospace;
+      white-space: pre-wrap;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Embodiment perceptibility harness</h1>
+  <p>Visual evaluation helper for AT-07 (searching / grounded / uncovered).</p>
+  <div id="presence" aria-live="polite"></div>
+  <div id="stage"></div>
+  <p id="readout"></p>
+  <script type="module">
+    import { createStore, reduce, initialState } from '../src/state/store.js';
+    import { createAgentEventBus, createAgentEvent } from '../src/state/agent-events.js';
+    import { mountPresence } from '../src/presence/presence.js';
+    import { mountEmbodiment } from '../src/presence/embodiment.js';
+    import { EMBODIED_INTENT_PROFILES } from '../src/presence/eye-motion-profiles.js';
+
+    const reducedMotion = false;
+    let state = reduce(initialState, { type: 'AWAKE' });
+    const store = createStore(state);
+    const eventBus = createAgentEventBus({ store });
+    eventBus.startTurn(1);
+    store.dispatch({ type: 'SUBMIT', prompt: 'harness' });
+
+    const presenceRoot = document.getElementById('presence');
+    const stage = document.getElementById('stage');
+    const readout = document.getElementById('readout');
+
+    const presence = mountPresence({ root: presenceRoot, store, reducedMotion });
+    const embodiment = mountEmbodiment({
+      eventBus,
+      store,
+      presence,
+      stage,
+      root: presenceRoot,
+      reducedMotion,
+      minDwellMs: 0,
+    });
+
+    const SCENARIOS = {
+      searching: { type: 'retrieval.started', action_id: 'r-search' },
+      grounded: {
+        type: 'retrieval.completed',
+        action_id: 'r-search',
+        metadata: { coverage: 'GIVEN', hits: 3 },
+      },
+      uncovered: {
+        type: 'retrieval.completed',
+        action_id: 'r-unc',
+        metadata: { coverage: 'NOT_COVERED', hits: 0 },
+      },
+    };
+
+    function cssBoosts() {
+      const s = stage.style;
+      return {
+        depth: s.getPropertyValue('--embodied-depth-boost').trim(),
+        sheen: s.getPropertyValue('--embodied-sheen-boost').trim(),
+        sweep: s.getPropertyValue('--embodied-search-sweep').trim(),
+        haze: s.getPropertyValue('--embodied-haze-boost').trim(),
+      };
+    }
+
+    function applyScenario(key) {
+      const partial = SCENARIOS[key];
+      if (!partial) throw new Error(`unknown scenario: ${key}`);
+      eventBus.emit({ ...partial, turn_id: 'turn-1', simulated: true });
+      const st = embodiment.getState();
+      const boosts = cssBoosts();
+      readout.textContent = JSON.stringify(
+        { scenario: key, intent: st.intent, coverage: st.coverage, boosts, profile: EMBODIED_INTENT_PROFILES[st.intent] },
+        null,
+        2,
+      );
+      return { intent: st.intent, boosts, dataset: { ...stage.dataset } };
+    }
+
+  window.__embodimentHarness = {
+      scenarios: Object.keys(SCENARIOS),
+      profiles: EMBODIED_INTENT_PROFILES,
+      applyScenario,
+      getState: () => embodiment.getState(),
+      cssBoosts,
+    };
+
+    applyScenario('searching');
+  </script>
+</body>
+</html>

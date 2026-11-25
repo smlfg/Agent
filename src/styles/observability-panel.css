@@ -1,0 +1,347 @@
+/* DEVELOPMENT ONLY — observability & visual evaluation panel (ADR-0008). */
+
+.obs-panel {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 55;
+  width: min(420px, calc(100vw - 24px));
+  max-height: min(68vh, 540px);
+  display: flex;
+  flex-direction: column;
+  color: #e8ecf1;
+  background: rgba(12, 16, 22, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(14px) saturate(115%);
+  -webkit-backdrop-filter: blur(14px) saturate(115%);
+  font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  opacity: 0.96;
+  pointer-events: auto;
+}
+
+.obs-panel[hidden] {
+  display: none !important;
+}
+
+.obs-panel.is-sim-active .obs-sim-banner {
+  display: block;
+}
+
+.obs-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.obs-title {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 10px;
+  color: #a8c8f0;
+}
+
+.obs-tabs {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.obs-tab {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font: inherit;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.obs-tab[aria-selected='true'] {
+  background: rgba(120, 170, 230, 0.22);
+  border-color: rgba(140, 190, 255, 0.45);
+}
+
+.obs-close {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  margin-left: 4px;
+}
+
+.obs-body {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.obs-pane {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 8px 9px 10px;
+  gap: 8px;
+}
+
+.obs-pane.is-active {
+  display: flex;
+}
+
+.obs-sim-banner {
+  display: none;
+  padding: 6px 8px;
+  border: 1px dashed rgba(255, 200, 100, 0.55);
+  border-radius: 6px;
+  background: rgba(255, 160, 60, 0.12);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #ffd9a8;
+}
+
+.obs-eval-notice {
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  font-size: 10px;
+  color: rgba(232, 236, 241, 0.85);
+}
+
+.obs-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.obs-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 5px 6px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.obs-card-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(232, 236, 241, 0.55);
+  margin-bottom: 3px;
+}
+
+.obs-card-value {
+  font-size: 10px;
+  word-break: break-word;
+}
+
+.obs-badge {
+  display: inline-block;
+  margin-right: 4px;
+  margin-bottom: 2px;
+  padding: 1px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.obs-badge-ok {
+  border-color: rgba(120, 220, 160, 0.5);
+  color: #9ef0c0;
+}
+
+.obs-badge-warn {
+  border-color: rgba(255, 200, 100, 0.5);
+  color: #ffd9a0;
+}
+
+.obs-badge-err {
+  border-color: rgba(255, 120, 120, 0.5);
+  color: #ffb0b0;
+}
+
+.obs-badge-empty {
+  border-color: rgba(180, 180, 200, 0.4);
+  color: #c8c8d8;
+}
+
+.obs-badge-sim {
+  border-color: rgba(255, 180, 80, 0.55);
+  color: #ffc878;
+  border-style: dashed;
+}
+
+.obs-badge-stale {
+  border-color: rgba(200, 140, 255, 0.45);
+  color: #ddb8ff;
+}
+
+.obs-timeline-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.obs-timeline-title {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(232, 236, 241, 0.55);
+}
+
+.obs-clear {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font: inherit;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.obs-timeline {
+  flex: 1;
+  min-height: 80px;
+  max-height: 220px;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.obs-timeline-row {
+  padding: 3px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.obs-timeline-row:last-child {
+  border-bottom: none;
+}
+
+.obs-meta-pill {
+  display: inline-block;
+  margin: 1px 3px 1px 0;
+  padding: 0 4px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 9px;
+  color: rgba(232, 236, 241, 0.75);
+}
+
+.obs-eval-groups {
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.obs-eval-group-title {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(232, 236, 241, 0.55);
+  margin-bottom: 4px;
+}
+
+.obs-eval-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.obs-preset-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font: inherit;
+  font-size: 10px;
+  padding: 4px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.obs-preset-btn.is-highlight {
+  border-color: rgba(140, 190, 255, 0.5);
+  background: rgba(80, 130, 200, 0.18);
+}
+
+.obs-stop-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 120, 120, 0.45);
+  background: rgba(180, 60, 60, 0.2);
+  color: #ffc8c8;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.obs-keyhint {
+  font-size: 9px;
+  color: rgba(232, 236, 241, 0.45);
+  padding: 0 9px 6px;
+}
+
+/* Stage simulation badge — never color-only */
+.sim-badge {
+  position: fixed;
+  left: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 54;
+  margin: 0;
+  padding: 6px 10px;
+  font: 10px/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #ffe2b8;
+  background: rgba(24, 18, 10, 0.88);
+  border: 2px dashed rgba(255, 180, 80, 0.65);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.sim-badge[hidden] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obs-panel,
+  .obs-tab,
+  .obs-preset-btn,
+  .obs-close,
+  .obs-clear,
+  .obs-stop-btn {
+    transition: none !important;
+    animation: none !important;
+  }
+}

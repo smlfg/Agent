@@ -443,6 +443,29 @@ export function mountSurfaceProjector({
   let activeWorldId = null;
   let activeMetricParams = null;
   const writtenBoneVars = new Set();
+  const writtenEmbodimentModVars = new Set();
+
+  function clearEmbodimentModulationVars() {
+    if (root?.style && typeof root.style.removeProperty === 'function') {
+      for (const name of writtenEmbodimentModVars) root.style.removeProperty(name);
+    }
+    writtenEmbodimentModVars.clear();
+  }
+
+  /** Temporary CSS-only atmosphere shift (AT-06); never writes surfaceStore. */
+  function setEmbodimentModulation(mod = {}) {
+    clearEmbodimentModulationVars();
+    if (!mod || typeof mod !== 'object' || !root?.style) return;
+    for (const [name, value] of Object.entries(mod)) {
+      if (value == null || value === '' || value === 0 || value === '0') continue;
+      root.style.setProperty(name, String(value));
+      writtenEmbodimentModVars.add(name);
+    }
+  }
+
+  function clearEmbodimentModulation() {
+    clearEmbodimentModulationVars();
+  }
 
   function clearBoneCssVars() {
     if (root && root.style && typeof root.style.removeProperty === 'function') {
@@ -652,6 +675,7 @@ export function mountSurfaceProjector({
       activeBones = null;
       activeWorldId = null;
       clearBoneCssVars();
+      clearEmbodimentModulation();
       if (root?.dataset) {
         clearTimeout(resetTimerId);
         root.dataset.surfaceTransition = 'reset';
@@ -685,9 +709,12 @@ export function mountSurfaceProjector({
     boneCount: Object.keys(BONE_SCHEMA).length,
     setMetricParams,
     getMetricParams,
+    setEmbodimentModulation,
+    clearEmbodimentModulation,
     destroy() {
       clearTimeout(resetTimerId);
       clearBoneCssVars();
+      clearEmbodimentModulation();
       unsubscribe();
       if (doc && typeof doc.removeEventListener === 'function') {
         doc.removeEventListener('agentfaehig:metrics-commit', onMetricsCommit);

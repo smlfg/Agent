@@ -22,6 +22,7 @@ import { buildAdaptationPromptBlock, createAdaptiveAgent } from './surface/surfa
 import { mountSurfaceProjector } from './surface/surface-projector.js';
 import { mountSurfaceControls } from './surface/surface-controls.js';
 import { mountKeyboardViewport } from './surface/keyboard-viewport.js';
+import { mountObservabilityPanel } from './dev/observability-panel.js';
 
 export const AWAKE_AFTER_MS = 5000;
 
@@ -95,9 +96,18 @@ const embodiment = mountEmbodiment({
   eventBus,
   store,
   presence,
+  surfaceProjector,
   stage,
   root: document.documentElement,
   reducedMotion,
+});
+const observability = mountObservabilityPanel({
+  eventBus,
+  store,
+  embodiment,
+  presence,
+  stage,
+  search: location.search,
 });
 let innerAgent = createAgentChain(adapters, { timeoutMs: 10000 });
 if (!isProductionHost(location.hostname)) {
@@ -181,6 +191,7 @@ window.__agentfaehig = {
   events: eventBus,
   embodiment,
   presence,
+  observability,
   surface: surfaceStore,
   surfaceProjector,
   surfaceControls,

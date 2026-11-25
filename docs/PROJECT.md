@@ -80,20 +80,22 @@ Belege: [`tech/REALITY-SYNC-2026-11-25.md`](../tech/REALITY-SYNC-2026-11-25.md),
 Slice auf dem verifizierten Integrationsstand definieren und durch Upstream- und
 Plan-Gates bringen; keine Voice- oder DPPM-Arbeit in diesen Slice schmuggeln.
 
-## Wave 1 — Embodied Agent State (Vertical Slice Retrieval-SSE, 25.11.2026)
+## Real-Time Agent Embodiment V1 (25.11.2026)
 
-- **Umgesetzt in PR 1 (Wave 1):** Typisierter `AgentEvent`-Contract & Event-Bus
+- **Umgesetzt:** Typisierter `AgentEvent`-Contract & Event-Bus
   (`src/state/agent-events.js`, `ADR-0008`), inkrementeller Echtzeit-SSE-Stream
-  aus `POST /api/agent` (`deploy/agentfaehig-site/src/search.js`, `worker.js`)
-  während `search()` läuft — **bevor** die Modellantwort vorliegt —, Streaming-
-  SSE-Client (`src/agent/remoteAgent.js`, `chain.js`), lokales Pre-Retrieval-
-  Parity-Modul (`src/agent/local-retrieval.js`) sowie die biologisch inspirierte
-  Embodiment-Schicht (`src/presence/embodiment.js`, `eye-motion-profiles.js`,
-  `presence.js`, `styles/embodiment.css`) inkl. 5s-Delay-Echtzeit-Akzeptanztest
-  (`tests/retrieval-sse-acceptance.test.js`).
-- **Bewusst zurückgestellt für PR 2 (Deferred):** Ausgearbeitetes Upstream-
-  Research-Dokument, Developer-Observability- & Owner-Visual-Evaluation-Panel
-  (`?dev=1` / `?eval=1`) sowie erweiterte Full-Lifecycle-Tests.
+  aus `POST /api/agent` während `search()` läuft — **bevor** die Modellantwort
+  vorliegt —, Streaming-SSE-Client, lokales Pre-Retrieval, deklarative
+  Verhaltensprofile **P01–P09** (`src/presence/behavior-profiles.js`) über die
+  15 vorhandenen Ausdruckskanäle, Milestone-Hold für Grounded gegen
+  `generation.started`, temporäre Surface-Atmosphäre ohne Store-Drift,
+  Embodiment-Orchestrator, Owner-Panels `?dev=1` / `?eval=1`.
+- **Verifikation:** `bash scripts/validate.sh` grün; **`npm test` 354/354**;
+  AT-01…AT-07 in `tests/embodiment-v1-acceptance.test.js` und
+  `tests/retrieval-sse-acceptance.test.js`; Browser-AT-07
+  (`tests/embodiment-perceptibility-browser.py`) unterscheidet Searching /
+  Grounded / Uncovered ohne Statuslabels an CSS-Boosts und `data-agent-intent`.
+- **Owner-Abnahme:** Preview über Branch/PR; Production unverändert bis Freigabe.
 
 ## Historischer Planungsstand (19./20.11.2026)
 

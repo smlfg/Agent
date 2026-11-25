@@ -2,6 +2,13 @@
 // and accessible status without coupling to vendor eye markup.
 
 import { EMBODIED_INTENT_PROFILES } from './eye-motion-profiles.js';
+import {
+  MILESTONE_HOLD_INTENTS,
+  MILESTONE_HOLD_MS,
+  applyMilestoneHold,
+  atmosphereModulationFromChannels,
+  resolveBehaviorForIntent,
+} from './behavior-profiles.js';
 
 function clamp(value, min, max) {
   return value < min ? min : value > max ? max : value;
@@ -202,6 +209,7 @@ const HISTORY_MAX = 32;
  *   presence?: { setEmbodiedOverlay?: Function, clearEmbodiedOverlay?: Function, setState?: Function, unlockState?: Function, triggerCue?: Function } | null,
  *   stage?: HTMLElement | null,
  *   root?: HTMLElement | null,
+ *   surfaceProjector?: { setEmbodimentModulation?: Function, clearEmbodimentModulation?: Function } | null,
  *   reducedMotion?: boolean,
  *   minDwellMs?: number,
  *   now?: () => number,
@@ -213,6 +221,7 @@ export function mountEmbodiment({
   presence = null,
   stage = null,
   root = null,
+  surfaceProjector = null,
   reducedMotion = false,
   minDwellMs = 110,
   now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now()),
@@ -239,6 +248,11 @@ export function mountEmbodiment({
   const intentHistory = [];
   let readingX = 0;
   let pendingIntent = null;
+  let profileId = 'P09';
+  let expressionChannels = null;
+  let reactionLatencyMs = 60;
+  let milestoneIntent = null;
+  let milestoneHoldUntil = 0;
 
   const win = doc?.defaultView ?? (typeof globalThis !== 'undefined' ? globalThis : {});
 
@@ -344,6 +358,23 @@ export function mountEmbodiment({
     return overlay;
   }
 
+  function applySurfaceAtmosphere(name) {
+    const behavior = resolveBehaviorForIntent(name);
+    profileId = behavior?.profileId ?? 'P09';
+    expressionChannels = behavior?.channels ?? null;
+    reactionLatencyMs = behavior?.reactionLatencyMs ?? 60;
+
+    if (name === 'idle') {
+      surfaceProjector?.clearEmbodimentModulation?.();
+      return;
+    }
+    if (behavior?.channels && surfaceProjector?.setEmbodimentModulation) {
+      surfaceProjector.setEmbodimentModulation(atmosphereModulationFromChannels(behavior.channels));
+    } else {
+      surfaceProjector?.clearEmbodimentModulation?.();
+    }
+  }
+
   function commitIntent(name, meta = {}) {
     if (destroyed) return;
     intent = name;
@@ -366,6 +397,7 @@ export function mountEmbodiment({
     }
 
     applySpatialTokens(profile ?? {}, { parallelBoost });
+    applySurfaceAtmosphere(name);
     updateDomAttributes(name, meta);
     updateStatusLabel(name);
     pushHistory(name);
@@ -400,7 +432,17 @@ export function mountEmbodiment({
     if (destroyed || meta?.stale === true) return;
 
     const phase = store?.getState?.().phase ?? 'idle';
-    const resolved = resolveEmbodiedIntent({ event, snapshot, phase });
+    let resolved = resolveEmbodiedIntent({ event, snapshot, phase });
+
+    if (MILESTONE_HOLD_INTENTS.has(resolved)) {
+      milestoneIntent = resolved;
+      milestoneHoldUntil = now() + MILESTONE_HOLD_MS;
+    }
+
+    resolved = applyMilestoneHold(resolved, {
+      milestoneIntent,
+      holdUntil: milestoneHoldUntil,
+    }, now());
 
     if (event?.type === 'retrieval.completed') {
       const cov = event.metadata?.coverage;
@@ -499,6 +541,9 @@ export function mountEmbodiment({
     return {
       intent,
       eyeState,
+      profileId,
+      channels: expressionChannels,
+      reactionLatencyMs,
       coverage,
       hits,
       parallelCount,
@@ -524,6 +569,12 @@ export function mountEmbodiment({
     presence?.clearEmbodiedOverlay?.();
     presence?.unlockState?.();
     clearEmbodiedBoosts();
+    surfaceProjector?.clearEmbodimentModulation?.();
+    milestoneIntent = null;
+    milestoneHoldUntil = 0;
+    profileId = 'P09';
+    expressionChannels = null;
+    reactionLatencyMs = 60;
     updateDomAttributes('idle', { clearCoverage: true, parallelCount: 0, clearSimulated: true });
     updateStatusLabel('idle');
     intentHistory.length = 0;

@@ -257,6 +257,13 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
           EYE_MOTION_LIMITS.ambientMovement[1],
         );
       }
+      if (Number.isFinite(o.intensityMul)) {
+        merged.intensity = clamp(
+          finiteOr(userParams.intensity, 1) * o.intensityMul,
+          EYE_MOTION_LIMITS.intensity[0],
+          EYE_MOTION_LIMITS.intensity[1],
+        );
+      }
       merged.damping = Number.isFinite(o.damping) ? clamp(o.damping, EYE_MOTION_LIMITS.damping[0], EYE_MOTION_LIMITS.damping[1]) : userParams.damping;
     }
     engine.setParams(merged);
