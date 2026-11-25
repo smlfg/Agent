@@ -361,3 +361,34 @@ test('compileBonesToCssVars derives --depth-light-x/y from orbAX/orbAY for all 8
   assert.ok(observedX.size > 1, 'the curated worlds span more than one light direction (x)');
   assert.ok(observedY.size > 1, 'the curated worlds span more than one light direction (y)');
 });
+
+// ── 6. CSS Spatial Depth Contract ───────────────────────────────────────────
+
+test('2.5D CSS rules apply to default surface, couple light/cornea/lag, and keep .stage unflattened', () => {
+  const depthCss = readFileSync(join(here, '../src/styles/bones/bones-depth.css'), 'utf8');
+  const textureCss = readFileSync(join(here, '../src/styles/bones/bones-texture.css'), 'utf8');
+
+  // .stage must not carry filter (would rasterize children into one flat bitmap).
+  assert.equal(
+    /\.stage\s*\{[^}]*filter:/s.test(textureCss),
+    false,
+    'bones-texture.css must not apply filter directly on .stage',
+  );
+  assert.match(textureCss, /body::before,\s*html\[data-bones-active="true"\]\s*\.stage::before\s*\{[^}]*filter:/s);
+
+  // Depth rules use html:root:root so they work on default landing surface AND bones worlds.
+  assert.equal(
+    depthCss.includes('html[data-bones-active="true"]'),
+    false,
+    'bones-depth.css must not gate spatial depth behind data-bones-active',
+  );
+  assert.match(depthCss, /html:root:root\s+\.presence\s+\.eye\s*\{[^}]*--depth-light-x[^}]*--depth-contact-alpha/s);
+  assert.match(depthCss, /\.left-eye\s+\.eye-catchlight[^}]*--eye-left-pupil-x/s);
+  assert.match(depthCss, /\.right-eye\s+\.eye-catchlight[^}]*--eye-right-pupil-x/s);
+  assert.match(depthCss, /\.pupil-core[^}]*--eye-left-pupil-x/s);
+  assert.match(depthCss, /--scene-lag-far/);
+  assert.match(depthCss, /--scene-lag-mid/);
+  assert.match(depthCss, /--scene-lag-near/);
+  assert.match(depthCss, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(depthCss, /is-motion-paused/);
+});
