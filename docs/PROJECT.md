@@ -1,11 +1,86 @@
 # Projektstand — Agentfähig
 
-Stand: 19.11.2026. Phase: Planungsdokumente fertig, **Owner-Entscheidungen
-offen** — Messlauf (Stufe 1) angelaufen; Laufversuch 1 an der Paid-Wand
-gescheitert, Laufversuch 2 belegt den Free-Pfad, ist aber an der STT-Stufe
-blockiert. Eine Latenzzahl entstand noch nicht.
+Stand: 25.11.2026, **Reality Sync auf dem integrierten
+Spatial-/Error-State-Stand**. Die Produktvision bleibt gültig; diese Datei
+unterscheidet ab hier nachweisbaren Ist-Stand, Dokumentationswissen und offene
+Nachweise.
 
-## Planungsstand
+## Verifizierter Produktstand (VERIFIED)
+
+- Aktueller Integrations-HEAD während dieses Syncs: `ea3bd2e` auf
+  `integration/spatial-depth-error-state`. Er verbindet die adaptive Living
+  Surface, den ruhigen `error`-Zustand und die aktivierte 2.5D-Spatial-Depth-
+  Erweiterung.
+- Die Anwendung besteht aus Vanilla-ES-Modulen für Gesprächszustand, Typewriter,
+  reaktive Augen, validierte Surface-Anpassung, kontextuelle Regler, Metriken,
+  Provider-Fallbacks und räumliche Tiefe. Es gibt keine WebGL-/Three.js-Welt.
+- **279/279 Node-Tests** laufen auf dem Integrations-HEAD grün; die gezielten
+  Slice-A-Tests laufen mit **43/43** grün.
+- Der lokale Browser-Smoke belegt den echten `error`-Zustand, Fehlermeldung und
+  `aria-live`, Wiedereinstieg und Reduced Motion. Der erweiterte Spatial-Browser-
+  Test läuft für Default-Desktop, Bones-Desktop, Mobile und Reduced Motion grün.
+- Die öffentliche UI beantwortet einen realen Browser-Turn mit `PONG` vom Provider
+  `minimax`; das `DEV-DATA`-Badge bleibt verborgen. `verify-live.sh` ist grün.
+- Cloudflare ist mit Worker `agentfaehig`, Assets, Workers-AI-Binding und den
+  Provider-Variablen konfiguriert. Die aktive Version zum Prüfzeitpunkt ist
+  `9e0c8e7f-777f-4981-9f37-98c6f1679a52` (Version 20, 25.11.2026).
+- `bash scripts/validate.sh` ist nach der inhaltserhaltenden Umbenennung des
+  Talk-Transkripts nach `docs/ai-avatare.txt` grün.
+
+Belege: [`tech/REALITY-SYNC-2026-11-25.md`](../tech/REALITY-SYNC-2026-11-25.md),
+[`README.md`](../README.md), [`src/README.md`](../src/README.md) und
+[`tests/README.md`](../tests/README.md).
+
+## Dokumentierte Zielrichtung und Historie (DOCUMENTED)
+
+- Die bestätigte Produktvision und Designentscheidungen stehen in
+  [`VISION-samuel.md`](VISION-samuel.md) und
+  [`DESIGN-DECISIONS.md`](DESIGN-DECISIONS.md).
+- Die Abschnitte ab „Historischer Planungsstand“ beschreiben die Entscheidungs-
+  und Messlage vom 19./20.11.2026. Sie bleiben als Geschichte erhalten, sind aber
+  keine Aussage über den heutigen Implementierungsstand.
+- Der M1-Bericht und die Messprotokolle bleiben historische Belege. Sie werden
+  durch den Reality Sync weder gelöscht noch rückwirkend mit neuen Ergebnissen
+  versehen.
+
+## Offene Nachweise (UNVERIFIED / EVIDENCE DEBT)
+
+- **Voice:** kein erneuter 20-Turn-Latenzmesslauf in diesem Sync; keine aktuelle
+  Bestätigung der STT-Stabilität und kein neuer `first_audio_ms`-Wert.
+- **Fremdtest:** weiterhin 0 durchgeführte Fremdtests. Die vorhandenen Pläne sind
+  keine Nutzerbelege.
+- **DPPM/On-Demand-Agenten, serverautoritative Zwei-Tab-Synchronisation und
+  langfristige Evolution:** in diesem Sync nicht als End-to-End-Verhalten geprüft.
+- **Öffentlicher Spatial-Depth-Lauf:** die öffentliche UI und echte Antwort sind
+  verifiziert; die vollständige Spatial-Browser-Matrix wurde lokal, nicht erneut
+  auf der Produktions-URL ausgeführt.
+- Kleinbefund: lokal erscheint ein `favicon.ico`-404; kein Pageerror und kein
+  nachgewiesener Zusammenhang mit Slice A oder Spatial Depth.
+
+## Execution Rebaseline
+
+- [`EXECUTION_PLAN-M0-M5.md`](EXECUTION_PLAN-M0-M5.md) ist der **eine vorgeschlagene
+  Gesamtplan** für den aktuellen Stand. Seine Rebaseline ist eine
+  **OPEN OWNER DECISION**, bis Samuel sie ratifiziert.
+- [`../tech/EXECUTION_PLAN-M1-MESSLAUF.md`](../tech/EXECUTION_PLAN-M1-MESSLAUF.md)
+  ist ausschließlich das historische Task-Protokoll für den Voice-Messlauf und
+  kein konkurrierender Gesamtplan mehr.
+- Alte Gates werden nicht rückwirkend bestanden. Unverändert gelten Owner-Gates
+  für Commits, Deploys und Secrets, Upstream-First, unabhängige Plan-Annahme vor
+  neuen Build-Lanes und Continuous Authorize.
+- Voice-Latenz und Fremdtests sind **Evidence Debt**, aber keine pauschale
+  Blockade für unabhängige UI-/Spatial-Arbeit. Sie werden erneut verbindlich,
+  wenn ein aktueller Plan sie ausdrücklich verknüpft oder eine Stable-/Voice-
+  Abnahme ansteht.
+- Slice A besitzt `ACCEPT` in [`PLAN_VALIDATION_REPORT.md`](../PLAN_VALIDATION_REPORT.md)
+  und eine zusätzliche unabhängige mcode-Validierung
+  ([`PLAN-VALIDATION-REPORT-mcode-reality-sync-2026-11-25.md`](../PLAN-VALIDATION-REPORT-mcode-reality-sync-2026-11-25.md)).
+
+**Empfohlener nächster Implementierungsschritt:** genau einen räumlichen Vertical
+Slice auf dem verifizierten Integrationsstand definieren und durch Upstream- und
+Plan-Gates bringen; keine Voice- oder DPPM-Arbeit in diesen Slice schmuggeln.
+
+## Historischer Planungsstand (19./20.11.2026)
 
 Was ich vorhabe, in meinen eigenen Worten: [`VISION-samuel.md`](VISION-samuel.md).
 
@@ -83,7 +158,7 @@ Damit Ziele, Entscheidungen und Belege nicht auseinanderlaufen, gilt im Repo:
 | [`docs/missions/INTEGRATION-FIRST-WHAT-THIS-IS.md`](missions/INTEGRATION-FIRST-WHAT-THIS-IS.md) | **HAI-Missionsvorschlag** zur Integration des ersten Besucherablaufs; DRAFT, keine Build-Freigabe |
 | [`docs/missions/SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md`](missions/SECONDARY-EVIDENCE-BASED-ML-FLYWHEEL.md) | **Abhängige Secondary-Mission (COLD)**: Evidenz-basiertes Optimierungs-Flywheel erst nach erfolgreicher Integration und separatem Owner-GO |
 
-## Smarte Projektziele für den ersten Build (v1 — EINE Version mit Ownership)
+## Bestehende Produktziele für V1 (Zielrichtung, kein Ist-Nachweis)
 
 > **Wichtige Leitplanke (aus Plaud 13.11.2026):** Heute Nacht wird **nicht** mehr gebaut.
 > Es gibt **keine mehreren Wegwerf-Prototypen**, sondern **eine** saubere Version mit
@@ -125,7 +200,7 @@ Damit Ziele, Entscheidungen und Belege nicht auseinanderlaufen, gilt im Repo:
         - *CSS Visual Style:* Ruhiges Feld, langsame Atmung ↔ lebendiger Puls, dynamischer Typewriter.
         - *HAI Interaction:* Ruhige Sofort-Antwort ohne Nachfragen ↔ aktive DPPM-Synthese + 2 weiterführende Fäden.
 
-## Anti-Scope-Creep: 3 vertikale Build-Slices (HAI-Projektmanagement)
+## Ursprüngliche Anti-Scope-Creep-Slices (19.11., historische Planungsgrundlage)
 
 Am 19.11.2026 mit Samuel geklärt ([Entscheidungen](DESIGN-DECISIONS.md)):
 
@@ -233,7 +308,7 @@ in **drei strikt getrennten vertikalen Slices** gebaut — jeder Slice hat ein e
 | **Slice 1 — Core Vertical Slice (`What this is`)** | Polierte reaktive Augen (`BoopFace`-Mechanik) + 3 Dual-Channel-Slider (CSS Custom Properties + Prompt-Steuerung) + pulsierender Typewriter + Front-Agent (Text + Voice-Modul) + **1 Pathway (`What this is`)** mit „Bridge + max. 2 Fäden“ und **3 statischen JSON-Waypoints** (`What is HAI`, `hai-mcp`, `Website-Agent als Produkt`). | Keine mehrstufige DPPM-Hintergrund-Kaskade, noch nicht alle 8 Domains im Katalog, kein Bild-Upload. |
 | **Slice 2 — On-Demand DPPM & voller Portfolio-Katalog** | Caching-First + asynchrone On-Demand-Agents (DPPM-Synthese nachliefern) + Freischaltung der Pathways `creator` und `product for X` inkl. komplettem Waypoint-Katalog (alle 8 Domains, beste GitHub-Repos, Kontaktdaten, Buchungs-/Anfrage-Waypoint). | Keine neuen UI-Bedienelemente außerhalb der 3 Slider + 1 Waypoint-Card. |
 | **Slice 3 — Polish, Latenz-Messung & Live-Deploy** | E2E-Latenz- & Deutsch-Verifikation (`first_token_ms`, `first_audio_ms`), Graceful-Degradation-Tests und kontrollierter Deploy auf `agentfähig.de` nach Samuels Freigabe. | Kein Umbau der Kernarchitektur. |
-## Stand der 5 Kernfragen vor dem ersten Build
+## Stand der 5 Kernfragen (19.11., historische Baseline)
 1. **Erster Besucherablauf:** *Entschieden* — Pathway `What this is` Ende-zu-Ende mit
    „Bridge + max. 2 Fäden“ und genau 1 eingeblendeten Waypoint-Card zur Zeit.
 2. **Eingabemodalität & Reaktivität:** *Entschieden* — Mensch initiiert sofort (Zero-Popup);
@@ -275,4 +350,8 @@ in **drei strikt getrennten vertikalen Slices** gebaut — jeder Slice hat ein e
   ein Wisch zurück — Stage und Tastaturband teilen sich dann den sichtbaren
   Bereich; auf Chromium-Mobilgeräten greift der native Meta-Tag-Pfad.
 
-Noch offen: restliche Grilling-Punkte (Abschluss-Ergebnis von `What this is`, Mobile/Wake-Trigger, Modellwahl, Abnahmekriterien), gemeinsame Designabnahme und Build-Freigabe.
+Aktuelle offene Punkte stehen oben unter „Offene Nachweise“ und in der
+Reality-Sync-Triage von [`UNSOLVED-TECHNIK.md`](UNSOLVED-TECHNIK.md). Die
+ursprünglich offenen Grilling-, Designabnahme- und Build-Freigaben werden nicht
+rückwirkend als erledigt dargestellt; ihre erneute Gültigkeit ist Teil der
+OPEN OWNER DECISION zur Execution Rebaseline.

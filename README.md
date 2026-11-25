@@ -3,11 +3,13 @@
 Ein Human-Agent Interface, bei dem die Website selbst als Agent erlebbar wird.
 Die **Living Surface** läuft lokal und ist live unter
 [agentfähig.de](https://www.xn--agentfhig-02a.de/) erreichbar: erwachende Augen,
-Texteingabe, Typewriter-Antwort und Unterbrechen. Der Live-Betrieb nutzt den
-Worker `agentfaehig` mit `POST /api/agent` (MiniMax M3.1 Flash, OpenAI-Fallback);
-Voice ist noch nicht freigeschaltet.
+Texteingabe, Typewriter-Antwort, Unterbrechen, konversationsgesteuerte
+Oberflächenanpassung, räumliche 2.5D-Tiefe und ein echter Fehlerzustand.
+Der Live-Betrieb nutzt den Worker `agentfaehig` mit `POST /api/agent`
+(MiniMax M3.1 Flash, OpenRouter- und Workers-AI-Fallback). Voice-Ausgabe ist
+noch nicht freigeschaltet.
 
-Stand: 19.11.2026.
+Stand: 25.11.2026 (Reality Sync).
 
 ## Schnellstart
 
@@ -15,7 +17,7 @@ Voraussetzungen: Node.js 22+ und Python 3.
 
 ```bash
 npm run dev       # http://127.0.0.1:5173/living-surface.html
-npm test          # Strukturcheck + 239 Verhaltenstests
+npm test          # Strukturcheck + 279 Verhaltenstests
 npm run validate  # nur der Strukturcheck
 ```
 
@@ -133,7 +135,7 @@ wendet die Namensregel aus [`docs/DATEINAMEN.md`](docs/DATEINAMEN.md) an.
 Verweise in allen anderen Dokumenten prüft er nicht. Er ist kein
 Funktionsnachweis für die Anwendung.
 
-`npm test` ruft denselben Check auf und führt danach die 239 Verhaltenstests
+`npm test` ruft denselben Check auf und führt danach die 279 Verhaltenstests
 unter `tests/` aus.
 
 ## Deployment
@@ -157,13 +159,13 @@ Konfiguration und Ablauf stehen in
 ## Stand und Grenzen
 
 - Die Living Surface ist lokal bedienbar und live unter
-  [agentfähig.de](https://www.xn--agentfhig-02a.de/); 239 Tests grün
-  (Stand 19.11.2026).
+  [agentfähig.de](https://www.xn--agentfhig-02a.de/); 279 Node-Tests grün
+  auf dem integrierten Spatial-/Error-Stand (Reality Sync 25.11.2026).
 - Produktiv beantwortet `POST /api/agent` Anfragen über MiniMax M3.1 Flash,
-  mit OpenAI-Fallback; ohne konfigurierten Provider antwortet der Endpoint
-  mit `503`.
-- Voice ist noch nicht freigeschaltet; der Mikrofon-Knopf bleibt verborgen.
-- Messlauf, Latenzabnahme und Fremdtest stehen aus — Stand und offene
-  Entscheidungen: [`docs/PROJECT.md`](docs/PROJECT.md),
-  [`docs/UNSOLVED-PLANUNG.md`](docs/UNSOLVED-PLANUNG.md) und
-  [`docs/UNSOLVED-TECHNIK.md`](docs/UNSOLVED-TECHNIK.md).
+  mit OpenRouter- und Workers-AI-Fallback; ohne erreichbaren Provider antwortet
+  der Endpoint mit einem ehrlichen Fehler. Beim Reality Sync antwortete die
+  öffentliche UI sichtbar mit echtem `PONG` vom Provider `minimax` und ohne
+  `DEV-DATA`-Badge.
+- Mikrofon-Eingabe erfolgt nur nach bewusstem Klick. Voice-Ausgabe, der
+  20-Turn-Latenzmesslauf und Fremdtests stehen weiterhin aus und sind nicht
+  als bestanden dokumentiert.

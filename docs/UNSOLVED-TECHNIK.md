@@ -1,8 +1,21 @@
 # UNSOLVED — Entscheidungswarteschlange (Technik)
 
-Stand: 19.11.2026. Zweck: Punkte, die **nicht** ohne Owner-Entscheidung in die
+Stand: 25.11.2026, Reality Sync. Zweck: Punkte, die **nicht** ohne Owner-Entscheidung in die
 Projektdokumentation integriert werden durften. Diese Liste ist eine
 Warteschlange, **kein** genehmigter Backlog und keine Scope-Änderung.
+
+## Reality-Sync-Triage (aktuell)
+
+| Thema | Aktueller Befund | Klasse |
+| --- | --- | --- |
+| U20 — zwei Execution Plans | Dokumentarisch entzerrt: `docs/EXECUTION_PLAN-M0-M5.md` ist der eine vorgeschlagene Gesamtplan, `tech/EXECUTION_PLAN-M1-MESSLAUF.md` ist historisches M1-Protokoll. Ratifizierung durch Samuel bleibt offen. | OPEN OWNER DECISION |
+| U29 — Produktivprovider | Am 25.11. erneut verifiziert: `verify-live.sh` grün; öffentlicher UI-Turn zeigt `PONG` von `minimax`, kein DEV-DATA-Badge. Aktive Version `9e0c8e7f-777f-4981-9f37-98c6f1679a52`. | VERIFIED / gelöst zum Prüfzeitpunkt |
+| U12/U32 — Voice/STT und Messung | In diesem Sync nicht erneut getestet. Die alten Fehler und Kontingentbefunde bleiben Historie, nicht automatisch aktuelle Blocker. | EVIDENCE DEBT / NOT RUN |
+| U31 — Fremdtest | Weiterhin 0 Fremdtests. Für Stable bzw. ein erneut gesetztes Gate offen; kein pauschaler Blocker für unabhängige UI-Experimente. | EVIDENCE DEBT / OPEN OWNER DECISION |
+| Slice A | `ACCEPT` vorhanden; zusätzliche unabhängige mcode-Validierung; 43/43 gezielte Tests, 279/279 Gesamttests und Browser-Smoke grün. | VERIFIED |
+| Übrige Einträge unten | Historische Warteschlange vom 19./20.11. Sie sind nicht ohne erneute Prüfung als aktuelle Blocker oder offene Freigaben zu lesen. | DOCUMENTED HISTORY |
+
+## Historische Warteschlange (19./20.11.2026)
 
 > **Nachtrag (Konsolidierung 19.11.):** U2 und U3 beschreiben die frühere
 > Vertragsfassung; U20 löst sie ab. Mehrere IDs sind doppelt vergeben
