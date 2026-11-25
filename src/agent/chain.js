@@ -97,7 +97,7 @@ export function classifyError(error) {
   return 'unknown';
 }
 
-function attemptProvider(adapter, prompt, { timeoutMs, signal }) {
+function attemptProvider(adapter, prompt, { timeoutMs, signal, turnId, onEvent }) {
   return new Promise((resolve, reject) => {
     let settled = false;
     let timedOut = false;
@@ -132,13 +132,32 @@ function attemptProvider(adapter, prompt, { timeoutMs, signal }) {
 
     signal?.addEventListener('abort', onAbort, { once: true });
 
+    const respondOpts = { signal: controller.signal };
+    if (turnId !== undefined) respondOpts.turnId = turnId;
+    if (onEvent) respondOpts.onEvent = onEvent;
+
     Promise.resolve()
-      .then(() => adapter.respond(prompt, { signal: controller.signal }))
+      .then(() => adapter.respond(prompt, respondOpts))
       .then(
         (value) => finish(null, value),
         (error) => finish(timedOut ? timeoutError(timeoutMs) : error),
       );
   });
+}
+
+function emitChainEvent(callbacks, partial) {
+  for (const fn of callbacks) {
+    if (typeof fn !== 'function') continue;
+    try {
+      fn(partial);
+    } catch {
+      /* callbacks must not break the chain */
+    }
+  }
+}
+
+function isProviderEvent(event) {
+  return typeof event?.type === 'string' && event.type.startsWith('provider.');
 }
 
 function abortableDelay(ms, signal) {
@@ -177,6 +196,7 @@ export function createAgentChain(adapters, options = {}) {
     : DEFAULTS.retryBackoffMs;
   const now = typeof options.now === 'function' ? options.now : () => Date.now();
   const onAttempt = typeof options.onAttempt === 'function' ? options.onAttempt : null;
+  const chainOnEvent = typeof options.onEvent === 'function' ? options.onEvent : null;
 
   const breakers = new Map();
 
@@ -194,9 +214,15 @@ export function createAgentChain(adapters, options = {}) {
     try { onAttempt(entry); } catch { /* callbacks must not break the chain */ }
   }
 
-  async function respond(prompt, { signal } = {}) {
+  async function respond(prompt, { signal, turnId, onEvent: respondOnEvent } = {}) {
     const attempts = [];
     if (signal?.aborted) throw abortError(signal?.reason);
+
+    const eventListeners = [];
+    if (chainOnEvent) eventListeners.push(chainOnEvent);
+    if (respondOnEvent) eventListeners.push(respondOnEvent);
+
+    let prevProviderId = null;
 
     for (let index = 0; index < list.length; index++) {
       const adapter = list[index];
@@ -214,7 +240,24 @@ export function createAgentChain(adapters, options = {}) {
         };
         attempts.push(entry);
         report(entry);
+        if (eventListeners.length) {
+          emitChainEvent(eventListeners, {
+            type: 'provider.failed',
+            action_id: `chain-${id}-skip`,
+            status: 'warning',
+            metadata: { provider: id, kind: 'quota', reason: 'circuit-open' },
+          });
+        }
+        prevProviderId = id;
         continue;
+      }
+
+      if (index > 0 && eventListeners.length && prevProviderId !== null) {
+        emitChainEvent(eventListeners, {
+          type: 'provider.switched',
+          action_id: `chain-${id}-${attempts.length + 1}`,
+          metadata: { from: prevProviderId, to: id, attempt: attempts.length + 1 },
+        });
       }
 
       let attemptNumber = 0;
@@ -225,9 +268,35 @@ export function createAgentChain(adapters, options = {}) {
         attemptNumber += 1;
         const startedAt = now();
 
+        if (eventListeners.length && id !== 'remote') {
+          emitChainEvent(eventListeners, {
+            type: 'provider.started',
+            action_id: `chain-${id}-${attemptNumber}`,
+            metadata: { provider: id, attempt: attemptNumber },
+          });
+          emitChainEvent(eventListeners, {
+            type: 'generation.started',
+            action_id: `gen-${id}-${attemptNumber}`,
+            metadata: { provider: id },
+          });
+        }
+
+        let adapterEmittedProvider = false;
+        const forwardEvent = eventListeners.length
+          ? (event) => {
+              if (isProviderEvent(event)) adapterEmittedProvider = true;
+              emitChainEvent(eventListeners, event);
+            }
+          : null;
+
         let result;
         try {
-          result = await attemptProvider(adapter, prompt, { timeoutMs, signal });
+          result = await attemptProvider(adapter, prompt, {
+            timeoutMs,
+            signal,
+            ...(turnId !== undefined ? { turnId } : {}),
+            ...(forwardEvent ? { onEvent: forwardEvent } : {}),
+          });
         } catch (error) {
           if (signal?.aborted) throw abortError(signal?.reason);
 
@@ -243,6 +312,16 @@ export function createAgentChain(adapters, options = {}) {
           attempts.push(entry);
           report(entry);
 
+          if (eventListeners.length && !adapterEmittedProvider) {
+            emitChainEvent(eventListeners, {
+              type: 'provider.failed',
+              action_id: `chain-${id}-${attemptNumber}`,
+              status: kind === 'timeout' ? 'timeout' : 'error',
+              duration_ms: entry.elapsedMs,
+              metadata: { provider: id, kind, attempt: attemptNumber },
+            });
+          }
+
           if (kind === 'quota') {
             breaker.quotaCount += 1;
             if (breaker.quotaCount >= quotaTripAfter) {
@@ -255,11 +334,19 @@ export function createAgentChain(adapters, options = {}) {
           if (kind === 'content-filter') throw new ContentFilterError(error, id);
 
           if (kind === 'server' && !retried) {
+            if (eventListeners.length) {
+              emitChainEvent(eventListeners, {
+                type: 'provider.retry',
+                action_id: `chain-${id}-${attemptNumber + 1}`,
+                metadata: { provider: id, attempt: attemptNumber + 1, reason: 'server_5xx' },
+              });
+            }
             retried = true;
             await abortableDelay(retryBackoffMs, signal);
             continue;
           }
 
+          prevProviderId = id;
           break;
         }
 
@@ -272,6 +359,15 @@ export function createAgentChain(adapters, options = {}) {
         };
         attempts.push(entry);
         report(entry);
+
+        if (eventListeners.length && id !== 'remote') {
+          emitChainEvent(eventListeners, {
+            type: 'generation.completed',
+            action_id: `gen-${id}-${attemptNumber}`,
+            duration_ms: entry.elapsedMs,
+            metadata: { provider: id },
+          });
+        }
 
         return {
           ...result,

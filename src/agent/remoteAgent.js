@@ -1,6 +1,8 @@
 // Remote agent adapter for the production surface. It speaks to the page's own
 // POST /api/agent endpoint, keeps a short in-memory history, and reports failures
 // in the same shapes src/agent/chain.js classifies.
+
+import { createSseParser, sanitizeAgentEvent, turnIdFor } from '../state/agent-events.js';
 //
 // Endpoint URLs are resolved against the page origin so a <base href="/surface/">
 // on the deployed page cannot redirect the API call.
@@ -72,6 +74,7 @@ export function isProductionHost(hostname) {
  *   Promise<{text: string, dev: false, provider: string, model: string | null}>}}
  */
 export function createRemoteAgent(options = {}) {
+  const adapterOnEvent = typeof options.onEvent === 'function' ? options.onEvent : null;
   const url = resolveEndpoint(options.endpoint ?? '/api/agent');
   const getSystem = typeof options.getSystem === 'function' ? options.getSystem : null;
   const getParams = typeof options.getParams === 'function' ? options.getParams : null;
@@ -107,7 +110,95 @@ export function createRemoteAgent(options = {}) {
     while (history.length > limit) history.shift();
   }
 
-  async function respond(prompt, { signal } = {}) {
+  function emitEvent(event, callOnEvent) {
+    try {
+      callOnEvent?.(event);
+    } catch { /* listeners must not break the adapter */ }
+    try {
+      adapterOnEvent?.(event);
+    } catch { /* ignore */ }
+  }
+
+  function normalizeResult(data) {
+    return {
+      text: String(data.text ?? ''),
+      dev: false,
+      provider: typeof data.provider === 'string' && data.provider ? data.provider : ADAPTER_ID,
+      model: data.model ?? null,
+      sources: Array.isArray(data.sources) ? data.sources : [],
+      contact_card: Boolean(data.contact_card),
+      coverage: data.coverage ?? null,
+    };
+  }
+
+  async function consumeSseStream(response, { signal, turnId, callOnEvent }) {
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let finalData = null;
+    let streamError = null;
+
+    const parser = createSseParser({
+      onFrame({ event, data }) {
+        if (event === 'agent.event') {
+          const clean = sanitizeAgentEvent(data);
+          if (clean) {
+            emitEvent(
+              {
+                ...clean,
+                ...(turnId !== undefined ? { turn_id: turnIdFor(turnId) } : {}),
+              },
+              callOnEvent,
+            );
+          }
+          return;
+        }
+        if (event === 'agent.result') {
+          finalData = data;
+          return;
+        }
+        if (event === 'agent.error') {
+          streamError = data;
+        }
+      },
+    });
+
+    const onAbort = () => {
+      try { reader.cancel(); } catch { /* ignore */ }
+    };
+    signal?.addEventListener('abort', onAbort, { once: true });
+
+    try {
+      while (true) {
+        if (signal?.aborted) {
+          onAbort();
+          throw abortError(signal.reason);
+        }
+        const { done, value } = await reader.read();
+        if (value) parser.push(decoder.decode(value, { stream: true }));
+        if (done) break;
+      }
+      parser.push(decoder.decode());
+      parser.flush();
+    } catch (error) {
+      if (signal?.aborted || error?.name === 'AbortError') {
+        onAbort();
+        throw abortError(signal.reason);
+      }
+      throw error;
+    } finally {
+      signal?.removeEventListener('abort', onAbort);
+    }
+
+    if (streamError) {
+      throw statusError(Number(streamError.status) || 503);
+    }
+    if (!finalData || typeof finalData !== 'object') {
+      throw remoteError('server', 'remote event stream ended without result');
+    }
+    return normalizeResult(finalData);
+  }
+
+  async function respond(prompt, { signal, turnId, onEvent: callOnEvent } = {}) {
     if (signal?.aborted) throw abortError(signal.reason);
     if (!fetchImpl) throw remoteError('network', 'fetch is not available');
 
@@ -155,16 +246,25 @@ export function createRemoteAgent(options = {}) {
       }
       if (history.length) body.history = history.map((turn) => ({ ...turn }));
       if (lastSourceIds.length) body.last_source_ids = [...lastSourceIds];
+      if (turnId !== undefined) body.turn_id = turnIdFor(turnId);
 
       const response = await fetchImpl(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'text/event-stream, application/json',
+        },
         body: JSON.stringify(body),
         signal: controller.signal,
       });
 
       if (response?.ok === false || Number(response?.status) >= 400) {
         throw statusError(Number(response?.status) || 0);
+      }
+
+      const contentType = String(response?.headers?.get?.('content-type') ?? '').toLowerCase();
+      if (contentType.includes('text/event-stream') && typeof response?.body?.getReader === 'function') {
+        return consumeSseStream(response, { signal, turnId, callOnEvent });
       }
 
       let data = null;
@@ -177,15 +277,7 @@ export function createRemoteAgent(options = {}) {
         throw remoteError('server', 'remote agent returned an invalid payload');
       }
 
-      return {
-        text: String(data.text ?? ''),
-        dev: false,
-        provider: typeof data.provider === 'string' && data.provider ? data.provider : ADAPTER_ID,
-        model: data.model ?? null,
-        sources: Array.isArray(data.sources) ? data.sources : [],
-        contact_card: Boolean(data.contact_card),
-        coverage: data.coverage ?? null,
-      };
+      return normalizeResult(data);
     })();
 
     try {
