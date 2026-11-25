@@ -6,6 +6,7 @@ import { search } from './search.js';
 import siteConfig from './site-config.json' with { type: 'json' };
 import persona from '../../../src/agent/persona.json' with { type: 'json' };
 import { buildServerPrompt } from '../../../src/agent/prompt.js';
+import { createAgentEvent, formatSseFrame, turnIdFor } from '../../../src/state/agent-events.js';
 
 const MINIMAX_BASE_URL = "https://api.minimax.io/v1";
 const MINIMAX_ANTHROPIC_BASE_URL = "https://api.minimax.io/anthropic";
@@ -37,15 +38,281 @@ const ALLOWED_ORIGIN_HOSTS = new Set([
 const agentRateBuckets = new Map();
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === "/api/agent") return handleAgent(request, env);
+    if (url.pathname === "/api/agent") return handleAgent(request, env, ctx);
     if (url.pathname.startsWith("/api/")) return json({ error: "not_found" }, 404);
     return env.ASSETS.fetch(request);
   },
 };
 
-async function handleAgent(request, env) {
+export function wantsEventStream(request, payload) {
+  if (Boolean(payload?.stream)) return true;
+  return (request.headers.get('accept') || '').toLowerCase().includes('text/event-stream');
+}
+
+export async function runWorkerTools(tools, context, emitEvent) {
+  const emit = (partial) => {
+    if (typeof emitEvent === 'function') {
+      try {
+        emitEvent(partial);
+      } catch {
+        /* ignore */
+      }
+    }
+  };
+
+  const runOne = async (tool, idx) => {
+    const name = String(tool?.name ?? `tool-${idx}`);
+    const action_id = `tool-${name}-${idx}`;
+    const maxRetries = Number.isFinite(tool?.maxRetries) ? tool.maxRetries : 0;
+    const retryDelayMs = Number.isFinite(tool?.retryDelayMs) ? tool.retryDelayMs : 50;
+    let attempt = 0;
+
+    emit({
+      type: 'tool.started',
+      action_id,
+      metadata: { tool: name, attempt: 1 },
+    });
+
+    for (;;) {
+      attempt += 1;
+      const startedAt = Date.now();
+      try {
+        await tool.run(context, { attempt });
+        emit({
+          type: 'tool.completed',
+          action_id,
+          duration_ms: Math.max(0, Date.now() - startedAt),
+          metadata: { tool: name, attempt },
+        });
+        return;
+      } catch (error) {
+        if (attempt <= maxRetries) {
+          emit({
+            type: 'tool.retry',
+            action_id,
+            metadata: {
+              tool: name,
+              attempt: attempt + 1,
+              reason: error?.code || error?.name || 'error',
+            },
+          });
+          await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
+          continue;
+        }
+        const isTimeout = error?.name === 'TimeoutError';
+        emit({
+          type: 'tool.failed',
+          action_id,
+          status: isTimeout ? 'timeout' : 'error',
+          duration_ms: Math.max(0, Date.now() - startedAt),
+          metadata: { tool: name, reason: error?.code || error?.name || 'error' },
+        });
+        throw error;
+      }
+    }
+  };
+
+  await Promise.all(tools.map((tool, idx) => runOne(tool, idx)));
+}
+
+function buildFinalPayload(result, provider, retrieved) {
+  const raw = String(result.text || '');
+  const markers = [...raw.matchAll(/\[\[([^\]]+)\]\]/g)].map((match) => match[1]);
+  const allowed = new Map(retrieved.hits.map((hit) => [hit.id, hit]));
+  const validIds = [...new Set(markers.filter((id) => allowed.has(id)))];
+  const text = raw.replace(/\[\[[^\]]+\]\]/g, '').replace(/\s{2,}/g, ' ').trim();
+  const sources = validIds.map((id) => ({ id, title: allowed.get(id).title, link: allowed.get(id).link ?? null }));
+  const coverage = retrieved.coverage;
+  if (coverage === 'GIVEN' && !validIds.length) {
+    console.warn('agent_uncited', JSON.stringify({ coverage, hit_count: retrieved.hits.length }));
+  }
+  return {
+    text,
+    sources,
+    contact_card: Boolean(retrieved.business && siteConfig.contact?.approved),
+    coverage,
+    ...(coverage === 'GIVEN' && !validIds.length ? { uncited: true } : {}),
+    provider,
+    model: result.model,
+  };
+}
+
+function providerFailureReason(error, response) {
+  if (error?.name === 'AbortError' || error?.name === 'TimeoutError') return 'timeout';
+  if (response) return `http_${response.status}`;
+  return 'network';
+}
+
+function openAiProviderLabel(env) {
+  const base = String(env.OPENAI_BASE_URL || DEFAULT_OPENAI_BASE_URL).replace(/\/+$/, '');
+  return env.OPENAI_PROVIDER || (base.includes('openrouter.ai') ? 'openrouter' : 'openai');
+}
+
+export async function executeAgentTurn({ input, env, emitEvent, turnStartMs }) {
+  const emit = (partial) => {
+    if (typeof emitEvent === 'function') {
+      try {
+        emitEvent(partial);
+      } catch {
+        /* ignore */
+      }
+    }
+  };
+
+  emit({
+    type: 'turn.received',
+    action_id: 'turn-001',
+    status: 'running',
+    metadata: { has_history: input.history.length > 0 },
+  });
+
+  emit({
+    type: 'context.prepared',
+    action_id: 'context-001',
+    status: 'success',
+    duration_ms: 0,
+    metadata: {
+      history_items: input.history.length,
+      param_keys: Object.keys(input.params).length,
+      anchor_sources: input.lastSourceIds.length,
+    },
+  });
+
+  const retrieved = await search({
+    query: input.prompt,
+    history: input.history,
+    lastSourceIds: input.lastSourceIds,
+    turnId: input.turnId,
+    onEvent: emitEvent,
+    embedQuery: env.AI
+      ? async (text) => {
+          const result = await withTimeout(env.AI.run('@cf/baai/bge-m3', { text: [text] }), 1500);
+          return result?.data?.[0] || result?.embeddings?.[0] || result?.result?.data?.[0] || null;
+        }
+      : null,
+  });
+
+  if (Array.isArray(env?.AGENT_TOOLS) && env.AGENT_TOOLS.length > 0) {
+    await runWorkerTools(env.AGENT_TOOLS, { retrieved, params: input.params }, emitEvent);
+  }
+
+  const messages = buildAgentMessages(input, retrieved);
+  const attempted = [];
+  const startedAt = Date.now();
+  const stageMs = () => Math.min(AGENT_TIMEOUT_MS, AGENT_TOTAL_BUDGET_MS - (Date.now() - startedAt));
+  const hasTime = () => stageMs() >= AGENT_MIN_STAGE_MS;
+
+  const tryStage = async ({ stageKey, eventProvider, resolvedModel, call }) => {
+    const attemptNum = attempted.length + 1;
+    if (attempted.length > 0) {
+      const from = attempted[attempted.length - 1];
+      emit({
+        type: 'provider.switched',
+        action_id: `provider-${attemptNum}`,
+        metadata: { from, to: eventProvider, attempt: attemptNum },
+      });
+    }
+
+    emit({
+      type: 'provider.started',
+      action_id: `provider-${attemptNum}`,
+      metadata: { provider: eventProvider, attempt: attemptNum },
+    });
+
+    emit({
+      type: 'generation.started',
+      action_id: `gen-${attemptNum}`,
+      metadata: { provider: eventProvider, model: resolvedModel },
+    });
+
+    attempted.push(stageKey);
+    const stageStart = Date.now();
+    const result = await call();
+    const stageDurationMs = Math.max(0, Date.now() - stageStart);
+
+    if (result.ok) {
+      const finalProviderName = result.provider || eventProvider;
+      const payload = buildFinalPayload(result, finalProviderName, retrieved);
+      emit({
+        type: 'generation.completed',
+        action_id: `gen-${attempted.length}`,
+        duration_ms: stageDurationMs,
+        metadata: {
+          provider: finalProviderName,
+          model: result.model,
+          cited_sources: payload.sources.length,
+        },
+      });
+      return { ok: true, payload };
+    }
+
+    emit({
+      type: 'provider.failed',
+      action_id: `provider-${attempted.length}`,
+      status: result.reason === 'timeout' ? 'timeout' : 'error',
+      duration_ms: stageDurationMs,
+      metadata: {
+        provider: eventProvider,
+        reason: result.reason || 'failed',
+        ...(result.status ? { http_status: result.status } : {}),
+      },
+    });
+    return null;
+  };
+
+  if (env.MINIMAX_API_KEY) {
+    const model = env.MINIMAX_MODEL || DEFAULT_MINIMAX_MODEL;
+    const outcome = await tryStage({
+      stageKey: 'minimax',
+      eventProvider: 'minimax',
+      resolvedModel: model,
+      call: () => callMiniMax(messages, env, stageMs()),
+    });
+    if (outcome) return outcome;
+  }
+
+  if (env.OPENAI_API_KEY && env.OPENAI_MODEL && hasTime()) {
+    const eventProvider = openAiProviderLabel(env);
+    const outcome = await tryStage({
+      stageKey: 'openai',
+      eventProvider,
+      resolvedModel: env.OPENAI_MODEL,
+      call: () => callOpenAI(messages, env, stageMs()),
+    });
+    if (outcome) return outcome;
+  }
+
+  if (env.AI && hasTime()) {
+    const model = env.WORKERS_AI_MODEL || DEFAULT_WORKERS_AI_MODEL;
+    const outcome = await tryStage({
+      stageKey: 'workers-ai',
+      eventProvider: 'workers-ai',
+      resolvedModel: model,
+      call: () => callWorkersAI(messages, env, stageMs()),
+    });
+    if (outcome) return outcome;
+  }
+
+  const errCode = !attempted.length ? 'no_provider' : 'providers_unavailable';
+  emit({
+    type: 'system.error',
+    action_id: 'system-001',
+    status: 'error',
+    metadata: { code: errCode, attempts_count: attempted.length, attempts: attempted },
+  });
+
+  return {
+    ok: false,
+    status: 503,
+    errorPayload: !attempted.length
+      ? { error: 'no_provider' }
+      : { error: 'providers_unavailable', attempts: attempted },
+  };
+}
+
+async function handleAgent(request, env, ctx) {
   if (request.method !== "POST") {
     return json({ error: "Only POST requests are accepted." }, 405, { Allow: "POST" });
   }
@@ -76,48 +343,100 @@ async function handleAgent(request, env) {
     return json({ error: input.error }, 400);
   }
 
-  const retrieved = await search({
-    query: input.value.prompt,
-    history: input.value.history,
-    lastSourceIds: input.value.lastSourceIds,
-    embedQuery: env.AI ? async (text) => {
-      const result = await withTimeout(env.AI.run('@cf/baai/bge-m3', { text: [text] }), 1500);
-      return result?.data?.[0] || result?.embeddings?.[0] || result?.result?.data?.[0] || null;
-    } : null,
+  const turnStartMs = Date.now();
+  const streaming = wantsEventStream(request, payload);
+
+  if (!streaming) {
+    const outcome = await executeAgentTurn({
+      input: input.value,
+      env,
+      emitEvent: null,
+      turnStartMs,
+    });
+    if (outcome.ok) return json(outcome.payload, 200);
+    return json(outcome.errorPayload, outcome.status);
+  }
+
+  const { readable, writable } = new TransformStream();
+  const writer = writable.getWriter();
+  const encoder = new TextEncoder();
+  let writeChain = Promise.resolve();
+
+  const emitEvent = (partial) => {
+    let ev;
+    try {
+      ev = createAgentEvent({ ...partial, turn_id: input.value.turnId }, { turnStartMs });
+    } catch {
+      return;
+    }
+    writeChain = writeChain
+      .then(() => writer.write(encoder.encode(formatSseFrame('agent.event', ev))))
+      .catch(() => {});
+  };
+
+  const streamTask = (async () => {
+    try {
+      const outcome = await executeAgentTurn({
+        input: input.value,
+        env,
+        emitEvent,
+        turnStartMs,
+      });
+
+      if (outcome.ok) {
+        writeChain = writeChain
+          .then(() => writer.write(encoder.encode(formatSseFrame('agent.result', outcome.payload))))
+          .catch(() => {});
+        emitEvent({
+          type: 'turn.completed',
+          action_id: 'turn-001',
+          status: 'success',
+          duration_ms: Math.max(0, Date.now() - turnStartMs),
+          metadata: {
+            provider: outcome.payload.provider,
+            coverage: outcome.payload.coverage,
+            sources: outcome.payload.sources.length,
+          },
+        });
+      } else {
+        writeChain = writeChain
+          .then(() =>
+            writer.write(
+              encoder.encode(
+                formatSseFrame('agent.error', { ...outcome.errorPayload, status: outcome.status }),
+              ),
+            ),
+          )
+          .catch(() => {});
+      }
+
+      await writeChain;
+      try {
+        await writer.close();
+      } catch {
+        /* client may have disconnected */
+      }
+    } catch {
+      try {
+        await writer.close();
+      } catch {
+        /* ignore */
+      }
+    }
+  })();
+
+  if (typeof ctx?.waitUntil === 'function') {
+    ctx.waitUntil(streamTask);
+  }
+
+  return new Response(readable, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Accel-Buffering': 'no',
+    },
   });
-  const messages = buildAgentMessages(input.value, retrieved);
-
-  const attempted = [];
-  const startedAt = Date.now();
-  const stageMs = () => Math.min(AGENT_TIMEOUT_MS, AGENT_TOTAL_BUDGET_MS - (Date.now() - startedAt));
-  const hasTime = () => stageMs() >= AGENT_MIN_STAGE_MS;
-
-  if (env.MINIMAX_API_KEY) {
-    attempted.push("minimax");
-    const result = await callMiniMax(messages, env, stageMs());
-    if (result.ok) {
-      return finalizeResponse(result, 'minimax', retrieved);
-    }
-  }
-
-  if (env.OPENAI_API_KEY && env.OPENAI_MODEL && hasTime()) {
-    attempted.push("openai");
-    const result = await callOpenAI(messages, env, stageMs());
-    if (result.ok) {
-      return finalizeResponse(result, result.provider, retrieved);
-    }
-  }
-
-  if (env.AI && hasTime()) {
-    attempted.push("workers-ai");
-    const result = await callWorkersAI(messages, env, stageMs());
-    if (result.ok) {
-      return finalizeResponse(result, 'workers-ai', retrieved);
-    }
-  }
-
-  if (!attempted.length) return json({ error: "no_provider" }, 503);
-  return json({ error: "providers_unavailable", attempts: attempted }, 503);
 }
 
 function normalizeAgentInput(payload) {
@@ -141,7 +460,9 @@ function normalizeAgentInput(payload) {
   const lastSourceIds = Array.isArray(payload?.last_source_ids)
     ? payload.last_source_ids.filter((id) => typeof id === 'string').slice(0, 5)
     : [];
-  return { ok: true, value: { prompt, history, params, lastSourceIds } };
+  const turnId = turnIdFor(payload?.turn_id ?? 1);
+  const stream = Boolean(payload?.stream);
+  return { ok: true, value: { prompt, history, params, lastSourceIds, turnId, stream } };
 }
 
 function clampParams(value) {
@@ -168,23 +489,7 @@ function buildAgentMessages({ prompt, history, params }, retrieved) {
 const FALLBACK_DE = 'Dazu habe ich nichts Belegtes. Ich kann dir erklären, was HAI ist, woran Samuel arbeitet oder wie diese Seite funktioniert.';
 
 function finalizeResponse(result, provider, retrieved) {
-  const raw = String(result.text || '');
-  const markers = [...raw.matchAll(/\[\[([^\]]+)\]\]/g)].map((match) => match[1]);
-  const allowed = new Map(retrieved.hits.map((hit) => [hit.id, hit]));
-  const validIds = [...new Set(markers.filter((id) => allowed.has(id)))];
-  const text = raw.replace(/\[\[[^\]]+\]\]/g, '').replace(/\s{2,}/g, ' ').trim();
-  const sources = validIds.map((id) => ({ id, title: allowed.get(id).title, link: allowed.get(id).link ?? null }));
-  const coverage = retrieved.coverage;
-  if (coverage === 'GIVEN' && !validIds.length) console.warn('agent_uncited', JSON.stringify({ coverage, hit_count: retrieved.hits.length }));
-  return json({
-    text,
-    sources,
-    contact_card: Boolean(retrieved.business && siteConfig.contact?.approved),
-    coverage,
-    ...(coverage === 'GIVEN' && !validIds.length ? { uncited: true } : {}),
-    provider,
-    model: result.model,
-  });
+  return json(buildFinalPayload(result, provider, retrieved));
 }
 
 async function callMiniMax(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
@@ -230,7 +535,12 @@ async function callMiniMax(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
       const rl = {};
       for (const [k, v] of response.headers) if (/ratelimit|retry-after/i.test(k)) rl[k] = v;
       console.warn("agent_provider_status", "minimax", response.status, JSON.stringify(detail), JSON.stringify(rl));
-      return { ok: false, status: response.status, detail };
+      return {
+        ok: false,
+        status: response.status,
+        detail,
+        reason: providerFailureReason(null, response),
+      };
     }
 
     const data = await response.json();
@@ -241,13 +551,13 @@ async function callMiniMax(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
       .trim());
     if (!text) {
       console.warn("agent_provider_empty", "minimax", data?.stop_reason ?? null);
-      return { ok: false };
+      return { ok: false, reason: 'empty' };
     }
 
     return { ok: true, text, model };
   } catch (error) {
     console.warn("agent_provider_error", "minimax", error?.name ?? "error");
-    return { ok: false };
+    return { ok: false, reason: providerFailureReason(error, null) };
   } finally {
     clearTimeout(timer);
   }
@@ -295,17 +605,21 @@ async function callOpenAI(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
         };
       } catch {}
       console.warn("agent_provider_status", provider, response.status, JSON.stringify(detail));
-      return { ok: false };
+      return {
+        ok: false,
+        status: response.status,
+        reason: providerFailureReason(null, response),
+      };
     }
 
     const data = await response.json();
     const text = stripThinking(extractChatText(data));
-    if (!text) return { ok: false };
+    if (!text) return { ok: false, reason: 'empty' };
 
     return { ok: true, text, provider, model };
   } catch (error) {
     console.warn("agent_provider_error", provider, error?.name ?? "error");
-    return { ok: false };
+    return { ok: false, reason: providerFailureReason(error, null) };
   } finally {
     clearTimeout(timer);
   }
@@ -329,12 +643,12 @@ async function callWorkersAI(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
     const text = stripThinking(workersAiText(data));
     if (!text) {
       console.warn("agent_provider_empty", "workers-ai", model);
-      return { ok: false };
+      return { ok: false, reason: 'empty' };
     }
     return { ok: true, text, model };
   } catch (error) {
     console.warn("agent_provider_error", "workers-ai", error?.name ?? "error");
-    return { ok: false };
+    return { ok: false, reason: providerFailureReason(error, null) };
   }
 }
 
