@@ -170,19 +170,26 @@ und U32 in [UNSOLVED-TECHNIK.md](UNSOLVED-TECHNIK.md).
 
 | Gate | Urteil | Basis |
 |---|---|---|
-| UX | **NOT TESTED** | kein lauffähiger Prototyp, 0 Fremdtests |
-| VOICE | **NOT TESTED** | 0 von 20 Messzeilen; Lauf 1 und 2 ungültig |
-| CONTROL | **NOT TESTED** | Kontrollwege sind spezifiziert, aber nicht gebaut |
+| UX | **NOT TESTED** | Living Surface live, aber Agent-Pfad ohne Provider: `POST /api/agent` → `503 no_provider`, Antworten aus `DEV DATA`; 0 Fremdtests |
+| VOICE | **NOT TESTED** | 0 von 20 Messzeilen; Voice laut `README.md` nicht freigeschaltet |
+| CONTROL | **NOT TESTED** | „Pause motion" und Mikrofon-Knopf vorhanden; nicht geprüft |
 | EVIDENCE | **FAIL** | keine Testbelege; „FAIL" heißt nicht belegt, nicht widerlegt |
 
 Daraus ist keine Freigabe ableitbar. „NOT TESTED" ist kein „bestanden".
 
-**Domain ≠ Prüfgegenstand.** `agentfähig.de` liefert heute eine redaktionelle
-Einstiegsseite mit Kacheln und Chat-Widget (HTTP 200, abgerufen 19.11.2026).
-Dass dort Worker 05 liegt, ist in
-[`CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md`](CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md) §4.1 belegt; neu ist,
-dass ein 20-Sekunden-Test auf der Domain das falsche Produkt messen würde. Der
-Test braucht eine eigene, ungelistete URL (→ [`UNSOLVED-TECHNIK.md`](UNSOLVED-TECHNIK.md) U29).
+**Live-Stand ≠ messbarer Agent (Befund 19.11., 22:57 UTC).** `agentfähig.de`
+liefert jetzt die Living Surface (Textfeld, Augen, Typewriter, „Pause motion",
+Mikrofon-Knopf); die frühere Seite liegt unter `/classic/` (HTTP 200). Ein
+Testturn antwortet sichtbar mit **DEV DATA**. Ursache ist nicht ein fehlender
+Key — `MINIMAX_API_KEY` ist gesetzt — sondern der Provider: MiniMax antwortet
+**429** (Rate-Limit/Guthaben), der Worker meldet daraufhin `503
+{"error":"no_provider"}` und die Fallback-Kette nimmt deterministische
+Antworten. `verify-live.sh` akzeptierte bisher auch diesen Fehler als „ok" und
+ist jetzt auf echte Agentenantwort (`text`) verschärft. Ein 20-Sekunden-Test
+würde heute die Hülle messen, nicht den Agenten. Vor jeder Sitzung prüfen:
+`/api/agent` liefert 200 mit `text` und im DOM steht kein „DEV DATA" (→
+[`UNSOLVED-TECHNIK.md`](UNSOLVED-TECHNIK.md) U29,
+[`FREMDTEST-PLAN.md`](../tech/FREMDTEST-PLAN.md) §3).
 
 Prüfprotokoll der ersten Runde: [`FREMDTEST-PLAN.md`](../tech/FREMDTEST-PLAN.md)
 (Vorschlag, n = 5).
@@ -199,9 +206,14 @@ Prüfprotokoll der ersten Runde: [`FREMDTEST-PLAN.md`](../tech/FREMDTEST-PLAN.md
   (kein Produktivcode, keine Abhängigkeiten):
   [`wireframes/agentfaehig-wireframe.html`](wireframes/agentfaehig-wireframe.html)
   mit 20-Sekunden-Storyboard, dreizehn Zustandskompositionen, orthogonaler
-  Zustandsmaschine, Motion- und Typografieregeln und Voice-Demo; Spezifikation und
+  Zustandsmaschine, Motion- und Typografieregeln und Voice-Demo; **v0.2 ist an
+  den Live-Stand vom 20.11. angepasst** (ein Auge rechts, Composer unten,
+  warme Palette, „Pause motion"); Spezifikation und
   ehrliche Simulationsliste in
   [`wireframes/wireframe-prototype-interactive.md`](wireframes/wireframe-prototype-interactive.md).
+  Die **Audio-Ausgabe des Agenten** fehlt dort noch und ist als eigener Schnitt
+  geplant: [`wireframes/PLAN-AUDIO-AUSGABE.md`](wireframes/PLAN-AUDIO-AUSGABE.md)
+  (opt-in, Default stumm nach DD:14; S1–S5, offene Entscheidungen A-01…A-05).
 - **Visual Exploration** (13.11.2026, Scope: nur visuelles und Motion-Design,
   kein Code): die ausgearbeitete Beschreibung des Kernkonzepts — wie aus dem
   Gekritzel Augen werden, wie der Blick folgt, wie der Pathway-Fluss läuft.
@@ -247,5 +259,20 @@ in **drei strikt getrennten vertikalen Slices** gebaut — jeder Slice hat ein e
   `cloudflare-bausteine.md` in `tech/briefs/` → `BRIEF-…`. Zusätzlich
   `PLAN-ADREN` → `PLAN-STUFEN-0-5`, `INTENT` → `INTENT-TECHNIK`,
   `MISSION_BRIEF` → `MISSION-BRIEF`.
+- Mobile-Tastatur-Fix (20.11., erster Mobile-Test): Bei ausgeklappter
+  Tastatur verschwanden die Augen hinter dem Keyboard. Zwei-teilige Lösung:
+  `interactive-widget=resizes-content` im Viewport-Meta (Chromium-Familie)
+  und [`src/surface/keyboard-viewport.js`](../src/surface/keyboard-viewport.js)
+  via `visualViewport` (iOS Safari), das `--keyboard-inset` /
+  `data-keyboard` auf `<html>` schreibt und die Stage komprimiert
+  ([`src/styles/base.css`](../src/styles/base.css)). Verifikation vor Push:
+  13 Unit-Tests ([`tests/keyboard-viewport.test.js`](../tests/keyboard-viewport.test.js))
+  und der Playwright-Handylauf
+  [`scripts/verify-mobile-keyboard.py`](../scripts/verify-mobile-keyboard.py)
+  (12/12 Checks grün, Screenshots unter
+  [`tech/mobile-keyboard-verify/`](../tech/mobile-keyboard-verify/)).
+  Bekannte Restgrenze: falls iOS beim Aufklappen trotzdem wegpannt, genügt
+  ein Wisch zurück — Stage und Tastaturband teilen sich dann den sichtbaren
+  Bereich; auf Chromium-Mobilgeräten greift der native Meta-Tag-Pfad.
 
 Noch offen: restliche Grilling-Punkte (Abschluss-Ergebnis von `What this is`, Mobile/Wake-Trigger, Modellwahl, Abnahmekriterien), gemeinsame Designabnahme und Build-Freigabe.

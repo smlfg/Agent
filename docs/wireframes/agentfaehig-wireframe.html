@@ -96,116 +96,165 @@ table.spec tr:hover td{background:#fdfbf5}
 .mono{font-family:var(--mono);font-size:12px}
 
 /* ============================================================
-   Produkt-Bühne (Lo-Fi) — die eigentliche Komposition
+   Produkt-Bühne v0.2 — Anatomie des Live-Stands
+   Ein Auge rechts, Composer unten, warme Papierfläche.
+   Übernommen vom Live-Stand: Palette, ein Auge, Composer unten,
+   „Pause motion" sichtbar. Das ist bewusst näher am Live-Bild
+   als die erste Fassung (zwei abstrakte Augen, Haarlinie).
    ============================================================ */
 .stage{
-  --w:.62;                                   /* 0 = kühl, 1 = warm (Beispielachse) */
-  --open:1; --look:0; --eyeScale:1;
-  --s-bg:color-mix(in oklab,#faf3e4 calc(var(--w)*100%),#e9eef6);
-  --s-ink:color-mix(in oklab,#241a10 calc(var(--w)*100%),#121b2b);
-  --s-dim:color-mix(in oklab,rgba(36,26,16,.58) calc(var(--w)*100%),rgba(18,27,43,.58));
-  --s-line:color-mix(in oklab,rgba(36,26,16,.22) calc(var(--w)*100%),rgba(18,27,43,.22));
-  position:relative;overflow:hidden;border-radius:6px;background:var(--s-bg);color:var(--s-ink);
-  font-family:var(--sans);container-type:size;aspect-ratio:16/10;isolation:isolate;
+  --w:.66; --open:1; --look:0; --focus:0;
+  --s-bg-a:color-mix(in oklab,#f8f1e6 calc(var(--w)*100%),#eef2f7);
+  --s-bg-b:color-mix(in oklab,#f2e8da calc(var(--w)*100%),#e5ebf4);
+  --s-ink:color-mix(in oklab,#3d3229 calc(var(--w)*100%),#28303c);
+  --s-muted:color-mix(in oklab,#6b5b4c calc(var(--w)*100%),#566270);
+  --s-line:color-mix(in oklab,rgba(61,50,41,.20) calc(var(--w)*100%),rgba(40,48,60,.20));
+  --s-accent:color-mix(in oklab,#c17a4d calc(var(--w)*100%),#6d84a6);
+  position:relative;overflow:hidden;border-radius:8px;
+  background:linear-gradient(158deg,var(--s-bg-a) 0%,var(--s-bg-b) 100%);
+  color:var(--s-ink);font-family:var(--sans);
+  container-type:size;aspect-ratio:16/10;isolation:isolate;
 }
 .stage.live,#rzStage{transition:background .7s ease,color .7s ease}
-.stage.mobile{aspect-ratio:390/844;border-radius:14px}
-.stage.mobile .eye{width:12cqw;height:5.4cqw}
-.stage.mobile .eyes{gap:4cqw}
-.stage.mobile .answer .q{font-size:4.4cqw}
-.stage.mobile .answer .a{font-size:6.2cqw;line-height:1.36}
-.stage.mobile .fieldline .hint{font-size:3.2cqw}
-.stage.mobile .slider .lab{font-size:2.8cqw}
-.stage.mobile .slider .thumb{width:3.4cqw;height:3.4cqw}
-.stage.mobile .answer .undo{font-size:3cqw;padding:1.6cqw 3cqw}
-.stage.tall{aspect-ratio:4/5}
-.texture{position:absolute;inset:-10%;pointer-events:none;opacity:.5;
+.stage.mobile{aspect-ratio:390/844;border-radius:16px}
+.texture{position:absolute;inset:0;pointer-events:none;opacity:.65;
   background:
-    repeating-linear-gradient(112deg,transparent 0 7px,color-mix(in oklab,var(--s-ink) 5%,transparent) 7px 7.6px),
-    repeating-linear-gradient(24deg,transparent 0 11px,color-mix(in oklab,var(--s-ink) 4%,transparent) 11px 11.5px),
-    radial-gradient(120% 80% at 50% 45%,transparent 40%,color-mix(in oklab,var(--s-ink) 6%,transparent) 100%);
-  mask-image:radial-gradient(130% 90% at 50% 40%,#000 20%,transparent 92%)}
-.eyes{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(var(--eyeScale));
-  display:flex;gap:2.1cqw}
-.stage.live .eyes{transition:top .52s cubic-bezier(.2,.7,.2,1),transform .52s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
-.eye{width:7.2cqw;height:3.2cqw;border-radius:50%;background:var(--s-ink);position:relative;overflow:hidden;
-  transform:scaleY(var(--open,1));transform-origin:50% 50%}
-.eye::after{content:"";position:absolute;width:1.15cqw;height:1.15cqw;border-radius:50%;
-  background:color-mix(in oklab,var(--s-bg) 76%,#fff);left:50%;top:52%;
-  transform:translate(calc(-50% + var(--look)*1.5cqw),-50%)}
-.stage[data-focus="text"] .eyes{top:18%;transform:translate(-50%,-50%) scale(calc(var(--eyeScale)*.84))}
-.stage[data-focus="text"]{--eyeScale:.92}
+    radial-gradient(80% 60% at 74% 26%,color-mix(in oklab,var(--s-ink) 5%,transparent),transparent 72%),
+    radial-gradient(120% 90% at 18% 82%,color-mix(in oklab,var(--s-ink) 3.5%,transparent),transparent 62%)}
 
-.fieldline{position:absolute;left:20%;right:20%;bottom:19%;display:flex;align-items:flex-end;gap:.5cqw;
-  border-bottom:1px solid var(--s-line);padding-bottom:.5cqw}
-.stage.live .fieldline{transition:bottom .42s cubic-bezier(.2,.7,.2,1),opacity .35s ease}
-.fieldline .typed{font-size:clamp(11px,2.05cqw,22px);line-height:1.3;letter-spacing:.002em;max-width:100%;overflow:hidden;white-space:nowrap}
-.fieldline .caret{display:inline-block;width:1.5px;height:2.3cqw;background:var(--s-ink);flex:0 0 auto;animation:caret 1.06s steps(1) infinite}
-@keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}
-.fieldline .hint{font-family:var(--mono);font-size:clamp(8px,1.05cqw,12px);letter-spacing:.08em;color:var(--s-dim);text-transform:uppercase}
-.stage[data-focus="text"] .fieldline{bottom:7.5%}
+/* Auge */
+.face{position:absolute;right:7%;top:15%;width:21cqw;height:21cqw;border-radius:50%;overflow:hidden;
+  background:
+    radial-gradient(circle at calc(50% + var(--look)*9%) 50%,#120c08 0 7.4%,transparent 8%),
+    radial-gradient(circle at calc(50% + var(--look)*9%) 50%,#8a5a2e 0 20%,#6b4322 21%,#4a2c14 26%,rgba(74,44,20,0) 27%),
+    radial-gradient(circle at calc(44% + var(--look)*9%) 37%,rgba(255,255,255,.95) 0 3.2%,transparent 3.8%),
+    radial-gradient(circle at 50% 45%,#fdf9f0 0 62%,#f3e9d6 80%,#e3d4bb 100%);
+  box-shadow:inset 0 .3cqw 1.4cqw rgba(61,50,41,.16),0 1.4cqw 3.2cqw -1.8cqw rgba(61,50,41,.4);
+  transition:right .5s cubic-bezier(.2,.7,.2,1),top .5s cubic-bezier(.2,.7,.2,1),
+             width .5s cubic-bezier(.2,.7,.2,1),height .5s cubic-bezier(.2,.7,.2,1)}
+.face::before{content:"";position:absolute;left:-8%;right:-8%;top:-4%;
+  height:calc(5% + (1 - var(--open))*97%);
+  background:color-mix(in oklab,var(--s-bg-a) 93%,#c9b697);border-radius:0 0 50% 50% / 0 0 22% 22%;
+  border-bottom:1px solid color-mix(in oklab,var(--s-ink) 24%,transparent);
+  box-shadow:0 .6cqw 1.2cqw -.5cqw rgba(61,50,41,.35)}
+.face::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-3%;
+  height:calc(8% + (1 - var(--open))*24%);
+  background:color-mix(in oklab,var(--s-bg-a) 95%,#c9b697);border-radius:50% 50% 0 0 / 22% 22% 0 0;
+  border-top:1px solid color-mix(in oklab,var(--s-ink) 14%,transparent)}
+.stage[data-focus="text"] .face{right:5.5%;top:13%;width:18.5cqw;height:18.5cqw}
 
-.answer{position:absolute;left:20%;right:20%;top:34%}
-.stage.live .answer{transition:opacity .3s ease}
-.answer .q{font-size:clamp(10px,1.8cqw,18px);line-height:1.4;color:var(--s-dim);margin:0 0 1.6cqw;max-width:62ch}
-.answer .a{font-size:clamp(12px,2.5cqw,26px);line-height:1.34;letter-spacing:-.006em;margin:0;max-width:60ch;font-weight:450}
+/* Composer — vom Live-Stand übernommen: Linie, „…", zwei Icon-Ziele */
+.composer{position:absolute;left:9%;right:34%;bottom:9%;display:flex;align-items:center;gap:1.1cqw;
+  padding:0 0 1.1cqw;border-bottom:1px solid var(--s-line)}
+.composer .input{flex:1 1 auto;min-width:0;font-size:clamp(10px,2.05cqw,22px);line-height:1.5;white-space:nowrap;overflow:hidden;color:var(--s-ink)}
+.composer .ph{color:var(--s-muted);opacity:.55}
+.composer .hint{font-family:var(--mono);font-size:max(8px,.95cqw);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--s-muted);opacity:.85;white-space:nowrap}
+.composer .caret{width:1.5px;height:2.4cqw;background:var(--s-accent);flex:0 0 auto;animation:caret 1.06s steps(1) infinite}
+.composer .icon{position:relative;flex:0 0 auto;width:4.4cqw;height:4.4cqw;border-radius:50%;display:grid;place-items:center;color:var(--s-muted)}
+.composer .icon.send::before{content:"";width:1.3cqw;height:1.3cqw;border-left:1.5px solid currentColor;
+  border-top:1.5px solid currentColor;transform:rotate(45deg) translate(16%,16%)}
+.composer .icon.mic::before{content:"";width:.6cqw;height:1.15cqw;border:1.4px solid currentColor;border-radius:99px}
+.composer .icon.mic::after{content:"";position:absolute;left:50%;top:58%;width:1.05cqw;height:.5cqw;
+  border:1.4px solid currentColor;border-top:0;border-radius:0 0 99px 99px;transform:translateX(-50%)}
+.stage[data-focus="text"] .composer{border-bottom-color:color-mix(in oklab,var(--s-accent) 55%,var(--s-line))}
+.stage[data-ring="1"] .composer{border-bottom-color:var(--s-accent);box-shadow:0 .6cqw 1.6cqw -1cqw var(--s-accent)}
+
+/* Antwort — linke Spalte, das Auge bleibt frei */
+.answer{position:absolute;left:8%;right:32%;top:27%}
+.answer .q{font-size:1.7cqw;line-height:1.4;color:var(--s-muted);margin:0 0 1.3cqw;max-width:46ch}
+.answer .a{font-size:2.55cqw;line-height:1.38;letter-spacing:-.006em;margin:0;max-width:46ch;font-weight:400}
 .answer .a .tw-caret{display:inline-block;width:.9cqw;height:2.3cqw;background:var(--s-ink);vertical-align:-.15em;animation:caret 1.06s steps(1) infinite}
-.answer .hist{position:absolute;left:0;right:0;top:-4.4cqw;opacity:.34;font-size:clamp(9px,1.4cqw,14px);line-height:1.4;max-width:60ch}
-.answer .undo{display:inline-flex;align-items:center;gap:.6cqw;margin-top:1.6cqw;font-family:var(--mono);font-size:clamp(8px,1.15cqw,12px);
-  letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--s-line);border-radius:99px;padding:.55cqw 1.1cqw;color:color-mix(in oklab,var(--s-ink) 68%,transparent)}
+.answer .hist{position:absolute;left:0;right:0;top:-4.6cqw;opacity:.36;font-size:1.35cqw;line-height:1.4;max-width:46ch}
+.answer .undo{display:inline-flex;align-items:center;gap:.5cqw;margin-top:1.4cqw;font-family:var(--mono);
+  font-size:max(8px,1.05cqw);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--s-line);
+  border-radius:99px;padding:.5cqw 1cqw;color:var(--s-muted)}
 
-.slider{position:absolute;left:20%;right:20%;bottom:16.5%;opacity:0}
+/* Regler — über dem Composer, in der Antwortspalte */
+.slider{position:absolute;left:9%;right:40%;bottom:21%;opacity:0}
 .stage.live .slider,#rzStage .slider{transition:opacity .3s ease}
 .slider.show{opacity:1}
-.slider .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:clamp(8px,.95cqw,12px);letter-spacing:.09em;
-  text-transform:uppercase;color:var(--s-dim);margin-bottom:.7cqw}
+.slider .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:max(8px,.9cqw);
+  letter-spacing:.09em;text-transform:uppercase;color:var(--s-muted);margin-bottom:.7cqw}
 .slider .groove{position:relative;height:1px;background:var(--s-line)}
 .slider .fill{position:absolute;left:0;top:0;height:1px;background:var(--s-ink);width:calc(var(--pos,0.5)*100%)}
-.slider .thumb{position:absolute;top:50%;left:calc(var(--pos,0.5)*100%);width:1.15cqw;height:1.15cqw;border-radius:50%;
-  background:var(--s-bg);border:1.5px solid var(--s-ink);transform:translate(-50%,-50%)}
+.slider .thumb{position:absolute;top:50%;left:calc(var(--pos,0.5)*100%);width:1.25cqw;height:1.25cqw;border-radius:50%;
+  background:var(--s-bg-a);border:1.5px solid var(--s-ink);transform:translate(-50%,-50%)}
 .slider .ticks{display:flex;justify-content:space-between;margin-top:.7cqw}
 .slider .ticks i{width:1px;height:.5cqw;background:var(--s-line)}
 
-.rail{position:absolute;right:3.2%;top:9%;width:23%;display:flex;flex-direction:column;gap:.8cqw;
-  font-family:var(--mono);font-size:.92cqw;letter-spacing:.04em;transition:opacity .3s ease}
-.rail .job{border-top:1px solid var(--s-line);padding-top:.9cqw;color:var(--s-dim);display:grid;gap:.45cqw}
-.rail .job b{font-weight:600;font-size:1.0cqw;color:color-mix(in oklab,var(--s-ink) 76%,transparent);letter-spacing:.02em}
+/* Hintergrund — leise am linken Rand */
+.rail{position:absolute;left:3.2%;top:9%;width:23%;display:flex;flex-direction:column;gap:.8cqw;
+  font-family:var(--mono);font-size:max(7px,.92cqw);letter-spacing:.04em;color:var(--s-muted)}
+.rail .job{border-top:1px solid var(--s-line);padding-top:.9cqw;display:grid;gap:.45cqw}
+.rail .job b{font-weight:600;color:var(--s-ink);letter-spacing:.02em}
 .rail .job .bar{height:2px;background:var(--s-line);overflow:hidden;position:relative}
 .rail .job .bar i{position:absolute;inset:0;width:38%;background:var(--s-ink);opacity:.55;animation:slide 3.2s ease-in-out infinite}
 @keyframes slide{0%{transform:translateX(-40%)}100%{transform:translateX(280%)}}
 .rail .job.done .bar i{width:100%;animation:none;opacity:.8}
 .rail .job .new{font-family:var(--mono);font-size:.8cqw;letter-spacing:.12em;text-transform:uppercase;color:var(--s-ink)}
 
-.chips{position:absolute;left:20%;right:20%;bottom:26%;display:flex;gap:.8cqw;flex-wrap:wrap;opacity:0;transition:opacity .3s}
+.chips{position:absolute;left:9%;right:34%;bottom:26%;display:flex;gap:.8cqw;flex-wrap:wrap;opacity:0}
 .chips.show{opacity:1}
-.chip{font-family:var(--mono);font-size:1.0cqw;letter-spacing:.05em;border:1px solid var(--s-line,var(--line));border-radius:99px;
-  padding:.55cqw 1.15cqw;color:var(--s-dim,var(--muted));background:color-mix(in oklab,var(--s-bg,#fff) 70%,#fff)}
-.chip.solid{background:var(--s-ink,var(--ink));color:var(--s-bg,var(--paper));border-color:var(--s-ink,var(--ink))}
+.chip{font-family:var(--mono);font-size:max(8px,1cqw);letter-spacing:.05em;border:1px solid var(--s-line);border-radius:99px;
+  padding:.55cqw 1.1cqw;color:var(--s-muted);background:color-mix(in oklab,var(--s-bg-a) 70%,#fff)}
+.chip.solid{background:var(--s-ink);color:var(--s-bg-a);border-color:var(--s-ink)}
 
-.overlay{position:absolute;inset:auto 20% 27% 20%;border:1px solid var(--s-line);border-radius:.6cqw;
-  background:color-mix(in oklab,var(--s-bg) 88%,#fff);padding:1.6cqw 1.8cqw;display:grid;gap:.8cqw;
+.overlay{position:absolute;left:8%;right:32%;top:33%;border:1px solid var(--s-line);border-radius:.6cqw;
+  background:color-mix(in oklab,var(--s-bg-a) 88%,#fff);padding:1.5cqw 1.7cqw;display:grid;gap:.8cqw;
   box-shadow:0 10px 30px -20px rgba(0,0,0,.5)}
-.overlay .ttl{font-size:1.5cqw;font-weight:600;letter-spacing:-.01em}
-.overlay .txt{font-size:1.25cqw;line-height:1.45;color:var(--s-dim)}
+.overlay .ttl{font-size:1.45cqw;font-weight:600;letter-spacing:-.01em}
+.overlay .txt{font-size:1.2cqw;line-height:1.45;color:var(--s-muted)}
 .overlay .row{display:flex;gap:.7cqw;flex-wrap:wrap}
 .strip{position:absolute;left:0;right:0;top:0;padding:.9cqw 3.2%;display:flex;justify-content:space-between;align-items:center;
-  font-family:var(--mono);font-size:.95cqw;letter-spacing:.07em;text-transform:uppercase;
-  background:color-mix(in oklab,var(--s-ink) 10%,var(--s-bg));border-bottom:1px solid var(--s-line)}
-.mic{position:absolute;right:20%;bottom:18%;width:3.2cqw;height:3.2cqw;border-radius:50%;border:1px solid var(--s-line);
-  display:grid;place-items:center;opacity:0;transition:opacity .3s}
-.mic.show{opacity:1}
-.mic i{display:block;width:.8cqw;height:1.5cqw;border-radius:99px;background:var(--s-ink);position:relative}
-.mic i::after{content:"";position:absolute;left:50%;top:100%;width:1.6cqw;height:1px;background:var(--s-ink);transform:translateX(-50%)}
+  font-family:var(--mono);font-size:max(8px,.95cqw);letter-spacing:.07em;text-transform:uppercase;
+  background:color-mix(in oklab,var(--s-ink) 10%,var(--s-bg-a));border-bottom:1px solid var(--s-line)}
 
-/* Level-Meter (Voice) */
-.level{position:absolute;left:20%;right:20%;bottom:11%;display:flex;align-items:center;gap:.45cqw;opacity:0;transition:opacity .2s}
+/* Pegel — echter Audioeingang, direkt über dem Composer */
+.level{position:absolute;left:9%;right:34%;bottom:16%;display:flex;align-items:center;gap:.45cqw;opacity:0}
 .level.show{opacity:1}
 .level b{display:block;width:.45cqw;background:var(--s-ink);border-radius:1px;height:.6cqw;transition:height .09s linear}
-.level .lbl{font-family:var(--mono);font-size:.95cqw;letter-spacing:.1em;text-transform:uppercase;color:var(--s-dim);margin-left:.8cqw;white-space:nowrap}
+.level .lbl{font-family:var(--mono);font-size:max(8px,.95cqw);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--s-muted);margin-left:.8cqw;white-space:nowrap}
 
-/* Fokusring + Markierungen */
-.focusring{position:absolute;inset:3.2%;border:1px solid var(--s-ink);border-radius:.4cqw;opacity:0;pointer-events:none}
-.stage[data-ring="1"] .focusring{opacity:.55}
+/* Fußzeile — Pause links, Rechtliches mittig (wie live) */
+.footer{position:absolute;left:3%;right:3%;bottom:2.2%;display:flex;align-items:center;
+  font-family:var(--mono);font-size:max(8px,.9cqw);letter-spacing:.05em;color:var(--s-muted);opacity:.85}
+.footer .pause{border:1px solid var(--s-line);border-radius:99px;padding:.35cqw .9cqw;
+  background:color-mix(in oklab,var(--s-bg-a) 65%,transparent);font:inherit;color:inherit;
+  letter-spacing:inherit;cursor:pointer}
+.footer .pause[aria-pressed="true"]{background:var(--s-ink);color:var(--s-bg-a);border-color:var(--s-ink)}
+.stage.paused .caret,.stage.paused .rail .job .bar i,.stage.paused .answer .a .tw-caret{animation-play-state:paused}
+.footer .legal{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:1.2cqw;white-space:nowrap}
+
+/* Mobile Anatomie */
+.stage.mobile .face{width:32cqw;height:32cqw;right:34%;top:11%}
+.stage.mobile[data-focus="text"] .face{width:26cqw;height:26cqw;right:37%;top:8%}
+.stage.mobile .answer{left:8%;right:8%;top:38%}
+.stage.mobile .answer .q{font-size:4cqw;max-width:26ch}
+.stage.mobile .answer .a{font-size:6.1cqw;max-width:26ch;line-height:1.36}
+.stage.mobile .answer .undo{font-size:3cqw;padding:1.6cqw 3cqw}
+.stage.mobile .composer{left:6%;right:6%;bottom:9%}
+.stage.mobile .composer .input{font-size:4.6cqw}
+.stage.mobile .composer .hint{font-size:2.8cqw}
+.stage.mobile .composer .icon{width:10cqw;height:10cqw}
+.stage.mobile .composer .icon.send::before{width:3.2cqw;height:3.2cqw;border-width:2px}
+.stage.mobile .composer .icon.mic::before{width:1.5cqw;height:2.8cqw}
+.stage.mobile .composer .icon.mic::after{width:2.4cqw;height:1cqw}
+.stage.mobile .slider{left:8%;right:8%;bottom:23%}
+.stage.mobile .chips{left:8%;right:8%;bottom:28%}
+.stage.mobile .rail{left:6%;right:6%;top:6%;width:auto;flex-direction:row;flex-wrap:wrap}
+.stage.mobile .overlay{left:8%;right:8%;top:34%}
+.stage.mobile .level{left:8%;right:8%;bottom:18%}
+.stage.mobile .footer{font-size:2.6cqw;right:5%;left:5%}
+.stage.mobile .footer .pause{padding:1.4cqw 3cqw}
+.stage.mobile .footer .legal{position:static;transform:none;margin-left:auto;gap:2cqw}
+
+/* Fokus-Darstellung: nur der Composer bekommt den Fokusstrich */
+.stage[data-focus="text"] .composer .input{color:var(--s-ink)}
+
+
+/* Annotationspunkte auf den Wireframes */
 .mk{position:absolute;left:var(--x);top:var(--y);width:19px;height:19px;border-radius:50%;background:var(--accent);
   color:#fff;font:600 11px/19px var(--mono);text-align:center;transform:translate(-50%,-50%);
   box-shadow:0 0 0 3px color-mix(in srgb,var(--paper) 70%,transparent);z-index:5}
@@ -276,14 +325,15 @@ table.spec tr:hover td{background:#fdfbf5}
 .controls label{display:inline-flex;gap:8px;align-items:center}
 .bars{display:flex;gap:2px;align-items:flex-end;height:30px}
 .bars i{display:block;width:3px;background:var(--ink);height:3px;border-radius:1px}
-.devices{display:flex;gap:28px;flex-wrap:wrap;margin-top:18px}
-.device{flex:1 1 380px;max-width:520px}
+.devices{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.9fr);gap:28px;align-items:start;margin-top:18px}
+@media (max-width:900px){.devices{grid-template-columns:1fr}}
+.device{max-width:none}
 .device h4{margin:0 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.phone{max-width:250px}
+.phone{max-width:390px}
 
 /* Reduced motion */
 body.reduced .stage *{transition:none!important;animation:none!important}
-body.reduced .stage[data-focus="text"] .eyes{top:18%}
+body.reduced .stage[data-focus="text"] .face{right:5.5%;top:13%;width:18.5cqw;height:18.5cqw}
 
 /* Print */
 @media print{
@@ -299,16 +349,16 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
 
 <header class="doc-head">
   <div class="wrap">
-    <p class="eyebrow">Agentfähig.de · Phase: Malen · Wireframe-Konzept v0.1 · 19.11.2026</p>
+    <p class="eyebrow">Agentfähig.de · Phase: Malen · Wireframe-Konzept v0.2 · 20.11.2026</p>
     <h1>Die Seite ist der Zustand des Agenten.</h1>
     <p class="sub">Low-Fidelity-Kompositionen, ein zeitliches Storyboard der ersten 20 Sekunden,
       eine orthogonale Zustandsmaschine, Motion- und Typografieregeln sowie ein anklickbarer
-      Lo-Fi-Prototyp. Jede Entscheidung trägt eine Quellen-ID auf eine bestehende Anforderung
+      Lo-Fi-Prototyp in der Anatomie des Live-Stands (ein Auge rechts, Composer unten). Jede Entscheidung trägt eine Quellen-ID auf eine bestehende Anforderung
       oder ein ADR. Kein Produktivcode.</p>
 
     <dl class="meta">
       <div><dt>Status</dt><dd><span class="badge o">Entwurf zur Owner-Abnahme</span></dd></div>
-      <div><dt>Fidelity</dt><dd>Lo-Fi, keine Marke, keine Assets</dd></div>
+      <div><dt>Fidelity</dt><dd>Lo-Fi, keine Assets · Anatomie vom Live-Stand 20.11.</dd></div>
       <div><dt>Quellen</dt><dd>ADR-0001…0005, DESIGN-DECISIONS, Skizze 12.11., PROJECT_CONTRACT</dd></div>
       <div><dt>Nicht enthalten</dt><dd>Produktivcode, Deploy, Commit, ADR-Statuswechsel</dd></div>
     </dl>
@@ -354,6 +404,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <li><a href="#responsive"><b>8</b>Desktop / Mobil</a></li>
       <li><a href="#prototyp"><b>9</b>Prototyp</a></li>
       <li><a href="#offen"><b>10</b>Offen</a></li>
+      <li><a href="#live"><b>11</b>Live-Abgleich</a></li>
     </ul>
   </div>
 </nav>
@@ -404,7 +455,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
 
   <h3>Modellierungsentscheidung: orthogonal statt eine große Kette</h3>
   <p>Die zwölf geforderten Zustände sind <em>nicht</em> eine lineare Zustandsmaschine. Sie sind
-    sieben unabhängige Dimensionen. Linear modelliert ergäben sich aus den sinnvollen Kombinationen
+    acht unabhängige Dimensionen. Linear modelliert ergäben sich aus den sinnvollen Kombinationen
     über hundert Zustände, darunter unmögliche wie „antwortet, während er schläft". Orthogonal
     modelliert bleibt jede Dimension klein und prüfbar, und Recovery ist pro Dimension definierbar.</p>
 
@@ -418,6 +469,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <tr><td><code>background</code></td><td>NONE · WORKING · RESULT_READY · FAILED</td><td>Sub-Agent-Ereignisse</td><td>ja</td></tr>
       <tr><td><code>connection</code></td><td>CONNECTED · DEGRADED · DISCONNECTED · RECONNECTING</td><td>Transportereignisse</td><td>nein (neu ausgehandelt)</td></tr>
       <tr><td><code>fault</code></td><td>NONE · TURN_ERROR · VOICE_ERROR · BACKGROUND_ERROR</td><td>Fehlerereignisse</td><td>nein</td></tr>
+      <tr><td><code>motion</code></td><td>RUNNING · PAUSED</td><td>Nutzer (Pause motion) oder <code>prefers-reduced-motion</code></td><td>ja (Sitzung)</td></tr>
     </tbody>
   </table></div>
 
@@ -426,6 +478,15 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       „Ich überlege…"-Schleife, keine erfundenen Zwischenschritte, keinen Fortschrittsbalken ohne
       echten Fortschritt. Sichtbar sind nur beobachtbare Fakten: gesendet, verbunden, Ergebnis da,
       Fehler. <span class="src">VISION-samuel.md:108–110</span> <span class="src">Q1</span></p>
+  </div>
+
+  <div class="note">
+    <p><strong>Pause motion ist ein Zustand, kein Notaus.</strong> Der sichtbare Knopf in der
+      Fußzeile (vom Live-Stand übernommen, WCAG 2.2.2) hält <em>autonome</em> Bewegung an:
+      Blinzeln, Pupillen-Tracking, den wandernden Hintergrundbalken, das Caret-Blinken. Er hält
+      <em>nicht</em> an: eine Antwort, einen Reglerwechsel, einen Fehlerzustand. Beim Weiterbewegen
+      wird nichts nachgeholt und nichts doppelt abgespielt. <code>prefers-reduced-motion</code> startet
+      im Zustand PAUSED; der Knopf bleibt sichtbar und bedienbar. <span class="src">Q1</span></p>
   </div>
 
   <h3>Zeitgesteuert oder ereignisgesteuert?</h3>
@@ -448,7 +509,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <h4><span class="badge e">E</span> ereignisgesteuert</h4>
       <ul class="tight small">
         <li>Alles nach einer Eingabe: Tippen, Senden, erster Token, Antwortende.</li>
-        <li>Augen treten zurück, wenn Text Fokus wird.</li>
+        <li>Das Auge tritt zurück, wenn Text Fokus wird.</li>
         <li>Regler entsteht, Oberfläche wandelt sich, Undo erscheint.</li>
         <li>Hintergrund-Ergebnis trifft ein; Fehler; Verbindungsverlust.</li>
         <li>Voice: Berechtigung, Pegel, Transkript, Sprechen, Abbruch.</li>
@@ -476,9 +537,11 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <div>
       <div class="stage live" id="liveStage" data-focus="field" data-phase="dormant">
         <div class="texture"></div>
-        <div class="focusring"></div>
         <div class="strip" id="liveStrip" hidden><span>Verbindung getrennt</span><span>Entwurf bleibt erhalten</span></div>
-        <div class="eyes" id="liveEyes"><i class="eye"></i><i class="eye"></i></div>
+        <div class="rail" id="liveRail" hidden>
+          <div class="job" id="liveJob"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
+        </div>
+        <div class="face"></div>
         <div class="answer" id="liveAnswer" hidden>
           <p class="hist" id="liveHist"></p>
           <p class="q" id="liveQ"></p>
@@ -488,18 +551,19 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
         <div class="chips" id="liveChips">
           <span class="chip">wärmer</span><span class="chip">kühler</span><span class="chip">so lassen</span>
         </div>
-        <div class="fieldline" id="liveField" hidden>
-          <span class="typed" id="liveUser"></span><span class="hint" id="liveHint" style="display:none">Enter · als Nächstes vormerken</span><span class="caret"></span>
-        </div>
         <div class="slider" id="liveSlider" style="--pos:.5">
           <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
           <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
           <div class="ticks"><i></i><i></i><i></i></div>
         </div>
-        <div class="rail" id="liveRail" hidden>
-          <div class="job" id="liveJob"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
+        <div class="composer" id="liveField">
+          <span class="input" id="liveUser"></span>
+          <span class="hint" id="liveHint" hidden>gesendet</span>
+          <span class="caret"></span>
+          <span class="icon send"></span><span class="icon mic"></span>
         </div>
-        <i class="mk" id="liveMk" style="--x:50%;--y:11%" hidden>1</i>
+        <div class="footer"><button type="button" class="pause" id="pauseBtn" aria-pressed="false">Pause motion</button><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div>
+        <i class="mk" id="liveMk" hidden>1</i>
       </div>
 
       <div class="toolbar">
@@ -527,10 +591,11 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
         <dt>Eingabe</dt><dd id="roInput">—</dd>
         <dt>Turn</dt><dd id="roTurn">IDLE</dd>
         <dt>Adaption</dt><dd id="roAdapt">NOT_OFFERED</dd>
+        <dt>Bewegung</dt><dd id="roMotion">läuft</dd>
         <dt>Auslöser</dt><dd id="roTrigger">Timer</dd>
         <dt>Fokus</dt><dd id="roFocus">Feld</dd>
       </dl>
-      <p class="say" id="roSay">Ein ruhiges Feld. Keine Augen, keine Eingabe, keine Aufforderung.</p>
+      <p class="say" id="roSay">Ein ruhiges Feld. Ein geschlossenes Auge, keine Eingabe, keine Aufforderung.</p>
     </aside>
   </div>
 
@@ -552,34 +617,34 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
         im Feld.</dd>
       <dt>Übergang</dt><dd>→ <code>AWAKENING</code> bei 5,0 s oder beim ersten Eingabeereignis.</dd>
       <dt>Unterbrechung</dt><dd>Jede Eingabe beschleunigt; Tab lässt das Feld fokussierbar werden, ohne die
-        Augen zu zeigen.</dd>
-      <dt>Reduziert</dt><dd>Pre-Glow entfällt; die Augen erscheinen als Schnitt bei 5,0 s (oder sofort bei Eingabe).</dd>
+        Auge zu zeigen.</dd>
+      <dt>Reduziert</dt><dd>Pre-Glow entfällt; das Auge erscheint als Schnitt bei 5,0 s (oder sofort bei Eingabe).</dd>
     </dl>
   </div>
 
   <div class="seg">
-    <h4>② T+5,0 s — Augen erwachen <span class="badge t">T</span> <span class="src">F1</span> <span class="src">ADR-0003</span> <span class="src">K4</span></h4>
+    <h4>② T+5,0 s — Das Auge erwacht <span class="badge t">T</span> <span class="src">F1</span> <span class="src">ADR-0003</span> <span class="src">K4</span></h4>
     <dl>
-      <dt>Komposition</dt><dd>Zwei ruhige Augen, optisch auf 38 % Höhe, zusammen ≈ 13 % der Feldbreite. Kein
-        Gesicht, kein Rahmen, kein Avatar. Der Rest bleibt Feld.</dd>
-      <dt>Primärer Fokus</dt><dd>Die Augen — aber als <em>Anwesenheit</em>, nicht als Aufforderung. Kein Blinken
-        in Richtung Eingabe, kein „Hier klicken".</dd>
-      <dt>Bewegung / Timing</dt><dd>Lider 0 → 100 % über 900 ms, ease-out-cubic. Pupillen wandern in 420 ms
-        zum Zeiger, sonst zur Feldmitte. Erster Blinzler bei 6,4 s (280 ms). <span class="src">T</span></dd>
+      <dt>Komposition</dt><dd>Ein ruhiges Auge rechts, Durchmesser ≈ 21 % der Feldbreite, oberes Drittel. Kein
+        Gesicht, kein Avatar, kein Rahmen. Composer unten, Rechtliches in der Fußzeile.</dd>
+      <dt>Primärer Fokus</dt><dd>Das Auge — aber als <em>Anwesenheit</em>, nicht als Aufforderung. Kein Blinken
+        in Richtung Composer, kein „Hier klicken".</dd>
+      <dt>Bewegung / Timing</dt><dd>Lid 0 → 100 % über 900 ms, ease-out-cubic. Die Pupille wandert in 420 ms
+        zum Zeiger, sonst leicht zum Composer. Erster Blinzler bei 6,4 s (280 ms). <span class="src">T</span></dd>
       <dt>Nutzeraktion</dt><dd>Zusehen oder sofort tippen. Beides ist richtig.</dd>
       <dt>Agentenreaktion</dt><dd>Keine Sprache, kein Ton. Nur Blickkontakt. „Soft and not scary." <span class="src">K3</span></dd>
       <dt>Übergang</dt><dd>→ <code>PRESENT</code>, sobald die Lider 100 % erreichen (Ereignis des Timers,
         nicht ein zweiter Timer).</dd>
       <dt>Unterbrechung</dt><dd>Tippen während des Öffnens: Lider springen auf 100 %, Eingabe erscheint sofort.</dd>
-      <dt>Reduziert</dt><dd>Kein Lid-Film: Augen sind da oder nicht. Kein Pupillen-Tracking, kein Blinzeln.</dd>
+      <dt>Reduziert</dt><dd>Kein Lid-Film: Das Auge ist da oder nicht. Kein Pupillen-Tracking, kein Blinzeln.</dd>
     </dl>
   </div>
 
   <div class="seg">
     <h4>③ T+6,2 s — Einladung ohne Formular <span class="badge t">T</span> <span class="src">F2</span> <span class="src">P4</span></h4>
     <dl>
-      <dt>Komposition</dt><dd>Eine einzelne Haarlinie auf 19 % Höhe von unten, 60 % breit, mit Caret. Kein Kasten,
-        kein Label, kein Senden-Knopf. Das Mikrofon ist ein 24-px-Zeichen rechts, ohne Rahmen.</dd>
+      <dt>Komposition</dt><dd>Der Composer liegt bei 9 % Höhe von unten, linksbündig in der Antwortspalte, mit
+        Caret. Kein Kasten, kein Label, kein Senden-Text. Senden und Stimme sind zwei 44-px-Icon-Ziele.</dd>
       <dt>Primärer Fokus</dt><dd>Die Linie. Sie ist die einzige Einladung.</dd>
       <dt>Bewegung / Timing</dt><dd>Einblenden 400 ms, 120 ms nach dem letzten Lid-Frame. Caret blinkt 1,06 s. <span class="src">T</span></dd>
       <dt>Nutzeraktion</dt><dd>Einen natürlichen Satz schreiben. Kein Enter-Denken nötig: nach 3 Zeichen erscheint
@@ -595,8 +660,8 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
   <div class="seg">
     <h4>④ ca. T+8,5 s — Erster Satz <span class="badge e">E</span> <span class="src">F2</span></h4>
     <dl>
-      <dt>Komposition</dt><dd>Der Satz steht auf der Linie, linksbündig, 17 px, max. 60 Zeichen sichtbar. Die Augen
-        bleiben auf 38 %, die Pupillen folgen der Schreibposition. Keine Sprechblase.</dd>
+      <dt>Komposition</dt><dd>Der Satz steht im Composer, linksbündig, max. 60 Zeichen sichtbar. Das Auge
+        bleibt rechts; die Pupille folgt der Schreibposition. Keine Sprechblase.</dd>
       <dt>Primärer Fokus</dt><dd>Der eigene Text. Er wird <em>nicht</em> animiert — Tippen ist sofort, ohne
         Typewriter. <span class="src">Q1</span></dd>
       <dt>Bewegung / Timing</dt><dd>Nur native Textdarstellung. Bei Fokus hebt sich die Linie 8 px; 180 ms. <span class="src">E</span></dd>
@@ -611,11 +676,11 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
   <div class="seg">
     <h4>⑤ ca. T+10,0 s — Gesendet, ohne Denktheater <span class="badge e">E</span> <span class="src">Q1</span> <span class="src">VISION:108–110</span></h4>
     <dl>
-      <dt>Komposition</dt><dd>Die Nutzerzeile rückt nach oben (auf ≈ 26 %) und auf 55 % Deckkraft. In der Mitte
-        bleibt Platz für die Antwort — kein Spinner, kein „…", kein Fortschrittsbalken.</dd>
+      <dt>Komposition</dt><dd>Die Frage erscheint gedimmt in der linken Spalte; der Composer zeigt „gesendet".
+        Kein Spinner, kein „…", kein Fortschrittsbalken.</dd>
       <dt>Primärer Fokus</dt><dd>Die Stelle, an der die Antwort erscheinen wird.</dd>
-      <dt>Bewegung / Timing</dt><dd>Eine 1-px-Haarlinie wandert einmalig von der Eingabe zu den Augen (320 ms) —
-        das ist das ehrliche Signal „gesendet". Pupillen weiten sich 6 % (120 ms). Danach Stille. <span class="src">E</span></dd>
+      <dt>Bewegung / Timing</dt><dd>Eine 1-px-Linie wandert einmalig vom Composer zum Auge (320 ms) —
+        das ist das ehrliche Signal „gesendet". Die Pupille weitet sich 6 % (120 ms). Danach Stille. <span class="src">E</span></dd>
       <dt>Nutzeraktion</dt><dd>Warten, tippen, oder mit <kbd>Esc</kbd> abbrechen.</dd>
       <dt>Agentenreaktion</dt><dd>Nichts Sichtbares, solange nichts Passiertes sichtbar ist. Erst der erste
         echte Token ändert den Zustand.</dd>
@@ -630,9 +695,9 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
   <div class="seg">
     <h4>⑥ ca. T+10,4 s — Antwort im Fokus <span class="badge e">E</span> <span class="src">F2</span> <span class="src">DD:17–19</span></h4>
     <dl>
-      <dt>Komposition</dt><dd>Augen treten auf 18 % zurück und werden 16 % kleiner. Die Antwort steht mittig,
-        2,15 cqw (~34 px Desktop), max. 60 Zeichen pro Zeile, linksbündig. Ältere Antworten darüber auf
-        42 % Deckkraft, angeschnitten — Verlauf ist lesbar, aber nicht die Hauptansicht.</dd>
+      <dt>Komposition</dt><dd>Das Auge tritt zurück (19 % statt 21 %, 2 % weiter rechts) und verengt sich leicht.
+        Die Antwort steht in der linken Spalte, 2,55 cqw (~22 px Desktop), max. 46 Zeichen pro Zeile.
+        Ältere Antworten darüber auf 36 % Deckkraft, angeschnitten.</dd>
       <dt>Primärer Fokus</dt><dd>Die wachsende Antwort. Der Nutzer sieht der Seite beim Antworten zu.</dd>
       <dt>Bewegung / Timing</dt><dd>Typewriter nach Wortlänge (§4): Basis 38 Zeichen/s, kurze Wörter ×1,35,
         lange ×0,72. Pausen im Stream werden überbrückt, nie als leerer Puffer gezeigt. <span class="src">E</span></dd>
@@ -687,14 +752,14 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
 
   <div class="note">
     <p><strong>T+20 s — der eigentliche Endzustand.</strong> Nichts leuchtet, nichts feiert. Die Seite ist
-      ruhig, hat einen Regler, eine Antwort und Augen. Genau das ist der Unterschied zu einem Onboarding:
+      ruhig, hat einen Regler, eine Antwort und ein Auge. Genau das ist der Unterschied zu einem Onboarding:
       der Beweis ist <em>Zustand</em>, nicht Erfolgsmeldung. <span class="src">P2</span></p>
   </div>
 </div></section>
 
 <!-- 2 ================================================================= -->
 <section class="sec" id="zustaende"><div class="wrap">
-  <h2><span class="n">02 · Zustände und Übergänge · Deliverables A + C</span>Dreizehn Kompositionen, sieben Dimensionen</h2>
+  <h2><span class="n">02 · Zustände und Übergänge · Deliverables A + C</span>Dreizehn Kompositionen, acht Dimensionen</h2>
   <p class="lead">Die Galerie zeigt die zentralen Zustände als Wireframes. Jede Komposition ist eine
     Antwort auf die Frage: „Was sieht der Besucher, wenn dieser Dimensionswert gilt?" — nicht ein
     Screenshot einer fertigen Marke.</p>
@@ -703,16 +768,9 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- DORMANT -->
     <article class="frame-card" id="st-dormant">
       <header><h4>DORMANT</h4><span class="badge t">T</span></header>
-      <div class="stage" data-focus="field" style="--open:0;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline" style="opacity:.3;border-bottom-style:dashed"><span class="hint">eingabe · unsichtbar</span></div>
-        <i class="mk" style="--x:50%;--y:27%">1</i>
-        <i class="mk" style="--x:62%;--y:73%">2</i>
-      </div>
-      <div class="dims">presence=DORMANT · input=— · turn=IDLE · background=NONE</div>
+      <div class="stage" data-focus="field" style="--open:0;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer" style="opacity:0.35"><span class="input ph">…</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:10%;--y:87%">2</i></div><div class="dims">presence=DORMANT · input=— · turn=IDLE · background=NONE</div>
       <ol class="an">
-        <li><b>1</b><span>Augen sind vorhanden, aber geschlossen (Lid 0 %). Kein Platzhalter, kein Ladesymbol.</span></li>
+        <li><b>1</b><span>Das Auge ist vorhanden, aber geschlossen (Lid 0 %). Kein Platzhalter, kein Ladesymbol.</span></li>
         <li><b>2</b><span>Eingabe existiert im DOM, ist aber unsichtbar und nicht fokussierbar. Ein Tastendruck holt sie in 240 ms.</span></li>
       </ol>
       <p class="rule"><em>Nicht erlaubt:</em> Autoplay-Ton, Begrüßungstext, Cookie-Banner im Feld, pulsierender Punkt.</p>
@@ -723,17 +781,10 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- AWAKENING -->
     <article class="frame-card" id="st-awakening">
       <header><h4>AWAKENING</h4><span class="badge t">T</span></header>
-      <div class="stage" data-focus="field" style="--open:.45;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline" style="opacity:.35"><span class="caret"></span></div>
-        <i class="mk" style="--x:50%;--y:28%">1</i>
-        <i class="mk" style="--x:50%;--y:79%">2</i>
-      </div>
-      <div class="dims">presence=AWAKENING · input=TEXT_IDLE (0,35) · turn=IDLE</div>
+      <div class="stage" data-focus="field" style="--open:.45;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer" style="opacity:0.5"><span class="input ph">…</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:10%;--y:87%">2</i></div><div class="dims">presence=AWAKENING · input=TEXT_IDLE (0,35) · turn=IDLE</div>
       <ol class="an">
-        <li><b>1</b><span>Lider bei 45 %. Blick noch nicht auf den Zeiger; Pupillen kommen 220 ms später.</span></li>
-        <li><b>2</b><span>Die Eingabe wird schon vorbereitet, ist aber nicht bedienbar, bis die Augen offen sind.</span></li>
+        <li><b>1</b><span>Lid bei 45 %. Blick noch nicht auf den Zeiger; die Pupille kommt 220 ms später.</span></li>
+        <li><b>2</b><span>Der Composer ist schon da, aber bis zum offenen Auge nicht bedienbar.</span></li>
       </ol>
       <p class="rule"><em>Nicht erlaubt:</em> Sprechen vor dem ersten Blick; ein zweiter Timer, der „fertig" verkündet.</p>
       <p class="rule"><em>Reduziert:</em> Schnitt auf 100 % bei 5,0 s; Eingabe sofort sichtbar.</p>
@@ -743,64 +794,36 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- PRESENT -->
     <article class="frame-card" id="st-present">
       <header><h4>PRESENT</h4><span class="badge n">ruht</span></header>
-      <div class="stage" data-focus="field" style="--open:1;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline"><span class="caret"></span></div>
-        <div class="mic show"><i></i></div>
-        <i class="mk" style="--x:50%;--y:28%">1</i>
-        <i class="mk" style="--x:50%;--y:79%">2</i>
-        <i class="mk" style="--x:88%;--y:80%">3</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=IDLE</div>
+      <div class="stage" data-focus="field" style="--open:1;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer"><span class="input ph">…</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:10%;--y:87%">2</i><i class="mk" style="--x:60%;--y:87%">3</i></div><div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=IDLE</div>
       <ol class="an">
-        <li><b>1</b><span>Augen offen, Blick ruhig. Blinzeln und leichte Sakkaden halten Präsenz, ohne zu fordern.</span></li>
-        <li><b>2</b><span>Eine Haarlinie mit Caret. Kein Kasten, kein Label, kein Senden-Knopf.</span></li>
-        <li><b>3</b><span>Mikrofon als 24-px-Zeichen, ohne Füllfläche. Erst der Klick öffnet Berechtigung (§7).</span></li>
+        <li><b>1</b><span>Auge offen, Blick ruhig. Blinzeln und leichte Sakkaden halten Präsenz, ohne zu fordern.</span></li>
+        <li><b>2</b><span>Composer-Linie mit Caret und „…" als Placeholder. Kein Kasten, kein Senden-Text.</span></li>
+        <li><b>3</b><span>Senden und Stimme als 44-px-Icon-Ziele, ohne Füllfläche. Erst der Klick öffnet Berechtigung (§7).</span></li>
       </ol>
       <p class="rule"><em>Nicht erlaubt:</em> Vorschlagschips vor dem ersten Intent; „Wie kann ich helfen?"; pulsierender CTA.</p>
-      <p class="rule"><em>Reduziert:</em> Kein Blinzeln, kein Tracking; statische offene Augen.</p>
+      <p class="rule"><em>Reduziert:</em> Kein Blinzeln, kein Tracking; statisch offenes Auge.</p>
       <p class="rule"><em>Quelle:</em> <span class="src">F1</span> <span class="src">F2</span> <span class="src">F5</span> <span class="src">P4</span></p>
     </article>
 
     <!-- USER_TYPING -->
     <article class="frame-card" id="st-typing">
       <header><h4>USER_TYPING</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="field" style="--open:1;--look:.45;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline" style="bottom:15%"><span class="typed">Was kannst du, das eine Website nicht kann?</span><span class="caret"></span></div>
-        <div class="mic show"><i></i></div>
-        <i class="mk" style="--x:50%;--y:28%">1</i>
-        <i class="mk" style="--x:44%;--y:72%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE</div>
+      <div class="stage" data-focus="field" style="--open:1;--look:-.45;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer"><span class="input">Was kannst du, das eine Website nicht kann?</span><span class="caret"></span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:10%;--y:87%">2</i></div><div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE</div>
       <ol class="an">
-        <li><b>1</b><span>Pupillen folgen der Schreibposition (±6 px), nicht dem Mauszeiger — Aufmerksamkeit ohne Bühne.</span></li>
+        <li><b>1</b><span>Die Pupille folgt der Schreibposition (±6 px), nicht dem Mauszeiger — Aufmerksamkeit ohne Bühne.</span></li>
         <li><b>2</b><span>Der eigene Text ist sofort da, ohne Typewriter. Die Zeile hebt sich 8 px und wächst mit.</span></li>
       </ol>
       <p class="rule"><em>Nicht erlaubt:</em> Zeichenanimation auf Nutzereingaben; Autokorrektur-Angebote im Feld; „Tippe hier".</p>
-      <p class="rule"><em>Reduziert:</em> Kein Pupillen-Tracking, kein Lift; Text und Caret unverändert.</p>
+      <p class="rule"><em>Reduziert:</em> Kein Pupillen-Tracking; Text und Caret unverändert.</p>
       <p class="rule"><em>Quelle:</em> <span class="src">F2</span> <span class="src">P4</span> <span class="src">Q1</span></p>
     </article>
 
     <!-- PROCESSING -->
     <article class="frame-card" id="st-processing">
       <header><h4>PROCESSING</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="text" style="--open:.82;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="answer" style="top:30%">
-          <p class="q">Du</p>
-          <p class="a" style="font-size:1.55cqw;opacity:.55;font-weight:400">Was kannst du, das eine Website nicht kann?</p>
-        </div>
-        <div class="fieldline" style="bottom:9%;opacity:.35"><span class="hint">gesendet</span></div>
-        <i class="mk" style="--x:50%;--y:18%">1</i>
-        <i class="mk" style="--x:50%;--y:48%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=PROCESSING</div>
+      <div class="stage" data-focus="text" style="--open:.9;--w:.66"><div class="texture"></div><div class="face"></div><div class="answer" style="top:29%"><p class="q">Du</p><p class="a" style="font-size:1.5cqw;opacity:.55">Was kannst du, das eine Website nicht kann?</p></div><div class="composer"><span class="hint">gesendet</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:10%;--y:42%">2</i></div><div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=PROCESSING</div>
       <ol class="an">
-        <li><b>1</b><span>Augen treten zurück (18 %) und verengen sich leicht. Das ist Aufmerksamkeit, kein „Denken".</span></li>
+        <li><b>1</b><span>Das Auge tritt zurück (19 %) und verengt sich leicht. Das ist Aufmerksamkeit, kein „Denken".</span></li>
         <li><b>2</b><span>Die gesendete Zeile bleibt sichtbar und gedimmt. Kein Spinner, kein Fortschritt, keine Vermutung.</span></li>
       </ol>
       <p class="rule"><em>Nicht erlaubt:</em> „Ich überlege…", Fake-Schritte, Puls, der wie ein Herzschlag aussieht, geschätzte Dauer.</p>
@@ -811,21 +834,9 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- RESPONDING -->
     <article class="frame-card" id="st-responding">
       <header><h4>RESPONDING</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="text" style="--open:1;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="answer" style="top:33%">
-          <p class="q" style="opacity:.55">Was kannst du, das eine Website nicht kann?</p>
-          <p class="a">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.<span class="tw-caret"></span></p>
-        </div>
-        <div class="fieldline" style="bottom:8%;opacity:.35"><span class="hint">Enter · als Nächstes vormerken</span></div>
-        <i class="mk" style="--x:50%;--y:18%">1</i>
-        <i class="mk" style="--x:24%;--y:52%">2</i>
-        <i class="mk" style="--x:24%;--y:26%">3</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=RESPONDING</div>
+      <div class="stage" data-focus="text" style="--open:1;--w:.66"><div class="texture"></div><div class="face"></div><div class="answer" style="top:28%"><p class="q" style="opacity:.55">Was kannst du, das eine Website nicht kann?</p><p class="a">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.<span class="tw-caret"></span></p></div><div class="composer"><span class="hint">gesendet</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:10%;--y:46%">2</i></div><div class="dims">presence=PRESENT · input=TEXT_IDLE · turn=RESPONDING</div>
       <ol class="an">
-        <li><b>1</b><span>Augen klein und zurück: Text ist jetzt der Fokus. Kein Avatar, keine Sprechblase.</span></li>
+        <li><b>1</b><span>Auge klein und zurück: Text ist jetzt der Fokus. Kein Avatar, keine Sprechblase.</span></li>
         <li><b>2</b><span>Antwort linksbündig, max. 60 Zeichen, 34 px, Typewriter nach Wortlänge (§4).</span></li>
         <li><b>3</b><span>Ältere Antwort nur als angeschnittene, gedimmte Zeile — lesbar beim Scrollen, nie Hauptansicht.</span></li>
       </ol>
@@ -837,23 +848,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- ADAPTING -->
     <article class="frame-card" id="st-adapting">
       <header><h4>ADAPTING</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="text" style="--open:1;--w:.72">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="answer" style="top:31%">
-          <p class="q">Soll ich wärmer oder kühler aussehen?</p>
-          <p class="a" style="opacity:.55">Dann sag mir: wärmer.</p>
-        </div>
-        <div class="slider show" style="--pos:.44;opacity:.7">
-          <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
-          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
-          <div class="ticks"><i></i><i></i><i></i></div>
-        </div>
-        <div class="chips show" style="bottom:30%"><span class="chip">„wärmer"</span></div>
-        <i class="mk" style="--x:33%;--y:78%">1</i>
-        <i class="mk" style="--x:58%;--y:68%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · turn=SETTLED · adaptation=ADAPTING</div>
+      <div class="stage" data-focus="text" style="--open:1;--w:.72"><div class="texture"></div><div class="face"></div><div class="answer" style="top:27%"><p class="q">Dann sag mir: wärmer.</p><p class="a" style="opacity:.6">Gut. Ich werde wärmer — und erzähle dir künftig etwas mehr.</p></div><div class="chips show" style="bottom:32%"><span class="chip">„wärmer"</span></div><div class="slider show" style="--pos:.44;opacity:.7"><div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div><div class="groove"><div class="fill"></div><div class="thumb"></div></div><div class="ticks"><i></i><i></i><i></i></div></div><div class="composer"><span class="hint">gesendet</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:11%;--y:78%">1</i><i class="mk" style="--x:36%;--y:78%">2</i></div><div class="dims">presence=PRESENT · turn=SETTLED · adaptation=ADAPTING</div>
       <ol class="an">
         <li><b>1</b><span>Das Wort aus der Nutzerzeile wird zum Regler-Label. Die Rille zeichnet sich in 180 ms.</span></li>
         <li><b>2</b><span>Fläche, Laufweite und Rhythmus wandeln sich gleichzeitig (700 ms) — nicht erst nach dem Regler.</span></li>
@@ -866,22 +861,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- ADAPTED -->
     <article class="frame-card" id="st-adapted">
       <header><h4>ADAPTED</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="text" style="--open:1;--w:.78">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="answer" style="top:30%">
-          <p class="a" style="font-size:1.95cqw">Drei Dinge sind fertig: Augen, Text, Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Hintergrundagenten liefern still.</p>
-          <span class="undo">↺ rückgängig</span>
-        </div>
-        <div class="slider show" style="--pos:.78">
-          <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
-          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
-          <div class="ticks"><i></i><i></i><i></i></div>
-        </div>
-        <i class="mk" style="--x:78%;--y:89%">1</i>
-        <i class="mk" style="--x:26%;--y:60%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · turn=SETTLED · adaptation=ADAPTED</div>
+      <div class="stage" data-focus="text" style="--open:1;--w:.78"><div class="texture"></div><div class="face"></div><div class="answer" style="top:27%"><p class="a">Drei Dinge sind fertig: Augen, Text, Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Hintergrundagenten liefern still.</p><span class="undo">↺ rückgängig</span></div><div class="slider show" style="--pos:.78"><div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div><div class="groove"><div class="fill"></div><div class="thumb"></div></div><div class="ticks"><i></i><i></i><i></i></div></div><div class="composer"><span class="hint">gesendet</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:72%;--y:79%">1</i><i class="mk" style="--x:10%;--y:60%">2</i></div><div class="dims">presence=PRESENT · turn=SETTLED · adaptation=ADAPTED</div>
       <ol class="an">
         <li><b>1</b><span>Regler bleibt sichtbar und ziehbar; Position und Label sind Zustand, nicht Dekoration.</span></li>
         <li><b>2</b><span>Undo ist der einzige neue Bedienrest — kein „Einstellungen"-Link, keine Seite.</span></li>
@@ -894,17 +874,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- BACKGROUND_WORKING -->
     <article class="frame-card" id="st-bgworking">
       <header><h4>BACKGROUND_WORKING</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="field" style="--open:1;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
-        <div class="rail">
-          <div class="job"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
-        </div>
-        <i class="mk" style="--x:88%;--y:16%">1</i>
-        <i class="mk" style="--x:50%;--y:28%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE · background=WORKING</div>
+      <div class="stage" data-focus="field" style="--open:1;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer"><span class="input">Und was hat die Analyse ergeben?</span><span class="caret"></span><span class="icon send"></span><span class="icon mic"></span></div><div class="rail"><div class="job"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:6%;--y:15%">1</i><i class="mk" style="--x:82%;--y:43%">2</i></div><div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE · background=WORKING</div>
       <ol class="an">
         <li><b>1</b><span>Die Hintergrundarbeit lebt am Rand: 1-px-Balken, langsames Wandern, keine Zahl, kein Prozentversprechen.</span></li>
         <li><b>2</b><span>Der Front-Agent bleibt voll bedienbar. Kein Overlay, keine Sperre, kein Wartecursor.</span></li>
@@ -917,17 +887,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- BACKGROUND_RESULT_READY -->
     <article class="frame-card" id="st-bgready">
       <header><h4>BACKGROUND_RESULT_READY</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="field" style="--open:1;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
-        <div class="rail">
-          <div class="job done"><span class="new">neu</span><b>3 Quellen verglichen</b><span>Ergebnis liegt am Rand</span><div class="bar"><i></i></div></div>
-        </div>
-        <i class="mk" style="--x:88%;--y:14%">1</i>
-        <i class="mk" style="--x:50%;--y:38%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE · background=RESULT_READY</div>
+      <div class="stage" data-focus="field" style="--open:1;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer"><span class="input">Und was hat die Analyse ergeben?</span><span class="caret"></span><span class="icon send"></span><span class="icon mic"></span></div><div class="rail"><div class="job done"><span class="new">neu</span><b>3 Quellen verglichen</b><span>Ergebnis liegt am Rand</span><div class="bar"><i></i></div></div></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:6%;--y:13%">1</i><i class="mk" style="--x:58%;--y:13%">2</i></div><div class="dims">presence=PRESENT · input=USER_TYPING · turn=IDLE · background=RESULT_READY</div>
       <ol class="an">
         <li><b>1</b><span>Ergebnis erscheint als ruhige Karte am Rand, 8 px Aufstieg in 200 ms. Kein Fokuswechsel, kein Ton.</span></li>
         <li><b>2</b><span>Der Fokus bleibt, wo er war — auch mitten im Tippen. Screenreader hören <em>eine</em> höfliche Zeile.</span></li>
@@ -940,22 +900,10 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- ERROR -->
     <article class="frame-card" id="st-error">
       <header><h4>ERROR</h4><span class="badge o">Pflicht</span></header>
-      <div class="stage" data-focus="text" style="--open:.7;--w:.62">
-        <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="overlay">
-          <span class="ttl">Die Antwort ist nicht angekommen.</span>
-          <span class="txt">Deine Frage steht noch hier. Der Dienst hat nicht geantwortet — das liegt nicht an deiner Eingabe.</span>
-          <span class="row"><span class="chip solid">erneut senden</span><span class="chip">als Text behalten</span></span>
-        </div>
-        <div class="fieldline" style="bottom:8%;opacity:.5"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
-        <i class="mk" style="--x:50%;--y:44%">1</i>
-        <i class="mk" style="--x:50%;--y:38%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · turn=IDLE · fault=TURN_ERROR · background=WORKING</div>
+      <div class="stage" data-focus="text" style="--open:.8;--w:.66"><div class="texture"></div><div class="face"></div><div class="overlay"><span class="ttl">Die Antwort ist nicht angekommen.</span><span class="txt">Deine Frage steht noch hier. Der Dienst hat nicht geantwortet — das liegt nicht an deiner Eingabe.</span><span class="row"><span class="chip solid">erneut senden</span><span class="chip">als Text behalten</span></span></div><div class="composer"><span class="input">Und was hat die Analyse ergeben?</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:9%;--y:41%">1</i><i class="mk" style="--x:82%;--y:43%">2</i></div><div class="dims">presence=PRESENT · turn=IDLE · fault=TURN_ERROR · background=WORKING</div>
       <ol class="an">
         <li><b>1</b><span>Fehler nennt Umfang, Ursache in Alltagssprache und was erhalten bleibt. Keine Schuldzuweisung, kein Code.</span></li>
-        <li><b>2</b><span>Augen bleiben da, aber gedämpft. Der Agent verschwindet nicht — das wäre ein stiller Fehlschlag.</span></li>
+        <li><b>2</b><span>Das Auge bleibt da, aber gedämpft. Der Agent verschwindet nicht — das wäre ein stiller Fehlschlag.</span></li>
       </ol>
       <p class="rule"><em>Nicht erlaubt:</em> „Etwas ist schiefgelaufen", leeres Feld, verlorener Entwurf, Auto-Retry-Schleife.</p>
       <p class="rule"><em>Reduziert:</em> Overlay erscheint als Schnitt; Fokus springt auf „erneut senden" (programmatisch, sichtbar).</p>
@@ -965,16 +913,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- DISCONNECTED -->
     <article class="frame-card" id="st-disconnected">
       <header><h4>DISCONNECTED</h4><span class="badge o">Pflicht</span></header>
-      <div class="stage" data-focus="field" style="--open:.6;--w:.62">
-        <div class="texture"></div>
-        <div class="strip"><span>Verbindung getrennt</span><span>Entwurf bleibt erhalten · neuer Versuch in 3 s</span></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline" style="opacity:.55"><span class="typed">Und was hat die Analyse ergeben?</span></div>
-        <div class="rail"><div class="job"><b>Analysing</b><span>pausiert</span><div class="bar"><i></i></div></div></div>
-        <i class="mk" style="--x:50%;--y:7%">1</i>
-        <i class="mk" style="--x:88%;--y:16%">2</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=TEXT_IDLE · connection=DISCONNECTED · background=WORKING (pausiert)</div>
+      <div class="stage" data-focus="field" style="--open:.75;--w:.66"><div class="texture"></div><div class="face"></div><div class="strip"><span>Verbindung getrennt</span><span>Entwurf bleibt erhalten · neuer Versuch in 3 s</span></div><div class="rail"><div class="job"><b>Analysing</b><span>pausiert</span><div class="bar"><i></i></div></div></div><div class="composer"><span class="input">Und was hat die Analyse ergeben?</span><span class="icon send"></span><span class="icon mic"></span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:50%;--y:6%">1</i><i class="mk" style="--x:6%;--y:21%">2</i></div><div class="dims">presence=PRESENT · input=TEXT_IDLE · connection=DISCONNECTED · background=WORKING (pausiert)</div>
       <ol class="an">
         <li><b>1</b><span>Ein 1-zeiliger Streifen oben, keine Modalseite. Er nennt den nächsten Versuch, nicht nur den Fehler.</span></li>
         <li><b>2</b><span>Hintergrundarbeit wird als pausiert markiert, nicht als „läuft weiter" behauptet.</span></li>
@@ -987,23 +926,9 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <!-- USER_SPEAKING -->
     <article class="frame-card" id="st-speaking">
       <header><h4>USER_SPEAKING</h4><span class="badge e">E</span></header>
-      <div class="stage" data-focus="field" style="--open:.92;--w:.62">
-        <div class="texture"></div>
-        <div class="focusring"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="fieldline" style="bottom:20%"><span class="typed" style="opacity:.7">… wie du aussiehst</span><span class="caret"></span></div>
-        <div class="level show">
-          <b style="height:6px"></b><b style="height:14px"></b><b style="height:22px"></b><b style="height:9px"></b>
-          <b style="height:26px"></b><b style="height:16px"></b><b style="height:5px"></b><b style="height:12px"></b>
-          <span class="lbl">hört zu · Stop mit Esc</span>
-        </div>
-        <i class="mk" style="--x:50%;--y:28%">1</i>
-        <i class="mk" style="--x:50%;--y:69%">2</i>
-        <i class="mk" style="--x:88%;--y:80%">3</i>
-      </div>
-      <div class="dims">presence=PRESENT · input=USER_SPEAKING · turn=IDLE</div>
+      <div class="stage" data-focus="field" data-ring="1" style="--open:1;--look:-.35;--w:.66"><div class="texture"></div><div class="face"></div><div class="composer"><span class="input">… wie du aussehen sollst</span><span class="icon send"></span><span class="icon mic"></span></div><div class="level show"><b style="height:8px"></b><b style="height:15px"></b><b style="height:22px"></b><b style="height:9px"></b><b style="height:26px"></b><b style="height:16px"></b><b style="height:6px"></b><b style="height:13px"></b><span class="lbl">hört zu · Stop mit Esc</span></div><div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div><i class="mk" style="--x:82%;--y:43%">1</i><i class="mk" style="--x:34%;--y:84%">2</i><i class="mk" style="--x:60%;--y:87%">3</i></div><div class="dims">presence=PRESENT · input=USER_SPEAKING · turn=IDLE</div>
       <ol class="an">
-        <li><b>1</b><span>Der Ring um das ganze Feld ist das Listening-Signal, nicht ein roter Punkt. Augen bleiben ruhig.</span></li>
+        <li><b>1</b><span>Der Ring liegt um den Composer — das Listening-Signal, kein roter Punkt. Das Auge bleibt ruhig.</span></li>
         <li><b>2</b><span>Pegel kommt aus echter Audioenergie. Ohne Eingang bleibt der Pegel flach — kein tanzender Fake.</span></li>
         <li><b>3</b><span>Stop ist immer sichtbar und 44 px groß; Esc und Tippen beenden ebenfalls.</span></li>
       </ol>
@@ -1019,7 +944,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     einer Dimension erlaubt/verbietet einen Wert in einer anderen).</p>
 
   <div class="sm">
-    <svg viewBox="0 0 980 430" role="img" aria-label="Orthogonale Zustandsdimensionen von Agentfähig">
+    <svg viewBox="0 0 980 450" role="img" aria-label="Orthogonale Zustandsdimensionen von Agentfähig">
       <defs>
         <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="#3a3a42"/>
@@ -1108,7 +1033,13 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <text class="etext" x="600" y="214">SETTLED → OFFERED</text>
       <path class="edgeb" d="M330 121 C330 138 300 142 300 148"/>
       <text class="etext" x="250" y="140">Tippen bricht Zuhören ab</text>
-      <text class="etext" x="20" y="405">FAULT (TURN_ERROR · VOICE_ERROR · BACKGROUND_ERROR) liegt orthogonal zu allen Zeilen.</text>
+      <rect class="lane" x="120" y="352" width="820" height="44" rx="8"/>
+      <text class="lanelab" x="20" y="379">motion</text>
+      <rect class="node" x="140" y="361" width="78" height="26"/><text class="nodetext" x="152" y="378">RUNNING</text>
+      <rect class="node" x="250" y="361" width="76" height="26"/><text class="nodetext" x="264" y="378">PAUSED</text>
+      <path class="edge" d="M218 374 H246"/><text class="etext" x="222" y="358">Pause motion</text>
+      <text class="etext" x="360" y="378">hält Autonomie an (Caret, Balken, Blinzeln) — nicht Antwort, Regler, Fehler</text>
+      <text class="etext" x="20" y="425">FAULT (TURN_ERROR · VOICE_ERROR · BACKGROUND_ERROR) liegt orthogonal zu allen Zeilen.</text>
     </svg>
   </div>
 
@@ -1118,13 +1049,13 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
   <div class="table-scroll"><table class="spec">
     <thead><tr><th>Von</th><th>Nach</th><th>Auslöser</th><th>Wächter</th><th>Sichtbar</th><th>Quelle</th></tr></thead>
     <tbody>
-      <tr><td>DORMANT</td><td>AWAKENING</td><td>Timer 4,6 s (Pre-Glow), 5,0 s (Lider)</td><td>Erstbesuch, kein <code>prefers-reduced-motion</code></td><td>Augen öffnen sich</td><td><span class="src">F1</span></td></tr>
-      <tr><td>DORMANT</td><td>AWAKENING</td><td>Erste Eingabe (Taste, Klick, Touch, Tab)</td><td>—</td><td>Augen springen auf 100 % in 240 ms</td><td><span class="src">P4</span></td></tr>
+      <tr><td>DORMANT</td><td>AWAKENING</td><td>Timer 4,6 s (Pre-Glow), 5,0 s (Lider)</td><td>Erstbesuch, kein <code>prefers-reduced-motion</code></td><td>Das Auge öffnet sich</td><td><span class="src">F1</span></td></tr>
+      <tr><td>DORMANT</td><td>AWAKENING</td><td>Erste Eingabe (Taste, Klick, Touch, Tab)</td><td>—</td><td>Auge springt auf 100 % in 240 ms</td><td><span class="src">P4</span></td></tr>
       <tr><td>AWAKENING</td><td>PRESENT</td><td>Lider erreichen 100 %</td><td>Timer oder Eingabe hat den Film gestartet</td><td>Eingabe blendet ein</td><td><span class="src">F1</span></td></tr>
       <tr><td>PRESENT</td><td>TEXT_FOCUS</td><td>Klick/Tab auf Eingabe</td><td>—</td><td>Fokusring, Caret</td><td><span class="src">F2</span></td></tr>
-      <tr><td>TEXT_FOCUS</td><td>USER_TYPING</td><td>Erstes Zeichen</td><td>Eingabe nicht gesperrt</td><td>Text sofort, Pupillen folgen</td><td><span class="src">F2</span></td></tr>
+      <tr><td>TEXT_FOCUS</td><td>USER_TYPING</td><td>Erstes Zeichen</td><td>Eingabe nicht gesperrt</td><td>Text sofort, Pupille folgt</td><td><span class="src">F2</span></td></tr>
       <tr><td>USER_TYPING</td><td>PROCESSING</td><td>Enter</td><td>Text nicht leer, Verbindung nicht getrennt</td><td>Zeile rückt hoch, Sendepuls</td><td><span class="src">T1</span></td></tr>
-      <tr><td>PROCESSING</td><td>RESPONDING</td><td>Erster Token</td><td>Turn nicht abgebrochen</td><td>Typewriter beginnt, Augen zurück</td><td><span class="src">T1</span></td></tr>
+      <tr><td>PROCESSING</td><td>RESPONDING</td><td>Erster Token</td><td>Turn nicht abgebrochen</td><td>Typewriter beginnt, Auge zurück</td><td><span class="src">T1</span></td></tr>
       <tr><td>PROCESSING</td><td>IDLE</td><td>Escape / Abbrechen</td><td>—</td><td>„abgebrochen", keine erfundene Antwort</td><td><span class="src">Q1</span></td></tr>
       <tr><td>PROCESSING</td><td>ERROR</td><td>Fehlerereignis</td><td>—</td><td>Fehlerkarte, Entwurf erhalten</td><td><span class="src">Q1</span></td></tr>
       <tr><td>RESPONDING</td><td>SETTLED</td><td>Letzter Token + 400 ms Ruhe</td><td>Stream geschlossen</td><td>Caret verschwindet</td><td><span class="src">F2</span></td></tr>
@@ -1199,14 +1130,14 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <tbody>
       <tr><td>Pre-Glow</td><td><span class="badge t">T</span> 4,6 s</td><td>opacity</td><td>0,03 → 0,10</td><td>1200 ms</td><td>sine in-out</td><td>ja (Eingabe)</td><td>entfällt</td></tr>
       <tr><td>Lider öffnen</td><td><span class="badge t">T</span> 5,0 s</td><td>scaleY (open)</td><td>0 → 1</td><td>900 ms</td><td>cubic-bezier(.2,.8,.2,1)</td><td>ja</td><td>Schnitt</td></tr>
-      <tr><td>Pupillen</td><td><span class="badge t">T</span> +220 ms / <span class="badge e">E</span> Zeiger</td><td>translateX/Y</td><td>0 → ±6 px</td><td>420 ms</td><td>ease-out</td><td>ja</td><td>kein Tracking</td></tr>
+      <tr><td>Pupille</td><td><span class="badge t">T</span> +220 ms / <span class="badge e">E</span> Zeiger</td><td>background-position</td><td>0 → ±9 %</td><td>420 ms</td><td>ease-out</td><td>ja</td><td>kein Tracking</td></tr>
       <tr><td>Blinzeln</td><td><span class="badge t">T</span> autonom 3–7 s</td><td>open</td><td>1 → 0 → 1</td><td>280 ms</td><td>linear</td><td>—</td><td>aus</td></tr>
-      <tr><td>Eingabe einblenden</td><td><span class="badge t">T</span> Lider fertig + 120 ms</td><td>opacity, translateY</td><td>0, 6 px → 1, 0</td><td>400 ms</td><td>ease-out</td><td>ja</td><td>opacity 80 ms</td></tr>
+      <tr><td>Composer einblenden</td><td><span class="badge t">T</span> Lid fertig + 120 ms</td><td>opacity</td><td>0,35 → 1</td><td>400 ms</td><td>ease-out</td><td>ja</td><td>opacity 80 ms</td></tr>
       <tr><td>Caret</td><td><span class="badge t">T</span> immer</td><td>opacity</td><td>1 ↔ 0</td><td>1060 ms Takt</td><td>steps(1)</td><td>—</td><td>bleibt (Orientierung)</td></tr>
-      <tr><td>Fokus-Lift</td><td><span class="badge e">E</span> Fokus</td><td>translateY</td><td>0 → −8 px</td><td>180 ms</td><td>ease-out</td><td>ja</td><td>entfällt</td></tr>
-      <tr><td>Sendepuls</td><td><span class="badge e">E</span> Enter</td><td>1-px-Linie entlang Pfad</td><td>Eingabe → Augen</td><td>320 ms</td><td>ease-in-out</td><td>nein (einmalig)</td><td>entfällt</td></tr>
-      <tr><td>Nutzerzeile rückt hoch</td><td><span class="badge e">E</span> Enter</td><td>top, opacity, font-size</td><td>15 % → 26 %, 1 → 0,55</td><td>420 ms</td><td>cubic-bezier(.2,.7,.2,1)</td><td>nein</td><td>Schnitt</td></tr>
-      <tr><td>Augen zurück</td><td><span class="badge e">E</span> erster Token</td><td>top, scale</td><td>38 % → 18 %, 1 → 0,84</td><td>520 ms</td><td>cubic-bezier(.2,.7,.2,1)</td><td>ja</td><td>Schnitt</td></tr>
+      <tr><td>Composer-Fokusstrich</td><td><span class="badge e">E</span> Fokus</td><td>scaleX</td><td>0 → 1 (2 px, Akzent)</td><td>180 ms</td><td>ease-out</td><td>ja</td><td>entfällt</td></tr>
+      <tr><td>Sendepuls</td><td><span class="badge e">E</span> Enter</td><td>1-px-Linie entlang Pfad</td><td>Composer → Auge</td><td>320 ms</td><td>ease-in-out</td><td>nein (einmalig)</td><td>entfällt</td></tr>
+      <tr><td>Antwortblock erscheint</td><td><span class="badge e">E</span> Enter</td><td>opacity, translateY</td><td>0, 6 px → 1, 0</td><td>180 ms</td><td>ease-out</td><td>nein</td><td>Schnitt</td></tr>
+      <tr><td>Auge zurück</td><td><span class="badge e">E</span> erster Token</td><td>right, top, width</td><td>7 % → 5,5 %, 21 → 18,5 cqw</td><td>520 ms</td><td>cubic-bezier(.2,.7,.2,1)</td><td>ja</td><td>Schnitt</td></tr>
       <tr><td>Typewriter</td><td><span class="badge e">E</span> Tokenstrom</td><td>Zeichenanzahl</td><td>0 → n</td><td>Basis 38 z/s, wortabhängig (§4)</td><td>linear + Pausen</td><td>ja (Esc)</td><td>absatzweise, 80 ms Fade</td></tr>
       <tr><td>Frage erscheint</td><td><span class="badge e">E</span> SETTLED + 600 ms</td><td>opacity, translateY</td><td>0, 6 px → 1, 0</td><td>220 ms</td><td>ease-out</td><td>ja</td><td>Schnitt</td></tr>
       <tr><td>Wortflug zum Regler</td><td><span class="badge e">E</span> Antwort auf die Frage</td><td>position, scale</td><td>Nutzerzeile → Rille</td><td>240 ms</td><td>ease-in-out</td><td>ja</td><td>entfällt (Label sitzt sofort)</td></tr>
@@ -1343,18 +1274,20 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     beiden Sätzen sind identisch — das ist die Prüfung aus <span class="src">T3</span> in klein.</p>
 
   <div class="demo">
-    <div class="stage" id="rzStage" data-focus="text" style="--w:.62">
+    <div class="stage" id="rzStage" data-focus="text" style="--w:.66">
       <div class="texture"></div>
-      <div class="eyes" style="--open:1"><i class="eye"></i><i class="eye"></i></div>
-      <div class="answer" style="top:30%">
+      <div class="face"></div>
+      <div class="answer" style="top:26%">
         <p class="q" id="rzQ">Wie fühlt sich das an?</p>
-        <p class="a" id="rzA" style="font-size:2.0cqw">Kurz gesagt: Du siehst drei Dinge — Augen, ein Textfeld, eine Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Was im Hintergrund läuft, bleibt leise.</p>
+        <p class="a" id="rzA">Kurz gesagt: Du siehst drei Dinge — Augen, ein Textfeld, eine Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Was im Hintergrund läuft, bleibt leise.</p>
       </div>
       <div class="slider show" style="--pos:.62" id="rzSlider">
         <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
         <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
         <div class="ticks"><i></i><i></i><i></i></div>
       </div>
+      <div class="composer"><span class="input ph">…</span><span class="icon send"></span><span class="icon mic"></span></div>
+      <div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div>
     </div>
     <div class="controls" style="margin-top:14px">
       <label style="flex:1">Achse
@@ -1414,7 +1347,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <div class="card">
       <h4>Wo es lebt</h4>
       <ul class="tight small">
-        <li>Desktop: rechte Randspalte, 23 % Breite, nur wenn Jobs existieren.</li>
+        <li>Desktop: linke Randspalte, 23 % Breite, nur wenn Jobs existieren.</li>
         <li>Mobil: Bottom-Sheet-Griff mit Anzahl, nie automatisch geöffnet.</li>
         <li>Ankündigung: eine höfliche Screenreader-Zeile (<code>aria-live="polite"</code>), kein Alarm.</li>
         <li>Der Front-Agent darf <em>erwähnen</em>, dass etwas läuft — in einem Nebensatz, ohne Zeitzusage.</li>
@@ -1434,16 +1367,17 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <button id="abStart" class="chip" style="font-size:13px;cursor:pointer">Hintergrundjob starten (simuliert)</button>
       <span class="mono small" id="abState">background=NONE</span>
     </div>
-    <div class="stage" id="abStage" data-focus="field" style="--open:1;--w:.62;margin-top:12px">
+    <div class="stage" id="abStage" data-focus="field" style="--open:1;--w:.66;margin-top:12px">
       <div class="texture"></div>
-      <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-      <div class="fieldline"><span class="typed">Und was hat die Analyse ergeben?</span><span class="caret"></span></div>
+      <div class="face"></div>
       <div class="rail" id="abRail" hidden>
         <div class="job" id="abJob"><b>Analysing</b><span>1 Aufgabe läuft</span><div class="bar"><i></i></div></div>
       </div>
-      <div class="chips" id="abChips" style="bottom:30%">
+      <div class="composer"><span class="input">Und was hat die Analyse ergeben?</span><span class="caret"></span><span class="icon send"></span><span class="icon mic"></span></div>
+      <div class="chips" id="abChips" style="bottom:27%">
         <span class="chip solid">Ergebnis zeigen</span><span class="chip">später</span>
       </div>
+      <div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div>
     </div>
     <p class="small" id="abSay" style="margin-bottom:0">Variante A: Das Ergebnis erscheint am Rand, der
       Fokus bleibt im Feld. Keine Bewegung im Zentrum.</p>
@@ -1526,16 +1460,16 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <button id="vDeny" class="chip" style="font-size:13px;cursor:pointer">Verweigerung zeigen</button>
       <span class="mono small" id="vState">input=TEXT_IDLE</span>
     </div>
-    <div class="stage" id="vStage" data-focus="field" style="--open:1;--w:.62;margin-top:12px">
+    <div class="stage" id="vStage" data-focus="field" style="--open:1;--w:.66;margin-top:12px">
       <div class="texture"></div>
-      <div class="focusring"></div>
-      <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-      <div class="fieldline"><span class="typed" id="vText" style="opacity:.7">…</span><span class="caret"></span></div>
+      <div class="face"></div>
+      <div class="composer"><span class="input" id="vText" style="opacity:.7">…</span><span class="caret"></span><span class="icon send"></span><span class="icon mic"></span></div>
       <div class="level" id="vLevel"><span class="lbl" id="vLabel">hört zu · Stop mit Esc</span></div>
-      <div class="overlay" id="vNote" hidden style="inset:auto 18% 30% 18%">
+      <div class="overlay" id="vNote" hidden style="top:34%">
         <span class="ttl" id="vNoteTtl">Stimme ist aus.</span>
         <span class="txt" id="vNoteTxt">Du kannst weiter tippen — alles, was die Stimme kann, geht auch als Text.</span>
       </div>
+      <div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div>
     </div>
     <p class="small" id="vSay" style="margin-bottom:0">Voice ist aus. Kein Zugriff, keine Aufnahme,
       kein Prompt.</p>
@@ -1552,7 +1486,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
 <!-- 8 ================================================================= -->
 <section class="sec" id="responsive"><div class="wrap">
   <h2><span class="n">08 · Desktop und Mobil · Deliverable H</span>Dieselbe Präsenz, andere Fläche</h2>
-  <p class="lead">Mobil ist keine verkleinerte Desktopseite. Die Augen bleiben das erste Ereignis, aber
+  <p class="lead">Mobil ist keine verkleinerte Desktopseite. Das Auge bleibt das erste Ereignis, aber
     Text bekommt mehr Raum, der Hintergrund wird zur Schublade, und alles, was Hover braucht, fällt weg.</p>
 
   <div class="devices">
@@ -1560,22 +1494,22 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <h4>Desktop ≥ 1024 px</h4>
       <div class="stage" data-focus="text" style="--open:1;--w:.66;aspect-ratio:16/9">
         <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="answer" style="top:32%;left:18%;right:18%">
+        <div class="face"></div>
+        <div class="answer" style="top:26%">
           <p class="q">Soll ich wärmer oder kühler aussehen?</p>
-          <p class="a" style="font-size:2.0cqw">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.</p>
+          <p class="a">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.</p>
         </div>
-        <div class="slider show" style="--pos:.7;left:18%;right:18%;bottom:18%">
+        <div class="slider show" style="--pos:.7">
           <div class="lab"><span>wärmer · erzählend</span><span>kühler · präzise</span></div>
           <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
         </div>
-        <div class="fieldline" style="left:18%;right:18%;bottom:8%"><span class="hint">Enter · senden</span><span class="caret"></span></div>
-        <div class="mic show" style="right:18%;bottom:15%"><i></i></div>
+        <div class="composer"><span class="input ph">…</span><span class="icon send"></span><span class="icon mic"></span></div>
+        <div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint</span><span>Privacy</span><span>Built by Samuel</span></span></div>
       </div>
       <ul class="tight small" style="margin-top:10px">
-        <li>Augen bei 18 % (Textfokus), Antwortspalte 60 ch, Regler in derselben Spalte.</li>
-        <li>Hintergrund: rechte Randspalte 23 %, nur bei Jobs.</li>
-        <li>Maus: Pupillen folgen dem Zeiger, solange kein Text Fokus ist.</li>
+        <li>Auge rechts bei 18,5 cqw (Textfokus), Antwort links, Regler in derselben Spalte.</li>
+        <li>Hintergrund: linke Randspalte 23 %, nur bei Jobs.</li>
+        <li>Maus: Die Pupille folgt dem Zeiger, solange kein Text Fokus ist.</li>
         <li>Tastatur: Tab-Reihenfolge Feld → Stimme → Regler → Verlauf → Hintergrund.</li>
       </ul>
     </div>
@@ -1584,20 +1518,20 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <h4>Mobil 390 × 844</h4>
       <div class="stage mobile" data-focus="text" style="--open:1;--w:.66">
         <div class="texture"></div>
-        <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
-        <div class="answer" style="top:32%;left:9%;right:9%">
+        <div class="face"></div>
+        <div class="answer">
           <p class="q">Soll ich wärmer oder kühler aussehen?</p>
           <p class="a">Ich bin die Seite. Wenn du mir sagst, wie ich wirken soll, ändere ich mich — und meine Art zu antworten mit.</p>
         </div>
-        <div class="slider show" style="--pos:.7;left:9%;right:9%;bottom:19%;opacity:1">
-          <div class="lab" style="font-size:2.2cqw"><span>wärmer</span><span>kühler</span></div>
-          <div class="groove"><div class="fill"></div><div class="thumb" style="width:3.4cqw;height:3.4cqw"></div></div>
+        <div class="slider show" style="--pos:.7">
+          <div class="lab"><span>wärmer</span><span>kühler</span></div>
+          <div class="groove"><div class="fill"></div><div class="thumb"></div></div>
         </div>
-        <div class="fieldline" style="left:9%;right:9%;bottom:10%"><span class="hint">Enter</span><span class="caret"></span></div>
-        <div class="mic show" style="right:9%;bottom:8%;width:9cqw;height:9cqw"><i style="width:2.4cqw;height:4.4cqw"></i></div>
+        <div class="composer"><span class="input ph">…</span><span class="icon send"></span><span class="icon mic"></span></div>
+        <div class="footer"><span class="pause">Pause motion</span><span class="legal"><span>Imprint · Privacy</span></span></div>
       </div>
       <ul class="tight small" style="margin-top:10px">
-        <li>Augen bei 30 %, 20 % kleiner; Antwort 26 px, 42 Zeichen, Ränder 20 px.</li>
+        <li>Auge oben bei 32 cqw, 20 % kleiner; Antwort 26 px, 30 Zeichen, Ränder 20 px.</li>
         <li>Hintergrund als Bottom-Sheet mit Griff + Anzahl; öffnet nur auf Tipp.</li>
         <li>Trefferflächen ≥ 44 px; Regler-Griff visuell 14 px, Treffer 44 px.</li>
         <li>Eingabe über der Tastatur, Safe-Area unten; kein Auto-Fokus (keine Tastatur beim Ankommen).</li>
@@ -1610,7 +1544,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <thead><tr><th>Aspekt</th><th>Desktop</th><th>Mobil</th><th>Warum</th></tr></thead>
     <tbody>
       <tr><td>Erstes Erwachen</td><td>5,0 s, Pre-Glow ab 4,6 s</td><td>4,0 s (kürzere Aufmerksamkeitsspanne), Pre-Glow ab 3,6 s</td><td>Vorschlag, im Tryout prüfen — keine Messung</td></tr>
-      <tr><td>Textfokus</td><td>Augen 18 %, 16 % kleiner</td><td>Augen 26 %, 20 % kleiner</td><td>Mehr Textraum bei kleiner Fläche</td></tr>
+      <tr><td>Textfokus</td><td>Auge 18,5 cqw</td><td>Auge 32 cqw</td><td>Mehr Textraum bei kleiner Fläche</td></tr>
       <tr><td>Verlauf</td><td>2 ältere Antworten angeschnitten</td><td>1 ältere Antwort, Scrollen</td><td>Kein Hochleistungs-Scrollen auf kleinen Geräten</td></tr>
       <tr><td>Hintergrund</td><td>Randspalte</td><td>Bottom-Sheet</td><td>Seitenleiste würde Antwortspalte töten</td></tr>
       <tr><td>Voice</td><td>Mikro rechts neben Feld</td><td>Mikro als 44-px-Ziel in Daumenreichweite</td><td>Erreichbarkeit ohne Umgreifen</td></tr>
@@ -1663,6 +1597,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <tr><td>L6</td><td>Fast/Slow</td><td>Ergebnis unterbricht nicht; Front bleibt bedienbar; A und B unterscheidbar; Auto-Sprechen nicht vorhanden.</td></tr>
       <tr><td>L7</td><td>Voice</td><td>Keine Aufnahme vor Klick; Pegel nur aus echter Energie; Stop ≤ 120 ms; Textweg gleichwertig.</td></tr>
       <tr><td>L8</td><td>Fehler / Verbindung</td><td>Drei injizierte Fehler erzeugen drei verständliche, sichtbare Zustände; Entwurf bleibt.</td></tr>
+      <tr><td>L9</td><td>Pause motion</td><td>Der Knopf hält autonome Bewegung an (Caret, Balken, Blinzeln) und lässt Antwort, Regler und Fehler weiter funktionieren; <code>prefers-reduced-motion</code> startet pausiert.</td></tr>
     </tbody>
   </table></div>
 
@@ -1678,7 +1613,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <thead><tr><th>Was hier entschieden ist</th><th>Wohin es im Bau gehört</th><th>Was dort noch fehlt</th></tr></thead>
     <tbody>
       <tr><td>Sieben Dimensionswerte + Übergangstabelle</td><td>Ein Zustandsobjekt als einzige Wahrheit (<span class="src">Q2</span>)</td><td>Schema, Server-Autorität, Re-Sync-Regel</td></tr>
-      <tr><td>Augen-Zustände: geschlossen → offen → zurückgetreten</td><td>Mapping auf <code>EyeFace.js</code> (MIT)</td><td>Adapter-Funktion, Lizenznotiz (<span class="src">Q3</span>)</td></tr>
+      <tr><td>Auge-Zustände: geschlossen → offen → zurückgetreten</td><td>Mapping auf <code>EyeFace.js</code> (MIT)</td><td>Adapter-Funktion, Lizenznotiz (<span class="src">Q3</span>)</td></tr>
       <tr><td>Regler → CSS-Variablen + Prompt-Fragment</td><td>Ein Zustandsfeld, zwei Verbraucher</td><td>Prompt-Fragment, Blindtest (T3)</td></tr>
       <tr><td>Typewriter-Raten</td><td>Antwort-Renderer</td><td>Frame-Messung, Puffer-Regel bei echtem Stream</td></tr>
       <tr><td>Voice-Zustände + Fallbacks</td><td>Transport/Adapter</td><td>Berechtigungsfluss, TTS-Provider, Datenschutz (D7)</td></tr>
@@ -1703,9 +1638,12 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       <tr><td>5</td><td>Proaktives Nachsprechen (<span class="src">T4</span>)</td><td><strong>nicht</strong> enthalten; nur A/B-Angebot</td><td>Eigener ADR + Einwilligung + Unterbrechungsregel</td></tr>
       <tr><td>6</td><td>Wiederkehr-Besuch</td><td>Erwachen erneut bei 5 s, aber ohne Pre-Glow</td><td>Messung, ob Präsenz beim zweiten Besuch noch trägt</td></tr>
       <tr><td>7</td><td>Verlaufstiefe</td><td>Zwei angeschnittene ältere Antworten</td><td>Lesetest; ADR-0002 sagt „ein Ort", nicht „kein Verlauf"</td></tr>
-      <tr><td>8</td><td>Reduzierte Bewegung + Augen</td><td>Statische offene Augen, kein Blinzeln</td><td>Test, ob Präsenz ohne Autonomie erhalten bleibt</td></tr>
+      <tr><td>8</td><td>Reduzierte Bewegung + Auge</td><td>Statisch offenes Auge, kein Blinzeln</td><td>Test, ob Präsenz ohne Autonomie erhalten bleibt</td></tr>
       <tr><td>9</td><td>Mobile Erwachen 4 s statt 5 s</td><td>Vorschlag</td><td>Tryout; keine Messung vorhanden</td></tr>
       <tr><td>10</td><td>Zweiter/dritter Regler</td><td>nicht in V1</td><td>Ausbaupfad, eigener Change Request</td></tr>
+      <tr><td>11</td><td>P-06 Sichtbarkeit der Einladung</td><td>Composer mit „…" wie live; keine sichtbare Aufforderung</td><td>Fremdtest: finden Menschen den Einstieg ohne Hinweis? (P1)</td></tr>
+      <tr><td>12</td><td>P-07 Umfang von Pause motion</td><td>pausiert Autonomie, nicht Zustandswechsel</td><td>Bestätigung; WCAG-Lesart und Live-Verhalten angleichen</td></tr>
+      <tr><td>13</td><td>P-08 Markenname nur für Screenreader</td><td>wie live (<code>h1.sr-only</code>)</td><td>Entscheidung: unsichtbar lassen oder sichtbar machen</td></tr>
     </tbody>
   </table></div>
 
@@ -1722,6 +1660,63 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     <code>docs/adr/ADR-0001…0005</code>, <code>sketches/2026-11-12-agentfaehig.md</code>,
     <code>UPSTREAM-SEARCH-vergleichbare-projekte.md</code>,
     <code>research/SCOUT-SYNTHESIS.md</code>, <code>docs/GUTACHTEN-wow-oder-scheitern.md</code>.</p>
+</div></section>
+
+
+<!-- 11 ================================================================ -->
+<section class="sec" id="live"><div class="wrap">
+  <h2><span class="n">11 · Abgleich mit dem Live-Stand · Anhang</span>Was vom gebauten Bild übernommen ist — und was das Konzept ergänzt</h2>
+  <p class="lead">Am 20.11.2026 ist <code>agentfähig.de</code> öffentlich erreichbar (Cloudflare, HTTP 200).
+    Diese Fassung ist an dessen Anatomie angepasst. Der Abgleich ist read-only entstanden; am Deploy
+    wurde nichts geändert.</p>
+
+  <h3>Übernommen (mit Beleg)</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Element</th><th>Live-Befund (20.11.)</th><th>Im Konzept</th></tr></thead>
+    <tbody>
+      <tr><td>Ein Auge rechts</td><td><code>.eyes-container</code> ≈ 219 × 109 px, warme Iris, Lider, Blick folgt</td><td>ein Auge, 21 cqw, rechte Spalte, Lid-Öffnung 900 ms</td></tr>
+      <tr><td>Warme Papierfläche</td><td>Hintergrund ≈ <code>#f5efe6</code>, Text <code>#3d3229</code>, muted <code>#6b5b4c</code>, Akzent <code>#c17a4d</code></td><td>exakt diese Tokens als warmer Pol der Achse</td></tr>
+      <tr><td>Composer unten</td><td>Formular, Input mit Placeholder „…", Senden- und Stimme-Icon, 44 px Ziele</td><td>gleiche Anatomie, plus Fokusstrich und Zustandshinweise</td></tr>
+      <tr><td>Fußzeile</td><td>„Pause motion" links, Imprint · Privacy · „Built by Samuel" mittig</td><td>übernommen; Pause ist ein echter Zustand (§0)</td></tr>
+      <tr><td>Markenname unsichtbar</td><td><code>h1.sr-only</code>, 1 × 1 px — nur für Screenreader</td><td>übernommen; als offener Punkt P-06 notiert</td></tr>
+      <tr><td>Keine Chat-Oberfläche</td><td>kein Verlauf, keine Blasen, keine Avatare</td><td>bestätigt ADR-0002; Antwort bleibt eine Spalte</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Was das Konzept ergänzt, ohne das Live-Bild zu verwerfen</h3>
+  <div class="grid2">
+    <div class="card">
+      <h4>Links statt Mitte</h4>
+      <p class="small">Weil das Auge rechts sitzt, wandert die Antwort in die linke Spalte (8–68 %).
+        Der Composer bleibt unten, rückt aber unter die Antwortspalte (9–66 %), damit Auge und Antwort
+        sich nie überlagern. Das ist die einzige geometrische Änderung an der Live-Anatomie.</p>
+    </div>
+    <div class="card">
+      <h4>Der Composer bleibt ein Satz, kein Formular</h4>
+      <p class="small">Er sieht aus wie live (Linie, „…", zwei Icons), verhält sich aber wie im Konzept:
+        kein Label-Zwang, kein Senden-Text, <kbd>Enter</kbd> sendet, <kbd>Esc</kbd> bricht ab. Die
+        Sichtbarkeit der Einladung ist der offene Punkt P-06, nicht stillschweigend gelöst.</p>
+    </div>
+  </div>
+
+  <h3>Was live noch fehlt, gemessen am Pflichtumfang (F1–F5)</h3>
+  <div class="table-scroll"><table class="spec">
+    <thead><tr><th>Pflicht</th><th>Live-Befund</th><th>Nächster Slice (Vorschlag)</th></tr></thead>
+    <tbody>
+      <tr><td>F2 Antwort im Fokus</td><td>keine sichtbare Antwortfläche im Erstbild; <code>aria-live</code>-Region vorhanden</td><td>Antwortspalte links, Typewriter, Fokuswechsel nach SETTLED (P-01)</td></tr>
+      <tr><td>F3 ein Regler aus dem Gespräch</td><td><code>Rückgängig</code>/<code>Zurücksetzen</code> existieren, sind aber 0 × 0 px</td><td>Regler über dem Composer, Undo sichtbar, Fakten unverändert</td></tr>
+      <tr><td>F4 stilles Hintergrund-Ergebnis</td><td>kein Randkanal sichtbar</td><td>linke Randspalte, eine höfliche Screenreader-Zeile</td></tr>
+      <tr><td>F5 Voice nach Klick</td><td>Mikro-Icon vorhanden, Berechtigungsfluss nicht geprüft</td><td>Ring am Composer, echter Pegel, Stop ≤ 120 ms</td></tr>
+      <tr><td>Q1 sichtbarer Fehler</td><td>kein Fehlerzustand im Erstbild prüfbar</td><td>Fehlerkarte links, Entwurf bleibt (L8)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note warn">
+    <p><strong>Grenze dieses Abgleichs.</strong> Geprüft wurden DOM, berechnete Stile, Interaktion
+      (Fokus), Konsole und ein Screenshot bei 1280 × 634. Nicht geprüft: eine echte Antwort, Voice,
+      Mobilgerät, Latenz. Es wurde keine Nachricht gesendet — das hätte Modellkosten ausgelöst und
+      gehört in einen autorisierten Messlauf, nicht in eine Designprüfung.</p>
+  </div>
 </div></section>
 
 </main>
@@ -1742,25 +1737,25 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
   var SEG = [
     { t0: 0, t1: 4.6, phase: 'dormant', title: 'Ankunft · DORMANT', presence: 'DORMANT', input: '—', turn: 'IDLE',
       adapt: 'NOT_OFFERED', trigger: 'Timer', focus: 'Feld',
-      say: 'Ein ruhiges Feld. Keine Augen, keine Eingabe, keine Aufforderung.' },
+      say: 'Ein ruhiges Feld. Kein offenes Auge, keine Eingabe, keine Aufforderung.' },
     { t0: 4.6, t1: 5.0, phase: 'preglow', title: 'Pre-Glow · noch DORMANT', presence: 'DORMANT', input: '—', turn: 'IDLE',
       adapt: 'NOT_OFFERED', trigger: 'Timer', focus: 'Feld',
       say: 'Ein Hauch mehr Licht. Das ist der einzige Hinweis vor dem Erwachen — keine Aufforderung.' },
     { t0: 5.0, t1: 6.2, phase: 'awake', title: 'Erwachen · AWAKENING', presence: 'AWAKENING', input: 'TEXT_IDLE (0,35)', turn: 'IDLE',
-      adapt: 'NOT_OFFERED', trigger: 'Timer 5,0 s oder erste Eingabe', focus: 'Augen',
-      say: 'Die Lider öffnen sich in 900 ms. Pupillen kommen nach, dann ein erster Blinzler.' },
+      adapt: 'NOT_OFFERED', trigger: 'Timer 5,0 s oder erste Eingabe', focus: 'Auge',
+      say: 'Das Lid öffnet sich in 900 ms. Die Pupille kommt nach, dann ein erster Blinzler.' },
     { t0: 6.2, t1: 8.5, phase: 'ready', title: 'Einladung · PRESENT', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'IDLE',
       adapt: 'NOT_OFFERED', trigger: 'Lider 100 %', focus: 'Eingabe',
-      say: 'Eine Haarlinie mit Caret. Kein Kasten, kein Button. Wer tippt, ist sofort dran.' },
+      say: 'Der Composer mit Caret und „…“. Kein Kasten, kein Senden-Text. Wer tippt, ist sofort dran.' },
     { t0: 8.5, t1: 10.0, phase: 'typing', title: 'Erster Satz · USER_TYPING', presence: 'PRESENT', input: 'USER_TYPING', turn: 'IDLE',
       adapt: 'NOT_OFFERED', trigger: 'Ereignis: erstes Zeichen', focus: 'eigener Text',
-      say: 'Der eigene Text erscheint sofort, ohne Animation. Die Pupillen folgen der Schreibposition.' },
+      say: 'Der eigene Text erscheint sofort, ohne Animation. Die Pupille folgt der Schreibposition.' },
     { t0: 10.0, t1: 10.4, phase: 'processing', title: 'Gesendet · PROCESSING', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'PROCESSING',
       adapt: 'NOT_OFFERED', trigger: 'Ereignis: Enter', focus: 'Platz der Antwort',
       say: 'Ein einmaliger Sendepuls, danach Stille. Kein Spinner, keine Denk-Schleife, keine Dauer.' },
     { t0: 10.4, t1: 13.4, phase: 'responding', title: 'Antwort · RESPONDING', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'RESPONDING',
       adapt: 'NOT_OFFERED', trigger: 'Ereignis: erster Token', focus: 'Antwort',
-      say: 'Die Augen treten zurück. Der Text wächst wortlängen-abhängig — man sieht der Seite beim Antworten zu.' },
+      say: 'Das Auge tritt zurück. Der Text wächst wortlängen-abhängig — man sieht der Seite beim Antworten zu.' },
     { t0: 13.4, t1: 15.0, phase: 'offer', title: 'Die Frage · OFFERED', presence: 'PRESENT', input: 'TEXT_IDLE', turn: 'SETTLED',
       adapt: 'OFFERED', trigger: 'Ereignis: Antwortende + 600 ms', focus: 'Frage',
       say: 'Eine Frage pro Runde, drei optionale Chips. Der Agent fragt nach seinem Aussehen — und kündigt beide Wirkungen an.' },
@@ -1774,7 +1769,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
 
   var stage = $('liveStage');
   if (stage) {
-    var elEyes = $('liveEyes'), elAnswer = $('liveAnswer'), elA = $('liveA'), elQ = $('liveQ'),
+    var elAnswer = $('liveAnswer'), elA = $('liveA'), elQ = $('liveQ'),
         elHist = $('liveHist'), elField = $('liveField'), elUser = $('liveUser'),
         elSlider = $('liveSlider'), elChips = $('liveChips'), elRail = $('liveRail'),
         elStrip = $('liveStrip'), elUndo = $('liveUndo'), elMk = $('liveMk');
@@ -1785,7 +1780,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     var WARM = 'Drei Dinge sind fertig: Augen, Text, Stimme nach Klick. Ein Regler ändert Aussehen und Ton. Hintergrundagenten liefern still.';
     var RESPOND_UNTIL = 13.4;
 
-    var state = { t: 0, playing: false, speed: 1, reduced: false, raf: 0, last: 0 };
+    var state = { t: 0, playing: false, speed: 1, reduced: false, paused: false, raf: 0, last: 0 };
     var startT = parseFloat(new URLSearchParams(location.search).get('t') || '0');
     if (!isNaN(startT)) state.t = Math.max(0, Math.min(20, startT));
 
@@ -1828,7 +1823,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       var textFocus = ['processing', 'responding', 'offer', 'adapting', 'adapted'].indexOf(s.phase) >= 0;
       stage.setAttribute('data-focus', textFocus ? 'text' : 'field');
 
-      /* Augen */
+      /* Auge */
       var open = 0;
       if (s.phase === 'dormant' || s.phase === 'preglow') open = 0;
       else if (s.phase === 'awake') {
@@ -1837,30 +1832,36 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       }
       else open = 1;
       stage.style.setProperty('--open', open.toFixed(3));
-      stage.style.setProperty('--look', s.phase === 'typing' ? '.45' : '0');
+      stage.classList.toggle('paused', state.paused);
+      var rm = $('roMotion'); if (rm) rm.textContent = state.paused ? 'pausiert (Pause motion)' : 'läuft';
+      stage.style.setProperty('--look', s.phase === 'typing' ? '-.45' : s.phase === 'offer' ? '-.2' : '0');
 
-      /* Eingabe */
+      /* Composer — vom Live-Stand übernommen, immer sichtbar */
       var showField = ['ready', 'typing', 'processing', 'responding', 'offer', 'adapting', 'adapted'].indexOf(s.phase) >= 0;
-      show(elField, showField);
-      if (showField) {
-        var hint = $('liveHint');
-        if (s.phase === 'typing') {
-          elUser.textContent = USER.slice(0, Math.ceil(USER.length * Math.min(1, p * 1.6)));
-          elUser.style.display = ''; if (hint) hint.style.display = 'none';
-        } else if (s.phase === 'ready') {
-          elUser.textContent = ''; elUser.style.display = '';
-          if (hint) { hint.style.display = 'none'; }
-        } else if (s.phase === 'processing') {
-          elUser.textContent = ''; elUser.style.display = 'none';
-          if (hint) { hint.textContent = 'gesendet'; hint.style.display = ''; }
-        } else {
-          elUser.textContent = ''; elUser.style.display = 'none';
-          if (hint) { hint.textContent = 'Enter · als Nächstes vormerken'; hint.style.display = ''; }
-        }
-        elField.style.opacity = (s.phase === 'processing') ? '.4' : '1';
-        var caret = elField.querySelector('.caret');
-        if (caret) caret.style.display = (s.phase === 'typing' || s.phase === 'ready') ? '' : 'none';
+      show(elField, true);
+      var hint = $('liveHint');
+      if (s.phase === 'dormant' || s.phase === 'preglow') {
+        elUser.textContent = ''; elField.style.opacity = '.35';
+        if (hint) hint.hidden = true;
+      } else if (s.phase === 'awake') {
+        elUser.textContent = ''; elField.style.opacity = '.55';
+        if (hint) hint.hidden = true;
+      } else if (s.phase === 'typing') {
+        elUser.textContent = USER.slice(0, Math.ceil(USER.length * Math.min(1, p * 1.6)));
+        elField.style.opacity = '1';
+        if (hint) hint.hidden = true;
+      } else if (s.phase === 'ready') {
+        elUser.textContent = ''; elField.style.opacity = '1';
+        if (hint) hint.hidden = true;
+      } else if (s.phase === 'processing') {
+        elUser.textContent = ''; elField.style.opacity = '.85';
+        if (hint) { hint.textContent = 'gesendet'; hint.hidden = false; }
+      } else {
+        elUser.textContent = ''; elField.style.opacity = '.85';
+        if (hint) { hint.textContent = 'Enter · als Nächstes vormerken'; hint.hidden = false; }
       }
+      var caret = elField.querySelector('.caret');
+      if (caret) caret.style.display = (s.phase === 'typing' || s.phase === 'ready') ? '' : 'none';
 
       /* Antwort */
       var showAnswer = ['processing', 'responding', 'offer', 'adapting', 'adapted'].indexOf(s.phase) >= 0;
@@ -1970,6 +1971,12 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     if ($('scrub')) $('scrub').addEventListener('input', function () {
       state.t = parseFloat(this.value); render();
     });
+    if ($('pauseBtn')) $('pauseBtn').addEventListener('click', function () {
+      state.paused = !state.paused;
+      this.setAttribute('aria-pressed', state.paused ? 'true' : 'false');
+      this.textContent = state.paused ? 'Weiter bewegen' : 'Pause motion';
+      render();
+    });
     if ($('reducedBtn')) $('reducedBtn').addEventListener('click', function () {
       state.reduced = !state.reduced;
       this.setAttribute('aria-pressed', state.reduced ? 'true' : 'false');
@@ -1978,6 +1985,7 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
     });
     if (reduceQuery && reduceQuery.matches) {
       state.reduced = true;
+      state.paused = true;
       document.body.classList.add('reduced');
       var rb = $('reducedBtn'); if (rb) rb.setAttribute('aria-pressed', 'true');
     }
@@ -1989,6 +1997,10 @@ body.reduced .stage[data-focus="text"] .eyes{top:18%}
       if (state.playing) { setPlaying(false); }
     });
 
+    if (state.paused && $('pauseBtn')) {
+      $('pauseBtn').setAttribute('aria-pressed', 'true');
+      $('pauseBtn').textContent = 'Weiter bewegen';
+    }
     render();
   }
 
