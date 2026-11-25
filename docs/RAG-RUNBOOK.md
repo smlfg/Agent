@@ -65,7 +65,13 @@ read -s "CLOUDFLARE_API_TOKEN?Token: " && export CLOUDFLARE_API_TOKEN
 6. **Codex-Code prüfen:** Hash-Freigabe deckte zuerst nur Frontmatter ab; Kalibrierung war ein
    Stub; ein Feature war immer 1. Tests waren trotzdem grün.
 7. **Lokaler Antwort-Eval über Workers-AI-REST läuft in die Worker-Timeouts** → gegen Live testen.
-8. **Chunks v1 sind zu kurz und zu unpersönlich** (Screening): 120-Wort-Grenze, README-Anfänge,
+8. **Erster Live-Eval (25.11., Version ac1e9d41): 11/14.** „wer ist samuel" belegt beantwortet.
+   Schwäche: Zitat-Disziplin — richtige Antworten ohne `[[id]]` (→ keine Quellen-Chips), vor allem
+   über den OpenRouter-Fallback; dort auch Füllsätze („I hear you") und Sprachwechsel DE→EN.
+9. **`build.sh` kopiert `deploy/agentfaehig-site/src/` nach `public/`** — Worker-Quelltext,
+   `chunks.json`, `site-config.json` sind dadurch öffentlich abrufbar (keine Secrets, aber nicht
+   gewollt). Beim nächsten Umbau den zweiten rsync auf das Nötige begrenzen.
+10. **Chunks v1 sind zu kurz und zu unpersönlich** (Screening): 120-Wort-Grenze, README-Anfänge,
    keine Notion/Plaud-Stimme, Repos ohne README erzeugen leere Chunks.
 
 ## 4. Das nächste RAG (größer, krasser) — Startpunkte
