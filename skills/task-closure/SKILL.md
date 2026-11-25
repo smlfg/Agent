@@ -51,6 +51,11 @@ Die Ausgabe enthält:
 - **Die geänderten Dateien** mit Pfad.
 - **Die Zahl**, wenn eine Zahl die Aussage trägt — mit Einheit und
   Kontext (gemessen, geschätzt, gerechnet, übernommen).
+- **Bei UI-/Layout-/Bewegungsänderungen zusätzlich:** Vorher-/Nachher-Screenshots
+  unter identischen Bedingungen (Desktop, Mobile, `prefers-reduced-motion`) sowie
+  bei Motion-Änderungen eine kurze Aufnahme (`.webm`) samt eigener Sichtprüfung
+  der gerenderten Bilder; temporäre QA-Medien außerhalb des Git-Trees halten,
+  sofern nicht ausdrücklich als Repo-Evidenz abgelegt.
 
 Wenn ein Wert nicht gemessen wurde, steht das dabei. Nicht weglassen.
 

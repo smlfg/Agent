@@ -52,6 +52,17 @@ geprüfte Ergebnisse als erledigt melden; offene Punkte in `docs/PROJECT.md`
 festhalten. Keine Framework-, Hosting- oder Modellentscheidung als bestätigt
 darstellen, solange sie nur aus einer Skizze abgeleitet ist.
 
+Für jede sichtbare UI-, Layout-, Licht- oder Bewegungsänderung gilt zusätzlich
+als Pflichtnachweis:
+- **Vorher-/Nachher-Screenshots** unter identischen Viewport-, Zustands- und
+  Lichtbedingungen (Desktop, Mobile sowie `prefers-reduced-motion: reduce`).
+- **Kurze Bildschirmaufnahme** (z. B. `.webm`), sobald Bewegung, Parallaxe oder
+  Zustandsübergänge Teil der Änderung sind.
+- **Direkte Sichtprüfung** der gerenderten Bilder vor Abschluss — nicht bloß
+  CSS-Werte oder DOM-Attribute behaupten. Temporäre QA-Medien verbleiben
+  außerhalb des Git-Trees (z. B. im Session-Artefaktordner), sofern sie nicht
+  ausdrücklich als Repo-Evidenz abgelegt werden sollen.
+
 Der Abschluss folgt [`skills/task-closure/SKILL.md`](skills/task-closure/SKILL.md):
 Kriterien einzeln prüfen, Verifikation ausführen, Belege zeigen, Projektstand
 fortschreiben, Blocker mit Pfad festhalten, und genau eine Abschlussformulierung
