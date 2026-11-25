@@ -2,7 +2,7 @@
 // Phases: dormant -> idle -> listening -> thinking -> speaking -> idle
 // Only the current pair (prompt + answer) exists. There is no history.
 
-export const PHASES = Object.freeze(['dormant', 'idle', 'listening', 'thinking', 'speaking']);
+export const PHASES = Object.freeze(['dormant', 'idle', 'listening', 'thinking', 'speaking', 'error']);
 
 export const initialState = Object.freeze({
   phase: 'dormant',
@@ -24,7 +24,9 @@ export function reduce(state, event) {
     case 'INPUT': {
       // Typing wakes the surface; it never interrupts an answer in progress.
       if (state.phase === 'thinking' || state.phase === 'speaking') return state;
-      const phase = event.value && event.value.length > 0 ? 'listening' : 'idle';
+      const hasValue = Boolean(event.value && event.value.length > 0);
+      if (state.phase === 'error' && !hasValue) return state;
+      const phase = hasValue ? 'listening' : 'idle';
       return { ...state, phase };
     }
 
@@ -48,8 +50,8 @@ export function reduce(state, event) {
       return { ...state, phase: 'idle', answer: String(event.text ?? state.answer) };
 
     case 'RESPONSE_ERROR':
-      if (event.turn !== state.turn) return state;
-      return { ...state, phase: 'idle' };
+      if (event.turn !== state.turn || (state.phase !== 'thinking' && state.phase !== 'speaking')) return state;
+      return { ...state, phase: 'error' };
 
     default:
       return state;

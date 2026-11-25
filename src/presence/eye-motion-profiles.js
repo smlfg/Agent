@@ -15,6 +15,7 @@ export const EYE_STATES = Object.freeze([
   'responding',
   'adapting',
   'idle',
+  'error',
 ]);
 
 /**
@@ -329,6 +330,37 @@ export const EYE_STATE_PROFILES = Object.freeze({
     blinkMinMs: 2400,
     blinkMaxMs: 5400,
     doubleBlinkChance: 0.16,
+  }),
+
+  error: Object.freeze({
+    offsetX: 0,
+    offsetY: 0.06,
+    spread: 0.94,
+    scale: 0.97,
+    asymmetry: 0,
+    asymmetryBias: 0,
+    intensity: 0.35,
+    damping: 0.14,
+    driftAmpX: 0.03,
+    driftAmpY: 0.02,
+    driftFreq: 0.08,
+    spreadBreathAmp: 0.012,
+    scaleBreathAmp: 0.008,
+    microShiftIntervalMs: Object.freeze([4800, 8200]),
+    microShiftAmpX: 0.06,
+    microShiftAmpY: 0.04,
+    pointerFollow: 0.12,
+    focusCenterPull: 0.2,
+    eyeFollowRatio: 0.14,
+    pupilBiasX: 0,
+    pupilBiasY: 0.12,
+    pupilDilation: 0.88,
+    lidTopPct: 6,
+    lidBottomPct: 3,
+    lidAsymmetryPct: 0,
+    blinkMinMs: 3600,
+    blinkMaxMs: 6800,
+    doubleBlinkChance: 0.04,
   }),
 });
 
