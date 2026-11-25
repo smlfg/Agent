@@ -6,9 +6,11 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"
 OUT="$HERE/public"
 
+node "$ROOT/scripts/build-knowledge.mjs" --no-embed
 rm -rf "$OUT"
 mkdir -p "$OUT/classic"
-rsync -a --exclude README.md "$ROOT/src/" "$OUT/"
+rsync -a --exclude README.md --exclude 'agent/knowledge/' --exclude 'agent/orchestrator.js' "$ROOT/src/" "$OUT/"
+rsync -a "$HERE/src/" "$OUT/"
 mv "$OUT/living-surface.html" "$OUT/index.html"
 
 # agentfähig.de hat kein eigenes Impressum/Datenschutz: wie die bisherige Seite auf HAI verweisen.

@@ -2,6 +2,11 @@
 // (MiniMax → OpenAI-kompatibel → Workers AI als letzte, schlüsselfreie Stufe).
 // Agent endpoint code taken from DeepSeek agent D1 (tested in deploy/site/test/agent-endpoint.test.mjs).
 
+import { search } from './search.js';
+import siteConfig from './site-config.json' with { type: 'json' };
+import persona from '../../../src/agent/persona.json' with { type: 'json' };
+import { buildServerPrompt } from '../../../src/agent/prompt.js';
+
 const MINIMAX_BASE_URL = "https://api.minimax.io/v1";
 const MINIMAX_ANTHROPIC_BASE_URL = "https://api.minimax.io/anthropic";
 const DEFAULT_MINIMAX_MODEL = "MiniMax-M3.1-Flash";
@@ -11,7 +16,7 @@ const DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1";
 // Dritte Stufe: Workers AI über das native Binding. Braucht keinen Schlüssel und
 // kein Guthaben; läuft auf dem freien Neuronen-Kontingent. Modell per Var änderbar.
 const DEFAULT_WORKERS_AI_MODEL = "@cf/zai-org/glm-4.7-flash";
-const AGENT_SYSTEM_DEFAULT = "You are the presence on agentfähig.de, a website that behaves like an agent, built by Samuel. Answer in one to three short sentences. React to what the visitor says. Never say 'How can I help'. Be warm, curious and honest. No lists, no markdown.";
+const AGENT_SYSTEM_DEFAULT = "You are the presence on agentfähig.de, the public embodiment of the Human-Agent Interface (HAI) built by Samuel — an interface where human and agent work as one system and the website itself is experienced as an agent rather than a document with a separate chatbot. Answer in one to three short sentences. React to what the visitor says. Never say 'How can I help'. Be warm, curious and honest. No lists, no markdown.";
 const AGENT_TIMEOUT_MS = 4000; // pro Anbieter; Responsiveness-Vorgabe: Gesamtzeit klein halten
 const AGENT_TOTAL_BUDGET_MS = 9000; // Gesamtbudget aller Stufen; Client bricht bei 10 s ab
 const AGENT_MIN_STAGE_MS = 1500;
@@ -71,7 +76,16 @@ async function handleAgent(request, env) {
     return json({ error: input.error }, 400);
   }
 
-  const messages = buildAgentMessages(input.value);
+  const retrieved = await search({
+    query: input.value.prompt,
+    history: input.value.history,
+    lastSourceIds: input.value.lastSourceIds,
+    embedQuery: env.AI ? async (text) => {
+      const result = await withTimeout(env.AI.run('@cf/baai/bge-m3', { text: [text] }), 1500);
+      return result?.data?.[0] || result?.embeddings?.[0] || result?.result?.data?.[0] || null;
+    } : null,
+  });
+  const messages = buildAgentMessages(input.value, retrieved);
 
   const attempted = [];
   const startedAt = Date.now();
@@ -82,7 +96,7 @@ async function handleAgent(request, env) {
     attempted.push("minimax");
     const result = await callMiniMax(messages, env, stageMs());
     if (result.ok) {
-      return json({ text: result.text, provider: "minimax", model: result.model });
+      return finalizeResponse(result, 'minimax', retrieved);
     }
   }
 
@@ -90,7 +104,7 @@ async function handleAgent(request, env) {
     attempted.push("openai");
     const result = await callOpenAI(messages, env, stageMs());
     if (result.ok) {
-      return json({ text: result.text, provider: result.provider, model: result.model });
+      return finalizeResponse(result, result.provider, retrieved);
     }
   }
 
@@ -98,7 +112,7 @@ async function handleAgent(request, env) {
     attempted.push("workers-ai");
     const result = await callWorkersAI(messages, env, stageMs());
     if (result.ok) {
-      return json({ text: result.text, provider: "workers-ai", model: result.model });
+      return finalizeResponse(result, 'workers-ai', retrieved);
     }
   }
 
@@ -112,11 +126,6 @@ function normalizeAgentInput(payload) {
     return { ok: false, error: "A prompt is required." };
   }
 
-  let system = "";
-  if (payload?.system !== undefined && payload?.system !== null) {
-    system = trimMax(payload.system, AGENT_SYSTEM_MAX);
-  }
-
   let history = [];
   if (Array.isArray(payload?.history)) {
     history = payload.history
@@ -128,17 +137,54 @@ function normalizeAgentInput(payload) {
       .filter((item) => item.content);
   }
 
-  return { ok: true, value: { prompt, system, history } };
+  const params = clampParams(payload?.params);
+  const lastSourceIds = Array.isArray(payload?.last_source_ids)
+    ? payload.last_source_ids.filter((id) => typeof id === 'string').slice(0, 5)
+    : [];
+  return { ok: true, value: { prompt, history, params, lastSourceIds } };
 }
 
-function buildAgentMessages({ prompt, system, history }) {
+function clampParams(value) {
+  const out = {};
+  if (!value || typeof value !== 'object') return out;
+  for (const [key, spec] of Object.entries(siteConfig.persona_params || {})) {
+    if (!Number.isFinite(Number(value[key]))) continue;
+    const number = Number(value[key]);
+    out[key] = Math.min(Number(spec.max), Math.max(Number(spec.min), number));
+  }
+  return out;
+}
+
+function buildAgentMessages({ prompt, history, params }, retrieved) {
   const messages = [];
-  messages.push({ role: "system", content: system || AGENT_SYSTEM_DEFAULT });
+  messages.push({ role: "system", content: buildServerPrompt({ persona, params, retrieved, fallback: FALLBACK_DE }) });
   for (const item of history) {
     messages.push({ role: item.role, content: item.content });
   }
   messages.push({ role: "user", content: prompt });
   return messages;
+}
+
+const FALLBACK_DE = 'Dazu habe ich nichts Belegtes. Ich kann dir erklären, was HAI ist, woran Samuel arbeitet oder wie diese Seite funktioniert.';
+
+function finalizeResponse(result, provider, retrieved) {
+  const raw = String(result.text || '');
+  const markers = [...raw.matchAll(/\[\[([^\]]+)\]\]/g)].map((match) => match[1]);
+  const allowed = new Map(retrieved.hits.map((hit) => [hit.id, hit]));
+  const validIds = [...new Set(markers.filter((id) => allowed.has(id)))];
+  const text = raw.replace(/\[\[[^\]]+\]\]/g, '').replace(/\s{2,}/g, ' ').trim();
+  const sources = validIds.map((id) => ({ id, title: allowed.get(id).title, link: allowed.get(id).link ?? null }));
+  const coverage = retrieved.coverage;
+  if (coverage === 'GIVEN' && !validIds.length) console.warn('agent_uncited', JSON.stringify({ coverage, hit_count: retrieved.hits.length }));
+  return json({
+    text,
+    sources,
+    contact_card: Boolean(retrieved.business && siteConfig.contact?.approved),
+    coverage,
+    ...(coverage === 'GIVEN' && !validIds.length ? { uncited: true } : {}),
+    provider,
+    model: result.model,
+  });
 }
 
 async function callMiniMax(messages, env, timeoutMs = AGENT_TIMEOUT_MS) {
