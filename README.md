@@ -98,10 +98,10 @@ skills/               Projektkopien der Agent-Skills
 
 Der Graph wird aus dem Repo erzeugt:
 
-- [`graphify-out/graph.html`](graphify-out/graph.html) — klickbare Ansicht
+- `graphify-out/graph.html` — klickbare Ansicht (lokal generiert, in `.gitignore`)
 - [`graphify-out/GRAPH_REPORT.md`](graphify-out/GRAPH_REPORT.md) — God-Nodes,
   Communities und Verbindungen
-- [`graphify-out/graph.json`](graphify-out/graph.json) — abfragbarer Graph
+- `graphify-out/graph.json` — abfragbarer Graph (lokal generiert, in `.gitignore`)
 
 Er ist generiertes Arbeitsmittel, kein Projektinhalt, und kann dem Arbeitsstand
 hinterherlaufen. Aufbau und Upstream:
