@@ -34,16 +34,23 @@ const VAR_SACCADE_Y = '--saccade-y';
 const MOTION_VARS = Object.freeze([
   '--eye-pair-x',
   '--eye-pair-y',
+  '--eye-pair-z',
   '--eye-pair-scale',
   '--eye-pair-tilt',
+  '--eye-pair-rot-x',
+  '--eye-pair-rot-y',
   '--eye-left-x',
   '--eye-left-y',
   '--eye-left-scale-x',
   '--eye-left-scale-y',
+  '--eye-left-rot-x',
+  '--eye-left-rot-y',
   '--eye-right-x',
   '--eye-right-y',
   '--eye-right-scale-x',
   '--eye-right-scale-y',
+  '--eye-right-rot-x',
+  '--eye-right-rot-y',
   '--eye-left-pupil-x',
   '--eye-left-pupil-y',
   '--eye-right-pupil-x',
@@ -57,6 +64,8 @@ const MOTION_VARS = Object.freeze([
   '--eye-top-clearance',
   '--eye-bottom-clearance',
   '--eye-presence-opacity',
+  '--eye-depth',
+  '--eye-lid-shadow-strength',
   '--eye-shadow-y',
   '--eye-shadow-blur',
   '--eye-shadow-alpha',
@@ -193,25 +202,31 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
   function renderFrame(frame) {
     if (!frame) return;
     if (motionAllowed()) {
-      setSceneParallax(
-        `${clamp(frame.pair.x * 0.025, -4, 4).toFixed(2)}px`,
-        `${clamp(frame.pair.y * 0.025, -4, 4).toFixed(2)}px`,
-      );
+      const sx = clamp((frame.scene?.x ?? frame.pair.x / 240) * 14, -14, 14);
+      const sy = clamp((frame.scene?.y ?? frame.pair.y / 86) * 10, -10, 10);
+      setSceneParallax(`${sx.toFixed(2)}px`, `${sy.toFixed(2)}px`);
     } else {
       setSceneParallax('0px', '0px');
     }
     setVariable('--eye-pair-x', `${frame.pair.x}px`);
     setVariable('--eye-pair-y', `${frame.pair.y}px`);
+    setVariable('--eye-pair-z', `${frame.pair.zPx ?? 0}px`);
     setVariable('--eye-pair-scale', `${frame.pair.scale}`);
     setVariable('--eye-pair-tilt', `${frame.pair.tiltDeg}deg`);
+    setVariable('--eye-pair-rot-x', `${motionAllowed() ? (frame.pair.rotXDeg ?? 0) : 0}deg`);
+    setVariable('--eye-pair-rot-y', `${motionAllowed() ? (frame.pair.rotYDeg ?? 0) : 0}deg`);
     setVariable('--eye-left-x', `${frame.left.x}px`);
     setVariable('--eye-left-y', `${frame.left.y}px`);
     setVariable('--eye-left-scale-x', `${frame.left.scaleX}`);
     setVariable('--eye-left-scale-y', `${frame.left.scaleY}`);
+    setVariable('--eye-left-rot-x', `${motionAllowed() ? (frame.left.rotXDeg ?? 0) : 0}deg`);
+    setVariable('--eye-left-rot-y', `${motionAllowed() ? (frame.left.rotYDeg ?? 0) : 0}deg`);
     setVariable('--eye-right-x', `${frame.right.x}px`);
     setVariable('--eye-right-y', `${frame.right.y}px`);
     setVariable('--eye-right-scale-x', `${frame.right.scaleX}`);
     setVariable('--eye-right-scale-y', `${frame.right.scaleY}`);
+    setVariable('--eye-right-rot-x', `${motionAllowed() ? (frame.right.rotXDeg ?? 0) : 0}deg`);
+    setVariable('--eye-right-rot-y', `${motionAllowed() ? (frame.right.rotYDeg ?? 0) : 0}deg`);
     setVariable('--eye-left-pupil-x', `${frame.left.pupilX}px`);
     setVariable('--eye-left-pupil-y', `${frame.left.pupilY}px`);
     setVariable('--eye-right-pupil-x', `${frame.right.pupilX}px`);
@@ -224,23 +239,27 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     setVariable('--eye-right-lid-tilt', `${frame.right.lidTiltDeg ?? 0}deg`);
     setVariable('--pupil-state', `${frame.pupilDilation}`);
 
-    const depth = clamp((frame.pair.scale - 1) / 0.45, -1, 1);
-    setVariable('--eye-shadow-y', `${Math.round(14 + depth * 10)}px`);
-    setVariable('--eye-shadow-blur', `${Math.round(28 + depth * 14)}px`);
+    const depth = clamp(frame.scene?.depthZ ?? (frame.pair.scale - 1) / 0.42, -1, 1);
+    setVariable('--eye-depth', depth.toFixed(3));
+    const avgLidTop = ((frame.left.lidTopPct ?? 0) + (frame.right.lidTopPct ?? 0)) * 0.5;
+    const lidShadowStrength = clamp(0.46 + Math.max(0, avgLidTop) * 0.02, 0.36, 0.96);
+    setVariable('--eye-lid-shadow-strength', lidShadowStrength.toFixed(3));
+    setVariable('--eye-shadow-y', `${Math.round(14 + depth * 11)}px`);
+    setVariable('--eye-shadow-blur', `${Math.round(28 + depth * 15)}px`);
     setVariable('--eye-shadow-alpha', `${clamp(0.32 + depth * 0.18, 0.14, 0.54).toFixed(3)}`);
-    const presenceOpacity = depth < -0.15 ? clamp(1 + (depth + 0.15) * 0.42, 0.74, 1) : 1;
+    const presenceOpacity = depth < -0.12 ? clamp(1 + (depth + 0.12) * 0.44, 0.72, 1) : 1;
     setVariable('--eye-presence-opacity', presenceOpacity.toFixed(3));
-    setVariable('--eye-catchlight-opacity', clamp(0.85 + depth * 0.18, 0.55, 1).toFixed(3));
+    setVariable('--eye-catchlight-opacity', clamp(0.86 + depth * 0.16, 0.55, 1).toFixed(3));
 
     const vw = win.innerWidth || 1280;
     const baseTop = vw <= 640 ? 10 : 20;
     const topClearance = Math.round(
-      baseTop + Math.max(0, -frame.pair.y) * 0.3 + Math.max(0, frame.pair.scale - 1) * (vw <= 640 ? 22 : 40),
+      baseTop + Math.max(0, -frame.pair.y) * 0.3 + Math.max(0, frame.pair.scale - 1) * (vw <= 640 ? 22 : 42),
     );
     const bottomClearance = Math.round(
       (vw <= 640 ? 10 : 14)
-      + Math.max(0, frame.pair.y) * (vw <= 640 ? 0.35 : 0.55)
-      + Math.max(0, frame.pair.scale - 1) * (vw <= 640 ? 34 : 58),
+      + Math.max(0, frame.pair.y) * (vw <= 640 ? 0.38 : 0.58)
+      + Math.max(0, frame.pair.scale - 1) * (vw <= 640 ? 40 : 76),
     );
     setVariable('--eye-top-clearance', `${topClearance}px`);
     setVariable('--eye-bottom-clearance', `${bottomClearance}px`);
@@ -668,6 +687,12 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     root.classList.add('is-motion-paused');
     stopOwnMotion();
     setSceneParallax('0px', '0px');
+    setVariable('--eye-pair-rot-x', '0deg');
+    setVariable('--eye-pair-rot-y', '0deg');
+    setVariable('--eye-left-rot-x', '0deg');
+    setVariable('--eye-left-rot-y', '0deg');
+    setVariable('--eye-right-rot-x', '0deg');
+    setVariable('--eye-right-rot-y', '0deg');
     syncToggle();
   }
 

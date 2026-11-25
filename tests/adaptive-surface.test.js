@@ -248,6 +248,34 @@ test('createAdaptiveAgent never leaks <surface> tags even if the model outputs o
   assert.ok(res.text.length > 0);
 });
 
+test('conversation-driven spatial moods distinguish quiet, alive, focused, and neutral prompts', () => {
+  const neutral = parseAdaptationIntent('Was bist du?', DEFAULT_SURFACE_STATE);
+  assert.equal(neutral.action, 'none');
+  assert.equal(projectSurfaceState(DEFAULT_SURFACE_STATE).spatialMood, 'neutral');
+
+  const quietIntent = parseAdaptationIntent('Sei ruhiger und etwas distanzierter.', DEFAULT_SURFACE_STATE);
+  assert.equal(quietIntent.action, 'patch');
+  const quietState = validateSurfacePatch(quietIntent.patch, DEFAULT_SURFACE_STATE).nextState;
+  const quietProj = projectSurfaceState(quietState);
+  assert.equal(quietProj.spatialMood, 'quiet');
+  assert.ok(quietState.embodiment.eyeScale < 0.8);
+
+  const aliveIntent = parseAdaptationIntent('Werde lebendiger und komm näher.', DEFAULT_SURFACE_STATE);
+  assert.equal(aliveIntent.action, 'patch');
+  const aliveState = validateSurfacePatch(aliveIntent.patch, DEFAULT_SURFACE_STATE).nextState;
+  const aliveProj = projectSurfaceState(aliveState);
+  assert.equal(aliveProj.spatialMood, 'alive');
+  assert.ok(aliveState.embodiment.eyeScale > 1.25);
+
+  const focusedIntent = parseAdaptationIntent('Konzentrier dich.', DEFAULT_SURFACE_STATE);
+  assert.equal(focusedIntent.action, 'patch');
+  const focusedState = validateSurfacePatch(focusedIntent.patch, DEFAULT_SURFACE_STATE).nextState;
+  const focusedProj = projectSurfaceState(focusedState);
+  assert.equal(focusedProj.spatialMood, 'focused');
+  assert.ok(focusedProj.spatial.focalSeparation > quietProj.spatial.focalSeparation);
+  assert.ok(Number(aliveProj.spatial.cornealDepth) > Number(quietProj.spatial.cornealDepth));
+});
+
 test('enforceResponseLength preserves balanced replies and trims verbose brief replies', () => {
   const twoSentences = 'Erster Satz. Zweiter Satz.';
   assert.equal(enforceResponseLength(twoSentences, 'balanced'), twoSentences);

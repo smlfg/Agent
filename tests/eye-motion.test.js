@@ -290,3 +290,31 @@ test('pause freezes frame output without losing state and engine is deterministi
   assert.deepEqual(frozen.pair, fa.pair);
   assert.deepEqual(frozen.left, fa.left);
 });
+
+test('3D volumetric orientation, perspective Z, and scene parallax stay bounded and calm under reducedMotion', () => {
+  const full = createEyeMotionEngine({ state: 'present', viewport: DESKTOP });
+  full.setParams({ offsetX: 0.9, offsetY: -0.6, scale: 1.35 });
+  const nearFrame = runSteps(full, 120, 16);
+
+  assert.ok(nearFrame.pair.zPx > 15, `expected positive Z on approach, got ${nearFrame.pair.zPx}`);
+  assert.ok(Math.abs(nearFrame.pair.rotYDeg) > 1 && Math.abs(nearFrame.pair.rotYDeg) <= 9);
+  assert.ok(Math.abs(nearFrame.pair.rotXDeg) > 0.5 && Math.abs(nearFrame.pair.rotXDeg) <= 6.5);
+  assert.ok(Math.abs(nearFrame.scene.x) > 0.1 && Math.abs(nearFrame.scene.x) <= 1);
+  assert.ok(nearFrame.scene.depthZ > 0.4);
+
+  full.setParams({ offsetX: 0, offsetY: 0, scale: 0.7 });
+  const farFrame = runSteps(full, 120, 16);
+  assert.ok(farFrame.pair.zPx < -15, `expected negative Z on retreat, got ${farFrame.pair.zPx}`);
+  assert.ok(farFrame.scene.depthZ < -0.4);
+
+  const reduced = createEyeMotionEngine({ state: 'present', viewport: DESKTOP, reducedMotion: true });
+  reduced.setParams({ offsetX: 0.9, scale: 1.35 });
+  const redFrame = runSteps(reduced, 30, 16);
+  assert.equal(redFrame.pair.rotXDeg, 0);
+  assert.equal(redFrame.pair.rotYDeg, 0);
+  assert.equal(redFrame.left.rotXDeg, 0);
+  assert.equal(redFrame.left.rotYDeg, 0);
+  assert.equal(redFrame.scene.x, 0);
+  assert.equal(redFrame.scene.y, 0);
+  assert.ok(redFrame.pair.zPx > 10, 'static approach Z depth remains legible under reducedMotion');
+});

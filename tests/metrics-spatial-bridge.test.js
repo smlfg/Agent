@@ -389,6 +389,13 @@ test('2.5D CSS rules apply to default surface, couple light/cornea/lag, and keep
   assert.match(depthCss, /--scene-lag-far/);
   assert.match(depthCss, /--scene-lag-mid/);
   assert.match(depthCss, /--scene-lag-near/);
+  assert.match(depthCss, /perspective:/);
+  assert.match(depthCss, /preserve-3d/);
+  assert.match(depthCss, /\.presence::before/);
+  assert.match(depthCss, /\.focus::before/);
+  assert.match(depthCss, /data-spatial-mood="quiet"/);
+  assert.match(depthCss, /data-spatial-mood="alive"/);
+  assert.match(depthCss, /data-spatial-mood="focused"/);
   assert.match(depthCss, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
   assert.match(depthCss, /is-motion-paused/);
 });

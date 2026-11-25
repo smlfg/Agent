@@ -414,10 +414,31 @@ export function projectSurfaceState(
     focusStrength: Number(clamp(0.2 + motion.responsiveness * 0.75, 0.15, 0.95).toFixed(3)),
   };
 
+  let spatialMood = 'neutral';
+  if (
+    (communication.tone === 'direct' && motion.responsiveness >= 0.8 && motion.ambientMovement <= 0.22)
+    || (spatial.focalSeparation >= 0.68 && motion.ambientMovement <= 0.22)
+  ) {
+    spatialMood = 'focused';
+  } else if (
+    communication.tone === 'reserved'
+    || (communication.tone === 'calm' && motion.energy <= 0.2)
+    || embodiment.eyeScale <= 0.78
+  ) {
+    spatialMood = 'quiet';
+  } else if (
+    motion.energy >= 0.72
+    || embodiment.eyeScale >= 1.24
+    || communication.tone === 'playful'
+  ) {
+    spatialMood = 'alive';
+  }
+
   return {
     legacyParams: anchorParams,
     effectiveLegacyParams,
     spatial,
+    spatialMood,
     variables,
     presenceParams,
     eyeShape: embodiment.eyeShape,
@@ -488,6 +509,7 @@ export function mountSurfaceProjector({
       root.dataset.surfaceLength = state.communication.responseLength;
       root.dataset.surfaceModified = surfaceStore.isModified() ? 'true' : 'false';
       root.dataset.surfaceAlive = state.motion.energy > 0.65 && !reducedMotion ? 'true' : 'false';
+      root.dataset.spatialMood = projected.spatialMood;
     }
 
     // 3. Apply articulated 180-bone layer if active, merged live with dial changes.
@@ -688,6 +710,7 @@ export function mountSurfaceProjector({
     destroy() {
       clearTimeout(resetTimerId);
       clearBoneCssVars();
+      if (root?.dataset) delete root.dataset.spatialMood;
       unsubscribe();
       if (doc && typeof doc.removeEventListener === 'function') {
         doc.removeEventListener('agentfaehig:metrics-commit', onMetricsCommit);

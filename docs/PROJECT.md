@@ -1,6 +1,12 @@
 # Projektstand — Agentfähig
 
-Stand: 19.11.2026. Phase: Planungsdokumente fertig, **Owner-Entscheidungen
+Stand: 25.11.2026 (Spatial Depth & 3D Embodiment auf Branch `spatial_depth_embodiment`, Basis-Commit `4e0a838`, uncommitted zur Abnahme).
+Ergänzung auf der Living Surface:
+- **5-Ebenen-Raumtiefe (Layer A–E):** Tiefer Licht-/Vignettenraum (`Z = -3`), seitlich ausfadender Turrell-Horizont und Sedimentband (`Z = -2`), räumliches Umfeld mit Lichtpool hinter den Augen und fokussiertem Lesepool hinter `#pair` (`Z = -1`), volumetrische Augen mit isolierter CSS-3D-Perspektive (`perspective: 950px`, `translateZ`, `rotateX/Y`), sphärischer Licht-/Schattenkopplung an `orbA`, Lidschatten und Corneal Counter-Parallax (`Z = 0`), sowie ruhige/stabile Konversations- und Eingabeebene (`Z = +1/+2`).
+- **3D-Kinematik & Konversations-Modi:** `eye-motion-engine.js` treibt gedämpfte Z-Tiefe, 3D-Blickorientierung und Szenen-Parallaxe im bestehenden rAF-Loop; `surface-adapter.js` und `surface-projector.js` verbinden bestehende Surface-State- und Metrik-Parameter mit `data-spatial-mood` (`neutral`, `quiet`, `alive`, `focused`).
+- **Verifikation:** `npm test` (277/277 Pass inkl. `scripts/validate.sh`), `tests/spatial-depth-browser.py` sowie Playwright-Desktop/Mobile/Reduced-Motion-QA (60.0 fps, 0 Long Tasks, 0 CLS) grün; kein Commit, Push oder Live-Deploy ohne Owner-Freigabe.
+
+Vorheriger Stand: 19.11.2026. Phase: Planungsdokumente fertig, **Owner-Entscheidungen
 offen** — Messlauf (Stufe 1) angelaufen; Laufversuch 1 an der Paid-Wand
 gescheitert, Laufversuch 2 belegt den Free-Pfad, ist aber an der STT-Stufe
 blockiert. Eine Latenzzahl entstand noch nicht.

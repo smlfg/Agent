@@ -223,6 +223,13 @@ export function createEyeMotionEngine({
     microX: createFilterChannel(0),
     microY: createFilterChannel(0),
     microSpread: createFilterChannel(0),
+    sceneX: createFilterChannel(0),
+    sceneY: createFilterChannel(0),
+    pairZPx: createFilterChannel(0),
+    pairRotXDeg: createFilterChannel(0),
+    pairRotYDeg: createFilterChannel(0),
+    eyeRotXDeg: createFilterChannel(0),
+    eyeRotYDeg: createFilterChannel(0),
   };
 
   function applyParamPatch(patch = {}) {
@@ -531,6 +538,26 @@ export function createEyeMotionEngine({
     const rightLidBottom = clamp(profile.lidBottomPct - lowEnergyLid * 0.15, -28, 6);
     const lidTiltDeg = isReducedMotion ? 0 : clamp(asymmetry * asymmetryBias * 6.5, -4, 4);
 
+    // 9. Volumetric 3D orientation, perspective Z depth, and damped scene parallax
+    const stateZBias = currentState === 'listening' ? 10 : currentState === 'thinking' ? -14 : 0;
+    const pairZPx = currentState === 'dormant'
+      ? -18
+      : clamp((pairScale - 1) * 125 + stateZBias, -68, 54);
+
+    const normPosX = clamp(rawPairX / Math.max(bounds.rangeX, 1), -1, 1);
+    const normPosY = clamp(rawPairY / Math.max(bounds.rangeY, 1), -1, 1);
+    const no3DRot = isReducedMotion || currentState === 'dormant';
+    const pairRotYDeg = no3DRot ? 0 : clamp(normPosX * 6.5 + pupilNormX * 3.0, -9, 9);
+    const pairRotXDeg = no3DRot ? 0 : clamp(-normPosY * 4.5 - pupilNormY * 2.5, -6.5, 6.5);
+    const eyeRotYDeg = no3DRot ? 0 : clamp(pupilNormX * 7.5, -8.5, 8.5);
+    const eyeRotXDeg = no3DRot ? 0 : clamp(-pupilNormY * 6.0, -7, 7);
+    const sceneX = no3DRot
+      ? 0
+      : clamp(normPosX * 0.68 + pupilNormX * 0.24 + pointerPullX * pointerWeight * 0.35, -1, 1);
+    const sceneY = no3DRot
+      ? 0
+      : clamp(normPosY * 0.62 + pupilNormY * 0.22 + pointerPullY * pointerWeight * 0.3, -1, 1);
+
     return {
       eff,
       focusEngagement,
@@ -540,6 +567,14 @@ export function createEyeMotionEngine({
       spreadDeltaPx: rawSpreadDeltaPx,
       pairScale,
       pairTiltDeg,
+      pairZPx,
+      pairRotXDeg,
+      pairRotYDeg,
+      eyeRotXDeg,
+      eyeRotYDeg,
+      convergencePx,
+      sceneX,
+      sceneY,
       leftOffsetY: asymVertPx,
       rightOffsetY: -asymVertPx,
       leftScale: 1 + asymScaleDelta,
@@ -605,20 +640,30 @@ export function createEyeMotionEngine({
     const leftScale = clamp(channels.leftScale.value, 0.92, 1.08);
     const rightScale = clamp(channels.rightScale.value, 0.92, 1.08);
     const lidTiltDeg = round(channels.lidTiltDeg.value, 2);
+    const convRotDeg = isReducedMotion || currentState === 'dormant'
+      ? 0
+      : clamp((targets?.convergencePx ?? 0) * 0.35, -1, 1.4);
+    const eyeRotXDeg = isReducedMotion ? 0 : round(clamp(channels.eyeRotXDeg.value, -7, 7), 2);
+    const eyeBaseRotY = isReducedMotion ? 0 : channels.eyeRotYDeg.value;
 
     return {
       state: currentState,
       pair: {
         x: round(pairX, 2),
         y: round(pairY, 2),
+        zPx: round(clamp(channels.pairZPx.value, -68, 54), 2),
         scale: round(pairScale, 4),
         tiltDeg: round(channels.pairTiltDeg.value, 3),
+        rotXDeg: isReducedMotion ? 0 : round(clamp(channels.pairRotXDeg.value, -6.5, 6.5), 2),
+        rotYDeg: isReducedMotion ? 0 : round(clamp(channels.pairRotYDeg.value, -9, 9), 2),
       },
       left: {
         x: round(-clampedSpreadHalf, 2),
         y: round(channels.leftOffsetY.value, 2),
         scaleX: round(leftScale, 4),
         scaleY: round(leftScale, 4),
+        rotXDeg: eyeRotXDeg,
+        rotYDeg: isReducedMotion ? 0 : round(clamp(eyeBaseRotY + convRotDeg, -10, 10), 2),
         pupilX: round(clamp(channels.leftPupilX.value, -bounds.pupilRangeX * 1.1, bounds.pupilRangeX * 1.1), 2),
         pupilY: round(clamp(channels.leftPupilY.value, -bounds.pupilRangeY * 1.1, bounds.pupilRangeY * 1.1), 2),
         lidTopPct: round(channels.leftLidTop.value, 2),
@@ -630,11 +675,18 @@ export function createEyeMotionEngine({
         y: round(channels.rightOffsetY.value, 2),
         scaleX: round(rightScale, 4),
         scaleY: round(rightScale, 4),
+        rotXDeg: eyeRotXDeg,
+        rotYDeg: isReducedMotion ? 0 : round(clamp(eyeBaseRotY - convRotDeg, -10, 10), 2),
         pupilX: round(clamp(channels.rightPupilX.value, -bounds.pupilRangeX * 1.1, bounds.pupilRangeX * 1.1), 2),
         pupilY: round(clamp(channels.rightPupilY.value, -bounds.pupilRangeY * 1.1, bounds.pupilRangeY * 1.1), 2),
         lidTopPct: round(channels.rightLidTop.value, 2),
         lidBottomPct: round(channels.rightLidBottom.value, 2),
         lidTiltDeg: round(-lidTiltDeg, 2),
+      },
+      scene: {
+        x: isReducedMotion ? 0 : round(clamp(channels.sceneX.value, -1, 1), 4),
+        y: isReducedMotion ? 0 : round(clamp(channels.sceneY.value, -1, 1), 4),
+        depthZ: round(clamp((pairScale - 1) / 0.42, -1, 1), 4),
       },
       effectiveGapPx: round(effectiveGapPx, 2),
       pupilDilation: round(channels.pupilDilation.value, 4),
@@ -668,6 +720,13 @@ export function createEyeMotionEngine({
     snapChannel(channels.microX, 0);
     snapChannel(channels.microY, 0);
     snapChannel(channels.microSpread, 0);
+    snapChannel(channels.sceneX, targets.sceneX);
+    snapChannel(channels.sceneY, targets.sceneY);
+    snapChannel(channels.pairZPx, targets.pairZPx);
+    snapChannel(channels.pairRotXDeg, targets.pairRotXDeg);
+    snapChannel(channels.pairRotYDeg, targets.pairRotYDeg);
+    snapChannel(channels.eyeRotXDeg, targets.eyeRotXDeg);
+    snapChannel(channels.eyeRotYDeg, targets.eyeRotYDeg);
     return buildFrame(targets);
   }
 
@@ -717,6 +776,13 @@ export function createEyeMotionEngine({
     stepCriticallyDamped(channels.leftLidBottom, targets.leftLidBottom, omega * 0.9, dtSec);
     stepCriticallyDamped(channels.rightLidBottom, targets.rightLidBottom, omega * 0.9, dtSec);
     stepCriticallyDamped(channels.lidTiltDeg, targets.lidTiltDeg, omega * 0.8, dtSec);
+    stepCriticallyDamped(channels.sceneX, targets.sceneX, omega * 0.42, dtSec);
+    stepCriticallyDamped(channels.sceneY, targets.sceneY, omega * 0.42, dtSec);
+    stepCriticallyDamped(channels.pairZPx, targets.pairZPx, omega * 0.78, dtSec);
+    stepCriticallyDamped(channels.pairRotXDeg, targets.pairRotXDeg, omega * 0.72, dtSec);
+    stepCriticallyDamped(channels.pairRotYDeg, targets.pairRotYDeg, omega * 0.72, dtSec);
+    stepCriticallyDamped(channels.eyeRotXDeg, targets.eyeRotXDeg, omega * 1.15, dtSec);
+    stepCriticallyDamped(channels.eyeRotYDeg, targets.eyeRotYDeg, omega * 1.15, dtSec);
 
     lastFrame = buildFrame(targets);
     return lastFrame;

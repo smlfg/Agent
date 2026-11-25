@@ -338,6 +338,36 @@ export function parseAdaptationIntent(utterance, currentState = DEFAULT_SURFACE_
     summaries.push('zurückhaltender Ausdruck und dezente Präsenz');
   }
 
+  // ── Focused / concentrated ────────────────────────────────────────────────
+  if (/\b(konzentrier\w*|fokussier\w*|bleib\s+fokussiert|voller\s+fokus|mehr\s+fokus|focus(?:ed)?|concentrat\w*)\b/i.test(text)) {
+    mergePatch(patch, {
+      embodiment: {
+        eyeSpacing: atMost(s.embodiment.eyeSpacing, -0.18, 0.82),
+        eyePositionY: clamp(Math.max(s.embodiment.eyePositionY, 0.14), -1, 1),
+        asymmetry: atMost(s.embodiment.asymmetry, -0.05, 0.03),
+        eyeShape: 'sharp',
+      },
+      motion: {
+        energy: atMost(s.motion.energy, -0.24, 0.24),
+        ambientMovement: atMost(s.motion.ambientMovement, -0.44, 0.14),
+        responsiveness: atLeast(s.motion.responsiveness, 0.34, 0.94),
+        damping: 0.08,
+      },
+      atmosphere: {
+        contrast: atLeast(s.atmosphere.contrast, 0.32, 0.84),
+        visualIntensity: atMost(s.atmosphere.visualIntensity, -0.26, 0.18),
+      },
+      communication: {
+        textDensity: atLeast(s.communication.textDensity, 0.2, 0.66),
+        tone: 'direct',
+      },
+    });
+    addControl('atmosphere.contrast');
+    addControl('motion.ambientMovement');
+    addControl('embodiment.eyeSpacing');
+    summaries.push('fokussierte Präsenz und ruhiger Hintergrund');
+  }
+
   // ── Typography scale ──────────────────────────────────────────────────────
   if (/\b(größere\s+schrift|schrift\s+größer|larger\s+text|bigger\s+font)\b/i.test(text)) {
     mergePatch(patch, {
