@@ -144,6 +144,8 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
   let lastSurfaceLevel = doc.documentElement?.dataset?.surfaceLevel ?? '';
   let adaptingPending = false;
   const writtenVars = new Map();
+  let lastScenePx = null;
+  let lastScenePy = null;
 
   const initialEngineState = phase === 'dormant'
     ? 'dormant'
@@ -176,12 +178,28 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     root.style.setProperty(name, value);
   }
 
+  function setSceneParallax(px, py) {
+    const scene = doc.documentElement;
+    if (!scene?.style) return;
+    if (lastScenePx !== px) {
+      lastScenePx = px;
+      scene.style.setProperty('--scene-px', px);
+    }
+    if (lastScenePy !== py) {
+      lastScenePy = py;
+      scene.style.setProperty('--scene-py', py);
+    }
+  }
+
   function renderFrame(frame) {
     if (!frame) return;
-    const scene = doc.documentElement;
-    if (scene?.style && motionAllowed()) {
-      scene.style.setProperty('--scene-px', `${clamp(frame.pair.x * 0.025, -4, 4).toFixed(2)}px`);
-      scene.style.setProperty('--scene-py', `${clamp(frame.pair.y * 0.025, -4, 4).toFixed(2)}px`);
+    if (motionAllowed()) {
+      setSceneParallax(
+        `${clamp(frame.pair.x * 0.025, -4, 4).toFixed(2)}px`,
+        `${clamp(frame.pair.y * 0.025, -4, 4).toFixed(2)}px`,
+      );
+    } else {
+      setSceneParallax('0px', '0px');
     }
     setVariable('--eye-pair-x', `${frame.pair.x}px`);
     setVariable('--eye-pair-y', `${frame.pair.y}px`);
@@ -655,6 +673,7 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     engine.setPaused(true);
     root.classList.add('is-motion-paused');
     stopOwnMotion();
+    setSceneParallax('0px', '0px');
     syncToggle();
   }
 
@@ -932,6 +951,8 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     for (const name of OWN_VARS) root.style.removeProperty(name);
     doc.documentElement?.style.removeProperty('--scene-px');
     doc.documentElement?.style.removeProperty('--scene-py');
+    lastScenePx = null;
+    lastScenePy = null;
     writtenVars.clear();
     root.classList.remove('is-motion-paused', 'is-reduced-motion', 'is-dormant', 'is-cue-adapt');
     delete root.dataset.phase;

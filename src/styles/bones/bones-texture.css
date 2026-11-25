@@ -8,7 +8,8 @@ html[data-bones-active="true"] body::after {
   transition: opacity var(--bone-transition-ms, 1100ms) var(--ease);
 }
 
-html[data-bones-active="true"] .stage {
+html[data-bones-active="true"] body::before,
+html[data-bones-active="true"] .stage::before {
   filter: saturate(var(--bone-canvas-sat, 1)) contrast(var(--bone-canvas-contrast, 1));
 }
 
