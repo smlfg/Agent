@@ -32,10 +32,14 @@ Entwurf und wird nicht rückwirkend als genehmigt behandelt.
 | **R2 — Genau ein Spatial Vertical Slice** | Eine fachlich begrenzte Erweiterung der vorhandenen 2.5D-Surface auf dem integrierten Stand | Nächster Produkt-Schritt. Vorher: Scope von Samuel, Upstream-First, Plan-Council und unabhängiges ACCEPT. Danach: Node-Suite, Default-/Bones-/Mobile-/Reduced-Motion-Browser und Diff-Review |
 | **R3 — Produktevidence statt Politur-Glaube** | Nachweis des Kernversprechens mit Fremdbeobachtung und reproduzierbaren Produktionschecks | Fremdtest bleibt offen. Für Stable und vor weiterer Expansion erneut Owner-Entscheidung; nicht rückwirkend als bestanden markieren |
 | **R4 — Voice / DPPM getrennt weiterentwickeln** | Voice-Messung, Multi-Agent-Verhalten und Persistenz mit eigenen technischen Gates | Nicht Bestandteil von R2. Start nur bei tatsächlichem Bedarf und eigenem Plan; Datenschutz/Kosten/Owner-Freigaben bleiben eigene Gates |
+| **K1 — Wissen (eigene Linie, parallel zu R2)** | Der Agent spricht belegt über Samuel und seine Arbeiten: freigegebene Chunks, Pre-Retrieval im Worker, Quellen-Chips, Kontakt-Karte, Offline-Gate | Owner-Entscheidung 25.11.2026, [`ADR-0007`](adr/ADR-0007-wissen-per-pre-retrieval.md), HAI-Mission `M-20261125T212109-5dd54792`. Phasen A (Chunks) + B (Wissenspaket) umgesetzt, C/E (Suche, Gate) in Arbeit, D (UI) offen. **Gate-Schuld:** Plan-Council + unabhängiger ACCEPT-Report vor Produktions-Deploy nachholen. Abnahme live durch Samuel; Fremdtest bleibt in R3 |
 
 R2 darf nicht mit Voice, DPPM, neuen Agenten, neuen Modalitäten oder einem
 Architekturwechsel erweitert werden. Ein Zusammenhang ist erst dann ein Blocker,
 wenn er für den konkret gewählten Spatial-Slice technisch belegt ist.
+
+K1 berührt die Surface nur an zwei Stellen (Quellen-Chips und Kontakt-Karte unter der
+Antwort) und ändert weder Spatial-Ebenen noch Regler; R2 und K1 kollidieren deshalb nicht.
 
 ## 2 · Gate-Klassifikation nach dem Rebaseline
 

@@ -103,17 +103,16 @@ test('buildSystemPrompt carries identity, rules and persona marketing rules', ()
   assert.doesNotMatch(prompt, /How can I help/);
 });
 
-test('buildSystemPrompt includes supplied knowledge and marks it as the boundary', () => {
+test('buildSystemPrompt keeps factual knowledge out and names server retrieval', () => {
   const prompt = buildSystemPrompt({
-    knowledge: { facts: ['Samuel builds agent surfaces.', 'Contact: hello@example.com'] },
     style: deriveStyle({}),
   });
-  assert.match(prompt, /Samuel builds agent surfaces\./);
-  assert.match(prompt, /hello@example\.com/);
-  assert.match(prompt, /do not extend them/i);
+  assert.match(prompt, /ABOUT/);
+  assert.match(prompt, /server-provided retrieved context/);
+  assert.doesNotMatch(prompt, /hello@example\.com/);
 });
 
-test('buildSystemPrompt survives without persona or knowledge', () => {
+test('buildSystemPrompt survives without persona', () => {
   const prompt = buildSystemPrompt({ style: deriveStyle({}) });
   assert.ok(prompt.length > 200);
   assert.match(prompt, /agentfaehig/);

@@ -5,7 +5,12 @@
 
 import { VALID_MOODS } from '../vendor/openvoiceui/face/BaseFace.js';
 import { createEyeMotionEngine } from './eye-motion-engine.js';
-import { EYE_STATE_PROFILES, normalizeEyeState } from './eye-motion-profiles.js';
+import {
+  DEFAULT_MOTION_CONFIG,
+  EYE_MOTION_LIMITS,
+  EYE_STATE_PROFILES,
+  normalizeEyeState,
+} from './eye-motion-profiles.js';
 
 // Contract + extended eye-state mapping for mood compatibility.
 export const PHASE_MOOD = Object.freeze({
@@ -21,6 +26,15 @@ export const PHASE_MOOD = Object.freeze({
   adapting: 'neutral',
   error: 'neutral',
 });
+
+const CUE_CLASSES = Object.freeze([
+  'is-cue-adapt',
+  'is-cue-grounding',
+  'is-cue-hesitation',
+  'is-cue-tool',
+  'is-cue-switch',
+  'is-cue-exhale',
+]);
 
 const BLINK_CLOSE_MS = 95;
 const BLINK_HOLD_MS = 55;
@@ -158,6 +172,105 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     reducedMotion: reducedPref,
   });
 
+  /** User-owned params (surface-projector customizations); never overwritten by embodied overlays. */
+  let userParams = { ...DEFAULT_MOTION_CONFIG };
+  let embodiedOverlay = null;
+  let overlayPupilExtra = 0;
+  let overlayLidTopDelta = 0;
+
+  function finiteOr(value, fallback) {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
+  function clampParamValue(key, raw) {
+    if (key === 'motionRangeX' || key === 'motionRangeY') {
+      if (raw === null || raw === undefined) return null;
+      const n = Number(raw);
+      return Number.isFinite(n) && n > 0 ? n : null;
+    }
+    const range = EYE_MOTION_LIMITS[key];
+    const fallback = DEFAULT_MOTION_CONFIG[key];
+    const n = finiteOr(raw, fallback);
+    if (range) return clamp(n, range[0], range[1]);
+    if (key === 'spreadStepRatio') return clamp(n, 0.1, 0.9);
+    if (key === 'pupilRangeRatio') return clamp(n, 0.06, 0.35);
+    if (key === 'reducedMotionScale') return clamp(n, 0, 0.5);
+    return n;
+  }
+
+  function patchUserParams(partial = {}) {
+    if (!partial || typeof partial !== 'object') return;
+    for (const key of Object.keys(DEFAULT_MOTION_CONFIG)) {
+      if (!Object.hasOwn(partial, key)) continue;
+      const incoming = partial[key];
+      if (incoming === undefined || (incoming === null && key !== 'motionRangeX' && key !== 'motionRangeY')) {
+        userParams[key] = DEFAULT_MOTION_CONFIG[key];
+        continue;
+      }
+      userParams[key] = clampParamValue(key, incoming);
+    }
+  }
+
+  function syncEffectiveParams() {
+    const merged = { ...userParams };
+    const o = embodiedOverlay;
+    if (o) {
+      if (Number.isFinite(o.offsetX)) {
+        merged.offsetX = clamp(finiteOr(userParams.offsetX, 0) + o.offsetX, -1, 1);
+      }
+      if (Number.isFinite(o.offsetY)) {
+        merged.offsetY = clamp(finiteOr(userParams.offsetY, 0) + o.offsetY, -1, 1);
+      }
+      if (Number.isFinite(o.spreadDelta)) {
+        merged.spread = clamp(
+          finiteOr(userParams.spread, 1) * (1 + o.spreadDelta),
+          EYE_MOTION_LIMITS.spread[0],
+          EYE_MOTION_LIMITS.spread[1],
+        );
+      }
+      if (Number.isFinite(o.scaleMul)) {
+        merged.scale = clamp(
+          finiteOr(userParams.scale, 1) * o.scaleMul,
+          EYE_MOTION_LIMITS.scale[0],
+          EYE_MOTION_LIMITS.scale[1],
+        );
+      }
+      if (Number.isFinite(o.asymmetryDelta)) {
+        merged.asymmetry = clamp(
+          finiteOr(userParams.asymmetry, 0.08) + o.asymmetryDelta,
+          EYE_MOTION_LIMITS.asymmetry[0],
+          EYE_MOTION_LIMITS.asymmetry[1],
+        );
+      }
+      if (Number.isFinite(o.speedMul)) {
+        merged.speed = clamp(
+          finiteOr(userParams.speed, 1) * o.speedMul,
+          EYE_MOTION_LIMITS.speed[0],
+          EYE_MOTION_LIMITS.speed[1],
+        );
+      }
+      if (Number.isFinite(o.ambientMul)) {
+        merged.ambientMovement = clamp(
+          finiteOr(userParams.ambientMovement, 1) * o.ambientMul,
+          EYE_MOTION_LIMITS.ambientMovement[0],
+          EYE_MOTION_LIMITS.ambientMovement[1],
+        );
+      }
+      if (Number.isFinite(o.intensityMul)) {
+        merged.intensity = clamp(
+          finiteOr(userParams.intensity, 1) * o.intensityMul,
+          EYE_MOTION_LIMITS.intensity[0],
+          EYE_MOTION_LIMITS.intensity[1],
+        );
+      }
+      merged.damping = Number.isFinite(o.damping) ? clamp(o.damping, EYE_MOTION_LIMITS.damping[0], EYE_MOTION_LIMITS.damping[1]) : userParams.damping;
+    }
+    engine.setParams(merged);
+    overlayPupilExtra = o && Number.isFinite(o.pupilDelta) ? o.pupilDelta : 0;
+    overlayLidTopDelta = o && Number.isFinite(o.lidTopDelta) ? o.lidTopDelta : 0;
+  }
+
   function eyes() {
     return root.querySelectorAll('.eye');
   }
@@ -223,7 +336,16 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     setVariable('--eye-right-lid-bottom', `${frame.right.lidBottomPct}%`);
     setVariable('--eye-left-lid-tilt', `${frame.left.lidTiltDeg ?? 0}deg`);
     setVariable('--eye-right-lid-tilt', `${frame.right.lidTiltDeg ?? 0}deg`);
-    setVariable('--pupil-state', `${frame.pupilDilation}`);
+    const pupilState = clamp(
+      frame.pupilDilation + overlayPupilExtra,
+      0.72,
+      1.32,
+    );
+    setVariable('--pupil-state', `${pupilState}`);
+    if (overlayLidTopDelta !== 0) {
+      setVariable('--eye-left-lid-top', `${frame.left.lidTopPct + overlayLidTopDelta}%`);
+      setVariable('--eye-right-lid-top', `${frame.right.lidTopPct + overlayLidTopDelta}%`);
+    }
 
     const depth = clamp((frame.pair.scale - 1) / 0.45, -1, 1);
     setVariable('--eye-shadow-y', `${Math.round(14 + depth * 10)}px`);
@@ -406,7 +528,7 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
       ? maxWait + Math.random() * 2800
       : minWait + Math.random() * (maxWait - minWait);
     after(wait, () => {
-      if (motionAllowed() && !isDormant()) blinkOnce();
+      if (motionAllowed() && !isDormant() && !embodiedOverlay?.suppressBlinks) blinkOnce();
       scheduleBlink();
     });
   }
@@ -803,17 +925,44 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
   }
 
   function setParams(partial) {
-    if (destroyed) return engine.getSnapshot().params;
-    const updated = engine.setParams(partial);
+    if (destroyed) return { ...userParams };
+    patchUserParams(partial);
+    syncEffectiveParams();
     if (reducedPref) renderFrame(engine.settle());
-    return updated;
+    return { ...userParams };
   }
 
   function resetParams() {
-    if (destroyed) return engine.getSnapshot().params;
-    const reset = engine.resetParams();
+    if (destroyed) return { ...userParams };
+    userParams = { ...DEFAULT_MOTION_CONFIG };
+    syncEffectiveParams();
     if (reducedPref) renderFrame(engine.settle());
-    return reset;
+    return { ...userParams };
+  }
+
+  function setEmbodiedOverlay(overlay) {
+    if (destroyed) return;
+    embodiedOverlay = overlay && typeof overlay === 'object' ? { ...overlay } : null;
+    syncEffectiveParams();
+    if (embodiedOverlay?.baseEyeState) {
+      setState(embodiedOverlay.baseEyeState, { lock: true });
+    }
+    if (embodiedOverlay?.eyeShape) {
+      setEyeShape(embodiedOverlay.eyeShape);
+    }
+    if (embodiedOverlay?.cue) {
+      triggerCue(embodiedOverlay.cue);
+    }
+    if (reducedPref) renderFrame(engine.settle());
+  }
+
+  function clearEmbodiedOverlay() {
+    if (destroyed) return;
+    embodiedOverlay = null;
+    overlayPupilExtra = 0;
+    overlayLidTopDelta = 0;
+    syncEffectiveParams();
+    if (reducedPref) renderFrame(engine.settle());
   }
 
   function setFocus(target) {
@@ -843,7 +992,7 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
   function triggerCue(kind = 'adapt') {
     if (destroyed) return;
     if (kind === 'reset') {
-      root.classList.remove('is-cue-adapt');
+      for (const cls of CUE_CLASSES) root.classList.remove(cls);
       if (motionAllowed() && !isDormant()) {
         performBlink({ closeMs: 130, holdMs: 110, openMs: 340, doubleChance: 0 });
       }
@@ -857,6 +1006,59 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
       });
       if (motionAllowed() && !isDormant()) {
         performBlink({ closeMs: 75, holdMs: 35, openMs: 190, doubleChance: 0 });
+      }
+      return;
+    }
+    if (kind === 'grounding') {
+      root.classList.add('is-cue-grounding');
+      after(420, () => {
+        if (!destroyed) root.classList.remove('is-cue-grounding');
+      });
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 85, holdMs: 45, openMs: 220, doubleChance: 0 });
+      }
+      return;
+    }
+    if (kind === 'hesitation') {
+      root.classList.add('is-cue-hesitation');
+      after(420, () => {
+        if (!destroyed) root.classList.remove('is-cue-hesitation');
+      });
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 65, holdMs: 30, openMs: 150, doubleChance: 1 });
+      }
+      return;
+    }
+    if (kind === 'tool') {
+      root.classList.add('is-cue-tool');
+      after(360, () => {
+        if (!destroyed) root.classList.remove('is-cue-tool');
+      });
+      return;
+    }
+    if (kind === 'switch') {
+      root.classList.add('is-cue-switch');
+      after(420, () => {
+        if (!destroyed) root.classList.remove('is-cue-switch');
+      });
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 105, holdMs: 60, openMs: 240, doubleChance: 0 });
+      }
+      return;
+    }
+    if (kind === 'exhale') {
+      root.classList.add('is-cue-exhale');
+      after(500, () => {
+        if (!destroyed) root.classList.remove('is-cue-exhale');
+      });
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 115, holdMs: 75, openMs: 320, doubleChance: 0 });
+      }
+      return;
+    }
+    if (kind === 'interrupt') {
+      if (motionAllowed() && !isDormant()) {
+        performBlink({ closeMs: 65, holdMs: 30, openMs: 160, doubleChance: 0 });
       }
     }
   }
@@ -954,7 +1156,11 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     lastScenePx = null;
     lastScenePy = null;
     writtenVars.clear();
-    root.classList.remove('is-motion-paused', 'is-reduced-motion', 'is-dormant', 'is-cue-adapt');
+    root.classList.remove('is-motion-paused', 'is-reduced-motion', 'is-dormant', ...CUE_CLASSES);
+    embodiedOverlay = null;
+    overlayPupilExtra = 0;
+    overlayLidTopDelta = 0;
+    userParams = { ...DEFAULT_MOTION_CONFIG };
     delete root.dataset.phase;
     delete root.dataset.eyeState;
     delete root.dataset.eyeShape;
@@ -970,6 +1176,8 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
     resetParams,
     setEyeShape,
     triggerCue,
+    setEmbodiedOverlay,
+    clearEmbodiedOverlay,
     setFocus,
     clearFocus,
     getState,

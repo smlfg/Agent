@@ -4,12 +4,24 @@
 
 export const PHASES = Object.freeze(['dormant', 'idle', 'listening', 'thinking', 'speaking', 'error']);
 
+export const initialEmbodiedState = Object.freeze({
+  lastEventType: null,
+  lastStatus: null,
+  coverage: null,
+  hits: 0,
+  activeActionCount: 0,
+  parallelCount: 0,
+  provider: null,
+  simulated: false,
+});
+
 export const initialState = Object.freeze({
   phase: 'dormant',
   prompt: '',   // the visitor's current input, echoed once submitted
   answer: '',   // visible part of the current answer
   turn: 0,      // increments on every SUBMIT; lets views drop stale work
   dev: false,   // true while the answer comes from development data
+  embodied: initialEmbodiedState,
 });
 
 /**
@@ -34,7 +46,44 @@ export function reduce(state, event) {
       const prompt = String(event.prompt ?? '').trim();
       if (!prompt) return state;
       // Submitting during thinking/speaking interrupts: the old pair is replaced.
-      return { ...state, phase: 'thinking', prompt, answer: '', turn: state.turn + 1, dev: false };
+      return {
+        ...state,
+        phase: 'thinking',
+        prompt,
+        answer: '',
+        turn: state.turn + 1,
+        dev: false,
+        embodied: initialEmbodiedState,
+      };
+    }
+
+    case 'AGENT_EVENT': {
+      if (!event.simulated && event.turn !== state.turn) return state;
+      const ae = event.agentEvent;
+      if (!ae || typeof ae !== 'object') return state;
+
+      const meta = ae.metadata ?? {};
+      const nextEmbodied = {
+        lastEventType: ae.type,
+        lastStatus: ae.status,
+        coverage: state.embodied.coverage,
+        hits: state.embodied.hits,
+        activeActionCount: Number(event.activeActionCount) || 0,
+        parallelCount: Number(event.parallelCount) || 0,
+        provider: state.embodied.provider,
+        simulated: Boolean(event.simulated),
+      };
+
+      if (ae.type === 'retrieval.completed') {
+        const cov = meta.coverage;
+        if (cov === 'GIVEN' || cov === 'NOT_COVERED') nextEmbodied.coverage = cov;
+        if (Number.isFinite(meta.hits)) nextEmbodied.hits = Math.floor(meta.hits);
+      }
+
+      const prov = meta.provider ?? meta.to;
+      if (typeof prov === 'string') nextEmbodied.provider = prov;
+
+      return { ...state, embodied: Object.freeze(nextEmbodied) };
     }
 
     case 'RESPONSE_START':

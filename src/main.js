@@ -1,5 +1,8 @@
 // Integration point (owned by Claude Code). Wires store, presence and conversation.
 import { createStore } from './state/store.js';
+import { createAgentEventBus } from './state/agent-events.js';
+import { mountEmbodiment } from './presence/embodiment.js';
+import { createLocalPreRetrievalAgent } from './agent/local-retrieval.js';
 import * as devAgent from './dev/devAgent.js';
 import { mountPresence } from './presence/presence.js';
 import { mountConversation } from './conversation/conversation.js';
@@ -19,11 +22,13 @@ import { buildAdaptationPromptBlock, createAdaptiveAgent } from './surface/surfa
 import { mountSurfaceProjector } from './surface/surface-projector.js';
 import { mountSurfaceControls } from './surface/surface-controls.js';
 import { mountKeyboardViewport } from './surface/keyboard-viewport.js';
+import { mountObservabilityPanel } from './dev/observability-panel.js';
 
 export const AWAKE_AFTER_MS = 5000;
 
 const stage = document.getElementById('stage');
 const store = createStore();
+const eventBus = createAgentEventBus({ store });
 const surfaceStore = createSurfaceStore();
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -44,18 +49,17 @@ const search = new URLSearchParams(location.search);
 function currentParams() {
   return surfaceStore.toLegacyParams();
 }
-// Persona and knowledge base (released by Samuel on 19.11.2026, decision 9).
+// Persona is loaded for the local prompt; factual knowledge is retrieved by the server.
 let persona = null;
-let knowledge = null;
 const loadJson = (path) => fetch(new URL(path, import.meta.url))
   .then((r) => (r.ok ? r.json() : null))
   .catch(() => null);
 loadJson('./agent/persona.json').then((p) => { persona = p; });
-loadJson('./agent/knowledge.json').then((k) => { knowledge = k; });
+let knowledgePromise = null;
+const getKnowledge = () => (knowledgePromise ??= loadJson('./agent/knowledge.json'));
 const getSystem = () => {
   const basePrompt = buildSystemPrompt({
     persona,
-    knowledge,
     style: deriveStyle(currentParams()),
   });
   const adaptationNote = buildAdaptationPromptBlock(
@@ -71,7 +75,7 @@ const adapters = [...parseFailureKinds(search).map((kind) => createFailingAgent(
 if (isProductionHost(location.hostname)) {
   // Production speaks only to the real endpoint. If every provider fails, the
   // surface shows an honest error instead of a canned answer that looks live.
-  adapters.push(createRemoteAgent({ getSystem }));
+  adapters.push(createRemoteAgent({ getParams: currentParams }));
 } else {
   const local = parseModelParam(search);
   if (local.enabled) {
@@ -88,8 +92,29 @@ const surfaceProjector = mountSurfaceProjector({
   root: document.documentElement,
   reducedMotion,
 });
+const embodiment = mountEmbodiment({
+  eventBus,
+  store,
+  presence,
+  surfaceProjector,
+  stage,
+  root: document.documentElement,
+  reducedMotion,
+});
+const observability = mountObservabilityPanel({
+  eventBus,
+  store,
+  embodiment,
+  presence,
+  stage,
+  search: location.search,
+});
+let innerAgent = createAgentChain(adapters, { timeoutMs: 10000 });
+if (!isProductionHost(location.hostname)) {
+  innerAgent = createLocalPreRetrievalAgent({ innerAgent, getKnowledge });
+}
 const baseAgent = createAdaptiveAgent({
-  innerAgent: createAgentChain(adapters, { timeoutMs: 10000 }),
+  innerAgent,
   surfaceStore,
   projector: surfaceProjector,
 });
@@ -113,7 +138,7 @@ const surfaceControls = mountSurfaceControls({
 });
 // The eyes must survive the mobile keyboard (first mobile test, 20.11.2026).
 const keyboardViewport = mountKeyboardViewport();
-mountConversation({ root: stage, store, agent, reducedMotion });
+mountConversation({ root: stage, store, agent, eventBus, reducedMotion });
 // Eyes follow the writing caret and look ahead while the visitor types.
 mountGaze({ input: document.getElementById('composer-input'), reducedMotion });
 // In silence the eyes wait expectantly and glance at the input (never sleep).
@@ -163,7 +188,10 @@ if (poseParam) {
 // Debug handle for local verification and dev tools only.
 window.__agentfaehig = {
   store,
+  events: eventBus,
+  embodiment,
   presence,
+  observability,
   surface: surfaceStore,
   surfaceProjector,
   surfaceControls,

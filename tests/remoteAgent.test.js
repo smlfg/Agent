@@ -31,7 +31,7 @@ test('adapter exposes id "remote" and posts the prompt to the endpoint', async (
   assert.equal(agent.id, 'remote');
   const result = await agent.respond('hello');
 
-  assert.deepEqual(result, { text: 'hi back', dev: false, provider: 'workers-ai', model: 'llama' });
+  assert.deepEqual(result, { text: 'hi back', dev: false, provider: 'workers-ai', model: 'llama', sources: [], contact_card: false, coverage: null });
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, ENDPOINT);
   assert.equal(calls[0].init.method, 'POST');
@@ -39,7 +39,7 @@ test('adapter exposes id "remote" and posts the prompt to the endpoint', async (
 
   const body = JSON.parse(calls[0].init.body);
   assert.equal(body.prompt, 'hello');
-  assert.equal(body.system, 'stay quiet');
+  assert.equal('system' in body, false);
   assert.equal('history' in body, false);
 });
 

@@ -2,6 +2,8 @@
 // Eye Motion System. No DOM dependencies so both browser runtime and Node unit
 // tests can import and tune these values directly.
 
+import { embodiedOverlayForIntent } from './behavior-profiles.js';
+
 /**
  * Canonical eye motion states supported by the Living Surface.
  * @type {readonly string[]}
@@ -378,3 +380,43 @@ export function normalizeEyeState(name) {
   if (Object.hasOwn(STATE_ALIASES, key)) return STATE_ALIASES[key];
   return 'present';
 }
+
+/**
+ * Named embodied intents (Layer 3) mapped from AgentEvent types.
+ * @type {readonly string[]}
+ */
+export const EMBODIED_INTENTS = Object.freeze([
+  'orienting',
+  'contextualizing',
+  'embedding',
+  'searching',
+  'grounded',
+  'multi_source',
+  'uncovered',
+  'degraded',
+  'tooling',
+  'tool_retry',
+  'tool_failed',
+  'switching',
+  'concentrating',
+  'streaming',
+  'pausing',
+  'completing',
+  'waiting',
+  'interrupted',
+  'error',
+]);
+
+/**
+ * Parametric overlays applied orthogonally on top of EYE_STATE_PROFILES + userParams.
+ * Sourced from declarative P01–P09 behavior profiles.
+ * @type {Readonly<Record<string, object>>}
+ */
+export const EMBODIED_INTENT_PROFILES = Object.freeze(
+  Object.fromEntries(
+    EMBODIED_INTENTS.map((intent) => {
+      const overlay = embodiedOverlayForIntent(intent);
+      return [intent, Object.freeze(overlay ?? { baseEyeState: 'idle' })];
+    }),
+  ),
+);

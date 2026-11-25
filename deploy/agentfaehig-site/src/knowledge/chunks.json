@@ -1,0 +1,3144 @@
+{
+  "version": 1,
+  "built_at": "2026-11-25T21:24:26.284Z",
+  "chunks": [
+    {
+      "id": "about-samuel",
+      "title": "Über Samuel",
+      "text": "Samuel Fleig studiert Informatik und arbeitet als AI Engineer intensiv mit agentischen Systemen. Er will Systeme bauen, die Menschen mehr Handlungsfähigkeit geben.\n\nSein Studienschwerpunkt liegt auf Machine Learning, Deep Learning, neuronalen Netzen und agentischen Systemen. Praktisch baut er eigene Strukturen für Agenten, etwa für Routing, Memory und Verifikation, und beobachtet genau, wie sie sich im Alltag verhalten.\n\nHAI (Human Agent Interface) ist seine Antwort darauf, wie Mensch und Agent gemeinsam arbeiten können. Die Idee entstand aus dem Alltag mit vielen parallelen Agenten-Sessions: Wie lässt sich arbeiten, damit die eigene Handlungsfähigkeit wächst und nicht verloren geht? Der Mensch bleibt dabei die Engstelle für Entscheidungen.",
+      "topics": [
+        "person",
+        "owner",
+        "about"
+      ],
+      "aliases": [
+        "Samuel",
+        "Samuel Fleig",
+        "wer hat das gebaut",
+        "wer steckt dahinter",
+        "Autor",
+        "Owner",
+        "Gründer"
+      ],
+      "waypoints": [
+        "creator",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:d7340863de8c5d40885ac35a0362248cc2d5dd12999a5f46f24c5db6f8623f32"
+    },
+    {
+      "id": "gh-agent",
+      "title": "Agentfähig",
+      "text": "Agentfähig ist ein lokal laufendes Human-Agent Interface mit einer als Agent erlebbaren Website. Die Living Surface bietet Texteingabe, Typewriter-Antworten, Unterbrechen, konversationsgesteuerte Oberflächenanpassung, räumliche 2.5D-Tiefe und einen Fehlerzustand. Produktiv verarbeitet ein Worker Anfragen über `POST /api/agent`; Voice-Ausgabe ist nicht freigeschaltet. Lokal dienen deterministische Entwicklungsdaten. Das Projekt besitzt keinen Build und keine Laufzeit-Abhängigkeiten. Es enthält Validierungs- und Verhaltenstests sowie Deployment- und Verifikationsskripte. Die Umsetzung ist lokal bedienbar und live erreichbar; Voice-Ausgabe, ein 20-Turn-Latenzmesslauf und Fremdtests stehen noch aus.",
+      "topics": [
+        "Human-Agent Interface",
+        "Living Surface",
+        "Agent-Website",
+        "POST /api/agent",
+        "Cloudflare",
+        "Verhaltenstests"
+      ],
+      "aliases": [
+        "Agentfähig",
+        "Living Surface",
+        "Human-Agent Interface",
+        "agentfaehig"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "creator",
+        "*"
+      ],
+      "link": "https://www.xn--agentfhig-02a.de/",
+      "source_kind": "github",
+      "hash": "sha256:2788050b4e8b030a91a7eaef55bfdaeefb2d5daa61cbe543e557d762e05c4596"
+    },
+    {
+      "id": "gh-agentfaehig-de",
+      "title": "Agentfähig.de",
+      "text": "Die Quelle enthält keine inhaltlichen Angaben.",
+      "topics": [],
+      "aliases": [
+        "Agentfähig.de"
+      ],
+      "waypoints": [
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:3139ac0ad450c8dbbd090068f0fb10096ae065e9759601c89e44385baa066d4f"
+    },
+    {
+      "id": "gh-agentic-owner-tracker",
+      "title": "Agentic Owner Tracker",
+      "text": "Agentic Owner Tracker ist ein lokales HAI-Werkzeug, das aus Agentensitzungsprotokollen eine sichtbare tägliche Signalgrid erzeugt. Die Grid-Zustände `empty`, `agent`, `overload`, `human` und `owner` machen Agentenaktivität, Überlastung und manuelle Eigentümersignale sichtbar. Die Anwendung ist statisches HTML/JavaScript mit Python-Importer, benötigt weder Konten noch API-Aufrufe und speichert keine Rohprompts. Der Importer zählt Codex-Sitzungen und Ereignisse und erzeugt abgeleitete JSON-Daten. Manuelle Markierungen werden über Overrides ergänzt. Das Projekt bietet Demo-Daten, einen lokalen HTTP-Server und einen 42-Tage-Standardzeitraum. Es enthält keinen LLM-Aufruf, keine Synchronisation und keinen Rückschreibemechanismus.",
+      "topics": [
+        "Owner-Signale",
+        "Agentensitzungen",
+        "lokal-first",
+        "Codex-Importer",
+        "Datenschutz",
+        "Signalgrid"
+      ],
+      "aliases": [
+        "Agentic Owner Tracker",
+        "Owner Signal Grid",
+        "owner map",
+        "owner signals"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "creator",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/agentic-owner-tracker",
+      "source_kind": "github",
+      "hash": "sha256:71bb77f4a61fcee702e1290d500b21b5ce9965cf7445f308a62e5b2799bdc5c2"
+    },
+    {
+      "id": "gh-agentswarmdashboard-1",
+      "title": "Agent Swarm Dashboard",
+      "text": "Die Quelle enthält keine inhaltlichen Angaben.",
+      "topics": [],
+      "aliases": [
+        "Agent Swarm Dashboard"
+      ],
+      "waypoints": [
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:5bab5f89bf26dbcfce9ff604e11ed950b6b0ed051431748d678b78bb72049832"
+    },
+    {
+      "id": "gh-aider-bench-harness",
+      "title": "First Real Harness Evaluation",
+      "text": "First Real Harness Evaluation ist ein Messwerkzeug, das prüft, ob Markdown-Harness-Regeln das Verhalten von Coding-Agenten reproduzierbar verändern. Der Schwerpunkt liegt auf Aider- und SWE-bench-Lite-Experimenten. Harte Testmetriken bilden die primäre Evidenz; LLM-Bewertungen dienen nur der Diagnose. Runner, Preflight, Zusammenfassung, wissenschaftliche A/B-Auswertung und Modellvergleiche sind vorhanden. Das Projekt beansprucht kein abschließendes Ergebnis für eine bestimmte Policy. Eine Validitätsprüfung kennzeichnet Vergleiche mit zu wenigen gültigen Paarläufen, null Tests, Infrastrukturfehlern oder fehlenden gemeinsamen Aufgaben als nicht entscheidungsfähig. Reale Läufe benötigen Docker, Aider, Modellzugang, Zeit und Budget.",
+      "topics": [
+        "Agentenevaluation",
+        "Aider",
+        "SWE-bench Lite",
+        "A/B-Tests",
+        "Harness-Policies",
+        "Validitätsprüfung"
+      ],
+      "aliases": [
+        "First Real Harness Evaluation",
+        "Aider Bench Harness",
+        "Harness Evaluation",
+        "scientific A/B"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:26814eef8e30ea1cedf2cc454a614489a4f5b3c7df0b632eaf8c3e60fac78542"
+    },
+    {
+      "id": "gh-aisystemforvibecoding",
+      "title": "MyAIGame — AI Skills & Tools",
+      "text": "MyAIGame ist eine Sammlung wiederverwendbarer AI-Skills und Werkzeuge für sprechende Agents und Command-Erklärungen. Der MultiKanal-Daemon empfängt Texte per HTTP, fasst sie über MiniMax oder Ollama zusammen und gibt sie mit Edge TTS aus. Eine Sperre und eine Audio-Warteschlange verhindern überlappende Wiedergabe. Der AI-Command-Explainer erläutert Linux-Befehle im Power-User-Modus und nutzt MiniMax mit Ollama-Fallback. Claude-Code-Hooks können Stop- und Tool-Ereignisse vertonen. Narrationen werden auf Informationsdichte, Füllwörter, Prompt-Version und Kompression ausgewertet. Das Projekt benötigt Linux, Python, Audioausgabe und je nach Funktion externe Modelle.",
+      "topics": [
+        "AI-Skills",
+        "TTS",
+        "MultiKanal-Daemon",
+        "Command Explainer",
+        "Claude-Code-Hooks",
+        "Ollama"
+      ],
+      "aliases": [
+        "MyAIGame",
+        "AI Skills & Tools",
+        "MultiKanal",
+        "AI Command Explainer",
+        "TTS Daemon"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/MyAIGame",
+      "source_kind": "github",
+      "hash": "sha256:2ff2d091e91272345d4e82dca6d2e361e85c598de1639388f0918463deb814df"
+    },
+    {
+      "id": "gh-angebote-cli",
+      "title": "angebote-cli",
+      "text": "angebote-cli ermöglicht Agenten und Menschen den lesenden Zugriff auf aktuelle Prospektangebote deutscher Händler. Die Suche unterstützt Begriffe, Händler, Marken, Preise, Rabatte, Seiten, Orte und JSON-Ausgabe. Zusätzlich zeigt das Werkzeug Händlerprospekte, sucht einzelne Angebote und beobachtet neue Angebote über einen lokalen Watch-Zustand. Es verwendet öffentlich abrufbare Seiten, benötigt keinen Login und führt keine Schreibaktionen aus. Ergebnisse enthalten den tatsächlich verwendeten Ort. Die Suche filtert irrelevante Treffer anhand normalisierter Wörter und kann diesen Filter abschalten. Die Installation erfolgt über pip oder pipx; als einzige Laufzeitabhängigkeit wird `httpx` genannt. Zugriffe werden gedrosselt und mit einem User-Agent gekennzeichnet.",
+      "topics": [
+        "Prospektangebote",
+        "CLI",
+        "kaufDA",
+        "Shopping",
+        "Watch-Modus",
+        "JSON"
+      ],
+      "aliases": [
+        "angebote-cli",
+        "angebote",
+        "Prospekt-Suche",
+        "Angebote CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/angebote-cli",
+      "source_kind": "github",
+      "hash": "sha256:645c18143b083ccd3b868a89c951de11cee64344466b95556320d8471f3e0301"
+    },
+    {
+      "id": "gh-apotheken-notdienst-cli",
+      "title": "apotheken-notdienst-cli",
+      "text": "apotheken-notdienst-cli findet Notdienst-Apotheken in Deutschland über die öffentliche Notdienstsuche. Es unterstützt aktuelle und datierte Suchen, Orte, Postleitzahlen, Umkreise, Straßen, Entfernungen, Öffnungszeiten, Details und JSON-Ausgabe. Ein Standardort kann lokal gespeichert werden. Ergebnisse werden zehn Minuten zwischengespeichert; ein Suchlauf verwendet höchstens drei lesende GET-Anfragen. Das Werkzeug benötigt keinen Login und führt keine schreibenden Web-Aktionen aus. Mehrdeutige Orte werden interaktiv oder mit einer Auswahloption behandelt. Exit-Codes unterscheiden Erfolg, keine Treffer, Eingabefehler und Quellenfehler. Die verwendete Website ist keine dokumentierte API; bei Änderungen meldet das Werkzeug einen Quellenfehler statt eines Tracebacks.",
+      "topics": [
+        "Notdienst-Apotheken",
+        "CLI",
+        "Deutschland",
+        "Umkreissuche",
+        "Caching",
+        "Exit-Codes"
+      ],
+      "aliases": [
+        "apotheken-notdienst-cli",
+        "notdienst",
+        "Apotheken-Notdienstsuche"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/apotheken-notdienst-cli",
+      "source_kind": "github",
+      "hash": "sha256:960c8790504671a56922aec126104345ad5b1d7a21aabf59ff464907402dd9da"
+    },
+    {
+      "id": "gh-archify-free-pipeline-research",
+      "title": "Archify Free-Pipeline Research",
+      "text": "Archify Free-Pipeline Research untersucht, ob redundante Vollrepository-Erkundung oder spezialisierte Erkundung bessere quellengestützte Architekturdarstellungen erzeugt. Das Projekt ist explorativ und beansprucht keine überlegene Orchestrierungsstrategie. Es vergleicht Modelle, Quellkorrektheit, wichtige Befunde, Auslassungen, Verständlichkeit, visuelle Artefaktqualität, Robustheit, Zeit und Kosten. Ein größerer Lauf unterstützt die Fan-out-Hypothese und zeigt geringe Überschneidung zwischen Modellansichten, bestätigt sie aber nicht vollständig. Das Projekt trennt technische Pipeline-Erfolge von verständlichen Architekturartefakten. Es enthält Laufdaten, Anspruchssammlungen, generierte Archify-Karten, visuelle Prüfberichte und ein experimentelles Vergleichsdesign.",
+      "topics": [
+        "Architekturdarstellung",
+        "Agenten-Orchestrierung",
+        "Scouting",
+        "Archify",
+        "Fan-out",
+        "Evaluation"
+      ],
+      "aliases": [
+        "Archify Free-Pipeline Research",
+        "Archify Research",
+        "Fan-out Scouting",
+        "Architecture Map Evaluation"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:e41d09303dd061b504c2fb821dd68437e983c8b4693134862be80be339b000e6"
+    },
+    {
+      "id": "gh-bafoeg-cli",
+      "title": "bafoeg-cli",
+      "text": "bafoeg-cli unterstützt Agenten und Menschen bei BAföG-Bedarfsrechnung, Fristen, Formblättern und offiziellen Links. Jeder Befehl kann strukturierte JSON-Ausgabe liefern. Die experimentelle Automation umfasst Login, Statuslesen, Entwurfsspeicherung, Antragseinreichung und Dokumentupload mit Bestätigungsgates. Rechner, Fristen, Unterlagen und Links funktionieren ohne Browser-Erweiterung; der BundID-Login benötigt Playwright. Tests verwenden gemockte Backends und eine gefälschte Sitzung. Ein echter End-to-End-Lauf gegen BAföG Digital wurde nicht verifiziert. Zugangsdaten werden nur aus Umgebungsvariablen oder interaktiv gelesen; lokale Sitzungen erhalten restriktive Rechte. Der Stand der Werte bezieht sich auf das Wintersemester 2024/25.",
+      "topics": [
+        "BAföG",
+        "CLI",
+        "Bedarfsrechner",
+        "BundID",
+        "BAföG Digital",
+        "Automation"
+      ],
+      "aliases": [
+        "bafoeg-cli",
+        "BAföG-CLI",
+        "BAföG Rechner",
+        "Antrags-CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/bafoeg-cli",
+      "source_kind": "github",
+      "hash": "sha256:6f5bdfcdfeee2898c1f0cc267b40e48f3085cb20070568f0532c86985896a99d"
+    },
+    {
+      "id": "gh-bash-explain",
+      "title": "bash-explain",
+      "text": "bash-explain ist ein einzelnes Bash-Skript, das fehlgeschlagene interaktive Shell-Befehle mit einem lokalen Ollama-Modell auf Deutsch erklärt. Es sammelt sichtbare Standardfehlerausgabe, merkt den letzten Befehl, prüft Exit-Code und Fehlertext und zeigt anschließend eine kurze Erklärung unter dem Prompt. Standardmäßig wird `codellama` verwendet. Das Werkzeug ist offline-fähig und richtet sich an Lernende, die Fehlermeldungen verstehen möchten. Es arbeitet nur in interaktiven Shells und verändert die Standardfehlerumleitung dauerhaft für diese Shell. Stille Fehler ohne Standardfehlerausgabe werden nicht erklärt. Modelllatenz, lange Stacktraces und die Modellqualität begrenzen das Verhalten.",
+      "topics": [
+        "Bash",
+        "Fehlererklärung",
+        "Ollama",
+        "Shell-Lernen",
+        "offline",
+        "stderr"
+      ],
+      "aliases": [
+        "bash-explain",
+        "Bash-Erklärer",
+        "Shell-Fehlererklärung",
+        "Ollama Bash Hook"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/bash-explain",
+      "source_kind": "github",
+      "hash": "sha256:c3bd878e370a9dab1241add22b358c3f94e6db3ac61177f80992c225d8c1230f"
+    },
+    {
+      "id": "gh-bibliothek-cli",
+      "title": "bibliothek-cli",
+      "text": "bibliothek-cli ist eine Agent-CLI für den LIV-Bibliothekskatalog. Sie bietet Live-Suche, Detaildatensätze, statische Standorte, lokale Keyword-Watches, Kontologin, Ausleihanzeige und Verlängerung mit Bestätigung. Zugangsdaten werden über Umgebungsvariablen gelesen und nicht als CLI-Argumente verwendet. JSON-Ausgabe erzeugt genau ein Objekt auf stdout. Die Suche wurde live getestet. Login und Detailanzeige sind in der beschriebenen Version jedoch als Mock implementiert; ein Live-Login-Roundtrip steht als Follow-up aus. Das Werkzeug nutzt einen aDISWeb-/BSZ-Treiber, der als JavaScript- und Forms-Anwendung ohne SRU, DAIA oder REST beschrieben wird. Schreibende Verlängerungen benötigen `--confirm`.",
+      "topics": [
+        "Bibliothekskatalog",
+        "CLI",
+        "OPAC",
+        "Ausleihen",
+        "Keyword-Watch",
+        "Bestätigung"
+      ],
+      "aliases": [
+        "bibliothek-cli",
+        "Bibliotheks-CLI",
+        "LIV-Bibliothekskatalog",
+        "OPAC-Suche"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/bibliothek-cli",
+      "source_kind": "github",
+      "hash": "sha256:5952187af2d0e82afd4060f7efc4975b5a878b5f78a57228815fbcaee3976e89"
+    },
+    {
+      "id": "gh-blaulicht-cli",
+      "title": "blaulicht-cli",
+      "text": "blaulicht-cli durchsucht Pressemeldungen aus Polizei, Feuerwehr und Zoll im Terminal. Es unterstützt neue Meldungen für Orte, Stichwortsuche, Volltext, Dienststellen, Meldungsdetails und einen Watch-Modus. Das Werkzeug benötigt weder Login noch API-Schlüssel und verwendet ausschließlich lesende GET-Anfragen. Standard- und Watch-Zustände werden lokal gespeichert; Antworten werden kurz zwischengespeichert und Zugriffe gedrosselt. JSON-Ausgabe ist bei nicht interaktivem stdout der Standard. Exit-Codes unterscheiden Erfolg, Nutzungsfehler, Laufzeitfehler, Quellenfehler und Abbruch. Die Quelle ist nicht als dokumentierte API beschrieben; Änderungen am Seitenaufbau können die Ausgabe beeinträchtigen. Das Projekt ist inoffiziell.",
+      "topics": [
+        "Pressemeldungen",
+        "Polizei",
+        "Feuerwehr",
+        "Zoll",
+        "CLI",
+        "Watch-Modus"
+      ],
+      "aliases": [
+        "blaulicht-cli",
+        "Blaulicht-Suche",
+        "Presseportal Blaulicht",
+        "Meldungs-Watch"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/blaulicht-cli",
+      "source_kind": "github",
+      "hash": "sha256:b99456e44f53b291d41fac5a9670ff4887f8094ccb00f6a10f1fcabb19d8f6eb"
+    },
+    {
+      "id": "gh-blutspende-cli",
+      "title": "blutspende-cli",
+      "text": "blutspende-cli findet Blutspendetermine im Terminal. Es unterstützt Suche nach Postleitzahl, Ort oder Landkreis, Umkreis- und Zeitraumfilter, Details, den nächsten Termin, lokale Watches und das Speichern von Kalendereinträgen. Das Werkzeug benötigt keinen Login und führt keine schreibenden Aktionen aus. JSON wird bei nicht interaktivem stdout standardmäßig ausgegeben. Standardort, Watch-Zustand und Cache werden lokal gespeichert. Reservierungen erfolgen ausschließlich über einen angezeigten Link. Die Anwendung nutzt öffentlich erreichbare Such-, Detail- und Kalenderseiten sowie RSS-Daten; eine offizielle API ist nicht genannt. Zugriffe werden auf höchstens eine Anfrage pro Sekunde begrenzt. Änderungen an der Website können das Werkzeug beeinträchtigen.",
+      "topics": [
+        "Blutspendetermine",
+        "CLI",
+        "DRK",
+        "Kalender",
+        "Watch-Modus",
+        "Umkreissuche"
+      ],
+      "aliases": [
+        "blutspende-cli",
+        "Blutspende-Suche",
+        "Blutspendetermine CLI",
+        "Termin-Watch"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/blutspende-cli",
+      "source_kind": "github",
+      "hash": "sha256:2df1f4dd4e8247c7e9805384cddc63d2cd6098e24b7db994eb5ddca7c3f71156"
+    },
+    {
+      "id": "gh-bundesanzeiger-cli",
+      "title": "bundesanzeiger-cli",
+      "text": "bundesanzeiger-cli durchsucht und liest Bekanntmachungen im Bundesanzeiger. Es findet Firmenbekanntmachungen nach Name, filtert Bereiche und Datum, liest Volltexte und zeigt neue Bekanntmachungen seit dem letzten Aufruf. Ein Login ist nicht nötig; die Zugriffe sind lesend. Jahresabschlüsse bleiben durchsuchbare Indizes, während ihr Volltext wegen eines Captchas nicht abgerufen wird. Das Werkzeug umgeht Captchas nicht, sondern nennt eine Such-URL. JSON wird bei nicht interaktivem stdout standardmäßig ausgegeben. Cache und Watch-Zustand werden lokal gespeichert. Exit-Codes unterscheiden Erfolg, Nutzungsfehler, allgemeine Fehler, Quellenfehler und Abbruch. Die öffentliche Website wird ohne dokumentierte API verwendet.",
+      "topics": [
+        "Bundesanzeiger",
+        "Bekanntmachungen",
+        "Firmenrecherche",
+        "Captcha",
+        "CLI",
+        "Watch-Modus"
+      ],
+      "aliases": [
+        "bundesanzeiger-cli",
+        "Bundesanzeiger-Suche",
+        "Bekanntmachungs-CLI",
+        "Jahresabschluss-Index"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:a67325eb3ded3b15a0f02cf3b395254e6f3a089e32100e90b13f8ba4e5378f1b"
+    },
+    {
+      "id": "gh-cfhackathon-ocr-2026",
+      "title": "TableSalt",
+      "text": "TableSalt ist ein Wettbewerbssystem zur Erkennung strukturierter Tabellen aus beschädigten Scans und Fotos. Es liefert einen Datengenerator mit exakten Referenzdaten, einen deterministischen Scorer, Baselines und eine Docker-Submission. Bewertet werden Tabellenstruktur, Zellinhalte und Zellspannen auf synthetischen Testdaten mit verschiedenen Beschädigungsstufen. Unterstützt werden klassische Bildverarbeitung, Open-Weight-OCR, Vision-Language-Modelle, Feinabstimmung und heuristische Verfahren. Geschlossene Modell-APIs sind im Offline-Lauf ausgeschlossen. Das Repository enthält Entwicklungsdaten, Generator, Auswertung, Baselines und eine Submission-Vorlage.",
+      "topics": [
+        "Tabellenerkennung",
+        "OCR",
+        "synthetische Daten",
+        "Computer Vision",
+        "Docker",
+        "Benchmark"
+      ],
+      "aliases": [
+        "TableSalt",
+        "Table Recognition",
+        "Tabellen-OCR",
+        "Tabellenerkennung aus Scans"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:739ae89e4b20d3470e8c5a4266e7f0c2c9e829f8a94a8aaa1bae851194ab96a9"
+    },
+    {
+      "id": "gh-chefkoch-cli",
+      "title": "chefkoch-cli",
+      "text": "chefkoch-cli ist ein ausschließlich lesendes Terminalwerkzeug für Rezepte. Es sucht Rezepte mit Filtern, zeigt Rezeptdetails mit skalierten Zutaten, erstellt zusammengefasste Einkaufslisten aus mehreren Rezepten und beobachtet neue Suchtreffer. Es benötigt keinen Login und nutzt eine inoffizielle API. Die Ausgabe erfolgt lesbar im Terminal oder als einzelnes JSON-Objekt. Ein lokaler Watch-State speichert Suchschlüssel, IDs und Zeitstempel. Schreibende Web-Aktionen und Zugangsdaten werden nicht verwendet. Die API kann sich ändern.",
+      "topics": [
+        "CLI",
+        "Rezepte",
+        "Einkaufslisten",
+        "Watch",
+        "JSON",
+        "Python"
+      ],
+      "aliases": [
+        "chefkoch-cli",
+        "Chefkoch CLI",
+        "Rezept-CLI",
+        "Kochrezepte im Terminal"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/chefkoch-cli",
+      "source_kind": "github",
+      "hash": "sha256:48435eeb8e16bb02b44a261b9b8baf7010659b9eefd61c69a059b92a9a178bfa"
+    },
+    {
+      "id": "gh-chefkoch-mcp",
+      "title": "chefkoch-mcp",
+      "text": "chefkoch-mcp ist ein ausschließlich lesender MCP-Server für Rezeptsuche, Rezeptdetails und Einkaufslisten. Er bildet eine dünne Hülle um den Kern von chefkoch-cli und verwendet dieselben Funktionen. Die Tools suchen Rezepte mit Filtern, laden Rezepte per ID, URL oder Suchbegriff und fassen Zutaten nach Name und Einheit zusammen. Der Server läuft über stdio und kann aus MCP-Clients gestartet werden. Die Daten stammen über eine inoffizielle API. Login und schreibende Web-Aktionen sind nicht erforderlich.",
+      "topics": [
+        "MCP",
+        "Rezepte",
+        "Einkaufslisten",
+        "stdio",
+        "read-only"
+      ],
+      "aliases": [
+        "chefkoch-mcp",
+        "Chefkoch MCP-Server",
+        "Rezept-MCP",
+        "MCP-Rezeptserver"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/chefkoch-cli",
+      "source_kind": "github",
+      "hash": "sha256:f651f984ae3a9920716f1c602dad5624aa48adb4248b2684a84875d86f5fb9a9"
+    },
+    {
+      "id": "gh-claudecodepanel",
+      "title": "Claude Code Panel",
+      "text": "Claude Code Panel ist ein natives GTK3-Desktoppanel für Linux. Es bündelt Systemtray, Kostenübersicht, Sitzungsbrowser, Prozessverwaltung, Agent-Swarm-Monitor, Ereignisanzeige, Shortcut-Statistik, Projektdashboards, Logansicht sowie Konfigurations- und Hook-Verwaltung. Das Panel unterstützt helle und dunkle Darstellung, Einzelinstanz-Sperre und optionale WebKit2-Dashboards. Es liest unter anderem Sitzungs-, Kosten- und Hook-Daten aus lokalen Dateien und Prozessen. Die Installation erfolgt direkt aus dem Repository oder als systemd-Benutzerdienst.",
+      "topics": [
+        "GTK3",
+        "Linux",
+        "Desktoppanel",
+        "Claude Code",
+        "Monitoring",
+        "Kosten"
+      ],
+      "aliases": [
+        "Claude Code Panel",
+        "ClaudeCodePanel",
+        "Claude Desktop Panel",
+        "Agent Swarm Monitor"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/ClaudeCodePanel",
+      "source_kind": "github",
+      "hash": "sha256:a724deb8a53efe7e1167534416db4ead58dfc4a154138901adb3703229d4edf2"
+    },
+    {
+      "id": "gh-dataengeneering-keepa-hsworms",
+      "title": "Keeper System",
+      "text": "Keeper System ist eine Datenpipeline zur Überwachung von Amazon-Preisen und zur Deal-Suche. Eine Keepa-Schnittstelle liefert Daten an Kafka; Consumer verarbeiten sie für PostgreSQL und Elasticsearch. Eine REST-API, Scheduler und Agenten unterstützen Preisüberwachung, Deal-Berichte, Benachrichtigungen und Analysen. Elasticsearch-Indizes ermöglichen Suche und Aggregationen. Die Infrastruktur umfasst unter anderem Kafka, Redis, PostgreSQL, Elasticsearch und Kibana. Docker Compose dient zum Start der Dienste. Für den Betrieb werden API-Schlüssel und weitere Umgebungsvariablen konfiguriert.",
+      "topics": [
+        "Data Engineering",
+        "Keepa",
+        "Kafka",
+        "Elasticsearch",
+        "PostgreSQL",
+        "Preisüberwachung"
+      ],
+      "aliases": [
+        "Keeper System",
+        "Amazon Price Monitoring",
+        "Deal Finder",
+        "Keepa-Datenpipeline"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:77f9a0eb234f45025ae9eb8cd6bde03e21d80fbef0f8a32d625fa192728b1b7c"
+    },
+    {
+      "id": "gh-doctolib-cli",
+      "title": "doctolib-cli",
+      "text": "doctolib-cli ist ein ausschließlich lesendes Kommandozeilenwerkzeug für die Suche nach medizinischen Profilen und freien Terminen. Es unterstützt Suche, Profilanzeige, Terminabfrage, Fachrichtungsfilter und lokale Watchlisten. Login und Buchung sind ausgeschlossen; der Buchungsbefehl endet immer mit Exit 5. Live-Suchen verwenden Playwright, Terminabfragen eine Verfügbarkeits-Schnittstelle. Ausgaben können terminallesbar oder als einzelnes JSON-Objekt erfolgen. Watchlisten werden lokal gespeichert. Mehrere Praxisstandorte werden pro Aufruf begrenzt abgefragt.",
+      "topics": [
+        "CLI",
+        "Doctolib",
+        "Terminsuche",
+        "medizinische Profile",
+        "Watchlist",
+        "read-only"
+      ],
+      "aliases": [
+        "doctolib-cli",
+        "Doctolib CLI",
+        "Arzttermin-CLI",
+        "freie Termine suchen"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/doctolib-cli",
+      "source_kind": "github",
+      "hash": "sha256:d5c0754119ba124c0a941b8dd6b0ce3ed833c4e1a1bc7bdb8b101032ebf2f2ab"
+    },
+    {
+      "id": "gh-fahrgastrechte-cli",
+      "title": "fahrgastrechte-cli",
+      "text": "fahrgastrechte-cli ist eine Terminalanwendung für ein Verspätungskonto. Sie erfasst, sammelt und prüft Bahnverspätungsfälle und bereitet Anträge vor. Der Antrag wird vom Menschen selbst abgeschickt. Schreibende Aktionen verlangen standardmäßig eine Bestätigung und brechen ohne TTY ab, sofern kein explizites Bestätigungsflag gesetzt ist. Die Logik liegt in einem Kernpaket, die CLI bildet eine dünne Typer-Hülle. Der dokumentierte MVP umfasst Speicherung, Modelle, Konfiguration, einen Fahrplandaten-Connector sowie Fallverwaltung mit Duplikatschutz. Ein passender MCP-Server ist vorgesehen.",
+      "topics": [
+        "CLI",
+        "Fahrgastrechte",
+        "Verspätungskonto",
+        "Typer",
+        "Antragsvorbereitung"
+      ],
+      "aliases": [
+        "fahrgastrechte-cli",
+        "Verspätungskonto",
+        "Bahnverspätungs-CLI",
+        "Fahrgastrechte-Anträge"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:32594775ef2bb8b298aeaba27ea6494d909453f42e1d2a754615efd55bbba02c"
+    },
+    {
+      "id": "gh-fahrgastrechte-mcp",
+      "title": "fahrgastrechte-mcp",
+      "text": "fahrgastrechte-mcp ist ein FastMCP-Server über stdio für ein Verspätungskonto. Er soll Funktionen des zugehörigen CLI als MCP-Tools bereitstellen, darunter das Anlegen und Auflisten von Verspätungsfällen sowie die Berechnung einer Entschädigung. Im dokumentierten MVP ist zunächst ein Server-Skelett mit einem Ping-Tool umgesetzt. Der Server startet mit uv und wird durch Tests geprüft. Der Kern ist derzeit als vendored Platzhalter enthalten und wird manuell aus dem CLI-Kontext übernommen. Das Absenden eines Antrags bleibt beim Menschen.",
+      "topics": [
+        "MCP",
+        "FastMCP",
+        "Verspätungskonto",
+        "stdio",
+        "Fahrgastrechte"
+      ],
+      "aliases": [
+        "fahrgastrechte-mcp",
+        "Fahrgastrechte MCP",
+        "Verspätungs-MCP",
+        "Bahnentschädigungsserver"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:4ef3b9bd8fe3335ccfdb080062ed494541fb35696aff21eb41dac563e4d1c4bd"
+    },
+    {
+      "id": "gh-flixbus-cli",
+      "title": "flixbus-cli",
+      "text": "flixbus-cli ist eine CLI zur anonymen Live-Abfrage von FlixBus- und FlixTrain-Verbindungen. Sie findet Städte, sucht Verbindungen mit Preisen und freien Plätzen, zeigt Halte, ermittelt günstige Reisetage und beobachtet Preise lokal. Buchungen sind nicht implementiert und enden immer mit Exit 5. Login und API-Schlüssel werden nicht benötigt. Such- und Watch-Ausgaben können als einzelnes JSON-Objekt erfolgen. Lokale Watchlisten werden erst nach Bestätigung geschrieben. Die Daten sind Momentaufnahmen; Preise werden als Grundpreis und Endpreis mit Plattformgebühr ausgewiesen.",
+      "topics": [
+        "CLI",
+        "FlixBus",
+        "FlixTrain",
+        "Live-Suche",
+        "Preise",
+        "Watchlist"
+      ],
+      "aliases": [
+        "flixbus-cli",
+        "Flix CLI",
+        "Busverbindungen suchen",
+        "Reisepreis-Watcher"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/flixbus-cli",
+      "source_kind": "github",
+      "hash": "sha256:3adcb2c567125757c737231ab797a562b4ea5f5a1c100cd78eb30ba2661b3a41"
+    },
+    {
+      "id": "gh-glasroute-prezero-hhn-futurecityhackathon2026",
+      "title": "GlasRoute",
+      "text": "GlasRoute ist ein Hackathon-Prototyp zur Priorisierung und Tourenplanung für Glascontainer. Eine Pipeline liest Messdaten ein, bewertet Füllstände und Überlaufhäufigkeit, wählt dringende Standorte und baut eine kapazitäts- und schichtbeschränkte Route. Routenvorschläge benötigen eine Disponentenfreigabe, bevor sie als gültig gelten. Die Demo nutzt anonymisierte Messungen, simulierte Zuordnungen zu OpenStreetMap-Standorten, Schätzungen und Luftliniendistanzen mit Umwegfaktor. Enthalten sind CLI, Karten, Prognosen, Heatmaps, Backtests, Benchmark und eine lokale HTML-Oberfläche.",
+      "topics": [
+        "Tourenplanung",
+        "Glascontainer",
+        "Logistik",
+        "Human-in-the-loop",
+        "Hackathon",
+        "Simulation"
+      ],
+      "aliases": [
+        "GlasRoute",
+        "PreZero-Routing",
+        "Glascontainer-Routenplanung",
+        "Containerfüllstände"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://smlfg.github.io/GlasRoute-PreZero-HHN-FUTURECITYHACKATHON2026/",
+      "source_kind": "github",
+      "hash": "sha256:57f8d1bc2381f35b95cb0677dedc92ff956bf5ee528a398969c481b0d8009031"
+    },
+    {
+      "id": "gh-hai-mcp",
+      "title": "HAI-MCP",
+      "text": "HAI-MCP ist eine modellagnostische MCP-Steuerungsebene für eine Human-Agent-Interface-Arbeitsweise. Sie begrenzt, autorisiert und protokolliert agentische Arbeit, ohne selbst ein LLM aufzurufen, Shell-Befehle auszuführen, Git zu pushen oder Dateien zu löschen. Funktionen umfassen Missionsverträge, Sitzungsleases, Aktivitäts- und Driftprüfung, Fokus und Lanes, Owner-Gates, Belege, Abschluss, Checkpoints und Wiederherstellung. Der Server unterstützt stdio sowie streamable HTTP mit optionaler Tokenbindung. Eingaben werden strikt typisiert und bei Fehlern geschlossen abgewiesen.",
+      "topics": [
+        "MCP",
+        "Agent Governance",
+        "Owner Gate",
+        "Missionen",
+        "Evidenz",
+        "Recovery"
+      ],
+      "aliases": [
+        "HAI-MCP",
+        "Human Agent Interface",
+        "MCP Control Plane",
+        "Agenten-Steuerungsebene"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/hai-mcp",
+      "source_kind": "github",
+      "hash": "sha256:b7237a946be77dcdf2270b09abca3380427ea3408dcfc634c19697f3ba5ebab7"
+    },
+    {
+      "id": "gh-hai-skills-registry",
+      "title": "HAI Skills Registry",
+      "text": "HAI Skills Registry ist eine Sammlung kleiner, modellagnostischer Markdown-Skills für agentische Arbeit. Die Skills strukturieren Engineering, Orchestrierung, Automatisierung, Lernen und Produktivität. Wiederkehrende Prinzipien sind belegbare Ergebnisse, einzelne Gates und menschliche Zuständigkeit. Jeder Skill enthält Anweisungen, ein Beispiel und einen Anwendungsfall. Die Sammlung kann über skills.sh oder durch Kopieren einzelner Skill-Verzeichnisse installiert werden. Sie richtet sich an verschiedene agentenfähige Werkzeuge und enthält unter anderem Skills für Prior-Art-Suche, Delegation, Verifikation, Reviews, Automatisierung und Lernbegleitung.",
+      "topics": [
+        "Agent Skills",
+        "Orchestrierung",
+        "Engineering",
+        "Automatisierung",
+        "Lernen",
+        "Markdown"
+      ],
+      "aliases": [
+        "HAI Skills Registry",
+        "HAI-Skill-Sammlung",
+        "Agent Skills Registry",
+        "Skills für Agenten"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://human-agent-interface.com",
+      "source_kind": "github",
+      "hash": "sha256:21d09232d70205dad7cbc362aa1f4d4a2ecd431d7825b4b2323b9360dea1d5aa"
+    },
+    {
+      "id": "gh-hai-voice-builder",
+      "title": "hai-voice-builder",
+      "text": "hai-voice-builder ist ein Baukasten für sprachgestützte Agentenkommunikation. Eine Policy wählt anhand von Profilen aus, welche Ereignisse gesprochen werden, filtert Text, teilt ihn in Chunks und übergibt ihn an ein TTS-Backend. Guards, Wortlimits, Abschnittsfilter, Code-Auslassung, Aussprache und Audio-Sperre werden deterministisch angewendet. Die CLI liefert JSON, während eine lokale UI Profile verwaltet, Vorschauen erzeugt und Testausgaben abspielt. Unterstützt werden lokale und cloudbasierte Backends sowie Spracheingabe. Ein HTTP-Server bietet kompatible Audio-Endpunkte.",
+      "topics": [
+        "TTS",
+        "Agent Voice",
+        "Audio-Policy",
+        "CLI",
+        "Sprachausgabe",
+        "Speech-to-Text"
+      ],
+      "aliases": [
+        "hai-voice-builder",
+        "HAI Voice",
+        "Agentenstimme",
+        "Voice Policy Builder"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/voice-systems",
+      "source_kind": "github",
+      "hash": "sha256:cf024d3de911fdb060c811280b5914ed39034f1119eacababa51a63c8cca76a8"
+    },
+    {
+      "id": "gh-heumaden-lenzzauber",
+      "title": "Heumaden Lenzzauber",
+      "text": "Heumaden Lenzzauber ist eine kleine mobile Festival-Website für eine private Abschiedsfeier. Das digitale Ritualportal verbindet Lore, Stimmung und praktische Orientierung. Die One-Page-Oberfläche bietet einen Tab-Switcher für das Line-up, eine Timeline, Informationskarten, eine Kartenverlinkung und einen angekündigten Zahlungslink. Die Website verwendet Plain HTML, CSS und JavaScript ohne Framework und wird über GitHub Pages gehostet. Die Projektstruktur enthält eine HTML-Datei, Stylesheets, JavaScript-Dateien, Assets sowie Plan- und README-Dokumentation.",
+      "topics": [
+        "Website",
+        "Festival",
+        "One-Page",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "aliases": [
+        "Heumaden Lenzzauber",
+        "Lenzzauber Festival-Website",
+        "private Festivalportal",
+        "Abschiedsfeier-Website"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://smlfg.github.io/heumaden-lenzzauber",
+      "source_kind": "github",
+      "hash": "sha256:1d7dee26e57615f0d2252e554165ea0615f5687f72c2a964875b4dc0a9c5c511"
+    },
+    {
+      "id": "gh-hisinone-cli",
+      "title": "hisinone-cli",
+      "text": "hisinone-cli ist ein Terminalwerkzeug für HISinOne-Campusportale. Es durchsucht öffentliche Vorlesungsverzeichnisse und zeigt Veranstaltungsdetails. Mit Login stellt es außerdem Stundenpläne und Leistungsübersichten bereit. Sitzungen werden lokal mit eingeschränkten Dateirechten gespeichert; Passwörter werden nicht gespeichert. Die Ausgabe erfolgt im Terminal oder als einzelnes JSON-Objekt. Das Werkzeug verwendet keine offizielle API und führt bewusst keine schreibenden Hochschulaktionen wie Prüfungsanmeldung oder Belegung aus. Über eine Umgebungsvariable kann eine andere HISinOne-Instanz angesprochen werden.",
+      "topics": [
+        "CLI",
+        "HISinOne",
+        "Vorlesungsverzeichnis",
+        "Stundenplan",
+        "Noten",
+        "Login"
+      ],
+      "aliases": [
+        "hisinone-cli",
+        "HISinOne CLI",
+        "Campusportal im Terminal",
+        "Vorlesungsverzeichnis-CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/hisinone-cli",
+      "source_kind": "github",
+      "hash": "sha256:b7a648d918c02c3111d4ac6ba65584e9c052c80f14d263219d572c7936e833e1"
+    },
+    {
+      "id": "gh-hisinone-mcp",
+      "title": "hisinone-mcp",
+      "text": "hisinone-mcp ist ein ausschließlich lesender MCP-Server für HISinOne-Campusportale. Er ermöglicht die öffentliche Suche nach Veranstaltungen und das Lesen von Veranstaltungsdetails. Nach einer Anmeldung können persönliche Stundenpläne und Leistungsübersichten abgerufen werden. Der Server nutzt Kernfunktionen von hisinone-cli und bietet strukturierte Daten sowie lesbaren Text. Passwörter werden nicht als Tool-Argumente verarbeitet; Sitzungen liegen lokal. Die Hochschulbasis-URL ist konfigurierbar. Es gibt keine Aktionen für Belegung oder Prüfungsanmeldung. Portaländerungen können die Auswertung beeinträchtigen. Das Projekt steht unter MIT-Lizenz.",
+      "topics": [
+        "MCP",
+        "HISinOne",
+        "Campusportal",
+        "Stundenplan",
+        "Leistungsübersicht",
+        "CLI"
+      ],
+      "aliases": [
+        "HISinOne MCP",
+        "hisinone-mcp Server",
+        "MCP für HISinOne"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/hisinone-cli",
+      "source_kind": "github",
+      "hash": "sha256:76cab3b6a005dc6ab068f267c4c1b436e1a0abaf542d611f3b965645abec4a13"
+    },
+    {
+      "id": "gh-hochschulsport-cli",
+      "title": "hochschulsport-cli",
+      "text": "hochschulsport-cli ist eine Kommandozeilen-Schnittstelle für Buchsys-Hochschulsportportale. Sie kann Sportarten, Kurse und Kursdetails anzeigen, Buchungsstatus beobachten und Kurse buchen. Ohne Bestätigung läuft eine Buchung als Trockenlauf; das Absenden erfordert --confirm oder --yes sowie vollständige Umgebungsvariablen. Die CLI bietet stabile JSON-Ausgaben, lokale Statusdateien mit restriktiven Rechten und definierte Exit-Codes. Unterstützt werden mehrere bekannte Portale, konfigurierbar über Kurz-ID oder URL. Tests verwenden synthetische Fixtures und einen Netzwerk-Harness ohne echte Serverzugriffe. Passwörter werden nicht als Kommandozeilenargumente akzeptiert.",
+      "topics": [
+        "Hochschulsport",
+        "Buchsys",
+        "CLI",
+        "Kursbuchung",
+        "JSON",
+        "Tests"
+      ],
+      "aliases": [
+        "hsport",
+        "Hochschulsport CLI",
+        "Buchsys CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/hochschulsport-cli",
+      "source_kind": "github",
+      "hash": "sha256:4e38561ed1f9874be06ce711e9539b58fae3a3f58b0b9022ffe6678a4db0245d"
+    },
+    {
+      "id": "gh-hochschulstart-cli",
+      "title": "hochschulstart",
+      "text": "hochschulstart ist eine CLI für das DoSV-Bewerbungsportal. Sie unterstützt Login, Bewerbungsstatus, Ranglisten, öffentliche Fristen und lokale Statusüberwachung. Annahme und Absage sind verbindliche Aktionen: Im Terminal wird vorher mit Standardantwort Nein gefragt; Agenten benötigen --confirm oder --yes. JSON-Ausgaben sind für Skripte vorgesehen. Sitzungen und Konfiguration werden lokal verwaltet, Geheimnisse nicht ausgegeben. Offline-Tests verwenden ein synthetisches Fake-Portal und prüfen auch Fehlerpfade, Bestätigungs-Gates und Secret-Leaks. Ein dokumentierter Live-Check öffentlicher Seiten war möglich, ein Live-Test mit Konto blieb wegen Portalwartung offen.",
+      "topics": [
+        "DoSV",
+        "Bewerbungsportal",
+        "CLI",
+        "Rangliste",
+        "Fristen",
+        "Statusüberwachung"
+      ],
+      "aliases": [
+        "hochschulstart CLI",
+        "DoSV CLI",
+        "Bewerbungsstatus CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/hochschulstart-cli",
+      "source_kind": "github",
+      "hash": "sha256:986cd4cddcffdcb462b5329c8f5d084b8381f754cc98f2c6edcaa1feeb69563b"
+    },
+    {
+      "id": "gh-human-agent-interface",
+      "title": "Human Agent Interface",
+      "text": "Human Agent Interface ist eine öffentliche Website und ein Frontend für einen Kontrollansatz bei agentischer Arbeit. Menschliche Absicht soll vor der Ausführung sichtbar, prüfbar und wiederherstellbar bleiben. Der beschriebene Ablauf verbindet Absicht, Kontext, Routing, Gedächtnis, abgegrenzte Agentenarbeit, Verifikation, Übergabe und eine Eigentümerentscheidung. Das Repository enthält die statische JavaScript-Website hinter der öffentlichen Präsenz. Verwandte Komponenten sind eine MCP-Kontrollschicht und ein Profil mit Bauprinzipien. Das Projekt steht unter MIT-Lizenz.",
+      "topics": [
+        "Human Agent Interface",
+        "Agentensteuerung",
+        "Kontrollschicht",
+        "MCP",
+        "Frontend"
+      ],
+      "aliases": [
+        "HAI",
+        "Human-Agent-Interface",
+        "Agent Control Layer"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://www.human-agent-interface.com/",
+      "source_kind": "github",
+      "hash": "sha256:1a34469bcdc5559265e6f7c6a4d5e893051d93a7d0030812bd54cd0058386ca1"
+    },
+    {
+      "id": "gh-humanagentcontrol-com",
+      "title": "humanagentcontrol.com",
+      "text": "humanagentcontrol.com ist eine frühe, noch nicht indexierte Manifest-Website zur Frage, wie Menschen bei schnelleren Agenten ihre Aufmerksamkeit und ihr Urteil behalten. Sie formuliert acht Prinzipien für persönliche Kontrolle und grenzt das Thema von KI-Sicherheit und Compliance ab. Die Website besteht aus einer interaktiven Sanduhr in einer einzelnen HTML-Datei ohne externe Ressourcen und unterstützt helle sowie dunkle Darstellung. Ausgeliefert wird sie als Cloudflare Worker mit statischen Assets. Die Beschreibung nennt eine persönliche Perspektive auf den Umgang mit Agenten.",
+      "topics": [
+        "Agentenkontrolle",
+        "Aufmerksamkeit",
+        "Urteilsfähigkeit",
+        "Manifest",
+        "Cloudflare Worker"
+      ],
+      "aliases": [
+        "humanagentcontrol",
+        "Human Agent Control",
+        "Agenten-Manifest"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:fc3ea5a5beeca8791cc8f317bc6e384f4afe0dac0d788ac41d6e958516fd8bb3"
+    },
+    {
+      "id": "gh-ilias-cli",
+      "title": "ilias-cli",
+      "text": "ilias-cli ist eine Beta-Kommandozeile für ILIAS- und Moodle-Instanzen. Sie unterstützt Login, Status, Kurse, Kursnavigation und auf ILIAS den Download von Kursinhalten. Der Download zeigt Ziel und Dateianzahl und schreibt erst nach Bestätigung; Folgeläufe verwenden ein Manifest und überschreiben manuell abgelegte Dateien nicht ohne --force. Unterstützt werden mehrere vorkonfigurierte Instanzen mit unterschiedlichen Anmeldeverfahren. Sitzungen liegen im Schlüsselbund oder in Dateien mit restriktiven Rechten. Tests laufen ausschließlich gegen lokale Fake-Server. Ein Live-Test an einer Hochschule steht noch aus; Befehle können sich vor Version 1.0 ändern.",
+      "topics": [
+        "ILIAS",
+        "Moodle",
+        "CLI",
+        "Kursdownload",
+        "LMS",
+        "Beta"
+      ],
+      "aliases": [
+        "ILIAS CLI",
+        "Moodle CLI",
+        "ilias-cli"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/ilias-cli",
+      "source_kind": "github",
+      "hash": "sha256:d76ceb6c321c83f7a87c8a626b0dda72a62f81244999590c21ec55499a397e42"
+    },
+    {
+      "id": "gh-ilias-mcp",
+      "title": "ilias-mcp",
+      "text": "ilias-mcp ist ein MCP-Server für ILIAS- und Moodle-Lernplattformen. Er ermöglicht Login, Sitzungsprüfung, Abmeldung, Kursauflistung und die Navigation durch Kursinhalte als Baum aus Abschnitten, Modulen und Dateien. Der Transport erfolgt standardmäßig über stdio für lokale MCP-Clients. Das Projekt verwendet einen vendorten Kern, der unabhängig von der ursprünglichen CLI weiterentwickelt werden kann. Aufgaben, Fristen und Uploads sind nicht implementiert. Zugangsdaten stammen aus Umgebungsvariablen oder Laufzeitargumenten; Sitzungen werden bevorzugt im Schlüsselbund gespeichert. Tests verwenden HTTP-Mocks ohne echten Login.",
+      "topics": [
+        "MCP",
+        "ILIAS",
+        "Moodle",
+        "Kursinhalte",
+        "stdio",
+        "Lernplattform"
+      ],
+      "aliases": [
+        "ILIAS MCP",
+        "Moodle MCP",
+        "ilias-mcp Server"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/ilias-cli",
+      "source_kind": "github",
+      "hash": "sha256:f5fc2f6e98fc3b28e6e0f0d82c12d4fb4d7bbee990dbd451cc1864b5e1311af0"
+    },
+    {
+      "id": "gh-inkpartner",
+      "title": "inkpartner",
+      "text": "inkpartner ist ein Versuch für einen fachübergreifenden Agenten auf dem reMarkable. Der Agent liest eine Seite als Elemente, bewertet sie anhand eines Fachprofils und erzeugt begrenzte Zeichen wie Haken, Kreise, Unterstreichungen, Notizen oder Pfeile. Regeln verhindern unsichere Bestätigungen, doppelte Markierungen und unkontrollierte Schreibvorgänge. Nach jeder Zustellung wird zurückgelesen. Mehrere Schreibschutzregeln begrenzen Neustarts, Stiftaktivität, Ansicht, Fremdstriche und Rate. Unterstützte Profile umfassen Mathematik, Code, Diagramme, Projektmanagement und Prosa. Belegt sind simulierte Tests; ein echter Geräteeinsatz und ein echter Modelllauf sind nicht belegt.",
+      "topics": [
+        "reMarkable",
+        "Agent",
+        "Handschrift",
+        "Feedback",
+        "SymPy",
+        "Schreibschutz"
+      ],
+      "aliases": [
+        "Inkpartner",
+        "reMarkable-Lernagent",
+        "Agent auf Papier"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/HAI-skills-registry/tree/main/skills/engineering/experiment-to-project",
+      "source_kind": "github",
+      "hash": "sha256:1cc02a8a10b7a70ed7374866f01f70ff9ba4d42d69caaad9255ff1e83cfb0a37"
+    },
+    {
+      "id": "gh-keepa-data-engineering",
+      "title": "Keepa Data Engineering",
+      "text": "",
+      "topics": [],
+      "aliases": [],
+      "waypoints": [
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:449e9a95a22e065dc32a6a6853bae2cdef9a07dc3762595bc17f4ef19d81e7bd"
+    },
+    {
+      "id": "gh-keepaarbitrage-dataengeneering-hs-worms-samuelflg-claudecode",
+      "title": "Keeper System",
+      "text": "Keeper System ist eine Data-Engineering-Pipeline zur Überwachung von Amazon-Preisen und zur Deal-Suche. Preis- und Produktdaten werden über die Keepa API bezogen, mit Kafka verarbeitet und in PostgreSQL sowie Elasticsearch gespeichert. Kibana dient der Visualisierung. Ergänzend sind Agenten für Preisüberwachung, Deal-Findung und Benachrichtigungen vorgesehen. Eine FastAPI stellt REST-Endpunkte für Zustände, Watches, Preisprüfungen, Deals und Tokenstatus bereit. Docker Compose orchestriert die Dienste. Unterstützt werden Preisalarme, personalisierte Deal-Berichte, mehrere Benachrichtigungskanäle und europäische Marktplätze.",
+      "topics": [
+        "Keepa",
+        "Amazon",
+        "Data Engineering",
+        "Kafka",
+        "Elasticsearch",
+        "PostgreSQL",
+        "Kibana"
+      ],
+      "aliases": [
+        "Keeper System",
+        "Keepa Deal Finder",
+        "Amazon Preisüberwachung"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/DataEngeneering_KEEPA_HSWORMS.git",
+      "source_kind": "github",
+      "hash": "sha256:58a102ba14cc6c9dab352f33348a86d1d451e03fa82a876aa0ef27bbf441a6e0"
+    },
+    {
+      "id": "gh-kleinanzeigen-cli",
+      "title": "kleinanzeigen-cli",
+      "text": "kleinanzeigen-cli ist eine Kommandozeilen-Schnittstelle für öffentliche Suche, Anzeigen-Details, Kategorien und lokale Suchaufträge auf kleinanzeigen.de. Optional unterstützt sie Login, Konversationslisten, Lesen und Antworten. Antworten werden erst nach einer Bestätigung gesendet; ohne Bestätigung bleibt die Aktion aus. Die CLI bietet JSON-Ausgaben, lokale Watch-Zustände und Filter für Ort, Umkreis, Preis, Kategorie, Angebotsart, Anbieterart, Versand und Sortierung. Der Login verwendet einen Auth0-Flow; das Passwort wird nicht gespeichert. Tests nutzen synthetische HTML- und API-Fixtures ohne regulären Netzabruf. Abrufe sind lesend, höflich und standardmäßig ohne Login.",
+      "topics": [
+        "Kleinanzeigen",
+        "CLI",
+        "Suche",
+        "Chats",
+        "Watch",
+        "Auth0",
+        "JSON"
+      ],
+      "aliases": [
+        "Kleinanzeigen CLI",
+        "kleinanzeigen-cli",
+        "Kleinanzeigen-Agent"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://www.kleinanzeigen.de",
+      "source_kind": "github",
+      "hash": "sha256:251595c7472a9ca304fc96226cd9d9d691f270e1b283bd2ac89403537f143c46"
+    },
+    {
+      "id": "gh-kleine-policies-cas-umformungen",
+      "title": "Der nächste gute Schritt",
+      "text": "Der nächste gute Schritt ist ein interaktives Gedankenlabor für Computeralgebra, Modelltraining und SymPy-Benchmarkdaten. Eine lokale Website zeigt symbolisches Umformen, Ableiten, Integrieren, ein kleines trainierbares Modell und Vergleiche mehrerer Baselines. Gespeicherte Python-Ergebnisse werden im Browser dargestellt. Ein Pilot mit 156 Aufgaben und ein explorativer Modellvergleich sind dokumentiert; die gemeldeten Baselines erreichen dieselbe Operationsreduktion. Das Projekt beansprucht keinen fertigen allgemeinen CAS-Ansatz. Teacher, DSPy und Tree Transformer wurden nicht ausgeführt. Die Website benötigt weder Server noch Login noch API-Schlüssel. Mobile Optimierung ist ausgeschlossen.",
+      "topics": [
+        "Computeralgebra",
+        "SymPy",
+        "Machine Learning",
+        "Benchmark",
+        "DSPy",
+        "Lernlabor"
+      ],
+      "aliases": [
+        "CAS-Gedankenlabor",
+        "Der nächste gute Schritt",
+        "SymPy Umformungen"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:867c02133d6488580fa07963bf93d254c137036eae79659a71cd616174ef7e93"
+    },
+    {
+      "id": "gh-lebensmittelwarnung-cli",
+      "title": "lebensmittelwarnung-cli",
+      "text": "lebensmittelwarnung-cli ist eine lesende Terminal-Schnittstelle für offizielle Lebensmittel- und Produktwarnungen. Sie durchsucht Meldungen nach Produkt, Marke oder Hersteller und filtert nach Bundesland, Grund, Typ und Zeitraum. Detailansichten enthalten unter anderem Produkt, Haltbarkeit, Charge, Hersteller, mögliche Folgen und betroffene Regionen. Ein lokaler Watch meldet neue Warnungen seit dem letzten Aufruf. Für Skripte und Agenten gibt es JSON-Ausgaben. Konto und Login sind nicht erforderlich. Konfiguration, Zustand und Cache werden lokal gespeichert. Das Werkzeug ist inoffiziell; maßgeblich bleibt die jeweilige Meldung auf der Website.",
+      "topics": [
+        "Lebensmittelwarnungen",
+        "Produktwarnungen",
+        "CLI",
+        "BVL",
+        "Suche",
+        "Watch"
+      ],
+      "aliases": [
+        "lmw",
+        "Lebensmittelwarnung CLI",
+        "Warnmeldungen im Terminal"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://www.lebensmittelwarnung.de",
+      "source_kind": "github",
+      "hash": "sha256:b2f88f79e8f873e4d8a1eb4004201fe6d7d792b76b3b5fb1f9e48e0fe372e40c"
+    },
+    {
+      "id": "gh-make-all-repos-public",
+      "title": "make-all-repos-public",
+      "text": "make-all-repos-public beschreibt ein Verfahren, um lokale Projekte kontrolliert auf GitHub zu veröffentlichen. Es kombiniert vollständige Secret-Scans, private Erstellung, Scope-Prüfung, README-Pfadanalyse und Read-back nach dem Push. Ein Agent darf schreiben; deterministische Skripte entscheiden über Gates. Das Repository enthält außerdem README-Bench-Auswertungen zu Pfadtreue, erfundenen Pfaden, Blindurteilen und Harness-Effekten. Die zentrale Beobachtung lautet, dass eine Dateiliste im Prompt und ein Pfad-Checker die Pfadtreue stark verbessern können. Die Benchmark-Basis umfasst zwei Repositories und einen Prüfer; die Ergebnisse werden deshalb als Tendenz eingeordnet.",
+      "topics": [
+        "GitHub",
+        "Veröffentlichung",
+        "Secret-Scan",
+        "README",
+        "Benchmark",
+        "Agenten"
+      ],
+      "aliases": [
+        "make-all-repos-public",
+        "Repository-Publikationsverfahren",
+        "README-Bench"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://smlfg.github.io/make-all-repos-public/site",
+      "source_kind": "github",
+      "hash": "sha256:491c64181742016d84478e6fd15322f4aa1dc0568518f21228ddea913a01a843"
+    },
+    {
+      "id": "gh-mensa-agent",
+      "title": "Mensa Notifier",
+      "text": "Mensa Notifier ist ein kleines Python-Kommandozeilenprogramm für den täglichen Speiseplan der Mensa am Bildungscampus Heilbronn. Es lädt HTML, extrahiert Kategorien, Gerichte und Preise und wählt deterministisch bis zu drei repräsentative Mahlzeiten. Eine vegetarische Alternative wird bei Bedarf zusätzlich ausgegeben. Das Programm nutzt requests und BeautifulSoup, arbeitet synchron, benötigt keine Datenbank oder Geheimnisse und gibt bei Netzfehlern eine kurze Meldung aus. Es ist auf die HTML-Struktur von imensa.de angewiesen und unterstützt keine Historie, Mehrstandortabfragen, Benachrichtigungen oder Wiederholungslogik. Die Ausgabe kann über einen Zeitplan wie Cron oder einen Agenten verteilt werden.",
+      "topics": [
+        "Python",
+        "CLI",
+        "Mensa-Speiseplan",
+        "HTML-Parsing",
+        "Heilbronn"
+      ],
+      "aliases": [
+        "Mensa Notifier",
+        "mensa_today.py",
+        "Mensa-Speiseplan-CLI",
+        "imensa-Mensa-Tool"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/mensa-agent",
+      "source_kind": "github",
+      "hash": "sha256:2bc2462eaf85193093226d0da98c9a2289ad45796779b6369a1835234d2bc3d0"
+    },
+    {
+      "id": "gh-mensa-cli",
+      "title": "mensa",
+      "text": "mensa ist ein lesendes Terminalwerkzeug für deutsche Mensa-Speisepläne über die OpenMensa-API v2. Standardmäßig verwendet es die Mensa Bildungscampus/Europaplatz in Heilbronn. Es bietet Tages-, Wochen- und Datumsabfragen, Suche, vegane oder vegetarische Filter, Preis- und Rollenfilter sowie eine lokale Standardauswahl. Im Terminal erscheinen verständliche Ausgaben; ohne TTY oder mit --json wird genau ein JSON-Objekt geliefert. Mehrdeutige Treffer werden nicht geraten. Konfiguration, Cache und Auswahl liegen lokal. Geschlossene Tage gelten als regulärer Zustand. Das Tool sendet nur lesende Anfragen und verwendet definierte Exit-Codes für Erfolg, Eingabe-, Netz- und Quellenfehler.",
+      "topics": [
+        "CLI",
+        "Python",
+        "Mensa",
+        "OpenMensa",
+        "JSON"
+      ],
+      "aliases": [
+        "mensa",
+        "mensa-cli",
+        "Mensa-Terminal",
+        "Speiseplan-CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/mensa-cli",
+      "source_kind": "github",
+      "hash": "sha256:c900be95f23e6eb496182f7d09ae6497709d63fd0483c8a815c6750eaff386f2"
+    },
+    {
+      "id": "gh-mesh-compute",
+      "title": "mesh-compute",
+      "text": "mesh-compute dokumentiert eine geteilte Tailscale-Mesh-Compute-Verbindung. Ein MacBook mit Metal dient als Ausweich-Provider für OpenAI-kompatible Inference, während ein ThinkPad Hermes nutzt. Das Repository enthält Interconnect-Konfiguration, Keep-Awake-Mechanismen, Provider-Fallbacks und Smoke-Tests, nicht die Modell-Runtime. Unterstützt werden die Endpunkte GET /v1/models sowie POST /v1/chat/completions mit Tools und Tool-Calls. Die Einrichtung umfasst Ollama-Exposition, einen wachhaltenden LaunchAgent, Endpoint-Prüfung und einen Tool-Calling-Test. Für lange Läufe ist eine feste Modellreihenfolge dokumentiert; echte API-Schlüssel und private Konfigurationen dürfen nicht eingecheckt werden.",
+      "topics": [
+        "Tailscale",
+        "Inference",
+        "Ollama",
+        "Hermes",
+        "OpenAI-Kompatibilität"
+      ],
+      "aliases": [
+        "mesh-compute",
+        "Tailscale-Mesh-Compute",
+        "MBP-Inference",
+        "Hermes-Fallback"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/mesh-ear",
+      "source_kind": "github",
+      "hash": "sha256:09e384a263cf35826307bca454320ae118d75477c43e2edec1eaa5589509fbb6"
+    },
+    {
+      "id": "gh-mesh-ear",
+      "title": "mesh-ear / vorlesen",
+      "text": "mesh-ear ist ein lokales Text-zu-Sprache-Werkzeug für ein Tailscale-Mesh. Der Einstieg vorlesen nimmt Text als Argument oder über stdin entgegen. Piper erzeugt deutsche Sprache mit einer Thorsten-Stimme; die Wiedergabe wird über eine lokale oder per SSH erreichbare Mesh-Sperre koordiniert. Dadurch läuft im gesamten Mesh nur ein Vorlesevorgang gleichzeitig. Statusmeldungen erscheinen auf stderr. Die benötigten Piper-Modelldateien liegen außerhalb des Repositories. Die Installation erfolgt über ein Shell-Skript, das den lokalen Binärpfad ergänzt. Das Werkzeug verwendet keine Cloud-APIs und unterstützt sowohl direkte Texteingabe als auch bereinigte Markdown-Pipelines.",
+      "topics": [
+        "Text-to-Speech",
+        "Piper",
+        "Tailscale",
+        "SSH",
+        "CLI"
+      ],
+      "aliases": [
+        "mesh-ear",
+        "vorlesen",
+        "Ein Ohr im Mesh",
+        "pycoach-speak"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/mesh-ear",
+      "source_kind": "github",
+      "hash": "sha256:cab72c03fb89fe5c4f45f31b625ac9e7434ed10eef26e8b2a899ac518caae63e"
+    },
+    {
+      "id": "gh-minimalremarkableocrpipeline",
+      "title": "MinimalreMarkableOCRPipeline",
+      "text": "MinimalreMarkableOCRPipeline wandelt Handschrift vom reMarkable in LaTeX um und kennzeichnet Unsicherheit. Eine Pipeline kombiniert TexTeller und GLM-OCR, danach prüft eine Kohärenzschicht die Ergebnisse und liefert LaTeX, Unsicherheiten sowie Reparaturhinweise. Der Aufbau trennt Formel-Erkennung, Normalisierung, Strukturmetriken, Tablet-Import und Benchmarks. Für eigene Schrift werden Messungen zu Zeichen, Struktur und Latenz dokumentiert; Seitenstruktur ist noch nicht gemessen. Separate Python-Umgebungen isolieren Strukturpipeline und TexTeller-Worker. Experimente sind auf bestimmte OCR- und Kohärenzdateien begrenzt, während das Flywheel ansonsten eingefroren bleibt.",
+      "topics": [
+        "reMarkable",
+        "OCR",
+        "LaTeX",
+        "Handschrift",
+        "Benchmarking"
+      ],
+      "aliases": [
+        "MinimalreMarkableOCRPipeline",
+        "reMarkable OCR",
+        "Handschrift-zu-LaTeX",
+        "OCR-Flywheel"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:4bea34fa0cd2868d4e26906b48f5ca4c40027e3cf44821cc2b83cd8cab0236e7"
+    },
+    {
+      "id": "gh-monesterag-ent",
+      "title": "Monster World",
+      "text": "Monster World ist ein interaktiver Cloudflare-Worker-Prototyp mit fünf KI-Monstern. Jedes Monster besitzt Charakter, Stimme, Gedächtnis und Identität; Nutzer können mit ihm chatten. Der Worker verwendet ein kompatibles Remote-LLM, Edge-TTS und ein SQLite-Gedächtnis pro Monster und Sitzung. Ein Demo-Modus funktioniert ohne LLM-Schlüssel. Ein Durable Object hält die letzten zwölf Nachrichten, Reset löscht nur das jeweilige Gespräch. Sprachaufnahme nutzt die Web Speech API mit Tastatur-Fallback. Schutzmechanismen umfassen Turnstile, IP-Limit und Tageskostengrenze. Unit- und Smoke-Tests prüfen unter anderem Identität, Sitzungsisolierung, Persistenz, Reset, Validierung und TTS.",
+      "topics": [
+        "Cloudflare Worker",
+        "KI-Chat",
+        "Durable Objects",
+        "TTS",
+        "SQLite"
+      ],
+      "aliases": [
+        "Monster World",
+        "Monster-Chat",
+        "KI-Monster",
+        "Cloudflare-Monster-App"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://monster-world.smlflg.workers.dev",
+      "source_kind": "github",
+      "hash": "sha256:314b30a9ff5e9d4334ce4becafb44673a48f7433d1560610594b127d9c81a501"
+    },
+    {
+      "id": "gh-myaigame",
+      "title": "MyAIGame",
+      "text": "MyAIGame ist ein Toolkit für KI-gestützte Entwicklung mit Skills, Prompts, Agent-Orchestrierung und ADHS-orientierten Arbeitsabläufen. Es beschreibt eine Aufteilung zwischen strategischer Planung, günstiger Code-Ausführung, Recherche und Hintergrundaufgaben. Enthalten sind Slash-Commands für Delegation, Recherche, Tests, Debugging, Fokus, Checkpoints, Reviews und Zustandsprüfung. Companion-Dateien halten Arbeitsstil, Fehlervermeidung, Skillübersicht und Projekt-Dashboard-Vorlagen fest. Shell-Hooks sammeln Projekt- und Sitzungs-Kontext. Die optionale Installation kopiert Commands, Konfiguration, Companion-Dateien und Hooks in das lokale Claude-Code-Umfeld. Mehrere MCP-Server verbinden Delegation, Recherche, Dateizugriff, Speicher und GitHub.",
+      "topics": [
+        "Agent-Orchestrierung",
+        "Claude Code",
+        "Skills",
+        "ADHS-Workflows",
+        "MCP"
+      ],
+      "aliases": [
+        "MyAIGame",
+        "AI Workflow Toolkit",
+        "Agent-Workflow-Toolkit",
+        "Claude-Code-Skills"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/MyAIGame",
+      "source_kind": "github",
+      "hash": "sha256:cf5066ca426722b5c3f35e1878b9002d7b68e1784de4f860e1c6b53f2552d46f"
+    },
+    {
+      "id": "gh-mydealz-cli",
+      "title": "mydealz",
+      "text": "mydealz ist eine lesende Agent-CLI für die Suche und Beobachtung von Deals und Gutscheinen. Sie unterstützt Stichwortsuche, Detailabfragen, Filter nach Kategorie, Händler, Preis, Temperatur und Status sowie Sortierung. Der lokale Watch-Modus meldet neue Treffer seit dem letzten Lauf und kann per --dry-run ohne Zustandsänderung prüfen. Im Terminal erscheint eine lesbare Ausgabe; in Pipes oder mit --json liefert das Programm genau ein JSON-Objekt. Es gibt keine Anmeldung, POSTs oder Nachrichten. Die Detailseite kann ohne Browser-Rendering nur Metadaten liefern. Netzfreie Tests verwenden HTML-Fixtures und einen Netzwerk-Sandbox-Harness.",
+      "topics": [
+        "CLI",
+        "Deals",
+        "JSON",
+        "Web-Parsing",
+        "Watch-Modus"
+      ],
+      "aliases": [
+        "mydealz",
+        "mydealz-cli",
+        "Deal-Agent-CLI",
+        "Deal-Watch"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/mydealz-cli",
+      "source_kind": "github",
+      "hash": "sha256:4bf0d8fec8cd82eec7ba1630df99b40e6c37b3322bbbe5110e75fb11b36ac6d0"
+    },
+    {
+      "id": "gh-nextbike-cli",
+      "title": "nextbike-cli",
+      "text": "nextbike-cli zeigt Live-Verfügbarkeiten von Leihrädern im Terminal. Das lesende Werkzeug findet Städte und Stationen, zeigt Räder und Stellplätze, sucht Stationen in der Nähe, löst Fahrräder per Nummer auf und beobachtet Änderungen. Es benötigt weder Login noch App und verwendet öffentlich erreichbare JSON-Daten. Stadt- und Live-Daten werden unterschiedlich lange gecacht. Konfiguration, Cache und Watch-Stand liegen lokal mit restriktiven Dateirechten. Im Terminal erscheint Text; ohne TTY oder mit --json ein JSON-Objekt. Mehrdeutige Treffer werden ohne interaktive Auswahl nicht geraten. Ausleihe, Reservierung und Konten gehören nicht zum Funktionsumfang.",
+      "topics": [
+        "CLI",
+        "Leihräder",
+        "Live-Daten",
+        "Stationen",
+        "JSON"
+      ],
+      "aliases": [
+        "nextbike-cli",
+        "nextbike",
+        "Leihrad-Terminal",
+        "Fahrradstationen-CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/nextbike-cli",
+      "source_kind": "github",
+      "hash": "sha256:e87f79dc9c0431cec52241e5e98450eb46a6c2cba84bc8d0f662c9ceda2c35aa"
+    },
+    {
+      "id": "gh-papier-abgleich",
+      "title": "Papier-Abgleich",
+      "text": "Papier-Abgleich vergleicht eine menschliche Skizze des vermuteten Programmablaufs mit einem festen Code-Stand. Ein Agent transkribiert die Zeichnung, prüft jeden Punkt und erzeugt eine Seite im Stil der Skizze. Jeder Knoten erhält einen Status, eine Begründung, einen Beleg und einen passenden Codeausschnitt. Das Projekt unterscheidet unter anderem Übereinstimmung, Änderung, abweichendes Verhalten, Teilübereinstimmung und Unklarheit. Ein Belegmarker zeigt, ob ein Fakt im Code, auf einem Gerät, offline im Test oder nur als Hypothese gestützt ist. Build-, Prüf-, Render- und Tablet-Werkzeuge unterstützen eigene Projekte, eingebettete Ein-Datei-Ausgaben und Deep-Links.",
+      "topics": [
+        "Code-Verständnis",
+        "Skizzenvergleich",
+        "reMarkable",
+        "Belege",
+        "HTML-Generierung"
+      ],
+      "aliases": [
+        "Papier-Abgleich",
+        "Papier gegen Code",
+        "Skizzen-Code-Abgleich",
+        "Ownership-Workflow"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://smlfg.github.io/papier-abgleich/examples/inkpartner-grillme/site/inkpartner-fakten.html",
+      "source_kind": "github",
+      "hash": "sha256:19b7f41fdfb4e23f8bda1654e1b5e9d35d019b598069830e931c062c219f5344"
+    },
+    {
+      "id": "gh-pegel-cli",
+      "title": "pegel",
+      "text": "pegel ist ein lesendes Terminalwerkzeug für Live-Wasserstände an Bundeswasserstraßen. Es nutzt eine offene REST-API, findet Pegel nach Ort, zeigt aktuellen Stand, Einordnung und Drei-Stunden-Trend und liefert Verläufe, Kennwerte sowie flussabwärts sortierte Pegel. Ein Watch-Befehl meldet Änderungen und Schwellenüberschreitungen. Bei mehreren Treffern wird interaktiv ausgewählt; für Agenten gibt es eine explizite Erstwahl. Ohne TTY wird automatisch JSON ausgegeben. Cache und Watch-Zustand liegen lokal. Das Werkzeug sendet nur GET-Anfragen, benötigt keinen Login und schätzt fehlende Werte nicht. API-Ausfälle oder Änderungen der Quelle können die Nutzung beeinträchtigen.",
+      "topics": [
+        "CLI",
+        "Wasserstände",
+        "PEGELONLINE",
+        "REST-API",
+        "Monitoring"
+      ],
+      "aliases": [
+        "pegel",
+        "pegel-cli",
+        "Wasserstands-CLI",
+        "Pegel-Watch"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/pegel-cli",
+      "source_kind": "github",
+      "hash": "sha256:c5b2d0fd97eddb728489f07e6d65832f6469645e8a522e30884b7903bf179c03"
+    },
+    {
+      "id": "gh-personal-sidecar",
+      "title": "Sidecar V5",
+      "text": "Sidecar V5 ist ein eigenständiger asyncio-Daemon für persönliche Kontext-Hinweise in Claude Code. Er lädt Profile, erkennt Muster wie lange Sitzungen, fehlende Pausen, Sitzungsaufteilung und Stimmungsschwankungen und injiziert höchstens zwei Empfehlungen pro Prompt. Die UserPromptSubmit-Bridge ruft den lokalen Unix-Socket auf und liefert zusätzlichen Kontext. Der Dienst blockiert nicht und fällt bei Fehlern leer aus. Schwellenwerte, Profilquellen und Pfade liegen in einer Konfigurationsdatei. Der Zustand wird über einen Socket abgefragt, manuell getestet und als Benutzerdienst gestartet. Das System ist ausdrücklich von früheren Sidecar-Versionen entkoppelt.",
+      "topics": [
+        "asyncio",
+        "Claude Code",
+        "Kontext-Hinweise",
+        "Hooks",
+        "Daemon"
+      ],
+      "aliases": [
+        "Sidecar V5",
+        "Personal Context Awareness",
+        "Claude-Kontext-Sidecar",
+        "UserPromptSubmit-Bridge"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:903a2d4c9244f415e8169f7a78641dfa7cc64c08eb4a2a588da59e69d9aef7dd"
+    },
+    {
+      "id": "gh-plaud-analyse",
+      "title": "plaud-analyse",
+      "text": "plaud-analyse verarbeitet Plaud-Transkripte aus einem lokalen Eingangsordner. Es berechnet Wort- und Satzmetriken pro Transkript, aggregiert Records und erzeugt Diagramme als PNG oder direkt im Terminal. Ein optionaler Index ergänzt Startzeit und Dauer. Die Kommandozeile unterstützt freie X- und Y-Dimensionen, Preset-Plots, Terminalausgabe, Ausschluss von Titeln und ein interaktives Menü. Die Projektkonvention sieht eine Funktion pro Python-Datei vor; Konstanten liegen separat. Die Plot-Pipeline gilt als lauffähig. Eine vollständige CLI mit interaktivem Menü und Flags befindet sich laut Quelle noch in Planung.",
+      "topics": [
+        "Plaud",
+        "Transkriptanalyse",
+        "Python",
+        "Metriken",
+        "Plots"
+      ],
+      "aliases": [
+        "plaud-analyse",
+        "Plaud-Analyse",
+        "Transkript-Metriken",
+        "Plaud-Plot-Pipeline"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:a1f95d190a0baf5ec289e0068f8ce9b12d91e5ba82bd7ec62d7a2f645f030322"
+    },
+    {
+      "id": "gh-plaud-human-state",
+      "title": "plaud-human-state",
+      "text": "plaud-human-state beschreibt eine kleine, zeitlich ablaufende Zustandsinformation für Agenten. Plaud-Aufnahmen werden durch einen geplanten KI-Lauf in einen Notion-Eintrag mit Modus, drei Einschätzungen und einem neutralen Satz überführt. Agenten lesen diesen Zustand vor Rückfragen und passen die Arbeitsgröße an. Der Zustand gilt höchstens vier Stunden und nie über Mitternacht hinaus. Selbstberichte haben Vorrang; aktuelle Chat-Aussagen und manuelle Korrekturen überschreiben ältere Quellen. Transkripte, Zitate, Gesundheitsdetails und Namen anderer Personen werden nicht gespeichert. Die Einrichtung erfolgt über Vorlagen für Seite, Aktualisierung und Agentenanweisungen. Das Konzept ist als frühe, zusammengeführte Rezeptur beschrieben.",
+      "topics": [
+        "Plaud",
+        "Notion",
+        "Agenten",
+        "Human State",
+        "Kontextanpassung"
+      ],
+      "aliases": [
+        "plaud-human-state",
+        "Human State",
+        "Agenten-Zustand",
+        "zeitlich ablaufender Kontext"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/plaud-human-state",
+      "source_kind": "github",
+      "hash": "sha256:66869c84afa4f0eb1a6d9023a10509154e0f5357656e636dc730838b57834e5c"
+    },
+    {
+      "id": "gh-prezero-clean",
+      "title": "prezero-clean",
+      "text": "prezero-clean ist ein Python-Projekt zur Analyse und Simulation von Glascontainer-Daten. Es enthält ein Fakten-Skript, Domänen- und Puffermodelle, Tests, Diagnosebilder und ein lokales Simulations-Kino. Rohdaten bleiben außerhalb des öffentlichen Repositories. Das Modell unterscheidet gemessene, abgeleitete und gesetzte Werte und kennzeichnet sichtbare Zahlen entsprechend. Das Kino vergleicht eingesparte Leerungen mit Überlaufquote und Wegeeinheiten und bietet Verlauf sowie vier Stellhebel. Ziel ist eine geringere Zahl von Leerungen bei höchstens gleicher Überlaufquote. Geokoordinaten, Routing, Kosten, Emissionen, Prognose-ML und zusätzliche Daten sind ausdrücklich ausgeschlossen. Mehrere fachliche Annahmen und offene Fragen bleiben dokumentiert.",
+      "topics": [
+        "Datenanalyse",
+        "Simulation",
+        "Glascontainer",
+        "Python",
+        "PreZero"
+      ],
+      "aliases": [
+        "prezero-clean",
+        "Glascontainer-Simulation",
+        "Simulations-Kino",
+        "Füllstandsmodell"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://smlfg.github.io/prezero-clean/sim/kino.html",
+      "source_kind": "github",
+      "hash": "sha256:12926db9741140d754e19fa9d01ae7cd1f2109736d2961dcd5f2106889fa629f"
+    },
+    {
+      "id": "gh-promptboost",
+      "title": "PromptBoost v0.1.1",
+      "text": "PromptBoost ist ein lokaler Compiler und Evaluationslogger für persönliche Prompts. Er liest PromptGarage-Beispiele schreibgeschützt, verarbeitet Rohprompts, wählt Regeln für Aufgabe, Harness und Modell, erzeugt deterministisch verbesserte Prompts und prüft konservativ auf neue Fakten. Boost-Läufe werden in promptboost.db gespeichert. Ein optionaler agentischer Modus nutzt zunächst ein OpenAI-kompatibles Sprachmodell und fällt bei Ausfall oder vermuteten neuen Fakten auf den deterministischen Ablauf zurück. Die Anwendung läuft als lokale Uvicorn-Webanwendung. In Version 0.1 werden keine kostenpflichtigen Sprachmodell-APIs verwendet.",
+      "topics": [
+        "Prompt-Compiler",
+        "Prompt-Evaluation",
+        "deterministische Verarbeitung",
+        "OpenAI-kompatible Modelle",
+        "SQLite"
+      ],
+      "aliases": [
+        "PromptBoost",
+        "lokaler Prompt-Compiler",
+        "Prompt-Eval-Logger",
+        "no-new-facts check"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:c5b7d4405bc0f803a18d6e819641ec27254c2d85fb91f386a0c5f3b699f0834d"
+    },
+    {
+      "id": "gh-remarkable-atlas",
+      "title": "reMarkable Atlas",
+      "text": "reMarkable Atlas beschreibt ein Projekt für einen Mathematik-Tutor auf dem reMarkable Paper Pro. Der Tutor liest handschriftliche Aufgaben, prüft Rechenschritte und schreibt kurze Hinweise neben die Handschrift. Die Dokumentation trennt Vertrag, Kandidat, Messplatz, Werkzeuge, Archive und Pläne. Sie nennt 188 dokumentierte Varianten-Läufe, sieben Vorläufer-Codebasen und einen Live-Lauf mit 2.281 Strichen sowie 1.448.782 Events ohne SYN_DROPPED. Der Writeback bleibt als Host-Dryrun gekennzeichnet; erprobte Sitzungen erfüllen den Produktstatus noch nicht. Öffentlich erreichbar ist der Forschungsprototyp inkpartner unter https://github.com/smlfg/inkpartner.",
+      "topics": [
+        "reMarkable Paper Pro",
+        "Mathe-Tutor",
+        "Handschrift",
+        "Feedback",
+        "Writeback",
+        "Evaluation"
+      ],
+      "aliases": [
+        "reMarkable Atlas",
+        "Paper-Pro-Mathe-Tutor",
+        "Handschrift-Tutor",
+        "inkpartner"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "creator"
+      ],
+      "link": "https://github.com/smlfg/inkpartner",
+      "source_kind": "github",
+      "hash": "sha256:8050a2eb4907456d7528d5bef3516e002bc1b647c078b73446fd73ddbb7a0bbe"
+    },
+    {
+      "id": "gh-samuelfleig-com",
+      "title": "samuelfleig.com",
+      "text": "samuelfleig.com ist eine persönliche Dachseite mit drei Bereichen für Arbeit, Lernen und Leben. Die Seite besteht aus semantischem HTML, eigenem CSS und Vanilla-JavaScript mit ARIA-Unterstützung. Selbst gehostete Schriften ermöglichen Offline-Betrieb ohne externe Requests. Lokal lässt sich die Seite über einen Python-HTTP-Server ansehen. Das Deployment erfolgt als Cloudflare Worker mit Static Assets und den Dateien index.html, style.css, script.js sowie fonts/. Der Quellcode steht unter Vorbehalt; die Schriften sind unter der SIL Open Font License lizenziert. Die Live-Adresse lautet https://samuelfleig.com.",
+      "topics": [
+        "persönliche Website",
+        "semantisches HTML",
+        "Vanilla-JavaScript",
+        "Cloudflare Worker",
+        "Offline-Schriften"
+      ],
+      "aliases": [
+        "samuelfleig.com",
+        "persönliche Dachseite",
+        "Arbeit Lernen Leben Website"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "creator"
+      ],
+      "link": "https://samuelfleig.com",
+      "source_kind": "github",
+      "hash": "sha256:e37c072fe0b5300b24d32a45de8e5f978237666c70dc0ab34278e042ac8bccc6"
+    },
+    {
+      "id": "gh-selfai-minimaxm2",
+      "title": "Terminal-Chatbot mit NPU-Beschleunigung",
+      "text": "Das Projekt ist ein terminalbasierter Chatbot für Windows on ARM mit Snapdragon-X-Elite-NPU. AnythingLLM dient als primäres Inferenz-Backend; bei Nichterreichbarkeit übernimmt ein lokales GGUF-Modell über llama.cpp auf der CPU. Das SelfAI-CLI gliedert Anfragen in Planner-, Execution- und Merge-Phasen, protokolliert Status und nutzt bei fehlgeschlagenem Planning einen Analyse-zu-Antwort-Fallback. Eine zentrale YAML-Datei konfiguriert beide Backends. Zusätzlich bietet das CLI Memory-Befehle zum Auflisten und Reduzieren von Kategorien. Vorausgesetzt werden Python 3.12 ARM64, eine konfigurierte AnythingLLM-Installation und ein lokales Modell.",
+      "topics": [
+        "Terminal-Chatbot",
+        "NPU",
+        "CPU-Fallback",
+        "AnythingLLM",
+        "Llama.cpp",
+        "SelfAI"
+      ],
+      "aliases": [
+        "SelfAI NPU Chatbot",
+        "MiniMax M2 Chatbot",
+        "NPU-CPU-Fallback"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:3c97ead6ca80db9dfbe64dfb52d3567e287095b9dadc64accb5934385b09337a"
+    },
+    {
+      "id": "gh-selfai-npu-agent",
+      "title": "Terminal-Chatbot mit NPU-Beschleunigung",
+      "text": "Das Projekt ist ein terminalbasierter Chatbot für Windows on ARM mit Snapdragon-X-Elite-NPU. AnythingLLM dient als primäres Inferenz-Backend; bei Nichterreichbarkeit übernimmt ein lokales GGUF-Modell über llama.cpp auf der CPU. Das SelfAI-CLI gliedert Anfragen in Planner-, Execution- und Merge-Phasen, protokolliert Status und nutzt bei fehlgeschlagenem Planning einen Analyse-zu-Antwort-Fallback. Eine zentrale YAML-Datei konfiguriert beide Backends. Zusätzlich bietet das CLI Memory-Befehle zum Auflisten und Reduzieren von Kategorien. Vorausgesetzt werden Python 3.12 ARM64, eine konfigurierte AnythingLLM-Installation und ein lokales Modell.",
+      "topics": [
+        "Terminal-Chatbot",
+        "NPU",
+        "CPU-Fallback",
+        "AnythingLLM",
+        "Llama.cpp",
+        "SelfAI"
+      ],
+      "aliases": [
+        "SelfAI NPU Agent",
+        "NPU-Chatbot",
+        "CPU-Fallback-Chatbot"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:c8ecf6483a70e94766e34eec315fbdc3778085c72ed56476581705f6d8c1030f"
+    },
+    {
+      "id": "gh-selfimproveselfai",
+      "title": "SelfAI – autonomes Multi-Agenten-System",
+      "text": "SelfAI ist ein Multi-Agenten-System für MiniMax M2 mit eigener Tool-Calling-Schleife, Selbstverbesserung und Sicherheitsmechanismen. Es bietet 24 integrierte Werkzeuge für Introspektion, Dateien, Shell und Tests sowie eine strukturierte Terminal-Oberfläche. Der Modus /selfimprove folgt dem Ablauf Analysieren, Vorschlagen, Auswählen und Ausführen. Geschützte Dateien, Nutzerfreigaben, Backups und Git-Versionierung begrenzen Änderungen. Eine Identitätsdurchsetzung prüft Antworten und korrigiert Identitätslecks. Das System unterstützt mehrstufige Aufgaben, eigene Codeanalyse und kontrollierte Verbesserungsvorschläge. Die Projektseite ist unter https://github.com/smlfg/selfimproveSelfAI erreichbar.",
+      "topics": [
+        "Multi-Agenten-System",
+        "MiniMax M2",
+        "Tool Calling",
+        "Selbstverbesserung",
+        "Sicherheitsmechanismen",
+        "Terminal-UI"
+      ],
+      "aliases": [
+        "SelfAI",
+        "selfimproveSelfAI",
+        "autonomes SelfAI-System"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/selfimproveSelfAI",
+      "source_kind": "github",
+      "hash": "sha256:07de6f519b9a3756bdd0b4a9516666443c15bef0d579b0c8dd9441f532f3cf74"
+    },
+    {
+      "id": "gh-sidecar-1",
+      "title": "Sidecar v1",
+      "text": "Sidecar v1 ist ein dauerhafter Kontext-Daemon für die Claude-Code-CLI. Er überwacht Sitzungen und injiziert situativ Regeln, Muster und Skill-Hinweise. Hooks reagieren auf UserPromptSubmit und PostToolUse; ein Unix-Socket verbindet Bridges und asyncio-Daemon. Der Daemon verwaltet 22 Regeln, einen Phasen-Tracker, Plugin-Nachladen und JSON-Sitzungszustände. Detektoren erkennen unter anderem Schleifen, Lesestürme, Fehlerketten, Drift und riskante Schreibvorgänge. Gates blockieren bestimmte Lösch-, Git- und Geheimnisaktionen. Das System ist fail-open ausgelegt: Bei Fehlern bleibt Claude funktionsfähig. Plugins liegen in rules/.",
+      "topics": [
+        "Claude Code",
+        "Kontext-Daemon",
+        "Unix-Socket",
+        "Hooks",
+        "Regeln",
+        "Sicherheits-Gates"
+      ],
+      "aliases": [
+        "Sidecar v1",
+        "Claude-Sidecar",
+        "Kontext-Injektor"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:9dcc4bd7c5e9bb203d47b3ca10bfb6cb35db479209dfff570c0c30a2ed2e8b89"
+    },
+    {
+      "id": "gh-sidecar-v1",
+      "title": "Sidecar v1",
+      "text": "Sidecar v1 ist ein dauerhafter Kontext-Daemon für die Claude-Code-CLI. Er überwacht Sitzungen und injiziert situativ Regeln, Muster und Skill-Hinweise. Hooks reagieren auf UserPromptSubmit und PostToolUse; ein Unix-Socket verbindet Bridges und asyncio-Daemon. Der Daemon verwaltet 22 Regeln, einen Phasen-Tracker, Plugin-Nachladen und JSON-Sitzungszustände. Detektoren erkennen unter anderem Schleifen, Lesestürme, Fehlerketten, Drift und riskante Schreibvorgänge. Gates blockieren bestimmte Lösch-, Git- und Geheimnisaktionen. Das System ist fail-open ausgelegt: Bei Fehlern bleibt Claude funktionsfähig. Plugins liegen in rules/.",
+      "topics": [
+        "Claude Code",
+        "Kontext-Daemon",
+        "Unix-Socket",
+        "Hooks",
+        "Regeln",
+        "Sicherheits-Gates"
+      ],
+      "aliases": [
+        "Sidecar v1",
+        "Claude-Sidecar",
+        "Kontext-Injektor"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:05b6f652887d4ded9fdf15f98f9da055b4f4e963a23d00e5aab7c520dee498d6"
+    },
+    {
+      "id": "gh-sidecar-v2",
+      "title": "Sidecar v2",
+      "text": "Sidecar v2 erweitert einen Kontext-Daemon für Claude Code um Echtzeit-Sitzungsüberwachung und phasenabhängige Auswahl. Ein SessionWatcher verfolgt JSONL-Dateien, ein ContextSelector reduziert injizierten Kontext, und ein SkillRecommender schlägt passende Skills vor. Der Phasen-Tracker nutzt Werkzeugfenster und Verlauf. Eine optionale GTK3-Oberfläche zeigt Status, Regeln, Sitzungen, Befunde und Injektionen. Die v1-Detektoren, Gates, Plugins, Sprachbrücke und fail-open-Auslegung bleiben erhalten. Ein optionaler LLM-Judge ist als spätere Funktion beschrieben. Die Kommunikation erfolgt über einen Unix-Socket.",
+      "topics": [
+        "Claude Code",
+        "SessionWatcher",
+        "ContextSelector",
+        "SkillRecommender",
+        "GTK3",
+        "Phasen-Tracking"
+      ],
+      "aliases": [
+        "Sidecar v2",
+        "ContextSelector",
+        "SessionWatcher",
+        "Claude-Sidecar v2"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:df1cca1c7c2b2cc7ffa2c64901af2314160ac047e63b147549bc9e312ecb5340"
+    },
+    {
+      "id": "gh-sidecar-v3",
+      "title": "Sidecar v3",
+      "text": "Sidecar v3 ist ein QA-Inspektor für das Arbeitsverhalten von Claude Code. Neben deterministischen Detektoren und blockierenden Gates enthält es einen optionalen LLM-Judge. Dieser bewertet Sitzungen bei ausgelösten Detektoren, periodisch oder bei Phasenwechseln. Als Provider sind MiniMax M2.5, Gemini Flash und Ollama vorgesehen; ein Tagesbudget und ein Cache begrenzen Kosten und Wiederholungen. Coaching-Regeln, Best Practices und modulare Provider ergänzen die Architektur. Die bestehende Unix-Socket-Kommunikation, Sitzungsüberwachung, Kontextauswahl, Skill-Empfehlungen und GTK3-Oberfläche bleiben erhalten. Der Judge lässt sich über sidecar-ctl steuern.",
+      "topics": [
+        "QA-Inspektion",
+        "Claude Code",
+        "LLM-Judge",
+        "MiniMax",
+        "Gemini",
+        "Ollama"
+      ],
+      "aliases": [
+        "Sidecar v3",
+        "Claude-Code-QA",
+        "LLM-Judge für Sidecar"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/sidecar-v3",
+      "source_kind": "github",
+      "hash": "sha256:07595e86d2d9bdb5e4d14d5266d4407ef6a6c7d81858f51787222fa7a48ea921"
+    },
+    {
+      "id": "gh-sidecar-v4",
+      "title": "Sidecar v4",
+      "text": "Sidecar v4 ist ein persistenter Qualitätskontroll-Daemon für Claude Code. Er verbindet deterministische Mustererkennung, einen synchronen Quick Judge und einen asynchronen Deep Judge Agent mit Function Calling. Der Deep Judge navigiert eine Wissensbasis und erzeugt personalisiertes Feedback. Die Architektur umfasst Unix-Socket-Hooks, 22 Regeln, sechs Gates, neun Detektoren, Phasen-Tracking, Kontextauswahl, Sitzungsüberwachung, Skill-Empfehlungen und eine GTK3-Oberfläche. Plugins können per SIGHUP nachgeladen werden. Der Daemon ist fail-open ausgelegt und soll Claude bei eigenen Fehlern nicht blockieren. Die Versionshistorie verweist auf https://github.com/smlfg/sidecar-v4.",
+      "topics": [
+        "Qualitätskontrolle",
+        "Claude Code",
+        "Deep Judge",
+        "Function Calling",
+        "Detektoren",
+        "Gates"
+      ],
+      "aliases": [
+        "Sidecar v4",
+        "Deep Judge Agent",
+        "Claude-Code-Qualitätskontrolle"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/sidecar-v4",
+      "source_kind": "github",
+      "hash": "sha256:7822d407e30802fd794ae60cc98218057b93f2b493905ebe8df8066af71e2713"
+    },
+    {
+      "id": "gh-sidecar-v5",
+      "title": "Sidecar v5",
+      "text": "Sidecar v5 erweitert die Qualitätskontrolle für Claude Code um Lern- und Trendverfolgung sowie eine Offline-Evaluationspipeline. Neben Mustererkennung, Quick Judge und Deep Judge Agent erfasst es implementierte, gelernte und offene Lücken über mehrere Sitzungen. EventStore, 30 Szenarien, A/B-Tests, Drift-Erkennung und Regelökonomie unterstützen die Evaluation. Die Architektur umfasst weiterhin 22 Regeln, sechs Gates, neun Detektoren, Phasen-Tracking, Sitzungsarchiv, Sprachbrücke und GTK3-Oberfläche. Die Kommunikation erfolgt über einen Unix-Socket; der Daemon bleibt fail-open. Die Versionshistorie nennt https://github.com/smlfg/sidecar-v5.",
+      "topics": [
+        "Qualitätskontrolle",
+        "Lernverfolgung",
+        "Trendverfolgung",
+        "Evaluationspipeline",
+        "A/B-Tests",
+        "Claude Code"
+      ],
+      "aliases": [
+        "Sidecar v5",
+        "Sidecar Eval Pipeline",
+        "Claude-Code-Lerntracker"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/sidecar-v5",
+      "source_kind": "github",
+      "hash": "sha256:ad88b906624823161f6f95d8dcbb63d4559a13a29a86832b85168ce27dce0d5b"
+    },
+    {
+      "id": "gh-sidecar-v7-demo",
+      "title": "Sidecar v7 Demo",
+      "text": "Die Quelle enthält keinen beschreibenden Inhalt.",
+      "topics": [],
+      "aliases": [
+        "Sidecar v7 Demo"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:c9dc51429a05e901da463fdd2715dc173ed20ba84d8cc4a2f90e4ccc57e5fd7b"
+    },
+    {
+      "id": "gh-smlfg",
+      "title": "Samuel Fleig – Human-Agent Interfaces",
+      "text": "Die Profilseite beschreibt eine Person als Studierenden im Bereich AI Engineering, die Human-Agent Interfaces entwickelt. Diese Systeme sollen Menschen die Arbeit mit KI-Agenten ermöglichen, ohne ihnen die Verantwortung zu entziehen. Als zentrale Projekte werden ein MCP-Kontrollsystem mit Missionsverträgen, wiederverwendbare Agenten-Skills, ein Workflow für parallele Modellvarianten und eine agententaugliche Hochschul-CLI genannt. Die Arbeitsweise setzt auf mehrere Agenten und Modelle, kleine prüfbare Abschnitte und menschliche Entscheidungen. Die Homepage lautet https://www.human-agent-interface.com.",
+      "topics": [
+        "Human-Agent Interfaces",
+        "MCP",
+        "Agenten-Skills",
+        "parallele Varianten",
+        "CLI"
+      ],
+      "aliases": [
+        "smlfg",
+        "Human-Agent Interface Profil",
+        "HAI-Projekte"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "creator"
+      ],
+      "link": "https://www.human-agent-interface.com",
+      "source_kind": "github",
+      "hash": "sha256:23e65d75825da46b6127b4748e657364e9228f3c42d5272394885ce70bd21c2d"
+    },
+    {
+      "id": "gh-spark4",
+      "title": "Spark4",
+      "text": "Spark4 ist eine neu strukturierte Portierung von Spark3 für Training und Datenaufbereitung. Das Projekt trennt Kernfunktionen, Daten, Modelle und Ausgaben in eindeutig benannte Verzeichnisse. Es bietet einen YAML-Konfigurationsloader, einen JSONL-Trainings- und Validierungssplitter sowie eine GPU-Prüfung. Die Konfiguration wird aus einer Vorlage erzeugt; Daten lassen sich einfach oder detailliert im Verhältnis 80/20 teilen. Die Struktur vermeidet Konflikte mit Bibliotheksnamen und ist für Docker-Container vorbereitet. Die angegebene Version ist 4.0.0.",
+      "topics": [
+        "Training",
+        "JSONL",
+        "YAML",
+        "GPU",
+        "Docker"
+      ],
+      "aliases": [
+        "Spark4",
+        "Spark3-Portierung",
+        "spark4_core"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:d5661a7337e5c98436c29cfa0d8eafedbe8e2e066be6fbddfc082fde01492b43"
+    },
+    {
+      "id": "gh-sparktest",
+      "title": "DGX Spark Playbooks",
+      "text": "DGX Spark Playbooks ist ein Infrastructure-as-Code-System zur Bereitstellung und Verwaltung von KI- und ML-Workloads auf NVIDIA-DGX-Systemen. Es bündelt wiederverwendbare Docker-Komponenten, Konfigurationsschemas, Gesundheitsprüfungen, Dienstprogramme, Deployment-Agenten sowie Unit- und Integrationstests. Agent 5 stellt eine Inferenzumgebung mit Ollama, NVIDIA NIM, Open WebUI und einer Modellverwaltungs-API bereit. Gemeinsame Komponenten umfassen Konfigurationsvalidierung, strukturierte Protokollierung, Prometheus-Metriken und Docker-Verwaltung. Docker Compose, Ansible und Python bilden zentrale Teile der vorgesehenen Betriebsumgebung.",
+      "topics": [
+        "Infrastructure as Code",
+        "DGX",
+        "Deployment",
+        "Inference",
+        "Monitoring",
+        "Testing"
+      ],
+      "aliases": [
+        "DGX Spark Playbooks",
+        "dgx-spark-playbooks",
+        "Agent 5 Inference Engine"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:1a8d4a93e1580353460144504a6638818f1bbc5e3ddd8c7de9f8d87dd859df45"
+    },
+    {
+      "id": "gh-sparktest2",
+      "title": "DGX Fast Fine-tuning Iteration Lab",
+      "text": "DGX Fast Fine-tuning Iteration Lab ist ein System für schnelle Experimente mit kleinen Sprachmodellen auf NVIDIA DGX Spark. Es verbindet Training, Modell-Export, automatisierte Benchmarks, Delta-Berechnung und HTML-Auswertung zu einem kurzen Iterationszyklus. Die Benchmark-Komponente enthält standardisierte deutschsprachige Prompts, Ollama-Anbindung, Wiederholungen und abgestufte Zeitlimits. Das Repository bietet ein automatisiertes Setup mit virtueller Python-Umgebung, Docker, Basismodell und GPU-Prüfung. Mehrere Agenten sind als Pipeline vorgesehen; Training, Export und Orchestrierung sind teilweise noch offen. Die Dokumentation unterscheidet manuelle Einrichtung und automatisierten Einstieg.",
+      "topics": [
+        "Fine-Tuning",
+        "Benchmarks",
+        "DGX Spark",
+        "Ollama",
+        "Sprachmodelle"
+      ],
+      "aliases": [
+        "SparkTest2",
+        "DGX Fine-tuning Lab",
+        "Fast Fine-tuning Iteration Lab"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/SparkTest2",
+      "source_kind": "github",
+      "hash": "sha256:1e7ec8b07e129ddf4363a92726ef0b2b7240b30b15616979b30cd1282c50fe76"
+    },
+    {
+      "id": "gh-splan-cli",
+      "title": "splan-cli",
+      "text": "splan-cli ist ein Terminalwerkzeug für öffentliche Stundenplandaten der Hochschule Heilbronn. Es sucht Studiengänge und Planungsgruppen, zeigt Wochen- und Tagespläne, prüft Raumbelegungen und speichert ICal-Dateien lokal. Eine Standardgruppe kann konfiguriert werden; Ausgabe ist als lesbarer Text oder als einzelnes JSON-Objekt möglich. Das Werkzeug benötigt keinen Login und verwendet öffentliche Lese-Anfragen. Es ist ausdrücklich inoffiziell, kann sich bei Änderungen der zugrunde liegenden Schnittstelle verändern und wurde laut Quelle nur lesend getestet. Entwicklungstests prüfen eine UX-Spezifikation sowie Sitzungsabläufe.",
+      "topics": [
+        "Stundenplan",
+        "Hochschule Heilbronn",
+        "CLI",
+        "ICal",
+        "StarPlan"
+      ],
+      "aliases": [
+        "splan-cli",
+        "splan",
+        "Stundenplan-CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/splan-cli",
+      "source_kind": "github",
+      "hash": "sha256:f6e6a5546adfbbe9afcf290145ad0f592535937bb3ec276d5154143089c38b9d"
+    },
+    {
+      "id": "gh-st-anton-trip",
+      "title": "St.-Anton-Reiseplanung",
+      "text": "Die Quelle beschreibt eine statische Landingpage für die Planung einer Reise nach St. Anton. Nach einem Push wird die Seite über GitHub Actions auf GitHub Pages bereitgestellt.",
+      "topics": [
+        "Landingpage",
+        "Reiseplanung",
+        "GitHub Pages"
+      ],
+      "aliases": [
+        "St. Anton Trip Page",
+        "St.-Anton-Reiseplanung"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:ecdb0f86bb05e95eef005261a79e50b7555ae89660c35c49862cdfce7bec2ae4"
+    },
+    {
+      "id": "gh-studip-cli",
+      "title": "studip-cli",
+      "text": "studip-cli ist ein Terminalwerkzeug für Stud.IP-Instanzen mit aktivierter offizieller JSON:API. Es unterstützt Anmeldung, Sitzungsverwaltung, Kurs- und Dateisuche, lokale Downloads, Termine und Ankündigungen. Zugangsdaten werden verdeckt abgefragt und bevorzugt im Schlüsselbund, ersatzweise geschützt in der lokalen Konfiguration gespeichert. Ausgaben erscheinen als Text oder JSON; mehrdeutige Treffer werden interaktiv ausgewählt oder ohne TTY als Fehler gemeldet. Schreibende Web-Aktionen sind nicht vorgesehen, außer lokalen Downloads. Die Quelle beschreibt anonymisierte Fixtures, lesende Live-Prüfungen und getrennte UX-, Schnittstellen- und Anforderungsdokumente.",
+      "topics": [
+        "Stud.IP",
+        "JSON:API",
+        "CLI",
+        "Kurse",
+        "Downloads",
+        "Authentifizierung"
+      ],
+      "aliases": [
+        "studip-cli",
+        "Stud.IP im Terminal"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/studip-cli",
+      "source_kind": "github",
+      "hash": "sha256:51990584a2bdb65100d5d94f6fcad4d244d55bc9cdb140c2244a072dbb9451e8"
+    },
+    {
+      "id": "gh-the-farmer-was-replaced",
+      "title": "The Farmer Was Replaced — Local Learning Companion",
+      "text": "The Farmer Was Replaced — Local Learning Companion ist ein gesprochener Python-Tutor für ein lokales Spiel auf einem MacBook Pro M3 Max. Er beobachtet Spielcode und Lernstand, reagiert auf eine Sprechtaste oder Fehlerausgaben und gibt abgestufte Denkhilfen, ohne ungefragt die Lösung zu liefern. Sprachaufnahme, Spracherkennung, Steuerung und ein lokaler Fallback bleiben auf dem Gerät; der Normalbetrieb kann Spielcode, Screenshots und Lernstand an einen Cloud-Dienst übermitteln. Der Tutor verwaltet Lernstand, Konzeptkarte, Lehransätze, Unterbrechungen und Übungsserie. Ein Offline-Modus nutzt ein lokales Modell oder regelbasierte Hinweise.",
+      "topics": [
+        "Python-Tutor",
+        "Lernen",
+        "Spracherkennung",
+        "Offline-Modus",
+        "macOS"
+      ],
+      "aliases": [
+        "The Farmer Was Replaced Tutor",
+        "TFWR Tutor",
+        "Local Learning Companion"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:4cac61a3f145ca1df76efe47e70c39cc2ed862c5a4969cf3df1ade2e9750afdd"
+    },
+    {
+      "id": "gh-typotuner",
+      "title": "TypoTuner",
+      "text": "TypoTuner ist ein Linux-Daemon zur Analyse von Tippfehlern und Tastaturbetätigung. Er liest rohe Eingabeereignisse über evdev, erkennt Fehlertypen, berechnet geglättete Fehler- und Verweilzeiten und speichert nur Tastencodes sowie Zeitdaten. Auf Basis der Muster empfiehlt er Betätigungspunkte für eine SteelSeries Apex Pro TKL. Die Oberfläche umfasst eine Rich-CLI mit QWERTZ-Heatmap und Statistiken sowie ein Webdashboard mit interaktiver Tastatur und Diagrammen. SQLite, asyncio, FastAPI und Chart.js gehören zum technischen Aufbau. Getippte Zeichen oder Wörter werden nicht gespeichert.",
+      "topics": [
+        "Tippfehleranalyse",
+        "Linux",
+        "evdev",
+        "QWERTZ",
+        "Tastatur",
+        "Datenschutz"
+      ],
+      "aliases": [
+        "TypoTuner",
+        "Tastatur-Analyse-Daemon",
+        "QWERTZ Heatmap"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/typotuner",
+      "source_kind": "github",
+      "hash": "sha256:6f448713e744dd038813fed07876a27ca70839fe81d6409443944c9c120a0cf8"
+    },
+    {
+      "id": "gh-unigputest",
+      "title": "NVIDIA L40S GPU Testing Suite",
+      "text": "Die NVIDIA L40S GPU Testing Suite bündelt Verifikation, Benchmarks und Anleitungen für NVIDIA-L40S-GPUs mit 48 GB VRAM. Enthalten sind Prüfungen für GPU-Informationen, PyTorch, TensorFlow und CUDA sowie Beispiele für Sprachmodell-Inferenz und Bildgenerierung. Die Dokumentation behandelt Treiber, CUDA, Speicherbedarf, Framework-Konfiguration, Produktionsbereitstellung, Monitoring und Fehlerbehebung. Benchmarks umfassen Matrixmultiplikation, Speicherbandbreite, Faltungen und Elementoperationen. Zusätzlich werden Einsatzfelder wie Sprachmodelle, Bild, Video, 3D und wissenschaftliches Rechnen beschrieben. Die Quelle nennt erwartete Leistungswerte und Optimierungshinweise, deren Übertragbarkeit von der jeweiligen Umgebung abhängt.",
+      "topics": [
+        "NVIDIA L40S",
+        "GPU-Tests",
+        "Benchmarks",
+        "CUDA",
+        "PyTorch",
+        "TensorFlow"
+      ],
+      "aliases": [
+        "UNIGPUTEST",
+        "L40S GPU Testing Suite",
+        "NVIDIA L40S Testframework"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://www.nvidia.com/en-us/data-center/l40s/",
+      "source_kind": "github",
+      "hash": "sha256:c08778f641eca037ddc9c0233c945ab873fd8b28e31505cb7ebca8bced725c5e"
+    },
+    {
+      "id": "gh-variance-workflow",
+      "title": "variance-workflow",
+      "text": "variance-workflow lässt mehrere KI-Modelle dieselbe Funktion parallel in getrennten Git-Worktrees umsetzen. Varianten bleiben als auswählbare Alternativen erhalten, wenn sie gemeinsame Akzeptanztests bestehen. Der Ablauf friert einen Basisstand ein, weist Modelle und Entwurfswinkel zu, startet Harness-Adapter, sammelt Tests und Messwerte, erstellt Vergleichsberichte und integriert nur erlaubte Pfade. Unterstützt werden unter anderem OpenCode, Claude Code, Codex, Cursor Agent und Aider. Härtungsregeln begrenzen Parallelität, Laufzeit und Wiederholungen, isolieren Geheimnisse und protokollieren Fehler. Die Standardimplementierung benötigt Python 3.11+, Git und Bash.",
+      "topics": [
+        "Variantenvergleich",
+        "Worktrees",
+        "KI-Modelle",
+        "Akzeptanztests",
+        "Harness",
+        "Git"
+      ],
+      "aliases": [
+        "variance-workflow",
+        "vw",
+        "A/B/C/D/E-Variantenvergleich"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "github",
+      "hash": "sha256:2a8c7ec549a77a04a482a48284354b9a0981ea697742c0b234660b3d083720b0"
+    },
+    {
+      "id": "gh-wg-gesucht-cli",
+      "title": "wg-gesucht-cli",
+      "text": "wg-gesucht-cli ist eine Kommandozeilenschnittstelle zur öffentlichen Suche nach WG-Zimmern, Wohnungen und Häusern sowie zur Anzeige von Angebotsdetails. Mit Anmeldung können Posteingänge gelesen und Nachrichten versendet werden. Suchfilter, JSON-Ausgabe, persistente Sitzungen und Tests mit HTML-Fixtures sind vorgesehen. Zugangsdaten kommen aus Umgebungsvariablen oder verdeckter TTY-Eingabe; Passwörter werden nicht gespeichert oder ausgegeben. Nachrichtenversand erfordert eine sichtbare Bestätigung oder bei Agenten den Parameter --confirm. Sitzungs-Cookies sind eingeschränkt und geschützt. Die Quelle beschreibt das Werkzeug als inoffiziell und den Live-Test als optional.",
+      "topics": [
+        "Wohnungssuche",
+        "WG-Suche",
+        "CLI",
+        "JSON",
+        "Authentifizierung",
+        "Nachrichten"
+      ],
+      "aliases": [
+        "wg-gesucht-cli",
+        "wggesucht",
+        "WG-Gesucht Terminal"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://www.wg-gesucht.de",
+      "source_kind": "github",
+      "hash": "sha256:151eb2e84bc837cbf58b6c0618944aa47a3b5b34e84cfe16f584df180c7df0e2"
+    },
+    {
+      "id": "gh-wg-gesucht-mcp",
+      "title": "wg-gesucht-mcp",
+      "text": "wg-gesucht-mcp ist ein MCP-Server für WG-Gesucht.de. Er soll persönlichen KI-Agenten ermöglichen, Wohngemeinschaften zu suchen, Angebote zu verfolgen und wiederkehrende Aufgaben der Zimmersuche zu bearbeiten. Das Projekt ist aus wg-gesucht-cli abgeleitet, wird unabhängig weiterentwickelt und befindet sich laut Quelle in Arbeit. Es steht unter MIT-Lizenz und wird als Teil des Human-Agent-Interface beschrieben.",
+      "topics": [
+        "MCP-Server",
+        "WG-Suche",
+        "KI-Agenten",
+        "Wohnungssuche"
+      ],
+      "aliases": [
+        "wg-gesucht-mcp",
+        "WG-Gesucht MCP",
+        "MCP für Wohnungssuche"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": "https://github.com/smlfg/wg-gesucht-cli",
+      "source_kind": "github",
+      "hash": "sha256:f0045c91e9d0325d96606e2cd3f5abc2cbdc7b7d80121d659e9f8f28e14fdf81"
+    },
+    {
+      "id": "gh-wifionice-cli",
+      "title": "wifionice: CLI für das WIFIonICE-Zug-WLAN",
+      "text": "wifionice ist eine CLI für das WIFIonICE-Zug-WLAN. Sie prüft das Captive Portal, führt den Portal-Check-in mit AGB-Bestätigung aus, zeigt Session-Status und Zuggeschwindigkeit und unterstützt den lokalen Logout. Für Check-ins gelten interaktive Bestätigungen oder explizite Flags für nicht-interaktive Nutzung. Die CLI benötigt und speichert keine Zugangsdaten. Sie bietet JSON-Ausgabe, Dry-Run, Konfiguration über Umgebungsvariablen oder Datei sowie definierte Exit-Codes. Tests laufen offline mit einem Fake-Server. Das Werkzeug ist nicht offiziell und wird auf eigene Verantwortung genutzt.",
+      "topics": [
+        "CLI",
+        "WIFIonICE",
+        "Zug-WLAN",
+        "Captive Portal",
+        "Check-in",
+        "Session-Status",
+        "Zuggeschwindigkeit",
+        "Offline-Tests"
+      ],
+      "aliases": [
+        "wifionice",
+        "WIFIonICE CLI",
+        "ICE-WLAN-CLI",
+        "Zug-WLAN-Login",
+        "wifi.bahn.de CLI"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": "https://github.com/smlfg/wifionice-cli",
+      "source_kind": "github",
+      "hash": "sha256:a89c329d2fe4c282760d9352f041b464bc54b28deed2b3f1230c2c96bd15a13a"
+    },
+    {
+      "id": "kj-approach-0",
+      "title": "Vorgehen: lesen, zeichnen, strukturieren, bauen",
+      "text": "Die Quelle beschreibt eine Reihenfolge für die Entwicklung: Zuerst wird gelesen, danach gezeichnet, anschließend strukturiert und erst zuletzt gebaut. Das Vorgehen ordnet Verständnis, visuelle Klärung, Strukturierung und Umsetzung in dieser Abfolge.",
+      "topics": [
+        "Entwicklung",
+        "Vorgehensmodell",
+        "Planung",
+        "Strukturierung"
+      ],
+      "aliases": [
+        "lesen vor bauen",
+        "zeichnen vor bauen",
+        "Entwicklungsreihenfolge",
+        "Read draw structure build"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:65e1579796e1118e3133654d4787ca2e42de40d6c2bc86d88606f367d6fa9955"
+    },
+    {
+      "id": "kj-approach-1",
+      "title": "Vorhandenes prüfen, bevor Neues gebaut wird",
+      "text": "Die Quelle formuliert die Regel, vor jedem Neubau zu prüfen, was bereits existiert. Damit beginnt die Arbeit mit einer Bestandsaufnahme vorhandener Lösungen oder Bausteine, bevor neue Arbeit umgesetzt wird.",
+      "topics": [
+        "Bestandsaufnahme",
+        "Recherche",
+        "Entwicklung",
+        "Wiederverwendung"
+      ],
+      "aliases": [
+        "erst suchen, dann bauen",
+        "Bestand prüfen",
+        "Vorhandenes nutzen",
+        "Recherche vor Entwicklung"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:03805034bfb27ce81fe1490bc9378973da81e8e3f6d07968e29384b9676888ae"
+    },
+    {
+      "id": "kj-approach-2",
+      "title": "Riskante Annahmen vorab messen",
+      "text": "Die Quelle empfiehlt, eine riskante Annahme zu messen, bevor weitere Arbeit auf ihr aufbaut. Das Vorgehen setzt damit eine überprüfbare Untersuchung vor die Entwicklung abhängiger Funktionen oder Strukturen.",
+      "topics": [
+        "Annahmen",
+        "Messung",
+        "Risiko",
+        "Validierung"
+      ],
+      "aliases": [
+        "Annahme messen",
+        "Risiko vorab prüfen",
+        "Messung vor Umsetzung",
+        "Validierung riskanter Annahmen"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:0b8f9bf91e4a49bafc63e8898c25f78ade849c5df343ceacbc7d5b3f3659f1a3"
+    },
+    {
+      "id": "kj-approach-3",
+      "title": "Text zuerst, Sprache später per Klick",
+      "text": "Die Quelle beschreibt eine Reihenfolge für Interaktion: Zuerst steht Text im Vordergrund. Sprachfunktionalität kommt später hinzu und startet erst durch eine bewusste Aktion per Klick.",
+      "topics": [
+        "Textinteraktion",
+        "Sprache",
+        "Benutzeraktion",
+        "Interaktionsdesign"
+      ],
+      "aliases": [
+        "Text zuerst",
+        "Voice später",
+        "Sprache per Klick",
+        "Text vor Sprache"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:83309a167a6047dbebeb7ecc7d893324748e4e14f9c18fdb8209374768cb4bc6"
+    },
+    {
+      "id": "kj-approach-4",
+      "title": "Schnelle Vordergrundantworten und stille Hintergrundarbeit",
+      "text": "Die Quelle beschreibt ein Interaktionsmuster mit schneller Antwort im Vordergrund. Langsamere Agenten arbeiten im Hintergrund und unterbrechen die laufende Interaktion nicht.",
+      "topics": [
+        "Agenten",
+        "Parallelität",
+        "Interaktion",
+        "Hintergrundarbeit"
+      ],
+      "aliases": [
+        "schnelle Antwort",
+        "stille Agenten",
+        "Hintergrundagenten",
+        "nicht unterbrechen"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:f104bb7fcde27a78870d6bb06d757ebfd647f7c4618650fb2f55d05ad35ce555"
+    },
+    {
+      "id": "kj-approach-5",
+      "title": "Agent fragt nach dem gewünschten Erscheinungsbild",
+      "text": "Die Quelle beschreibt eine Oberfläche, in der der Agent fragen kann, wie sie aussehen soll. Die Seite verändert sich anschließend live entsprechend dieser Interaktion.",
+      "topics": [
+        "Agentenoberfläche",
+        "Live-Änderung",
+        "UI-Anpassung",
+        "Konversation"
+      ],
+      "aliases": [
+        "Agent gestaltet die Seite",
+        "live veränderbare Seite",
+        "Oberfläche nach Wunsch",
+        "Agent fragt nach Design"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:708d0083e2a48f8ab50768b65d2851a936632364d3f21c42872b32ebe0f444ec"
+    },
+    {
+      "id": "kj-approach-6",
+      "title": "Nicht bevormundende Seite",
+      "text": "Die Quelle beschreibt eine nicht bevormundende Seite. Sie sagt dem Besucher nicht, was er tun soll, sondern lässt die Interaktion offen.",
+      "topics": [
+        "Interaktionsdesign",
+        "Autonomie",
+        "Benutzerführung",
+        "Agentenoberfläche"
+      ],
+      "aliases": [
+        "nicht bevormundend",
+        "keine Anweisungen an Besucher",
+        "offene Interaktion",
+        "besucherfreundliche Seite"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:51a67096f9186d1648a498db2ad6110b78efed27d74d683f195e1bd082acdcc2"
+    },
+    {
+      "id": "kj-faq-0",
+      "title": "Oberfläche als Agent",
+      "text": "Die Quelle beschreibt eine Oberfläche, die selbst der Agent ist. Sie ist keine Seite mit einem danebenstehenden Chatfenster.",
+      "topics": [
+        "Agentenoberfläche",
+        "Chatfenster",
+        "Produktdefinition"
+      ],
+      "aliases": [
+        "Was ist das",
+        "Agent statt Chatfenster",
+        "agentische Oberfläche",
+        "Interface als Agent"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:70669d4ffeca05a25e0383eaa4abde6900700b3ea8ead1446ffe8bf02c13006c"
+    },
+    {
+      "id": "kj-faq-1",
+      "title": "Kein gewöhnlicher Chatbot",
+      "text": "Die Quelle grenzt das Konzept von einem gewöhnlichen Chatbot ab. Bei einem Chatbot besitzt eine Seite ein Chatfenster; hier ist die Seite selbst der Agent und verändert sich während des Gesprächs.",
+      "topics": [
+        "Chatbot",
+        "Agentenoberfläche",
+        "Live-Veränderung",
+        "Konversation"
+      ],
+      "aliases": [
+        "Ist das ein Chatbot",
+        "kein Chatbot",
+        "Seite als Agent",
+        "veränderliche Agentenseite"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:cd5def617e1d60086f060a92cf9a1e23be9ba9bdc0e95e239a1af45adc7364b9"
+    },
+    {
+      "id": "kj-faq-2",
+      "title": "Anpassbare Agentenoberfläche für Einzelpersonen oder Teams",
+      "text": "Die Quelle beschreibt ein Angebot für eine einzelne Person oder ein Team. Die konkrete Form richtet sich danach, was die Oberfläche leisten muss, und nicht nach einem festgelegten Paket.",
+      "topics": [
+        "Agentenentwicklung",
+        "Teams",
+        "Individualisierung",
+        "Oberfläche"
+      ],
+      "aliases": [
+        "Agent für mich",
+        "Agent fürs Team",
+        "maßgeschneiderter Agent",
+        "individuelle Agentenoberfläche"
+      ],
+      "waypoints": [
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:5d7254201faf6b52e45186345e3fd682d298ecfbba974d761f691d9e96fa75e3"
+    },
+    {
+      "id": "kj-faq-3",
+      "title": "Interner Betrieb als Bereitstellungsfrage",
+      "text": "Die Quelle behandelt den rein internen Betrieb als Frage der Bereitstellung. Der beschriebene Bau unterstützt einen internen Betrieb; die dazugehörige Richtlinie liegt beim Kunden.",
+      "topics": [
+        "Deployment",
+        "interner Betrieb",
+        "Bereitstellung",
+        "Richtlinien"
+      ],
+      "aliases": [
+        "intern betreiben",
+        "interne Nutzung",
+        "On-Premises-Agent",
+        "Bereitstellungsfrage"
+      ],
+      "waypoints": [
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:93dd6a3503a49cb8ec58d6bd7f008e7e7bacd0da03f43890694f2540d4aa7717"
+    },
+    {
+      "id": "kj-faq-4",
+      "title": "Antworten aus dem aktuellen Gespräch",
+      "text": "Die Quelle beschreibt Antworten aus dem aktuellen Gespräch, nicht aus dauerhaftem Gedächtnis. Das System kann Antworten an Aussagen der laufenden Unterhaltung ausrichten, erinnert sich aber nicht später an die Person.",
+      "topics": [
+        "Kontext",
+        "Gespräch",
+        "Gedächtnis",
+        "Personalisierung"
+      ],
+      "aliases": [
+        "Merkt sich der Agent mich",
+        "Gesprächskontext",
+        "kein dauerhaftes Gedächtnis",
+        "Antwort aus aktuellem Gespräch"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:12f2cf2bfc6580c5f4545b8c286ab76ed6e86f3ea417b8dda33924fb2a81c7b7"
+    },
+    {
+      "id": "kj-faq-5",
+      "title": "Preis wird nach Bedarf bestimmt",
+      "text": "Die Quelle enthält noch keine Preisliste. Ein Angebot wird erstellt, nachdem der konkrete Bedarf erfasst wurde.",
+      "topics": [
+        "Preis",
+        "Angebot",
+        "Bedarfsermittlung",
+        "Dienstleistung"
+      ],
+      "aliases": [
+        "Was kostet das",
+        "Preisfrage",
+        "individuelles Angebot",
+        "Preis nach Bedarf"
+      ],
+      "waypoints": [
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:8fea02d817e08c8baaf368d1f3e7905cfc5895de7cc9a884d377ad567e6a8a87"
+    },
+    {
+      "id": "kj-offerings-person-agent",
+      "title": "Agentenversion einer Person",
+      "text": "Die Quelle beschreibt eine Agentenversion einer einzelnen Person. Sie übernimmt deren Verhalten und wird mit den Worten und Grenzen dieser Person gefüllt. Als Beispiel dienen Aussagen für ein erstes Treffen sowie eine Aussage, die diese Person niemals machen würde. Das Angebot richtet sich an Menschen, die einen Agenten wünschen, der für sie spricht, aber den erforderlichen Aufwand noch nicht einschätzen können.",
+      "topics": [
+        "Persönlicher Agent",
+        "Verhalten",
+        "Sprache",
+        "Grenzen",
+        "Agentenangebot"
+      ],
+      "aliases": [
+        "Version einer Person",
+        "persönlicher Agent",
+        "Agent spricht für mich",
+        "Agent mit eigenen Grenzen"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:63f5476f2755b12fe92c861e840a2f3ab73343693010faee85b2b307dfede506"
+    },
+    {
+      "id": "kj-offerings-team-knowledge-interface",
+      "title": "Schnittstelle für Teamwissen",
+      "text": "Eine interne Wissensschnittstelle für Teams stellt Abruf vor Oberfläche. Sie richtet sich an Unternehmen, die eine solche Schnittstelle prüfen. Als Beispiel dient ein Team mit acht Personen, vier Dokumenten und einem Wiki. Der Agent beginnt mit drei echten Fragen, die das Team in der Vorwoche gestellt hat.",
+      "topics": [
+        "internes Wissen",
+        "Retrieval",
+        "Wissensschnittstelle",
+        "Team"
+      ],
+      "aliases": [
+        "Team Knowledge Interface",
+        "Schnittstelle für Teamwissen",
+        "Wissensinterface"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:5da3a22251023af5763ad6b45a5a0fc7c568d18e25317cd3893a21abca7d2851"
+    },
+    {
+      "id": "kj-offerings-website-as-agent",
+      "title": "Website als Agent",
+      "text": "Eine Website kann selbst der Agent sein und nicht nur eine Seite mit danebenstehendem Chat. Sie richtet sich an Studios und kleine Teams, die eine Website wollen, die Antworten gibt statt nur zu informieren. In einem Beispiel fragt ein Studioinhaber nach Möglichkeiten; die Oberfläche antwortet in wenigen kurzen Zeilen und stellt eine konkrete Rückfrage.",
+      "topics": [
+        "Website",
+        "Agentenoberfläche",
+        "Studios",
+        "kleine Teams"
+      ],
+      "aliases": [
+        "Website as Agent",
+        "Website als Agent",
+        "agentische Website"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:d5c6d2af50c262a600c186bded08f6df192234ec3567aac64dc0db4634e088e4"
+    },
+    {
+      "id": "kj-owner",
+      "title": "Builder von Human-Agent Interfaces",
+      "text": "Samuel Flg baut Human-Agent Interfaces. Sein Ansatz beschreibt Seiten, die selbst als Agent fungieren.",
+      "topics": [
+        "Human-Agent Interface",
+        "Builder",
+        "Agentenoberfläche"
+      ],
+      "aliases": [
+        "Samuel Flg",
+        "Human-Agent Interfaces",
+        "Seite als Agent"
+      ],
+      "waypoints": [
+        "creator"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:b579d4b05882e6e6d41e8241a7bb71650f42f6c1af349492e3b8637155f8eac7"
+    },
+    {
+      "id": "kj-projects-public-agentfaehig",
+      "title": "Agentfähig",
+      "text": "Agentfähig ist die öffentliche Ausprägung des Human-Agent Interface. Das Projekt befindet sich in Entwicklung und ist kein fertiges Produkt.",
+      "topics": [
+        "Agentfähig",
+        "Human-Agent Interface",
+        "Projekt",
+        "Entwicklung"
+      ],
+      "aliases": [
+        "Agentfaehig",
+        "Agentfähig",
+        "öffentliche HAI-Ausprägung"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:09c51285a0c7832c332e48f408edf07363f25bf589286e40046ce27cb806733d"
+    },
+    {
+      "id": "kj-projects-public-hai",
+      "title": "Human Agent Interface",
+      "text": "Human Agent Interface bezeichnet eine Schnittstelle, in der Mensch und Agent als ein System arbeiten. Maßstab ist die Fähigkeit des Menschen zu handeln. HAI wird als Konzept und Methode beschrieben.",
+      "topics": [
+        "HAI",
+        "Human-Agent Interface",
+        "Mensch-Agent-System",
+        "Methode"
+      ],
+      "aliases": [
+        "HAI",
+        "Human Agent Interface",
+        "Mensch-Agent-Schnittstelle"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:180af73f1cfa8cd1e0c22477e33aca2061884ae7c018473eb5beb8953d25522b"
+    },
+    {
+      "id": "kj-projects-public-plaud-thoughts",
+      "title": "Plaud thoughts",
+      "text": "Plaud thoughts ist als geplanter Weg vorgesehen, aufgezeichnete Gedanken in den Kontext eines Agenten zu bringen. Das Vorhaben ist geplant und noch nicht umgesetzt.",
+      "topics": [
+        "aufgezeichnete Gedanken",
+        "Agentenkontext",
+        "Kontextintegration",
+        "Planung"
+      ],
+      "aliases": [
+        "Plaud thoughts",
+        "Gedanken in Agentenkontext",
+        "aufgezeichnete Gedanken"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "manual",
+      "hash": "sha256:c2dbf04cfdb4c47f815acedd6003619f4c53871cca196ce4159d0dfee30bea9f"
+    },
+    {
+      "id": "web-human-agent-interface-com-affehtml",
+      "title": "Workflow-Audit für Agentenarbeit",
+      "text": "Ein vierstündiges Audit untersucht Agentenarbeit anhand sichtbarer Arbeitseinheiten, Reibungspunkten, Grenzen und überprüfbaren Artefakten. Der Ablauf umfasst Intake, begrenzte Agentenarbeit, menschliche Gates, Verifikation und eine nächste Entscheidung. Das Angebot richtet sich an Personen, die mehrere Agenten einsetzen und dabei Scope, Zahlen, Zuständigkeiten oder Verifikation verlieren. Es wird als praktische Begleitung mit Owner-Paket und Follow-up beschrieben.",
+      "topics": [
+        "Workflow-Audit",
+        "Agentenarbeit",
+        "Human Gates",
+        "Verifikation",
+        "Owner-Paket"
+      ],
+      "aliases": [
+        "4h Agenten-Workflow-Audit",
+        "Workflow-Audit",
+        "kontrollierte Agentenarbeit"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:c036383b0de5974224a4e2fd00a567497d616475340d899cf165794f9822ed32"
+    },
+    {
+      "id": "web-human-agent-interface-com-fit",
+      "title": "Human Fit",
+      "text": "Human Fit prüft, ob ein agentischer Workflow zur arbeitenden Person passt. Eine Person bringt einen unübersichtlichen Workflow mit; dieser wird auf eine überprüfbare nächste Handlung begrenzt. HAI passt Kontextmenge, Rollenaufteilung, Pausen, Verifikation und Tempo an die Person an. Der stabile Kern besteht aus Intake, Klassifikation, Scope, Rolle, Artefakt und nächster Handlung. Das Angebot richtet sich an Menschen, die Agentenworkflows betreiben und die Verantwortung behalten wollen.",
+      "topics": [
+        "Human Fit",
+        "Workflow-Anpassung",
+        "Ownership",
+        "Verifikation"
+      ],
+      "aliases": [
+        "Human Fit",
+        "Fit-Check",
+        "passender Agentenworkflow"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:e7626bbca90e7e6f1682f5ec399f29dbee19f0e03b9c8fd2f766b3495ecfad5d"
+    },
+    {
+      "id": "web-human-agent-interface-com-hai-mcp",
+      "title": "HAI-MCP",
+      "text": "HAI-MCP ist eine MCP-Steuerungsebene für begrenzte agentische Arbeit. Sie bindet Agentenarbeit an Missionsverträge, Owner-Gates, Drift-Prüfungen und evidenzbasierte Fertigstellung. Das System ruft selbst kein Sprachmodell auf; das Modell bleibt im Client. Gesteuert werden Missionsverträge, menschliche Freigaben, Abweichungsprüfungen, überprüfbare Abschlusskriterien und nächste Schritte über Sitzungen hinweg. HAI-MCP wird als Python-MCP-Server und als Umsetzung der HAI-Methode beschrieben.",
+      "topics": [
+        "HAI-MCP",
+        "MCP",
+        "Steuerungsebene",
+        "Missionsverträge",
+        "Owner-Gates"
+      ],
+      "aliases": [
+        "HAI-MCP",
+        "MCP Control Plane",
+        "HAI-Steuerungsebene"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:cbc84f384b484693519ad6b567ac4bd12731a321dc557f21805da2851959e54a"
+    },
+    {
+      "id": "web-human-agent-interface-com-home",
+      "title": "Human Agent Interface",
+      "text": "Human Agent Interface ordnet agentische Arbeit so, dass Menschen sie beobachten, begrenzen, prüfen und verantworten können. Es richtet sich an Personen mit chaotischen Agenten-Workflows und führt von einem konkreten Problem zu einem prüfbaren nächsten Aktionspaket. Der Ansatz beschreibt menschliche Kontrolle über Handlungen, Freigaben und Verifikation. Er umfasst außerdem einen interaktiven Beispielablauf, eine Definition, Angebote, Fit-Prüfung und Nachweise aus lokalen Agentensystemen.",
+      "topics": [
+        "HAI",
+        "Agentenworkflow",
+        "menschliche Kontrolle",
+        "Aktionspaket",
+        "Verifikation"
+      ],
+      "aliases": [
+        "HAI",
+        "Human Agent Interface",
+        "Agenten-Kontrollsystem"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:804fce245c87de8ea3bb6d62aa4ea9d2da89d9cc4a041a2ddb11ba387d01be28"
+    },
+    {
+      "id": "web-human-agent-interface-com-m-c3-bcnztelfon",
+      "title": "HAI Harness Check",
+      "text": "Der HAI Harness Check wandelt ein unbestimmtes Agentenproblem in einen begrenzten nächsten Schritt um. Die Person wählt Harness, Erfahrungsstufe und Problem und erhält ein begrenztes Onboarding-Profil. Vorgesehen sind keine Secrets, keine Uploads, kein Repository-Zugriff und eine menschliche Entscheidung. Eine Session kann mit einem Paket abgeschlossen werden, das nur in der Browser-Sitzung bleibt. Zum beschriebenen Zeitpunkt war der Live-Chat vorübergehend deaktiviert und leitete Eingaben nicht an ein KI-Modell weiter.",
+      "topics": [
+        "Harness Check",
+        "Onboarding",
+        "Session-Paket",
+        "Sicherheitsgrenzen"
+      ],
+      "aliases": [
+        "HAI Harness Check",
+        "10-Minuten Harness Check",
+        "Harness-Onboarding"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:2536b12bbdd3c3af06f2a9481d199603294548569ecbb7c75196f1b956517593"
+    },
+    {
+      "id": "web-human-agent-interface-com-product",
+      "title": "Human Agent Interface Products",
+      "text": "Human Agent Interface Products strukturieren unübersichtliche KI-Arbeit in begrenzte, kontrollierbare Systeme. Beschrieben werden vier Angebote: ein persönliches Audit, ein agentisches System-Setup, eine Sidecar-Schicht und eine Teamarchitektur. Der Schwerpunkt liegt auf terminalnaher Agentenarbeit, Kontrollschichten, Projektkontext, Verifikation und menschlicher Verantwortung. Die Leistungen umfassen Diagnosen, Rollenmodelle, Ausführungsgrenzen, Verifier-Pfade, Übergabepakete sowie Governance- und Eskalationsregeln. Der Einstieg beginnt mit einer Scope-Klärung.",
+      "topics": [
+        "Produkte",
+        "Audit",
+        "System-Setup",
+        "Sidecar",
+        "Teamarchitektur"
+      ],
+      "aliases": [
+        "HAI Products",
+        "Human Agent Interface Products",
+        "HAI-Angebote"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:8c3f8e4a9cb3b06a4c14027af26b6d75faa90a15496f80b416e79b172021ea1e"
+    },
+    {
+      "id": "web-human-agent-interface-com-proof",
+      "title": "Proof of Practice",
+      "text": "Proof of Practice beschreibt HAI als Ergebnis realer Arbeit mit lokalen Agentensystemen, Läufen und Kontrollartefakten. Der Nachweis konzentriert sich auf Sichtbarkeit, Kontrolle, Methodenbildung und Übertragbarkeit. Er grenzt interne Praxis von Kundenergebnissen, universellen Benchmarks und allgemeinen Versprechen ab. Die beschriebene Arbeitsweise beginnt mit einem Zweck, einem kleinsten prüfbaren Artefakt, einer PASS/FAIL/UNCLEAR-Bewertung und genau einem nächsten Schritt. Mehr Agenten oder ein Framework sollen erst folgen, wenn ein reales Artefakt dies verlangt.",
+      "topics": [
+        "Praxisnachweis",
+        "Kontrolle",
+        "Artefakte",
+        "Evidenz",
+        "Arbeitsmethode"
+      ],
+      "aliases": [
+        "Proof of Practice",
+        "HAI-Nachweis",
+        "Praxisbeleg"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:5ce3f8469ee76f0ff934396e47249502e126656328ab988be7f5733f8e2e8194"
+    },
+    {
+      "id": "web-human-agent-interface-com-samuel",
+      "title": "Samuel Fleig und Human Agent Interface",
+      "text": "Samuel Fleig beschreibt sich als Entwickler von Human Agent Interfaces und als AI-Engineering-Student. HAI entstand aus praktischer Arbeit mit Agenten, Harnesses, Kontrollschichten und Überlastung durch mehr Ergebnisse, als ein Mensch sicher besitzen kann. Der Ansatz soll agentische Arbeit beobachtbar, begrenzt, überprüfbar und menschlich verantwortet machen. HAI-MCP ist die offene, modellunabhängige MCP-Control-Plane-Implementierung. Fleigs Weg verbindet Wirtschaftswissenschaften, IT, Softwareentwicklung, Informatik, künstliche Intelligenz und autonome Agenten. Früh entwickelte er SelfAI als experimentelles KI-Harness. Seine Arbeit umfasst Agentenbetrieb, Kontrollschichten, Observability, Freigaben, Mission-Verträge und evidenzbasierte Abschlüsse. Human-Agent-Interfaces bilden für ihn die Kontroll-, Kommunikations- und Koordinationsschicht zwischen Menschen und zunehmend autonomen KI-Systemen.",
+      "topics": [
+        "Samuel Fleig",
+        "Human Agent Interface",
+        "HAI-MCP",
+        "SelfAI",
+        "Agent-Harness",
+        "Forward Deployed Engineering"
+      ],
+      "aliases": [
+        "Wer ist Samuel Fleig",
+        "HAI-Gründer",
+        "HAI-MCP-Entwickler",
+        "Samuel Fleig Weg"
+      ],
+      "waypoints": [
+        "creator",
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:604417b9d87a33726897a94dd073a0841d1b7092ccaf00de7f352ef6002d040a"
+    },
+    {
+      "id": "web-human-agent-interface-com-samuel-computer-day-audit-2026",
+      "title": "Computer Day Audit 2026",
+      "text": "Computer Day Audit 2026 zeigt eine Übersicht sichtbarer Projektdateien, aktiver Projekte, aktiver Tage, Agentensitzungen, Terminals und Token-Nutzung. In der dargestellten Momentaufnahme stehen alle aufgeführten Zähler auf null. Die Seite enthält außerdem Ansichten für Markt, Projekte, Zeitverlauf, Dateien pro Projekt und Tag sowie die Auswahl eines Tages.",
+      "topics": [
+        "Audit",
+        "Projektübersicht",
+        "Agentensitzungen",
+        "Token-Nutzung"
+      ],
+      "aliases": [
+        "Computer Day Audit 2026",
+        "Computer-Day-Audit",
+        "Tagesaudit"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:7f16f2ee673178dc04b7785567c454e19f3449f8e4ea66e680f351a04cd2a9b3"
+    },
+    {
+      "id": "web-human-agent-interface-com-samuel-timeline",
+      "title": "AI Builder Timeline",
+      "text": "Die AI Builder Timeline stellt eine verdichtete Arbeitsphase von März bis Mai dar. Sie ordnet Apps, Dashboards, Architekturen, Websites, Analysen und Erklärstücke als sichtbare Entwicklung. Die Seite beschreibt eine Arbeitsweise, die schnell baut, Systeme betrachtet, Muster erkennt, Versionen vergleicht und aus Iterationen sichtbare Artefakte macht. Sie rahmt den Werdegang als offenen Lernprozess mit zunehmender Planung und eval-gesteuerter Entwicklung, nicht als fertiges Produktversprechen.",
+      "topics": [
+        "Timeline",
+        "AI Builder",
+        "Arbeitsweise",
+        "Artefakte",
+        "Lernprozess"
+      ],
+      "aliases": [
+        "AI Builder Timeline",
+        "Samuel Timeline",
+        "Timeline der Arbeitsweise"
+      ],
+      "waypoints": [
+        "what-this-is"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:4534a3fd5186f638d5a7e5d44d00eaf72e9614d84bc6d7d43ee646104f658287"
+    },
+    {
+      "id": "web-human-agent-interface-com-samuel-why-hai-matters",
+      "title": "Warum HAI für Samuel Fleig relevant ist",
+      "text": "HAI ist eine von Samuel Fleig entwickelte Schnittstelle, die verhindern soll, dass Menschen in agentischen Systemen die Orientierung und Verantwortung verlieren. Sie bündelt Umfang, Belege, Stop-Regel und nächste Entscheidung in einem Owner-Paket. Der Ansatz macht sichtbar, dass parallele Agentenarbeit kognitive Last erzeugt: Der Mensch muss Relevanz, Wahrheit, Sicherheit und Abbruch entscheiden. HAI soll Agentenarbeit beobachtbar und begrenzt halten, ohne deren Nutzen und Spielraum vollständig zu entfernen. Menschliche Zuständigkeit bleiben Umfang, Risiko, irreversible Entscheidungen und Abnahme. Vorgesehen sind außerdem Filtern, Parken, Ablehnen, Einfrieren und Verifizieren. Als Einstieg dient ein einzelner Workflow, in dem Agenten schneller Ergebnisse erzeugen als Verantwortung geklärt werden kann.",
+      "topics": [
+        "Human Agent Interface",
+        "Agentenarbeit",
+        "menschliche Verantwortung",
+        "Owner-Paket",
+        "kognitive Last",
+        "Stop-Regeln"
+      ],
+      "aliases": [
+        "Warum HAI wichtig ist",
+        "HAI persönliche Motivation",
+        "Agentenüberlastung",
+        "menschliche Kontrolle"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "creator",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:5670cb9c396575054343fb778cfd66914a4d9bb106cccd544ffa65fd35e08f1e"
+    },
+    {
+      "id": "web-human-agent-interface-com-sidecar",
+      "title": "Sidecar als HAI-Kontrollschicht",
+      "text": "Sidecar ist ein prototypengestützter Kontrolllayer hinter HAI. Während ein Hauptagent arbeitet, beobachtet Sidecar Überlastung, Scope Drift, Verifikationslücken und menschliche Entscheidungspunkte. Sidecar V7 verband Hooks, Daemon, Sicherheitsgates, Beobachtung, Kontextinjektion, Analyse und Dashboard. Die Entwicklung zeigte, dass weiche Regeln nicht ausreichen und ein Kontrollsystem selbst ausufern kann. Sidecar-NG verkleinerte den Ansatz zu einem lokalen Kontroll-Hook mit situativen Regeln und deterministischen Gates. Vorgesehene Modi sind PlanMode, ReviewMode, EvalMode und VerifyMode. Der Ansatz blockiert riskante Werkzeugnutzung, verlangt sichtbaren Zustand und unabhängige Prüfung. Für einen Workflow werden Kontrollbruchstellen kartiert, menschliche Entscheidungen getrennt, die kleinste Kontrollschicht entworfen und ihre Wirkung verifiziert.",
+      "topics": [
+        "Sidecar",
+        "HAI",
+        "Kontrolllayer",
+        "Scope Drift",
+        "Verifikation",
+        "Kontrollgates"
+      ],
+      "aliases": [
+        "Sidecar HAI",
+        "Sidecar-NG",
+        "agentische Kontrollschicht",
+        "4h HAI Setup"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:0d1147d85c262939accd8a8d837b49aad905a6ea81b252dc7906441c2c48534f"
+    },
+    {
+      "id": "web-human-agent-interface-com-tripwire-map",
+      "title": "Tripwire Map für agentische Arbeit",
+      "text": "Die Tripwire Map beschreibt Kontrollübergaben in agentischer Arbeit. Ein Tripwire besteht aus Trigger, Aktion und verantwortlichem Akteur. Der Trigger bezeichnet eine beobachtbare Bedingung, bei der normales Fortsetzen unsicher, unklar oder ineffizient wird. Die Aktion kann Stoppen, Eskalieren, Moduswechsel, Prüfung oder Rückgabe an den Owner sein. Die Map unterscheidet Berechtigungs-, Ressourcen-, Scope-, Verifikations- und Kommunikations-Tripwires. Beispiele sind Lesen vor dem Bearbeiten, Konfigurationsprüfung, Nachfragen bei Unklarheit, evidenzbasierte Abschlussmeldungen, Freigabe vor Commits und Blockieren gefährlicher Befehle. Weitere Regeln begrenzen Fanout, Hintergrundagenten und Modusdrift. Ein Onboarding-Test prüft, ob neue Personen Trigger, Aktion und Akteur ohne verborgenes Erfahrungswissen erkennen.",
+      "topics": [
+        "Tripwire Map",
+        "Kontrollübergabe",
+        "Trigger-Aktion-Akteur",
+        "Scope",
+        "Verifikation",
+        "Onboarding"
+      ],
+      "aliases": [
+        "Tripwire",
+        "HAI Tripwire",
+        "Kontrollkarte",
+        "Agenten-Grenzen"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:ee8f66ca88afd05b0c9d87e6ef23f29ee252396cbfbbe1c803fd2ec8e5cd52b4"
+    },
+    {
+      "id": "web-human-agent-interface-com-tutorials",
+      "title": "Tutorial für kontrollierte Agenten-Harnesses",
+      "text": "Das Harness-Tutorial beschreibt eine Entscheidungskette für den kontrollierten Einsatz von Coding-Agenten. Sie umfasst Owner-Paket, Scope-Grenze, Delegationskarte, Verifier-Schleife und nächste Aktion. Für jedes Tool werden Rolle, erwartetes Artefakt und menschlicher Stopppunkt festgelegt. Der Ablauf besteht aus Intake, einem kurzen Plan, begrenztem Build, Evidenz, Review und Übergabe. Erfolg wird durch Tests, Smoke-Checks, Dokumentstruktur, Screenshots oder Diffs belegt. Der Mensch entscheidet über neue Abhängigkeiten, destruktive Aktionen, Geheimnisse, Authentifizierung, Deployment, Scope-Ausweitung und unklare Tests. Markdown-Artefakte bleiben die Wahrheitsebene. Das Tutorial behandelt mehrere Agentenoberflächen und verweist auf Referenzen, Vorlagen und Praxisabläufe.",
+      "topics": [
+        "Agent-Harness",
+        "Owner-Paket",
+        "Delegationskarte",
+        "Verifier-Schleife",
+        "Evidenz",
+        "Human Gate"
+      ],
+      "aliases": [
+        "Harness-Tutorial",
+        "Agenten kontrolliert einsetzen",
+        "Codex-Harness",
+        "Agenten-Runbook"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:5af2f8303bb6b6902ba29b891eba96cd92fb1ffa938d88413e30732ac8331acf"
+    },
+    {
+      "id": "web-human-agent-interface-com-what-it-is",
+      "title": "Was ist Human Agent Interface?",
+      "text": "Human Agent Interface ist ein Ansatz, um agentische KI-Arbeit beobachtbar, begrenzt, überprüfbar und menschlich verantwortet zu halten. HAI behandelt die Lücke zwischen erzeugtem Output und menschlicher Verantwortung als Schnittstellenproblem. Im Mittelpunkt stehen nicht nur Werkzeuge und Prompts, sondern Missionsverträge, Owner-Gates, Drift-Prüfungen, Belege, Stop-Regeln und Pakete für die nächste Entscheidung. HAI-MCP ist die offene, modellunabhängige MCP-Control-Plane-Implementierung und stellt diese Kontrollen verschiedenen MCP-Clients zur Verfügung. Der Mensch soll Agentenarbeit steuern, stoppen, verifizieren und besitzen können. Die Seite ordnet HAI als Schnittstelle für Zusammenarbeit ein, nicht als eigenständigen Agenten oder bloße Chatoberfläche.",
+      "topics": [
+        "Human Agent Interface",
+        "HAI",
+        "HAI-MCP",
+        "Missionsverträge",
+        "Owner-Gates",
+        "Drift-Prüfung"
+      ],
+      "aliases": [
+        "Was ist HAI",
+        "HAI Erklärung",
+        "Human Agent Interface Definition",
+        "HAI-Control-Plane"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "creator",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:0d9b179df341674b3178ae6024f258292d995813236a0b0cfeec5e6d57728cee"
+    },
+    {
+      "id": "web-human-agent-interface-com-what-it-is-deep-dive",
+      "title": "Technische Definition von Human Agent Interface",
+      "text": "Eine Human Agent Interface ist eine Kontrollschicht zwischen menschlicher Absicht und der Ausführung eines autonomen Agenten. Sie hält agentische Arbeit beobachtbar, begrenzt, durch den Owner freigegeben und evidenzbasiert. Dadurch kann der Mensch Arbeit steuern, stoppen, verifizieren und verantworten. HAI unterscheidet sich von einem normalen Agenten-Framework und von bloßem Human-in-the-Loop durch Missionsverträge, Sitzungsleases, Owner-Gates, Drift-Prüfungen, evidenzbasierte Abschlüsse, Parken und einen harten Stop. HAI-MCP implementiert diese Objekte als offene, modellunabhängige MCP-Control-Plane und ruft selbst kein Sprachmodell auf. Der Ansatz richtet sich gegen Scope Drift, Selbstfreigabe, False Done, Lease-Wiederverwendung, unendliche Delegation und Überlastung.",
+      "topics": [
+        "Human Agent Interface",
+        "HAI-MCP",
+        "Kontrollschicht",
+        "Missionsvertrag",
+        "Owner-Gate",
+        "Evidenz"
+      ],
+      "aliases": [
+        "HAI Definition",
+        "technische HAI-Definition",
+        "Human-Agent-Interface",
+        "HAI-MCP Control Plane"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "creator",
+        "product-for-x"
+      ],
+      "link": "https://www.human-agent-interface.com/what_it_is/deep-dive/",
+      "source_kind": "web",
+      "hash": "sha256:4887dc6163d3cda99741924fcd4980328d60724f698ce80787408d44750d84f1"
+    },
+    {
+      "id": "web-humanagentcontrol-com-home",
+      "title": "Human Agent Control und das Hourglass-Modell",
+      "text": "Human Agent Control beschreibt ein Modell, in dem der Mensch zwischen agentischer Sammlung und Ausführung steht. Agenten erzeugen Ergebnisse, der Mensch filtert, fordert eine Mission an, stoppt oder lässt Arbeit passieren. Das Modell betont Aufmerksamkeit, Urteilskraft und Überlastung statt technischer Sicherheit oder Compliance. Beschrieben werden eine kognitive Firewall, ein Missions-Gate, ein Drift-Check, ein Hourglass-Modell und ein menschliches Tempolimit. Eine Simulation veranschaulicht die fünf Bewegungen am Engpass. Die Seite leitet daraus Prinzipien ab, darunter selbst formuliertes Denken vor Delegation, Filterung statt Löschung, aktive Missionen, automatische Drift-Prüfung und fokussierte Entscheidungen. Beispiele aus der Entwicklung zeigen Probleme durch unbegrenzte Agentenvermehrung, unbeachtete Warnungen und selten genutzte Drift-Prüfungen.",
+      "topics": [
+        "Human Agent Control",
+        "Hourglass-Modell",
+        "kognitive Firewall",
+        "Drift-Check",
+        "Missions-Gate",
+        "Aufmerksamkeitsbudget"
+      ],
+      "aliases": [
+        "Human Agent Control",
+        "Hourglass Human Agent",
+        "Mensch im Mittelpunkt",
+        "kognitive Kontrolle"
+      ],
+      "waypoints": [
+        "what-this-is",
+        "product-for-x",
+        "*"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:43f2f031b5dc3317b0e331cb086a26bc8b3077ce21333d5c416d11d82f874072"
+    },
+    {
+      "id": "web-samuelfleig-com-home",
+      "title": "Samuel Fleigs persönliche Dachseite",
+      "text": "Die persönliche Dachseite von Samuel Fleig bündelt drei Bereiche: Arbeit, Lernen und Leben. Im Arbeitsbereich steht HAI für Systeme, Rollen, Schnittstellen, Kontrollschleifen und Fehlerfälle, bei denen die Entscheidung beim Menschen bleibt. HAI-MCP wird als lokale Steuerschicht für Agentenmissionen mit Belegen und sauberem Abschluss beschrieben. Sidecar soll Agentenarbeit beobachtbar und prüfbar machen; SelfAI steht für lokale KI auf eigener Hardware. Fleig betont Scope, Gates, Belege und Übergaben statt maximaler Autonomie. Im Lernbereich beschreibt er kurze aktive Schleifen mit Feedback, eigener Erklärung und Anwendung auf echte Aufgaben. Insgesamt sollen Systeme Menschen besser verstehen, kontrollieren und handeln lassen, ohne die menschliche Entscheidung zu ersetzen.",
+      "topics": [
+        "Samuel Fleig",
+        "HAI",
+        "HAI-MCP",
+        "Sidecar",
+        "SelfAI",
+        "Lernen"
+      ],
+      "aliases": [
+        "Samuel Fleig Homepage",
+        "persönliche Dachseite",
+        "Arbeit Lernen Leben",
+        "HAI Projekte"
+      ],
+      "waypoints": [
+        "creator",
+        "what-this-is",
+        "product-for-x"
+      ],
+      "link": null,
+      "source_kind": "web",
+      "hash": "sha256:12780c9e5e9fdbba3226786be06665dbb079cac114a79f5a56e301e7f1498733"
+    }
+  ]
+}

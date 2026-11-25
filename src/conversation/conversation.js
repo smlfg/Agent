@@ -4,6 +4,7 @@
 import { createTypewriter } from './typewriter.js';
 import { dissolve } from './dissolve.js';
 import { currentBehaviour } from '../metrics/surface.js';
+import { turnIdFor } from '../state/agent-events.js';
 
 const THINKING_MARKUP = '<span class="thinking-dots" aria-hidden="true"><span></span><span></span><span></span></span>';
 const LEAVE_FALLBACK_MS = 700;
@@ -21,7 +22,7 @@ function ensureAckStylesheet(doc) {
   (doc.head ?? doc.documentElement).append(link);
 }
 
-export function mountConversation({ root, store, agent, reducedMotion = false }) {
+export function mountConversation({ root, store, agent, eventBus = null, reducedMotion = false }) {
   const doc = root.ownerDocument ?? document;
   const composer = root.querySelector('#composer');
   const input = root.querySelector('#composer-input');
@@ -173,9 +174,18 @@ export function mountConversation({ root, store, agent, reducedMotion = false })
   async function respond(prompt, turn, answerEl) {
     const controller = new AbortController();
     aborter = controller;
+    const turnId = turnIdFor(turn);
+    const onEvent = (ev) => {
+      if (!controller.signal.aborted && turn === store.getState().turn) {
+        eventBus?.emit({ ...ev, turn_id: turnId });
+      }
+    };
+    const respondOptions = eventBus
+      ? { signal: controller.signal, turnId, onEvent }
+      : { signal: controller.signal };
 
     try {
-      const result = await agent.respond(prompt, { signal: controller.signal });
+      const result = await agent.respond(prompt, respondOptions);
       if (controller.signal.aborted || turn !== store.getState().turn) return;
 
       const text = String(result?.text ?? '');
@@ -202,12 +212,24 @@ export function mountConversation({ root, store, agent, reducedMotion = false })
           if (live) live.textContent = text;
           retireCaret(answerEl, caret);
           typewriter = null;
+          eventBus?.emit({
+            turn_id: turnId,
+            action_id: 'response-001',
+            type: 'response.completed',
+            status: 'success',
+          });
         },
       });
       typewriter.start();
     } catch (error) {
       if (error && error.name === 'AbortError') return;
       if (turn !== store.getState().turn) return;
+      eventBus?.emit({
+        turn_id: turnId,
+        action_id: 'system-001',
+        type: 'system.error',
+        status: 'error',
+      });
       store.dispatch({ type: 'RESPONSE_ERROR', turn });
       answerEl.setAttribute('aria-busy', 'false');
       answerEl.textContent = RESPONSE_ERROR_TEXT;
@@ -227,12 +249,21 @@ export function mountConversation({ root, store, agent, reducedMotion = false })
     if (!prompt) return;
 
     const phase = store.getState().phase;
+    const prevTurn = store.getState().turn;
     const interrupting = phase === 'thinking' || phase === 'speaking';
 
     let previousEntry = null;
     let finishing = null;
 
     if (interrupting) {
+      if (prevTurn > 0) {
+        eventBus?.emit({
+          turn_id: turnIdFor(prevTurn),
+          action_id: 'turn-interrupt',
+          type: 'turn.interrupted',
+          status: 'cancelled',
+        });
+      }
       acknowledgeInterrupt();
       previousEntry = currentEntry;
 
@@ -252,6 +283,13 @@ export function mountConversation({ root, store, agent, reducedMotion = false })
 
     store.dispatch({ type: 'SUBMIT', prompt });
     const turn = store.getState().turn;
+    const newTurnId = turnIdFor(turn);
+    eventBus?.emit({
+      turn_id: newTurnId,
+      action_id: 'turn-001',
+      type: 'turn.received',
+      status: 'running',
+    });
 
     input.value = '';
     input.focus();

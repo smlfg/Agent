@@ -1,0 +1,25 @@
+{
+  "contact": {
+    "booking_url": null,
+    "email": null,
+    "approved": false
+  },
+  "pricing": {
+    "stance": null,
+    "approved": false
+  },
+  "persona_params": {
+    "tempo": { "min": 0.2, "max": 0.85, "default": 0.45 },
+    "density": { "min": 0.2, "max": 0.85, "default": 0.4 },
+    "warmth": { "min": 0.35, "max": 0.85, "default": 0.6 },
+    "calm": { "min": 0.55, "max": 0.9, "default": 0.75 },
+    "closeness": { "min": 0, "max": 1, "default": 0.45 },
+    "openness": { "min": 0, "max": 1, "default": 0.5 },
+    "attention": { "min": 0, "max": 1, "default": 0.6 },
+    "certainty": { "min": 0, "max": 1, "default": 0.55 },
+    "playfulness": { "min": 0, "max": 1, "default": 0.2 },
+    "formality": { "min": 0.2, "max": 0.85, "default": 0.3 },
+    "depth": { "min": 0, "max": 1, "default": 0.45 },
+    "energy": { "min": 0, "max": 1, "default": 0.4 }
+  }
+}
