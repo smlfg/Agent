@@ -80,6 +80,21 @@ Belege: [`tech/REALITY-SYNC-2026-11-25.md`](../tech/REALITY-SYNC-2026-11-25.md),
 Slice auf dem verifizierten Integrationsstand definieren und durch Upstream- und
 Plan-Gates bringen; keine Voice- oder DPPM-Arbeit in diesen Slice schmuggeln.
 
+## Wave 1 — Embodied Agent State (Vertical Slice Retrieval-SSE, 25.11.2026)
+
+- **Umgesetzt in PR 1 (Wave 1):** Typisierter `AgentEvent`-Contract & Event-Bus
+  (`src/state/agent-events.js`, `ADR-0008`), inkrementeller Echtzeit-SSE-Stream
+  aus `POST /api/agent` (`deploy/agentfaehig-site/src/search.js`, `worker.js`)
+  während `search()` läuft — **bevor** die Modellantwort vorliegt —, Streaming-
+  SSE-Client (`src/agent/remoteAgent.js`, `chain.js`), lokales Pre-Retrieval-
+  Parity-Modul (`src/agent/local-retrieval.js`) sowie die biologisch inspirierte
+  Embodiment-Schicht (`src/presence/embodiment.js`, `eye-motion-profiles.js`,
+  `presence.js`, `styles/embodiment.css`) inkl. 5s-Delay-Echtzeit-Akzeptanztest
+  (`tests/retrieval-sse-acceptance.test.js`).
+- **Bewusst zurückgestellt für PR 2 (Deferred):** Ausgearbeitetes Upstream-
+  Research-Dokument, Developer-Observability- & Owner-Visual-Evaluation-Panel
+  (`?dev=1` / `?eval=1`) sowie erweiterte Full-Lifecycle-Tests.
+
 ## Historischer Planungsstand (19./20.11.2026)
 
 Was ich vorhabe, in meinen eigenen Worten: [`VISION-samuel.md`](VISION-samuel.md).

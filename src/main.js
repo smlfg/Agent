@@ -1,5 +1,8 @@
 // Integration point (owned by Claude Code). Wires store, presence and conversation.
 import { createStore } from './state/store.js';
+import { createAgentEventBus } from './state/agent-events.js';
+import { mountEmbodiment } from './presence/embodiment.js';
+import { createLocalPreRetrievalAgent } from './agent/local-retrieval.js';
 import * as devAgent from './dev/devAgent.js';
 import { mountPresence } from './presence/presence.js';
 import { mountConversation } from './conversation/conversation.js';
@@ -24,6 +27,7 @@ export const AWAKE_AFTER_MS = 5000;
 
 const stage = document.getElementById('stage');
 const store = createStore();
+const eventBus = createAgentEventBus({ store });
 const surfaceStore = createSurfaceStore();
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -50,6 +54,8 @@ const loadJson = (path) => fetch(new URL(path, import.meta.url))
   .then((r) => (r.ok ? r.json() : null))
   .catch(() => null);
 loadJson('./agent/persona.json').then((p) => { persona = p; });
+let knowledgePromise = null;
+const getKnowledge = () => (knowledgePromise ??= loadJson('./agent/knowledge.json'));
 const getSystem = () => {
   const basePrompt = buildSystemPrompt({
     persona,
@@ -85,8 +91,20 @@ const surfaceProjector = mountSurfaceProjector({
   root: document.documentElement,
   reducedMotion,
 });
+const embodiment = mountEmbodiment({
+  eventBus,
+  store,
+  presence,
+  stage,
+  root: document.documentElement,
+  reducedMotion,
+});
+let innerAgent = createAgentChain(adapters, { timeoutMs: 10000 });
+if (!isProductionHost(location.hostname)) {
+  innerAgent = createLocalPreRetrievalAgent({ innerAgent, getKnowledge });
+}
 const baseAgent = createAdaptiveAgent({
-  innerAgent: createAgentChain(adapters, { timeoutMs: 10000 }),
+  innerAgent,
   surfaceStore,
   projector: surfaceProjector,
 });
@@ -110,7 +128,7 @@ const surfaceControls = mountSurfaceControls({
 });
 // The eyes must survive the mobile keyboard (first mobile test, 20.11.2026).
 const keyboardViewport = mountKeyboardViewport();
-mountConversation({ root: stage, store, agent, reducedMotion });
+mountConversation({ root: stage, store, agent, eventBus, reducedMotion });
 // Eyes follow the writing caret and look ahead while the visitor types.
 mountGaze({ input: document.getElementById('composer-input'), reducedMotion });
 // In silence the eyes wait expectantly and glance at the input (never sleep).
@@ -160,6 +178,8 @@ if (poseParam) {
 // Debug handle for local verification and dev tools only.
 window.__agentfaehig = {
   store,
+  events: eventBus,
+  embodiment,
   presence,
   surface: surfaceStore,
   surfaceProjector,
