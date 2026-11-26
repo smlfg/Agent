@@ -5,6 +5,61 @@ Spatial-/Error-State-Stand**. Die Produktvision bleibt gültig; diese Datei
 unterscheidet ab hier nachweisbaren Ist-Stand, Dokumentationswissen und offene
 Nachweise.
 
+## Nachtrag 26.11.2026 (aktuellster Stand)
+
+Die Abschnitte darunter bleiben der Stand vom 25.11.; wo sie abweichen, gilt
+dieser Nachtrag.
+
+**Live seit 26.11.:** Version `db3849d6-9023-481d-9f1c-d80907ccbea7` (Stand
+`a633910`), auf Samuels Auftrag deployt. Rücksprung:
+`wrangler rollback ac1e9d41-2b5e-496e-a52e-bf10566124dc --name agentfaehig`.
+`verify-live.sh` grün. Vier Testfragen an `/api/agent`: eine beantwortete
+MiniMax (4,1 s), drei OpenRouter (6,0–7,5 s); „wer hat dich gemacht“ wurde
+englisch und ohne Erbauer beantwortet. Die Antwort auf eine Notlagen-Nachricht
+war nicht leer, nannte aber keine Hilfsangebote.
+
+**Im Branch `integration/spatial-depth-error-state`** (nicht nach `main`
+gemergt):
+
+- `513e70d`: wiederkehrende Floskeln aus Stil, Prompt und Persona entfernt; der
+  Agent soll höchstens einmal nach seinem Aussehen fragen; die Oberfläche zeigt
+  die Quellen einer Antwort.
+- `a633910`: festes Eval-Set mit `npm run eval`
+  ([`evals/promptfoo/README.md`](../evals/promptfoo/README.md)).
+- `npm test`: **314/314** grün.
+
+**Nachweise:**
+
+- Fremdtests: laut Samuel **2** am 26.11.; Befund: „I hear you“ und „No rush“
+  wiederholen sich. Wer getestet hat und weitere Beobachtungen sind noch nicht
+  festgehalten.
+- Probelauf des Eval-Sets (1 Wiederholung, Zeitlimit 30 s): 6 von 8 Fällen
+  bestanden; in beiden roten Fällen kam eine leere Antwort. Die
+  Vergleichsbasis ([`baseline.md`](../evals/promptfoo/baseline.md)) ist leer.
+- Lokaler MiniMax-Vergleich: etwa ein Drittel der Aufrufe dauerte länger als
+  die 4 s, die der Worker je Anbieter erlaubt.
+
+**Offen (vor dem Deploy nicht erledigt):**
+
+1. Leere Antworten untersuchen, auch auf die erste Notlagen-Nachricht.
+2. 4-s-Zeitlimit gegen die gemessene Latenz prüfen.
+3. Eval-Lauf mit 3 Wiederholungen von Samuel als Vergleichsbasis abnehmen lassen.
+4. Verhalten bei Notlagen festlegen (Hinweis auf Hilfsangebote).
+5. „wer hat dich gemacht“ über den Rückfall-Anbieter beantwortet den Erbauer nicht.
+
+**Offene Owner-Entscheidungen:**
+
+- Sprache des Text-Agenten.
+- Fester Identitätskern im Systemprompt.
+- Persona-Status (steht auf `DRAFT`, läuft aber in jedem Prompt mit).
+- Wissensstück zum Embodiment: Entwurf, nicht freigegeben und nicht im Repo; vor
+  der Prüfung an die Aussehensfrage anpassen und in Aussehen und Funktion teilen.
+- ADR für geführte Pfade (Vorschlag: zuerst Reinlesen und Kontakt).
+- Reihenfolge von Sprachausgabe und Hintergrund-Agenten (Vorschlag: nach den
+  Pfaden).
+
+**Ungeprüft:** der unabhängige Prüfbericht nach ADR-0007 wurde nicht gefunden.
+
 ## Verifizierter Produktstand (VERIFIED)
 
 - Aktueller Integrations-HEAD während dieses Syncs: `ea3bd2e` auf
@@ -47,8 +102,8 @@ Belege: [`tech/REALITY-SYNC-2026-11-25.md`](../tech/REALITY-SYNC-2026-11-25.md),
 
 - **Voice:** kein erneuter 20-Turn-Latenzmesslauf in diesem Sync; keine aktuelle
   Bestätigung der STT-Stabilität und kein neuer `first_audio_ms`-Wert.
-- **Fremdtest:** weiterhin 0 durchgeführte Fremdtests. Die vorhandenen Pläne sind
-  keine Nutzerbelege.
+- **Fremdtest:** Stand 25.11. waren es 0; zum 26.11. siehe Nachtrag oben. Die
+  vorhandenen Pläne sind keine Nutzerbelege.
 - **DPPM/On-Demand-Agenten, serverautoritative Zwei-Tab-Synchronisation und
   langfristige Evolution:** in diesem Sync nicht als End-to-End-Verhalten geprüft.
 - **Öffentlicher Spatial-Depth-Lauf:** die öffentliche UI und echte Antwort sind
