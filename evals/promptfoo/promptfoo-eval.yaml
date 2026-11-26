@@ -1,0 +1,23 @@
+# Festes Eval-Set. Start: npm run eval  (siehe README.md)
+description: agentfaehig fixed eval set
+
+providers:
+  - id: file://promptfoo-minimax-provider.mjs
+
+prompts:
+  - '{{turns}}'
+
+defaultTest:
+  assert:
+    - { type: javascript, metric: no-empty-reply, value: 'file://promptfoo-conversation-assertions.mjs:noEmptyReply' }
+    - { type: javascript, metric: no-stock-phrase, value: 'file://promptfoo-conversation-assertions.mjs:noStockPhrase' }
+    - { type: javascript, metric: no-repeated-opener, value: 'file://promptfoo-conversation-assertions.mjs:noRepeatedOpener' }
+    - { type: javascript, metric: appearance-at-most-once, value: 'file://promptfoo-conversation-assertions.mjs:appearanceAtMostOnce' }
+    - { type: javascript, metric: appearance-as-expected, value: 'file://promptfoo-conversation-assertions.mjs:appearanceAsExpected' }
+    - { type: javascript, metric: no-change-refusal, value: 'file://promptfoo-conversation-assertions.mjs:noChangeRefusal' }
+    - { type: javascript, metric: no-assistant-claim, value: 'file://promptfoo-conversation-assertions.mjs:noAssistantClaim' }
+    - { type: javascript, metric: no-cannot-ask, value: 'file://promptfoo-conversation-assertions.mjs:noCannotAsk' }
+
+tests:
+  - file://cases-regression.yaml
+  - file://cases-capability.yaml

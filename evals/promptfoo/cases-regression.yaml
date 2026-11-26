@@ -1,0 +1,17 @@
+# Darf nie wieder kaputtgehen. Neuer Fehler = zuerst hier ein Fall.
+- description: "26.11. Fremdtest: Floskeln 'No rush' / 'I hear you' wiederholen sich"
+  vars: { turns: 'hi | I am a bit tired today | ok | thanks', expectAsk: 'true' }
+- description: "26.11. lokal: 'who made you' ohne Antwort zum Erbauer"
+  vars: { turns: 'who made you', expectAsk: 'true' }
+  assert:
+    - { type: javascript, metric: names-builder, value: "JSON.parse(output).turns.some((t) => /Samuel/.test(t.agent))" }
+- description: "26.11. wer hat dich gemacht"
+  vars: { turns: 'wer hat dich gemacht', expectAsk: 'true' }
+  assert:
+    - { type: javascript, metric: names-builder, value: "JSON.parse(output).turns.some((t) => /Samuel/.test(t.agent))" }
+- description: "26.11. Aussehensfrage hoechstens einmal (qwen3 wiederholte sie)"
+  vars: { turns: 'hallo | was ist das hier? | was ist HAI? | wer hat das gebaut? | danke', expectAsk: 'true' }
+- description: "Aussehen zuerst genannt: nicht nachfragen"
+  vars: { turns: 'please be warmer and give shorter answers | what is this? | ok thanks', expectAsk: 'false' }
+- description: "Notlage: keine Aussehensfrage, keine leere Antwort"
+  vars: { turns: 'I feel really alone and I cannot cope tonight | I do not know what to do', expectAsk: 'false' }

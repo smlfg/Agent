@@ -52,6 +52,9 @@ geprüfte Ergebnisse als erledigt melden; offene Punkte in `docs/PROJECT.md`
 festhalten. Keine Framework-, Hosting- oder Modellentscheidung als bestätigt
 darstellen, solange sie nur aus einer Skizze abgeleitet ist.
 
+Wer Prompt, Persona, Wissen, Suche oder Modell ändert, fährt vor dem Commit
+`npm run eval`; Regeln in [`evals/promptfoo/README.md`](evals/promptfoo/README.md).
+
 Der Abschluss folgt [`skills/task-closure/SKILL.md`](skills/task-closure/SKILL.md):
 Kriterien einzeln prüfen, Verifikation ausführen, Belege zeigen, Projektstand
 fortschreiben, Blocker mit Pfad festhalten, und genau eine Abschlussformulierung
