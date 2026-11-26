@@ -222,3 +222,15 @@ test('worker clamps whitelisted params and ignores unknown params', async () => 
   assert.match(system, /tempo=0\.850/);
   assert.doesNotMatch(system, /Adaptation parameters:.*unknown/);
 });
+
+test('the prompt sent to the provider has no stock phrases and carries the appearance question', async () => {
+  let system = '';
+  const res = await worker.fetch(request({ prompt: 'hi', params: { warmth: 0.62 } }), {
+    ASSETS,
+    AI: { run: async (_model, input) => { if (input.messages) system = input.messages[0].content; return { response: 'ok' }; } },
+  });
+  assert.equal(res.status, 200);
+  assert.doesNotMatch(system, /I hear you|No rush/i);
+  assert.match(system, /Your appearance/);
+  assert.match(system, /warmer or cooler/);
+});

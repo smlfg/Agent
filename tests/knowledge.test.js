@@ -35,3 +35,9 @@ test('persona uses server context and no longer delegates answers to Samuel', ()
   assert.doesNotMatch(text, /Samuel's to answer/);
   assert.match(text, /site-config\.contact/);
 });
+
+test('persona exemplars carry no stock phrase the model would parrot, and stay a draft', () => {
+  const replies = persona.exemplars.good.map((example) => example.agent).join(' ');
+  assert.doesNotMatch(replies, /I hear you|No rush|I am here|Take your time/i);
+  assert.match(persona.status, /^DRAFT/);
+});

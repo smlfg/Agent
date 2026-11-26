@@ -51,6 +51,10 @@ test('presence markup exposes both eyes and pupil containers', () => {
   }
 });
 
+test('source chip styles are linked', () => {
+  assert.match(html, /<link[^>]*href="styles\/sources\.css"/);
+});
+
 test('vendored license is MIT', () => {
   assert.match(license, /MIT License/);
 });

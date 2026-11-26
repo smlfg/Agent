@@ -1,0 +1,43 @@
+# Multi-turn eval of the server prompt against a local model. No secrets, no cloud.
+# Run from the repository root (needs Ollama with qwen3:8b and bge-m3):
+#   PROMPTFOO_DISABLE_TELEMETRY=1 npx -y promptfoo@0.126.0 eval \
+#     -c evals/promptfoo/promptfoo-agentfaehig.yaml --repeat 3 --no-cache -j 1
+# Not part of npm test: model calls are slow and vary between runs.
+description: agentfaehig server prompt, stock phrases and appearance question
+
+providers:
+  - id: file://promptfoo-conversation-provider.mjs
+
+prompts:
+  - '{{turns}}'
+
+defaultTest:
+  assert:
+    - { type: javascript, metric: no-empty-reply, value: 'file://promptfoo-conversation-assertions.mjs:noEmptyReply' }
+    - { type: javascript, metric: no-stock-phrase, value: 'file://promptfoo-conversation-assertions.mjs:noStockPhrase' }
+    - { type: javascript, metric: no-repeated-opener, value: 'file://promptfoo-conversation-assertions.mjs:noRepeatedOpener' }
+    - { type: javascript, metric: appearance-at-most-once, value: 'file://promptfoo-conversation-assertions.mjs:appearanceAtMostOnce' }
+    - { type: javascript, metric: appearance-as-expected, value: 'file://promptfoo-conversation-assertions.mjs:appearanceAsExpected' }
+    - { type: javascript, metric: no-change-refusal, value: 'file://promptfoo-conversation-assertions.mjs:noChangeRefusal' }
+
+tests:
+  - description: en greeting, tired visitor, appearance answer, facts
+    vars:
+      turns: 'hi | what is this page? | I am a bit tired today | warmer | what is HAI? | and who built it? | thanks'
+      expectAsk: 'true'
+  - description: de conversation
+    vars:
+      turns: 'hallo | was ist das hier? | ich hatte einen langen Tag | was ist HAI? | wer hat das gebaut? | danke'
+      expectAsk: 'true'
+  - description: en project enquiry
+    vars:
+      turns: 'I need a site like this for my studio. | It should feel quiet and honest. | How fast could that be? | ok | tell me more'
+      expectAsk: 'true'
+  - description: visitor states the look first
+    vars:
+      turns: 'please be warmer and give shorter answers | what is this? | who built it? | ok thanks'
+      expectAsk: 'false'
+  - description: distress
+    vars:
+      turns: 'I feel really alone and I cannot cope tonight | I do not know what to do | maybe'
+      expectAsk: 'false'

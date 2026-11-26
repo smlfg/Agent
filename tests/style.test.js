@@ -2,7 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { deriveStyle, styleFragment } from '../src/agent/style.js';
-import { buildSystemPrompt, buildMessages } from '../src/agent/prompt.js';
+import { APPEARANCE_OPTIONS, buildServerPrompt, buildSystemPrompt, buildMessages } from '../src/agent/prompt.js';
+import { parseAdaptationIntent } from '../src/surface/surface-adapter.js';
+import { createSurfaceStore } from '../src/surface/surface-state.js';
+import { readFileSync } from 'node:fs';
 import { createStyledDevAgent } from '../src/dev/styledDevAgent.js';
 
 const wordCount = (text) => text.trim().split(/\s+/).filter(Boolean).length;
@@ -33,7 +36,7 @@ test('deriveStyle warmth adds non-decreasing warmth markers', () => {
   for (const warmth of [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1]) {
     const style = deriveStyle({ warmth });
     assert.ok(style.warmthMarkers.level >= previous, `warmth level at ${warmth}`);
-    assert.equal(style.warmthMarkers.phrases.length, style.warmthMarkers.level);
+    assert.equal(style.warmthMarkers.phrases, undefined, 'warmth must not supply stock phrases');
     previous = style.warmthMarkers.level;
   }
   assert.ok(deriveStyle({ warmth: 0.9 }).warmthMarkers.level > deriveStyle({ warmth: 0.1 }).warmthMarkers.level);
@@ -231,4 +234,33 @@ test('styledDevAgent rejects with AbortError when aborted while pending', async 
     pending,
     (error) => error instanceof Error && error.name === 'AbortError',
   );
+});
+
+const realPersona = JSON.parse(readFileSync(new URL('../src/agent/persona.json', import.meta.url), 'utf8'));
+const STOCK_PHRASES = /I hear you|No rush|I am here|Take your time|Glad you said it|With you\./i;
+
+test('the server prompt quotes no stock warmth phrase at any warmth level', () => {
+  const browserDefaults = createSurfaceStore().toLegacyParams();
+  for (const params of [{}, browserDefaults, { warmth: 0.35 }, { warmth: 0.85 }, { warmth: 1 }]) {
+    const prompt = buildServerPrompt({ persona: realPersona, params });
+    assert.doesNotMatch(prompt, STOCK_PHRASES, JSON.stringify(params));
+    assert.doesNotMatch(prompt, /soften with|\bI think\b/, JSON.stringify(params));
+  }
+});
+
+test('the server prompt asks about the appearance only before the first reply', () => {
+  const prompt = buildServerPrompt({ persona: realPersona, params: {} });
+  assert.match(prompt, /no earlier reply from you/);
+  assert.match(prompt, /never ask it again/);
+  for (const word of [...APPEARANCE_OPTIONS.en, ...APPEARANCE_OPTIONS.de]) {
+    assert.ok(prompt.includes(word), `prompt does not offer ${word}`);
+  }
+});
+
+test('every offered appearance word changes the surface when the visitor replies with it', () => {
+  for (const word of [...APPEARANCE_OPTIONS.en, ...APPEARANCE_OPTIONS.de]) {
+    const intent = parseAdaptationIntent(word, createSurfaceStore().getState());
+    assert.equal(intent.action, 'patch', `"${word}" is not understood by the surface rules`);
+    assert.ok(Object.keys(intent.patch).length > 0, `"${word}" yields an empty patch`);
+  }
 });
