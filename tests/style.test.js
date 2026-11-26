@@ -264,3 +264,46 @@ test('every offered appearance word changes the surface when the visitor replies
     assert.ok(Object.keys(intent.patch).length > 0, `"${word}" yields an empty patch`);
   }
 });
+
+test('buildSystemPrompt formats persona.marketing object without leaking source and deduplicates rules', () => {
+  const prompt = buildSystemPrompt({
+    persona: {
+      rules: {
+        hard: ['Answer only what was asked. One prompt, one response.', '  Stay short.  '],
+        forbidden_phrases: ['great question', 'Fresh phrase'],
+      },
+      marketing: {
+        stance: 'A presence, not a sales bot.',
+        source: 'docs/missions/INTERNAL-FILE.md:883',
+        mention_when: ['visitor asks who built this'],
+        never_when: ['visitor is in distress'],
+        max_unprompted_per_conversation: 1,
+        delivery: ['One sentence inside the answer.'],
+        contact: {
+          rule: 'Only approved contact.',
+          fallback_text: 'Samuel will add a way later.',
+        },
+        unknown_fact: 'Say you do not know.',
+      },
+    },
+    style: deriveStyle({}),
+  });
+
+  assert.match(prompt, /stance: A presence, not a sales bot\./);
+  assert.match(prompt, /Mention when: visitor asks who built this/);
+  assert.match(prompt, /Never mention when: visitor is in distress/);
+  assert.match(prompt, /Max unprompted mentions per conversation: 1/);
+  assert.match(prompt, /Delivery: One sentence inside the answer\./);
+  assert.match(prompt, /Only approved contact\./);
+  assert.match(prompt, /Contact fallback: Samuel will add a way later\./);
+  assert.doesNotMatch(prompt, /INTERNAL-FILE\.md/);
+
+  const exactRuleOccurrences = prompt.match(/Answer only what was asked\. One prompt, one response\./g) ?? [];
+  assert.equal(exactRuleOccurrences.length, 1);
+
+  const forbiddenLine = prompt.split('\n').find((line) => line.includes('Never use canned or assistant-like phrases'));
+  assert.ok(forbiddenLine);
+  const gqMatches = forbiddenLine.match(/great question/gi) ?? [];
+  assert.equal(gqMatches.length, 1);
+  assert.match(forbiddenLine, /Fresh phrase/);
+});

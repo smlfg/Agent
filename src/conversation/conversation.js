@@ -3,6 +3,7 @@
 
 import { createTypewriter } from './typewriter.js';
 import { dissolve } from './dissolve.js';
+import { renderLinkedText } from './linkify.js';
 import { renderSources } from './sources.js';
 import { currentBehaviour } from '../metrics/surface.js';
 
@@ -201,6 +202,7 @@ export function mountConversation({ root, store, agent, reducedMotion = false })
           store.dispatch({ type: 'RESPONSE_END', turn, text });
           answerEl.setAttribute('aria-busy', 'false');
           if (live) live.textContent = text;
+          renderLinkedText(textEl, text);
           retireCaret(answerEl, caret);
           // Below the answer, outside it and the live region: never read aloud.
           const chips = renderSources(doc, result?.sources);

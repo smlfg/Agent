@@ -9,6 +9,7 @@ import { createAgentChain } from './agent/chain.js';
 import { createRemoteAgent, isProductionHost } from './agent/remoteAgent.js';
 import { createOllamaAgent, parseModelParam } from './agent/ollamaAgent.js';
 import { createStyledDevAgent } from './dev/styledDevAgent.js';
+import { createLocalRecorder } from './dev/localRecorder.js';
 import { buildSystemPrompt } from './agent/prompt.js';
 import { deriveStyle } from './agent/style.js';
 import { mountMic } from './voice/mic.js';
@@ -65,16 +66,23 @@ const getSystem = () => {
 // Last resort everywhere: styled development answers (marked dev:true).
 const styledDev = { id: 'dev-styled', ...createStyledDevAgent({ getParams: currentParams }) };
 const adapters = [...parseFailureKinds(search).map((kind) => createFailingAgent(kind))];
+let localRecorder = null;
 if (isProductionHost(location.hostname)) {
   // Production speaks only to the real endpoint. If every provider fails, the
   // surface shows an honest error instead of a canned answer that looks live.
   adapters.push(createRemoteAgent({ getParams: currentParams }));
 } else {
+  localRecorder = createLocalRecorder();
   const local = parseModelParam(search);
   if (local.enabled) {
+    const remote = createRemoteAgent({ getParams: currentParams });
     const ollama = createOllamaAgent({ ...(local.model ? { model: local.model } : {}), getSystem });
-    ollama.warmUp?.();
-    adapters.push(ollama);
+    if (local.model) {
+      ollama.warmUp?.();
+      adapters.push(ollama, remote);
+    } else {
+      adapters.push(remote, ollama);
+    }
   }
   adapters.push(styledDev);
 }
@@ -92,12 +100,13 @@ const baseAgent = createAdaptiveAgent({
 });
 let currentAgent = baseAgent;
 // The DEV DATA badge shows only while answers actually come from dev data.
+const dispatchRespond = async (prompt, opts) => {
+  const result = await currentAgent.respond(prompt, opts);
+  devBadge.hidden = !result?.dev;
+  return result;
+};
 const agent = {
-  respond: async (prompt, opts) => {
-    const result = await currentAgent.respond(prompt, opts);
-    devBadge.hidden = !result?.dev;
-    return result;
-  },
+  respond: localRecorder ? localRecorder.wrapRespond(dispatchRespond) : dispatchRespond,
 };
 function setAgent(next) {
   currentAgent = next ?? baseAgent;
@@ -176,6 +185,7 @@ window.__agentfaehig = {
   },
   setAgent,
   devAgent,
+  transcript: localRecorder,
   reducedMotion,
 };
 

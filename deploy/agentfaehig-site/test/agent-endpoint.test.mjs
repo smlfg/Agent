@@ -234,3 +234,57 @@ test('the prompt sent to the provider has no stock phrases and carries the appea
   assert.match(system, /Your appearance/);
   assert.match(system, /warmer or cooler/);
 });
+
+test('History mit 8 Einträgen behält die letzten 6 (neuesten) Einträge', async () => {
+  let seenBody = null;
+  await withFetch(async (_url, init) => {
+    seenBody = JSON.parse(init.body);
+    return minimaxOk('ok');
+  }, async () => {
+    const history = [
+      { role: 'user', content: 'u1' },
+      { role: 'assistant', content: 'a1' },
+      { role: 'user', content: 'u2' },
+      { role: 'assistant', content: 'a2' },
+      { role: 'user', content: 'u3' },
+      { role: 'assistant', content: 'a3' },
+      { role: 'user', content: 'u4' },
+      { role: 'assistant', content: 'a4' },
+    ];
+    const res = await worker.fetch(request({ prompt: 'u5', history }), {
+      ASSETS,
+      MINIMAX_API_KEY: 'test',
+    });
+    assert.equal(res.status, 200);
+    assert.deepEqual(seenBody.messages, [
+      { role: 'user', content: 'u2' },
+      { role: 'assistant', content: 'a2' },
+      { role: 'user', content: 'u3' },
+      { role: 'assistant', content: 'a3' },
+      { role: 'user', content: 'u4' },
+      { role: 'assistant', content: 'a4' },
+      { role: 'user', content: 'u5' },
+    ]);
+  });
+});
+
+test('Unabgeschlossenes <think> und verwaiste Think-Tags werden sauber entfernt', async () => {
+  await withFetch(async () => minimaxOk('Sichtbarer Text <think>geheime Gedankenkette'), async () => {
+    const res = await worker.fetch(request(), {
+      ASSETS,
+      MINIMAX_API_KEY: 'test',
+    });
+    assert.equal(res.status, 200);
+    assert.equal((await res.json()).text, 'Sichtbarer Text');
+  });
+
+  await withFetch(async () => completion('</think>Klare Antwort'), async () => {
+    const res = await worker.fetch(request(), {
+      ASSETS,
+      OPENAI_API_KEY: 'test',
+      OPENAI_MODEL: 'model',
+    });
+    assert.equal(res.status, 200);
+    assert.equal((await res.json()).text, 'Klare Antwort');
+  });
+});

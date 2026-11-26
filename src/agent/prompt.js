@@ -87,11 +87,11 @@ export function buildSystemPrompt({ persona = null, style = null } = {}) {
 
   lines.push('');
   lines.push('Rules');
-  for (const rule of [...DEFAULT_RULES, ...stringList(p.rules?.hard)]) {
+  for (const rule of dedupeStrings([...DEFAULT_RULES, ...stringList(p.rules?.hard)])) {
     lines.push(`- ${rule}`);
   }
 
-  const forbidden = [...DEFAULT_FORBIDDEN, ...stringList(p.rules?.forbidden_phrases)];
+  const forbidden = dedupeStrings([...DEFAULT_FORBIDDEN, ...stringList(p.rules?.forbidden_phrases)]);
   if (forbidden.length) {
     lines.push(`- Never use canned or assistant-like phrases such as: ${forbidden.join('; ')}.`);
   }
@@ -202,6 +202,17 @@ function mergeIdentity(identity) {
   };
 }
 
+const HANDLED_MARKETING_KEYS = new Set([
+  'source',
+  'stance',
+  'mention_when',
+  'never_when',
+  'max_unprompted_per_conversation',
+  'delivery',
+  'contact',
+  'unknown_fact',
+]);
+
 function readMarketing(persona) {
   const raw = persona.marketing ?? persona.rules?.marketing ?? persona.sales ?? null;
   if (!raw) return [];
@@ -209,7 +220,25 @@ function readMarketing(persona) {
   if (Array.isArray(raw)) return raw.map((entry) => typeof entry === 'string' ? entry.trim() : '').filter(Boolean);
   if (typeof raw === 'object') {
     const out = [];
+    if (typeof raw.stance === 'string' && raw.stance.trim()) out.push(`stance: ${raw.stance.trim()}`);
+    const mentionWhen = stringList(raw.mention_when);
+    if (mentionWhen.length) out.push(`Mention when: ${mentionWhen.join('; ')}`);
+    const neverWhen = stringList(raw.never_when);
+    if (neverWhen.length) out.push(`Never mention when: ${neverWhen.join('; ')}`);
+    if (typeof raw.max_unprompted_per_conversation === 'number' && Number.isFinite(raw.max_unprompted_per_conversation)) {
+      out.push(`Max unprompted mentions per conversation: ${raw.max_unprompted_per_conversation}`);
+    }
+    const delivery = stringList(raw.delivery);
+    if (delivery.length) out.push(`Delivery: ${delivery.join(' ')}`);
+    if (raw.contact && typeof raw.contact === 'object') {
+      if (typeof raw.contact.rule === 'string' && raw.contact.rule.trim()) out.push(raw.contact.rule.trim());
+      if (typeof raw.contact.fallback_text === 'string' && raw.contact.fallback_text.trim()) {
+        out.push(`Contact fallback: ${raw.contact.fallback_text.trim()}`);
+      }
+    }
+    if (typeof raw.unknown_fact === 'string' && raw.unknown_fact.trim()) out.push(raw.unknown_fact.trim());
     for (const [key, value] of Object.entries(raw)) {
+      if (HANDLED_MARKETING_KEYS.has(key)) continue;
       if (typeof value === 'string' && value.trim()) out.push(`${key}: ${value.trim()}`);
       else if (value === true) out.push(`${key}: allowed`);
     }
@@ -314,4 +343,18 @@ function findLastIndex(list, predicate) {
     if (predicate(list[i])) return i;
   }
   return -1;
+}
+
+function dedupeStrings(values) {
+  const seen = new Set();
+  const out = [];
+  for (const raw of values) {
+    const trimmed = typeof raw === 'string' ? raw.trim() : '';
+    if (!trimmed) continue;
+    const key = trimmed.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(trimmed);
+  }
+  return out;
 }

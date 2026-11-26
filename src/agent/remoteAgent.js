@@ -5,6 +5,8 @@
 // Endpoint URLs are resolved against the page origin so a <base href="/surface/">
 // on the deployed page cannot redirect the API call.
 
+import { stripSurfaceTags } from '../surface/surface-adapter.js';
+
 const ADAPTER_ID = 'remote';
 const DEFAULT_TIMEOUT_MS = 10000;
 const DEFAULT_HISTORY_TURNS = 3;
@@ -102,7 +104,7 @@ export function createRemoteAgent(options = {}) {
   function remember(prompt, answer) {
     if (historyTurns === 0) return;
     history.push({ role: 'user', content: prompt });
-    history.push({ role: 'assistant', content: answer });
+    history.push({ role: 'assistant', content: stripSurfaceTags(answer) });
     const limit = historyTurns * 2;
     while (history.length > limit) history.shift();
   }

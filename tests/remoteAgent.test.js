@@ -262,3 +262,24 @@ test('503 error flow enters error phase, ignores stale turns and aborts, and rec
   assert.equal(store.getState().turn, 3);
   assert.equal(store.getState().answer, 'recovered answer');
 });
+
+test('returns raw <surface> tags to caller but strips them before storing in history', async () => {
+  const bodies = [];
+  const agent = createRemoteAgent({
+    endpoint: ENDPOINT,
+    fetchImpl: fetchReturning(
+      { text: 'Klar, wärmer.\n\n<surface>{"atmosphere":{"background":"warm"}}</surface>' },
+      200,
+      (_url, init) => bodies.push(JSON.parse(init.body)),
+    ),
+  });
+
+  const first = await agent.respond('mach es wärmer');
+  assert.match(first.text, /<surface>/);
+
+  await agent.respond('danke');
+  assert.deepEqual(bodies[1].history, [
+    { role: 'user', content: 'mach es wärmer' },
+    { role: 'assistant', content: 'Klar, wärmer.' },
+  ]);
+});

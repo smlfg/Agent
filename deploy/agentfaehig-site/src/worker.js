@@ -25,7 +25,6 @@ const AGENT_TEMPERATURE = 0.8;
 const AGENT_PROMPT_MAX = 600;
 const AGENT_HISTORY_MAX = 6;
 const AGENT_HISTORY_ITEM_MAX = 600;
-const AGENT_SYSTEM_MAX = 4000;
 const RATE_LIMIT_MAX = 20;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
@@ -129,7 +128,7 @@ function normalizeAgentInput(payload) {
   let history = [];
   if (Array.isArray(payload?.history)) {
     history = payload.history
-      .slice(0, AGENT_HISTORY_MAX)
+      .slice(-AGENT_HISTORY_MAX)
       .map((item) => ({
         role: item?.role === "assistant" ? "assistant" : "user",
         content: trimMax(item?.content, AGENT_HISTORY_ITEM_MAX),
@@ -359,7 +358,11 @@ function withTimeout(promise, ms) {
 }
 
 function stripThinking(text) {
-  return String(text || "").replace(/<think[\s\S]*?<\/think>/gi, "").trim();
+  return String(text || "")
+    .replace(/<think\b[^>]*>[\s\S]*?<\/think>/gi, " ")
+    .replace(/<think\b[^>]*>[\s\S]*$/gi, " ")
+    .replace(/<\/?think\b[^>]*>/gi, " ")
+    .trim();
 }
 
 function isAllowedOrigin(request, url) {

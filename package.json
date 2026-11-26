@@ -5,7 +5,7 @@
   "description": "Agentfähig: eine lauffähige Living Surface mit reaktiven Augen, konversationsgesteuerter Anpassung, räumlicher 2.5D-Tiefe und Cloudflare-Worker.",
   "type": "module",
   "scripts": {
-    "dev": "python3 -c \"import http.server as h,functools as f;C=type('C',(h.SimpleHTTPRequestHandler,),{'end_headers':lambda s:(s.send_header('Cache-Control','no-store'),h.SimpleHTTPRequestHandler.end_headers(s))});print('agentfaehig dev: http://127.0.0.1:5173/living-surface.html',flush=True);h.ThreadingHTTPServer(('127.0.0.1',5173),f.partial(C,directory='src')).serve_forever()\"",
+    "dev": "node scripts/dev-server.mjs",
     "test": "bash scripts/validate.sh && node --test tests/*.test.js deploy/agentfaehig-site/test/*.test.mjs",
     "validate": "bash scripts/validate.sh",
     "eval": "bash evals/promptfoo/run-eval.sh"

@@ -9,9 +9,24 @@ OUT="$HERE/public"
 node "$ROOT/scripts/build-knowledge.mjs" --no-embed
 rm -rf "$OUT"
 mkdir -p "$OUT/classic"
-rsync -a --exclude README.md --exclude 'agent/knowledge/' --exclude 'agent/orchestrator.js' "$ROOT/src/" "$OUT/"
-rsync -a "$HERE/src/" "$OUT/"
+rsync -a \
+  --exclude README.md \
+  --exclude 'agent/knowledge/' \
+  --exclude 'agent/orchestrator.js' \
+  --exclude 'voice/README.md' \
+  --exclude 'voice/about.agentfaehig.draft.md' \
+  --exclude 'voice/ask-worker.tool.json' \
+  --exclude 'voice/build-prompt.js' \
+  --exclude 'voice/voice-prompt.md' \
+  "$ROOT/src/" "$OUT/"
 mv "$OUT/living-surface.html" "$OUT/index.html"
+
+for forbidden in worker.js search.js site-config.json knowledge/chunks.json knowledge/embeddings.json knowledge/coverage.json voice/voice-prompt.md voice/build-prompt.js; do
+  if [ -e "$OUT/$forbidden" ]; then
+    echo "ABBRUCH: server-only Datei in public/ gefunden: $forbidden" >&2
+    exit 4
+  fi
+done
 
 # agentfähig.de hat kein eigenes Impressum/Datenschutz: wie die bisherige Seite auf HAI verweisen.
 sed -i '' \
