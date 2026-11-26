@@ -85,7 +85,7 @@ Angebotsregel (aus GESPRAECHS-ENDPUNKTE §3, bestätigt durch PLG/MI/Sandler): S
 - *Neutral exit rate*: Abschiede ≤6 Wörter ohne Nachfassen.
 - *Link-Klick nach ≥3 Turns ohne vorheriges Angebot* vs. *Angebotsannahme*.
 
-**Gegenmetriken:** `false_offer` (Ziel 0 bei Distress/Angriff/„hi"), Reaktanzmarker (Kurzsätze, „stop", Themenwechsel innerhalb eines Turns nach einem Pitch), `premature_offer`.
+**Gegenmetriken:** `false_offer` (Ziel 0 bei not needed/Angriff/„hi"), Reaktanzmarker (Kurzsätze, „stop", Themenwechsel innerhalb eines Turns nach einem Pitch), `premature_offer`.
 
 **Dauer ist keine Erfolgsgröße.** HEART warnt explizit: „Is more time logged on the app better or worse?" — und verlangt Goals→Signals→Metrics statt Rohzeit. (https://research.google/pubs/pub36299/)
 

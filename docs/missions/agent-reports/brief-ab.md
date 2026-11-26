@@ -3,7 +3,7 @@ Projekt agentfähig: eine Website, die sich wie ein Agent verhält, zugleich Sam
 
 ROLLE: AGENT AB — VOM GESPRÄCH ZUM RICHTIGEN ENDPUNKT (Upstream-Recherche + Architekturvorschlag)
 OWNER: "Das ganze System ist open for whatever end comes out. Die Pathways of Communication sind nahezu endlos; je nachdem, wie das Gespräch verläuft, kommt etwas anderes raus. Wie wir von A nach B kommen, ist technisch schwierig — RAG-based, oder wie der Agent zum richtigen Endpoint of Conversation kommt, wenn man das als UML-Conversation betrachtet. Mach einen Upstream-Agenten, wie wir da professionell vorarbeiten können."
-Endpunkte sind z. B.: Kontakt zu Samuel, Termin, Projektanfrage aufnehmen, Weiterleiten an Ressource, ehrliches Ende ohne Ziel, Grenze bei Distress — und unbekannte weitere. Rahmen: strikt Prompt/Response, nur aktuelles Paar sichtbar, Reload = Neustart, nicht bevormundend, Marketing offen (Entscheidung 5).
+Endpunkte sind z. B.: Kontakt zu Samuel, Termin, Projektanfrage aufnehmen, Weiterleiten an Ressource, ehrliches Ende ohne Ziel, Grenze bei not needed — und unbekannte weitere. Rahmen: strikt Prompt/Response, nur aktuelles Paar sichtbar, Reload = Neustart, nicht bevormundend, Marketing offen (Entscheidung 5).
 RECHERCHIERE (Web, aktuell, mit URL + Lizenz): Ansätze zur Steuerung offener Gespräche auf Ziele/Endpunkte:
 - Dialog-/Konversationsmanagement: Rasa CALM (Flows + LLM), Parlant (Guidelines/Journeys), Voiceflow, Botpress, NVIDIA NeMo Guardrails (Colang-Flows), Microsoft/LangChain-Muster.
 - Agenten-Orchestrierung: LangGraph (Zustandsgraph), OpenAI Agents SDK (Handoffs/Guardrails), Pydantic AI, Mastra, Cloudflare Agents SDK (passt zum geplanten Backend), Vercel AI SDK Tools.

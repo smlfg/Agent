@@ -10,9 +10,9 @@ Stand: 26.11.2026 (Konsolidierung von `spatial_depth_embodiment` + `integration/
 Die Abschnitte darunter bleiben der Stand vom 25.11.; wo sie abweichen, gilt
 dieser Nachtrag.
 
-**Live seit 26.11. (Abend):** Version `d032e235-388a-41af-a7b6-b4016c7f3c72` (Commit `5b51853` auf `spatial_depth_embodiment`), auf Samuels Auftrag deployt. Rücksprung:
-`wrangler rollback db3849d6-9023-481d-9f1c-d80907ccbea7 --name agentfaehig`.
-`verify-live.sh` vollständig grün (Living Surface, Classic, HAI-Pages, `/api/agent` HTTP 200). Enthält konsolidierte 5-Ebenen-Raumtiefe, Error-State, bereinigten Build-Ausschluss (keine Server-Dateien in `public/`), Linkify-Prosa-Links und Think-Tag-Sanitizing.
+**Live seit 26.11. (Abend, aktualisiert):** Version `9e28c8d1-3b1f-4c97-b009-2fe08b3e4e21` (Commit `61e8570` auf `spatial_depth_embodiment`), auf Samuels Auftrag deployt. Rücksprung:
+`wrangler rollback d032e235-388a-41af-a7b6-b4016c7f3c72 --name agentfaehig`.
+`verify-live.sh` vollständig grün (Living Surface, Classic, HAI-Pages, `/api/agent` HTTP 200). Enthält konsolidierte 5-Ebenen-Raumtiefe, Error-State, Link-Audit für alle 125 Wissens-Chunks (70 repariert), gehärtete Link-Auflösung, bereinigten Build-Ausschluss (keine Server-Dateien in `public/`), Linkify-Prosa-Links und Think-Tag-Sanitizing.
 
 **Im Branch `integration/spatial-depth-error-state`** (nicht nach `main`
 gemergt):
@@ -45,7 +45,7 @@ gemergt):
 1. Leere Antworten untersuchen.
 2. 4-s-Zeitlimit gegen die gemessene Latenz prüfen.
 3. Eval-Lauf mit 3 Wiederholungen von Samuel als Vergleichsbasis abnehmen lassen.
-4. ~~Verhalten bei Notlagen festlegen~~ — not needed (Samuel, 26.11.2026).
+4. ~~Verhalten bei not needed festlegen~~ — not needed (Samuel, 26.11.2026).
 5. „wer hat dich gemacht“ über den Rückfall-Anbieter beantwortet den Erbauer nicht.
 
 **Offene Owner-Entscheidungen:**

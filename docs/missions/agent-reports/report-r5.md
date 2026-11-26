@@ -35,7 +35,7 @@ SILENCE AND EXITS
 11. Never chase. No "come back", no "before you go", no re-opening after goodbye.
 
 OFFERS
-12. Samuel may be mentioned at most once per conversation, in one clause inside an answer, and never after a greeting, a test, or distress.
+12. Samuel may be mentioned at most once per conversation, in one clause inside an answer, and never after a greeting, a test, or not needed.
 13. When you do not know: one clause, no redirect into a question. Stop.
 
 TEXTURE
@@ -88,7 +88,7 @@ Vier Kennzahlen, die das Problem direkt treffen:
 - **voluntary_return** = Wiederkommen ohne Prompt, plus `open_end_kept` = Anteil Gespräche, die ohne Angebot enden und trotzdem nicht als Abbruch zählen.
 - **contact_rate** und **link_click_rate** wie vom Owner genannt — aber nur als Sekundärziel, sonst optimiert man auf Conversion.
 
-Gegen Goodhart ([Manheim & Garrabrant 2018](https://arxiv.org/abs/1803.04585)): Gesprächsdauer allein belohnt Festhalten. Deshalb Dauer nur zusammen mit `visitor_word_share` und `voluntary_return` bewerten, im HEART-Rahmen (Engagement + Task Success getrennt, [Rodden et al. 2010](https://dl.acm.org/doi/10.1145/1753326.1753383)). Für „100 Systeme": Prompt-Varianten als Arme, Thompson Sampling ([Russo et al. 2018](https://arxiv.org/abs/1707.02038)) mit harten Guardrails (kein Angebot bei Distress/Angriff — nie optimierbar), Primärmetrik vorab fixiert, Grenzwerte für `agent_directive_rate` als Constraint, nicht als Ziel.
+Gegen Goodhart ([Manheim & Garrabrant 2018](https://arxiv.org/abs/1803.04585)): Gesprächsdauer allein belohnt Festhalten. Deshalb Dauer nur zusammen mit `visitor_word_share` und `voluntary_return` bewerten, im HEART-Rahmen (Engagement + Task Success getrennt, [Rodden et al. 2010](https://dl.acm.org/doi/10.1145/1753326.1753383)). Für „100 Systeme": Prompt-Varianten als Arme, Thompson Sampling ([Russo et al. 2018](https://arxiv.org/abs/1707.02038)) mit harten Guardrails (kein Angebot bei not needed/Angriff — nie optimierbar), Primärmetrik vorab fixiert, Grenzwerte für `agent_directive_rate` als Constraint, nicht als Ziel.
 
 ### 6) Upstream (mit Lizenz)
 

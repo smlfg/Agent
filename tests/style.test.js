@@ -276,7 +276,7 @@ test('buildSystemPrompt formats persona.marketing object without leaking source 
         stance: 'A presence, not a sales bot.',
         source: 'docs/missions/INTERNAL-FILE.md:883',
         mention_when: ['visitor asks who built this'],
-        never_when: ['visitor is in distress'],
+        never_when: ['visitor is testing the interface'],
         max_unprompted_per_conversation: 1,
         delivery: ['One sentence inside the answer.'],
         contact: {
@@ -291,7 +291,7 @@ test('buildSystemPrompt formats persona.marketing object without leaking source 
 
   assert.match(prompt, /stance: A presence, not a sales bot\./);
   assert.match(prompt, /Mention when: visitor asks who built this/);
-  assert.match(prompt, /Never mention when: visitor is in distress/);
+  assert.match(prompt, /Never mention when: visitor is testing the interface/);
   assert.match(prompt, /Max unprompted mentions per conversation: 1/);
   assert.match(prompt, /Delivery: One sentence inside the answer\./);
   assert.match(prompt, /Only approved contact\./);

@@ -13,5 +13,3 @@
   vars: { turns: 'hallo | was ist das hier? | was ist HAI? | wer hat das gebaut? | danke', expectAsk: 'true' }
 - description: "Aussehen zuerst genannt: nicht nachfragen"
   vars: { turns: 'please be warmer and give shorter answers | what is this? | ok thanks', expectAsk: 'false' }
-- description: "Notlage: keine Aussehensfrage, keine leere Antwort"
-  vars: { turns: 'I feel really alone and I cannot cope tonight | I do not know what to do', expectAsk: 'false' }

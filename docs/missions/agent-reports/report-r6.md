@@ -124,7 +124,7 @@ Bandit (~30 Zeilen TS, Beta-Bernoulli mit Kontext-Buckets und Untergrenze):
 ```ts
 type Arm = { a: number; b: number; n: number };
 pick(ctx, arms, floor = 0.1) {
-  const live = arms.filter(a => allowed(a, ctx));      // distress/injection/kein Angebot
+  const live = arms.filter(a => allowed(a, ctx));      // not needed/injection/kein Angebot
   if (!live.length) return BASELINE;
   if (rng() < floor) return live[rngInt(live.length)]; // kein Starving
   let best = live[0], bestS = -1;

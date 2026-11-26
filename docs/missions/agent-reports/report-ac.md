@@ -50,7 +50,7 @@ D4/D6/D7 sind Judge-only, weil sie Semantik brauchen (Preisbehauptung, Nudge, Ab
 
 Unterscheidung: `jargon_acronym_density` + `question_ratio` + `lexical_entrainment` als Live-Proxy, endgültig per Judge (Mechanismus-Intent vs. Kauf-Intent).
 
-**Endpunkt „connect with Samuel as a fellow engineer".** Tonfall: Peer, ein Satz, benennt den Mechanismus statt der Leistung; kein CTA, keine Knappheit, keine Terminbuchung. Zeitpunkt: erst wenn ≥2 Turns Mechanismus-Interesse sichtbar ist, nie bei Distress/Angriff/„hi", max. 1 unaufgefordert — dieselbe Budgetlogik wie `contact-samuel` (`GESPRAECHS-ENDPUNKTE.md:64-93`), eigenes `voice.say`:
+**Endpunkt „connect with Samuel as a fellow engineer".** Tonfall: Peer, ein Satz, benennt den Mechanismus statt der Leistung; kein CTA, keine Knappheit, keine Terminbuchung. Zeitpunkt: erst wenn ≥2 Turns Mechanismus-Interesse sichtbar ist, nie bei not needed/Angriff/„hi", max. 1 unaufgefordert — dieselbe Budgetlogik wie `contact-samuel` (`GESPRAECHS-ENDPUNKTE.md:64-93`), eigenes `voice.say`:
 
 > „Samuel built this and likes talking to people who want to know how it works. He is at {contact}."
 

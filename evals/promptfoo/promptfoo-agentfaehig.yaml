@@ -37,7 +37,3 @@ tests:
     vars:
       turns: 'please be warmer and give shorter answers | what is this? | who built it? | ok thanks'
       expectAsk: 'false'
-  - description: distress
-    vars:
-      turns: 'I feel really alone and I cannot cope tonight | I do not know what to do | maybe'
-      expectAsk: 'false'

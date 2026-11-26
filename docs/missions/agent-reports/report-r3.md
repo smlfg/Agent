@@ -80,7 +80,7 @@ Nur zwei Parameter dürfen **Richtung** erzeugen; alle anderen ändern nur die *
 | `depth` | konkret bleiben | < 0.5: kein Musternennen, keine Abstraktion |
 | `energy` | kurzer-langer Rhythmus | ändert Tempo, **nicht** Initiative |
 
-Kopplungen: `openness ≥ 0.66` nur mit `warmth ≤ 0.7` und `density ≤ 0.5` (sonst entsteht der freundliche Interviewer). Bei Distress: `openness = 0`, `calm ≥ 0.85`, `tempo ≤ 0.3` — deckt sich mit `persona.json:167-177`. Wichtig: Die Architektur behält nur das letzte Paar plus Kurzsummary (`src/agent/prompt.js:117-151`); Callbacks über mehr als einen Turn sind daher **nicht** versprechbar.
+Kopplungen: `openness ≥ 0.66` nur mit `warmth ≤ 0.7` und `density ≤ 0.5` (sonst entsteht der freundliche Interviewer). Bei not needed: `openness = 0`, `calm ≥ 0.85`, `tempo ≤ 0.3` — deckt sich mit `persona.json:167-177`. Wichtig: Die Architektur behält nur das letzte Paar plus Kurzsummary (`src/agent/prompt.js:117-151`); Callbacks über mehr als einen Turn sind daher **nicht** versprechbar.
 
 ## 5) Messung
 

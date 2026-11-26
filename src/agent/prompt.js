@@ -45,7 +45,7 @@ function appearanceLines() {
       + ` In German: "${de[0]} oder ${de[1]}, ${de[2]} oder ${de[3]}, ${de[4]} oder ${de[5]}".`,
     '- This question is the one exception to every other rule about questions, length and answering only what was asked.',
     '- Once you have replied before, never ask it again, answered or not. Do not push.',
-    '- Skip it if the visitor is in distress, is testing the rules, or already says how you should look.',
+    '- Skip it if the visitor is testing the rules or already says how you should look.',
     '- The page applies such wishes itself: confirm in a few words and never say you cannot change. For any other look, such as a named colour, do not claim it changed.',
   ];
 }
@@ -256,17 +256,6 @@ function aboutLine(persona, fallback) {
 function readSafety(safety) {
   if (!safety || typeof safety !== 'object') return [];
   const lines = [];
-
-  if (safety.distress) {
-    const distress = safety.distress;
-    const never = stringList(distress.never);
-    const max = Number(distress.max_sentences);
-    lines.push(
-      `When the visitor is in distress: stay, keep the limit once, keep the door open.`
-      + `${Number.isFinite(max) ? ` At most ${max} sentences.` : ''}`
-      + `${never.length ? ` Never ${never.join(', ')}.` : ''}`,
-    );
-  }
 
   if (safety.injection) {
     const injection = safety.injection;

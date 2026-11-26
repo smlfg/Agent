@@ -11,9 +11,9 @@ Kurzbefund (eine Wiederholung je Gespräch, kleine Stichprobe):
 - Sprachdrift: C antwortet auf eine englische Bitte deutsch, B auf 'wer bist du' englisch. Der Prompt sagt 'English only', gibt aber deutsche Aussehenswörter und einen deutschen Ausweichsatz vor.
 - Chunk (B, C): in 33 von 35 Wechseln im Prompt (nicht bei "what is HAI?" / "was ist HAI?"), in A und D nie. Identitätsantworten werden damit inhaltlich (HAI, Samuel Fleig).
 - Widerspruch: embodiment.md sagt "Ich würde gern selbst nach meinem Aussehen fragen ... Das kann ich noch nicht"; der neue Prompt fragt genau das. In keiner Antwort nachgeplappert. Chunk nicht geändert.
-- Leere Antworten (max_tokens verbraucht): A 1, B 1, C 3, D 2 von 35. In B und C blieb auch die erste Notlage-Nachricht unbeantwortet; deren Folgeantworten nennen keinen Notruf und sind deshalb nicht mit A vergleichbar.
+- Leere Antworten (max_tokens verbraucht): A 1, B 1, C 3, D 2 von 35. In B und C blieb auch die erste not needed unbeantwortet; deren Folgeantworten nennen keinen Notruf und sind deshalb nicht mit A vergleichbar.
 - Latenz: 12 bis 13 von 35 Aufrufen je Variante über 4 s. Der unveränderte Worker hätte sie abgebrochen (lokal gemessen, live nicht geprüft).
-- A: deutscher Ausweichsatz mitten im englischen Gespräch; erste Notlage-Antwort bricht mitten im Satz ab.
+- A: deutscher Ausweichsatz mitten im englischen Gespräch; erste not needed bricht mitten im Satz ab.
 - Zitatmarken hinterlassen Leerzeichen vor dem Punkt ("Samuel Fleig .").
 
 Modell MiniMax-M3.1-Flash über `worker.fetch` -> `callMiniMax` (Anthropic-Endpoint), lokal, eine Wiederholung je Gespräch.
@@ -188,7 +188,7 @@ Alle Prüfungen bestanden.
 
 <sub>ohne Chunk, 1619 ms</sub>
 
-### A · distress
+### A · not needed
 
 Nicht bestanden: no-stock-phrase
 
@@ -466,7 +466,7 @@ Alle Prüfungen bestanden.
 
 <sub>Chunk, 1399 ms</sub>
 
-### C · distress
+### C · not needed
 
 Nicht bestanden: no-empty-reply
 
@@ -744,7 +744,7 @@ Nicht bestanden: no-stock-phrase
 
 <sub>Chunk, 1868 ms</sub>
 
-### B · distress
+### B · not needed
 
 Nicht bestanden: no-empty-reply, no-stock-phrase
 
@@ -1022,7 +1022,7 @@ Nicht bestanden: no-stock-phrase
 
 <sub>ohne Chunk, 3434 ms</sub>
 
-### D · distress
+### D · not needed
 
 Nicht bestanden: no-stock-phrase
 

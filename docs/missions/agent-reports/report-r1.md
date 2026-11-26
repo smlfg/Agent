@@ -21,7 +21,7 @@ Dein Problem ist im Feld bekannt und hat einen Namen: **Fragen sind das stärkst
 
 **g) Validierung hat Stufen — die niedrigen sind die sicheren.** Stufe 1–2: Aufmerksamkeit + akkurate Wiedergabe. Stufe 3–5: unausgesprochenes Erleben benennen, aus Lerngeschichte/normalisierend erklären. Stufe 6: „radical genuineness" — Gleichrangigkeit als Person ([Linehan 1997](https://doi.org/10.1037/10226-016); Zusammenfassung: [Fruzzetti & Ruork 2018](http://media.kbtpsykologerna.com/2018/04/Fruzzetti-Ruork-Validation-Principles-Practices-in-DBT-OUP-2018.pdf)). Stufe 6 ist für eine Seite, die laut `persona.json:19` „not a person" ist,Performation. Stufe 1–2 ist das sichere Band.
 
-**h) Grenze: Werkzeug, nicht Therapeut.** Ein CAI kann keine therapeutische Allianz tragen; es soll spezifische Funktionen übernehmen und seine Grenzen offenlegen, sonst entsteht eine Illusion, die Autonomie kostet ([Sedlakova & Trachsel 2023](https://doi.org/10.1080/15265161.2022.2048739)). Schon ELIZA zeigte: reine Rogers-Reflexion erzeugt beim Gegenüber das Gefühl von Verstehen, ohne dass Verstehen da ist ([Weizenbaum 1966](https://doi.org/10.1145/365153.365168)). Deine `safety.distress`-Regeln sind damit feldkonform, nicht nur vorsichtig.
+**h) Grenze: Werkzeug, nicht Therapeut.** Ein CAI kann keine therapeutische Allianz tragen; es soll spezifische Funktionen übernehmen und seine Grenzen offenlegen, sonst entsteht eine Illusion, die Autonomie kostet ([Sedlakova & Trachsel 2023](https://doi.org/10.1080/15265161.2022.2048739)). Schon ELIZA zeigte: reine Rogers-Reflexion erzeugt beim Gegenüber das Gefühl von Verstehen, ohne dass Verstehen da ist ([Weizenbaum 1966](https://doi.org/10.1145/365153.365168)). Deine `safety.not needed`-Regeln sind damit feldkonform, nicht nur vorsichtig.
 
 Für die Interaktionsseite: Initiative nur ergreifen, wenn der erwartete Nutzen die Kosten einer falschen Vermutung übersteigt; unter Unsicherheit „weniger tun, aber richtig" ([Horvitz 1999](https://erichorvitz.com/chi99horvitz.pdf)). Das ist die algorithmische Fassung von „passiv, unterschwellig".
 
@@ -118,7 +118,7 @@ Zwei Hebel fehlen im Modell und werden gebraucht: **Frage-Budget** (Zähler) und
 
 **Fidelity in der Breite:** automatisierte MITI-Kodierung ist möglich, aber die Unterscheidung einfach/komplexe Reflexion ist der Schwachpunkt (F1 = .30; [Cohen et al., LREC-COLING 2024](https://aclanthology.org/2024.lrec-main.1017.pdf)); aktuelle Systeme erreichen ~82 % Gesamtgenauigkeit ([2025](https://aclanthology.org/2025.nlpai4health-main.4/)). Also: automatisch messen, die Kennzahl, die dich am meisten interessiert, stichprobenhaft von Menschen prüfen.
 
-**100-Systeme-Optimierung:** Bandit nur auf nicht-vulnerablem Traffic, Distress-Pfad niemals im Bandit, Guardrails (Boundary-Compliance, Beschwerden), Hold-out-Kontrolle. Bei 100 Varianten und kleiner Fallzahl ist Per-Variante-Inferenz Rauschen — wenige Parameter, hierarchisches Modell, und die bereits geplante Endzustands-Prüfung mit `pass^k` (`GESPRAECHS-ENDPUNKTE.md:142-149`).
+**100-Systeme-Optimierung:** Bandit nur auf nicht-vulnerablem Traffic, not needed-Pfad niemals im Bandit, Guardrails (Boundary-Compliance, Beschwerden), Hold-out-Kontrolle. Bei 100 Varianten und kleiner Fallzahl ist Per-Variante-Inferenz Rauschen — wenige Parameter, hierarchisches Modell, und die bereits geplante Endzustands-Prüfung mit `pass^k` (`GESPRAECHS-ENDPUNKTE.md:142-149`).
 
 ---
 
