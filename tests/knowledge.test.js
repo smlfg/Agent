@@ -41,3 +41,32 @@ test('persona exemplars carry no stock phrase the model would parrot, and stay a
   assert.doesNotMatch(replies, /I hear you|No rush|I am here|Take your time/i);
   assert.match(persona.status, /^DRAFT/);
 });
+
+test('every github chunk links deterministically to its github repository', () => {
+  const ghChunks = chunks.chunks.filter((c) => c.source_kind === 'github');
+  assert.equal(ghChunks.length, 86);
+  for (const chunk of ghChunks) {
+    assert.ok(chunk.link !== null, `${chunk.id} must have a non-null link`);
+    assert.match(chunk.link, /^https:\/\/github\.com\/smlfg\/[A-Za-z0-9_.-]+$/, `${chunk.id} link must be its github repository`);
+    assert.doesNotMatch(chunk.link, /human-agent-interface\.com|kleinanzeigen\.de|nvidia\.com|wg-gesucht\.de|lebensmittelwarnung\.de/, `${chunk.id} must not link to third-party or umbrella site`);
+  }
+
+  // Regression: HAI Skills Registry must link to repository, not human-agent-interface.com
+  const registry = chunks.chunks.find((c) => c.id === 'gh-hai-skills-registry');
+  assert.equal(registry.link, 'https://github.com/smlfg/HAI-skills-registry');
+
+  // Regression: MCP packages must not link to their CLI counterparts
+  assert.equal(chunks.chunks.find((c) => c.id === 'gh-chefkoch-mcp').link, 'https://github.com/smlfg/chefkoch-mcp');
+  assert.equal(chunks.chunks.find((c) => c.id === 'gh-hisinone-mcp').link, 'https://github.com/smlfg/hisinone-mcp');
+  assert.equal(chunks.chunks.find((c) => c.id === 'gh-ilias-mcp').link, 'https://github.com/smlfg/ilias-mcp');
+  assert.equal(chunks.chunks.find((c) => c.id === 'gh-wg-gesucht-mcp').link, 'https://github.com/smlfg/wg-gesucht-mcp');
+});
+
+test('every web chunk links deterministically to its web page url', () => {
+  const webChunks = chunks.chunks.filter((c) => c.source_kind === 'web');
+  assert.equal(webChunks.length, 18);
+  for (const chunk of webChunks) {
+    assert.ok(chunk.link !== null, `${chunk.id} must have a non-null link`);
+    assert.match(chunk.link, /^https:\/\/(www\.)?(human-agent-interface\.com|humanagentcontrol\.com|samuelfleig\.com)\//, `${chunk.id} must link to source web domain`);
+  }
+});

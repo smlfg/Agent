@@ -22,7 +22,12 @@ gemergt):
   die Quellen einer Antwort.
 - `a633910`: festes Eval-Set mit `npm run eval`
   ([`evals/promptfoo/README.md`](../evals/promptfoo/README.md)).
-- `npm test`: **314/314** grün.
+- **Link-Audit & Deterministische Reparatur (26.11.):** Vollständiger Audit aller
+  125 Chunks. 70 Chunks deterministisch korrigiert (25 GitHub-Mismatches, 27
+  fehlende GitHub-Links, 17 fehlende Web-Links, 1 Normalisierung). Ingestion-Pipeline
+  gehärtet (`scripts/chunks/check.mjs`, `condense.mjs`, `prompt.md`, `repair-links.mjs`);
+  Hash-basierte Owner-Freigabe; Tests in `tests/knowledge.test.js` und `tests/chunks.test.js`.
+- `npm test`: **339/339** grün.
 
 **Nachweise:**
 
@@ -37,10 +42,10 @@ gemergt):
 
 **Offen (vor dem Deploy nicht erledigt):**
 
-1. Leere Antworten untersuchen, auch auf die erste Notlagen-Nachricht.
+1. Leere Antworten untersuchen.
 2. 4-s-Zeitlimit gegen die gemessene Latenz prüfen.
 3. Eval-Lauf mit 3 Wiederholungen von Samuel als Vergleichsbasis abnehmen lassen.
-4. Verhalten bei Notlagen festlegen (Hinweis auf Hilfsangebote).
+4. ~~Verhalten bei Notlagen festlegen~~ — not needed (Samuel, 26.11.2026).
 5. „wer hat dich gemacht“ über den Rückfall-Anbieter beantwortet den Erbauer nicht.
 
 **Offene Owner-Entscheidungen:**

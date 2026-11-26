@@ -7,7 +7,7 @@ export function buildBatches(sources, size = 8) {
   const batches = []; for (let i = 0; i < sources.length; i += size) batches.push(sources.slice(i, i + size)); return batches;
 }
 export function pendingSources(sources, cache = {}) { return sources.filter((s) => cache[s.id] !== s.source_hash); }
-export const sourcePrompt = (sources, template) => `${template}\n\n${sources.map((s) => `<<<SOURCE id=${s.id}>>>\n${s.text}\n<<<END>>>`).join('\n\n')}`;
+export const sourcePrompt = (sources, template) => `${template}\n\n${sources.map((s) => `<<<SOURCE id=${s.id} kind=${s.source_kind} url=${s.url || ''}>>>\n${s.text}\n<<<END>>>`).join('\n\n')}`;
 async function loadSources(dir) { return Promise.all((await readdir(`${dir}/sources`).catch(() => [])).filter((n) => n.endsWith('.json')).map(async (n) => JSON.parse(await readFile(`${dir}/sources/${n}`, 'utf8')))); }
 export async function condense({ outDir = 'scripts/chunks/.out', batchSize = 8, limit, dryRun = false, invoke } = {}) {
   const sources = await loadSources(outDir); const cache = JSON.parse(await readFile(`${outDir}/cache.json`, 'utf8').catch(() => '{}'));

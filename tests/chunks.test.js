@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { htmlToText } from '../scripts/chunks/collect.mjs';
 import { buildBatches, pendingSources } from '../scripts/chunks/condense.mjs';
-import { validateChunk, hints } from '../scripts/chunks/check.mjs';
+import { validateChunk, hints, resolveDeterministicLink } from '../scripts/chunks/check.mjs';
 import { chunkHash, approve } from '../scripts/chunks/approve.mjs';
 import { isApproved } from '../scripts/chunks/chunk-file.mjs';
 import { migrate } from '../scripts/chunks/migrate-knowledge.mjs';
@@ -49,4 +49,13 @@ test('knowledge migration creates one manual source per supported section item',
   await writeFile(input, JSON.stringify({ owner: { name: 'S' }, offerings: [{ id: 'offer' }], approach: [{ point: 'p' }], faq: [{ q: 'q' }], projects_public: [{ id: 'project' }] }));
   assert.equal(await migrate({ input, outDir: dir }), 5); assert.equal((await readdir(join(dir, 'sources'))).length, 5);
   assert.equal(JSON.parse(await readFile(join(dir, 'sources', 'kj-owner.json'), 'utf8')).source_kind, 'manual');
+});
+test('resolveDeterministicLink maps sources to canonical URLs', () => {
+  assert.equal(resolveDeterministicLink({ source_kind: 'github', url: 'https://github.com/smlfg/repo' }), 'https://github.com/smlfg/repo');
+  assert.equal(resolveDeterministicLink({ source_kind: 'web', url: 'https://human-agent-interface.com/x' }), 'https://human-agent-interface.com/x');
+  assert.equal(resolveDeterministicLink({ source_kind: 'manual', url: 'kj-owner' }), null);
+  assert.equal(resolveDeterministicLink({ source_kind: 'manual', url: 'https://example.org/manual' }), 'https://example.org/manual');
+  // Validation rejects mismatched github link
+  const ghSource = { id: 'gh-repo', source_kind: 'github', url: 'https://github.com/smlfg/repo', text: 'Some text' };
+  assert.ok(validateChunk({ id: 'gh-repo', title: 'Repo', text: 'Text', topics: [], aliases: [], waypoints: ['*'], link: 'https://wrong.example.com' }, ghSource).length >= 1);
 });

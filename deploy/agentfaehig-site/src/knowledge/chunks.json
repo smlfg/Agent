@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "built_at": "2026-11-26T19:08:36.955Z",
+  "built_at": "2026-11-26T17:27:40.260Z",
   "chunks": [
     {
       "id": "about-samuel",
@@ -52,9 +52,9 @@
         "creator",
         "*"
       ],
-      "link": "https://www.xn--agentfhig-02a.de/",
+      "link": "https://github.com/smlfg/Agent",
       "source_kind": "github",
-      "hash": "sha256:2788050b4e8b030a91a7eaef55bfdaeefb2d5daa61cbe543e557d762e05c4596"
+      "hash": "sha256:ed3771c0ed2904f31e227c7f653a6dc749ec6d7399bd50f5b8548d198b5b8319"
     },
     {
       "id": "gh-agentfaehig-de",
@@ -67,9 +67,9 @@
       "waypoints": [
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/agentfaehig-de",
       "source_kind": "github",
-      "hash": "sha256:3139ac0ad450c8dbbd090068f0fb10096ae065e9759601c89e44385baa066d4f"
+      "hash": "sha256:b9d8f8c4bc99e6f46996205f440e5e19940447360a6cfef3c0e7e04a5da258fc"
     },
     {
       "id": "gh-agentic-owner-tracker",
@@ -110,9 +110,9 @@
       "waypoints": [
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/AgentSwarmDashboard-1",
       "source_kind": "github",
-      "hash": "sha256:5bab5f89bf26dbcfce9ff604e11ed950b6b0ed051431748d678b78bb72049832"
+      "hash": "sha256:b693d498e5aedaac1a2c419257632904d319653efa4bd7c6747915f061e170be"
     },
     {
       "id": "gh-aider-bench-harness",
@@ -137,9 +137,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/Aider_Bench_Harness",
       "source_kind": "github",
-      "hash": "sha256:26814eef8e30ea1cedf2cc454a614489a4f5b3c7df0b632eaf8c3e60fac78542"
+      "hash": "sha256:363ad3f9ca1c8854fd02cab40ce25c7c378e8f099b6c0ec48c249c1a2235f10f"
     },
     {
       "id": "gh-aisystemforvibecoding",
@@ -165,9 +165,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/MyAIGame",
+      "link": "https://github.com/smlfg/AiSystemForVibeCoding",
       "source_kind": "github",
-      "hash": "sha256:2ff2d091e91272345d4e82dca6d2e361e85c598de1639388f0918463deb814df"
+      "hash": "sha256:141951722087b53c63c146799a11fc83520e1c9169767d56ed237b89a64339f1"
     },
     {
       "id": "gh-angebote-cli",
@@ -245,9 +245,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/archify-free-pipeline-research",
       "source_kind": "github",
-      "hash": "sha256:e41d09303dd061b504c2fb821dd68437e983c8b4693134862be80be339b000e6"
+      "hash": "sha256:bc8de7ee1f2ae2bffb98cbe0d429b76c3ae24c38869c7a218f206d8992f738b0"
     },
     {
       "id": "gh-bafoeg-cli",
@@ -407,9 +407,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/bundesanzeiger-cli",
       "source_kind": "github",
-      "hash": "sha256:a67325eb3ded3b15a0f02cf3b395254e6f3a089e32100e90b13f8ba4e5378f1b"
+      "hash": "sha256:ea14310a8c279c2f4ff56f85263f1d34fe50474d99ac577601cc418918287640"
     },
     {
       "id": "gh-cfhackathon-ocr-2026",
@@ -434,9 +434,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/CFHackathon_OCR_2026",
       "source_kind": "github",
-      "hash": "sha256:739ae89e4b20d3470e8c5a4266e7f0c2c9e829f8a94a8aaa1bae851194ab96a9"
+      "hash": "sha256:abef088921209704759b53d0df7412a52b0b6d2aa61e15a2af6878c3969b7d0f"
     },
     {
       "id": "gh-chefkoch-cli",
@@ -487,9 +487,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/chefkoch-cli",
+      "link": "https://github.com/smlfg/chefkoch-mcp",
       "source_kind": "github",
-      "hash": "sha256:f651f984ae3a9920716f1c602dad5624aa48adb4248b2684a84875d86f5fb9a9"
+      "hash": "sha256:8aada01a5e4971626740ba3184fa84f588fc1d732b7ae41180276beb5124e59f"
     },
     {
       "id": "gh-claudecodepanel",
@@ -541,9 +541,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/DataEngeneering_KEEPA_HSWORMS",
       "source_kind": "github",
-      "hash": "sha256:77f9a0eb234f45025ae9eb8cd6bde03e21d80fbef0f8a32d625fa192728b1b7c"
+      "hash": "sha256:d1285c595d3c0bc44951e1a493be3ab8e88c67fa6dc4fa991f0524bfc671f835"
     },
     {
       "id": "gh-doctolib-cli",
@@ -594,9 +594,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/fahrgastrechte-cli",
       "source_kind": "github",
-      "hash": "sha256:32594775ef2bb8b298aeaba27ea6494d909453f42e1d2a754615efd55bbba02c"
+      "hash": "sha256:42fa63ff7e31c2645d4942e11ac0bda4cb2a022357ef0c8f38ea15f1e0835d72"
     },
     {
       "id": "gh-fahrgastrechte-mcp",
@@ -620,9 +620,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/fahrgastrechte-mcp",
       "source_kind": "github",
-      "hash": "sha256:4ef3b9bd8fe3335ccfdb080062ed494541fb35696aff21eb41dac563e4d1c4bd"
+      "hash": "sha256:7434da69b627de0d1208dbe37851a4db7aaadfe948b725d374dfc99c64a80179"
     },
     {
       "id": "gh-flixbus-cli",
@@ -674,9 +674,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://smlfg.github.io/GlasRoute-PreZero-HHN-FUTURECITYHACKATHON2026/",
+      "link": "https://github.com/smlfg/GlasRoute-PreZero-HHN-FUTURECITYHACKATHON2026",
       "source_kind": "github",
-      "hash": "sha256:57f8d1bc2381f35b95cb0677dedc92ff956bf5ee528a398969c481b0d8009031"
+      "hash": "sha256:6e16217b982fd8c45604b186cef72e4648fcf93ba3d83b7976774c95270adfcd"
     },
     {
       "id": "gh-hai-mcp",
@@ -728,9 +728,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://human-agent-interface.com",
+      "link": "https://github.com/smlfg/HAI-skills-registry",
       "source_kind": "github",
-      "hash": "sha256:21d09232d70205dad7cbc362aa1f4d4a2ecd431d7825b4b2323b9360dea1d5aa"
+      "hash": "sha256:aa7d9b8e20a47c9203585d421b3af2794f4a48ee837c9c35787fa2efa89ce73c"
     },
     {
       "id": "gh-hai-voice-builder",
@@ -755,9 +755,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/voice-systems",
+      "link": "https://github.com/smlfg/hai-voice-builder",
       "source_kind": "github",
-      "hash": "sha256:cf024d3de911fdb060c811280b5914ed39034f1119eacababa51a63c8cca76a8"
+      "hash": "sha256:4fda6d306bfeec5d3fad39c31a95702170b5cf392369004bd95ab9bd5d788aab"
     },
     {
       "id": "gh-heumaden-lenzzauber",
@@ -782,9 +782,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://smlfg.github.io/heumaden-lenzzauber",
+      "link": "https://github.com/smlfg/heumaden-lenzzauber",
       "source_kind": "github",
-      "hash": "sha256:1d7dee26e57615f0d2252e554165ea0615f5687f72c2a964875b4dc0a9c5c511"
+      "hash": "sha256:61bfc6435fa06327759730b035a4301be03e3f0db1e4ab1b45dbda8d5c782170"
     },
     {
       "id": "gh-hisinone-cli",
@@ -835,9 +835,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/hisinone-cli",
+      "link": "https://github.com/smlfg/hisinone-mcp",
       "source_kind": "github",
-      "hash": "sha256:76cab3b6a005dc6ab068f267c4c1b436e1a0abaf542d611f3b965645abec4a13"
+      "hash": "sha256:e1a46fd1cf73bc0846c4ad5c804ad65030ffc82c342509aa299d4a7553c66a5e"
     },
     {
       "id": "gh-hochschulsport-cli",
@@ -912,9 +912,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://www.human-agent-interface.com/",
+      "link": "https://github.com/smlfg/human-agent-interface",
       "source_kind": "github",
-      "hash": "sha256:1a34469bcdc5559265e6f7c6a4d5e893051d93a7d0030812bd54cd0058386ca1"
+      "hash": "sha256:95fe5eeb06e888a393cfcbdd6d18026d47183d3f7b811909729d4a5b3fb1242c"
     },
     {
       "id": "gh-humanagentcontrol-com",
@@ -937,9 +937,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/humanagentcontrol.com",
       "source_kind": "github",
-      "hash": "sha256:fc3ea5a5beeca8791cc8f317bc6e384f4afe0dac0d788ac41d6e958516fd8bb3"
+      "hash": "sha256:e7a2770ff4db990c1514d1bb1130f84c0d2e15f3299191ba25864ed6df67a2c4"
     },
     {
       "id": "gh-ilias-cli",
@@ -989,9 +989,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/ilias-cli",
+      "link": "https://github.com/smlfg/ilias-mcp",
       "source_kind": "github",
-      "hash": "sha256:f5fc2f6e98fc3b28e6e0f0d82c12d4fb4d7bbee990dbd451cc1864b5e1311af0"
+      "hash": "sha256:614249aae548820f11a4183454a8ae6433c17889d5d4480fe759a79ad57f5721"
     },
     {
       "id": "gh-inkpartner",
@@ -1015,9 +1015,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/HAI-skills-registry/tree/main/skills/engineering/experiment-to-project",
+      "link": "https://github.com/smlfg/inkpartner",
       "source_kind": "github",
-      "hash": "sha256:1cc02a8a10b7a70ed7374866f01f70ff9ba4d42d69caaad9255ff1e83cfb0a37"
+      "hash": "sha256:615bdcfe9900689edb52288cbae197b63c9e16658c347f339a259fd8a6889cd3"
     },
     {
       "id": "gh-keepa-data-engineering",
@@ -1028,9 +1028,9 @@
       "waypoints": [
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/keepa-data-engineering",
       "source_kind": "github",
-      "hash": "sha256:449e9a95a22e065dc32a6a6853bae2cdef9a07dc3762595bc17f4ef19d81e7bd"
+      "hash": "sha256:083775f7488e31703b6c46a19cb4dda458675b39c07b6f6ef1ab7f87d7ff9eb1"
     },
     {
       "id": "gh-keepaarbitrage-dataengeneering-hs-worms-samuelflg-claudecode",
@@ -1055,9 +1055,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/DataEngeneering_KEEPA_HSWORMS.git",
+      "link": "https://github.com/smlfg/KeepaArbitrage_DataEngeneering_HS-WORMS_SamuelFLG-ClaudeCode",
       "source_kind": "github",
-      "hash": "sha256:58a102ba14cc6c9dab352f33348a86d1d451e03fa82a876aa0ef27bbf441a6e0"
+      "hash": "sha256:fad3af4e54a23bba9ef14838f3edb3bea9cbacd2841c3bc3f98c2b74e5b6c712"
     },
     {
       "id": "gh-kleinanzeigen-cli",
@@ -1082,9 +1082,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://www.kleinanzeigen.de",
+      "link": "https://github.com/smlfg/kleinanzeigen-cli",
       "source_kind": "github",
-      "hash": "sha256:251595c7472a9ca304fc96226cd9d9d691f270e1b283bd2ac89403537f143c46"
+      "hash": "sha256:402e6e7f6018018bc8d09c9a16e5f966a7e6d56aac96a197f36957596dbb9ea3"
     },
     {
       "id": "gh-kleine-policies-cas-umformungen",
@@ -1108,9 +1108,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/kleine-policies-cas-umformungen",
       "source_kind": "github",
-      "hash": "sha256:867c02133d6488580fa07963bf93d254c137036eae79659a71cd616174ef7e93"
+      "hash": "sha256:bf8afeac7a56899ba16347d9e61a30582161c29b9bb6d5a311ee1c59744a5b3a"
     },
     {
       "id": "gh-lebensmittelwarnung-cli",
@@ -1134,9 +1134,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://www.lebensmittelwarnung.de",
+      "link": "https://github.com/smlfg/lebensmittelwarnung-cli",
       "source_kind": "github",
-      "hash": "sha256:b2f88f79e8f873e4d8a1eb4004201fe6d7d792b76b3b5fb1f9e48e0fe372e40c"
+      "hash": "sha256:3923df6eab8f4eead5c8c412ddd5ebd5b113cbbf93c185dcf0bf3415dc01765e"
     },
     {
       "id": "gh-make-all-repos-public",
@@ -1160,9 +1160,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://smlfg.github.io/make-all-repos-public/site",
+      "link": "https://github.com/smlfg/make-all-repos-public",
       "source_kind": "github",
-      "hash": "sha256:491c64181742016d84478e6fd15322f4aa1dc0568518f21228ddea913a01a843"
+      "hash": "sha256:0262e54218346225174496657269accec70788ae5494037bed16ab4966958b4b"
     },
     {
       "id": "gh-mensa-agent",
@@ -1238,9 +1238,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://github.com/smlfg/mesh-ear",
+      "link": "https://github.com/smlfg/mesh-compute",
       "source_kind": "github",
-      "hash": "sha256:09e384a263cf35826307bca454320ae118d75477c43e2edec1eaa5589509fbb6"
+      "hash": "sha256:0b847d6478da74d1f27a90355c5a39b15c73288981458857b6debbf90cc97f84"
     },
     {
       "id": "gh-mesh-ear",
@@ -1290,9 +1290,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/MinimalreMarkableOCRPipeline",
       "source_kind": "github",
-      "hash": "sha256:4bea34fa0cd2868d4e26906b48f5ca4c40027e3cf44821cc2b83cd8cab0236e7"
+      "hash": "sha256:8779ae449c04bb0d82ee587c335aa64a0ca219d46fc181984325abae8afe122d"
     },
     {
       "id": "gh-monesterag-ent",
@@ -1316,9 +1316,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://monster-world.smlflg.workers.dev",
+      "link": "https://github.com/smlfg/MonesterAG-ent-",
       "source_kind": "github",
-      "hash": "sha256:314b30a9ff5e9d4334ce4becafb44673a48f7433d1560610594b127d9c81a501"
+      "hash": "sha256:aca7addc054a148d0dbcb0f1741ef19b1be1ce642d77b807a35f6a87879b1a1c"
     },
     {
       "id": "gh-myaigame",
@@ -1420,9 +1420,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://smlfg.github.io/papier-abgleich/examples/inkpartner-grillme/site/inkpartner-fakten.html",
+      "link": "https://github.com/smlfg/papier-abgleich",
       "source_kind": "github",
-      "hash": "sha256:19b7f41fdfb4e23f8bda1654e1b5e9d35d019b598069830e931c062c219f5344"
+      "hash": "sha256:fa5fbb6eedd54e44adee7dc79b677fc6bb0c3821bb7e17dd4642ad2863e819a8"
     },
     {
       "id": "gh-pegel-cli",
@@ -1472,9 +1472,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/personal-sidecar",
       "source_kind": "github",
-      "hash": "sha256:903a2d4c9244f415e8169f7a78641dfa7cc64c08eb4a2a588da59e69d9aef7dd"
+      "hash": "sha256:82612bd6984f23bdc1862bf99df7868e4efab57ea3a79cf69f6af1abbc3bc20b"
     },
     {
       "id": "gh-plaud-analyse",
@@ -1498,9 +1498,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/plaud-analyse",
       "source_kind": "github",
-      "hash": "sha256:a1f95d190a0baf5ec289e0068f8ce9b12d91e5ba82bd7ec62d7a2f645f030322"
+      "hash": "sha256:31c26a7f60f1d66be372626df474beb6f2d42941435ad265bf39da7022097fcc"
     },
     {
       "id": "gh-plaud-human-state",
@@ -1550,9 +1550,9 @@
         "product-for-x",
         "*"
       ],
-      "link": "https://smlfg.github.io/prezero-clean/sim/kino.html",
+      "link": "https://github.com/smlfg/prezero-clean",
       "source_kind": "github",
-      "hash": "sha256:12926db9741140d754e19fa9d01ae7cd1f2109736d2961dcd5f2106889fa629f"
+      "hash": "sha256:4a5f8f852944058a6a639f1f2223413385addc8001f4b71358fbc0663cef4187"
     },
     {
       "id": "gh-promptboost",
@@ -1575,9 +1575,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/PromptBoost",
       "source_kind": "github",
-      "hash": "sha256:c5b7d4405bc0f803a18d6e819641ec27254c2d85fb91f386a0c5f3b699f0834d"
+      "hash": "sha256:7ae071084780a6e81b75dad47bb8857aa4276439f0ce45675fe64256a72f6d32"
     },
     {
       "id": "gh-remarkable-atlas",
@@ -1602,9 +1602,9 @@
         "product-for-x",
         "creator"
       ],
-      "link": "https://github.com/smlfg/inkpartner",
+      "link": "https://github.com/smlfg/remarkable-atlas",
       "source_kind": "github",
-      "hash": "sha256:8050a2eb4907456d7528d5bef3516e002bc1b647c078b73446fd73ddbb7a0bbe"
+      "hash": "sha256:1507ee70060741728140775b288a62d6288257210d5945c115ec4a9f2ed3cff7"
     },
     {
       "id": "gh-samuelfleig-com",
@@ -1626,9 +1626,9 @@
         "what-this-is",
         "creator"
       ],
-      "link": "https://samuelfleig.com",
+      "link": "https://github.com/smlfg/SamuelFleig.com",
       "source_kind": "github",
-      "hash": "sha256:e37c072fe0b5300b24d32a45de8e5f978237666c70dc0ab34278e042ac8bccc6"
+      "hash": "sha256:cdcbc6e830cb0e819806425ced161a2b9c8ab1b4e4d307c8708a897e14d47af9"
     },
     {
       "id": "gh-selfai-minimaxm2",
@@ -1651,9 +1651,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/SelfAI-MiniMaxM2-",
       "source_kind": "github",
-      "hash": "sha256:3c97ead6ca80db9dfbe64dfb52d3567e287095b9dadc64accb5934385b09337a"
+      "hash": "sha256:5b3c12271c70510a709333a9508dd5729aa03cbcd33827032134e31dd7b97040"
     },
     {
       "id": "gh-selfai-npu-agent",
@@ -1676,9 +1676,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/SelfAi-NPU-AGENT",
       "source_kind": "github",
-      "hash": "sha256:c8ecf6483a70e94766e34eec315fbdc3778085c72ed56476581705f6d8c1030f"
+      "hash": "sha256:7f1c80d0d94d390c14204b03e320bbecba4b2ed37b457776b5c305c695aaa6fb"
     },
     {
       "id": "gh-selfimproveselfai",
@@ -1726,9 +1726,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/Sidecar-1",
       "source_kind": "github",
-      "hash": "sha256:9dcc4bd7c5e9bb203d47b3ca10bfb6cb35db479209dfff570c0c30a2ed2e8b89"
+      "hash": "sha256:a64049699dbf261b5669dfeebe17a91ba75e66090d97fde42ce258d0cf2a1faa"
     },
     {
       "id": "gh-sidecar-v1",
@@ -1751,9 +1751,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/sidecar-v1",
       "source_kind": "github",
-      "hash": "sha256:05b6f652887d4ded9fdf15f98f9da055b4f4e963a23d00e5aab7c520dee498d6"
+      "hash": "sha256:5f13ae9cc5c7e1401203c61cc50a57da04d17be35dccd4e73eca0fcc7a98c92b"
     },
     {
       "id": "gh-sidecar-v2",
@@ -1777,9 +1777,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/sidecar-v2",
       "source_kind": "github",
-      "hash": "sha256:df1cca1c7c2b2cc7ffa2c64901af2314160ac047e63b147549bc9e312ecb5340"
+      "hash": "sha256:b4c6e23eddda9b2a55ae887ca662dd34bc108bfb86e9015498f50451b253a4b0"
     },
     {
       "id": "gh-sidecar-v3",
@@ -1867,9 +1867,9 @@
       "waypoints": [
         "what-this-is"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/sidecar-v7-demo",
       "source_kind": "github",
-      "hash": "sha256:c9dc51429a05e901da463fdd2715dc173ed20ba84d8cc4a2f90e4ccc57e5fd7b"
+      "hash": "sha256:5944777439b5663ce8772317930e116c5b089eca8293d7a39899616c48e65429"
     },
     {
       "id": "gh-smlfg",
@@ -1891,9 +1891,9 @@
         "what-this-is",
         "creator"
       ],
-      "link": "https://www.human-agent-interface.com",
+      "link": "https://github.com/smlfg/smlfg",
       "source_kind": "github",
-      "hash": "sha256:23e65d75825da46b6127b4748e657364e9228f3c42d5272394885ce70bd21c2d"
+      "hash": "sha256:e63b5bfecdc87a03a8b62c755c7b3de465754e2384069544bc98340119b60ba9"
     },
     {
       "id": "gh-spark4",
@@ -1915,9 +1915,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/Spark4",
       "source_kind": "github",
-      "hash": "sha256:d5661a7337e5c98436c29cfa0d8eafedbe8e2e066be6fbddfc082fde01492b43"
+      "hash": "sha256:075421b11da40d2cae7d47ba29cae3faf2243a434df9d24dc766209a310de78d"
     },
     {
       "id": "gh-sparktest",
@@ -1940,9 +1940,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/SparkTest",
       "source_kind": "github",
-      "hash": "sha256:1a8d4a93e1580353460144504a6638818f1bbc5e3ddd8c7de9f8d87dd859df45"
+      "hash": "sha256:e67ce56aba81acd4f3d20d0eabbe47e8e8f90b182c4e11a18c524a4b9fa6c7ed"
     },
     {
       "id": "gh-sparktest2",
@@ -2009,9 +2009,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/st-anton-trip",
       "source_kind": "github",
-      "hash": "sha256:ecdb0f86bb05e95eef005261a79e50b7555ae89660c35c49862cdfce7bec2ae4"
+      "hash": "sha256:085bf75f91d917c46ac0b1899acf2bc0445cfcf612183fa05d6b99454c7cd245"
     },
     {
       "id": "gh-studip-cli",
@@ -2057,9 +2057,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/The-Farmer-was-Replaced",
       "source_kind": "github",
-      "hash": "sha256:4cac61a3f145ca1df76efe47e70c39cc2ed862c5a4969cf3df1ade2e9750afdd"
+      "hash": "sha256:da8de20a55f746ba87cb585506a5b6ee2e8d9bfa847f569d9bf618e721254a11"
     },
     {
       "id": "gh-typotuner",
@@ -2107,9 +2107,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": "https://www.nvidia.com/en-us/data-center/l40s/",
+      "link": "https://github.com/smlfg/UNIGPUTEST",
       "source_kind": "github",
-      "hash": "sha256:c08778f641eca037ddc9c0233c945ab873fd8b28e31505cb7ebca8bced725c5e"
+      "hash": "sha256:a84b3eceb2aea6cc9a8ccb871f01a6050c4f01d3c481bfd4f0ed3d2113ad3245"
     },
     {
       "id": "gh-variance-workflow",
@@ -2132,9 +2132,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://github.com/smlfg/variance-workflow",
       "source_kind": "github",
-      "hash": "sha256:2a8c7ec549a77a04a482a48284354b9a0981ea697742c0b234660b3d083720b0"
+      "hash": "sha256:8ef0a27cf66bd05550ffaf394680df4390e6169b1700b4d15bfa598ef817b3a4"
     },
     {
       "id": "gh-wg-gesucht-cli",
@@ -2157,9 +2157,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": "https://www.wg-gesucht.de",
+      "link": "https://github.com/smlfg/wg-gesucht-cli",
       "source_kind": "github",
-      "hash": "sha256:151eb2e84bc837cbf58b6c0618944aa47a3b5b34e84cfe16f584df180c7df0e2"
+      "hash": "sha256:154830a0821565ea5aa27a181af25003d5ebfa5ba5d6acd02023fc3603170f43"
     },
     {
       "id": "gh-wg-gesucht-mcp",
@@ -2180,9 +2180,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": "https://github.com/smlfg/wg-gesucht-cli",
+      "link": "https://github.com/smlfg/wg-gesucht-mcp",
       "source_kind": "github",
-      "hash": "sha256:f0045c91e9d0325d96606e2cd3f5abc2cbdc7b7d80121d659e9f8f28e14fdf81"
+      "hash": "sha256:22cd08104a8f8dcf1b1e83347cb30d6a45059a639d11feaba2ac41b2adf2c3b1"
     },
     {
       "id": "gh-wifionice-cli",
@@ -2707,9 +2707,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/AffeHTML/",
       "source_kind": "web",
-      "hash": "sha256:c036383b0de5974224a4e2fd00a567497d616475340d899cf165794f9822ed32"
+      "hash": "sha256:8752980555c3364438d988ce0f119836383baad1d4267cb8ebce14375a88b2f9"
     },
     {
       "id": "web-human-agent-interface-com-fit",
@@ -2730,9 +2730,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/fit/",
       "source_kind": "web",
-      "hash": "sha256:e7626bbca90e7e6f1682f5ec399f29dbee19f0e03b9c8fd2f766b3495ecfad5d"
+      "hash": "sha256:ef4a41a9b7f4efaad17cd475d90f6a5d5adf21fa5f56cdd425fc5b209b198912"
     },
     {
       "id": "web-human-agent-interface-com-hai-mcp",
@@ -2753,9 +2753,9 @@
       "waypoints": [
         "what-this-is"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/hai-mcp/",
       "source_kind": "web",
-      "hash": "sha256:cbc84f384b484693519ad6b567ac4bd12731a321dc557f21805da2851959e54a"
+      "hash": "sha256:0efc63fedb57c323fc525e2457274ab2f3293d60fa7b5b4b6a973f5ccbfe5349"
     },
     {
       "id": "web-human-agent-interface-com-home",
@@ -2777,9 +2777,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/",
       "source_kind": "web",
-      "hash": "sha256:804fce245c87de8ea3bb6d62aa4ea9d2da89d9cc4a041a2ddb11ba387d01be28"
+      "hash": "sha256:3d3757ea82ee1f0b00ac73281852ec5bbd86fed669fdf17dfa29609e2a1b7476"
     },
     {
       "id": "web-human-agent-interface-com-m-c3-bcnztelfon",
@@ -2800,9 +2800,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/M%C3%BCnztelfon/",
       "source_kind": "web",
-      "hash": "sha256:2536b12bbdd3c3af06f2a9481d199603294548569ecbb7c75196f1b956517593"
+      "hash": "sha256:f343ec555f5094d47acdd6907fc9952612a18da72ec4db502982b659aa47e960"
     },
     {
       "id": "web-human-agent-interface-com-product",
@@ -2824,9 +2824,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/product/",
       "source_kind": "web",
-      "hash": "sha256:8c3f8e4a9cb3b06a4c14027af26b6d75faa90a15496f80b416e79b172021ea1e"
+      "hash": "sha256:a1c3720aad725265e13c3bf3406f4aea1bd0fb72c3bc21933e436fbde081cee9"
     },
     {
       "id": "web-human-agent-interface-com-proof",
@@ -2847,9 +2847,9 @@
       "waypoints": [
         "what-this-is"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/proof/",
       "source_kind": "web",
-      "hash": "sha256:5ce3f8469ee76f0ff934396e47249502e126656328ab988be7f5733f8e2e8194"
+      "hash": "sha256:6ab2377a9cbad800f573bef44a7f7d8a1f0308f357e3a6c30e5007892a431fab"
     },
     {
       "id": "web-human-agent-interface-com-samuel",
@@ -2874,9 +2874,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/samuel/",
       "source_kind": "web",
-      "hash": "sha256:604417b9d87a33726897a94dd073a0841d1b7092ccaf00de7f352ef6002d040a"
+      "hash": "sha256:9a0b98998c10a1c0de79d2df95a458d10cf91793b56a18a120702091d5e0be28"
     },
     {
       "id": "web-human-agent-interface-com-samuel-computer-day-audit-2026",
@@ -2896,9 +2896,9 @@
       "waypoints": [
         "what-this-is"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/samuel/computer-day-audit-2026/",
       "source_kind": "web",
-      "hash": "sha256:7f16f2ee673178dc04b7785567c454e19f3449f8e4ea66e680f351a04cd2a9b3"
+      "hash": "sha256:4a2e329d37b04e940b59b859134e1f62c8ceb8df2bd25971a8edee7674dea7f1"
     },
     {
       "id": "web-human-agent-interface-com-samuel-timeline",
@@ -2919,9 +2919,9 @@
       "waypoints": [
         "what-this-is"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/samuel/timeline/",
       "source_kind": "web",
-      "hash": "sha256:4534a3fd5186f638d5a7e5d44d00eaf72e9614d84bc6d7d43ee646104f658287"
+      "hash": "sha256:e9fcde1cb9bef8dd587b12d23f6bdc4f62892a68c3115cd56a520ce015cb137a"
     },
     {
       "id": "web-human-agent-interface-com-samuel-why-hai-matters",
@@ -2947,9 +2947,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/samuel/why-hai-matters/",
       "source_kind": "web",
-      "hash": "sha256:5670cb9c396575054343fb778cfd66914a4d9bb106cccd544ffa65fd35e08f1e"
+      "hash": "sha256:0857687e3eb355e6d0eec4d71fbd306c044e69e09485fc2ecd102d25422e643e"
     },
     {
       "id": "web-human-agent-interface-com-sidecar",
@@ -2974,9 +2974,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/sidecar/",
       "source_kind": "web",
-      "hash": "sha256:0d1147d85c262939accd8a8d837b49aad905a6ea81b252dc7906441c2c48534f"
+      "hash": "sha256:f706b8911defd552e994c88fa2636130fb18d5888068881fe7745538e74325c0"
     },
     {
       "id": "web-human-agent-interface-com-tripwire-map",
@@ -3001,9 +3001,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/tripwire-map/",
       "source_kind": "web",
-      "hash": "sha256:ee8f66ca88afd05b0c9d87e6ef23f29ee252396cbfbbe1c803fd2ec8e5cd52b4"
+      "hash": "sha256:39e291b4f26badbf547e73cfa1e0b9c88d9732b38ef4e8a7c1bdade0ac40dbb8"
     },
     {
       "id": "web-human-agent-interface-com-tutorials",
@@ -3028,9 +3028,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/tutorials/",
       "source_kind": "web",
-      "hash": "sha256:5af2f8303bb6b6902ba29b891eba96cd92fb1ffa938d88413e30732ac8331acf"
+      "hash": "sha256:ea34a214d02a2b80ede331ade30b5f1b9ddda6b04a205c4531839ddb96de57c8"
     },
     {
       "id": "web-human-agent-interface-com-what-it-is",
@@ -3055,9 +3055,9 @@
         "creator",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://human-agent-interface.com/what_it_is/",
       "source_kind": "web",
-      "hash": "sha256:0d9b179df341674b3178ae6024f258292d995813236a0b0cfeec5e6d57728cee"
+      "hash": "sha256:c16611f68985892c33681b3a07ce57a03d1a874187c0f35760e965d5646e4a04"
     },
     {
       "id": "web-human-agent-interface-com-what-it-is-deep-dive",
@@ -3082,9 +3082,9 @@
         "creator",
         "product-for-x"
       ],
-      "link": "https://www.human-agent-interface.com/what_it_is/deep-dive/",
+      "link": "https://human-agent-interface.com/what_it_is/deep-dive/",
       "source_kind": "web",
-      "hash": "sha256:4887dc6163d3cda99741924fcd4980328d60724f698ce80787408d44750d84f1"
+      "hash": "sha256:08e8fb2bddf23c20cb3d6f7b6b48cdcb209dc8702467adaafeb56831fbe21f35"
     },
     {
       "id": "web-humanagentcontrol-com-home",
@@ -3109,9 +3109,9 @@
         "product-for-x",
         "*"
       ],
-      "link": null,
+      "link": "https://humanagentcontrol.com/",
       "source_kind": "web",
-      "hash": "sha256:43f2f031b5dc3317b0e331cb086a26bc8b3077ce21333d5c416d11d82f874072"
+      "hash": "sha256:fe9f4f44e0349ed4d76125e3b59d7c7a364f0015d9e071c722b6f647740a6319"
     },
     {
       "id": "web-samuelfleig-com-home",
@@ -3136,9 +3136,9 @@
         "what-this-is",
         "product-for-x"
       ],
-      "link": null,
+      "link": "https://samuelfleig.com/",
       "source_kind": "web",
-      "hash": "sha256:12780c9e5e9fdbba3226786be06665dbb079cac114a79f5a56e301e7f1498733"
+      "hash": "sha256:c4cc374343f5da5a1bb119b5f2071bc8ec89d496c2806263fd6c2655c5972755"
     }
   ]
 }
