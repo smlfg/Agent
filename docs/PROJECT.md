@@ -10,13 +10,9 @@ Stand: 26.11.2026 (Konsolidierung von `spatial_depth_embodiment` + `integration/
 Die Abschnitte darunter bleiben der Stand vom 25.11.; wo sie abweichen, gilt
 dieser Nachtrag.
 
-**Live seit 26.11.:** Version `db3849d6-9023-481d-9f1c-d80907ccbea7` (Stand
-`a633910`), auf Samuels Auftrag deployt. Rücksprung:
-`wrangler rollback ac1e9d41-2b5e-496e-a52e-bf10566124dc --name agentfaehig`.
-`verify-live.sh` grün. Vier Testfragen an `/api/agent`: eine beantwortete
-MiniMax (4,1 s), drei OpenRouter (6,0–7,5 s); „wer hat dich gemacht“ wurde
-englisch und ohne Erbauer beantwortet. Die Antwort auf eine Notlagen-Nachricht
-war nicht leer, nannte aber keine Hilfsangebote.
+**Live seit 26.11. (Abend):** Version `d032e235-388a-41af-a7b6-b4016c7f3c72` (Commit `5b51853` auf `spatial_depth_embodiment`), auf Samuels Auftrag deployt. Rücksprung:
+`wrangler rollback db3849d6-9023-481d-9f1c-d80907ccbea7 --name agentfaehig`.
+`verify-live.sh` vollständig grün (Living Surface, Classic, HAI-Pages, `/api/agent` HTTP 200). Enthält konsolidierte 5-Ebenen-Raumtiefe, Error-State, bereinigten Build-Ausschluss (keine Server-Dateien in `public/`), Linkify-Prosa-Links und Think-Tag-Sanitizing.
 
 **Im Branch `integration/spatial-depth-error-state`** (nicht nach `main`
 gemergt):
