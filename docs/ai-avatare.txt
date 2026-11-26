@@ -1,0 +1,3758 @@
+00:00:06 Sprecher 1
+System, das dann eben mit wie sie, wie die Sprache mit mir interagieren kann. Darüber schaffe ich eine gewisse Integrität,
+
+00:00:13 Sprecher 1
+Eine soziale Präsenz und gestalte eben auch aktiv die Interaktion mit meinem System oder mit meiner fiktiven Person.
+
+00:00:22 Sprecher 1
+Darüber werden aber da eben eine sicht und erlebbare Schnittstelle zu meinem KI-Service.
+
+00:00:29 Sprecher 1
+Wir gehen also direkt von dem Tool, also die KI ist nicht mehr nur ein Tool, sondern sie wird ein virtueller Mitarbeitender,
+
+00:00:37 Sprecher 1
+Sie wird ein virtueller Kollege oder Kollegin oder dann eben auch als eigenständiger KI-Service, der skalierbar und 24/7 im Prinzip anrufbar ist.
+
+00:00:49 Sprecher 1
+Avatare bringen in der Grundform, wenn man sie gut gestaltet, das ist doch nochmal unterstrichen, gut gestaltet, Vorteile mit.
+
+00:00:57 Sprecher 1
+Man weiß und es ist auch gut belegt,
+
+00:01:00 Sprecher 1
+Avatare senken die Hemmschwelle in der Interaktion und sie haben grundsätzlich oder können eine höhere Akzeptanz mit meinem KI-Service tatsächlich bewirken. Also soziale Präsenz ist da ein Schlagwort dahinter.
+
+00:01:14 Sprecher 1
+In dieser Interaktion oder in Interaktion mit den Avataren kann ich eine stärkere Bindung mit meinem KI-Service erreichen.
+
+00:01:23 Sprecher 1
+Ich kann Vertrauen aufbauen und dazu gleichzeitig auch noch mal.
+
+00:01:30 Sprecher 1
+Die Inklusion auch verstärken. Ich habe einfach mehr Ebenen,
+
+00:01:33 Sprecher 2
+Die ich bespielen kann.
+
+00:01:34 Sprecher 1
+Ich habe eine sichtbare Ebene, ich habe eine hörbare Ebene,
+
+00:01:38 Sprecher 1
+Zusätzlich zum reinen Text,
+
+00:01:39 Sprecher 2
+Sage ich mal, Text in Anführungszeichen.
+
+00:01:42 Sprecher 1
+Genau und insgesamt ist so dieses große Thema KI wird ein Stück weit Teil der Organisation bzw. Gesellschaft.
+
+00:01:51 Sprecher 1
+Ich kann durch den KI-gestützten Avatar das Engagement, die Motivation erhöhen in Onboarding-Situationen, in Studiumsituationen. weil ich einfach was Greifbares, Inklusives sozusagen schaffen kann. Genau, ein Stück weit vielleicht,
+
+00:02:09 Sprecher 1
+3 Beispiele, 1 davon werden wir gleich noch mal stärker beleuchten, wie man Avatare tatsächlich einsetzen kann, ganz links als Unterstützung in dem Prozess oder bei einer Lösung von einer Aufgabe.
+
+00:02:22 Sprecher 1
+Also ich verstehe Aufgabe 6 nicht so ganz.
+
+00:02:26 Sprecher 3
+Alles klar, ich erklär es dir Schritt für Schritt. Bei Aufgabe 6 sollst du Wörter in die richtige Form bringen.
+
+00:02:32 Sprecher 1
+Zum Beispiel, wenn da steht 'geschickt',
+
+00:02:34 Sprecher 3
+Welches Wort passt dann besser, wenn du vergleichst? Wie klettern Affen?
+
+00:02:40 Sprecher 1
+Genau, zweites Beispiel als Assistenz beispielsweise zur Pflege, erst beispielsweise im Krankenhaus oder auch im Quartier.
+
+00:02:47 Sprecher 1
+Hier im Beispiel, auch als komplementäres Tool sozusagen zu einer Physiotherapeut,
+
+00:02:57 Sprecher 1
+Zu einem Service-Roboter.
+
+00:03:00 Sprecher 1
+Wie komme ich zur Mensa und was gibt es da heute?
+
+00:03:06 Sprecher 4
+Die Mensa ist in Gebäude 8, die Route siehst du jetzt auf deiner Karte. Heute gibt es im Foodtruck Currywurst vom Kalb mit Brot.
+
+00:03:15 Sprecher 1
+Ja und zu guter Letzt auch noch mal dieses Thema Organisation beziehungsweise Gesellschaft als Wissensträger in der Organisation beziehungsweise einfach zum Nutzen.
+
+00:03:25 Sprecher 5
+Toll, vielen Dank für die Information.
+
+00:03:27 Sprecher 2
+Und welche Bedeutung hat KI in der Robotik für einen Wirtschaftsstandort wie zum Beispiel Deutschland oder Europa?
+
+00:03:36 Sprecher 2
+Künstliche Intelligenz in der Robotik kann die Wettbewerbsfähigkeit eines Wirtschaftsstandorts erheblich steigern.
+
+00:03:43 Sprecher 2
+Sie ermöglicht es, Produktionsprozesse effizienter und flexibler zu gestalten.
+
+00:03:50 Sprecher 1
+Genau, das waren jetzt nur ein paar Beispiele, die so ein Avatar-Einsatz.
+
+00:03:54 Sprecher 1
+Aussehen kann und in was für unterschiedlichen Aktionen und Interaktionen der tatsächlich auch eingesetzt werden kann. Wir sehen später dann auch noch mal zwei detaillierte Entwicklungen dazu. Genau, was leistet jetzt aber ein Avatar, was ein einfaches System tatsächlich nicht leisten kann und wie nähere ich mich dem Thema vielleicht auch.
+
+00:04:11 Sprecher 1
+Jetzt haben wir eine Studie oder ich eine Studie mitgebracht, die wir selber durchgeführt haben mit einer innovativen Studie mit relativ hoher Teilnehmendenzahl,
+
+00:04:18 Sprecher 1
+Die wir vor zwei Jahren durchgeführt haben.
+
+00:04:21 Sprecher 1
+Wo man es im Prinzip sich so mal näherungsweise einordnen kann.
+
+00:04:25 Sprecher 1
+Im Prinzip zwei grundlegende Achsen.
+
+00:04:28 Sprecher 1
+Achsen, danke.
+
+00:04:31 Sprecher 1
+Ich werde das Wert.
+
+00:04:33 Sprecher 1
+Einmal dieser Bedarf.
+
+00:04:37 Sprecher 1
+Emotions und Beziehungsbedarf von niedrig zu hoch und auf der anderen Seite die Interaktionskomplexität und Grundsätzlich könnte man sagen, je höher der Emotionsbedarf und je höher die Interaktionskomplexität ist, desto eher hat ein Avatar Vorteile oder sollte ein Avatar vielleicht auch eingesetzt werden. In diesen niedrigen Phasen reicht oftmals auch ein Chatbot. Je stärker die Themen steigen, desto stärker muss ich über zusätzliche Interaktionsebene, über die wir aus der Sprache nachdenken. Ist beides hoch, braucht man vielleicht einfach eine visuelle Unterstützung dazu.
+
+00:05:10 Sprecher 1
+Genau, wenn ich jetzt wirklich vielleicht auch festgestellt habe,
+
+00:05:14 Sprecher 1
+Braucht einen Avatar, weil ich eine hohe Dimensionalität hab, weil ich eine hohe Komplexität hab,
+
+00:05:19 Sprecher 1
+Kann man sagen, es gibt grundsätzliche Gestaltungsdimensionen, die ich auch mitbedenken sollte.
+
+00:05:25 Sprecher 1
+Auf der einen Seite das Thema, die Wirkung ist kontextabhängig, das heißt, die Gestaltung muss auf den jeweiligen Anwendungsfall angepasst werden.
+
+00:05:34 Sprecher 1
+Möchte ich jetzt, also möchte ich beispielsweise eine medizinische Situation nachstellen, hab ich ein ganz anderes Szenario, wie wenn ich jetzt ein Kind,
+
+00:05:41 Sprecher 5
+Eine Schülerin oder ein Schüler.
+
+00:05:43 Sprecher 1
+Eine Textaufgabe erklärt.
+
+00:05:45 Sprecher 1
+Ganz andere Sachen, wenn ich beides mal den gleichen Avatar reinbringe, bekomme ich einen komplett anderen Effekt am Ende des Tages.
+
+00:05:53 Sprecher 1
+Die Identifikation und Präsenz sind die zentralen Wirkungsmechanismen. Das heißt die Vermittlung zwischen der Gestaltung und dem Ergebnis. Das heißt die Zielgruppe muss sich mit diesem Avatar tatsächlich auch.
+
+00:06:06 Sprecher 5
+Identifizieren können,
+
+00:06:07 Sprecher 1
+Damit die Messages und den Service, den ich tatsächlich bespielen möchte, tatsächlich auch rüberbekommen.
+
+00:06:15 Sprecher 1
+Und zu guter Letzt Fakt ist schlägt den Maximalrealismus.
+
+00:06:23 Sprecher 1
+Themen wie Verhalten, Gestik, Mimik sind oftmals wichtiger als eine reine supergute Darstellung des Avatars. Das heißt, wenn ich eine supergute klare Darstellung des Avatars habe, der sich ganz komisch bewegt,
+
+00:06:38 Sprecher 1
+Das wird plump gesagt nicht gut tun.
+
+00:06:42 Sprecher 1
+Genau.
+
+00:06:44 Sprecher 1
+Eine vereinfachte Darstellung, wie man das ganze Avatar-Thema angehen sollte, beziehungsweise was im Hintergrund letztendlich auch dahinter steckt. Drei Säulen im Prinzip: Auf der einen Seite das Denken,
+
+00:06:56 Sprecher 1
+Dann habe ich Sprechen,
+
+00:06:59 Sprecher 1
+Wie sie irgendwo reagieren können und dann aber auch nochmal zeigen, wie es im Blick.
+
+00:07:04 Sprecher 1
+Ich habe unterschiedliche Interfaces, also man kann einfach nicht so Ressourcen oder Compute aufwendige Sachen über ein Webinterface machen. Man kann auch Unreal Engine nehmen,
+
+00:07:17 Sprecher 5
+Wo es relativ viele Bibliotheken und so weiter auch schon gibt,
+
+00:07:19 Sprecher 1
+Auf die man aufsetzen kann. Das Wichtige und die Kernmessage hier ist,
+
+00:07:24 Sprecher 1
+Diese drei Säulen müssen wirklich gut zusammenpassen,
+
+00:07:27 Sprecher 6
+Die müssen ordentlich orchestriert werden,
+
+00:07:28 Sprecher 1
+Wenn ich nur ein gutes LLM habe und dann mir eine schlechte Mimik.
+
+00:07:34 Sprecher 1
+Perfekt ist sich dieses Thema nicht und ich habe nicht das gewünschte Verhalten,
+
+00:07:37 Sprecher 3
+Das ich letztendlich bespielen möchte.
+
+00:07:41 Sprecher 1
+Genau. Um zu meinem Beispiel eingangs noch mal zurückzukommen, was sollte ich denn jetzt beachten, wenn ich ein virtuelles Abbild von mir von der Organisation einsetzen möchte? Was würden wir denn jetzt beachten müssen, wenn wir eine virtuelle Person hätten?
+
+00:07:55 Sprecher 1
+Was darf mein virtueller Avatar alles entscheiden? Darf ich jetzt Einkaufsthemen freigeben?
+
+00:08:01 Sprecher 1
+Darf ich sagen, ich darf jemanden einstellen einstellen?
+
+00:08:03 Sprecher 1
+Ich brauche einfach Verhaltensregeln und so weiter.
+
+00:08:05 Sprecher 1
+Das heißt, ich muss auch, wenn ich den Einsatz tatsächlich plane,
+
+00:08:08 Sprecher 3
+Einfach diese Themen mitbedenken,
+
+00:08:10 Sprecher 1
+Ein bisschen Limitationen, Herausforderungen auch mitbedenken.
+
+00:08:15 Sprecher 1
+Die kann man grundsätzlich in vier unterschiedliche Themenbereiche vielleicht mal vorclustern. Ich glaube auf der einen Seite das Thema Gestaltung und Technik.
+
+00:08:24 Sprecher 1
+Natürlichkeit, die Qualität hat relativ hohe technische Anforderungen.
+
+00:08:29 Sprecher 1
+Um den wirklich guten Avatar auszugestalten, Da braucht es viel Aufwand.
+
+00:08:34 Sprecher 1
+Das heißt, es ist wirklich so eine Planung, ob sich es überhaupt rentiert und mit was für einem Aufwand ich da reingehe und ob es es dann letztendlich auch umsetzen ist. Das zweite Thema ist das Thema Realismus Gap.
+
+00:08:45 Sprecher 1
+Je realistischer ist es nicht immer besser.
+
+00:08:48 Sprecher 1
+Ich habe eben dieses Thema Uncanny Valley,
+
+00:08:50 Sprecher 1
+Weil ich zwar eine sehr gute Figur habe, aber diese Mimik eben nicht zusammenpasst, die eben auch wiederum technische Anforderungen haben,
+
+00:08:57 Sprecher 1
+Wird der ganze Avatar letztendlich nicht verfangen.
+
+00:09:00 Sprecher 1
+Oder wenn der Avatar sehr dumm ist.
+
+00:09:02 Sprecher 1
+Gesagt. Also wenn ich kein gutes LLM oder keine gute Datenbasis hab, wird auch der Avatar nicht den gewünschten Effekt haben.
+
+00:09:10 Sprecher 1
+Zweite Thema ist,
+
+00:09:12 Sprecher 1
+Zweiter Themenblock ist die Ethik, das Recht und das Vertrauen. Es gibt den Proteus-Effekt seit 2007 sogar.
+
+00:09:23 Sprecher 1
+Der sagt aus, dass Avatare und die Merkmale der Avatare auch das Verhalten tatsächlich beeinflussen können, also attraktiveren Avatar beispielsweise. desto besser wird der Teilnehmer.
+
+00:09:35 Sprecher 1
+Alter spielt eine Rolle,
+
+00:09:37 Sprecher 1
+Geschlecht spielt eine Rolle und so weiter. Das muss man alles bedenken.
+
+00:09:41 Sprecher 1
+Je mehr wir diese Verschmelzung von Welten auch sehen, desto größer wird auch dieses Thema Avatar oder self-extended Avatar Thema notwendig.
+
+00:09:53 Sprecher 1
+Avatare werden immer menschlicher, ich kann gewisse Zielgruppen, vielleicht auch Kinder,
+
+00:09:58 Sprecher 1
+Dagegen vielleicht auch verlieren, wenn sie zu stark mit Avatar-Rahmen interagieren und ein Stück weit abdriftet und.
+
+00:10:05 Sprecher 1
+Thema Glaubwürdigkeit und Kennzeichnungspflichten,
+
+00:10:11 Sprecher 1
+Also was entsteht obendrauf.
+
+00:10:15 Sprecher 1
+Genau, Thema oben rechts, Akzeptanz und Zielgruppen. Auch hier nochmal die wahrgenommene Präsenz von dem Avatar hat natürlich einen Einfluss auf die wahrgenommenen Antworten und beeinflusst eben auch die Interaktion,
+
+00:10:31 Sprecher 3
+Das muss ich beachten.
+
+00:10:34 Sprecher 1
+Die Einstellungen und Wirkungen von der Zielgruppe sind kontextabhängig. Das heißt, ich muss wirklich immer beachten, wo will ich es einsetzen. Das sind alles Wechselwirkungen, das muss ich ordentlich betrachten, bevor ich den Avatar dann am Ende des Tages noch einsetzt.
+
+00:10:48 Sprecher 1
+Und zu guter Letzt, das Thema ist noch relativ neu, auch wenn es jetzt schon seit 20 Jahren Forschung dafür gibt, aber auch technologisch haben wir uns weiterentwickelt. Es gibt relativ wenig Evidenz,
+
+00:10:58 Sprecher 1
+Die tatsächlich sagen kann, wo setze ich jetzt was ein, wie gestalte ich das dann am Ende des Tages wirklich perfekt aus, bis es in unterschiedlichen Zielgruppen gut zum Einsatz kommt.
+
+00:11:06 Sprecher 1
+Und die Forschung, die bisher betrieben wurde, hat eine relativ geringe Stichprobe, das heißt die Übertragbarkeit ist auch einfach nur relativ gering zu sehen.
+
+00:11:15 Sprecher 1
+Genau, zu guter Letzt vielleicht noch drei konkrete Schritte, denen man sich jetzt dem Thema oder dem Avatar auch nähern kann.
+
+00:11:24 Sprecher 1
+Schritt 1 Anwendungsfall sauber definieren.
+
+00:11:29 Sprecher 1
+Thema Zweck bei Technik. Was heißt das? Es macht nicht immer Sinn, einen Avatar zu kreieren. Es macht immer Sinn, einen guten Avatar zu kreieren. Wenn ich keinen guten Einsatz oder keinen guten Anwendungsfall dahinter tatsächlich habe, dann habe ich vielleicht ein nettes Gimmick, aber auch dieser Aha-Effekt,
+
+00:11:45 Sprecher 1
+Der verfliegt sich relativ schnell dann aus.
+
+00:11:48 Sprecher 1
+Die Basis schaffen,
+
+00:11:52 Sprecher 1
+Eben die Ausgestaltung, die Technik dahinter, alles was ich reinstecke,
+
+00:11:57 Sprecher 1
+Nicht immer mehr als besser.
+
+00:11:59 Sprecher 1
+Also ich kann es auch mit der Realität oder mit der Darstellung übertreiben, wenn der Anwendungsfall dazu nicht passt.
+
+00:12:04 Sprecher 1
+Und dann letztendlich, der letzte Schritt ist die Interaktion ausgestalten, hier tendenziell eher iterativ vorgehen und wirklich immer schauen, passt meine Technik zu der sozial gewünschten Interaktion,
+
+00:12:14 Sprecher 7
+Die ich abstelle.
+
+00:12:17 Sprecher 1
+Ja, und das war's von meiner Seite.
+
+00:12:24 Sprecher 1
+Und damit würde ich an den Florian, der uns noch mal mehr was zu.
+
+00:12:28 Sprecher 1
+Das kann ich in der Loom machen tatsächlich.
+
+00:12:31 Sprecher 3
+Ich habe es schon ein paar Mal gesehen, von daher bin ich wirklich happy und wir haben gleich einen Spaß für dich mit dabei, weil wir werden auch den Link zur Service-Robotik machen.
+
+00:12:40 Sprecher 3
+Nur mit Technik vielleicht ein bisschen zu kämpfen, weil wir alles auf Cloud machen mittlerweile. Das heißt, ich bin direkt ans Internet angewiesen.
+
+00:12:46 Sprecher 3
+Deswegen bin ich froh, dass du schon mal ein paar Videos mit dabei hattest.
+
+00:12:51 Sprecher 5
+Nein, ich kann nur.
+
+00:12:57 Sprecher 7
+Ich kann ja ausklicken.
+
+00:13:22 Sprecher 3
+So, wer sind wir denn, warum bin ich heute hier? Also eigentlich bin ich ein Immo-Mensch,
+
+00:13:27 Sprecher 3
+Mein Name ist Jo, bin eigentlich tatsächlich für den Fachbereich Immobilien,
+
+00:13:33 Sprecher 3
+Bildungscampus auch ein Stück weit verantwortlich und da eigentlich für den Pollen-Scheiß, wie meine Kollegen immer sagen.
+
+00:13:39 Sprecher 3
+Die vom Bau, ich sag euch gleich noch, wie wir da reinfinden. Aber ich hab 'n paar Zahlen mitgebracht, weil ich die immer noch super herausfordernd find und auch mega stolz drauf bin, wie wir wachsen. Also, wenn man sieht, 2010 war der Bildungscampus einfach mit 4 Mitarbeitern von uns von der Schwarz Campus Service unterwegs und mit 0 Studierenden und 0 Institutionen. Heute stehen wir bei 16 Institutionen,8000 Studierenden und über 200 Mitarbeiter, die von uns von der Immo Gruppe kommen und 2030 Horizont wachsend. Wir wissen noch gar nicht wie viele Mitarbeiter, mal gucken wie viele dann tatsächlich noch menschlich sind und wie viele dann schon Avatare.
+
+00:14:13 Sprecher 3
+Studierende 20.000 mal als Benchmark vorgegeben und Institution auf jeden Fall mehr. Wir haben jetzt schon Gespräche mit Helmholtz, eigentlich auch schon sicher, dass sie kommen und es gibt bestimmt noch die ein oder andere Institution, die da auf mich dazukommt.
+
+00:14:27 Sprecher 3
+Also daher werden wachsen und das zeigt man auch an den Baustellen, die wir hier überall sehen in der Stadt.
+
+00:14:33 Sprecher 3
+So, wie haben wir denn eigentlich als Schwarzgruppe, wie passen wir da in den Kosmos mit rein und wer ist unser Geldgeber? Deswegen habe ich ganz kurz ein Schaubild mitgebracht, um zu erklären, wer wir sind und wie wir arbeiten. Also ganz rechts die Schwarzgruppe brauche ich glaube ich nicht erklären,
+
+00:14:47 Sprecher 3
+Wenn jeder weiß auch wieder, wie groß sie ist. Wir bedienen uns immer aus der Schwarzgruppe von den besten Services, die wir da kriegen. Das heißt, wir gucken, dass die Beschaffung zentral da läuft, wir gucken, dass so Themen wie Perso, Auch die ganzen administrativen Prozesse, die bekommen wir aus der Schwarz-Gruppe, da haben wir Skaleneffekte,
+
+00:15:02 Sprecher 7
+Die nutzen wir.
+
+00:15:04 Sprecher 3
+Und wir sind der Schwarz Campus Service, wir sind die Immo-Gruppe, wie gesagt. Das ist so der Kreis, den wir abbilden,
+
+00:15:10 Sprecher 3
+Bauen, ganz klassisch, die Jungs, die bauen, also die planen und bauen, den Bildungscampus FN, die Jungs, die betreiben. EM, wir haben einen ganz großen Bereich mit Veranstaltungsmanagement, muss auch gemacht werden. CSM in der Mitte, das Customer Service Management.
+
+00:15:25 Sprecher 3
+Da sage ich gleich noch einen Satz dazu. In dem einen Bereich, das ist meiner Vision und Strategie, heißen die Opposition und Strategy. Wir machen den Kohl-Scheiß, den dann der Bau umsetzen darf.
+
+00:15:36 Sprecher 3
+So wir haben da einen einzigen Taktgeber, deswegen wir bedienen uns aus der Schwarzgruppe. Da kommt aber relativ wenig Input. Mein Chef sagt immer, wenn am Ende des Jahres eine schwarze Null steht, dann ist der Chef glücklich und er hat wieder ein Jahr Zeit.
+
+00:15:48 Sprecher 3
+Unser Taktgeber ist Dieter Schwarz Stiftung. Das heißt, von da kriegen wir die Mission und da kriegen wir auch den Input, wer denn noch an den Campus kommt und vor allem auch wie der Campus gestaltet werden soll.
+
+00:15:57 Sprecher 3
+Wir haben einen Auszug mitgebracht. Einer der Player sei natürlich hier mit dem Fraunhofer,
+
+00:16:03 Sprecher 3
+Aber eben auch die Vielzahl der Institutionen, die hier mittlerweile sind, schon echt einzigartig und das zeigt auch, warum man mit der Anzahl der Studierenden mitwachsen muss und vielleicht auch andere Services anbieten muss in Form von Avataren.
+
+00:16:16 Sprecher 3
+So, jetzt habe ich noch jemand mitgebracht.
+
+00:16:18 Sprecher 3
+Nenn ich unseren Serviceroboter. Das ist der Lumi, den gibt es bei uns auf dem Campus und der ist schon relativ etabliert.
+
+00:16:25 Sprecher 3
+Die FM-Jungs sagen immer, das ist der beliebteste Mitarbeiter, weil den sieht man überall rumlaufen.
+
+00:16:32 Sprecher 3
+Der ist dann einzigartig.
+
+00:16:35 Sprecher 3
+Aber der wird fleißig, werden Selfies gemacht. Der ist wirklich akzeptiert auf dem Campus und Akzeptanz haben wir gerade schon ein großes Thema,
+
+00:16:42 Sprecher 5
+Was auch Arbeitgeber angeht.
+
+00:16:43 Sprecher 3
+Was macht der? Also der unterstützt wirklich das FM.
+
+00:16:46 Sprecher 3
+Der fährt im halböffentlichen Raum autonom und scannt beispielsweise auch Nummernschilder von Kennzeichen, die sich auf dem Campus befinden, um zu tracken, dürfen die da sein, er zählt Fahrräder fleißig, er scannt auch die Gebäude und guckt nach Event-Schäden,
+
+00:17:01 Sprecher 3
+Roller und so weiter, hat relativ viele Möglichkeiten, wir werden die auch leider nutzen und wahrscheinlich auch erweitern, da gibt es eine neue Version dazu.
+
+00:17:09 Sprecher 3
+Warum zeige ich den Service-Roboter?
+
+00:17:11 Sprecher 3
+Weil der zeigt so ein Stück weit unsere Infrastruktur, mit der wir arbeiten,
+
+00:17:15 Sprecher 3
+Und das wird auch gleich deutlich, warum der für uns Avatar wichtig ist. Das ist unser Ökosystem, da gibt es auf der linken Seite eigentlich die ganzen Datenpunkte, die wir anzapfen.
+
+00:17:25 Sprecher 3
+Das heißt unsere Gebäudedaten, IoT-Daten, Außengebäude, aber auch Umweltsensorik, also Wetterdaten und so weiter, aber auch eben Nutzerdaten, also Parken, Sachen aus der Lehre,
+
+00:17:35 Sprecher 3
+Logistik, wir haben Präsenzsensorik, wir wissen auch, wie viele Leute in der Mensa sind, also wie ausgelastet die ist. Ich glaube, es kam von euch auch dann so ein Auslastungs-Tracking, dass man so ein Ampelsystem hat, wann gehe ich denn am besten essen?
+
+00:17:46 Sprecher 3
+Zeitnah bedient.
+
+00:17:48 Sprecher 3
+Das alles spielen wir, also alle Datenpunkte, die eine eins zu n Beziehung haben, also eins zu viel, die kommen in den Core. Und da gibt es zwei Möglichkeiten, die aus dem Core wieder rauszugeben. Einmal in Form von einer Data Library, das heißt, wir stellen alle Daten, die wir selber haben, auf dem Campus zur Verfügung, also allen Campusbewohnern und eben auch für uns selbst.
+
+00:18:10 Sprecher 3
+Was wir jetzt natürlich darauf aufbauen, ist immer mehr Agentic. Das heißt, wir bauen immer mehr Agenten auf den Roostage auf, die wir wirklich aus dem Ökosystem an Daten bekommen. Das machen nicht nur wir, das machen auch die Teilnehmer aus dem Ökosystem selbst.
+
+00:18:24 Sprecher 3
+So und dann hatte ich dieselbe Idee,
+
+00:18:26 Sprecher 7
+Glaube ich, wie ich jetzt gelernt habe, wie Mark Zuckerberg.
+
+00:18:29 Sprecher 5
+Ich habe mir gedacht, ja cool, wir haben irgendwie ein Gummi,
+
+00:18:31 Sprecher 3
+Wir haben ganz viele Datenpunkte.
+
+00:18:33 Sprecher 3
+Was wir noch brauchen ist irgendwie ein Avatar weil wir haben ganz viele Leute die auf den Campus kommen es gibt immer wieder Fragen die an unsere Frontoffice Mitarbeiter gestellt werden wir müssen doch dem Avatar und Gesicht geben und da war es völlig naheliegend den jungen sympathischen Menschen zu nehmen und der zweite Lied ist der zweite Lied ist der auch bekannt werden auf dem Campus nee ich dachte tatsächlich aus Tech-Richtung wir müssen ja zeigen was geht so hyperrealistisch und wirklich.
+
+00:19:02 Sprecher 3
+Unreal Engine Maximum,
+
+00:19:05 Sprecher 3
+Dass wir zeigen, was auch möglich ist an Technologie.
+
+00:19:08 Sprecher 3
+Und dann kam ihr vom Fraunhofer, sagt: "Ja, weiß nicht, Akzeptanz, denk doch mal zurück, ihr habt da einen Lumi rumfahren,
+
+00:19:14 Sprecher 3
+Der ist doch vielleicht ein bisschen mehr akzeptiert und auch bekannter als du.
+
+00:19:19 Sprecher 3
+Wir machen doch lieber den Lumi.
+
+00:19:20 Sprecher 7
+" Und dann kam die Idee,
+
+00:19:22 Sprecher 3
+Okay, Lumi ist tatsächlich eine Version davon,
+
+00:19:25 Sprecher 2
+Das ist die physische Version,
+
+00:19:27 Sprecher 3
+Männlich, irgendwie vor Ort, der rumfährt, ändert,
+
+00:19:30 Sprecher 3
+Okay, was wäre denn akzeptanztechnisch der nächste Schritt? Wir kreieren den Effekt die LUMA, aber der Name ist Mitarbeiter.
+
+00:19:39 Sprecher 3
+Das ist die Schwester von Lumi und eben die digitale Station als Service-Roboter.
+
+00:19:46 Sprecher 3
+Und so haben wir es kreiert, da ist auch der Name entstanden, also aus Lumi, Can Luma und somit auch der Avatar.
+
+00:19:52 Sprecher 7
+Ich glaube das hat jetzt funktioniert.
+
+00:19:55 Sprecher 3
+Eigentlich vom Use Case her habt ihr es schon gesehen.
+
+00:19:58 Sprecher 1
+Hallo Luma, kannst du mir sagen, wo ich etwas auf dem Campus essen kann?
+
+00:20:05 Sprecher 4
+Auf dem Campus gibt es ein paar Möglichkeiten. Die Mensa in Gebäude 8, den Campus Garden in Gebäude 1, Heaven's Kitchen in Gebäude 11 und das Café in Gebäude 13.
+
+00:20:15 Sprecher 4
+Soll ich dir den Weg zu einer davon zeigen?
+
+00:20:19 Sprecher 3
+Das ist natürlich auch das naheliegendste. Also was wirklich am meisten geklickt wird bei uns, und das ist kein Scherz, ist der Speiseplan.
+
+00:20:27 Sprecher 3
+Von daher.
+
+00:20:28 Sprecher 3
+Welche Use Cases kennen das, müssen wir abbilden,
+
+00:20:30 Sprecher 2
+Um Benutzerakzeptanz zu erhalten,
+
+00:20:31 Sprecher 3
+Ist unter anderem das Speiseangebot.
+
+00:20:34 Sprecher 3
+Wir müssen auf die Usability achten, das habt ihr gerade schon ausdrücklich erklärt. Und natürlich auch die Verständlichkeit der Dialog. Also natürliche Sprache muss schon so sein, wie man Dialog einfach Tag für Tag erlebt. und eben auch für den Kontext der Antworten. Also wenn er Schwachsinn ausgibt, dann unterhalte ich mich immer nicht mehr mit dem, so wie im natürlichen Leben auch.
+
+00:20:52 Sprecher 3
+Was kann er denn noch? Das werden wir vielleicht noch ein Stück weit sehen. Also Campusnavigation haben wir gerade schon gezeigt, Events, da werde ich gleich noch ein Beispiel haben. Speiseplan mit Gerichten und eben auch zusätzliches Campuswissen.
+
+00:21:05 Sprecher 3
+Und dadurch ist er natürlich wirklich eine Entlastung auch für unsere Mitarbeiter im Front-Office, weil das sind die Fragen, die tagtäglich bei denen ankommen. Da landen unterschiedliche Leute, also entweder Eventbesucher, Campus-Besucher, Studis, die zum ersten Mal da sind, wollen natürlich wissen, dadurch, dass wir auch mittlerweile räumlich wachsen, wo muss ich hin, wo finde ich was, welchen Service kann ich wo auch stattfinden lassen, wie komme ich denn an die Campus-Card, darf ich hier parken, solche Geschichten.
+
+00:21:29 Sprecher 5
+Da habe ich euch einen zweiten News Space mitgebracht.
+
+00:21:37 Sprecher 1
+Ich würde gerne heute etwas in der Mensa essen. Was gibt es da so für vegetarische Optionen?
+
+00:21:44 Sprecher 4
+Heute gibt es in der Mensa ein paar vegetarische und vegane Gerichte, eine Gnocchipfanne mit Rahmpilzen und Würzelgemüse für Studierende 99 Cent, einen Tofu-Karotten-Bratling mit orientalischem Rahmspinat und Kartoffelstampf für Studierende 2,90 € und vom Foodtruck einen Burger von Portobello Pilz mit Pak Choi für Studierende 5,
+
+00:22:03 Sprecher 8
+50 €.
+
+00:22:04 Sprecher 4
+Als bisher gibt es einen veganen Kokos Mandelpudding für Studierende 90 Cent.
+
+00:22:10 Sprecher 3
+Was Menschen gemerkt haben, wir sind im Schwabenland und die Preise werden ausdrücklich bekommen.
+
+00:22:16 Sprecher 3
+Ganz wichtig nutze ich die Information dann auch gleich verwenden,
+
+00:22:23 Sprecher 9
+Um in deren Essensplan potenziell anders schieben.
+
+00:22:27 Sprecher 3
+Tatsächlich geben wir die Infos auch weiter, ja.
+
+00:22:30 Sprecher 3
+Was wir aber noch machen wollen,
+
+00:22:31 Sprecher 5
+Ist personalisierte Information.
+
+00:22:32 Sprecher 3
+Also, das ist natürlich keine Entwicklungsstrecke, dass man auch darauf eingeht.
+
+00:22:36 Sprecher 3
+Finde ich dann Vegetarier oder Veganer? Sind das vielleicht bestimmte Themen, die besonders interessant sind? Wo muss er denn hin und so weiter?
+
+00:22:44 Sprecher 3
+Natürlich App-Integration, also das Denken ist zweifach, also nicht nur, dass wir es an einer Stelle haben, irgendwo in einem halböffentlichen Raum, sondern wirklich auch auf der App, sodass man quasi einen Campus-Buddy kreiert, kann man für den Avatar schon zu Hause mit dabei und kann dann auf dem Campus im besten Fall schon anknüpfen an das, was man quasi auf dem Handy mit Anfragen losgeworden ist. Und Aufgabenabwicklung ist am aktuell noch nicht, also dass er tatsächlich auch Sachen prozessiert,
+
+00:23:07 Sprecher 2
+Beispielsweise Services anstößt.
+
+00:23:09 Sprecher 3
+Ein Ticket eröffnen will so Richtung FM was der nicht aktuell schon kann das haben wir aktuell nicht integriert das wollen wir aber tun und jetzt ganz ganz gefährliches Halbwissen wie gesagt ich bin im Moment ich habe nur gehört die sind vielleicht auch technikinteressierte von daher haben mir die Jungs mitgebracht dass wir Text zu Speech verwenden vom LLM also vom Gehirn und speech to Text ich kann mir auch sagen lassen wenn deshalb weil ich natürlich lokal gehostet werden kann das heißt es wird nicht irgendwann eine Cloud geschoben sondern wir haben Daten in unserer Hoheit und.
+
+00:23:39 Sprecher 3
+So Renity ist glaube ich auch in aller Munde, von daher haben wir es auch bei dir recht gut jetzt. Gemeinsam mit euch.
+
+00:23:48 Sprecher 3
+So noch letztes Video.
+
+00:23:53 Sprecher 3
+Er zeigt mir nochmal alles, was er kann,
+
+00:23:55 Sprecher 1
+Was ich kann. Das hört sich sehr lecker an. Ich würde gerne in die Mensa gehen. Kannst du mir den Weg dahin zeigen?
+
+00:24:03 Sprecher 4
+Ich zeige dir den Weg zur Mensa in Gebäude 8 auf der Karte. Den Weg siehst du jetzt auf dem Bildschirm.
+
+00:24:10 Sprecher 1
+Vielen Dank, ich habe danach noch ein Meeting im Raum 11.4. 10. Kannst du mir den Weg dahin zeigen?
+
+00:24:19 Sprecher 4
+Raum L410 ist das Büro der Turm im vierten Stock von Gebäude 9, dem L-Bau. Du gehst zuerst zum Haupteingang,
+
+00:24:26 Sprecher 4
+Dann links zu den Aufzügen, fährst in den vierten Stock und biegst aus dem Aufzug links ab.
+
+00:24:32 Sprecher 4
+Der Raum ist dann auf der rechten Seite. Den Weg siehst du auf dem Bildschirm.
+
+00:24:37 Sprecher 1
+Das finde ich gerade sehr interessant und ich würde gerne mehr zum Thema KI-Avatare erfahren.
+
+00:24:43 Sprecher 5
+Kannst du mir sagen,
+
+00:24:44 Sprecher 1
+Ob da nächste Woche zufällig ein Vortrag ist?
+
+00:24:49 Sprecher 4
+Ja, da gibt es etwas Passendes.
+
+00:24:51 Sprecher 4
+Am 19. November um 16: 30 Uhr findet ein KI-Dialog für den Titel, aber im Rahmen der erkennenden Sichtdienst statt.
+
+00:24:58 Sprecher 4
+Der Ort ist IPRE-Saal,
+
+00:25:00 Sprecher 4
+Raum Campus Thüringen bei uns. Das klingt doch genau nach deinem Thema.
+
+00:25:06 Sprecher 5
+Genau, vom Thema heute.
+
+00:25:07 Sprecher 3
+Wir haben was mitgebracht, das ist aber tatsächlich was, was auch immer wieder aufkommt, also wo sind Events, zu welchem Thema und wie kann ich da vielleicht auch noch mehr Gäste hinlocken, weil das ist glaube ich auch für uns wichtig, dass wir einfach das nach außen tragen, was wir an Wissen haben.
+
+00:25:20 Sprecher 3
+Zitat, was von Herr Schwarz ab und zu mal verwendet wird ist, Bildung ist unser wichtigster Rohstoff und das hilft nicht, wenn wir das für uns behalten, sondern das müssen wir in die Welt raustragen und das tun wir auch gerne, deswegen haben wir auch immer gerne persönliche Vorträge mit dabei.
+
+00:25:31 Sprecher 7
+Aber Luhmann konnte mir noch Essen bringen, oder?
+
+00:25:36 Sprecher 10
+Die Verknüpfung fände ich spannend, so mit einem Kunden könnte man dann sagen, mein Fitnessplan mit dem Essen und was weiß ich, berücksichtigen für mich.
+
+00:25:45 Sprecher 3
+Das personalisierte tatsächlich wahrscheinlich machen wir das aber nicht über Avatar sondern über die App tatsächlich User-Tracking und können das darüber aussteuern aber ist schon schon interessant wir denken auch viel in die Richtung auch mit Paketauslieferung und so weiter aber aktuell noch zu teuer mit der Service-Robotik die man dazu sagen so ein Bild mitgebracht sind wir schon in der Matrix ne sind wir nicht aber warum habe ich es auf aufgelegt.
+
+00:26:09 Sprecher 3
+Man merkt schon, dass die Welten immer mehr verschmelzen und mein Kollege von der IT sagt immer, ihr baut ja gar nicht mehr Häuser, ihr baut eigentlich Betonklötze, wo ihr die IT unterbringt.
+
+00:26:19 Sprecher 3
+Aktuell ist es noch nicht so, aber zukünftig wird es schon immer mehr so sein, dass wir wirklich digitale Zwillinge haben, auch von unseren Gebäuden. Wir werden immer mehr interagieren mit Gebäuden, werden immer mehr interagieren mit Avataren und ich glaube vor allem auch in unseren Organisationsstrukturen werden wir immer mehr auch Avatare als Mitarbeiter sehen. Von daher ist das Bild vielleicht so.
+
+00:26:37 Sprecher 3
+Mit dem Augenzwinkern gemeint, aber ich glaube es wird immer mehr so sein, dass wir verschmelzende Welten sehen.
+
+00:26:43 Sprecher 3
+Danke.
+
+00:27:12 Sprecher 2
+Ja von den Gebäuden zur Sicherheit.
+
+00:27:14 Sprecher 2
+Auch die Polizei befasst sich mit dem Thema Avatare.
+
+00:27:19 Sprecher 2
+Warum tun wir das?
+
+00:27:21 Sprecher 5
+Weil wir BC auch eine Kundenbindung haben.
+
+00:27:24 Sprecher 2
+Wenn ich das mit meinen Präsidenten und meinen Präsidentinnen bespreche,
+
+00:27:27 Sprecher 6
+Dann sagen die immer, wir haben mit Kunden zu tun,
+
+00:27:29 Sprecher 2
+Wir sind kein Wirtschaftsunternehmen. Stimmt, wir sind eine Non-Profit-Organisation und trotzdem haben wir es mit Menschen, mit Kunden zu tun, die zu uns kommen und Sicherheit möchten.
+
+00:27:40 Sprecher 2
+Wir haben uns über Avatare unterhalten.
+
+00:27:44 Sprecher 2
+Ich würde sagen, wir sollten uns zunächst Gedanken machen,
+
+00:27:47 Sprecher 2
+Was wir von KI-Agenten erwarten, die dahinter liegen und wir gehen gerade einen Weg als Polizei Baden-Württemberg zusammen mit der STACKIT. Für uns hat digitale Souveränität mit sehr hohem Wert, eine sehr hohe Bedeutung.
+
+00:28:03 Sprecher 2
+Im Moment stelle ich fest, es hängt sich jeder so gerne ans Plakat, weil es sich gut verkaufen lässt.
+
+00:28:10 Sprecher 2
+Ich glaube, das Smart Country Convention.
+
+00:28:12 Sprecher 2
+Wir haben mit unserer KI-Plattform, die wir mit dem Staatsministerium gebaut haben,
+
+00:28:16 Sprecher 6
+Den Open-Source-Preis gewonnen.
+
+00:28:19 Sprecher 2
+Es war ganz einfach zu sagen,
+
+00:28:21 Sprecher 2
+Ich war überzeugt davon,
+
+00:28:22 Sprecher 1
+Ich habe es auch so gesagt,
+
+00:28:24 Sprecher 2
+Alle Veranstalter, die auf der Smart Country von Menschen waren, wenn ich die frage, ob sie skalierbar sind in ihrem Segment digital, souverän, skalierbar, wer das kann, bleibt von der Halle,
+
+00:28:34 Sprecher 3
+Wer nicht, geht raus, die Halle wäre leer gewesen.
+
+00:28:37 Sprecher 2
+Ganz einfach, weil viele Bereiche nicht skalierbar sind,
+
+00:28:42 Sprecher 2
+Wir sind den Weg gegangen als Verwaltungsbehörden, als Industrie, sehr stark technisch getrieben,
+
+00:28:48 Sprecher 2
+Applikationsgetrieben. Wir haben einen anderen Weg gewählt, aufgrund von einem Bedarf.
+
+00:28:54 Sprecher 2
+Wir sind infrastrukturell vorgegangen, haben uns infrastrukturell stark aufgestellt, auch KI-Plattform-technisch und stehen jetzt an den Herausforderungen von Wissensmanagement, KI-Agenten und wir stellen fest, wir brauchen Helfer und wir brauchen Coaches.
+
+00:29:09 Sprecher 2
+Und ich möchte das vorne hinstellen.
+
+00:29:12 Sprecher 2
+Denn der Helfer kann sehr gerne jemand sein,
+
+00:29:16 Sprecher 2
+Der ein abstraktes Bild ist. Ich glaube das Wirtschaftsministerium hat einen Löwen,
+
+00:29:21 Sprecher 6
+Hier haben wir einen Roboter.
+
+00:29:23 Sprecher 2
+Das ist total okay, weil der für mich nur ein Helfer ist,
+
+00:29:25 Sprecher 6
+Er ist nur ein Teil davon.
+
+00:29:26 Sprecher 2
+Ich habe keinen Beziehungsbedarf.
+
+00:29:30 Sprecher 2
+Ich bin Science-Fiction-Fan so ein bisschen.
+
+00:29:33 Sprecher 2
+Meine Mitarbeiter kriegen das immer auch mit, mit Iron Man. Ich fand bei Iron Man nicht den fliegenden Anzug cool, ich fand den Avatar, diese künstliche Intelligenz im Hintergrund, J.A.R.V.I.S. cool, mit dem er diskutiert hat und Probleme gelöst hat. Warum hatte J.A.R.V.I.S. kein Gesicht?
+
+00:29:48 Sprecher 6
+Weil der Kunde,
+
+00:29:50 Sprecher 2
+Der Bedarf nicht empathisch war, er hatte keinen Bedarf auf einer Beziehungsebene.
+
+00:29:55 Sprecher 2
+Die Menschen haben das,
+
+00:29:57 Sprecher 1
+Wir sind soziale Wesen.
+
+00:30:00 Sprecher 2
+Ich bin Polizeibeamter und Gott sei Dank hatte ich in meiner Ausbildung das Studium war es eher nervig. Jetzt zeige ich, das war das wichtigste Fach: Soziologie.
+
+00:30:09 Sprecher 2
+Im Moment ein riesigen Schwerpunkt. Wir sind soziale Wesen, wir werden krank, wenn wir nicht interagieren.
+
+00:30:15 Sprecher 2
+Jetzt kommt eine Technologie, die Wissen vermittelt und wir haben einen Bedarf in eine soziale Interaktion.
+
+00:30:21 Sprecher 2
+Und das möchte ich vorne hinstellen.
+
+00:30:23 Sprecher 2
+Es gibt Agenten, die wir als Helfer, lang haben, der nimmt mir Arbeit weg.
+
+00:30:26 Sprecher 2
+Der strukturiert mir meine E-Mails, der bastelt mir irgendwas, das ist alles okay, der kann aussehen, wenn ich wieder will.
+
+00:30:34 Sprecher 2
+Aber die ältere Frau, die gerade irgendwo angerufen wird und die Sorge hat,
+
+00:30:43 Sprecher 2
+Dass ihr das Geld abgezogen wird, dass ihr auf den Enkeltrickbetrug reinfällt, die möchte jemand haben,
+
+00:30:49 Sprecher 2
+Sofort, mit dem sie spricht und da spricht sie ihrem Gegenüber nicht.
+
+00:30:55 Sprecher 7
+Mit irgendeinem Luftballon, mit irgendeinem Roboter oder mit irgendeinem Fahrgerät.
+
+00:30:59 Sprecher 2
+Sondern ich möchte einen Polizeibeamten, einen Polizeibeamtin sehen.
+
+00:31:04 Sprecher 2
+Und jetzt kommt trendtechnischer Aspekt, den wir hier bei uns mit integrieren.
+
+00:31:09 Sprecher 2
+Das Zukunftsinstitut arbeitet mit Megatrends.
+
+00:31:12 Sprecher 2
+Ein Megatrend ist Individualität. Wir kennen das alle aus Beruf, Familie, Umfeld, Gesellschaft.
+
+00:31:20 Sprecher 2
+Niemals selbst in einem. Ich habe einen Bedarf und ich will jetzt einen Polizeibeamten.
+
+00:31:26 Sprecher 7
+Technologie ermöglichst.
+
+00:31:28 Sprecher 2
+Also möchten wir aber auch jetzt jemanden haben, den wir sehen, den wir erlebt haben, der mit uns kommuniziert.
+
+00:31:35 Sprecher 2
+Das war für uns der Anspruch, in den wir gestartet sind mit IWA.
+
+00:31:39 Sprecher 2
+Mein Kollege stellt Ihnen mal grob das Wort. Genau.
+
+00:31:43 Sprecher 6
+Also herzlich willkommen,
+
+00:31:46 Sprecher 6
+Innovation Hub der Polizei Baden-Württemberg. Wir sind angesiedelt beim Präsidium für Technik, Logistik und Service.
+
+00:31:53 Sprecher 6
+Wir sind Dienstleister für alle Regionalpräsidien. Wir stellen die Technik-Polizei bereit, wir sehen uns als Dienstleister für die echte Polizei übertrieben gesagt, für die, die wirklich draußen am Bürger arbeiten müssen. Genauso wie aber auch übergeordnete Instanz im Bereich Technik. Also wir können auch dementsprechend Meilensteine setzen und dementsprechend auch Vorgaben machen.
+
+00:32:18 Sprecher 6
+Zu unserer Abteilung, wir sind angesiedelt genau im Präsidium für Technik,
+
+00:32:24 Sprecher 6
+Innovation Hub hat den Auftrag,
+
+00:32:27 Sprecher 6
+Bedarfsorientiert zu arbeiten.
+
+00:32:29 Sprecher 6
+Die Polizei hat einen relativ großen Sprung gemacht in den letzten Jahren, bedarfsorientiert zu arbeiten.
+
+00:32:35 Sprecher 6
+Oft war es so, einfach haben wir das vorgegeben und so wurde es gemacht. Mittlerweile holen wir die Bedarfe aus der kompletten Mannschaft raus.
+
+00:32:46 Sprecher 6
+Wir haben einen Prozess entwickelt, wo alle Polizisten, alle Bediensteten der Polizei Baden-Württemberg ihre Bedarfe, ihre Probleme eingehen können.
+
+00:32:55 Sprecher 6
+Und dann werden die gesammelt und dann wird man quasi, wenn man quasi keine Lösung für dieses Problem hat, kommt es quasi entweder zu uns im Innovation Hub oder zu einer anderen Abteilung, die dann quasi eine bedarfsorientierte Lösung erarbeiten.
+
+00:33:11 Sprecher 6
+Bei uns im Innovation Hub, wir entwickeln dann diese Lösungen.
+
+00:33:14 Sprecher 6
+Mit einem externen Dienstleister, wir erstellen als Polizisten die Fachlichkeit, was Expertise brauchen für dieses Problem und dann holen wir uns quasi externe Entwickler oder UI/UX-Designer, um quasi diesem Problem quasi wirklich nahe zu gehen und eine innovative Lösung zu entwickeln.
+
+00:33:31 Sprecher 6
+Wir wollen einen Mehrwert für den Realbetrieb nachher darstellen und damit auch die Polizei einfach zukunftsfähig machen, dass wir quasi wegkommen von diesem altertümlichen.
+
+00:33:43 Sprecher 6
+Papierformular-getriebenen Haushalt hin zu datengetriebenen innovativen Lösungen.
+
+00:33:58 Sprecher 6
+Ein Problem war,
+
+00:34:01 Sprecher 6
+Polizeibeamte von der Polizeiwache haben einfach eine Vielzahl an wechselnden Aufgaben.
+
+00:34:09 Sprecher 6
+Sie müssen sich vorstellen,
+
+00:34:12 Sprecher 6
+Wenn jetzt ein Wachhabender Samstagabends alleine auf dem Revier sitzt, die ganzen Streifen sind draußen unterwegs, dann klingeln zwei noch an der Pforte und sagen, sie würden gerne eine Anzeige aufgeben bei XY, dann musste er seine Streifen koordinieren und gleichzeitig kann man nebenher eine Anzeige aufnehmen.
+
+00:34:30 Sprecher 6
+Oder beispielsweise noch einen in Gewahrsam genommenen versorgen, wenn er gerade noch Essen braucht oder aufs Klo muss oder anfängt zu schreiben. Es ist einfach eine Vielzahl an Aufgaben,
+
+00:34:42 Sprecher 6
+Und gerade in dem Thema haben wir dann gesagt,
+
+00:34:45 Sprecher 6
+Um die Wartezeit der Bürgerinnen dann auch wirklich zu verkürzen,
+
+00:34:48 Sprecher 6
+Können wir ja einen Assistenten entwickeln,
+
+00:34:52 Sprecher 6
+Der uns quasi einfach diese reine repetitive Arbeit abnehmen kann. Die Erstaufnahme von Anzeigen von Bürgeranliegen.
+
+00:35:01 Sprecher 6
+Wir haben jetzt hier so relativ so vereinzelte Delikte.
+
+00:35:06 Sprecher 6
+Beispielhaft aufgeführt,
+
+00:35:08 Sprecher 6
+Die wir einfach quasi repetitiv sind, die einfach immer wieder Schema A, Schema B bedienen, die man einfach wirklich relativ einfach durch so einen Agenten aufnehmen kann.
+
+00:35:20 Sprecher 6
+Deshalb hat sich quasi die Fragestellung und Lösung herausgestellt, wie könnt ihr mit einem KI-Assistenten Polizeiwachen wirklich entlasten und wie weit eignen sich Avatare dafür.
+
+00:35:36 Sprecher 6
+Unser Lösungsansatz, da haben wir als Grundlage genommen die Online-Wache. Ich weiß nicht, ob Sie das kennen. Es wird vom BKA bereitgestellt, dass Internetauftritt, wo man quasi verschiedene Delikte in verschiedenen Bundesländern aufgeben kann. Das haben wir als Grundlage genommen. Das Problem war da aber,
+
+00:35:55 Sprecher 6
+Dass wir einfach eine formularbasierte Vorgehensweise haben. Man muss eintippen Feld 1, Feld 2, Feld 3. usw. ist einfach kein richtig natürliches Gespräch, wie man es eigentlich mit einem Polizeibeamten gerne haben würde. Ich schildere mein Problem,
+
+00:36:12 Sprecher 6
+Polizeibeamte halten sich an und die Anzeige erfolgt.
+
+00:36:18 Sprecher 6
+Im zweiten Schritt haben wir uns überlegt, wie kann man eine Anzeige mit Hilfe eines Dialogs aufnehmen, ohne den Polizeibeamten zu benötigen.
+
+00:36:31 Sprecher 6
+Da war dann das Ziel,
+
+00:36:33 Sprecher 6
+Eine automatisierte, sprachbasierte Anzeigenaufnahme.
+
+00:36:37 Sprecher 6
+Und als drittes dann, haben wir vorher schon gehört, wenn Emotionen sehr stark sind, ist es meistens bei einer Anzeige so, dass man da nicht relativ emotionslos angeht, sondern wenn man starke Emotionen hat, dann braucht man dementsprechend auch einen Avatar im Gesicht.
+
+00:36:51 Sprecher 6
+Und da haben wir gesagt, wir brauchen einen KI generierten Polizisten und das Ziel ist die Akzeptanz zu erhöhen,
+
+00:37:00 Sprecher 6
+Genau durch die Visualisierung.
+
+00:37:04 Sprecher 6
+Dann haben wir einmal zwei Ausbaustufen gehabt.
+
+00:37:08 Sprecher 6
+Einmal dieses reinen Dialog.
+
+00:37:11 Sprecher 6
+Und hier haben wir uns quasi die Frage gestellt: Kann man überhaupt eine Anzeige möglichst sauber mit Hilfe von KI-Dialog aufnehmen? Was wir bei Schritt 1 bestätigt haben. Und dann in Schritt 2 haben wir dann noch quasi dieses Gesicht dazu genommen.
+
+00:37:27 Sprecher 2
+Aktuell nach dem Prototyp,
+
+00:37:30 Sprecher 6
+Schon nicht in Live-Umgebung.
+
+00:37:33 Sprecher 6
+Und da haben wir gesagt, wie können wir mit dem Avatar die User Experience wirklich verbessern, die Akzeptanz erhöhen und so weiter.
+
+00:37:43 Sprecher 6
+Und das führt dann zu unserem aktuellen Prototyp.
+
+00:37:47 Sprecher 2
+Da ist auch ein kurzes Video dabei.
+
+00:37:50 Sprecher 7
+Wenn es erst mal im Tatort kommt,
+
+00:37:52 Sprecher 5
+Dann reden es die Leute.
+
+00:38:04 Sprecher 11
+Hallo, ich bin die digitale Assistenz der Polizei Baden-Württemberg. Mit Hilfe von künstlicher Intelligenz begleite ich Sie Schritt für Schritt bei der Aufnahme Ihrer Anzeige.
+
+00:38:15 Sprecher 11
+Wir gehen die notwendigen Schritte gemeinsam und in Ruhe durch. Ich stelle Ihnen nacheinander einige Fragen und helfe Ihnen dabei, alle relevanten Angaben zu erfassen. Diese werden anschließend von Polizeibeamtinnen und Polizeibeamten geprüft und weiter bearbeitet.
+
+00:38:32 Sprecher 11
+Bevor wir mit der Anzeige beginnen, ist eine Identifikation mit Ihrem Ausweisdokument erforderlich.
+
+00:38:39 Sprecher 11
+Vor Ihnen befindet sich ein Lesegerät. Legen Sie Ihren Ausweis bitte darauf und tippen Sie anschließend auf „Ausweis auslesen“. Danach starten wir gemeinsam mit der Aufnahme Ihrer Anzeige.
+
+00:38:59 Sprecher 11
+Folgende Informationen wurden ausgelesen. Bitte überprüfen Sie, ob alle Daten korrekt und aktuell sind.
+
+00:39:11 Sprecher 11
+Kommen wir nun zu Ihrer Anzeige. Erzählen Sie mir zunächst, was passiert ist.
+
+00:39:47 Sprecher 11
+Ich habe den Diebstahl Ihres Fahrrads und die Sachbeschädigung des Schlosses aufgenommen. Bitte warten Sie einen Moment, während ich die Daten weiterleite.
+
+00:39:56 Sprecher 11
+Bitte beschreiben Sie den oder die Täter. Bei mehreren Personen beschreibe bitte jede Person einzeln.
+
+00:40:12 Sprecher 11
+Vielen Dank für Ihre Angabe. Ich verarbeite die Informationen und bitte Sie, einen Moment zu warten.
+
+00:40:20 Sprecher 11
+Können Sie mir bitte beschreiben, was genau bestohlen wurde? Zum Beispiel Art des Gegenstands, Marke, Farbe, Größe oder besondere Merkmale. Das hilft uns sehr bei der Suche.
+
+00:40:58 Sprecher 11
+Ich habe die Angaben zum gestohlenen Fahrradhändler, E-Bike, Herrenrad erfasst und leite die Daten weiter. Bitte warten Sie einen Moment.
+
+00:41:07 Sprecher 11
+Wann genau hat sich die Straftat ereignet? Bitte gib Datum und Uhrzeit an.
+
+00:41:22 Sprecher 6
+Also prinzipisch verstanden, oder? Genau, das ist ein ganz normaler Gesprächsverlauf.
+
+00:41:26 Sprecher 6
+Hier sieht man natürlich noch, dass teilweise Probleme gibt und Transkriptionen, hat man auch gesehen, teilweise mit dem Fahrer und so weiter.
+
+00:41:32 Sprecher 6
+Und es ist ganz klar, wir in Innovation bauen Prototypen.
+
+00:41:36 Sprecher 6
+Diese Prototypen, die wir testen wir, jetzt hier mit Sachbearbeitern von der Polizei, also quasi nachher Leute, die das Ergebnis bekommen, aber auch jetzt weiter noch mit Bürger quasi draußen.
+
+00:41:51 Sprecher 6
+Wenn wir diese Testergebnisse alle gesammelt haben und konsolidiert haben, dann können wir eine Empfehlung aussprechen an die Organisation. Und wenn die dann sagen,
+
+00:42:01 Sprecher 6
+Also wenn die Gesamtorganisation Polizei sagt,
+
+00:42:04 Sprecher 6
+Das wollen wir haben, das wollen wir in die breite Masse spielen,
+
+00:42:07 Sprecher 6
+Dann können wir sagen, wir haben diese Ergebnisse selber erforscht und haben dann quasi einen großen Aussagewert, dass dieses Produkt dann wirklich nachher rauskommt und dementsprechend auch weitergeführt wird.
+
+00:42:21 Sprecher 9
+Bei der Entwicklung denken wir auch daran an die an die Vielfalt der Bevölkerung im Sinne der Sprachen wenn ich mir den Video jetzt vorstelle den ich kenne und wo ich mir nehme, könnte ich mir vorstellen dass 80% Probleme haben wenn sie das in Deutsch eingeben sollen.
+
+00:42:39 Sprecher 6
+Ja, dann komme ich jetzt zur nächsten Folie genau aktuell noch beim Prototypen out of.
+
+00:42:48 Sprecher 6
+Wir haben jetzt aktuell, den Diebstahl können wir jetzt aufnehmen. Wir haben noch nicht alle Delikte mit aufgenommen.
+
+00:42:55 Sprecher 6
+Das kann dann nachher noch in der Weiterentwicklung erfolgen.
+
+00:42:58 Sprecher 6
+Aber diese Delikte sind z. noch rausgenommen. B.
+
+00:43:01 Sprecher 6
+Wir haben z. B. auch hier noch kein Bürgerterminal. Also allgemeine Fragen bzw.
+
+00:43:06 Sprecher 6
+Campusroboter haben wir natürlich auch noch nicht drin. Das sind auch Sachen, die man sich auf jeden Fall noch vorstellen könnte.
+
+00:43:13 Sprecher 6
+In Bezug auf den Avatar oder auch Dialog Avatar ist gerade dieser Punkt Mehrsprachigkeit. Ein elementarer Punkt, das ist ganz klar.
+
+00:43:19 Sprecher 10
+In wem will ich sprechen Frau oder Mann?
+
+00:43:22 Sprecher 5
+Das sind alles Punkte,
+
+00:43:25 Sprecher 6
+Keine abschließende Aufzählung. Das sind alles Punkte, die auf jeden Fall mit drin sind.
+
+00:43:31 Sprecher 6
+Andererseits, man kann auch nicht eine Vielzahl von Avataren machen, weil.
+
+00:43:36 Sprecher 6
+Der Bürger draußen, der 'n Unfall war, kann sich auch nicht aussuchen, mit dem er sprechen will.
+
+00:43:39 Sprecher 5
+Da kann man politisch nichts, nichts erlauben,
+
+00:43:40 Sprecher 8
+Kommt man auf Sie nicht drauf an.
+
+00:43:42 Sprecher 6
+Genau, natürlich, aber sowas wie Mord, Vergewaltigung oder ähnliches darf mit sowas sowieso nicht aufgenommen werden, da braucht man Menschen. Genau, sind wirklich solche Themen, repetitive Aufgaben, Schema A, Schema B. wird bedient, einfach die 'n hohen,
+
+00:43:58 Sprecher 6
+'N sehr hohen.
+
+00:44:01 Sprecher 6
+Aufwand im Organisatorischen, quasi an den Ursachen, aber teilweise auch gar nicht diese große Ermittlungsmöglichkeiten haben. Genau.
+
+00:44:11 Sprecher 2
+Ich steige aber nicht ein und baue dadurch die Mehrsprachigkeit in meiner Tat auf.
+
+00:44:17 Sprecher 5
+Jetzt haben wir den Bäumen nicht aufgeholt.
+
+00:44:20 Sprecher 2
+Wir sind plattformtechnisch organisiert, das heißt die Mehrsprachigkeit habe ich als IT-Service aus meiner Plattform drin und kann dann nicht darauf zugreifen.
+
+00:44:27 Sprecher 2
+Von allem, weil es im Grundsatz ist.
+
+00:44:32 Sprecher 2
+Wichtig, Deliktsfeld Eingabe,
+
+00:44:36 Sprecher 7
+Passender Avatar, Logo.
+
+00:44:39 Sprecher 2
+Auch wichtig, kein Gefahrenüberhang,
+
+00:44:42 Sprecher 2
+Weil der steigt mir nicht aus dem Bildschirm und tätigt eine Festnahme.
+
+00:44:46 Sprecher 2
+Also auch das müssen wir mit dem bunten Browser kommunizieren.
+
+00:44:52 Sprecher 2
+Der nächste Schritt ist, möchte ich es fotografisch abgebildet haben. Auch das wird der nächste Schritt sein. Wir werden nicht an Bildschirmen geprägt sein. Wir werden Hologramme im Raum haben, die uns begleiten.
+
+00:45:03 Sprecher 2
+Was machen wir mit dem virtuellen Raum?
+
+00:45:06 Sprecher 2
+Auch hier. Die Polizei muss in den virtuellen Raum.
+
+00:45:09 Sprecher 6
+Wir werden virtuell streicheln laufen müssen.
+
+00:45:13 Sprecher 2
+Das passiert einfach.
+
+00:45:16 Sprecher 2
+Für uns ist aber wichtig,
+
+00:45:18 Sprecher 2
+Das Thema Look & Feel, Kundenbetrachtung.
+
+00:45:21 Sprecher 2
+Stellen Sie sich vor, ich weiß nicht, wem es auffällt, Stärke blinzelt.
+
+00:45:25 Sprecher 2
+So, also was haben wir getan? Wir blinzeln Menschen im Gespräch.
+
+00:45:30 Sprecher 2
+Was wirkt denn?
+
+00:45:32 Sprecher 2
+Ab wann wirken Blinzeln nervös?
+
+00:45:34 Sprecher 2
+Oder wann macht sie es nervös? Ab wann wird es doof, wenn ich hier stehe und so mache?
+
+00:45:40 Sprecher 2
+Es ist einfach, wir müssen die soziologischen Bedarfe berücksichtigen und hier schneidet sich Technik,
+
+00:45:46 Sprecher 2
+Weil den Avatar brauchen wir nicht, weil er uns technisch besser macht.
+
+00:45:51 Sprecher 2
+Es ist nur ein Bindemitglied,
+
+00:45:54 Sprecher 2
+Ein Step-In in eine Technologie,
+
+00:45:56 Sprecher 2
+Die wir benötigen, um Vertrauen aufzubauen.
+
+00:46:00 Sprecher 2
+Und für uns als Organisation, die maßgeblich von Vertrauen geprägt ist,
+
+00:46:04 Sprecher 2
+Ist das ein Zahlmittel der Zukunft.
+
+00:46:07 Sprecher 2
+Also wir battlen uns, der Polizeibeamte und der Pilot, die battlen sich immer so in der Bevölkerung im Vertrauensüberschuss Platz 1 und 2. Ich glaube, wir sind wieder auf 1.
+
+00:46:16 Sprecher 2
+Mit unseren KI-Live-V sind wir sicher, dann Lufthansa vorbei.
+
+00:46:20 Sprecher 2
+Ne, aber es ist wichtig.
+
+00:46:22 Sprecher 2
+Vertrauen ist die Währung der Zukunft. Wir dürfen uns nicht zutiefst überzeugen.
+
+00:46:27 Sprecher 2
+Egal welches Unternehmen das Vertrauen seiner Kunden verliert,
+
+00:46:30 Sprecher 6
+Verliert den Kunden.
+
+00:46:32 Sprecher 2
+Und für uns heißt das,
+
+00:46:34 Sprecher 2
+Wenn wir uns auf diese Wege nicht begeben und wir alles versuchen mit Menschen zu erschlagen, wird der Staat ohnmächtig.
+
+00:46:41 Sprecher 2
+Und das geht keine fünf Jahre mehr.
+
+00:46:45 Sprecher 2
+Denn das ist einfach spürbar. Ich habe es vorhin gesehen, KI-Team der Stadt Heilbronn.
+
+00:46:51 Sprecher 2
+Das Gleiche ist die gleiche Partnerschaft, Public Sector.
+
+00:46:57 Sprecher 2
+Also ich als Leiter des IA-Abteilung, mein Chef lässt mich das nicht machen,
+
+00:47:00 Sprecher 7
+Hätte ich noch richtig Lust,
+
+00:47:01 Sprecher 2
+Eines meiner Präsentationen rauszusuchen und mal probieren, wie lange wir brauchen um sie zusammenzulegen.
+
+00:47:06 Sprecher 2
+Dann wird man dann auf die andere Seite wechseln und sagen,
+
+00:47:08 Sprecher 2
+Lass mich mal ausprobieren. Natürlich mit KI ist logisch,
+
+00:47:12 Sprecher 2
+Das geht.
+
+00:47:17 Sprecher 2
+Ich stelle ihn jetzt auf das Online-Portal der Stadt Heilbronn,
+
+00:47:20 Sprecher 2
+5000 Anfragen nach dem Landesinformationsfreiheitsgesetz und habe irgendwelche Fragen zu irgendwelchen Bauprojekten, die gerade laufen.
+
+00:47:29 Sprecher 2
+Das war's.
+
+00:47:31 Sprecher 2
+Onlinewache, eine Million gefertigter Anzeigen beim Landeskriminalamt, die Polizei Baden-Württemberg. Bitte tun Sie das nicht.
+
+00:47:41 Sprecher 7
+Dann haben wir uns.
+
+00:47:44 Sprecher 2
+Und damit müssen wir uns auseinandersetzen.
+
+00:47:46 Sprecher 2
+Wir brauchen die Technologie. Wir werden nicht daran vorbeikommen.
+
+00:47:49 Sprecher 2
+Wir brauchen aber auch Sie.
+
+00:47:51 Sprecher 2
+Wir wollen den Bezug zum Kunden nicht verlieren.
+
+00:47:55 Sprecher 2
+Und es bringt uns nichts,
+
+00:47:57 Sprecher 2
+Also weiter um den technisch großen Schritt zu machen.
+
+00:48:01 Sprecher 2
+Denn egal ob in einem Wirtschaftsunternehmen, wer prägt das Vertrauen zu Ihrem Kunden?
+
+00:48:06 Sprecher 2
+Ihr CEO, der in irgendwelchen Talkshows auftritt und auf irgendwelchen Werbeplakaten runterlächelt,
+
+00:48:13 Sprecher 2
+Oder ist der Verkäufer im Serviceportal, der Mechaniker in der Werkstatt oder der Mitarbeiter vom Bauhof.
+
+00:48:22 Sprecher 2
+Das sind unsere sozialen Partner, das sind unsere Radarschilder. Jeder Streifenbeamte von uns ist die soziologische Bibliothek.
+
+00:48:31 Sprecher 2
+Das heißt, wir versuchen unnötige Arbeit von unseren Menschen wegzubekommen,
+
+00:48:38 Sprecher 2
+Weil wir in vielen Bereichen momentan eine Überlastung haben, was erzeugt ist, die Menschen sind.
+
+00:48:43 Sprecher 2
+Überlagerte sind emotional angespannt.
+
+00:48:46 Sprecher 2
+Und ich werde nicht besser. Im Gegenteil, das Einzige was ich habe ist, ich kriege vielleicht noch eine blöde Kommunikation hin, weil irgendjemand angespannt ist, einen falschen Triggerpunkt kriegt.
+
+00:48:56 Sprecher 2
+Und wir haben so einen Ansatz,
+
+00:48:58 Sprecher 2
+Der normale Mensch hat vielleicht zwei bis drei Mal Kontakt in seinem Leben zur Polizei und diese zwei bis drei Mal soll einfach gut laufen.
+
+00:49:05 Sprecher 2
+Diese zwei bis drei Mal werden jetzt mehr.
+
+00:49:08 Sprecher 2
+Warum werden sie mehr?
+
+00:49:10 Sprecher 2
+Technologisch evolutionäre Schritte. Einer davon war das.
+
+00:49:16 Sprecher 2
+Niemand ist von der Diskothek raus, hat seine Telefonkarte nachts um drei aufgeladen und eine Anzeige gemacht, weil er in der Diskothek eine auf die Nase bekommen hat.
+
+00:49:23 Sprecher 5
+Das hat niemand gemacht.
+
+00:49:26 Sprecher 2
+Die Polizei ging mit diesem Teil in jede Diskothek, in jedes Festzelt und war bei den Streifenden dabei. Achtung, hier passiert gerade was. Also wirkt sich das auf uns aus.
+
+00:49:36 Sprecher 2
+Die Onlinewache, Sie haben es gerade sehen, steht Ihnen allen zur Verfügung.
+
+00:49:40 Sprecher 2
+Ja, das Haus ist beschissen. Sie müssen nicht mehr zur Polizei fahren.
+
+00:49:43 Sprecher 2
+Sie können es in dem emotionalen Moment von ihrem Wohnzimmer aus tun.
+
+00:49:48 Sprecher 2
+Und das betrifft sie alle.
+
+00:49:51 Sprecher 2
+Wer verkaufen will, macht das. Amazon verkauft,
+
+00:49:56 Sprecher 2
+Out ich mich als Kunde.
+
+00:49:58 Sprecher 2
+Und die machen das mittlerweile, wenn ich Fernsehen schaue.
+
+00:50:02 Sprecher 2
+Übrigens, du hast letztens was angeschaut und zu dem Film passt es gerade nicht und da gibt es gerade super Angebote.
+
+00:50:08 Sprecher 2
+Also diverse Notizen habe ich zugeschnitten.
+
+00:50:11 Sprecher 2
+Da kann man was lernen. Ich möchte, dass die KI-Assistent, die wir als KI-Agenten mit Gesicht unseren Kolleginnen zur Verfügung stellen, weil KI kann Sie Berater, er kann aber auch meine Kollegen beraten.
+
+00:50:23 Sprecher 2
+Ich möchte, dass der Coach eine gewisse Beziehungsberatung hat.
+
+00:50:28 Sprecher 7
+Spielt mit eine Rolle.
+
+00:50:30 Sprecher 2
+Das hängt zusammen.
+
+00:50:31 Sprecher 2
+Und auf diese Punkte zielen wir ab.
+
+00:50:36 Sprecher 2
+Deshalb lasse ich mich auch nicht von Betrieb und Entwicklung binden und mache den.
+
+00:50:41 Sprecher 2
+Prototypen-Bastler für eine große Organisation mit 35,000 Menschen.
+
+00:50:47 Sprecher 2
+Wir sind nur zu fünft und zu sechst im Moment und wir werden auch nicht größer, solange ich was zu sagen habe. Weil das ausreicht, um genau sich mit solchen Ideen zu befassen und es danach in die Organisation zu geben und das rauszuspielen.
+
+00:51:03 Sprecher 2
+Weil darum geht es uns. Wir wollen weiterhin hier der Polizei bleiben,
+
+00:51:07 Sprecher 2
+Da draußen auf der Straße, in der Innenstadt,
+
+00:51:10 Sprecher 2
+Aber auch im virtuellen Raum.
+
+00:51:13 Sprecher 2
+Denn überall wo Geld läuft,
+
+00:51:15 Sprecher 7
+Ist Kriminalität.
+
+00:51:18 Sprecher 2
+Wo Kriminalität ist, das ist unser Anspruch in Baden-Württemberg. Dem sind wir jetzt lange im virtuellen Raum nachgehangen.
+
+00:51:27 Sprecher 2
+Jetzt holen wir maßgeblich auf.
+
+00:51:29 Sprecher 2
+Zusammen mit einer Partnerschaft mit Speckig und einem guten Fundament.
+
+00:51:34 Sprecher 2
+Das ist die Basis von allem, wenn Sie die nicht haben, setzen Sie das nicht rein.
+
+00:51:38 Sprecher 2
+Und ich kann Ihnen einen Tipp geben,
+
+00:51:41 Sprecher 2
+Gut vier Jahren.
+
+00:51:43 Sprecher 2
+Entwicklung in diesen Bereichen startet zuletzt vom Avatar.
+
+00:51:47 Sprecher 2
+Wenn das Fundament nicht steht,
+
+00:51:50 Sprecher 2
+Gut schwäbisch, wie man im Baden-Württemberger Haus baut,
+
+00:51:54 Sprecher 2
+So sieht die Voränge erst aus, wenn das Haus steht und nicht vor dem Fundament. Vielen Dank.
+
+00:52:08 Sprecher 2
+So, dann geht's jetzt,
+
+00:52:11 Sprecher 3
+Glaube ich, über in unser Panels-/Frage-Sessions.
+
+00:52:16 Sprecher 6
+Dazu dürfen wir noch mal alle nach Hause.
+
+00:52:18 Sprecher 5
+Das hätten wir jetzt auch vorsagen können, aber.
+
+00:52:39 Sprecher 5
+Hallo so ich würde sagen wir fragen aber erstmal kurz in die Runde gibt's denn schon Fragen aus dem Publikum?
+
+00:52:51 Sprecher 5
+Habt ihr ja warum?
+
+00:52:55 Sprecher 9
+Ich bin ein Freund von Avatare auch wenn ich zu älteren Generationen gehöre aber ich glaube im positiven Sinne dass das Deutschland verändern wird.
+
+00:53:05 Sprecher 9
+Warum? Weil ja die Avatare so gestaltet sind, dass die immer freundlich und nett sind.
+
+00:53:12 Sprecher 9
+Wenn man manchmal mit Firmen,
+
+00:53:14 Sprecher 9
+Oder auch auf der Straße, im Leben und so weiter,
+
+00:53:18 Sprecher 9
+Mit Menschen zusammen ist, wo es um Service geht,
+
+00:53:21 Sprecher 9
+Und mit welchen negativen Emotionen wir dann teilweise behaftet sind, dann stellt sich ja die ganze Welt verändert.
+
+00:53:29 Sprecher 9
+Ergebnisse, dem soziologischen.
+
+00:53:32 Sprecher 2
+Aspekt den sie vorhin erwähnt haben und ich glaube das wird ganz bewusst das wird Deutschland von der Mentalität her positiv verändert nein also ich spreche von in meinem in meinem Team spreche ich auch noch von von Pippi Prinzip und zwar aus Pippi Langstrumpf unsere Gesellschaft durchlebt einen Wandel.
+
+00:54:02 Sprecher 2
+Algorithmen, durch Technologie und alles.
+
+00:54:05 Sprecher 2
+Das heißt, ich baue mir meine Welt,
+
+00:54:06 Sprecher 6
+Wie sie mir gefällt.
+
+00:54:07 Sprecher 1
+Deshalb ist Astrid wichtig.
+
+00:54:10 Sprecher 2
+Ich sehe die Gefahr darin.
+
+00:54:12 Sprecher 2
+Also ich sehe eine Gefahr darin,
+
+00:54:14 Sprecher 2
+Robotik wird noch verstärkt, aber stellen Sie sich vor, Sie kriegen einen Roboter,
+
+00:54:18 Sprecher 2
+Den Sie sich gestalten, wie es Ihnen gefällt. Also wie er aussieht, Sie geben ihm das Gesicht,
+
+00:54:22 Sprecher 7
+Das Ihnen passt und er sagt Ihnen, was ich hören wollte.
+
+00:54:26 Sprecher 2
+Ich vergleiche das mit einer,
+
+00:54:28 Sprecher 7
+Also ich komme vom ganz,
+
+00:54:29 Sprecher 2
+Ganz tiefen oberschwäbischen Raum,
+
+00:54:34 Sprecher 2
+Und ich sage jetzt mal, vor grob 80 Jahren hat man sich auf der Kirche bei uns zum Frühschoppen getroffen und da waren alle vertreten.
+
+00:54:43 Sprecher 2
+Alle Interessensgruppen.
+
+00:54:45 Sprecher 2
+Und ich glaube, dass es auch trotz kirchlichem Segen dann nach dem Frühschoppen manchmal auch noch den Finanzgeber hat, weil es da keine Konflikte gab.
+
+00:54:54 Sprecher 2
+Das haben wir umgangen, indem wir Vereinshallen gebaut haben und jeder hat sich so separiert. Also Interessensfragen haben sich so vermieden.
+
+00:55:01 Sprecher 2
+Jetzt kommt Social Media und baut uns die Blase und erzählt ihnen und der Algorithmus sagt mir jeden Tag,
+
+00:55:08 Sprecher 2
+Was mir gefällt.
+
+00:55:10 Sprecher 3
+Und er bestätigt mich in meiner Haltung.
+
+00:55:12 Sprecher 2
+Das sind die nächsten Schritte.
+
+00:55:14 Sprecher 2
+Also soziologisch sind das die nächsten Schritte.
+
+00:55:16 Sprecher 2
+Ich würde behaupten, die Welt wird für uns besser, weil wir sie in uns sehen. Ich glaube, dass die Gesellschaft noch mehr konfliktscheuer wird und wir das.
+
+00:55:29 Sprecher 2
+Und den Umgang mit ganz normal wichtigen Konflikten zu lernen.
+
+00:55:34 Sprecher 9
+Aber eine andere Dimension schon gesagt. Ich habe jetzt nur im Umgang zwischen Menschen geredet, von der Freundlichkeit her,
+
+00:55:42 Sprecher 9
+Im Service von verschiedenen Firmen und wen auch immer.
+
+00:55:46 Sprecher 9
+Das sind wirklich die Muffel da.
+
+00:55:48 Sprecher 1
+In der Arbeit habe, die beruflich werden,
+
+00:55:50 Sprecher 9
+Die Aufträge, dann kann ich dementsprechend programmieren und ich wollte nur auf die Ebene abwägen.
+
+00:55:57 Sprecher 3
+Das ist bei uns, bei Mitarbeiterin, das ist. oft so, dass wir einfach Leute aus der Hotellerie nehmen, Hotellerie in Gastro, weil es einfach Personenbusiness ist. Da ist es gar nicht so wichtig, dass der fachliche Grund in Bezug auf Immobilien stimmt, sondern eher das, was sie gerade ansprechen. Da muss ein freundliches Gesicht da sein, da muss man auffrischen und auf Bedürfnisse eingehen. Da glaube ich schon, dass da viel Wahrheit und Stück auch beim Avatar.
+
+00:56:24 Sprecher 1
+Habt ihr da auch geforscht im Sinne von, ihr erkennt, welche Emotionen das Gegenüber hat und reagiert darauf oder reagiert ihr auf jeden jetzt mit so einer stoischen Freundlichkeit? Das kann ja auch wieder ein bisschen abstoßen dann.
+
+00:56:37 Sprecher 5
+Ich weiß,
+
+00:56:39 Sprecher 3
+Dass man es kann, wir dürfen aber nicht darauf reagieren.
+
+00:56:43 Sprecher 1
+Genau, das ist das Thema, man kann natürlich relativ viel,
+
+00:56:47 Sprecher 1
+Wäre natürlich in der Interaktion auch sehr vielversprechend und eigentlich auch notwendig,
+
+00:56:51 Sprecher 2
+Aber die Frage ist,
+
+00:56:52 Sprecher 7
+Was uns natürlich.
+
+00:56:54 Sprecher 1
+Moralisch, gesetzlich dann auch tatsächlich erlaubt ist.
+
+00:56:58 Sprecher 3
+Besonders wenn man in der Polizei ist.
+
+00:57:02 Sprecher 10
+Ja, aber es ist schon manipulativ. Also es ist zwar einerseits im Positiven manipulativ, aber es ist nachher die Hochrisiko-KI, wo dann wieder andere, sag ich mal,
+
+00:57:11 Sprecher 8
+Anforderungen.
+
+00:57:12 Sprecher 3
+Also ist es nicht gerade bei euch eigentlich zum Beispiel jetzt bei der Polizei, das wäre noch wirklich, also man kriegt ja wahrscheinlich bei der Polizei, ich vermute einfach bei uns, das wissen aber relativ viel,
+
+00:57:21 Sprecher 3
+Was vielleicht gar nicht unbedingt dann immer zu 100% der Wahrheit entspricht, wo vielleicht auch mal, also vielleicht auch gar nicht bewusst, unterbewusst falsch Dinge erzählt werden, weil sie anders wahrgenommen wurden, die sie dann wirklich objektiv fragen,
+
+00:57:33 Sprecher 2
+Ist das eine Option,
+
+00:57:34 Sprecher 3
+Dass der Avatar da versucht, aus beispielsweise der Mimik, der Gestik, wie eine Person spricht, so ein bisschen herauszufinden, wie hoch ist die Konfidenz dieser Aussage?
+
+00:57:44 Sprecher 2
+Da gibt es Wissenschaften dazu.
+
+00:57:46 Sprecher 2
+Ich war immer bei meinem Vortrag und da saß mir jemand gegenüber mit einer Brille,
+
+00:57:51 Sprecher 2
+Und dann hat er gesagt, die sind sehr identisch zu dem Inhalt."Wie kommen Sie da drauf?" Ich weiß nicht, wie der Studiengang hieß, aber das ist ein psychologischer Studiengang, der hier auf der KI gepresst hat und die Brille gedrückt hat.
+
+00:58:04 Sprecher 2
+Und die KI, diese Brille hat mich gefragt,
+
+00:58:06 Sprecher 2
+Ob das meine Haltung, meine Mimik, meine Geste zu dem passt,
+
+00:58:09 Sprecher 1
+Was der Inhalt gesagt hat.
+
+00:58:10 Sprecher 7
+Also das gibt es.
+
+00:58:12 Sprecher 2
+Nein, wir haben das nicht eingesetzt, weil viel zu tief für Prototypen wollen wir nicht machen.
+
+00:58:19 Sprecher 2
+Ist auch eine rechtliche Frage, ob ich das darf, was mit eine Rolle spielt,
+
+00:58:23 Sprecher 2
+Aber was wir mit Sicherheit einbringen, ist die eskalative Gesprächsführung.
+
+00:58:27 Sprecher 7
+Also etwas, was mir beigebracht hat.
+
+00:58:29 Sprecher 2
+Und jetzt sind wir halt,
+
+00:58:31 Sprecher 2
+Um auf das Beispiel von vorher zu kommen, muss man unterscheiden, sind wir im Sales oder sind wir im Public Sektor Interaktion unterwegs?
+
+00:58:39 Sprecher 2
+Ganz ehrlich, meine externen Dienstleister sind jeden Tag freundlich zu mir, weil ich bin ein Life, das Innovation Hubs und ich unterschreibe den Vertrag.
+
+00:58:46 Sprecher 2
+Und ich muss mir auch in menschlicher Interaktion jeden Tag die Frage stellen: Ist das irgendein Sales Honey, der mir da an den Hut geschnürt wird? Oder ist das eine echte Meinung?
+
+00:58:55 Sprecher 2
+Also die Frage habe ich jeden Tag egal.
+
+00:58:58 Sprecher 2
+Da macht der Avatar auch keinen Unterschied.
+
+00:59:01 Sprecher 2
+In unserer Online-Wache müssen wir damit rechnen, dass jemand alkoholisiert aufschlägt,
+
+00:59:06 Sprecher 6
+Dass uns jemand anwandt.
+
+00:59:09 Sprecher 2
+Jetzt denke ich, ist der Avatar da vielleicht sogar besser,
+
+00:59:13 Sprecher 2
+Weil es ja nicht noch viel besser abprallt.
+
+00:59:15 Sprecher 2
+Mir also nicht.
+
+00:59:17 Sprecher 2
+Nichtsdestotrotz haben wir eine Polizei, also vertritt er die Polizei und wird sich auch nicht alles gefallen lassen.
+
+00:59:24 Sprecher 2
+Und wenn jetzt mal plump gesagt,
+
+00:59:27 Sprecher 2
+Stellen Sie sich vor, wir geben den Avatar irgendwo an eine Säule und Sie können im Lidl Markt oder vor dem Lidl Markt in der Öffentlichkeit.
+
+00:59:35 Sprecher 2
+Eine Anzeige aufgeben und in der Öffentlichkeit wird die Polizei Baden-Württemberg beleiten,
+
+00:59:39 Sprecher 7
+Dann wird die Polizei Baden-Württemberg darauf reagieren. Ganz klar.
+
+00:59:42 Sprecher 2
+Entweder schon mit klarer Kommunikation,
+
+00:59:45 Sprecher 7
+Was davor nicht abgebrochen wird.
+
+00:59:47 Sprecher 2
+Und wenn Straftaten im Raum stehen,
+
+00:59:49 Sprecher 2
+Dann werden wir dort entwickelt, dann werden wir dort interveniert. Auch klar.
+
+00:59:53 Sprecher 2
+Also das sind solche Themen, die müssen erzwingen, Impulse finden. Stellen Sie sich vor, es steht jemand vor einer Polizeizweige und zeigt verfassungsfeindliche Symbole oder gibt irgendwelche Aussagen dazu auf.
+
+01:00:06 Sprecher 2
+Hier kommt die Polizei mit dieser Straftat in Verbindung, im öffentlichen Raum, in irgendjemand Dritters geht das.
+
+01:00:12 Sprecher 3
+Also werden wir behandeln müssen.
+
+01:00:14 Sprecher 2
+Das Schöne ist, ich muss mich nicht darum kümmern, aber wir müssen diese Informationen aufstellen.
+
+01:00:18 Sprecher 2
+Aber das wird, wenn wir das in die Online-Mache geben, wird es eine Frage sein,
+
+01:00:21 Sprecher 7
+Wo ist ein Zugang dazu, was kann der Passierer gegeben und verdienen.
+
+01:00:26 Sprecher 3
+Noch ein Satz dazu. Erstmal müssen wir mit dem Gericht aufhören, dass bei denen irgendwie viele Straftaten.
+
+01:00:38 Sprecher 3
+Ja, was glaube ich wichtig ist, als Emotion aufzunehmen, auch von dem Avatar ist glaube ich die Informations, der Informationsgehalt. Wir haben ganz viele der vielleicht Informationen, die nicht kommuniziert werden, weil einfach die Hemmschwelle da ist, also wirklich einer Person gegenüber zu treten und Dinge zu artikulieren. Ich glaube, das wird bei der Polizei auch so sein. Und dadurch können wir vielleicht unsere eigenen Services auch verbessern, also weiß ich nicht, Wegausschilderung, vielleicht auch mehr Kommunikation, vielleicht andere Kommunikationsmittel. Ich glaube, dadurch, dass vielleicht die ein oder achte Nuance gar nicht dokumentiert ist bei einer Polizeiwache, kann ich mir gut vorstellen, dass nicht die Emission entscheidend ist,
+
+01:01:10 Sprecher 3
+Sondern der Reformationsgehalt bei der kompletten Transportation.
+
+01:01:13 Sprecher 10
+Aber sind Sie schon bei jeweils, also auch der Dooma, als auch der Polizeiarbeiter mit Kamera eigentlich elektronisch sehen oder mit der Erfassung?
+
+01:01:24 Sprecher 9
+Habt ihr das schon getestet eben in Polizeiwachen oder ist das alles nur in der Entwicklung?
+
+01:01:29 Sprecher 2
+Mir war schon draußen noch fest, wir gelten noch in der Öffentlichkeit.
+
+01:01:33 Sprecher 2
+Wir arbeiten als InnovationHub mit Reallaboren, wir arbeiten tatsächlich vor Ort in Polizeirevier und das Publikum schon. Das bringt uns.
+
+01:01:42 Sprecher 2
+Also wenn wir schon wieder selber beim Turm,
+
+01:01:44 Sprecher 7
+Der eine coole Idee hat und der eben sachbearbeitete Nutzungsakt vor Ort.
+
+01:01:55 Sprecher 7
+Das Vorbild für die Arbitrage kommt ja aus Science Fiction, aus Matrix, aus.
+
+01:02:01 Sprecher 6
+Vielleicht auch noch zwei, die spielerische,
+
+01:02:03 Sprecher 7
+Oder aus der Spielwelt GTA 6 jetzt.
+
+01:02:05 Sprecher 5
+Was sind denn eure Vorbilder?
+
+01:02:08 Sprecher 7
+Ist das GTA 6 oder?
+
+01:02:12 Sprecher 3
+Ich enthalte mich.
+
+01:02:17 Sprecher 7
+Andersrum gepackt, ich gebe KI-Kurse für Senioren und da ist eine wahnsinnige Angst da und jetzt kommt da noch so menschenähnliche irgendwas und man hat nur diesen Kandeletter auf Augen, aber hat kein positives.
+
+01:02:29 Sprecher 7
+Das ist eine klare Zielgruppe.
+
+01:02:34 Sprecher 7
+Also der Bildungssektor,
+
+01:02:39 Sprecher 2
+Bildung ist unser höchstes Buch.
+
+01:02:42 Sprecher 7
+Der Bildungssektor arbeitet jetzt,
+
+01:02:44 Sprecher 2
+Meine Tochter ist in der siebten Klasse,
+
+01:02:47 Sprecher 2
+Hat jetzt mit Informatik und Medien,
+
+01:02:51 Sprecher 7
+Nennt sich Medientechnik, glaube ich, ein Fach gestartet.
+
+01:02:55 Sprecher 2
+Das heißt, die kriegt jetzt Medienkompetenz ohne Gedanken.
+
+01:03:00 Sprecher 2
+Was ist mit, ich sag jetzt mal,
+
+01:03:02 Sprecher 2
+Jetzt rechnen wir mal zurück, was ist mit den Jahrgängen ab 2010 und da und davor?
+
+01:03:09 Sprecher 2
+Also doch ein großer Teil unserer Gesellschaft.
+
+01:03:13 Sprecher 7
+Wie gehen wir da denn um?
+
+01:03:15 Sprecher 2
+Und was ist mit einer Generationsschicht, die kognitiv gar nicht in der Fähigkeit mehr ist, diese Informationsschritte mitzugehen?
+
+01:03:23 Sprecher 2
+Weil auch das ist ja natürlich gehirnwissenschaftlich nachvollziehbar.
+
+01:03:30 Sprecher 7
+Das sind alles Dinge, die beachten wir nicht.
+
+01:03:33 Sprecher 2
+Deshalb ist auch der Hinweis, auf die Währung vertrauen zu müssen.
+
+01:03:37 Sprecher 3
+Darum geht es.
+
+01:03:38 Sprecher 2
+In der Interaktion geht es um Vertrauen.
+
+01:03:41 Sprecher 2
+Das ist egal wie, können wir nicht verspielen. Nur wir können es als Polizei so tun,
+
+01:03:47 Sprecher 6
+Als wären wir ressourcenfrei.
+
+01:03:52 Sprecher 2
+Jeder hat schon mal die 110 gleich angerufen und kam dann auch gar nicht durch.
+
+01:03:58 Sprecher 2
+Warum? Weil bei uns immer gleich der Mensch rangeht.
+
+01:04:01 Sprecher 2
+Aber halt eine belegte Leitung unterscheidet keine Gewichtung vom Inhalt,
+
+01:04:05 Sprecher 7
+Was denn gerade passiert.
+
+01:04:06 Sprecher 2
+Und deshalb wird vielleicht der Fahrraddiebstahl oder der Notruf angezeigt, obwohl es vielleicht konkurriert und die lebensgefährliche Situation fällt in der Warteschleife hängen.
+
+01:04:17 Sprecher 2
+Wir wollen besser werden. Wir wollen besser werden für Sie,
+
+01:04:20 Sprecher 7
+Mit Ihnen.
+
+01:04:22 Sprecher 2
+Das ist unser Ziel, um genau das zu vermeiden.
+
+01:04:25 Sprecher 2
+Dort wo wir noch nicht sind,
+
+01:04:27 Sprecher 2
+Qualitativ steigern.
+
+01:04:29 Sprecher 2
+Dort, wo wir sein könnten, noch viel besser werden. Und dort, wo wir heute Probleme haben, die Wege an die Fake-Shops,
+
+01:04:35 Sprecher 2
+Und die Druckprofile. Was glauben Sie, welche Qualität diese Geschäftsfelder noch an mitgehen. Und Sie müssen heute gar nichts mehr drauf haben,
+
+01:04:43 Sprecher 2
+Um eine Cyberattacke zu fahren.
+
+01:04:45 Sprecher 2
+Und ich habe es jetzt nicht ausprobiert, Sie müssen jetzt mal klar oder irgendjemand mal testen,
+
+01:04:49 Sprecher 2
+Wie gut es mich berät, wo denn gerade die Schwachstellen sind oder wo ich am einfachsten schnell Geld machen kann.
+
+01:04:57 Sprecher 7
+Ich glaube, dass ich eine sehr gute Beratung bekomme.
+
+01:05:01 Sprecher 2
+Und deshalb, ich brauche wenige Fähigkeiten,
+
+01:05:04 Sprecher 11
+Um kriminell zu werden,
+
+01:05:06 Sprecher 2
+Um Spektrums und so weiter, und dem müssen wir uns stellen.
+
+01:05:10 Sprecher 7
+Weil die Generation,
+
+01:05:12 Sprecher 2
+Die über Schützer explizit diese Geschwindigkeit nicht nimmt.
+
+01:05:17 Sprecher 10
+Aber da kommt dann nicht das gleiche Thema wie früher, also früher war, halt Agenturarbeit als später in der Polizei.
+
+01:05:23 Sprecher 10
+Uniform und habe russischen Polizisten. Da kamen die ersten Schauspieler in der Uniform und standen vor dir: Hey.
+
+01:05:28 Sprecher 10
+Und jetzt ist ja auch die Frage bei den Avataren, ist ja immer noch realistischere Verben. Wie erkenne ich, ist es ein authentifizierter oder sehr zertifizierter Avatar?
+
+01:05:36 Sprecher 10
+Gibt es einen TÜV für die Avatare?
+
+01:05:39 Sprecher 10
+Also so wie ich auch Arbeitsverhältnisse alle Jahre beim Vornehmen von einem Arbeitgeber oder Führungszeugnis.
+
+01:05:45 Sprecher 10
+Das ist ja auch die Frage, weil woran erkenne ich jetzt, dass das genau der, der von der Polizei ist und nachher nicht irgendwo, sag ich mal, auch nochmal erscheint. Also das wird ja spannend in der ganzen, also es wird ja immer realer, also die Analogie wiederholt sich eben im Digitalen mit den ganzen Betrügereien. Also klar, bei Numa ist es ziemlich so abgebildet, aber es könnte auch das falsche Numa sein, die mich dann irgendwann woanders hinführt und sagt, jetzt kommst du in die Ecke und dann wird dir das Geld abgezogen.
+
+01:06:10 Sprecher 3
+Der Polizei-Avatar.
+
+01:06:12 Sprecher 8
+Ja, der Falsche,
+
+01:06:14 Sprecher 8
+Der quasi mit du mal gemeinsame Sache macht.
+
+01:06:20 Sprecher 10
+Also, ja, aber das ist halt jetzt, also wie gesagt, auch die Senioren, wir haben es gerade schon angesprochen, ich sag mal, es ist schon, ich finde, es gibt.
+
+01:06:27 Sprecher 10
+Sage ich mal, dass da irgendwann jetzt irgendwo was passiert, wo ich sage, ich kann ja nur nicht schreien, obwohl ich mich jeden Tag schlau mache vermeintlich, aber da geht ja los, wie gesagt, gibt es das blaue Häkchen für die Avatare, gibt es die Badge?
+
+01:06:39 Sprecher 10
+Keine Ahnung, also das sind ja auch spannend.
+
+01:06:42 Sprecher 3
+Was denken denn die Experten? Genau.
+
+01:06:46 Sprecher 3
+Ich kenne noch was dazu zu sagen.
+
+01:06:47 Sprecher 5
+Die haben es relativ einfach gehandhabt ehrlicherweise,
+
+01:06:51 Sprecher 3
+Weil die LUMA gibt jetzt keine kritischen Informationen an für uns. ist für uns relativ echt.
+
+01:06:55 Sprecher 10
+Ja, die echte, aber die kann ja genutzt werden und dann geht die Nummer halt der Kontakt.
+
+01:07:01 Sprecher 5
+Also ich denke das Risiko ist,
+
+01:07:03 Sprecher 7
+Dass ich es verstehe und auch vielfältig sich natürlich,
+
+01:07:06 Sprecher 1
+Also genau das Thema,
+
+01:07:08 Sprecher 5
+Das das angesprochen wurde, ist einfacher kopierbar,
+
+01:07:12 Sprecher 7
+Ich habe vielfältige Möglichkeiten auch,
+
+01:07:14 Sprecher 1
+Wo ich reinsetzen kann, also ich kann den Avatar einfach kopieren,
+
+01:07:17 Sprecher 7
+Ich kann hier nur das Backend entsprechend noch ein Stück weit reingehen.
+
+01:07:21 Sprecher 1
+Da muss man natürlich drüber nachdenken.
+
+01:07:23 Sprecher 2
+Und die Kennzeichnung alleine wird irgendwie nicht reichen,
+
+01:07:27 Sprecher 7
+Weil auf die kann ich ja letztendlich relativ ankommen.
+
+01:07:51 Sprecher 7
+Eine Technikabhängigkeit, um die es hier geht. Ich kenne manche Leute, die sagen, ich kann nicht die Fahrzeuge, die es ganz stark ist, wenn die überall hingehen.
+
+01:08:01 Sprecher 7
+Warum? Weil wir eine gewisse Technik, die Abhängigkeit haben. Wir können eine Blue tun.
+
+01:08:06 Sprecher 7
+Wir können die Menschen nicht von einem technischen Werk verantworten.
+
+01:08:11 Sprecher 7
+Das muss immer klar sein. Das heißt, es ist Bildung und auch hier,
+
+01:08:15 Sprecher 7
+Deshalb haben wir Und Präventionsauftrag als Polizei, wenn wir hier die gemacht werden.
+
+01:08:21 Sprecher 7
+Hier steht dann die Präventionsstelle, die in Baden-Württemberg etc.
+
+01:08:30 Sprecher 7
+Und arbeitet auch hier gerade die Landschaft aus in der Aufklärung. Das ist gut.
+
+01:08:35 Sprecher 7
+Ganz klar. Danke, Nicole.
+
+01:08:38 Sprecher 6
+Danke. Ich kann abwechseln.
+
+01:08:47 Sprecher 8
+Thema ja Vertrauen angesprochen, ich wollte da nur fragen, weil die Enkel sich ja immer ganz weit oben hatten, wahrscheinlich weiß ich ja schon, dass sie hier ist, aber oder weil es immer in diesem Thema abläuft, aber ich stelle mir da jetzt ehrlich gesagt so ein bisschen meine Oma gerade vor und die wird von der unbekannten Nummer angerufen und diese Nummer imitiert meine Stimme eins zu eins, weil ich habe Social Media, meine.
+
+01:09:16 Sprecher 8
+Ich weiß nicht, ob meine Oma, wenn sie gerade ein Fake an mich bekommen hat, mit seiner Stimme, ob sie dann mit einem Avatar sprechen möchte, der vielleicht auch, also klar ist, sie nicht so zu schließen, aber es ist endlich richtig auf der Höhe, wenn man gerade irgendeine fiktive Stimme gehört hat, die der Essen sehr ähnlich ist von Geliebten.
+
+01:09:36 Sprecher 8
+So eine coole Lösung, dass dann Leute, vor allem ältere Leute, dann sich sicher fühlen, wenn sie dann mit dem Polizei-Avatar AFK sprechen, diesen Betrug oder diese Person.
+
+01:09:48 Sprecher 5
+Ganz einfach, genau.
+
+01:09:51 Sprecher 7
+Wie ist der nächste Schritt, Anruf ich nach Problemen?
+
+01:09:55 Sprecher 8
+Ja, klar.
+
+01:09:56 Sprecher 7
+Also, der, der das Starbucks Luft kennt, aus Freiburg,
+
+01:10:01 Sprecher 7
+Ich hätte jetzt immer so.
+
+01:10:04 Sprecher 7
+Also die CSM Unfallort,
+
+01:10:07 Sprecher 7
+Den rufen wir ohne an.
+
+01:10:09 Sprecher 7
+Die können das nur in der und Tipser, indem sie ein Codewort ausmachen.
+
+01:10:13 Sprecher 7
+Das sind am besten nicht Social Media oder in der Nähe. Ja, also das hat auch mit digitaler Souveränität von jedem Einzelnen zu tun, wie gehe ich mit meinen Daten um. In den 80 Jahren ist man auf die Straße gegangen, weil man eigentlich hatte, dass Daten geklaut werden, wo wir in den Überwachungsstaat sind.
+
+01:10:34 Sprecher 7
+Keine 20 oder 30 Jahre später waren da die Sicherheit keine Rolle mehr. Wie sind die auf der Welt damit umgegangen? Damit haben wir zu kämpfen. Das ist das Thema.
+
+01:10:46 Sprecher 7
+Die Volksbank bei uns hat noch eine Filiale,
+
+01:10:49 Sprecher 7
+Da gibt es nur Überweisungsträger und meine Eltern sind 80 Jahre und da gibt es nur so Land wie Überweisungsträger, wie diese Generation zählt.
+
+01:10:56 Sprecher 7
+Weil meine Mutter dort kein Online-Banking macht, das ist voll das Volk.
+
+01:11:02 Sprecher 7
+Das haben wir eben schon gesagt. Das ist immer Generationsthema. Die Leute, die über Generation aussteigen, ist ganz klar.
+
+01:11:13 Sprecher 7
+Ich glaub, dass die häufig digital, also die Generation Richtung Medien, sich wieder mehr Gedanken machen sollte,
+
+01:11:20 Sprecher 7
+Was auf Social Media drauf ist, was in Social Media drin ist.
+
+01:11:24 Sprecher 7
+Gott sei Dank arbeiten viele jungen Kolleginnen und Kollegen zusammen. Das finde ich auch spannend zu beobachten,
+
+01:11:30 Sprecher 7
+Wie er auch in den Abwehr kommt. Man muss bewusst sein, das abgesehen gerade bei der Social Media so ein Quatsch hat, wo 11 D noch nehmen können.
+
+01:11:38 Sprecher 7
+Und er nimmt mich selber so nach der Weltmeisterschaft, wo die Lista nächste Woche, wer du wer welches Spielton hast,
+
+01:11:44 Sprecher 7
+Was du in der Bundestreiber in Deutschland spielt, mein Bruder hat mich zerquatscht.
+
+01:11:49 Sprecher 7
+Und als ich ihn gerade 10 Minuten gebraucht habe, ist irgendwelches Fake auf echte Interview zu so ist das, dass wir nicht und das ist das Wort auf das Recht zu diesem SPD ist die Wirtschaft.
+
+01:12:01 Sprecher 7
+Auch das sind Leute, das ist gut, das offensierte Bewusstsein, das jetzt generell das Sachen zu lernen.
+
+01:12:08 Sprecher 8
+Ne, worauf ich hinaus wollte, also ganz für die Antwort, ich soll klar in gewisser Weise lernen.
+
+01:12:14 Sprecher 8
+Ne, worauf hinaus wollte war, warum.
+
+01:12:18 Sprecher 8
+So ein ganz klarer Festfall bei ihm war.
+
+01:12:23 Sprecher 7
+Das muss auf jeden Fall gesagt worden,
+
+01:12:29 Sprecher 7
+Wenn er vielleicht, wenn das richtige Boot reinkommt,
+
+01:12:33 Sprecher 7
+Dann kann dann er reinkommen,
+
+01:12:34 Sprecher 5
+Aber offen gesagt diese Ara nur ein Angebot.
+
+01:12:38 Sprecher 7
+Also quasi jeder,
+
+01:12:40 Sprecher 7
+Der jetzt eine Anzeige aufnehmen will, die ihm den Ara sagen will. Es gibt nur eine Möglichkeit, das bei der Polizei zu haben,
+
+01:12:49 Sprecher 7
+Also ich hätte nur eine weitere Möglichkeit die eine Anzeige ausgeben können nur ein weiteres Gimmick sage ich mal in dem Fall ist vielleicht wieder guter guter Anschluss daran was glaubst du denn so in fünf Jahren ist da der Avatar immer noch sozusagen extra Gimmick oder ist es dann der Standardfall und der Mensch wird eher zum extra Gimmick und vielleicht zum special feature einfach also Vielleicht auch unterschiedlich auch in unterschiedlichen Branchen, ne?
+
+01:13:20 Sprecher 2
+Fragezeichen, vielleicht,
+
+01:13:22 Sprecher 7
+Keine Ahnung, bei euch vielleicht nicht mehr, weiß ich auch nicht, aber vielleicht einfach mal eure Meinung.
+
+01:13:27 Sprecher 7
+Ich glaube nicht, dass ich das bestimmt zusammenspielen kann. Wir denken mittlerweile, ob wir irgendwelche Grundstrukturen sind, dass wir, aber das heißt vielleicht das falsche Wort, aber zumindest mal agentliche Mitarbeiter mit integrieren. Das muss man einfach so sehen, dass wir.
+
+01:13:38 Sprecher 7
+Zurzeit auch echt ein Problem haben beim Arbeitsmarkt mit den Schulversicherungen.
+
+01:13:42 Sprecher 7
+Das hat den Hintergrund, dass sie einfach diesen Einsatzlevel nicht mehr haben werden, wahrscheinlich. Dann werden alle Menschen, die ins Berufsleben einsteigen, in der Berufung abziehen. Es braucht kein Leben, solche Lernwissen, die man rennt und auch nicht so richtig arbeitet.
+
+01:13:56 Sprecher 7
+Ja, glaube ich, dass es ein Teil davon sein wird, aber ich glaube nicht, dass der Mensch in Kontakt mit absolut ist und sich der Mensch irgendwie so fashion für mich handelt. Ich bin auch an den Hochschulen, weil auch nach Corona wird eigentlich.
+
+01:14:07 Sprecher 7
+Das ganze Thema Bindung groß gesagt, das ist Präsenzbindung, aber in dem Folge hier der Bedarf nach menschlichem Kontakt, Charakter und ich glaube, der wird immer wichtiger sein, vor allem auch wirklich größten Teil, glaube ich.
+
+01:14:17 Sprecher 5
+Es hängt davon ab,
+
+01:14:22 Sprecher 7
+Was es ist.
+
+01:14:28 Sprecher 7
+Ich glaube, dass Kai ja gegen den Großteil der Kolleginnen.
+
+01:14:36 Sprecher 7
+Jeder Fachbearbeiter wird Team-Meet,
+
+01:14:39 Sprecher 7
+Von irgendwelchen Timing-Teams, von irgendwelchen KI-Agenten, die verdienen.
+
+01:14:44 Sprecher 7
+Wir haben als Polizei Baden-Württemberg jetzt jede Mitarbeiter mit in orange, grün und schwarz. Da wird die Polizei in die Tasche geschickt.
+
+01:14:53 Sprecher 7
+Das heißt, wir haben das Thema Mobilität rausgebracht als Endgerät-Browser und der lautet,
+
+01:14:59 Sprecher 7
+Die Helfer, der laufen die Coaches, der laufen die Kollegen fest.
+
+01:15:03 Sprecher 7
+Der Mensch wird nie in der Leute zu werden.
+
+01:15:06 Sprecher 7
+Das glaube ich nicht, weil es wird halt so nützlich.
+
+01:15:11 Sprecher 7
+Also, so wie Corona auch präsent war,
+
+01:15:16 Sprecher 7
+Haben wir es diskutiert, dass der Bedarf so als Familie.
+
+01:15:19 Sprecher 7
+Und ich glaube, dass es schön sein wird, wieder als Polizei werden soll, mal wieder eine Kindstreife zu laufen,
+
+01:15:25 Sprecher 7
+In Innenstadt zu reichen, mit Menschen zu interagieren und einfach klar zu werden. Polizei als Mensch erlebt auch die Welt. Warum?
+
+01:15:32 Sprecher 7
+Vielleicht haben wir dann weniger Angriffe.
+
+01:15:35 Sprecher 7
+Also wir können es, wir können es in einem richtigen Bewusstsein, in einem richtigen Umgang, nur dass auch der Mensch richtig war. Das was uns gerade untergeht, weil man hinter dem Schalttisch gestanden ist, weil er mit Scham befindet, hinter dem Drucker, hinter dem Scanner oder hinter irgendwelchen Schaltlisten.
+
+01:15:53 Sprecher 7
+Das finde ich relativ ähnlich.
+
+01:15:56 Sprecher 7
+Weiter ist auch.
+
+01:15:57 Sprecher 5
+Kann ich mich so anschließen? Nein, ich kann ja mal kontrovers bekommen.
+
+01:16:00 Sprecher 7
+Ich hab's mir überlegt, nein, da ist nicht einfach meine Meinung, aber meine Thema wird schon sein.
+
+01:16:05 Sprecher 7
+Ist sicherlich sehr branchenabhängig von Tätigkeitsabhängig. Ich sehe auch das Thema die Qualität in der Interaktion auch zwischen Menschen. Wir hoffentlich nach einer Stärke, wir lernen damit umzugehen, welche Ideen, welche Qualitäten stecken in der menschlichen Interaktion, welche Qualitäten stecken vielleicht auch in Mensch,
+
+01:16:22 Sprecher 7
+Avatar, K. I. gestützten Interaktionen, wie gehe ich damit dann um? Dann brauche ich sie, dann brauche ich sie auch nicht, dann diese hinterlegt, dann unterstützen sie mich in der Interaktion. Dann, Dann fördern wir eben auch die menschliche Interaktion und die Richtung sollten wir stärker noch verwenden und eben immer nur immer denken, wo kann sich der komplette Effekt ist, sondern wo auf dem Grund dann tatsächlich seine meine Interaktionen und das System wir dann auch tatsächlich ein zu Tage ein Tage stehen. Aber relativ viele Aufgaben,
+
+01:16:51 Sprecher 7
+Da werden wir sicherlich hoffentlich auch einen sehr guten Schritt machen, um eben diesen Schritt zu tun,
+
+01:16:57 Sprecher 7
+Qualitativer.
+
+01:16:59 Sprecher 7
+Der Mensch-Mensch-Interaktion oder in anderen Formen und auch tatsächlich zu haben.
+
+01:17:06 Sprecher 8
+Eine Frage.
+
+01:17:07 Sprecher 12
+Jetzt haben wir ja die Vorteile von Avataren mitgekriegt, gelernt, zur Kenntnis genommen oder wir beschäftigen uns alle selber.
+
+01:17:15 Sprecher 12
+Was ich mich immer wieder stelle als jemand, der gerne abends kurz vor knapp einkaufen geht und grundlegend nicht findet, was er braucht und meistens einfach geht.
+
+01:17:24 Sprecher 12
+Warum finden diese Avatare bis heute im Einzelhandel nicht statt?
+
+01:17:28 Sprecher 12
+Ganz klassisch, wo ist die Hefe?
+
+01:17:31 Sprecher 12
+Finden wir nicht. Oder aber, wo sind die Dübel, die Schrauben, wo kann ich meine Gasflasche tauschen? Egal wo, ich kann jetzt nur aus dem Stuttgarter Großraum oder auch beim Peudinger. Wo finde ich Damenklamotten? Nee, ich muss entweder eine Verkäuferin suchen,
+
+01:17:48 Sprecher 12
+Was quasi unmöglich ist, was zeitaufwendig ist. Aber warum finden die da heute nicht statt? Da geht es ja noch nicht mal um ein personalisiertes Einkaufserlebnis, sondern schon alleine da, wo die Agents eigentlich nicht mal Datenpunkte von uns Kunden brauchen, sondern ja eigentlich nur eigentlich sowas wie Looma in einfach für einen packigen Supermarkt oder für einen Baumarkt Warum findet das bei niemanden statt? Also ich habe jetzt Lidl, Edeka, Hipp, Freundinger,
+
+01:18:19 Sprecher 5
+Bauhaus.
+
+01:18:21 Sprecher 5
+Obi, das sind die,
+
+01:18:22 Sprecher 12
+Die ich jetzt so kenne und die haben es alle nicht. Und wie oft ich einen dieser Läden verlasse mit 50% von dem Zeug, was ich nicht gefunden habe. Und dann sind es genau die, die sich beschweren, dass wir bei Klink bestellen, bei Amazon bestellen und überall anders bestellen. Das ist doch eigentlich eine Chance, wieder die Leute in den Einzelhandel zu holen. Warum findet das nicht statt?
+
+01:18:43 Sprecher 12
+Gibt es da irgendwie Ansätze für?
+
+01:18:46 Sprecher 12
+Ideen für?
+
+01:18:47 Sprecher 5
+Warum nicht?
+
+01:18:50 Sprecher 5
+Ich geh auch gern abends einkaufen tatsächlich und mir geht es manchmal ähnlich,
+
+01:19:00 Sprecher 7
+Aber ich glaub das Problem ist natürlich also ich sprech zu bedingt von Lidl da kenn ich mich zu wenig.
+
+01:19:06 Sprecher 7
+Das tatsächlich, obwohl wir sehr stark standardisiert sind, doch jeder Laden anders aussieht und die Konnektivität zwischen Kreativsystemen, tatsächlich welche Artikel wo, an welcher Stelle, in welchem Laden,
+
+01:19:17 Sprecher 7
+Zur Liebe Plus App, das ist aktuell noch ein bisschen schwierig,
+
+01:19:20 Sprecher 7
+Weil wir, ja,
+
+01:19:22 Sprecher 7
+Die Kollegen tatsächlich auch,
+
+01:19:25 Sprecher 7
+Weil es die Indoor-Shocknavigation gibt,
+
+01:19:29 Sprecher 7
+Aber eben nur, wenn es wirklich komplett seine Liste ist.
+
+01:19:33 Sprecher 5
+Also ich glaube,
+
+01:19:34 Sprecher 7
+Aber wir haben auch gelernt, es geht ja bei den Avataren, die aber insbesondere da, wo hohe emotionale oder Erziehungsanforderungen da sind,
+
+01:19:43 Sprecher 7
+Ihren Mehrwert. Also ich glaube, das wäre eher eine Frage von,
+
+01:19:46 Sprecher 5
+Wie kann man das in Verlandung sehr viel abgeben.
+
+01:19:49 Sprecher 9
+Also ich würde da extra Provokativ verantworten und mir sagen,
+
+01:19:54 Sprecher 7
+Warum möglich ein Brennzeichen sein möchte.
+
+01:19:59 Sprecher 12
+Ja, also das ist ja einfach die Frage. Also A, natürlich müsste ich wissen.
+
+01:20:06 Sprecher 7
+Also, weil ich komme halt als Kunde von der Nummer so,
+
+01:20:17 Sprecher 12
+Jeder fucking Scheiß ist Staubsauger, ja, kann meine Wohnung, egal wie verwinkelt es ist, abscannen. und wieso kann kein Matching zwischen das ist das Regal und mir würde es doch schon reichen und da steht Marmelade hier ich will ja gar nicht schwarz auf Marmelade extra werden Himbeere ohne Kerne sondern Marmelade hier und dann wenn es cool ist weil wir haben ja jetzt alle vielleicht eine Edeka App oder eine Lidl App.
+
+01:20:41 Sprecher 12
+Super, dann sammeln wir doch gleich die Daten und personalisieren den Spaß und sagen, guck mal die Angebote von deinen Produkten, die du gekauft hast, anhand deines Einkaufens nicht anhand dessen, wo ich halt per Tracking drauf war oder nicht.
+
+01:20:53 Sprecher 7
+Jetzt kann ich auch vielleicht auch nicht reagieren.
+
+01:20:58 Sprecher 7
+Das ist kein technisches Thema, ich sag ja, das Thema, ich sag ja, es sind Themen, die wir uns selber gemacht haben, in denen wir Digitalisierung bestraft haben,
+
+01:21:09 Sprecher 7
+In denen wir Datenstandards zu finden haben.
+
+01:21:13 Sprecher 7
+Und natürlich können wir immer durchlaufen und jeden Tag den Markt scannen und sagen, was hat sich denn verändert, das ist auch. Also, ich lasse so einen Roboter durchlaufen und jeden Tag mit einer entsprechenden Kamera zu tun, das denke ich, wie da damit gesprochen ist. Aber wenn so eine Scanner und Münze da drin sind,
+
+01:21:30 Sprecher 7
+Datenschutz und so. Also wir treffen im Moment und das weiß ich ganz viel an regulatorisch, über das regulatorisch, das ist ja in die Standardisierung.
+
+01:21:39 Sprecher 7
+Wirklichkeit, Grundsatz von günstiger,
+
+01:21:45 Sprecher 7
+Informatik, Digitalisierung. Die Organisation haben Sie neu gesagt,
+
+01:21:52 Sprecher 7
+Aber hier wird ja nichts transportiert oder so, von daher gibt es noch mal einen neuen Effekt, den man vielleicht auch nicht vernachlässigen kann mit dem IKEA-Effekt.
+
+01:21:58 Sprecher 7
+Also beim Ikea wird es absichtlich durch den ganzen Laden gehen und es gibt ja auch einen Grund, warum man absichtlich vielleicht durch die eine oder andere Gralreihe dann lieben wird.
+
+01:22:08 Sprecher 7
+Das ist nicht spontan so.
+
+01:22:10 Sprecher 7
+Das ist tatsächlich ein wichtiger Geschäftszweig, ist dann auch da, wo marginrechtlich profitieren, wenn ich bin. Die Daten werden im Sammelbild, wenn du das Lust hast, dann ist das schon interessiert ausgespuckt, welche Werbeartikel für Rechtigkeit für mich irrelevant sind für die Kunden.
+
+01:22:24 Sprecher 7
+Vielleicht ist es auch ein Grund. Vielleicht muss es nicht so liegen, ne?
+
+01:22:27 Sprecher 7
+Aufpassen, aufpassen muss ich da reinlaufen und sage, wie sieht's aus, hast du ein paar Zimmer oder kommst du da her und dann schau, ob die vergleichst das. Also.
+
+01:22:41 Sprecher 7
+Ich glaube, die arbeiten an dem KI-Argo an und dann würden wir richtig. Arbeiten Sie mit den anderen Landesbehörden eigentlich zusammen? Oder machen, ich will jetzt nicht negativ sagen, aber arbeiten 16 Landesbehörden gerade,
+
+01:22:52 Sprecher 5
+Weil die nutzen ja keine Hyperscaler,
+
+01:22:54 Sprecher 7
+Glaube ich, also wir im Ballungsintertal bei AWS und Microsoft-Verbandes, haben keine E-Mails bekommen letzten Freitag.
+
+01:23:00 Sprecher 2
+Ich glaube, die hatten E-Mails,
+
+01:23:01 Sprecher 7
+Das war aber sehr produktiv zu lesen bei den Behörden.
+
+01:23:05 Sprecher 7
+Wie zwischen der Zusammenarbeit in den Landesbehörden Haben Sie die IT gehabt, gibt es in jedem Land wahrscheinlich in unterschiedlicher Höhe Wir sind jetzt seit, glaub ich, 8 Jahren dran, die Polizei in der Länder,20, aber nicht voll und die Polizei die Kohlescheid und insgesamt sind die Partner,
+
+01:23:27 Sprecher 7
+Wo ist das bekommen die Regierung?
+
+01:23:31 Sprecher 7
+Hier, das finde ich.
+
+01:23:33 Sprecher 7
+Warum? Der Föderalismus, das gehört Digitalisierung.
+
+01:23:37 Sprecher 7
+Und das können wir noch auspacken.
+
+01:23:40 Sprecher 7
+Wir in Baden-Württemberg haben als Polizei eine Regionalreform durchzogen und von 37 Direktionen zeigt eine regionale Partei gemacht. Das wird dann halt eine rauchige Kampfbände ausbauen.
+
+01:23:53 Sprecher 7
+Das ist gesagt, das macht mir sehr versprechend.
+
+01:23:57 Sprecher 7
+Wenn Menschen, also mein hartester Kampf ist nicht das technische im Moment, sondern du kannst ihn und nicht den testen.
+
+01:24:05 Sprecher 7
+Wir haben es gebaut, unsere Infrastruktur,
+
+01:24:08 Sprecher 7
+Unsere Plattforminfrastruktur ist noch nicht nachsuchbar, sie wird nachsuchbar gemacht.
+
+01:24:12 Sprecher 7
+Für uns ist es total irrelevant.
+
+01:24:14 Sprecher 7
+Die KI-Plattform ist Open-Source-Gesicht gewährt,
+
+01:24:17 Sprecher 7
+Weil wir es nach wie vor machen.
+
+01:24:22 Sprecher 7
+Und ja, wir stehen jetzt gerade mit, dass das Innenministerium und Digitalisierungsministerium in einem Haus ist, steht man da raus, dass man das weiß.
+
+01:24:31 Sprecher 7
+Also das Fünfte, ob das funktioniert,
+
+01:24:34 Sprecher 7
+Dass jetzt jedes, bevor das macht wird. Bei Norbert hat sich eine Einregierungsperson an der Pipeline, die genau das Interesse hat, mit aufgeschrieben. Also wir können, wir bieten im Moment unsere Technologie an.
+
+01:24:51 Sprecher 7
+Die Länder oder die Landesdienstleistungen sind sehr stark geprägt, dass wir eigene Rechen, also wir brauchen eigene Häuser und irgendwie uns Fütterprofile. Wir brauchen Rechen, können wir nicht das beste Fach, wenn wir machen können.
+
+01:25:05 Sprecher 7
+Föderalistisch und zu dem Thema Zusteller wird groß sein, also ich weiß nicht, muss man nicht lesen, wir sind passiert, ihr wird uns im Internet, die geben mal einen über 2031, ein paar Technologien sind geschafft worden.
+
+01:25:18 Sprecher 7
+Das ist auch sehr gut, die Festbretter technisch wirklich aufgearbeitet, wie wir die Systementwicklung in Amerika und Europa, wo wir in 5 Jahren stehen. Das ist erschreckend.
+
+01:25:31 Sprecher 7
+Wenn wir es nicht schaffen, die Länder zu konsolidieren, werden wir abgehängt.
+
+01:25:35 Sprecher 7
+Und ich spreche hier nie vom Landkreis Biberach-Edo-Badenburg,
+
+01:25:40 Sprecher 7
+Sondern ich spreche ja nicht von Deutschland, sondern ich glaube, wir müssen die Marktbedingungen starten.
+
+01:25:47 Sprecher 7
+Das sind Globalen Städte, die wir starten.
+
+01:25:50 Sprecher 7
+Und wenn Sie jetzt nach Baden-Württemberg schauen, das ist das, was hier immer kommuniziert, betrifft mich zwar wenig,
+
+01:25:56 Sprecher 7
+1100 Kommunen.
+
+01:25:59 Sprecher 7
+Von 11.000 Kommunen, 1101 Kommunen in Baden-Württemberg. Ich habe es geschafft, sich zu 582 unter der zweiten Behörde zusammen zu spielen, auf die Wippung und die Bereiche Digitalisierung.
+
+01:26:10 Sprecher 7
+Ich habe das letzte Mal im politischen Raum auch gesagt, es gibt zwei Möglichkeiten.
+
+01:26:15 Sprecher 7
+Die Bereich Digitalisierung Umfälle, wir sehen knallhart eine Reorganisation des Landes auf organisatorischer Ebene an, bei einer Kommune.
+
+01:26:23 Sprecher 7
+Mein Sohn nochmal schon, ich sage, weiß 2000 Einwohner.
+
+01:26:28 Sprecher 7
+Er macht den Treulich und er baut seine Firma, wenn er das schafft, er das nicht digital macht er gar nichts.
+
+01:26:34 Sprecher 7
+Wenn du nur diese Kommunen mitnehmen wolltest, gibt's zwei Möglichkeiten, entweder du bist hier hoch und weil es gibt keine Kommunen digitaler Pass bei unter 100.000 €, grundsätzlich unwirtschaftlich, weil dieses Kapital alle ist gut.
+
+01:26:45 Sprecher 7
+Oder du kannst eben nicht gut auf Plattformen und wieder telefonieren an: "Hallo, wie sind wir?" und Yves macht mich freundlich.
+
+01:26:54 Sprecher 7
+Also ich glaube, der erste Weg ist politisch.
+
+01:26:58 Sprecher 7
+Nicht tragfähig und das werden wir nicht so schnell hinbekommen wie die Frau ist.
+
+01:27:03 Sprecher 7
+Wenn wir im zweiten lesen, gehen wir mit dem Termin ab.
+
+01:27:05 Sprecher 7
+Ich hatte es mit einer größeren Community zu tun.
+
+01:27:08 Sprecher 7
+Wir sind jetzt ein 6-Personen-Arbeiter in einem Projekt.
+
+01:27:12 Sprecher 7
+Und dann haben wir erklärt, was wir jetzt gerade alles in der KITA noch nicht gemacht.
+
+01:27:17 Sprecher 7
+Das erzählen wir einfach drauf, um dazu herauszubekommen, was das ist.
+
+01:27:21 Sprecher 7
+Was macht Konstanz, was macht Freiburg, was hat auch Freiburg, was macht man hinter der.
+
+01:27:27 Sprecher 7
+Genau.
+
+01:27:29 Sprecher 7
+Und jetzt stelle ich eine Frage und kann ich locker sagen, ich bin der Yves.
+
+01:27:34 Sprecher 7
+Wir haben, haben wir tatsächlich die Personalie. Das ist die gleiche Stimme und ich höre die auch nehmen kann.
+
+01:27:42 Sprecher 7
+Meine Tochter hat irgendwann mal gelernt, und sie stimmt doch, und ich finde, dass das gut aus der Praxis ist.
+
+01:27:47 Sprecher 7
+Das war der Lommatzsch.
+
+01:27:49 Sprecher 7
+Mittlerweile bleibt es das war aus Mecklenburg.
+
+01:27:52 Sprecher 7
+Die Lommatzsch hat Verwaltung, bekommen eine neue Aufgabe, bekommen eine neue Personalie.
+
+01:27:57 Sprecher 7
+Mehr Personal.
+
+01:28:00 Sprecher 7
+Mit dem Abschalten des Automotive Sektors oder dem entsprechenden, einer der größten Wirtschaftsmotoren der Europäischen Union,
+
+01:28:08 Sprecher 7
+Glaube ich nicht, was man nicht gesagt hat. Wir müssen an die Organisation, an die Prozesse und die Abläufe und warten.
+
+01:28:17 Sprecher 9
+Das Thema Mentalität.
+
+01:28:20 Sprecher 7
+Das Thema Einzelfallgerechtigkeit kann man machen.
+
+01:28:26 Sprecher 7
+Aber wir sind halt mental.
+
+01:28:29 Sprecher 7
+Wir geben 100.000 Euro im Rechtsstreit aus,
+
+01:28:32 Sprecher 7
+Obwohl Rechtsstreit eigentlich im Elementarwert von 5,50 Euro ist. Genau, aber nein, die 5,50 Euro sind nicht im Rande.
+
+01:28:43 Sprecher 7
+Wie gesagt, bei dieser Fallanzahl sagt man hier zwei Fälle, passt das Selbstrecht, das sind die elementarsten Bausteine in der Ausfüllung.
+
+01:28:50 Sprecher 7
+Heute sage ich, nö, es braucht Psychologie, Bewerbung und Prozess.
+
+01:28:54 Sprecher 7
+Also brauchen wir doch die Avatare.
+
+01:28:59 Sprecher 7
+Gut.
+
+01:29:01 Sprecher 2
+Dann, Nicole, jetzt will ich eine ganz schnelle Frage.
+
+01:29:04 Sprecher 8
+Ich wollte was fragen wegen dem Avatar.
+
+01:29:07 Sprecher 8
+Nicht nur, dass er den Prozess automatisiert. Macht er den auch besser? Also stellt er objektivere Fragen, werden die nicht mehr kürzer oder länger? Ist man mehr relevant für die Zukunft bei so einer Aufnahme von ihm? Also da könnt ihr ja natürlich schon auch in deren Betriebskennzahlen.
+
+01:29:24 Sprecher 5
+Ist es besser oder gleichzeitig?
+
+01:29:27 Sprecher 7
+Besser, aber das hängt damit,
+
+01:29:28 Sprecher 5
+Dass man nicht ermittelt sozusagen,
+
+01:29:31 Sprecher 7
+Also die bisherigen Top-Lösungen, aber wir werden auf jeden Fall Ansatz.
+
+01:29:38 Sprecher 7
+Also beispielsweise, ich habe jetzt irgendwann mal von dem Neffen gesagt, wenn wir jetzt immer wieder einen Schaden dagegen getan haben,
+
+01:29:49 Sprecher 7
+Dann findet jeden Freitagabend kommt irgendein Anzeigestatter her und sagt: "Hier,
+
+01:29:54 Sprecher 7
+Feierabend um 20: 00 Uhr, wo er am Bahnhof fliegt, ist wohl mein Fahrzeug.
+
+01:30:00 Sprecher 5
+Irgendwann mit acht verschiedenen Facharbeitern,
+
+01:30:03 Sprecher 7
+Werden die niemals zusammenkommen, um ihre Anliegen zu kommunizieren.
+
+01:30:07 Sprecher 7
+Und wenn der Arbeiter das macht, kann er daraus Schlüsse ziehen. Oder zweitens, weil die Bande in Kuspern kommt zwischen Mannheim an, dann geht sie weiter nach Karlsruhe, dann geht sie weiter nach Stuttgart und sagt ja, vielleicht haben sie auch, in zwei Tagen sind sie vielleicht im Häusling, oder, ja, sie machen eine sexuelle Maßnahme. Also.
+
+01:30:26 Sprecher 7
+Er wird anders arbeiten, er wird quasi die ganzen Daten zusammenziehen können müssen, ob jetzt qualitativ betroffen wird.
+
+01:30:34 Sprecher 7
+Ja, weil wir quasi eben die Gewalt und Wissen an die verschiedenen Sachbearbeitungen mitgeben können.
+
+01:30:40 Sprecher 7
+Das ist dann natürlich cool auch objektiv,
+
+01:30:42 Sprecher 7
+Emotionen sind raus.
+
+01:30:45 Sprecher 7
+Und nicht, dass er quasi auch mal mehrfach gearbeitet hätte, wäre es nicht ganz erfahren.
+
+01:30:50 Sprecher 7
+Und dann macht er vielleicht die, macht er vielleicht andere Fehler, wie alt der erfahrene ist. Und der Autor macht dann völlig wenig. Die beiden Wissen von verschiedenen Generationen drin hat und von der Heirat die breitere Marke.
+
+01:31:02 Sprecher 8
+Vorteile könnten man hier jetzt auch sagen,
+
+01:31:06 Sprecher 8
+Die hat keine Vorteile gegenüber irgendwas.
+
+01:31:11 Sprecher 7
+Genau, ja, wir haben Monate. Da muss man das vorher prüfen.
+
+01:31:16 Sprecher 5
+Ja, ganz kurz, aber Amazon ist bei einer anderen Technologiedimension, das ist ja, ich brauche jetzt keine Personifizierung von etwas, nur wenn ich digital Daten auswerten will, das Ganze auch mündlich gemeldeten Dinge tun.
+
+01:31:33 Sprecher 1
+Palapala, hier sind 10 Systeme oder irgendwer andere.
+
+01:31:37 Sprecher 7
+Ich kann ja auch ein bisschen Hotline,
+
+01:31:38 Sprecher 1
+Kann ja auch die eine nur digital abhandeln zum Beispiel,
+
+01:31:42 Sprecher 5
+Man kann ja auch kein Avatar vorschreiben.
+
+01:31:47 Sprecher 7
+Technologie ist gefühlsmaßhaft dass ich das mag weil ich wirklich das komplette Thema runterbatteln kann ich habe Informationen kann sie sehr schnell miteinander ablesen ist das für die Muskeln oder viel besser wir vergessen dich wir vergessen keine Frage auch im Stressfach wenn du Stress hast klopert dich dann macht alles einen Punkt.
+
+01:32:09 Sprecher 7
+Der ist auch nicht meins für die Bibel. Das heißt, er versucht nicht, ob das Fahrrad abschlösser war. Also das ist, dass die Frage, die die Abschlösser gar beschlossen haben.
+
+01:32:17 Sprecher 7
+Der versucht auch nicht des Tages, irgendwie auch mal direkt sein muss. Das macht er halt.
+
+01:32:22 Sprecher 7
+Aber das Gesicht verstaut,
+
+01:32:24 Sprecher 7
+Das macht halt, das macht nie den Unterschied mit dem Typ.
+
+01:32:29 Sprecher 7
+Also Avatar macht ihn technisch nicht egal. Das macht ihn besser, wenn eine Kundin etwas holst, du hast einen Kopf und deshalb.
+
+01:32:43 Sprecher 7
+Gut, ich glaube alle weiteren Fragen sind ja die Avatare der drei.
+
+01:32:49 Sprecher 7
+Wir gucken uns gerade digitale Screenings von den Mitarbeitern auch an. Oder natürlich dann draußen beim Buffet.
+
+01:32:59 Sprecher 5
+Okay, das ist okay.
+
+01:33:04 Sprecher 7
+Genau, wir aber gerne gerne Namen austauschen und weitermachen und sagen, wir lösen jetzt mal diese Hemmnissituation auf und dann geht es natürlich noch weiter in die Augen und sind auch in Kontakt.
+
+01:33:30 Sprecher 7
+Ist der Chan?
+
+01:33:32 Sprecher 5
+Ja, richtig, richtig.
+
+01:33:52 Sprecher 7
+Ja, richtig.
+
+01:33:54 Sprecher 6
+Ja, hoffentlich.
+
+01:33:59 Sprecher 5
+Das ist für mich schon was eben dahinter. Ja.
+
+01:34:02 Sprecher 5
+Also ich finde,
+
+01:34:07 Sprecher 6
+Das ist nur halt, was die Gewohnheit des Menschen will,
+
+01:34:10 Sprecher 5
+Wenn ich eine Anzeige auf den eigenen Menschen anspreche. Ja, genau.
+
+01:34:13 Sprecher 5
+Ich habe auch, wir haben auch keine Kinder, die nicht will, weil das ist ja auch nicht der Fall. Wir haben die Wurst, die wir gesehen haben, aber halt auch für ein einmal so weiß ich einmal da haben wir auch so die Heizung am Montag aber da haben wir kein wirklich das ganze Thema gesagt wir müssen das nicht bei der Luft und wir.
+
+01:34:53 Sprecher 5
+Mitgehen und das war jetzt ein neues,
+
+01:34:55 Sprecher 5
+Alles so umgeteilt, die noch mal betrachtet werden. Wir haben jetzt 2 große Tests und eine Couple, einen mit und es wird nicht erhöht werden, sondern die Sprachbarriere steht auf der Diagnose.
+
+01:35:11 Sprecher 5
+Es gibt dieses, was ich als abgebundenes Upgrade von diesen Kollegen, also wir haben aktuell in dieser Arbeit, was eigentlich ganz anders ist, wir haben nur mit Fake da,
+
+01:35:22 Sprecher 5
+Weil wir komplett, also würde ich sagen,
+
+01:35:25 Sprecher 5
+Ja, genau, wir haben, also ich hab ohne Studie einen Schiss über das, was jetzt nicht weiß wie gut, und dann faktieren wir mal den Preis,
+
+01:35:35 Sprecher 5
+Den wir vorher haben.
+
+01:35:39 Sprecher 5
+Das ist das,
+
+01:35:44 Sprecher 5
+Was ist das? Anfang des Jahres, das ist dann gerade ein,
+
+01:35:52 Sprecher 5
+Forschungszweck gemacht, ne, das ist quasi, also den mal quasi noch mal, das ist die Dokumente, dann werden wir das dann praktisch erstellen, was oben haben wir das, also es ist ein weiterer Schritt sein und es quasi eine.
+
+01:36:08 Sprecher 5
+Das bedeutet natürlich auch, dass diese Aufenthaltsform.
+
+01:36:41 Sprecher 5
+Also die, die.
+
+01:37:04 Sprecher 5
+Und das ist das,
+
+01:37:17 Sprecher 5
+Was wir uns bei meisten Unternehmen einfach mit meinen Social Media.
+
+01:37:27 Sprecher 5
+That's fine. That's fine.
+
+01:37:41 Sprecher 5
+That's fine.
+
+01:37:51 Sprecher 5
+WhatsApp?
+
+01:37:53 Sprecher 5
+Also ich werde nicht beantragen. Also du und Verantwortungszeit, ja?
+
+01:38:01 Sprecher 5
+Ja, wir haben dann hier unseren ganzen Anbieter vorgestellt.
+
+01:38:06 Sprecher 7
+Der muss diesen Avatar haben.
+
+01:38:08 Sprecher 5
+Die Anzeige auf der Kommunikation auf der Internetseite.
+
+01:38:20 Sprecher 5
+Ja, wenn man dann halt Freundin ist, der verschneidert wird. Das ist ja auch ein Thema zum ersten Mal, dass man einfach auch eigentlich den Anstand irgendwann entscheiden muss zu ändern da, dass man einfach auf die Idee wurde, wie er das erste Mal hingenommen hat. So hatten viele für sich halt selber so ein bisschen so in die Bulgarien entschieden,
+
+01:38:39 Sprecher 5
+Aber der Kontakt hat sich halt häufig, der hat sich dann auch nicht geguckt.
+
+01:38:49 Sprecher 5
+Es ist natürlich ein Problem, muss man sprechen, auch ja. Ja, es gibt dann haben wir doch alles. Also, die müssen wir erzeugen, nicht das Problem von sich zu schaffen,
+
+01:39:04 Sprecher 7
+Nicht wahr? So und alles, was, was in der Regel ist.
+
+01:39:08 Sprecher 5
+Ja, ich habe dann gesagt, das ist auch nicht.
+
+01:39:20 Sprecher 5
+Irgendeine Dokumentation haben? Und nicht irgendwann mal irgendwas zu tun.
+
+01:39:29 Sprecher 5
+Das war hier schon alles rein.
+
+01:39:30 Sprecher 7
+Das war nur einmal dasselbe.
+
+01:39:35 Sprecher 7
+Das war nur.
+
+01:39:37 Sprecher 5
+Ja, gut, klar, der Grundsatz ist schon wichtig, weil der hat einmal nicht so gute Abzweigkräfte von allen Polizeien.
+
+01:39:42 Sprecher 5
+Einmal im Jahr, genau, war mit einem Tag.
+
+01:39:45 Sprecher 5
+Gestern und heute, ne, vorgestern, Vorgestern war ich mit dabei,2015.
+
+01:39:53 Sprecher 5
+Genau.
+
+01:39:56 Sprecher 5
+Und bei einem war ich dabei, der war damals in den Medien, wenn er die Tage gemacht hat.
+
+01:40:05 Sprecher 5
+Ich hatte natürlich auch die ganzen, die haben auch in die neuen Vermerkungen,
+
+01:40:11 Sprecher 7
+Die sind auch.
+
+01:40:13 Sprecher 5
+Also, es hat große Wellen gegen das Bild und sowas geschlagen,
+
+01:40:18 Sprecher 6
+Sozusagen, und die dauern das.
+
+01:40:24 Sprecher 6
+Yeah.
+
+01:40:36 Sprecher 6
+Yeah. Yeah.
+
+01:40:50 Sprecher 5
+Yeah.
+
+01:40:59 Sprecher 5
+So, hier, links im Publikum.
+
+01:41:04 Sprecher 5
+Da ist schon die Spannung.
+
+01:41:24 Sprecher 5
+That's what we can do something now. That's what we can do.
+
+01:41:58 Sprecher 5
+Ich will teilen, was ich sagen will.
+
+01:42:18 Sprecher 7
+Die Präsidentin der Regierungsstrategie.
+
+01:42:21 Sprecher 5
+We want to go, and we have.
+
+01:42:53 Sprecher 5
+Ja, ja.
+
+01:43:27 Sprecher 5
+Das muss ich dann machen und sagen, ne?
+
+01:43:30 Sprecher 5
+Ich muss noch meinen Projektleiter, Code, so dass ich meine Arbeit erzählt habe,
+
+01:43:36 Sprecher 7
+Das ist der Verkehrsschalter.
+
+01:43:38 Sprecher 7
+Das gibt es ja im April 2018 in den letzten Jahren.
+
+01:43:41 Sprecher 5
+Wenn man persönliche Firmen waren, eigentlich nur noch, da gibt's dann, er hängt tatsächlich die Antwort.
+
+01:43:46 Sprecher 5
+Weil wenn ich jetzt meinen Kaffee abfrage, wie heißt das,
+
+01:43:51 Sprecher 5
+Weiß ich nicht.
+
+01:43:54 Sprecher 7
+Kannst du meine Schule kommen?
+
+01:43:58 Sprecher 5
+If I do,
+
+01:44:05 Sprecher 5
+I do, I do, I have to last me too,
+
+01:44:14 Sprecher 5
+I do. Make approach?
+
+01:44:20 Sprecher 5
+Make approach?
+
+01:44:24 Sprecher 5
+Ja.
+
+01:44:30 Sprecher 7
+Ich habe ihn nicht gespielt.
+
+01:44:30 Sprecher 5
+Das ist Sound of my Base. Ich habe ihn nicht gespielt.
+
+01:44:36 Sprecher 5
+Ne. Heute habe ich mir morgen mein Auto verkauft.
+
+01:44:40 Sprecher 5
+Ja, also ich habe halt so knapp 22 Kilometer drauf.
+
+01:44:53 Sprecher 7
+Ne, Pott.
+
+01:44:55 Sprecher 5
+Genau, das war ja echt spannend.
+
+01:44:58 Sprecher 6
+Und dann hatte ich noch heute Morgen den Autodienst,
+
+01:45:00 Sprecher 5
+Wo wir mitfahren.
+
+01:45:09 Sprecher 5
+Und dann bin ich zu Hause geblieben.
+
+01:45:12 Sprecher 6
+Eigentlich wollte ich arbeiten,
+
+01:45:13 Sprecher 5
+Aber meine Tochter hat dann zur Zeit irgendwie auch noch Fieber und dann konnte ich die pflegen und mein Sohn auch noch. Und wenn der ganze Hause mit seiner Schule geschrieben hat, dann kann man das immer.
+
+01:45:24 Sprecher 6
+Mittags, wo meine Frau dann wieder da war,
+
+01:45:25 Sprecher 5
+Und auch wieder arbeiten war.
+
+01:45:29 Sprecher 5
+So lange bis ich da war.
+
+01:45:33 Sprecher 6
+Runtergeladen habe ich dann, glaube ich,
+
+01:45:34 Sprecher 5
+Diesen Montagabend. Du konntest das irgendwo nicht runterladen, aber das war gestern mal auf Heißen abspielen, genau.
+
+01:45:41 Sprecher 6
+Und ich habe das mitbekommen von den Kumpels.
+
+01:45:44 Sprecher 7
+Der hat eine Xbox und mit der Xbox kann ich die Zeit holen,
+
+01:45:46 Sprecher 5
+Um sich zu helfen, kann sich quasi nach Austrahlen und kannst weg durchspielen.
+
+01:45:53 Sprecher 5
+Der hat es aber runter genommen und dann hat er sich die Zeit so nett von dem Spiel angehalten.
+
+01:46:06 Sprecher 5
+Das wirst du morgen Abend und dann kommst du wieder? Ja, war gut.
+
+01:46:13 Sprecher 5
+Ja, ab 14 Uhr ist es aber abends,
+
+01:46:16 Sprecher 7
+20 Uhr dann.
+
+01:46:21 Sprecher 5
+Hat eigentlich noch Fußballspieler das Klavier?
+
+01:46:24 Sprecher 5
+Ja, dieses Jahr, meine alte Herren.
+
+01:46:30 Sprecher 7
+Also ich bin jetzt in untere Rand der alten Herren, ja.
+
+01:46:37 Sprecher 5
+Also, ich bin jetzt nicht in der Mitte.
+
+01:46:43 Sprecher 5
+Ja.
+
+01:46:47 Sprecher 6
+Kann ich eine Frage, oder?
+
+01:46:49 Sprecher 5
+Ihr wart auch beim ICC da, oder?
+
+01:46:52 Sprecher 5
+Ja.
+
+01:46:53 Sprecher 5
+Ich war auch, ich glaub ich, auf dem vorgestellt, oder? Ja, ja, ja. Ja, ich hab mich kurz hingehockt, dann machst du voll mit dem Auto, ja. Wie habt ihr das gemacht, eine CD und so weiter?
+
+01:47:07 Sprecher 6
+Habt ihr irgendwelche Gardens mal reingemacht oder so,
+
+01:47:10 Sprecher 5
+Weil man ist so ganz bekannte Speicher von McDonald's, wo man dann sagt, hey, schmeckt gut, schmeckt, danke, ist bestellt und guck mal,
+
+01:47:17 Sprecher 6
+Wie man hier mit der Pension und dann kam die Knobos und so weiter.
+
+01:47:20 Sprecher 5
+Das ist der Zusammenhang,
+
+01:47:23 Sprecher 2
+Also ich finde die anderen Entwickler,
+
+01:47:25 Sprecher 5
+Also nicht die Klinge, sondern bei so einem Partner, die ja mit dem Partner oder mitgeschickt haben. Hast du mal die Aussage gemacht? Nee, wir haben die Partnerschaft.
+
+01:47:36 Sprecher 5
+Und die haben es entwickelt,
+
+01:47:45 Sprecher 5
+Die haben es versucht.
+
+01:47:48 Sprecher 6
+Aber es ist quasi auch ein Poltyp,
+
+01:47:49 Sprecher 5
+Das immer schon da ist.
+
+01:47:50 Sprecher 6
+Das hätten wir jetzt so interessiert,
+
+01:47:51 Sprecher 5
+Ob wir da schon, also das ist schon eine Herausforderung.
+
+01:47:53 Sprecher 6
+Das heißt, wenn man jetzt mitgeht und sagt,
+
+01:47:55 Sprecher 5
+Wickel mir mal was, das ein bisschen, dann würde ihr das machen.
+
+01:48:00 Sprecher 6
+Also, genau, dafür bin ich nicht ausgelegt.
+
+01:48:03 Sprecher 5
+Wir haben immer gesagt, geh immer zurück zur Anzeige.
+
+01:48:06 Sprecher 5
+Egal, was eine Frage ist,
+
+01:48:08 Sprecher 5
+Komm zurück und dann muss ich toll machen.
+
+01:48:11 Sprecher 5
+Also, es geht, wir haben es versucht, wir haben.
+
+01:48:16 Sprecher 5
+Ja, okay, cool, das ist jetzt nicht meine Akku.
+
+01:48:21 Sprecher 5
+Ja, gleich bei meinem Handy,
+
+01:48:22 Sprecher 6
+Von welches Model laufen wir da?
+
+01:48:24 Sprecher 5
+Ja, dürfen wir nicht sagen. Doch, doch.
+
+01:48:28 Sprecher 5
+Also die haben jetzt Ding gemacht.
+
+01:48:39 Sprecher 5
+Ah, wir haben zwei verschiedene.
+
+01:48:45 Sprecher 6
+Also die Version ist ja so, oder? Ja, ich weiß jetzt mal, was wir haben.
+
+01:48:48 Sprecher 5
+Es gibt quasi Grund, so abstrakt, wie die um die Sicherheit ist, dann ist es die 0 bei 8,
+
+01:48:55 Sprecher 5
+Also die Grund, die wir dann noch feststellen,
+
+01:49:09 Sprecher 5
+Sondern auch hier drauf, für die Rechenschaft.
+
+01:49:14 Sprecher 5
+Wir haben nur ein paar Sachen drauf die hat auch ein Kreuz und also auf dem Waste halt dann auch ja genau genau in den Fachlichkeiten ja genau ja ist ja weit ist so aber es gibt Unterschiede so wenn du was offen sollst kannst du noch mehr machen das Wake nach einfach ein Parameter drin und dann macht ihr das einfach ein bisschen besser kombinieren oder in den Zeitdruck rein,
+
+01:49:47 Sprecher 5
+Weil kannst du ja wirklich ein tiefreißendes Verlaufs Thema machen.
+
+01:49:53 Sprecher 5
+Ja, wir nehmen jetzt immer, das ist halt so.
+
+01:49:56 Sprecher 5
+Ja, du bist dann im Nachhinein auch vor allem, wenn du kein Thema schreibst.
+
+01:50:01 Sprecher 5
+Also ja, das ist immer, wenn ich auch jetzt deutlich reden soll. Und dann ist es halt eher im Nachhinein, den Punkt dazwischen.
+
+01:50:09 Sprecher 5
+Ja, ja, das war jetzt einfach so, normalerweise, weil, ich hatte jetzt auch so einen deutschen Fall.
+
+01:50:24 Sprecher 5
+Die Kollegen aus dem Kanzler hat gesagt,
+
+01:50:29 Sprecher 5
+Ich bin gerade in diesem Bereich.
+
+01:50:38 Sprecher 5
+Ja, ja, ja, mach ich.
+
+01:50:49 Sprecher 5
+Hoffentlich die Entwicklung, die wir ganz schnell, die von anderthalb Jahren passiert.
+
+01:50:54 Sprecher 5
+Also quasi amerikanischer,
+
+01:50:55 Sprecher 7
+Da haben wir auch eine als Benno Fake Laden,
+
+01:50:57 Sprecher 5
+Die hatten persönlich kein Praktikum,
+
+01:51:00 Sprecher 5
+Da hat mir quasi nichts gefallen zusammen, quasi in der eigenen Situation gefolgt,
+
+01:51:07 Sprecher 6
+Ja der Gast ist eigentlich ungefähr lang,
+
+01:51:09 Sprecher 5
+Nicht mal ganz egal, das macht halt voll gut so Avatare, auch mit Rapelle und die macht man halt irgendwie, ja, also ich hab mir das gerade so ein paar Tage von Hähnchen.
+
+01:51:21 Sprecher 5
+Der Film in der weiteren amerikanischen ist sehr sehr kontrolliert habe geschrieben und kann auch die Informationserkennung sagen haben natürlich gleich gezockt und versucht also geschickt quasi auch nicht die Sprache darüber wir haben nur Textbücher und der andere Text und auch die Stimme und sowas der hat bei dem nicht nur das kleine Bild diese Personalnachrichten zurückgekommen ist der Text schon mal genutzt nur das Bild mit dem notwendigen.
+
+01:51:54 Sprecher 5
+Und wenn das ganze so über den läuft, läuft das Ganze irgendwann mal auch durch so ein Leiter LM oder so durch den Gateway, dass es dann aktiviert wird oder geht das dann direkt so rein, sag ich jetzt mal? Das weiß ich nicht.
+
+01:52:11 Sprecher 5
+Weil es könnte ja sein, dass da die Daten rein, also zwangsläufig,
+
+01:52:15 Sprecher 6
+Weil da ist normaler Maßnahme.
+
+01:52:18 Sprecher 6
+Ja gut stimmt dann sollte es eigentlich eh nicht anders demonstriert werden also unsere Plattform können wir quasi komplett dazu machen,
+
+01:52:25 Sprecher 5
+Die jetzt auch online gestellt werden,
+
+01:52:28 Sprecher 5
+Sonst immer das Gegenteil, das möchte ich anders studiert werden,
+
+01:52:30 Sprecher 5
+Für euch ist es halt klar, wir haben also das eine Ding hier gebaut zusammen und da haben wir quasi komplett,
+
+01:52:37 Sprecher 5
+Können, kommen jetzt alle Sachen rein, rein oder.
+
+01:52:53 Sprecher 5
+Yeah, thanks for the agreement. Yeah.
+
+01:53:14 Sprecher 5
+Ja.
+
+01:55:52 Sprecher 5
+Es ist nicht einfach, zu sagen, es ist nicht einfach, es ist nicht einfach,
+
+01:56:06 Sprecher 5
+Aber es ist nicht einfach, es ist.
+
+01:56:26 Sprecher 12
+Okay, ja.
+
+01:56:30 Sprecher 12
+Ja, natürlich.
+
+01:56:32 Sprecher 5
+Noch ein Auto.
+
+01:56:33 Sprecher 8
+Da freue ich mich. Entschuldigung. Ja, klar.
+
+01:56:37 Sprecher 5
+Okay.
+
+01:56:39 Sprecher 5
+Also, wir müssen jetzt hier. Vielleicht nicht sprechen, oder?
+
+01:56:43 Sprecher 5
+Denk nicht sprechen, wenn wir nicht sprechen.
+
+01:56:48 Sprecher 5
+Ach so, die Luft.
+
+01:57:03 Sprecher 5
+It's one more thing past one.
+
+01:57:10 Sprecher 5
+It's one more thing past one.
+
+01:57:31 Sprecher 5
+Und sich über die Interessentenschaft auch was in der Richtung,
+
+01:57:39 Sprecher 5
+Die ich verstrachte, auf jeden Fall. Und jetzt haben wir Kenntnisse, das ist ja, also die MA,
+
+01:57:45 Sprecher 7
+Vorsitzende der Frau hat uns gerade zugestimmt,
+
+01:57:50 Sprecher 5
+Die Beweihungsförderung ist und die spielen halt wirklich diese,
+
+01:58:00 Sprecher 5
+Die.
+
+01:58:07 Sprecher 5
+Ja, ja, gut, ich meine, die Affen haben, werden.
+
+01:58:15 Sprecher 5
+Ich kann aber nicht,
+
+01:58:22 Sprecher 7
+Ich kann ja auch nicht, weil ich kann ja trotzdem,
+
+01:58:25 Sprecher 5
+Ich muss natürlich, ich hab ja auch alle, weil ich hab natürlich dann, ich hab ja, ich bin ja auch ein kleiner, ich hab, dass die nie really schämt, aber ich bin früher, hab ich ja ziemlich cool, dass das da noch ist,
+
+01:58:42 Sprecher 5
+Wenn auch nie, ja,
+
+01:58:58 Sprecher 5
+Wer sieht gar nicht relativ einfach, wenn wir im Restaurant sind,
+
+01:59:06 Sprecher 5
+Ja, das ist eine Welt, was ich da kann.
+
+01:59:12 Sprecher 5
+Und die war grau von mir aus. Aber wir kamen plötzlich nie von Menschen,
+
+01:59:16 Sprecher 5
+Die hinterhergekannt sind.
+
+01:59:17 Sprecher 3
+Ja, aber wir haben es gerade. Same story.
+
+01:59:21 Sprecher 5
+Ja, das ist so ein Schutz. Ja, ja, der kann dann.
+
+01:59:30 Sprecher 5
+Als menschliche Handpflicht, ist schon.
+
+01:59:35 Sprecher 5
+Sich ja an die technischen Sachen, aber ich muss auch sagen, wir sind nicht in der Position, haben wir ja weniger.
+
+01:59:47 Sprecher 5
+Aber es ist wirklich sehr viel, also schon beschäftigt, weil ich kann ja in dieser Frage, ja, der Frage kommt ja,
+
+01:59:53 Sprecher 5
+Also für die Steine gehen. Oh, ja.
+
+02:00:02 Sprecher 5
+That's how you interesting.
+
+02:00:05 Sprecher 5
+Yeah, and then yeah,
+
+02:00:11 Sprecher 5
+That's why I think that's why I think that.
+
+02:00:30 Sprecher 5
+It doesn't.
+
+02:00:36 Sprecher 5
+It doesn't.
+
+02:00:53 Sprecher 5
+It doesn't. It's. It's really.
+
+02:00:59 Sprecher 5
+Tschüß!
+
+02:01:00 Sprecher 5
+Ciao!
+
+02:01:02 Sprecher 5
+Ich weiß, dass man das immer so weiß. Tschüß! Oh! Ich kann den Tag gleich.
+
+02:01:18 Sprecher 5
+Ja.
+
+02:01:50 Sprecher 5
+Thank you.
+
+02:02:13 Sprecher 5
+Das ist glaube ich schwer. Aber es ist die, das ist eine nicht populöse Rechnung reingepackt hat von den Leuten,
+
+02:02:43 Sprecher 5
+Die es ja wieder echt gehört haben.
+
+02:02:46 Sprecher 5
+Wir haben doch noch die Größe bekommen, davon Rechnung zu verstecken, dafür, dass wir jetzt nur noch unsere einzuschätzen können,
+
+02:02:53 Sprecher 5
+Dass wir gleich eine Frage stellen. Oder die Förderer sind.
+
+02:02:56 Sprecher 5
+Die gibt's Textures vor,
+
+02:02:58 Sprecher 7
+In welchem Sport?
+
+02:02:59 Sprecher 5
+Ja, das muss man nochmal, das Wetter am Montag mit dem Telekop ist alles gut.
+
+02:03:03 Sprecher 5
+Das ist eine Lösung geben.
+
+02:03:05 Sprecher 5
+Also wir sind, wir schaffen nur 10 Prozessen,
+
+02:03:08 Sprecher 5
+Und ich muss den Distrib über die, vielleicht nicht, aber war interessant, weil vielleicht war es auch nur Kim Distributes, weil vielleicht am Montag,
+
+02:03:18 Sprecher 5
+Vielleicht nicht, aber letzten Endes genau das.
+
+02:03:23 Sprecher 5
+Wir sind noch voll quatschen.
+
+02:04:05 Sprecher 5
+Das ist eine sehr, sehr große,
+
+02:04:19 Sprecher 7
+Sehr große, sehr große,
+
+02:04:20 Sprecher 5
+Sehr große, sehr große, sehr große,
+
+02:04:22 Sprecher 5
+Sehr große, sehr große,
+
+02:04:31 Sprecher 5
+Sehr große, sehr große,
+
+02:04:46 Sprecher 8
+Schönen Tag.
+
+02:04:49 Sprecher 8
+Ja, danke schön.
+
+02:04:50 Sprecher 8
+Ich habe da jetzt über orientatorisch nicht viel beigetragen, aber ich kann gerne weiterkommen.
+
+02:11:46 Sprecher 5
+Nee, genau. Zum Glück.
+
+02:11:48 Sprecher 8
+Ja, weil ich eh noch so.
+
+02:11:52 Sprecher 12
+Der beginnt aber auch ganz genau.
+
+02:11:54 Sprecher 5
+Ja, eine Stunde oder so.
+
+02:11:56 Sprecher 8
+Der ist echt blöd, was der da so spät ist.
+
+02:11:58 Sprecher 8
+Dann kommst du teil. Dankeschön und guck mal, ob dein Mann dir ganz,
+
+02:12:02 Sprecher 5
+Das geht dann nicht.
+
+02:12:04 Sprecher 8
+Ich danke dir.
+
+02:12:07 Sprecher 5
+Auch bedauert.
+
+02:12:08 Sprecher 8
+Spontan.
+
+02:12:08 Sprecher 5
+Bis dann.
+
+02:12:12 Sprecher 8
+Tschüss. Schönen schönen Urlaub.
+
+02:12:13 Sprecher 8
+Ja, guten Tag.
+
+02:12:15 Sprecher 8
+Also, unser ist am Freitag mit unserem Job.
+
+02:12:19 Sprecher 8
+Und ich kann den Abend ganz gut.
+
+02:12:23 Sprecher 8
+Na ja, aber ich bin sehr gespannt. Es ist mal froh, dass es noch mal schneit.
+
+02:12:27 Sprecher 8
+Warum ist es bei mir so spät in Prag?
+
+02:12:33 Sprecher 5
+Hi. Hi. I was sure I was on calling the call.
+
+02:13:45 Sprecher 8
+Ja.
+
+02:13:59 Sprecher 8
+Und deshalb darf es normalerweise, jede Mitarbeiter brauchen ständig aus dem Abdeck nicht mehr raus, der weiß immer nicht.
+
+02:14:43 Sprecher 8
+Ich bin der Simon. Das ist der Buchstabe so.
+
+02:15:25 Sprecher 8
+Ja.
+
+02:15:35 Sprecher 8
+Zweimal Zeit.
+
+02:15:39 Sprecher 8
+Zweimal Topf.
+
+02:15:43 Sprecher 5
+Here it is.
+
+02:15:53 Sprecher 10
+Here it is. Das war Stefan, so.
+
+02:15:59 Sprecher 5
+Ah, okay.
+
+02:16:07 Sprecher 5
+Brauchen Sie das Hilfe?
+
+02:16:09 Sprecher 8
+Und zwar beim Betttransportieren. Ich habe auch ein Billing-Kabel.
+
+02:16:17 Sprecher 7
+Das ist gut gesagt.
+
+02:16:19 Sprecher 10
+Ich will mich duschen.
+
+02:16:20 Sprecher 8
+Ich habe es alleine hergetauscht. Es ist nicht viel.
+
+02:16:23 Sprecher 5
+Ich habe das bei mir in der Garage.
+
+02:16:28 Sprecher 5
+Morgen früh, oder was?
+
+02:16:30 Sprecher 5
+Ja.
+
+02:16:31 Sprecher 5
+Bis morgen. Bis morgen.
+
+02:16:35 Sprecher 5
+Ja, gar nicht.
+
+02:16:35 Sprecher 7
+Das war hier am Polizei.
+
+02:16:37 Sprecher 5
+Der Polizei hat auch irgendwas anderes gesagt.
+
+02:16:45 Sprecher 5
+Der Polizeiauto hat irgendwie den Fahrradschutz verdächtigt.
+
+02:16:49 Sprecher 8
+Ja, das muss halt sein. Das muss man eigentlich nur bei allen drei sein.
+
+02:16:58 Sprecher 6
+0204.
+
+02:16:59 Sprecher 8
+Da steht das nicht irgendwie hier.
+
+02:17:05 Sprecher 5
+Was ist das?
+
+02:17:29 Sprecher 7
+Äh, ja, ja, aber ich kann trotzdem kurz überlegen,
+
+02:17:33 Sprecher 5
+Ob wir, was wir wirklich am Tag schalten oder ob die Sache,
+
+02:17:36 Sprecher 7
+Was Sinn macht.
+
+02:17:38 Sprecher 5
+Weil unbedingt drei Tonnen haben.
+
+02:17:40 Sprecher 8
+Ja, doch, ja,
+
+02:17:43 Sprecher 5
+Und das kann ich noch nicht.
+
+02:17:45 Sprecher 7
+Also, viel. Ich kann es nicht einfach so entscheiden,
+
+02:17:48 Sprecher 5
+Dass ich nicht sprechen kann.
+
+02:17:50 Sprecher 8
+Weil, du weißt, was ich auch,
+
+02:17:51 Sprecher 5
+Was ich übernommen hab, sollt ihr auch nicht vorstellen. Ja, hab ich ja auch recht.
+
+02:17:54 Sprecher 8
+Ich mag den zeig ich ehrlich,
+
+02:17:55 Sprecher 5
+Doch, aber irgendwie hab ich das Gefühl, dass es doch.
+
+02:17:58 Sprecher 5
+Ich mag das doch eigentlich, oder?
+
+02:18:00 Sprecher 12
+Ja, grundsätzlich ja.
+
+02:18:02 Sprecher 5
+Das kommt auch mit her?
+
+02:18:03 Sprecher 8
+Das kommt auch ganz nur von den Reichseinmördern.
+
+02:18:13 Sprecher 5
+Ja. Da gibt's ja auch wieder was von.
+
+02:18:17 Sprecher 5
+Ich weiß es nicht,
+
+02:18:19 Sprecher 8
+Aber du hast auch heute und morgen.
+
+02:18:22 Sprecher 3
+Eigentlich schon.
+
+02:18:23 Sprecher 5
+Also eigentlich muss ich noch was sagen.
+
+02:18:28 Sprecher 5
+Und dann muss man das nicht auch machen.
+
+02:18:49 Sprecher 8
+Ja, ja,
+
+02:18:53 Sprecher 8
+Ja, ja.
+
+02:18:59 Sprecher 8
+Okay, gut, also. Da musste ich mich jetzt dran erinnern,
+
+02:19:01 Sprecher 5
+Was du da. Das glaube ich jetzt, also ich weiß jetzt nicht, ob du das jetzt siehst. Also eigentlich habe ich diese Spiele,
+
+02:19:06 Sprecher 9
+Da würde ich bei denen auch gerne produzieren.
+
+02:19:09 Sprecher 7
+Sowas wie der Teller aus Denkmal.
+
+02:19:13 Sprecher 8
+Was denkst du, was ist denn das?
+
+02:19:16 Sprecher 8
+Und er hat ja, was gibt es denn von dem?
+
+02:19:20 Sprecher 5
+Das, was seine Aufgabe ist.
+
+02:19:29 Sprecher 5
+Es kommt doch vor, dass wir uns das machen.
+
+02:19:39 Sprecher 7
+Wie viele Akademien das rausnehmen.
+
+02:19:43 Sprecher 5
+Genau, ja, wir können darauf achten,
+
+02:19:45 Sprecher 7
+Aber wie gesagt, das finde ich jetzt immer noch nicht so verstellbar. Also eigentlich habe ich mich gerade vor solchen Aufgaben.
+
+02:19:52 Sprecher 5
+Eigentlich bist du ja genau bei dem gewesen, so.
+
+02:19:58 Sprecher 8
+Das kann man mitbeantworten. Das hat er nicht gesagt.
+
+02:20:03 Sprecher 8
+Nee, dann gesagt.
+
+02:20:04 Sprecher 5
+Aber, ja,
+
+02:20:06 Sprecher 7
+Aber eigentlich muss ja die Aufgabe stimmen, aber auf alle Seite hat man das nicht so gemacht,
+
+02:20:10 Sprecher 5
+Weil es auch nicht so klar war, was natürlich in der Familie hier lag.
+
+02:20:14 Sprecher 8
+Das heißt bei mir auch nicht. Genau. Du hast immer mal ganz ehrlich gesagt, wir haben ja auch niemanden.
+
+02:20:19 Sprecher 5
+Ja, dann muss man sich genau deshalb kommunizieren und sich darum kümmern, dann.
+
+02:20:21 Sprecher 8
+Ja, man hat auch geguckt, dass alle kommunizieren, dass zum einen, wenn ich da bin,
+
+02:20:26 Sprecher 5
+Dann arbeitet es.
+
+02:20:27 Sprecher 7
+Und dann wird alles andere geändert,
+
+02:20:29 Sprecher 8
+Ne? Und deshalb ist es eben nicht so, aber.
+
+02:20:34 Sprecher 8
+Also, es ist oft so, die Wende, wo es so übermittelt wurde, auch in München, die nationale Situation ist auch nicht so.
+
+02:20:46 Sprecher 5
+Das war es genau gemacht, das war es halt.
+
+02:20:49 Sprecher 8
+Und das heißt, ich habe bis zu einem gewissen Punkt immer das Kenntnis.
+
+02:20:52 Sprecher 5
+Aber ganz ehrlich, mir war das vorher nicht mehr zu sagen. Absolut, ja. Also ich bin wenigstens immer so kalkuliert, das ist alles.
+
+02:21:08 Sprecher 8
+Wir haben das Thema auch mit Kommunikation gemacht, weil wir sind mit einem oder besser miteinander.
+
+02:21:14 Sprecher 8
+Ja, also, und intelligent, und zwar ist es auch nicht so, aber es ist auch ein Bayerischer.
+
+02:22:00 Sprecher 5
+Was sie kann und zwar auch dann so,
+
+02:22:02 Sprecher 7
+Dass es dann auch funktioniert. Weil wenn der Tag nur muss,
+
+02:22:04 Sprecher 5
+Sondern man kann ja dann am Tag, weil es dann doch nicht geht oder ein Kind nicht kann und sagt sie dann auch nicht.
+
+02:22:09 Sprecher 10
+Nee, das kann ich auch gar nicht machen.
+
+02:22:12 Sprecher 7
+Ich muss mal gucken, ob wir das hier.
+
+02:22:14 Sprecher 8
+Ne, nur bisschen tun können.
+
+02:22:17 Sprecher 5
+Ja. Aber trotzdem musst du noch mal reingehen.
+
+02:22:21 Sprecher 7
+Keine Ahnung, ich meine, wenn das mit deinem Hund geht, zwei Stiefeltern.
+
+02:22:24 Sprecher 7
+Das ist kein Familie.
+
+02:22:26 Sprecher 8
+Alles klar, Familie.
+
+02:22:27 Sprecher 5
+Sie hat ihr Familie.
+
+02:22:31 Sprecher 8
+Zumindest finde ich es ja gut, also.
+
+02:22:34 Sprecher 7
+Ich höre auch gut, weil ich meine,
+
+02:22:35 Sprecher 5
+Wenn ich nicht das habe, weil ich dann keine Bock drauf habe.
+
+02:22:46 Sprecher 5
+Ja. Ja, ich finde auch. Ich fand nämlich trotzdem irgendwie, also du versteckst dann immer noch alles für den Beruf, oder? Ja.
+
+02:22:59 Sprecher 5
+Thank you.
+
+02:23:09 Sprecher 8
+Wie heißt das?
+
+02:23:11 Sprecher 8
+Ja, das Einzige, was du mitgetrunken hast, hat mir gesprochen. Ja, vielen Dank.
+
+02:23:16 Sprecher 8
+Danke, danke auch.
+
+02:23:18 Sprecher 7
+Und ich zieh das mal.
+
+02:23:20 Sprecher 5
+Ich guck mal, dass er das nicht vergessen hat.
+
+02:23:53 Sprecher 5
+Okay, yeah,
+
+02:24:07 Sprecher 8
+Okay. Nö.
+
+02:24:11 Sprecher 8
+Ich hab gehört, dass es geführt wird.
+
+02:24:16 Sprecher 8
+Es war so.
+
+02:24:18 Sprecher 8
+Wir sind beide da, standen nämlich nachher dann. Es ist alles ganz gut, wenn man das nochmal hört.
+
+02:24:24 Sprecher 8
+Okay, mach ich.
+
+02:24:27 Sprecher 8
+Okay, mach ich. Ja, da sitzt du dann.
+
+02:24:33 Sprecher 8
+Und dann haben sie das also wirklich gesagt, ich bin so froh, ja, das ist doch kein Paar, eigentlich, der von der Frau kann. Ja, das kann dann auch noch, ne? Okay, ich kann mit der Liste rausfahren.
+
+02:24:46 Sprecher 8
+So geht das im Grunde natürlich. Ja.
+
+02:24:50 Sprecher 8
+Auch so begeistert, aber bei mir ist es so ein Feld. Ich kann hier wirklich dieses.
+
+02:25:10 Sprecher 8
+Und was das Fleisch gekostet hat, das ist aber so schnell.
+
+02:25:14 Sprecher 8
+Wir sind im Wasser.
+
+02:25:17 Sprecher 8
+Dann ist das Leben hier und wir sagen, okay, probier es alles.
+
+02:25:20 Sprecher 8
+Und ich finde das junge Wasser.
+
+02:25:22 Sprecher 8
+Ich hab immer das Problem.
+
+02:25:25 Sprecher 6
+Wirklich alle so. also.
+
+02:25:28 Sprecher 8
+Ich bin heimlich, hatte meine Mama angerufen und gesagt: "Du, glaub es, kann ich damit gar nichts anfangen, aber ich war so begeistert!" Ich liebe es! Ich liebe es so sehr, sehr!
+
+02:25:39 Sprecher 5
+Das war bei uns immer so diese Pain,
+
+02:25:41 Sprecher 8
+Diese Finger so zu machen.
+
+02:25:44 Sprecher 8
+Und das würden wir halt sagen, das sind andere Pains, wie Alltag, Arbeit oder was jetzt so was, dann.
+
+02:25:52 Sprecher 8
+Perfekt, so gut.
+
+02:25:56 Sprecher 8
+Dann wird immer gesagt, wie es gesagt hat, weißt du, ich werde dann schon langsam jetzt nass. Ja, wir sind Serienfelder.
+
+02:26:01 Sprecher 8
+Dankeschön, mach nochmal. Nein, ist besser noch gut, wenn ich den Fraunhofer raus.
+
+02:27:02 Sprecher 5
+Ja. Ja.
+
+02:27:04 Sprecher 5
+Und ich muss jetzt noch.
+
+02:27:10 Sprecher 8
+Ich hab gar nicht.
+
+02:28:00 Sprecher 5
+Ja, das ist nämlich auch toll.
+
+02:28:12 Sprecher 7
+Aber super.
+
+02:28:14 Sprecher 8
+Also ja, für Deutschland,
+
+02:28:16 Sprecher 7
+Viel auch. Wir machen Gold fertig, für die Genütigung.
+
+02:28:24 Sprecher 5
+Wir werden ein Stück an das Verkehrsmittel reinkommen. Vielen Dank. Danke Ihnen. Ciao.
+
+02:28:49 Sprecher 5
+Ja. Die Frage auswählen. Der, der, der Ding war Frage.
+
+02:28:55 Sprecher 5
+Ja, gerne.
+
+02:29:02 Sprecher 5
+Vielen Dank.
+
+02:29:04 Sprecher 5
+Ciao.
+
+02:29:15 Sprecher 5
+Es hilft, seinen Wissensstand hochzubringen.
+
+02:29:36 Sprecher 5
+Es hilft,
+
+02:29:43 Sprecher 5
+Seinen Wissensstand hoch.
+
+02:33:49 Sprecher 5
+Cool. Ciao, mein Bruder. Ciao.
+
+02:40:56 Sprecher 7
+Are you going home already? Yeah? Are you going home? Yeah, I'm just going to. How about you? I come to the event, this is about AI avatar. I just coming inspiration,
+
+02:41:10 Sprecher 7
+Coming inspiration too, I come in.
+
+02:41:14 Sprecher 5
+Yeah, you do when I hear what these things say I have,
+
+02:41:17 Sprecher 5
+I just like something like some they are also playing games and having creating the wrong voice something like that?
+
+02:41:23 Sprecher 7
+No, no, no, it's the.
+
+02:41:27 Sprecher 7
+It's example of doing comfortable with AI avatar I've seen today.
+
+02:41:32 Sprecher 7
+You cannot, you cannot ask what in members in there or where's room or where's rooms you six before?
+
+02:41:39 Sprecher 7
+Oh, that's sure. That's good.

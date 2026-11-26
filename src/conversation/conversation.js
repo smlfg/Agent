@@ -3,6 +3,7 @@
 
 import { createTypewriter } from './typewriter.js';
 import { dissolve } from './dissolve.js';
+import { renderSources } from './sources.js';
 import { currentBehaviour } from '../metrics/surface.js';
 
 const THINKING_MARKUP = '<span class="thinking-dots" aria-hidden="true"><span></span><span></span><span></span></span>';
@@ -201,6 +202,9 @@ export function mountConversation({ root, store, agent, reducedMotion = false })
           answerEl.setAttribute('aria-busy', 'false');
           if (live) live.textContent = text;
           retireCaret(answerEl, caret);
+          // Below the answer, outside it and the live region: never read aloud.
+          const chips = renderSources(doc, result?.sources);
+          if (chips) answerEl.after(chips);
           typewriter = null;
         },
       });

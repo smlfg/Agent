@@ -1,15 +1,17 @@
-# Graph Report - Agent  (2026-11-19)
+# Graph Report - Agent  (2026-11-23)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 335 files · ~370,772 words
+- Verdict: corpus is large enough that graph structure adds value.
+- Unclassified: 43 file(s) not represented in the graph (top: .css 21, .jsonl 8, .woff2 4)
 
 ## Summary
-- 5050 nodes · 7135 edges · 449 communities (269 shown, 180 thin omitted)
-- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 398 edges (avg confidence: 0.78)
-- Token cost: 0 input · 0 output
+- 6433 nodes · 9756 edges · 540 communities (283 shown, 257 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 657 edges (avg confidence: 0.83)
+- Token cost: 540,427 input · 2,200,783 output
 
 ## Graph Freshness
-- Built from commit: `a78f3123`
+- Built from commit: `2fc876ac`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -23,12 +25,12 @@
 - Notion README Status Document
 - Agentfähig Technical Intent
 - UPSTREAM_SEARCH (Tech)
-- Abgleich Document
+- Think (Experimental)
 - Research README Document
 - validate.sh
 - Samuel (Owner)
 - Agent Introduction Sketch
-- Block Introduction Sketch
+- UI-3 Reload und Reconnect
 - diagram
 - diagram
 - screenshot
@@ -72,14 +74,14 @@
 - 1 · Im Projekt
 - ui-morph
 - HANDOFF — doppelte U-IDs und ein Material-Widerspruch
-- L1 — Der stille Rand
+- Analysen N1–N7: Schnittstellen und Dynamik nach M1
 - konkurrenz
 - E1 Measuring the wrong gate green
 - Fast/Slow
 - run.mjs
 - Pika generative-ui
 - VISION-samuel.md
-- H What from existing planning carries
+- mountPresence
 - Voice-Interaktion · Deliverable G
 - K-3 D6 beantwortet und trotzdem Blocker
 - Typografie und Antwortdarstellung (Deliverable E)
@@ -101,9 +103,9 @@
 - Antwortet
 - HANDOFF-gespraechsfuehrung.md
 - Rive
-- Cloudflare Agents SDK (cloudflare/agents)
-- E12
-- Execution Plan M1 Measurement Run
+- Prior Art Report
+- L2 — Die Unterbrechungszeile
+- surface-projector.js
 - WF-10 · Fehler
 - PLAN-STUFEN-0-5.md
 - State & Scheduling
@@ -120,14 +122,14 @@
 - instrument.js
 - Sliders
 - Scroll-Verlauf
-- WF-09
+- OD-00 · Flow-Freigabe
 - package.json
 - 5 · Bekannte Abweichungen (offen)
 - Review-Punkt 3: Voice ist Teil des Erstbaus
 - MCERQUA/OpenVoiceUI
 - UNSOLVED — Entscheidungswarteschlange (Technik)
 - WCAG 2.2 SC 2.3.3
-- WF-12 · Verlauf
+- main.js
 - U-11 Cited contract version does not exist
 - sketches/2026-11-12-agentfaehig.md
 - SKILL.md
@@ -136,25 +138,25 @@
 - 2-tier routing (3 root currents -> specialist on-demand agent via Bridge + 2 Threads)
 - Visual Concept — Idle / Presence State
 - Augen als emotionales Zentrum
-- OD-00 · Flow-Freigabe
-- Task Closure Skill
-- Stufe 2 – Entscheidung Cloudflare ja/nein
+- metrics-spatial-bridge.test.js
+- compute.js
+- surface-state.js
 - ADR-0005 — Vor dem Ausbau: ein Fremder testet den ersten Durchstich
-- docs/PROJECT_CONTRACT.md
+- createTypewriter
 - $ (querySelector)
 - validate.yml
 - Problem: interaktive KI-Oberflaeche mit bis zu 3 sichtbaren Ein-Wort-Slidern fuer Atmosphaere und Antwortstil
-- Deepgram
-- A2UI
 - Kosten: TTS-Anbieter (deutsch, geparkt) und Workers-AI-Voice-Betrieb
+- idle.js
+- surface.js
 - Review-Punkt 4: Reproduzierbarkeit des Messlaufs
 - K-7 18 ODs, 7 davon P0
 - Offene Entscheidungen
-- 3 · Außerhalb des Projekts — und warum
+- gaze.js
 - createBrowserTools
 - Wrangler CLI Skill
 - Stichprobe (n = 5)
-- T1–T9 requirements table
+- mountReplay
 - Widget (Website mit Agenten)
 - Input Field
 - Nächster Schritt: Samuel wählt eine Hauptrichtung
@@ -163,14 +165,14 @@
 - Ablauf
 - Invalid run
 - prototype/index.html
-- K-1 Control-Plane-Widerspruch statt „keine Mission"
-- U-03 Voice in initial build vs text-first
-- WCAG
+- mountConversation
+- mic.js
+- E11: Nur die Augen tragen Präsenz
 - DISCONNECTED
-- QwenAudio/qwen-audio-agent
+- chain.test.js
 - Aufgaben T1–T6
-- deutsche Pipeline (geparkt)
-- agents/dist/voice/index.js
+- ElevenLabs
+- C. REFERENCE SET (15 Primärreferenzen im 9-Punkte-Analyseraster)
 - K-6 Pause/Stop für automatisch blinkende Augen
 - 4.5 Satz- und Absatzverhalten
 - render
@@ -185,19 +187,19 @@
 - versions
 - target
 - versions
-- Cloudflare Blog: Cloudflare Realtime Voice AI
+- worker.js
 - Handoff-Netzwerklatenz zwischen Diensten
 - Moshi (Kyutai)
 - Neuron (Workers AI Abrechnungseinheit)
-- U29 — agentfähig.de liefert nicht die ADR-0002-Fläche
-- ElevenLabs
+- ollamaAgent.js
+- keyboard-viewport.test.js
 - Typewriter-Effekt
-- MCP Integration
+- remoteAgent.js
 - Kritische Fehler E1–E8
 - durableObjectStore
-- docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md
-- ADR-0004 — Der Regler verändert Oberfläche und Haltung
-- U20 — Zwei Vertragsgenerationen und Execution Plans vermischt
+- 2.2 Vollständige Zuordnung je Dimension
+- PLAN — Audio-Ausgabe des Agenten
+- 03 · Zustandsmatrix und Feedback-Regeln
 - Vorgeschlagen, nicht bestätigt
 - 8. Risiken & offene visuelle Fragen
 - WF-08
@@ -209,12 +211,12 @@
 - blocker
 - isolation
 - run
-- Budget und Stop-Kriterien
+- 1. Parameter → Komponente
 - Desktop und Mobil · Deliverable H
 - U10 — Typewriter-Wahrnehmungs-Obergrenze
-- U3 — unsolved technique
+- FaceManager
 - Website is the agent (not a website with a chat)
-- Prior Art Decision A: ADAPT
+- EyeFace.js
 - Cloudflare Chat Agent example
 - Agent
 - Zweck: fünf Wahrnehmungen prüfen
@@ -223,9 +225,9 @@
 - measurement
 - Pydantic AI Browser WebRTC
 - Ein Writer pro Integrationsstelle
-- Stufe 4 – Ausweichpfad
-- OD-13 · Warte-Schwellen und Typewriter-Puffer
-- deutsche Stimme über zwei Anbieter
+- Handoffs — nicht anwendbare Änderungen (README)
+- Bericht — Reaktive statt lenkende Gesprächsführung (Feld: Verhandlungsgespräche)
+- Bericht — reaktive statt lenkende Gesprächsführung + Experimentierplattform
 - Transition choreography
 - Control Plane: DEGRADED
 - DESIGN_RESEARCH_2026-09-25.md
@@ -241,34 +243,34 @@
 - environment
 - serverModelRuntime
 - instrumentation
-- Phase 0 prerequisites
+- UI-5 Ein Regler, Oberfläche und Haltung
 - Cloudflare Workers AI
-- Google Cloud TTS
+- UI-1 Route, Shell, Zustandsvertrag
 - Drei Ebenen, die nicht verwechselt werden dürfen
 - HAI-DPPM/Projek-Managment/DPPM_CORE_CANON.md
-- agents/dist/voice/index.d.ts
-- agents/dist/voice/workers-ai.js
-- UI-8 A11y-, Viewport- und Regressionslauf
-- U22 — Readiness-Audit und Q1–Q4 nur in graphify-out/
+- Agent AB — Vom Gespräch zum richtigen Endpunkt
+- report-r1.md
+- Reaktive Gesprächsführung für agentfähig.de — Prior-Art-Bericht
+- Reaktive statt lenkende Gesprächsführung — Bericht (nur gelesen, nichts geändert)
 - fast / slow Architektur
-- Idle behaviors
+- Serendipität und unterschwellige Führung im Interface — Bericht (nur gelesen, nichts geändert)
 - Slider Thumb
 - One agent architecture
-- client-sdk.md
-- onEmail
+- Streaming Chat with AIChatAgent
+- Stabilisierung 20.11.2026 — gesicherter Stand und eine echte Agentenantwort
 - onTurn
 - PushSubscription
 - Workflows Integration
-- handleRooms
+- Routing
 - serverMapping
 - serverMapping
 - serverMapping
-- OpenAI TTS
+- UI-7 Voice nach Klick
 - Fallback: external TTS
 - Front man Agent
 - Betriebsstand
 - docs/wireframes/04-open-decisions.md
-- Microphone Button
+- UNSOLVED — Handoff-Ergänzungen (19.11.2026, Abend)
 - Single amorphous field metaphor
 - Mission contract proposal
 - routeAgentEmail
@@ -276,13 +278,13 @@
 - UNSOLVED-TECHNIK.md
 - Audio-Lane-Lock
 - Silence detection: 500 ms timeout vs flux turn detection?
-- U8 — „Agentic Behaviour Dynamic“ kein etablierter Begriff
-- U15 — Agent hat keinen definierten Inhalt
-- U6 — Zwei Modelle laufen am 20.11.2026 ab
+- Agent E — Gesprächsmetriken: Konzept, Abbildung, erster Durchstich
+- Agent Z — Prosodie-Ebene (Recherche/Planung, keine Datei geändert)
+- M-20261119T220518-4585e9fd-GESPRAECHS-ENDPUNKTE.md
 - @cloudflare/voice
 - fetch
 - E6 — Hintergrundresultat nie entdeckt
-- Microsoft Azure Speech
+- UI-2 Text-Turn end-to-end
 - Transportinvarianten
 - creator pathway
 - product for X pathway
@@ -296,6 +298,7 @@
 - Realtime SFU
 - Berechnung kompletter Voice-Wechsel (~530 Neurons)
 - Agent-SQLite
+- report-ac.md
 - Bluetooth
 - Buffer sizes
 - Control group without chatbot
@@ -434,7 +437,7 @@
 - scheduleEvery
 - Env
 - handleUsers
-- Grilling Skill
+- Neue Kandidaten (geprüft 19.11.2026, GitHub-API über `smlfg`)
 - Verification Before Completion
 - Application Code README
 - Style research
@@ -459,30 +462,47 @@
 - VR study N=24
 - WF-01…WF-12
 - Worker clock vs ear gap
+- Server-Driven Messages
+- K-7 18 ODs, 7 davon P0
+- report-n7.md
+- ADR-Besprechung 19.11.2026 — Mission M-20261119T212224-5bca4784
+- Evolving CSS: das wachsende Oberflächen-Genom
+- Metrik → Parameter → Oberfläche: Vertrag (Entwurf)
+- Prior Art Decision B: INTEGRATE
+- Falle 1: Theme-Switcher-Gimmick
+- report-i3.md
+- Cloudflare Worker agentfaehig mit /api/explain/* und Service Binding EXPLAIN
+- KONKURRENZ_LEKTIONEN.md
+- verify-live.sh
+- DESIGN_RETHINK_2026-09-25.md
+- MDN DeviceOrientationEvent.requestPermission
+- build.sh
+- deploy.sh
+- archive-agent-results.sh
 
 ## God Nodes (most connected - your core abstractions)
 1. `Agentfähig Wireframe` - 104 edges
-2. `PROJECT_CONTRACT — Agentfähig` - 78 edges
-3. `Projektstand — Agentfähig` - 72 edges
-4. `M0 — Latenzmessung Textpfad (19.11.2026)` - 71 edges
-5. `MESSLAUF-PLAN` - 64 edges
-6. `Skills im Projekt` - 55 edges
-7. `Cloudflare Bausteine Research` - 54 edges
-8. `Dateinamen — Regel, Ist-Zustand, Umbenennungen` - 51 edges
-9. `UX Informationsarchitektur` - 48 edges
-10. `WF-10 · Fehler` - 47 edges
+2. `Projektstand — Agentfähig` - 93 edges
+3. `PROJECT_CONTRACT — Agentfähig` - 90 edges
+4. `M0 — Latenzmessung Textpfad (19.11.2026)` - 78 edges
+5. `MESSLAUF-PLAN` - 77 edges
+6. `README` - 63 edges
+7. `UX Informationsarchitektur` - 62 edges
+8. `mountPresence()` - 61 edges
+9. `Dateinamen — Regel, Ist-Zustand, Umbenennungen` - 55 edges
+10. `Embodiment-Recherche` - 55 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `finalInputToFirstAudioMs` --semantically_similar_to--> `first_audio_ms`  [AMBIGUOUS] [semantically similar]
-  tech/MESSLAUF-PLAN.md → docs/UNSOLVED-PLANUNG.md
-- `Reused playback bridge` --conceptually_related_to--> `first_audio_ms`  [INFERRED]
-  tech/MESSLAUF-PLAN.md → docs/UNSOLVED-PLANUNG.md
-- `Audible clicks at audio packet boundaries` --conceptually_related_to--> `first_audio_ms`  [INFERRED]
-  tech/MESSLAUF-PLAN.md → docs/UNSOLVED-PLANUNG.md
-- `Notion README Status Document` --references--> `Agentfaehig Sketch PDF`  [EXTRACTED]
-  notion/README.md → sketches/2026-11-12-agentfaehig.pdf
-- `ElevenLabsTTS (@cloudflare/voice-elevenlabs)` --references--> `ElevenLabs`  [INFERRED]
-  tech/MESSLAUF-PLAN.md → docs/UX-INFORMATIONSARCHITEKTUR.md
+- `4 · Modell, Provider und Fallback` --references--> `fetch()`  [INFERRED]
+  tech/M0-DEPLOYED-ANALYSE-2026-11-20.md → deploy/agentfaehig-site/src/worker.js
+- `2) Schnittstellen` --references--> `mountConversation()`  [INFERRED]
+  docs/missions/agent-reports/report-n3.md → src/conversation/conversation.js
+- `2) Schnittstellen (Vorschlag, nichts gebaut)` --references--> `respond()`  [INFERRED]
+  docs/missions/agent-reports/report-n4.md → src/dev/devAgent.js
+- `2. Architektur der Vernetzung: Anker (`SurfaceState` / `Bones`) + Metrik-Modulation (`Δp`)` --references--> `mountMetrics()`  [INFERRED]
+  research/UPSTREAM-SEARCH-spatial-depth.md → src/metrics/surface.js
+- `3. Die drei vielversprechendsten Richtungen` --references--> `deriveSurface()`  [INFERRED]
+  research/UPSTREAM-SEARCH-spatial-depth.md → src/metrics/surface.js
 
 ## Import Cycles
 - None detected.
@@ -494,7 +514,7 @@
 - **Augen-State-Machine** — docs_visual_exploration_02_active_conversation_ui_section_5_1, docs_visual_exploration_02_active_conversation_ui_eye_state_rest_breathing, docs_visual_exploration_02_active_conversation_ui_eye_state_user_typing, docs_visual_exploration_02_active_conversation_ui_eye_state_thinking_swarm_call, docs_visual_exploration_02_active_conversation_ui_eye_state_answer_appears, docs_visual_exploration_02_active_conversation_ui_eye_state_speaking_voice, docs_visual_exploration_02_active_conversation_ui_eye_state_reading_scrolling, docs_visual_exploration_02_active_conversation_ui_eye_state_falling_asleep, docs_visual_exploration_02_active_conversation_ui_ui_eyes [EXTRACTED 0.75]
 - **Idle presence state components** — docs_visual_exploration_01_idle_presence_scribble_texture_treatment, docs_visual_exploration_01_idle_presence_eye_shape_size_position_expression, docs_visual_exploration_01_idle_presence_idle_behaviors, docs_visual_exploration_01_idle_presence_transition_choreography, docs_visual_exploration_01_idle_presence_typography_pairing [EXTRACTED 0.75]
 - **K-1 Control-Plane-Widerspruch** — docs_handoffs_2026_11_19_plan_konsolidierung_k1, docs_unsolved_planung_hai_health, hai_store, active_mission, lease_s_20261119t195007_03a762bf [EXTRACTED 0.75]
-- **K-2 Adressierbarkeitsverlust der Entscheidungswarteschlange** — docs_handoffs_2026_11_19_plan_konsolidierung_k2, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_unsolved_technik, docs_handoffs_2026_11_19_plan_konsolidierung__ref__projektpfade, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_project_contract, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_handoffs_2026_11_19_unsolved_ergaenzungen [EXTRACTED 0.75]
+- **K-2 Adressierbarkeitsverlust der Entscheidungswarteschlange** — docs_handoffs_2026_11_19_plan_konsolidierung_k2, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_unsolved_technik, docs_handoffs_2026_11_19_plan_konsolidierung__ref__projektpfade, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_project_contract, docs_handoffs_2026_11_19_unsolved_ergaenzungen [EXTRACTED 0.75]
 - **K-3 D6 als beantwortete, aber weiter blockierende Entscheidung** — docs_handoffs_2026_11_19_plan_konsolidierung_k3, docs_handoffs_2026_11_19_plan_konsolidierung__ref__design_decisions, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_project, docs_handoffs_2026_11_19_plan_konsolidierung__ref__docs_execution_plan_m0_m5, design_decisions_d6 [EXTRACTED 0.75]
 - **Project architecture and flow** — front_worker, on_demand_agents, docs_notes_2026_11_13_nightly_status_dppm_pattern, dynamic_flow_state, docs_notes_2026_11_13_nightly_status_cache_first_then_synthesis [EXTRACTED 0.75]
 - **Scroll-Verlauf und Antwortfokus** — docs_visual_exploration_02_active_conversation_ui_section_6, docs_visual_exploration_02_active_conversation_ui_current_answer_brightest, docs_visual_exploration_02_active_conversation_ui_older_answers_recede, docs_visual_exploration_02_active_conversation_ui_old_answer_slides_up_fades, docs_visual_exploration_02_active_conversation_ui_user_messages_small_bubbles, docs_visual_exploration_02_active_conversation_ui_flowing_band_of_thoughts, docs_visual_exploration_02_active_conversation_ui_scroll_anytime, docs_visual_exploration_02_active_conversation_ui_typewriter_does_not_pause, docs_visual_exploration_02_active_conversation_ui_eyes_follow_scroll, docs_visual_exploration_02_active_conversation_ui_new_tokens_wave_glow, docs_visual_exploration_02_active_conversation_ui_no_hard_dividers, docs_visual_exploration_02_active_conversation_ui_aged_paper_gradients, docs_visual_exploration_02_active_conversation_ui_ui_scroll [EXTRACTED 0.75]
@@ -519,7 +539,7 @@
 - **Input and Microphone Interaction Flow** — docs_visual_exploration_02_active_conversation_ui_input_field, docs_visual_exploration_02_active_conversation_ui_microphone_button, docs_visual_exploration_02_active_conversation_ui_eyes, docs_visual_exploration_02_active_conversation_ui_answer_text [EXTRACTED 0.85]
 - **T1 voice input pipeline** — tech_research_cloudflare_bausteine_t1, tech_research_cloudflare_bausteine_agents_sdk_voice, tech_research_cloudflare_bausteine_workersai_flux_stt, tech_research_cloudflare_bausteine_workersai_nova3_stt, tech_research_cloudflare_bausteine_workersai_tts, tech_research_cloudflare_bausteine_kimi_k2_6, tech_research_cloudflare_bausteine_smart_turn_v2 [EXTRACTED 0.85]
 - **Voice-Messlauf-Blockaden** — docs_unsolved_technik_u1, docs_unsolved_technik_u12, docs_unsolved_technik_u13, docs_unsolved_technik_u28, docs_unsolved_technik_u30, docs_unsolved_technik_u32 [EXTRACTED 0.85]
-- **Adaptive surface safety belt** — d5, research_prior_art_report__ref__ui_morph, a2ui, genui, office_2000, research_prior_art_report__ref__eyeface_js, wcag_2_2_2, docs_ux_informationsarchitektur_prefers_reduced_motion, aria_live_polite, xss, prompt_injection, layout_churn, adaptive_menus, closed_vocabulary, schema, protected_zones, budget, audit_log, catalogs_allowlists, free_html, three_axes, discrete_levels, values_instead_of_rules, turn_boundaries, server_side_validation, visible_history, pause_switch, reduced_motion_path [EXTRACTED 0.90]
+- **Adaptive surface safety belt** — d5, research_prior_art_report__ref__ui_morph, a2ui, genui, office_2000, src_vendor_openvoiceui_face_eyeface, wcag_2_2_2, docs_ux_informationsarchitektur_prefers_reduced_motion, aria_live_polite, xss, prompt_injection, layout_churn, adaptive_menus, closed_vocabulary, schema, protected_zones, budget, audit_log, catalogs_allowlists, free_html, three_axes, discrete_levels, values_instead_of_rules, turn_boundaries, server_side_validation, visible_history, pause_switch, reduced_motion_path [EXTRACTED 0.90]
 - **Agent als Interface: Antwort an einem Ort, stille Hintergrund-Updates, Zustandsmodell** — docs_adr_adr_0002_agent_als_interface, docs_adr_adr_0002_agent_als_interface_state_model, docs_adr_adr_0002_agent_als_interface_voice_protocol_events, docs_adr_adr_0002_agent_als_interface_silent_background [EXTRACTED 0.90]
 - **Agent state lifecycle** — skills_agents_sdk_skill_agent, skills_agents_sdk_skill_counter, skills_agents_sdk_skill_validatestatechange, skills_agents_sdk_skill_onstateupdate, skills_agents_sdk_skill_setstate [EXTRACTED 0.90]
 - **One-agent waypoint architecture** — handoff_gespraechsfuehrung_one_agent, handoff_gespraechsfuehrung_show_waypoint, handoff_gespraechsfuehrung_waypoints_data, handoff_gespraechsfuehrung_second_stage_product_inquiry [EXTRACTED 0.90]
@@ -641,7 +661,7 @@
 - **Duplicate and missing U-IDs in docs/UNSOLVED-TECHNIK.md** — docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u9, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u10, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u11, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u12, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u13, docs_unsolved_technik_u18, docs_unsolved_technik_u19, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u24 [EXTRACTED 1.00]
 - **Stage 0 completion depends on possibly nonexistent KI-Dialog recording** — docs_handoffs_2026_11_19_unsolved_ids__ref__docs_plan_stufen_0_5, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_ki_dialog_2026_11_19, docs_handoffs_2026_11_19_unsolved_ids_stage_0_completion_condition, docs_handoffs_2026_11_19_unsolved_ids_ki_dialog_recording_missing, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u4, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik_u7 [EXTRACTED 1.00]
 - **Two active unsolved-decision queues with different ID schemes** — docs_handoffs_2026_11_19_unsolved_ids__ref__unsolved_technik, docs_handoffs_2026_11_19_unsolved_ids__ref__docs_unsolved_technik, docs_handoffs_2026_11_19_unsolved_ids_two_decision_queues [EXTRACTED 1.00]
-- **Handoff inventory and naming rule** — docs_handoffs_readme, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_plan_konsolidierung, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_unsolved_ergaenzungen, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_unsolved_ids, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_upstream_grenzen, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_verifikation, docs_handoffs_2026_11_19_voice_slice2_review [EXTRACTED 1.00]
+- **Handoff inventory and naming rule** — docs_handoffs_readme, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_plan_konsolidierung, docs_handoffs_2026_11_19_unsolved_ergaenzungen, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_unsolved_ids, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_upstream_grenzen, docs_handoffs_readme__ref__docs_handoffs_2026_11_19_verifikation, docs_handoffs_2026_11_19_voice_slice2_review [EXTRACTED 1.00]
 - **Sechs harte Randbedingungen** — docs_wireframes_agentfaehig_wireframe_constraint_c1, docs_wireframes_agentfaehig_wireframe_constraint_c2, docs_wireframes_agentfaehig_wireframe_constraint_c3, docs_wireframes_agentfaehig_wireframe_constraint_c4, docs_wireframes_agentfaehig_wireframe_constraint_c5, docs_wireframes_agentfaehig_wireframe_constraint_c6 [EXTRACTED 1.00]
 - **ID-Konventionen und U-09 DEFER** — id_convention_u1, defer_u09 [EXTRACTED 1.00]
 - **Invalid run criteria** — invalid_run, account_quota_error, unavailable_model, no_recognized_language, defective_measurement_setup, stt_blocker, run_attempt_1 [EXTRACTED 1.00]
@@ -723,15 +743,15 @@
 - **WF-12 history flow** — docs_wireframes_wireframe_prototype_interactive_wf_12, docs_wireframes_01_screens_scrollflaeche, docs_wireframes_01_screens_sprungmarke, docs_wireframes_01_screens_aeltere_antworten, docs_wireframes_01_screens_uf_08, docs_wireframes_01_screens_adr_0002, docs_wireframes_01_screens_designentscheidung_neue_antwort_im_fokus, docs_wireframes_01_screens_designentscheidung_19_11, docs_wireframes_01_screens_od_09, docs_ux_informationsarchitektur_prefers_reduced_motion [INFERRED 0.80]
 - **WOW der ersten 20 Sekunden** — person_argon_gemini, person_minimax_m3_opencode, docs_GUTACHTEN_wow_oder_scheitern_falle_1, docs_GUTACHTEN_wow_oder_scheitern_falle_2, docs_GUTACHTEN_wow_oder_scheitern_falle_3, docs_GUTACHTEN_wow_oder_scheitern_falle_4, docs_GUTACHTEN_wow_oder_scheitern_luecke_4, stufe_3b_fremder_testet, docs_GUTACHTEN_wow_oder_scheitern_m0_measurement, first_20_seconds [INFERRED 0.80]
 
-## Communities (449 total, 180 thin omitted)
+## Communities (540 total, 257 thin omitted)
 
 ### Community 0 - "Agentfähig Sketch"
-Cohesion: 0.04
-Nodes (72): ABGLEICH-DESIGN-TECHNIK.md, cloudflare/agents#1747, cloudflare/agents#1816, Cloudflare-Budget 890 ms (40 + 300 + 400 + 150), CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, Cloudflare Realtime Agents (WebRTC, offene Beta), Cold start, Vergleichspunkte (890 ms, under 1 sec, 500-800 ms) (+64 more)
+Cohesion: 0.03
+Nodes (74): ABGLEICH-DESIGN-TECHNIK.md, Beispiel laeuft nach ca. 1 h Fehlersuche nicht lokal -> BLOCKED, Cloudflare-Budget 890 ms (40 + 300 + 400 + 150), CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, Cloudflare Realtime Agents (WebRTC, offene Beta), Cold start, Vergleichspunkte (890 ms, under 1 sec, 500-800 ms), English language (+66 more)
 
 ### Community 1 - "Cloudflare-Bausteine Research"
-Cohesion: 0.04
-Nodes (69): Workers AI quota 4006 (10,000 neurons/day), Chrome 158.0.8127.36, Durable Object SQLite store, Isolated conversation (run ID), Provider error: model_error / quota_4006, Text path (no call, no TTS), turn_metrics, Voice path (in-call, TTS) (+61 more)
+Cohesion: 0.05
+Nodes (57): Workers AI quota 4006 (10,000 neurons/day), Chrome 158.0.8127.36, Durable Object SQLite store, Isolated conversation (run ID), Provider error: model_error / quota_4006, Text path (no call, no TTS), Voice path (in-call, TTS), Dev server :5173 (PID 31990) (+49 more)
 
 ### Community 2 - "Konkurrenz Recherche"
 Cohesion: 0.04
@@ -739,7 +759,7 @@ Nodes (69): docs/adr/ADR-0001, docs/adr/ADR-0004, docs/adr/ADR-0005, docs/GUTACH
 
 ### Community 3 - "Upstream Search Document"
 Cohesion: 0.04
-Nodes (63): Embodiment-Recherche, ADR-0002 agent als interface, ADR-0006 zeitvertrag, Agent in surface, Agent replies only in state, Ambient agents, Answer as built page, Anti-pattern ask-first hero (+55 more)
+Nodes (69): Embodiment-Recherche, A2UI, ADR-0002 agent als interface, ADR-0006 zeitvertrag, Agent in surface, Agent replies only in state, Ambient agents, Answer as built page (+61 more)
 
 ### Community 4 - "Brief Cloudflare-Bausteine"
 Cohesion: 0.07
@@ -747,43 +767,43 @@ Nodes (59): anthropics/skills, Apache-2.0, brainstorming, cloudflare/skills, Kol
 
 ### Community 5 - "validate.yml"
 Cohesion: 0.04
-Nodes (57): adr/ADR-0001, adr/ADR-0002, adr/ADR-0003, adr/ADR-0004, adr/ADR-0005, Projektstand — Agentfähig, DATEINAMEN.md, DESIGN-DECISIONS.md (+49 more)
+Nodes (55): adr/ADR-0002, adr/ADR-0003, adr/ADR-0004, adr/ADR-0005, Projektstand — Agentfähig, DATEINAMEN.md, DESIGN-DECISIONS.md, EXECUTION_PLAN-M0-M5.md (+47 more)
 
 ### Community 6 - "Notion README Status Document"
-Cohesion: 0.06
-Nodes (57): cf_voice_messages table, Shared Durable Object conversation collision, @cf/deepseek-ai/deepseek-v4.1-flash-1017, Deploy to Workers, CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, PLAN_ACCEPTANCE_GATE.md, examples/voice-agent/client.tsx, fails/0021-plan-validation-anchor-drift.json (+49 more)
+Cohesion: 0.05
+Nodes (65): cf_voice_messages table, Shared Durable Object conversation collision, turn_metrics, Deploy to Workers, CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, PLAN_ACCEPTANCE_GATE.md, examples/voice-agent/client.tsx, fails/0021-plan-validation-anchor-drift.json (+57 more)
 
 ### Community 7 - "Agentfähig Technical Intent"
-Cohesion: 0.04
-Nodes (57): Milestone M2, PROJECT_CONTRACT — Agentfähig, adr/ADR-0006-zeitvertrag.md, AGENTS.md, docs/handoffs/2026-11-19-plan-konsolidierung.md, docs/KI-DIALOG-2026-11-19.md, PLAN_VALIDATION_REPORT.md, PROJEKTPFADE.md (+49 more)
+Cohesion: 0.03
+Nodes (58): adr/ADR-0001, Milestone M2, PROJECT_CONTRACT — Agentfähig, adr/ADR-0006-zeitvertrag.md, AGENTS.md, docs/handoffs/2026-11-19-plan-konsolidierung.md, docs/KI-DIALOG-2026-11-19.md, PLAN_VALIDATION_REPORT.md (+50 more)
 
 ### Community 8 - "UPSTREAM_SEARCH (Tech)"
-Cohesion: 0.06
-Nodes (55): L2 — Die Unterbrechungszeile, Kontingent, Modell, Netz, Strom, Enter, Escape, Skip-Links (+47 more)
+Cohesion: 0.09
+Nodes (46): C-04, 00-flows-and-viewports.md, 02-components.md, 03-state-matrix.md, ADR-0002, Regler (Aussehen), C-15 · WCAG-2.2.2-Pausesteuerung, Ruhiges Feld / Textur (+38 more)
 
-### Community 9 - "Abgleich Document"
-Cohesion: 0.06
-Nodes (53): Routing, default URL pattern, getAgentByName, onRequest, onStart, props, routeAgentRequest, Routing documentation (+45 more)
+### Community 9 - "Think (Experimental)"
+Cohesion: 0.15
+Nodes (25): Think (Experimental), beforeTurn, chat, @cloudflare/think, compatibility flags, configureSession, createWorkersAI, experimental (+17 more)
 
 ### Community 10 - "Research README Document"
 Cohesion: 0.06
-Nodes (51): Agent, Astra, Brügge, Caching, cloudflare/agents, Dispatch, Astra, Brügge orchestration planning (+43 more)
+Nodes (50): Agent, Astra, Brügge, Caching, cloudflare/agents, Dispatch, Astra, Brügge orchestration planning (+42 more)
 
 ### Community 11 - "validate.sh"
 Cohesion: 0.05
 Nodes (50): U-09 DEFER: ID-Angleichung, docs/CLOUDFLARE-MACHBARKEIT.md, Dateinamen — Regel, Ist-Zustand, Umbenennungen, docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, docs/EXECUTION_PLAN-M0-M5.md, docs/MISSION-BRIEF-graphify-verifikation.md, docs/PLAN-STUFEN-0-5.md, docs/UNSOLVED-PLANUNG.md (+42 more)
 
 ### Community 12 - "Samuel (Owner)"
-Cohesion: 0.06
-Nodes (50): Turn-Outcome (completed / no_output / aborted), agents package, Cloudflare Agents Changelog, Cloudflare Agents Voice Docs, ai-chat package, AI-Gateway-Funktionen (Analytics, Logging, Caching, Rate Limiting, Fallback, Routing), Cloudflare AI Gateway Docs, AI-Gateway-Provider (Workers AI, OpenAI, Anthropic, …) (+42 more)
+Cohesion: 0.04
+Nodes (72): Turn-Outcome (completed / no_output / aborted), 800-ms-Regel für natürliche Konversation, agents package, Cloudflare Agents Changelog, Cloudflare Agents Voice Docs, ai-chat package, AI-Gateway-Funktionen (Analytics, Logging, Caching, Rate Limiting, Fallback, Routing), Cloudflare AI Gateway Docs (+64 more)
 
 ### Community 13 - "Agent Introduction Sketch"
-Cohesion: 0.07
-Nodes (50): A2UI, Addendum: Argon findings, Addendum: maturity correction, ADR-0003, docs/adr/ADR-0004-regler-veraendert-oberflaeche-und-haltung.md, AndresCarreonDiaz/capturia, arXiv 2609.25195, Building-block comparisons (+42 more)
+Cohesion: 0.06
+Nodes (53): Regler als Antwort, nicht Werkzeug, Theme-Switcher-Falle, A2UI, Addendum: Argon findings, Addendum: maturity correction, ADR-0003, docs/adr/ADR-0004-regler-veraendert-oberflaeche-und-haltung.md, AndresCarreonDiaz/capturia (+45 more)
 
-### Community 14 - "Block Introduction Sketch"
-Cohesion: 0.05
-Nodes (49): UI component C-01, UI component C-02, UI component C-03, UI component C-04, UI component C-05, UI component C-06, UI component C-07, UI component C-08 (+41 more)
+### Community 14 - "UI-3 Reload und Reconnect"
+Cohesion: 0.18
+Nodes (12): UI component C-07, UI component C-08, UI component C-09, UI component C-10, E-01 AgentStateProvider, PV-9 OD-06 Reload-Identität, Stufe C · UI-3, Stufe D · UI-4 (+4 more)
 
 ### Community 15 - "diagram"
 Cohesion: 0.04
@@ -794,88 +814,88 @@ Cohesion: 0.05
 Nodes (40): Arbitrary Timeout, Business Logic Validation, code-reviewer.md, Completion Contract, Debug Instrumentation, Entry Point Validation, Environment Guards, Final Whole-Branch Review (+32 more)
 
 ### Community 17 - "screenshot"
-Cohesion: 0.07
-Nodes (45): Agents SDK Type Definitions, Beta Risk, Deepgram Aura TTS, Deepgram Flux STT, first_audio_ms Metric, German Language Support, Image Input Channel, Under 1 Second with TTS (+37 more)
+Cohesion: 0.05
+Nodes (65): Acceptance Criteria, Agents SDK Type Definitions, Backlog Items, Beta Risk, D1 Measurement Gate, D2 v1 App, D3 State Contract, D4 Tests and Evidence (+57 more)
 
 ### Community 18 - "screenshot"
-Cohesion: 0.07
-Nodes (45): Audible answer / first audible tone, Client timestamp, ADR-0006 — Ein Strom, eine Uhr: Segment- und Zeitvertrag, ADR-0002-agent-als-interface.md, EXECUTION_PLAN-M0-M5.md, ABGLEICH-DESIGN-TECHNIK.md, CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md (+37 more)
+Cohesion: 0.12
+Nodes (29): ADR-0006 — Ein Strom, eine Uhr: Segment- und Zeitvertrag, ADR-0002-agent-als-interface.md, EXECUTION_PLAN-M0-M5.md, ABGLEICH-DESIGN-TECHNIK.md, CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, INTENT-TECHNIK.md, cloudflare-bausteine.md (+21 more)
 
 ### Community 19 - "Hai Interaction und Design"
 Cohesion: 0.08
 Nodes (43): Agent ecosystem (front, analysing, looking-up, backup), Ambient first, explicit on demand, analysing dot, backup dot, Connect effect, Error or stall state, Explicit fallback labels (what · create · product), Eyes (+35 more)
 
 ### Community 20 - "Agent Architecture Sketch"
-Cohesion: 0.05
-Nodes (43): alarm, Durable Objects Anti-Patterns, Durable Objects Authorization, blockConcurrencyWhile, deleteAlarm, Durable Objects documentation, Durable Objects, DurableObject (+35 more)
+Cohesion: 0.04
+Nodes (52): alarm, Durable Objects Anti-Patterns, Durable Objects Authorization, blockConcurrencyWhile, deleteAlarm, Durable Objects documentation, Durable Objects, DurableObject (+44 more)
 
 ### Community 21 - "Meta & Philosophy Sketch"
-Cohesion: 0.06
-Nodes (43): ASR limit 720 req/min, @cf/deepgram/flux, Agents SDK Voice (agents/voice), Agents SDK Voice pipeline metrics (llm_ms, tts_ms, first_audio_ms, total_ms), audioLevel (0-1 Mic-RMS), aura-1, @cf/openai/whisper, deepseek-v4-pro-0813 (+35 more)
+Cohesion: 0.05
+Nodes (50): CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, Cloudflare Workers, ElevenLabs/Telnyx/Inworld, Falle 4: Deutsch verstehen vs. Deutsch klingen, M3b: deutsches TTS über Adapter, deutsche Stimme über zwei Anbieter, ASR limit 720 req/min, @cf/deepgram/flux (+42 more)
 
 ### Community 22 - "Steps & Research Sketch"
-Cohesion: 0.06
-Nodes (42): Agentfähig Project, AGENTS.md, blocks/, CSS, GreateWriting, Grilling-Skill, HAI Interaction, IDEA-TRANSKRIPT.txt (+34 more)
+Cohesion: 0.05
+Nodes (50): Agentfähig Project, AGENTS.md, blocks/, CSS, ADR-0004 — Der Regler verändert Oberfläche und Haltung, Agentfähig/GreateWriting.txt, docs/GUTACHTEN-wow-oder-scheitern.md, Dekoration vs. echte Anpassung (+42 more)
 
 ### Community 23 - "Technology & Outlook Sketch"
-Cohesion: 0.07
-Nodes (42): ADR-0002, ADR-0004:86–89, Benennt, DESIGN-DECISIONS.md, E13, E2, Eingabe, Eingabezeile (+34 more)
+Cohesion: 0.09
+Nodes (34): ADR-0004:86–89, Benennt, DESIGN-DECISIONS.md, Eingabe, Eingabezeile, Einwilligungszeile, F1, F2 (+26 more)
 
 ### Community 24 - "Application Code README"
-Cohesion: 0.05
-Nodes (40): client.tsx, Zwei Tabs gleicher Zustand (T6), docs/DECISIONS-M0.md, EXECUTION_PLAN — Agentfähig (M0–M5), adr/ADR-0006-zeitvertrag.md, docs/adr/*, docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, docs/PROJECT.md (+32 more)
+Cohesion: 0.06
+Nodes (34): client.tsx, docs/DECISIONS-M0.md, EXECUTION_PLAN — Agentfähig (M0–M5), adr/ADR-0006-zeitvertrag.md, docs/adr/*, docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, docs/PROJECT.md, PROJECT_CONTRACT.md (+26 more)
 
 ### Community 25 - "Latenzbudget (<1s)"
 Cohesion: 0.08
 Nodes (40): adaptation dimension, NOT_OFFERED, ADAPTED, ADAPTING, ADAPTING → neuer Gesprächsinhalt, ADR-0004, Source C2, Source C3 (+32 more)
 
 ### Community 26 - "State Synchronization"
-Cohesion: 0.07
-Nodes (39): Barrierefreiheit, Adaptive menus, aria-live polite, Blinking eyes, Catalogs / allowlists, Closed vocabulary, CSS variables, D5 — Text-Sprache (+31 more)
+Cohesion: 0.06
+Nodes (41): Adaptive menus, aria-live polite, Blinking eyes, Catalogs / allowlists, Closed vocabulary, CSS variables, D5 — Text-Sprache, Discrete levels (+33 more)
 
 ### Community 27 - "Verhaltenstests README"
-Cohesion: 0.06
-Nodes (37): Agentfähig/GreateWriting.txt, docs/PROJECT.md, IDEA-TRANSKRIPT.txt, README.md, sketches/2026-11-12-agentfaehig.md, skills/README.md, Abschlussformulierungen: DONE, BLOCKED, ABANDONED, Conserve (Default) (+29 more)
+Cohesion: 0.05
+Nodes (51): docs/adr/, ADRs, Agentfähig/GreateWriting.txt, docs/PROJECT.md, IDEA-TRANSKRIPT.txt, README.md, sketches/2026-11-12-agentfaehig.md, skills/README.md (+43 more)
 
 ### Community 28 - "Typewriter Feature"
 Cohesion: 0.06
 Nodes (39): docs/adr/ADR-0003, EyeFace.js (MIT), L1: 20-Sekunden-Ablauf ohne Erklärung, L2: Erstes Erwachen, L3: Erste Eingabe, L4: Antwort, L5: Regler, L6: Fast/Slow (+31 more)
 
 ### Community 29 - "UX Informationsarchitektur"
-Cohesion: 0.07
-Nodes (38): Mission M-20261119T194948-3db0ab44 (T1 Messlauf), UX Informationsarchitektur, ADR-0004, ADR-0005, D5, 00-flows-and-viewports.md, PLAN-STUFEN-0-5.md, PROJECT_CONTRACT.md (+30 more)
+Cohesion: 0.05
+Nodes (52): Mission M-20261119T194948-3db0ab44 (T1 Messlauf), Zwei Tabs gleicher Zustand (T6), UX Informationsarchitektur, ADR-0004, ADR-0005, D5, 00-flows-and-viewports.md, O1 (+44 more)
 
 ### Community 30 - "Integration First — What this is"
 Cohesion: 0.06
 Nodes (38): Integration First — What this is, AGENTS.md, DESIGN-DECISIONS.md, PROJECT.md, prototype/index.html, SCOUT-SYNTHESIS.md, CLOUDFLARE_MACHBARKEIT.md, LUECKEN.md (+30 more)
 
 ### Community 31 - "Fehler / Retry (Abschnitt im Auszug)"
-Cohesion: 0.08
-Nodes (38): Achsenanzeige R1, ADR-0004, D6, Fehler / Retry (Abschnitt im Auszug), F3, Hilfe bei Mikrofon (Disclosure), Kontingent erschöpft, OD-02 (+30 more)
+Cohesion: 0.06
+Nodes (44): Enter, Escape, Skip-Links, Achsenanzeige R1, ADR-0004, Aktuelle Antwort, Hintergrund-Ergebnis, D6 (+36 more)
 
 ### Community 32 - "PRESENT"
 Cohesion: 0.13
 Nodes (38): ADR-0003, AWAKENING, Anpassung (adapt), Eingabe (input), Präsenz (presence), DORMANT, Ereignisgesteuert (E), Augen (Eyes) (+30 more)
 
 ### Community 33 - "HANDOFF — Voice ist Slice 2 (Owner-Entscheidung 19.11., 3. Runde)"
-Cohesion: 0.10
-Nodes (37): agentfähig.de, CR-2 (Voice-Scope), CR-6 (Kriterien aus Messwerten ableiten), Englische Voice-Pipeline (Entscheidung 19.11., 2. Runde), agents@0.27.0, Slice 1 text-first (Augen, Text/Typewriter, ein Regler, stiller Sub-Agent), Stufe 3 — Prototyp (Text zuerst), Sprache des Text-Kanals (D5) (+29 more)
+Cohesion: 0.06
+Nodes (51): agentfähig.de, Audible answer / first audible tone, CR-2 (Voice-Scope), CR-6 (Kriterien aus Messwerten ableiten), Client timestamp, cloudflare/agents#1747, cloudflare/agents#1816, Englische Voice-Pipeline (Entscheidung 19.11., 2. Runde) (+43 more)
 
 ### Community 34 - "ADR-0002 — Zielbild: Agent als Schnittstelle, nicht als Chat"
 Cohesion: 0.07
-Nodes (37): BaseFace.js, Kandidat E – OpenAI Realtime, capturia, ADR-0002 — Zielbild: Agent als Schnittstelle, nicht als Chat, docs/DESIGN-DECISIONS.md, generative-ui/, Pika-Labs/Pika-Experiments, sketches/2026-11-12-agentfaehig.md (+29 more)
+Nodes (37): Kandidat E – OpenAI Realtime, capturia, ADR-0002 — Zielbild: Agent als Schnittstelle, nicht als Chat, docs/DESIGN-DECISIONS.md, generative-ui/, Pika-Labs/Pika-Experiments, sketches/2026-11-12-agentfaehig.md, tech/UPSTREAM-SEARCH-cloudflare.md (+29 more)
 
 ### Community 35 - "WF-03 · Schreiben"
-Cohesion: 0.12
-Nodes (37): C-01, C-02, C-03, C-04, C-13, C-14, 00 Flows and Viewports, ADR-0005 (+29 more)
+Cohesion: 0.07
+Nodes (38): C-11, C-12, C-13, 00 Flows and Viewports, ADR-0002, ADR-0005, D2, D4 (+30 more)
 
 ### Community 36 - "Sesame"
-Cohesion: 0.06
-Nodes (36): ADR-0002:35, Antworten, während der langsame Pfad läuft, Chatverlauf als Hauptansicht, Abschluss-Rating, Onboarding-Tour, Settings, Bedienelemente bleiben auffindbar, EMBODIMENT-RECHERCHE.md, UPSTREAM-SEARCH-vergleichbare-projekte.md, Anruf-Metapher (+28 more)
+Cohesion: 0.08
+Nodes (27): Antworten, während der langsame Pfad läuft, Q2, EMBODIMENT-RECHERCHE.md, UPSTREAM-SEARCH-vergleichbare-projekte.md, A3, Anruf-Metapher, Charakter-Picker, E9 (+19 more)
 
 ### Community 37 - "Prior Art Report"
-Cohesion: 0.08
-Nodes (36): AndresCarreonDiaz/capturia, Commit 1a450e7, G Remaining unknowns, Issue/PR #1441, Issue/PR #1849, Issue/PR #2157, LiveKit model license, pipecat-ai/pipecat (+28 more)
+Cohesion: 0.09
+Nodes (30): AndresCarreonDiaz/capturia, Commit 1a450e7, Issue/PR #1441, Issue/PR #1849, Issue/PR #2157, LiveKit model license, pipecat-ai/pipecat, pipecat-ai/smart-turn (+22 more)
 
 ### Community 38 - "Bewegungskatalog (Motion Table)"
 Cohesion: 0.06
@@ -887,59 +907,59 @@ Nodes (34): Deep-Mode run: 130 nodes, 128 edges, 28 communities, docs/, foambubb
 
 ### Community 40 - "HANDOFF — Upstream-Grenzen für das Risikoregister (19.11.2026, Abend)"
 Cohesion: 0.07
-Nodes (34): aura-1, aura-2, colorjs.io, DO-RPC, DO-SQLite, R5 (in docs/EXECUTION_PLAN-M0-M5.md), HANDOFF — Upstream-Grenzen für das Risikoregister (19.11.2026, Abend), ADR-0001 (+26 more)
+Nodes (32): aura-1, aura-2, colorjs.io, DO-RPC, DO-SQLite, R5 (in docs/EXECUTION_PLAN-M0-M5.md), HANDOFF — Upstream-Grenzen für das Risikoregister (19.11.2026, Abend), ADR-0001 (+24 more)
 
 ### Community 41 - "03 · Zustandsmatrix und Feedback-Regeln"
-Cohesion: 0.11
-Nodes (34): C-08, OD-06, Q2, T6, UF-06, ADR-0001, C-04 Composer, C-09 Error area (+26 more)
+Cohesion: 0.17
+Nodes (36): C-01, C-02, C-03, C-06, C-08, C-14, F1, F5 (+28 more)
 
 ### Community 42 - "02 · Komponentenarchitektur"
 Cohesion: 0.11
-Nodes (33): 02 · Komponentenarchitektur, 00 · Flows and Viewports, ADR-0002, ADR-0003 · Wiederverwendung vor Eigenbau, ADR-0004, C-06 · AppearanceSlider, Chat-UI, EyeFace.js (+25 more)
+Nodes (34): 02 · Komponentenarchitektur, 00 · Flows and Viewports, ADR-0002, ADR-0003 · Wiederverwendung vor Eigenbau, ADR-0004, C-06 · AppearanceSlider, Chat-UI, EyeFace.js (+26 more)
 
 ### Community 43 - "README"
-Cohesion: 0.06
-Nodes (32): docs/, CODECANVAS.md, visual-exploration/, README, GreateWriting.txt, AGENTS.md, adr/, DATEINAMEN.md (+24 more)
+Cohesion: 0.04
+Nodes (43): docs/, CODECANVAS.md, Bei der Integration gefunden und behoben, Implementiert, M1 Living Surface — Abschlussbericht, Nicht implementiert, Offene Abweichungen zu den Wireframes (bewusst, Owner-Entscheidungen 19.11.), Starten (+35 more)
 
 ### Community 44 - "Projektintern [P]"
-Cohesion: 0.07
-Nodes (30): A2UI/GenUI-Sicherheit (Katalog als Grenze), Deepgram Flux Konfiguration, Deepgram Flux Nova-3 Migration, Deepgram Flux Eager EOT, ElevenLabs Streaming mit Zeitmarken, Gnewuch et al. 2018, ECIS, NN/g 5-Sekunden-Test, NN/g 5-User-Regel (+22 more)
+Cohesion: 0.08
+Nodes (25): A2UI/GenUI-Sicherheit (Katalog als Grenze), Deepgram Flux Konfiguration, Deepgram Flux Nova-3 Migration, Deepgram Flux Eager EOT, ElevenLabs Streaming mit Zeitmarken, Gnewuch et al. 2018, ECIS, NN/g 5-Sekunden-Test, NN/g 5-User-Regel (+17 more)
 
 ### Community 45 - "wireframe-prototype-interactive.md"
-Cohesion: 0.08
-Nodes (29): C-07, F4, OD-03, Q1, T4, UF-04, ADR-0005, DESIGN-DECISIONS.md (+21 more)
+Cohesion: 0.07
+Nodes (34): C-05, C-07, C-10, F4, OD-03, Q1, T4, UF-04 (+26 more)
 
 ### Community 46 - "Handoff der unabhängigen Verifikation (19.11.2026, 20:15)"
-Cohesion: 0.13
-Nodes (30): C1–C4, Handoff der unabhängigen Verifikation (19.11.2026, 20:15), DO-SQLite-Tabelle cf_voice_messages, docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, docs/KI-DIALOG-2026-11-19.md, docs/PROJECT_CONTRACT.md, docs/UNSOLVED-PLANUNG.md, docs/UNSOLVED-TECHNIK.md (+22 more)
+Cohesion: 0.08
+Nodes (42): Control-Plane, C1–C4, DEGRADED, research/*, tech/MESSPROTOKOLL-2026-11-19.md, UX-INFORMATIONSARCHITEKTUR, K-1 Control-Plane-Widerspruch statt „keine Mission", Handoff der unabhängigen Verifikation (19.11.2026, 20:15) (+34 more)
 
 ### Community 47 - "Cloudflare"
 Cohesion: 0.09
-Nodes (29): Cloudflare, Cloudflare as hypothesis, AI agents, anomalyco/phonecall, archived repository, https://blog.cloudflare.com/cloudflare-realtime-voice-ai/, https://blog.cloudflare.com/voice-agents/, CLI (+21 more)
+Nodes (26): Cloudflare, Cloudflare as hypothesis, MCP Integration, Client API, createMcpHandler, Handler API, MCP SDK v2 migration, MCP server (+18 more)
 
 ### Community 48 - "Audit A-20261119T161858-753a2d1e"
-Cohesion: 0.11
-Nodes (29): Workers AI STT Deutsch (nova-3), agents@0.27.0 SDK, Audit A-20261119T161858-753a2d1e, Aura-2, @cf/deepgram/nova-3, claudeflareworkerhaus local SDK install, Deprecations on 2026-11-20, ElevenLabsTTS (+21 more)
+Cohesion: 0.09
+Nodes (36): Workers AI STT Deutsch (nova-3), @cf/deepseek-ai/deepseek-v4.1-flash-1017, @cf/zai-org/glm-4.7-flash, examples/voice-agent/src/server.ts, Audit A-20261119T161858-753a2d1e, Aura-2, Browser microphone, @cf/deepgram/nova-3 (+28 more)
 
 ### Community 49 - "H1 — Zwei doppelte IDs in docs/UNSOLVED-TECHNIK.md"
 Cohesion: 0.10
 Nodes (29): docs/PROJECT.md, docs/UNSOLVED-TECHNIK.md, U10 (Barrierefreiheit), U11 (deployter Lauf), U12 (STT-Stufe / Gate-Schwelle / weitere), U13 (Domainzuordnung), U24 (highest ID), U9 (Typewriter-Wahrnehmungsgrenze) (+21 more)
 
 ### Community 50 - "SCOUT-SYNTHESIS"
-Cohesion: 0.08
-Nodes (29): SCOUT-SYNTHESIS, Cloudflare Worker agentfaehig mit /api/explain/* und Service Binding EXPLAIN, Cloudflare Agent class, Cloudflare Service Bindings fuer Pathways, Cloudflare WebSockets, DESIGN_RETHINK_2026-09-25.md, Alltagsmetapher neuer Mitarbeiter/Praktikant mit Auftrag, Service Binding EXPLAIN zu cwh-11-explain-20261008 (+21 more)
+Cohesion: 0.16
+Nodes (15): SCOUT-SYNTHESIS, Cloudflare Agent class, Cloudflare WebSockets, MDN SVG feTurbulence, paranoia.js, Pathway 1 (What this is), Rough.js 4.6.6, Session ses_e2e12ee66ffe0Vb0rXz8GpRsLl (+7 more)
 
 ### Community 51 - "Technische Konkurrenz-Recherche"
-Cohesion: 0.07
-Nodes (29): Brief Konkurrenz, Technische Konkurrenz-Recherche, AI-Service-Integrationen, Analytics, Brand Kit, Daily, Docket Frameless, Guide (+21 more)
+Cohesion: 0.05
+Nodes (42): Technische Konkurrenz-Recherche, A2A, A2UI, ADK, Agent-SDK Dart, Agent-SDK Python, Agent-SDK Swift, Agent-SDK TypeScript (+34 more)
 
 ### Community 52 - "CodeCanvas Setup Document"
 Cohesion: 0.10
 Nodes (28): Agent Notes, cc:// Links, CC_SERVER_PORT, code-canvas-server package, CodeCanvas, connect-repository-github, connect-repository-local, devDependency (+20 more)
 
 ### Community 53 - "Handoffs — nicht anwendbare Änderungen (README)"
-Cohesion: 0.07
-Nodes (27): Handoffs — nicht anwendbare Änderungen (README), docs/handoffs/2026-11-19-plan-konsolidierung.md, docs/handoffs/2026-11-19-unsolved-ergaenzungen.md, docs/handoffs/2026-11-19-unsolved-ids.md, docs/handoffs/2026-11-19-upstream-grenzen.md, docs/handoffs/2026-11-19-verifikation.md, docs/adr/ADR-0006-zeitvertrag.md, handoffs/README.md (+19 more)
+Cohesion: 0.10
+Nodes (22): docs/adr/ADR-0006-zeitvertrag.md, docs/agents/voice.md, research/PRIOR_ART_REPORT.md, UPSTREAM-SEARCH-vergleichbare-projekte.md, DO clock, Fast/slow contract, GitHub API, Gnewuch et al. 2022 (BISE) (+14 more)
 
 ### Community 54 - "WORKING"
 Cohesion: 0.10
@@ -957,24 +977,24 @@ Nodes (27): Audit log, Budget, gecachte Kette, Änderungs-Historie als eigene An
 Cohesion: 0.11
 Nodes (27): HANDOFF — doppelte U-IDs und ein Material-Widerspruch, docs/DESIGN-DECISIONS.md, docs/EXECUTION_PLAN-M0-M5.md, docs/KI-DIALOG-2026-11-19.md, docs/PLAN-STUFEN-0-5.md (formerly PLAN-ADREN), docs/PROJECT_CONTRACT.md, U4 (KI-Dialog-Übernahmen), U7 (Plaud-Betriebsnotiz) (+19 more)
 
-### Community 58 - "L1 — Der stille Rand"
-Cohesion: 0.09
-Nodes (27): T1, A3, D1, D2, D3, E6, E9, F4 (+19 more)
+### Community 58 - "Analysen N1–N7: Schnittstellen und Dynamik nach M1"
+Cohesion: 0.02
+Nodes (111): 1. Parameter → Komponente, 2. Wertebereiche (spürbar, nicht kitschig), 3. Konflikte und eine Auflösungsregel, 4. Technischer Vorschlag (Schnittstelle, kein Code), 5. Prompt-Fragment-Muster, Agent J — Schicht 3: Parameter → Oberfläche, `attention` — Fokus des Nutzers, `calm` — Erregung invertiert (+103 more)
 
 ### Community 59 - "konkurrenz"
 Cohesion: 0.08
 Nodes (26): https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces, https://arxiv.org/abs/2410.00037, https://dev.hume.ai/docs/speech-to-speech-evi/overview.md, https://developers.cloudflare.com/agents/, https://developers.cloudflare.com/agents/examples/voice-agent/, https://developers.cloudflare.com/agents/patterns, https://docs.langchain.com/oss/python/deepagents/async-subagents, https://docs.livekit.io/agents/overview (+18 more)
 
 ### Community 60 - "E1 Measuring the wrong gate green"
-Cohesion: 0.08
-Nodes (25): ADR-0006 (Zeitvertrag), Agent fragt zuerst nach sich, Kette: mein Satz → seine Antwort → sein Aussehen, Client-side latency gate, CR-1 — Plan-Hash-Drift, D1, D2 — Lane + Lease, ADR-0001 (+17 more)
+Cohesion: 0.09
+Nodes (24): Agent fragt zuerst nach sich, Beta N visitors/day, Kette: mein Satz → seine Antwort → sein Aussehen, Client-side latency gate, Cost model, E1 Measuring the wrong gate green, E2 Leere Fläche, keine Handlung, Abbruch, E4 Besucher merkt Veränderung nicht oder nicht warum (+16 more)
 
 ### Community 61 - "Fast/Slow"
 Cohesion: 0.09
 Nodes (25): Automatisches ungefragtes Sprechen (offene Entscheidung), Backend-Agent, background[] (Sub-Agenten): WORKING → RESULT_READY / FAILED, Cloudflare detached: { onFinish }, D4 — Voice in M2?, Desktop: rechte Randspalte 23 %, Fast/Slow, Verboten (beide) (+17 more)
 
 ### Community 62 - "run.mjs"
-Cohesion: 0.11
+Cohesion: 0.13
 Nodes (17): Harness turn closed before turn_metrics, m0-verify-2026-11-19T19-25-05-050Z-b875 (discarded, turn closed before turn_metrics), { chromium }, devServerPids(), git(), HERE, isoCompact(), listDoStores() (+9 more)
 
 ### Community 63 - "Pika generative-ui"
@@ -985,17 +1005,17 @@ Nodes (25): Agent komponiert die Fläche pro Zug neu, Agent komponiert die Oberf
 Cohesion: 0.13
 Nodes (24): docs/DESIGN-DECISIONS.md, sketches/2026-11-12-agentfaehig.md, Agent asks its own appearance (colour, form, output style), Embodiment on the website, Eyes wake after 5 seconds (soft, not scary), Feeling texture: vibrant, alive, vivid, welcomed, engaging, children easy, soft smooth, Human Agent Interface (HAI), Live page change after answer (+16 more)
 
-### Community 65 - "H What from existing planning carries"
-Cohesion: 0.09
-Nodes (25): First-Click test, 5-second test, H What from existing planning carries, Nielsen/Landauer, ADR-0001, ADR-0002, ADR-0003, ADR-0004 (+17 more)
+### Community 65 - "mountPresence"
+Cohesion: 0.05
+Nodes (92): E. TECHNICAL OPTIONS (Bewertung für `agentfähig.de`), clamp(), clamp01(), clampParamValue(), computeResponsiveBounds(), createEyeMotionEngine(), applyParamPatch(), buildFrame() (+84 more)
 
 ### Community 66 - "Voice-Interaktion · Deliverable G"
 Cohesion: 0.10
 Nodes (24): COMMITTED, DENIED, Gerät belegt, Q4, USER_SPEAKING frame, DD:21, F5, Gleichwertiger Fallback (+16 more)
 
 ### Community 67 - "K-3 D6 beantwortet und trotzdem Blocker"
-Cohesion: 0.13
-Nodes (24): D2, D3, D4, D5, D6, Erster Regler, OD-00 bis OD-17, Projektion der Gestalt (+16 more)
+Cohesion: 0.20
+Nodes (16): D2, D3, D4, D5, D6, Erster Regler, OD-00 bis OD-17, Projektion der Gestalt (+8 more)
 
 ### Community 68 - "Typografie und Antwortdarstellung (Deliverable E)"
 Cohesion: 0.09
@@ -1006,12 +1026,12 @@ Cohesion: 0.12
 Nodes (23): Agentfähig V1, Control-plane status DEGRADED, Derived user flows UF-01…UF-08, 01-screens.md, 03-state-matrix.md, Offene Designentscheidungen (OD-00…OD-19), OD-18 · Sende-Auslöser, Wireframe-System V1 README (+15 more)
 
 ### Community 70 - "with_server.py"
-Cohesion: 0.12
-Nodes (4): Apache License 2.0, is_server_ready(), main(), Web Application Testing
+Cohesion: 0.07
+Nodes (9): check(), draw_keyboard_band(), main(), NoStoreHandler, serve(), Apache License 2.0, is_server_ready(), main() (+1 more)
 
 ### Community 71 - "E2 Leere Fläche, keine Handlung, Abbruch"
-Cohesion: 0.10
-Nodes (23): Beta N visitors/day, Charakter- oder Theme-Auswahl vorab, Cost model, P1, P2, P4, Regel R-G, E2 Leere Fläche, keine Handlung, Abbruch (+15 more)
+Cohesion: 0.14
+Nodes (15): Charakter- oder Theme-Auswahl vorab, P1, P2, P4, T1, Regel R-G, J1 In Sekunden spüren, dass etwas auf mich reagiert, J2 Antworten können, ohne die richtige Antwort zu kennen (+7 more)
 
 ### Community 72 - "MISSION-BRIEF-graphify-verifikation.md"
 Cohesion: 0.09
@@ -1038,8 +1058,8 @@ Cohesion: 0.14
 Nodes (22): Agent-Event, /home/smlflg/Projekte/HAI-Agent-Workflow/profiles/hai-agent/skills/hai-idea-spec/references/bio-hai-architecture.md, Chunks, cognitive-load slider, HAI-Agent-Workflow/profiles/hai-agent/skills/hai-minimize/references/dppm-merge-contract.md, Dynamischer Slider, Guards, H.A.I.-Parameter (+14 more)
 
 ### Community 78 - "Cloudflare Machbarkeit Audit 2026-11-19"
-Cohesion: 0.10
-Nodes (22): 1600 samples = 100 ms frames, 16 kHz resampling, Bestands-Worker 05 „Agentfähig", fleet/05-capability-map/wrangler.jsonc, fleet/10-pi-durable/wrangler.jsonc, fleet/11-explain/wrangler.jsonc, agents/dist/types-_Faxb570.d.ts, VoiceServerMessage (+14 more)
+Cohesion: 0.05
+Nodes (42): 1600 samples = 100 ms frames, 16 kHz resampling, Bestands-Worker 05 „Agentfähig", fleet/05-capability-map/wrangler.jsonc, fleet/10-pi-durable/wrangler.jsonc, fleet/11-explain/wrangler.jsonc, agents/dist/types-_Faxb570.d.ts, VoiceServerMessage (+34 more)
 
 ### Community 79 - "M2 — Minimal End-to-End Walking Skeleton (Text)"
 Cohesion: 0.10
@@ -1050,20 +1070,20 @@ Cohesion: 0.10
 Nodes (19): describe(), errorBreakdown, failures, manifest, measured, measuredDom, newStoreFiles, quantile() (+11 more)
 
 ### Community 81 - "F Build vs Buy vs Adapt"
-Cohesion: 0.10
-Nodes (21): A2UI, agents/voice, D3, Augen / Praesenz, F Build vs Buy vs Adapt, Flux-EOT, Generative Layouts (json-render/A2UI), LiveKit turn-detector (+13 more)
+Cohesion: 0.06
+Nodes (34): A2UI, Barrierefreiheit, ADR-0006 (Zeitvertrag), agents/voice, CR-1 — Plan-Hash-Drift, D1, D2 — Lane + Lease, D3 (+26 more)
 
 ### Community 82 - "KI-DIALOG-2026-11-19.md"
 Cohesion: 0.12
 Nodes (20): Bewertungsmethode für Avatare, Kanäle, Latenz, Abbruchschwelle, ADR-0002-agent-als-interface.md, ADR-0004-regler-veraendert-oberflaeche-und-haltung.md, ADR-0005-fremder-testet.md, CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, MESSLAUF-PLAN.md, KI-Dialog »Avatare – wenn KI ein Gesicht bekommt« (+12 more)
 
 ### Community 83 - "K-2 Entscheidungswarteschlange verliert Adressierbarkeit"
-Cohesion: 0.17
-Nodes (21): Plan-Konsolidierung Handoff (19.11.2026), docs/handoffs/2026-11-19-unsolved-ergaenzungen.md, docs/PROJECT_CONTRACT.md, docs/UNSOLVED-TECHNIK.md, PROJEKTPFADE.md, U12 (doppelt belegt), K-2 Entscheidungswarteschlange verliert Adressierbarkeit, O1–O6 (+13 more)
+Cohesion: 0.12
+Nodes (28): Plan-Konsolidierung Handoff (19.11.2026), docs/PROJECT_CONTRACT.md, docs/UNSOLVED-TECHNIK.md, PROJEKTPFADE.md, U12 (doppelt belegt), K-2 Entscheidungswarteschlange verliert Adressierbarkeit, K-4 Zwei Dokumente zitieren nicht existierende Vertragsfassung, F4-Sperrgate (+20 more)
 
 ### Community 84 - "Antwortet"
-Cohesion: 0.15
-Nodes (21): Antwortet, Hintergrund, PRIOR_ART_REPORT (D4/D5), Regel R-H, Stiller Rand, ui-morph-Muster, Augen, Fehler (+13 more)
+Cohesion: 0.14
+Nodes (23): Antwortet, Hintergrund, PRIOR_ART_REPORT (D4/D5), Regel R-C, Regel R-H, Stiller Rand, T2, ui-morph-Muster (+15 more)
 
 ### Community 85 - "HANDOFF-gespraechsfuehrung.md"
 Cohesion: 0.13
@@ -1071,27 +1091,27 @@ Nodes (20): hai-mcp, Bridge (1-2 short sentences), Threads as chips, Kontakt zum
 
 ### Community 86 - "Rive"
 Cohesion: 0.13
-Nodes (21): State-Machine, A2UI, ADR-0004 regler veraendert oberflaeche und haltung, Animated Presence, Anti-pattern catalog cards as answer, Anti-pattern freely generated HTML, Appearance as data, Catalog boundary (+13 more)
+Nodes (23): State-Machine, ADR-0004 regler veraendert oberflaeche und haltung, Animated Presence, Anti-pattern token stream in aria-live, Appearance as data, azukiazusa streaming chat UI, Cloudflare Voice Agent, Data binding (+15 more)
 
-### Community 87 - "Cloudflare Agents SDK (cloudflare/agents)"
-Cohesion: 0.12
-Nodes (20): Scheduling auf Audio-Uhr mit Cursor, Beta, Wiedergabe-Artefakte im Browser, Cloudflare Agents SDK (cloudflare/agents), Voice-Loop im Durable Object, Unterbrechung, Issue #1747, Issue #1816 (+12 more)
+### Community 87 - "Prior Art Report"
+Cohesion: 0.07
+Nodes (42): G Remaining unknowns, QwenAudio/qwen-audio-agent, Prior Art Report, UPSTREAM-SEARCH-vergleichbare-projekte.md, Scheduling auf Audio-Uhr mit Cursor, Backend-Agent (ACP/A2A), Beta, Wiedergabe-Artefakte im Browser (+34 more)
 
-### Community 88 - "E12"
-Cohesion: 0.12
-Nodes (20): Zuhören jederzeit beendbar, MESSPROTOKOLL-2026-11-19.md, A1–A14, D7, Annahme in diesem Dokument, E1, E12, L3 — Die Einwilligungszeile (+12 more)
+### Community 88 - "L2 — Die Unterbrechungszeile"
+Cohesion: 0.06
+Nodes (40): Zuhören jederzeit beendbar, MESSPROTOKOLL-2026-11-19.md, A1–A14, ADR-0002, D1, D2, D3, D7 (+32 more)
 
-### Community 89 - "Execution Plan M1 Measurement Run"
-Cohesion: 0.15
-Nodes (20): Acceptance Criteria, Backlog Items, D1 Measurement Gate, D2 v1 App, D3 State Contract, D4 Tests and Evidence, D5 Foreign Test, Free Plan (+12 more)
+### Community 89 - "surface-projector.js"
+Cohesion: 0.06
+Nodes (69): 1.1 Die 8 Spatial-Depth-Dimensionen und die 4. Mood-Achse, 1.2 Scharfe Abgrenzung gegen die drei bestehenden Systeme, 1.3 Warum das keine vierte Dimension im UI ist, 3.1 Harte Nicht-Ziele, 3.2 Was heute belegt scharfgeschaltet ist, 3.3 Was noch **nicht** sichtbar ist (die eigentliche Prüfantwort), 3.4 Nächster verifizierbarer Schritt: Stufe-1-Visual-Slice, 3.5 Belegstand, Reproduktion und Vorbehalte (+61 more)
 
 ### Community 90 - "WF-10 · Fehler"
-Cohesion: 0.11
-Nodes (20): C-05, C-09, C-10, OD-10, OD-13, Q5, UF-07, App-Shell/Zustand nicht ladbar (+12 more)
+Cohesion: 0.13
+Nodes (17): C-09, OD-10, OD-13, Q5, UF-07, App-Shell/Zustand nicht ladbar, Eingabe abgelehnt, Kein Mikrofon / kein Ton (+9 more)
 
 ### Community 91 - "PLAN-STUFEN-0-5.md"
-Cohesion: 0.10
-Nodes (19): ADR-0005 Fremder testet, Lücke 4: Fremder testet, PLAN-STUFEN-0-5.md, Sub-Agenten im ersten Durchstich, ADR-0001-messlauf-vor-bau.md, ADR-0003-wiederverwendung-vor-eigenbau.md, DESIGN-DECISIONS.md, GUTACHTEN-wow-oder-scheitern.md (+11 more)
+Cohesion: 0.05
+Nodes (44): Kandidat B – Cloudflare + Aura-2 direkt, Kandidat C – LiveKit + Thesys, Kandidat D – LiveKit Agents (Python), Kandidat F – OpenVoiceUI, K-5 Mobile-Pflicht, Open decision OD-01, PV-7 A11y-Entscheid zu Dauerbewegung, Stufe H · UI-8 (+36 more)
 
 ### Community 92 - "State & Scheduling"
 Cohesion: 0.13
@@ -1102,8 +1122,8 @@ Cohesion: 0.14
 Nodes (20): Building, Cloud Code Guthaben, Cloudflare Agent, Context, Embodiment, Implementation or process, Painting, Planning (+12 more)
 
 ### Community 94 - "Agentfähig — technischer Intent"
-Cohesion: 0.11
-Nodes (20): Agentfähig — technischer Intent, sketches/2026-11-12-agentfaehig.md, tech/ABGLEICH-DESIGN-TECHNIK.md, tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, tech/research/cloudflare-bausteine.md, tech/research/konkurrenz.md, tech/UPSTREAM-SEARCH-cloudflare.md, briefs/ (+12 more)
+Cohesion: 0.07
+Nodes (30): Brief Konkurrenz, Agentfähig — technischer Intent, sketches/2026-11-12-agentfaehig.md, tech/ABGLEICH-DESIGN-TECHNIK.md, tech/CLOUDFLARE-MACHBARKEIT-VORPRUEFUNG-2026-11-12.md, tech/research/cloudflare-bausteine.md, tech/research/konkurrenz.md, tech/UPSTREAM-SEARCH-cloudflare.md (+22 more)
 
 ### Community 95 - "7 Gegenprüfung 19.11.2026"
 Cohesion: 0.13
@@ -1130,12 +1150,12 @@ Cohesion: 0.20
 Nodes (17): Solche Agents als Produkt anbieten, Agentfägig.de/site/, /home/smlflg/Projekte/best_of, agent-human-interface.com, agentfähig.de (+www), human-agent-interface.com, humanagentcontrol.com (+www), humanagentinterface.de (+9 more)
 
 ### Community 101 - "WF-07 · Veränderter Zustand"
-Cohesion: 0.17
-Nodes (17): C-06, ADR-0004, D6, F3, OD-02, OD-08, R0, R1 (+9 more)
+Cohesion: 0.22
+Nodes (11): ADR-0004, D6, F3, OD-02, OD-08, R0, R1, R2 (+3 more)
 
 ### Community 102 - "ChatGPT Voice"
-Cohesion: 0.12
-Nodes (17): ChatGPT Voice, Integration in denselben Gesprächsfaden, Unterbrechen per Tippen, Unterbrechung als erstklassiges Bedienelement, Mute/Ende als eigene Bedienelemente, OpenAI Help Center, Orb-Fläche, Panel daneben als Zustandsort (abgelehnt) (+9 more)
+Cohesion: 0.07
+Nodes (28): ADR-0002:35, Chatverlauf als Hauptansicht, ChatGPT Voice, Abschluss-Rating, Onboarding-Tour, Settings, Bedienelemente bleiben auffindbar, Integration in denselben Gesprächsfaden, Unterbrechen per Tippen, Unterbrechung als erstklassiges Bedienelement (+20 more)
 
 ### Community 103 - "instrument.js"
 Cohesion: 0.21
@@ -1149,41 +1169,41 @@ Nodes (17): Bricolage Grotesque, Caveat, Typography pairing, Background Color Te
 Cohesion: 0.18
 Nodes (17): Farbverläufe/Texturen wie gealtertes Papier, Aktuelle Antwort ist hellstes und lebendigstes Element, Active Conversation UI Visual Exploration, Augen folgen kurz der Scrollrichtung, Fließendes Band aus Gedanken statt strenger Chat-Blasen, Neue Tokens lösen sanften Glow am unteren Rand aus, Keine harten Trennlinien zwischen alt und neu, Alte Antwort gleitet nach oben aus dem Fokus und verblasst (+9 more)
 
-### Community 106 - "WF-09"
-Cohesion: 0.18
-Nodes (17): OD-01 · Mobile-Umfang, OD-05 · Voice-Transkript im Verlauf, OD-09 · Verlaufstiefe, OD-10 · Fehler-Copy und Retry, OD-11 · Mikrofon- und Datenschutzhinweis, OD-14 · Textfeld vor dem Aufwachen, OD-15 · Bewegung bei reduziertem Modus, OD-17 · Augen bei sofortiger Eingabe (+9 more)
+### Community 106 - "OD-00 · Flow-Freigabe"
+Cohesion: 0.09
+Nodes (38): Quality criterion Q2, Quality criterion T1, Quality criterion T6, OD-00 · Flow-Freigabe, OD-01 · Mobile-Umfang, OD-02 · Aussehen-Frage im ersten Turn, OD-03 · Hintergrund-Ergebnis, OD-04 · Eingabe während einer Antwort (+30 more)
 
 ### Community 107 - "package.json"
 Cohesion: 0.12
-Nodes (16): description, devDependencies, code-canvas-server@^2.6.1, keywords, license, name, private, repository (+8 more)
+Nodes (17): description, devDependencies, code-canvas-server@^2.6.1, keywords, license, name, private, repository (+9 more)
 
 ### Community 108 - "5 · Bekannte Abweichungen (offen)"
-Cohesion: 0.21
-Nodes (17): Projektpfade — was liegt wo, 03_HAI/docs/PLAN_VALIDATION_REPORT.md, 03_HAI/workbench/plan-council/out/, 2 · Belege im Projekt, 4 · Was nicht in die Historie gehört, 5 · Bekannte Abweichungen (offen), DO-SQLite (...5890aaec….sqlite), docs/DESIGN-DECISIONS.md (+9 more)
+Cohesion: 0.13
+Nodes (28): Projektpfade — was liegt wo, 03_HAI/docs/CONTINUOUS_AUTHORIZE.md, 03_HAI/docs/PLAN_ACCEPTANCE_GATE.md, 03_HAI/docs/PLAN_VALIDATION_REPORT.md, 03_HAI/docs/UPSTREAM_FIRST_GATE.md, 03_HAI/fails/, 03_HAI/LOGBUCH.md, 03_HAI/registry/components/claudeflareworkerhaus.json (+20 more)
 
 ### Community 109 - "Review-Punkt 3: Voice ist Teil des Erstbaus"
-Cohesion: 0.12
-Nodes (17): Verhalten bei Überschreitung, Kosten und Betriebsgrenze, Echo, Free-/Paid-Grenze, Gate 3, Sprachgrenze, Modellkosten, Owner-Entscheidung: Voice ist Teil des Erstbaus (19.11.) (+9 more)
+Cohesion: 0.07
+Nodes (28): Verhalten bei Überschreitung, Erfassungsweg (fehlend), Client-Zahl als Gate, Kosten und Betriebsgrenze, D1 (referenzierte Entscheidung), E1 (referenzierte Entscheidung), Echo, first_audio_ms (Server-Metrik) (+20 more)
 
 ### Community 110 - "MCERQUA/OpenVoiceUI"
-Cohesion: 0.14
-Nodes (17): EyeFace moods (happy, sad, angry, thinking, surprised, listening), Python/Flask, iframe, LLM, MCERQUA/OpenVoiceUI, MIT, Mouse-following pupil movement, OpenVoiceUI src/face/BaseFace.js (+9 more)
+Cohesion: 0.15
+Nodes (16): EyeFace moods (happy, sad, angry, thinking, surprised, listening), Python/Flask, iframe, LLM, MCERQUA/OpenVoiceUI, Mouse-following pupil movement, OpenVoiceUI src/face/BaseFace.js, OpenVoiceUI canvas page system (+8 more)
 
 ### Community 111 - "UNSOLVED — Entscheidungswarteschlange (Technik)"
-Cohesion: 0.21
-Nodes (16): agents/dist/types-_Faxb570.d.ts, agents/dist/voice/workers-ai.js, cloudflare/agents#2377, diagnostics-C4jcz3VK.js, UNSOLVED — Entscheidungswarteschlange (Technik), tech/MESSLAUF-PLAN.md, tech/MESSPROTOKOLL-2026-11-19.md, tech/research/kosten-tts-voice.md (+8 more)
+Cohesion: 0.05
+Nodes (69): agents/dist/types-_Faxb570.d.ts, agents/dist/voice/workers-ai.js, claudeflareworkerhaus/README.md, cloudflare/agents#2377, diagnostics-C4jcz3VK.js, UNSOLVED — Entscheidungswarteschlange (Technik), ADR-0002, Agentfähig/GreateWriting.txt (+61 more)
 
 ### Community 112 - "WCAG 2.2 SC 2.3.3"
 Cohesion: 0.15
 Nodes (16): Aufmerksamkeit reißt, Technik C39, ruhige Fassung, direkte Manipulation, WCAG 2.2 SC 2.2.2, Abschnitt 2.7 Normative Pattern-Quellen, Ereignisse (zuhören, antworten), Bewegung abschaltbar und pausebar, Bedeutung bleibt (+8 more)
 
-### Community 113 - "WF-12 · Verlauf"
-Cohesion: 0.16
-Nodes (16): C-11, C-12, ADR-0002, OD-09, T2, UF-02, UF-08, Ältere Antworten (Text) (+8 more)
+### Community 113 - "main.js"
+Cohesion: 0.05
+Nodes (58): 4) Reihenfolge / Priorität, buildMessages(), buildSystemPrompt(), collectFacts(), DEFAULT_FORBIDDEN, DEFAULT_IDENTITY, DEFAULT_RULES, findLastIndex() (+50 more)
 
 ### Community 114 - "U-11 Cited contract version does not exist"
-Cohesion: 0.13
-Nodes (16): AGENTS.md, docs/handoffs/2026-11-19-plan-konsolidierung.md, docs/PROJECT.md, docs/PROJECT_CONTRACT.md, docs/wireframes/README.md, D2-D5, D6 (Regler-Achse), F4 (+8 more)
+Cohesion: 0.09
+Nodes (27): docs/REGISTER.md, AGENTS.md, docs/DESIGN-DECISIONS.md, docs/EXECUTION_PLAN-M0-M5.md, docs/handoffs/2026-11-19-plan-konsolidierung.md, docs/PROJECT.md, docs/PROJECT_CONTRACT.md, docs/wireframes/README.md (+19 more)
 
 ### Community 115 - "sketches/2026-11-12-agentfaehig.md"
 Cohesion: 0.12
@@ -1206,32 +1226,32 @@ Cohesion: 0.15
 Nodes (15): Anthropic Routing + Orchestrator-Workers, Bridge + max. 2 Threads pro Turn, Caching-First, docs/visual-exploration/03-pathway-flow.md, Anthropic Routing, OpenAI Handoffs, Prior-Art-Notiz, NN/g Progressive Disclosure (+7 more)
 
 ### Community 120 - "Visual Concept — Idle / Presence State"
-Cohesion: 0.22
-Nodes (15): Cold palette: Tech-Blue Frost, Color palette options, Color palette shared rules, Eye shape, size, position, expression, Visual Concept — Idle / Presence State, Idle state summary for builder, Organic jitter, Parting on wind (+7 more)
+Cohesion: 0.15
+Nodes (21): Reactive website Cloudflare showcase, Attention shifts, Breathing, Cold palette: Tech-Blue Frost, Color palette options, Color palette shared rules, Eye shape, size, position, expression, Idle behaviors (+13 more)
 
 ### Community 121 - "Augen als emotionales Zentrum"
 Cohesion: 0.22
 Nodes (15): Ausdrucksregel: Weniger ist mehr, Blick-Glättung 400-700 ms, Augenzustand: Antwort erscheint, Augenzustand: Einschlafen (Inaktivität), Augenzustand: Lesen / Scrollen, Augenzustand: Ruhe / Atmen, Augenzustand: Sprechen (Voice), Augenzustand: Denken / Schwarm-Call (+7 more)
 
-### Community 122 - "OD-00 · Flow-Freigabe"
-Cohesion: 0.23
-Nodes (15): OD-00 · Flow-Freigabe, OD-02 · Aussehen-Frage im ersten Turn, OD-03 · Hintergrund-Ergebnis, OD-04 · Eingabe während einer Antwort, OD-08 · Erster Regler, OD-12 · Aussehen nach der Entscheidung, OD-16 · Zweite Aussehen-Frage, WF-04 (+7 more)
+### Community 122 - "metrics-spatial-bridge.test.js"
+Cohesion: 0.05
+Nodes (44): 4) Reihenfolge / Priorität, AFFECT_METRIC_IDS, clamp01(), createParameterEngine(), get(), targetFor(), update(), createStore() (+36 more)
 
-### Community 123 - "Task Closure Skill"
-Cohesion: 0.14
-Nodes (14): docs/adr/, ADRs, Blockers, Collision Rule, docs/DESIGN-DECISIONS.md, Evidence, docs/EXECUTION_PLAN-M0-M5.md, ~/Projects/00_AKTUELL/JETZT.md (+6 more)
+### Community 123 - "compute.js"
+Cohesion: 0.06
+Nodes (62): ABORT, afinnTokenScore(), ANGER, APOLOGY, BARE_CONTRACTIONS, clamp(), clamp01(), computeAffectMetrics() (+54 more)
 
-### Community 124 - "Stufe 2 – Entscheidung Cloudflare ja/nein"
-Cohesion: 0.15
-Nodes (14): Kandidat F – OpenVoiceUI, Vom Owner bestätigt, Sub-Agent, endpointingMs, eot_threshold / Turn-Erkennung, OpenVoiceUI, silenceDurationMs (500 ms, Client), Sub-Agent scheitert (+6 more)
+### Community 124 - "surface-state.js"
+Cohesion: 0.08
+Nodes (44): atLeast(), atMost(), buildAdaptationPromptBlock(), clamp(), createAdaptiveAgent(), enforceResponseLength(), extractModelSurfacePatch(), mergePatch() (+36 more)
 
 ### Community 125 - "ADR-0005 — Vor dem Ausbau: ein Fremder testet den ersten Durchstich"
 Cohesion: 0.21
 Nodes (14): ADR-0005 — Vor dem Ausbau: ein Fremder testet den ersten Durchstich, DESIGN-DECISIONS.md, GUTACHTEN-wow-oder-scheitern.md, PLAN-STUFEN-0-5.md, Ist das ein Erlebnis oder eine Spielerei?, Bestehensgrenze: scrollt oder fragt, Zwei Fragen nach dem Test, Samuel (Bauherr) (+6 more)
 
-### Community 126 - "docs/PROJECT_CONTRACT.md"
-Cohesion: 0.15
-Nodes (14): docs/adr/ADR-0003-wiederverwendung-vor-eigenbau.md, docs/PROJECT_CONTRACT.md, docs/UX-INFORMATIONSARCHITEKTUR.md, graphify-out/GRAPH_REPORT.md, research/PRIOR_ART_REPORT.md, tech/INTENT-TECHNIK.md, UPSTREAM-SEARCH-vergleichbare-projekte.md, U11 — Kein Barrierefreiheits-Kriterium im Vertrag (+6 more)
+### Community 126 - "createTypewriter"
+Cohesion: 0.07
+Nodes (47): 1 · Befunde, 2 · Konkrete Schnittstellen, 3 · Was in der bestehenden UI vorbereitet/geändert werden muss, 4 · Reihenfolge / Priorität, 5 · Owner-Fragen (Produkt), M1-Analyse: Ersatz von `src/dev/devAgent.js` durch einen echten Agenten, 2 · Konkrete Schnittstellen, clamp01() (+39 more)
 
 ### Community 127 - "$ (querySelector)"
 Cohesion: 0.14
@@ -1242,36 +1262,36 @@ Cohesion: 0.14
 Nodes (13): jobs, validate, name, on, pull_request, push, workflow_dispatch, permissions (+5 more)
 
 ### Community 129 - "Problem: interaktive KI-Oberflaeche mit bis zu 3 sichtbaren Ein-Wort-Slidern fuer Atmosphaere und Antwortstil"
-Cohesion: 0.16
-Nodes (14): dense <-> airy, 5-bucket prompt modifier vector, goblin.tools Formalizer, Prior Art Decision B: INTEGRATE, Problem: interaktive KI-Oberflaeche mit bis zu 3 sichtbaren Ein-Wort-Slidern fuer Atmosphaere und Antwortstil, MDN Variable Fonts, Native input range + CSS Custom Properties + Variable Fonts, plain <-> playful (+6 more)
+Cohesion: 0.28
+Nodes (9): dense <-> airy, goblin.tools Formalizer, Problem: interaktive KI-Oberflaeche mit bis zu 3 sichtbaren Ein-Wort-Slidern fuer Atmosphaere und Antwortstil, plain <-> playful, empfohlene Standard-3: warm-cold, soft-sharp, still-alive, soft <-> sharp, still <-> alive, tone-slyder (+1 more)
 
-### Community 130 - "Deepgram"
-Cohesion: 0.16
-Nodes (14): Deepgram, Amazon Polly, Deepgram Aura-2 deutsche Stimmen (7), Deepgram Aura-1, Deepgram Aura-2, Deepgram Flux-TTS, Deepgram Flux-TTS deutsche Stimmen (13), Deepgram Flux-TTS-Promo ($1 Gutschrift je $1 bis 31.12.2026, max $500) (+6 more)
+### Community 130 - "Kosten: TTS-Anbieter (deutsch, geparkt) und Workers-AI-Voice-Betrieb"
+Cohesion: 0.06
+Nodes (42): Deepgram, Dauerhaft lauschender Agent, Amazon Polly, Azure Neural TTS, Azure Neural HD TTS, Cartesia (Sonic), Cartesia Sonic 3.6, Deepgram Aura-2 deutsche Stimmen (7) (+34 more)
 
-### Community 131 - "A2UI"
-Cohesion: 0.14
-Nodes (14): A2A, A2UI, ADK, Agent-SDK Dart, Agent-SDK Python, Agent-SDK Swift, Agent-SDK TypeScript, Protokoll als Daten (+6 more)
+### Community 131 - "idle.js"
+Cohesion: 0.09
+Nodes (48): ASK_WIDEN_MS, CALM_STEP_MS, clamp(), createRng(), ensureStylesheet(), EVENT_NAME, GLANCE_HOLD_MS, IDLE_SOURCE (+40 more)
 
-### Community 132 - "Kosten: TTS-Anbieter (deutsch, geparkt) und Workers-AI-Voice-Betrieb"
-Cohesion: 0.16
-Nodes (14): Dauerhaft lauschender Agent, Cartesia (Sonic), Cartesia Sonic 3.6, Kosten: TTS-Anbieter (deutsch, geparkt) und Workers-AI-Voice-Betrieb, ElevenLabsTTS (Agents-SDK-Klasse), INTENT-TECHNIK.md (Beleg-Regel), Kokoro-82M, Messlauf 19.11.2026 (+6 more)
+### Community 132 - "surface.js"
+Cohesion: 0.07
+Nodes (34): createCollector(), onKeyDown(), onPointerMove(), onVisibilityChange(), recordHidden(), recordKeyDown(), recordPointer(), ANCHORS (+26 more)
 
 ### Community 133 - "Review-Punkt 4: Reproduzierbarkeit des Messlaufs"
 Cohesion: 0.15
 Nodes (13): agents version, Commit SHA, Effective model ID, Reproducibility, A2 (referenzierte Quelle/Entscheidung), agents: "*", Lockfile behalten, Modell-ID im Protokoll (+5 more)
 
 ### Community 134 - "K-7 18 ODs, 7 davon P0"
-Cohesion: 0.15
-Nodes (13): K-3 Typewriter bei reduzierter Bewegung, K-7 18 ODs, 7 davon P0, K-8 Eingabe während der Antwort, Open decision OD-00, Open decision OD-04, Open decision OD-06, Open decision OD-07, Open decision OD-08 (+5 more)
+Cohesion: 0.29
+Nodes (7): K-3 Typewriter bei reduzierter Bewegung, K-8 Eingabe während der Antwort, Open decision OD-04, Open decision OD-15, Workflow WF-03, Workflow WF-04, Workflow WF-12
 
 ### Community 135 - "Offene Entscheidungen"
 Cohesion: 0.15
 Nodes (13): docs/adr/ADR-0002, D6 (Default erster Regler), Default des ersten Reglers (D6), Zweiter/dritter Regler, Beginn des Fokuswechsels, Proaktives Nachsprechen (T4), Wiederkehr-Besuch, Verlaufstiefe (+5 more)
 
-### Community 136 - "3 · Außerhalb des Projekts — und warum"
-Cohesion: 0.21
-Nodes (13): 03_HAI/docs/CONTINUOUS_AUTHORIZE.md, 03_HAI/docs/PLAN_ACCEPTANCE_GATE.md, 03_HAI/docs/UPSTREAM_FIRST_GATE.md, 03_HAI/fails/, 03_HAI/LOGBUCH.md, 03_HAI/registry/components/claudeflareworkerhaus.json, 3 · Außerhalb des Projekts — und warum, ~/Control/ACTIVE_PROJECTS.md (+5 more)
+### Community 136 - "gaze.js"
+Cohesion: 0.07
+Nodes (39): BACKSPACE_LOOKBACK_PX, CARET_SOURCE, clamp(), countWords(), EMIT_EPSILON_PX, EMIT_MIN_INTERVAL_MS, EVENT_NAME, findWordStart() (+31 more)
 
 ### Community 137 - "createBrowserTools"
 Cohesion: 0.18
@@ -1285,17 +1305,17 @@ Nodes (13): Wrangler CLI Skill, Automatic Provisioning, Cloudflare CLI (cf), Com
 Cohesion: 0.18
 Nodes (13): UX-INFORMATIONSARCHITEKTUR.md, Deterministischer Barrierefreiheits-Durchlauf, Ausschlusskriterien Stichprobe, First-Click-Test (~5 Personen, UX §6 A16), kein Chat (keine Chat-Oberfläche), P1 — kein Tech-Hintergrund, 30–60, P2 — mobil-first, Touch, eigenes Gerät, P3 — täglich ChatGPT (+5 more)
 
-### Community 140 - "T1–T9 requirements table"
-Cohesion: 0.15
-Nodes (13): T1–T9 requirements table, T1 Eingang voice/text/picture, T2 Latenz unter 1 sec, T3 Front man Agent → Analysing/Looking up/Backup, T4 fast/slow, T5 Sliders real time effects, T6 Augen/on wind/Connect effect/popups move, T7 Pathways (+5 more)
+### Community 140 - "mountReplay"
+Cohesion: 0.10
+Nodes (39): 2) Schnittstellen (Vorschlag, nichts gebaut), ANSWERS, DEV_LABEL, pickResponse(), respond(), abortError(), applyTypingSteps(), element() (+31 more)
 
 ### Community 141 - "Widget (Website mit Agenten)"
-Cohesion: 0.17
-Nodes (12): Einbettung verlangt öffentliche, unauthentifizierte Agenten, Floating Launcher, Vier Zustände, Launcher konkurriert mit Seiteninhalt um Aufmerksamkeit, Modus Stimme ↔ Text ohne Verlust des Gesprächsfadens, Orb markenunabhängig und austauschbar, P4-Verstoß, Präsenzfläche (denkt / hört / spricht / nichts) (+4 more)
+Cohesion: 0.15
+Nodes (13): Abschluss-Rating, Einbettung verlangt öffentliche, unauthentifizierte Agenten, Floating Launcher, Vier Zustände, Launcher konkurriert mit Seiteninhalt um Aufmerksamkeit, Modus Stimme ↔ Text ohne Verlust des Gesprächsfadens, Orb markenunabhängig und austauschbar, P4-Verstoß (+5 more)
 
 ### Community 142 - "Input Field"
-Cohesion: 0.23
-Nodes (12): Active Conversation UI, Typewriter Answer Text, Eyes (Augen), Focus Transition from Input to Answer, Input Field, Input Focus State, Input Placeholder Text, Input Typing State (+4 more)
+Cohesion: 0.16
+Nodes (16): Active Conversation UI, Typewriter Answer Text, Eyes (Augen), Focus Transition from Input to Answer, Input Field, Input Focus State, Input Placeholder Text, Input Typing State (+8 more)
 
 ### Community 143 - "Nächster Schritt: Samuel wählt eine Hauptrichtung"
 Cohesion: 0.27
@@ -1306,8 +1326,8 @@ Cohesion: 0.20
 Nodes (12): Gedanken IDEEN Page 1, Gedanken IDEEN Page 2, HAI Agent Architecture Page, MCP Server Notion Connector, Mensch Heute Page, Notion README Status Document, Projects Database, Agentfaehig Sketch PDF (+4 more)
 
 ### Community 145 - "runFiber"
-Cohesion: 0.21
-Nodes (11): fetchData, keepAlive, keepAliveWhile, MyAgent, onFiberRecovered, onRequest, transform, increment (+3 more)
+Cohesion: 0.22
+Nodes (10): fetchData, keepAlive, keepAliveWhile, onFiberRecovered, onRequest, transform, increment, runFiber (+2 more)
 
 ### Community 146 - "Ablauf"
 Cohesion: 0.22
@@ -1321,37 +1341,37 @@ Nodes (11): aborted, Account/quota errors, Defective measurement setup, Error ra
 Cohesion: 0.20
 Nodes (10): BoopFace-Rig, Tote Typografie (kein @font-face), DESIGN_COMMON.md, docs/notes/2026-11-13-nightly-status.md, Verstoß gegen DESIGN_COMMON.md (backdrop-filter/gradient/emoji), prototype/index.html, Wörtlicher Zufalls-Striche-Salat, Scout Prototype-Audit (ses_e2de031c4ffeXk7moKY9WSTAkS) (+2 more)
 
-### Community 149 - "K-1 Control-Plane-Widerspruch statt „keine Mission""
+### Community 149 - "mountConversation"
+Cohesion: 0.09
+Nodes (30): Entscheidung, Geänderte Dateien, Kandidatenliste (Upstream-Suche), Verifikation, 5) Was die bestehende UI braucht, 2) Schnittstellen, 5) Was die bestehende UI braucht, ensureAckStylesheet() (+22 more)
+
+### Community 150 - "mic.js"
+Cohesion: 0.11
+Nodes (38): collapse(), collectTranscript(), composeTranscript(), CONSENT_FADE_MS, CONSENT_TEXT, CONSENT_VISIBLE_MS, DEFAULT_ERROR_HINT, ensureStylesheet() (+30 more)
+
+### Community 151 - "E11: Nur die Augen tragen Präsenz"
 Cohesion: 0.20
-Nodes (11): Control-Plane, DEGRADED, research/*, tech/MESSPROTOKOLL-2026-11-19.md, UX-INFORMATIONSARCHITEKTUR, K-1 Control-Plane-Widerspruch statt „keine Mission", hai_health, fails/0025-sibling-mission-blocks-touchid-slice.json (+3 more)
-
-### Community 150 - "U-03 Voice in initial build vs text-first"
-Cohesion: 0.25
-Nodes (11): docs/REGISTER.md, docs/DESIGN-DECISIONS.md, docs/EXECUTION_PLAN-M0-M5.md, M2, M3, U-03 Voice in initial build vs text-first, U-04 One vs three sliders, U-07 UI budget at upper bound (+3 more)
-
-### Community 151 - "WCAG"
-Cohesion: 0.25
-Nodes (11): E11: Nur die Augen tragen Präsenz, Abschnitt 2.6, WCAG 2.3.3, Anti-pattern token stream in aria-live, azukiazusa streaming chat UI, generative-a11y, Principle P6 two channels one event, Screen reader channels (+3 more)
+Nodes (10): PRIOR_ART_REPORT.md, E11: Nur die Augen tragen Präsenz, E13, E14: Besucher wartet, ohne dass sich etwas zeigt, E2, Kurzantwort 5, PRIOR_ART_REPORT H2, Abschnitt 2.6 (+2 more)
 
 ### Community 152 - "DISCONNECTED"
 Cohesion: 0.33
 Nodes (11): CONNECTED, DEGRADED, RECONN., connection dimension, DISCONNECTED, DISCONNECTED → stille Wiederholung, Orthogonale Zustandsmaschine (7 Dimensionen), RECONNECTING (+3 more)
 
-### Community 153 - "QwenAudio/qwen-audio-agent"
-Cohesion: 0.27
-Nodes (11): QwenAudio/qwen-audio-agent, Backend-Agent (ACP/A2A), core contract tools, Frontend-Agent, implizite Abbrüche vermeiden, memory authority (user vs memory), optional capabilities, Orchestration-Runtime (+3 more)
+### Community 153 - "chain.test.js"
+Cohesion: 0.11
+Nodes (24): abortableDelay(), abortError(), AllProvidersFailed, attemptProvider(), classifyError(), ContentFilterError, createAgentChain(), breakerFor() (+16 more)
 
 ### Community 154 - "Aufgaben T1–T6"
 Cohesion: 0.20
 Nodes (11): Aufgaben T1–T6, E5 — Veränderung ohne benennbare Ursache oder als Bug gedeutet, H1 — „Du kannst sie auch ansprechen.“, H2 — „Vielleicht ist irgendwo etwas, das du bewegen kannst.“, Mehr als zwei Hinweise pro Aufgabe = Aufgabe nicht bestanden, S1 — erste willentliche Handlung ≤ 20 s ohne Ansprache (≥4/5), S5 — Präferenzänderung erzeugt und benannt, ≥ 2 Dimensionen (≥3/5), S6 — Rückgängig gefunden (≥4/5) (+3 more)
 
-### Community 155 - "deutsche Pipeline (geparkt)"
-Cohesion: 0.24
-Nodes (10): Amazon Polly Free-Tier (5 Mio Zeichen/Monat), Eigenbau-Adapter, Deepgram Aura-2/Flux-TTS per API, ElevenLabsTTS (@cloudflare/voice-elevenlabs), deutsche Pipeline (geparkt), Google TTS Free-Tier (4 Mio Zeichen/Monat), STT nova-3 mit language: de, research/kosten-tts-voice.md (+2 more)
+### Community 155 - "ElevenLabs"
+Cohesion: 0.08
+Nodes (28): Amazon Polly Free-Tier (5 Mio Zeichen/Monat), Eigenbau-Adapter, Deepgram Aura-2/Flux-TTS per API, ElevenLabs, Orb, Terms-Gate, Voice-only, Voice+Text (+20 more)
 
-### Community 156 - "agents/dist/voice/index.js"
-Cohesion: 0.24
-Nodes (10): agents/dist/voice/index.js, _handleTextMessage, _streamingTTSPipeline, cf_voice_messages, end_of_speech, SentenceChunker, speak, speakAll (+2 more)
+### Community 156 - "C. REFERENCE SET (15 Primärreferenzen im 9-Punkte-Analyseraster)"
+Cohesion: 0.05
+Nodes (36): 1. Abgrenzung der zusätzlichen räumlichen Dimensionen von bestehenden Systemen (Kriterium C1), 1. Was dem aktuellen Design fehlt (Code-Diagnose an `src/`), 2. Architektur der Vernetzung: Anker (`SurfaceState` / `Bones`) + Metrik-Modulation (`Δp`), 2. Die 7 räumlichen Z-Ebenen (`Z = -3` bis `Z = +3`), 2. Welche räumlichen Qualitäten sinnvoll sind, 3. Die 8 zusätzlichen Spatial-Depth-Dimensionen: UI-Wirkung & HAI-Interaktionswirkung (Kriterium C2), 3. Die drei vielversprechendsten Richtungen, 3. Vollständige Vernetzungs-Matrix: 109 Metriken → 12 Parameter → 8 Spatial-Depth-Dimensionen (+28 more)
 
 ### Community 157 - "K-6 Pause/Stop für automatisch blinkende Augen"
 Cohesion: 0.20
@@ -1374,8 +1394,8 @@ Cohesion: 0.29
 Nodes (9): greet, MyAgent, processData, close, error, send, streamResults, streamWithError (+1 more)
 
 ### Community 162 - "Agent"
-Cohesion: 0.20
-Nodes (8): MyAgent, EmailAgent, Agent, Counter, initialState, onStateUpdate, routeAgentRequest, validateStateChange
+Cohesion: 0.12
+Nodes (14): MyAgent, MyAgent, EmailAgent, getRaw, isAutoReplyEmail, onEmail, PostalMime, replyToEmail (+6 more)
 
 ### Community 163 - "Erfolgskriterien S1–S10"
 Cohesion: 0.27
@@ -1409,9 +1429,9 @@ Nodes (10): target, clone, gitHead, gitStatusVoiceAgent, llmQueryParam, serverTs
 Cohesion: 0.20
 Nodes (10): versions, agents, ai, browser, chromeChannel, node, playwright, vite (+2 more)
 
-### Community 171 - "Cloudflare Blog: Cloudflare Realtime Voice AI"
-Cohesion: 0.22
-Nodes (10): 800-ms-Regel für natürliche Konversation, Cloudflare Blog: Cloudflare Realtime Voice AI, Unterbrechungs- und Turn-Handling, Latenzbudget (40/300/400/150 ms), LLM-Inferenz 400 ms, Mikrofoneingabe 40 ms, Realtime Agents (offene Beta), this.speak() für LLM-Antwort (+2 more)
+### Community 171 - "worker.js"
+Cohesion: 0.09
+Nodes (27): agentRateBuckets, ALLOWED_ORIGIN_HOSTS, buildAgentMessages(), callMiniMax(), callOpenAI(), callWorkersAI(), clientIp(), extractChatText() (+19 more)
 
 ### Community 172 - "Handoff-Netzwerklatenz zwischen Diensten"
 Cohesion: 0.31
@@ -1425,21 +1445,21 @@ Nodes (10): Depth Transformer, Gradio-WebRTC-Demo, Mimi Codec, MLX, Moshi (Kyuta
 Cohesion: 0.20
 Nodes (10): Workers AI Free-Quota 10.000 Neurons/Tag, Neuron (Workers AI Abrechnungseinheit), Push-to-Talk / VAD-Gating, Workers AI TTS aura-1, Workers AI TTS aura-2-en, Workers AI STT flux (WebSocket), Workers AI LLM glm-4.7-flash, Workers AI LLM llama-3.2-1b (+2 more)
 
-### Community 175 - "U29 — agentfähig.de liefert nicht die ADR-0002-Fläche"
-Cohesion: 0.25
-Nodes (9): ADR-0002, docs/adr/ADR-0005-fremder-testet.md, docs/KI-DIALOG-2026-11-19.md, tech/FREMDTEST-PLAN.md, U29 — agentfähig.de liefert nicht die ADR-0002-Fläche, U31 — Explorative Fremdtest-Runde n=5, U4 — Fünf Übernahmen aus KI-Dialog, U7 — Vortragsaufnahme verloren (+1 more)
+### Community 175 - "ollamaAgent.js"
+Cohesion: 0.21
+Nodes (17): abortError(), cleanAnswer(), createOllamaAgent(), currentSystem(), post(), probe(), remember(), respond() (+9 more)
 
-### Community 176 - "ElevenLabs"
-Cohesion: 0.22
-Nodes (9): ElevenLabs, Abschluss-Rating, Orb, Terms-Gate, Voice-only, Voice+Text, Zustandsenum, ElevenLabs Black-Friday-Promo (bis 1.12.2026) (+1 more)
+### Community 176 - "keyboard-viewport.test.js"
+Cohesion: 0.23
+Nodes (13): computeKeyboardInset(), isKeyboardOpen(), isTypingTarget(), KEYBOARD_ATTR, KEYBOARD_INSET_MIN_PX, KEYBOARD_OPEN, KEYBOARD_VAR, mountKeyboardViewport() (+5 more)
 
 ### Community 177 - "Typewriter-Effekt"
 Cohesion: 0.25
 Nodes (9): Risiko: Pulsierender Typewriter kann auf Dauer nerven, Typewriter-Effekt pausiert beim Scrollen nicht, konstantes Buchstabentempo als Hypothese, Designabnahme, laengere Betrachtungsdauer impliziert nicht automatisch langsameren Buchstabeneinblendung, pulsierender Typewriter aus Samuels Antworten, Samuels gewuenschter Rhythmus, pauschale Empfehlung konstantes Buchstabentempo nicht wissenschaftlich bewiesen (+1 more)
 
-### Community 178 - "MCP Integration"
-Cohesion: 0.25
-Nodes (9): MCP Integration, Client API, createMcpHandler, Handler API, MCP SDK v2 migration, MCP server, McpAgent, Securing MCP servers (+1 more)
+### Community 178 - "remoteAgent.js"
+Cohesion: 0.21
+Nodes (12): abortError(), createRemoteAgent(), readSystem(), remember(), respond(), isProductionHost(), PRODUCTION_HOSTS, remoteError() (+4 more)
 
 ### Community 179 - "Kritische Fehler E1–E8"
 Cohesion: 0.31
@@ -1449,17 +1469,17 @@ Nodes (9): E2 — Unbeabsichtigtes Senden / ungewollte Aktion, E3 — Nutzer gla
 Cohesion: 0.22
 Nodes (9): file, rows, sha256, snapshot, snapshotSha256, evidence, durableObjectStore, assistant (+1 more)
 
-### Community 181 - "docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md"
-Cohesion: 0.25
-Nodes (8): claudeflareworkerhaus/README.md, docs/CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, fleet/05-capability-map/wrangler.jsonc, tech/LUECKEN-2026-11-12.md, R02 — Domainzuordnung agentfähig.de zu Worker 05 nur README/Manifest, R03 — Machbarkeits-Evidenz zitiert agents@0.27.0, Lauf nutzt 0.33.0, U5 — Kein deutsches TTS in Workers AI, examples/voice-agent/node_modules/agents/package.json
+### Community 181 - "2.2 Vollständige Zuordnung je Dimension"
+Cohesion: 0.13
+Nodes (15): 2.1 Die 7 Z-Ebenen und ihre realen DOM-Anker, 2.2.0 `spatiality` — `--surface-spatial` (4. Mood-Achse), 2.2.1 `depthIntensity` — `--depth-intensity`, 2.2.2 `parallaxGain` — `--depth-parallax`, 2.2.3 `cornealDepth` — `--depth-cornea`, 2.2.4 `lightDirectionCoupling` — `--depth-light-x` / `--depth-light-y`, 2.2.5 `shadowElevation` — `--depth-shadow-length` / `--depth-contact-alpha`, 2.2.6 `atmosphericHaze` — `--depth-haze` (+7 more)
 
-### Community 182 - "ADR-0004 — Der Regler verändert Oberfläche und Haltung"
-Cohesion: 0.29
-Nodes (8): Zustandsmodell (Reglerwerte, Farben, Status, Mikrofonpegel, Teiltranskript), ADR-0004 — Der Regler verändert Oberfläche und Haltung, Agentfähig/GreateWriting.txt, docs/GUTACHTEN-wow-oder-scheitern.md, Dekoration vs. echte Anpassung, Zustandsfeld tone (warm|cool) + System-Fragment, Achse warm ↔ kühl (Farbe, Typografie/Raum, Rhythmus, Antwort-Haltung), Designentscheidungen
+### Community 182 - "PLAN — Audio-Ausgabe des Agenten"
+Cohesion: 0.13
+Nodes (14): 0 · Befund, 10 · Nicht-Ziele, 11 · Risiken, 12 · Definition of Done für diesen Plan, 1 · Nicht verhandelbare Randbedingungen, 2 · Produktform (Vorschlag), 3 · Zustandsdimension `speech` (orthogonal), 4 · Ablauf „erste Audio-Ausgabe" (+6 more)
 
-### Community 183 - "U20 — Zwei Vertragsgenerationen und Execution Plans vermischt"
-Cohesion: 0.36
-Nodes (8): docs/EXECUTION_PLAN-M0-M5.md, docs/PROJECT.md, tech/EXECUTION_PLAN-M1-MESSLAUF.md, U2 — Drei D-Nummernkreise, U20 — Zwei Vertragsgenerationen und Execution Plans vermischt, U24 — AG-UI als Upstream für Agent→UI-Kanal, U3 — PROJECT_CONTRACT Vorschlag, O1–O11 offen, graphify-out/prebuild/REGISTER.md
+### Community 183 - "03 · Zustandsmatrix und Feedback-Regeln"
+Cohesion: 0.14
+Nodes (14): ADR-0001, C-15 Pause motion, 03 · Zustandsmatrix und Feedback-Regeln, OD-06 Reload survival, OD-09 Older history, OD-19 Rest quota, Q1, Q2 (+6 more)
 
 ### Community 184 - "Vorgeschlagen, nicht bestätigt"
 Cohesion: 0.25
@@ -1505,9 +1525,9 @@ Nodes (8): isolation, conversationId, devServerPidsBefore, devServerShared, devS
 Cohesion: 0.25
 Nodes (8): run, aborted, attemptedTurns, completedTurns, devServerPidsAfter, doStoreFilesAfter, finishedAt, rawEventCount
 
-### Community 195 - "Budget und Stop-Kriterien"
-Cohesion: 0.29
-Nodes (7): Beispiel laeuft nach ca. 1 h Fehlersuche nicht lokal -> BLOCKED, kein Eigenbau, kein Debugging-Fork, Paid- oder Key-Wand ohne Freigabe -> Stop und Rueckfrage, Phase 0 + Phase 1 <= 2 h reine Arbeitszeit, Budget und Stop-Kriterien, Freigabe durch Samuel
+### Community 195 - "1. Parameter → Komponente"
+Cohesion: 0.15
+Nodes (13): 1. Parameter → Komponente, `attention` — Fokus des Nutzers, `calm` — Erregung invertiert, `certainty` — Gewissheit, `closeness` — Nähe, `density` — Informationsdichte, `depth` — Tiefe, `energy` — Antrieb (+5 more)
 
 ### Community 196 - "Desktop und Mobil · Deliverable H"
 Cohesion: 0.29
@@ -1517,17 +1537,13 @@ Nodes (7): Desktop ≥ 1024 px, Mobil 390 × 844, Kein Auto-Fokus, Kein Hover, D
 Cohesion: 0.29
 Nodes (7): docs/adr/ADR-0006-zeitvertrag.md, research/EMBODIMENT-RECHERCHE.md, U10 — Typewriter-Wahrnehmungs-Obergrenze, U9 — Sieben Designprinzipien aus Embodiment-Recherche, NN/g How Little Do Users Read, NN/g Response Times, web.dev CLS
 
-### Community 198 - "U3 — unsolved technique"
-Cohesion: 0.29
-Nodes (7): O1, O2, O3, O4, O5, O6, U3 — unsolved technique
-
 ### Community 199 - "Website is the agent (not a website with a chat)"
 Cohesion: 0.29
 Nodes (7): Addresses: website, person, team, company, Context (pillar), Skills (pillar), Text (pillar), Voice (pillar), Website is the agent (not a website with a chat), Professional Vibe Coding
 
-### Community 200 - "Prior Art Decision A: ADAPT"
-Cohesion: 0.29
-Nodes (7): Prior Art Decision A: ADAPT, ~40 LoC pointer/focus lerp & blink timer, Residual risk: visual warmth of stroke-to-eye transition, optional Rough.js path baking at authoring time, sketch block 4, Vanilla SVG filters + CSS transforms, zero runtime dependencies
+### Community 200 - "EyeFace.js"
+Cohesion: 0.08
+Nodes (19): prefers-reduced-motion, MCERQUA/OpenVoiceUI, face.css, sechs Stimmungen, Prior Art Decision A: ADAPT, ~40 LoC pointer/focus lerp & blink timer, Residual risk: visual warmth of stroke-to-eye transition, optional Rough.js path baking at authoring time (+11 more)
 
 ### Community 201 - "Cloudflare Chat Agent example"
 Cohesion: 0.29
@@ -1561,17 +1577,17 @@ Nodes (7): Azure OpenAI Realtime, FastAPI, marin, openai:gpt-realtime, Pydantic 
 Cohesion: 0.40
 Nodes (6): Klon, Durable-Object-Konversation, Ein Writer pro Integrationsstelle, Protokolldatei, laufender Server, Browser-Tab
 
-### Community 209 - "Stufe 4 – Ausweichpfad"
-Cohesion: 0.33
-Nodes (6): Kandidat B – Cloudflare + Aura-2 direkt, Kandidat C – LiveKit + Thesys, Kandidat D – LiveKit Agents (Python), LiveKit + Thesys, aura-2-julius-de, Stufe 4 – Ausweichpfad
+### Community 209 - "Handoffs — nicht anwendbare Änderungen (README)"
+Cohesion: 0.22
+Nodes (9): Handoffs — nicht anwendbare Änderungen (README), docs/handoffs/2026-11-19-plan-konsolidierung.md, docs/handoffs/2026-11-19-unsolved-ids.md, docs/handoffs/2026-11-19-upstream-grenzen.md, docs/handoffs/2026-11-19-verifikation.md, handoffs/README.md, UNSOLVED-TECHNIK.md, UNSOLVED.md (+1 more)
 
-### Community 210 - "OD-13 · Warte-Schwellen und Typewriter-Puffer"
-Cohesion: 0.33
-Nodes (6): Quality criterion Q2, Quality criterion T1, Quality criterion T6, OD-06 · Reload und Besucher-Identität, OD-13 · Warte-Schwellen und Typewriter-Puffer, Measure run M1
+### Community 210 - "Bericht — Reaktive statt lenkende Gesprächsführung (Feld: Verhandlungsgespräche)"
+Cohesion: 0.20
+Nodes (9): 0) Befund aus dem Repo, der die Diagnose verschiebt, 1) Kernprinzipien des Feldes (reaktiv, nicht lenkend), 2) Prompt-Regeln (Englisch, kopierfertig), 3) Gegenbeispiele — was lenkend wirkt, 4) Zusammenspiel mit den 12 Parametern, 5) Messen, ob die Technik wirkt, 6) Upstream (Bücher / Paper / Repos / Datensätze), 7) Empfehlung: **ADAPT** (mit einem REUSE und einem BUILD LAST) (+1 more)
 
-### Community 211 - "deutsche Stimme über zwei Anbieter"
-Cohesion: 0.40
-Nodes (6): CLOUDFLARE-MACHBARKEIT-AUDIT-2026-11-19.md, Cloudflare Workers, ElevenLabs/Telnyx/Inworld, Falle 4: Deutsch verstehen vs. Deutsch klingen, M3b: deutsches TTS über Adapter, deutsche Stimme über zwei Anbieter
+### Community 211 - "Bericht — reaktive statt lenkende Gesprächsführung + Experimentierplattform"
+Cohesion: 0.20
+Nodes (9): 1) Kernprinzipien, 2) Prompt-Regeln (English, für einen 1–3-Satz-Agenten), 3) Gegenbeispiele aus `src/dev/conversation-pathways.json`, 4) Zusammenspiel mit den 12 Parametern, 5) Messen, ob die Technik wirkt, 6) Upstream, 7) Empfehlung, Architektur (+1 more)
 
 ### Community 212 - "Transition choreography"
 Cohesion: 0.33
@@ -1633,17 +1649,17 @@ Nodes (6): serverModelRuntime, file, sha256, sourceLine, sourceLog, url
 Cohesion: 0.33
 Nodes (6): instrumentation, clock, file, serverClock, sha256, version
 
-### Community 227 - "Phase 0 prerequisites"
-Cohesion: 0.33
-Nodes (6): AssemblyAI, Node.js 18+, npm install + npm run start, Phase 0 prerequisites, Telnyx, wrangler login / CLOUDFLARE_API_TOKEN
+### Community 227 - "UI-5 Ein Regler, Oberfläche und Haltung"
+Cohesion: 0.25
+Nodes (9): UI component C-01, UI component C-06, Decision D6, E-03 Token-Schicht, K-2 ein Regler vs. drei Regler, Milestone M3, Stufe E · UI-5, UI-5 Ein Regler, Oberfläche und Haltung (+1 more)
 
 ### Community 228 - "Cloudflare Workers AI"
 Cohesion: 0.33
 Nodes (6): Täglicher Reset 00:00 UTC, Erstbau Englisch (Workers AI Voice), Paid-Modelle Rate-Limits 20/50 req/min, Workers AI Rate-Limit ASR 720 req/min, Workers AI Rate-Limit Text Generation 300 req/min, Cloudflare Workers AI
 
-### Community 229 - "Google Cloud TTS"
-Cohesion: 0.33
-Nodes (6): Google Chirp 3 HD TTS, Google Cloud TTS, Google Gemini-TTS, Google Neural2 TTS, Google Standard/WaveNet TTS, Google Studio TTS
+### Community 229 - "UI-1 Route, Shell, Zustandsvertrag"
+Cohesion: 0.22
+Nodes (9): UI component C-02, UI component C-14, E-02 Zustandsvertrag, PV-1 Flows UF-01…08 bestätigt, PV-4 Herkunft des src-Gerüsts belegt, PV-6 M0-GO + Lane/Lease, Stufe A · UI-1, tests/ui/ui-1.spec.ts (+1 more)
 
 ### Community 230 - "Drei Ebenen, die nicht verwechselt werden dürfen"
 Cohesion: 0.40
@@ -1653,29 +1669,29 @@ Nodes (5): Lesbarkeit, Trefferflächen, Fokusring, Agentenfähigkeiten, Drei Ebe
 Cohesion: 0.70
 Nodes (5): ein ruhiges Interface, HAI-DPPM/Projek-Managment/DPPM_CORE_CANON.md, Owner-Intent, parallele Agent-Lanes, Pyramiden-Synthese
 
-### Community 232 - "agents/dist/voice/index.d.ts"
-Cohesion: 0.40
-Nodes (5): agents/dist/voice/index.d.ts, speak, speakAll, VoiceAgentMixinMembers, withVoice
+### Community 232 - "Agent AB — Vom Gespräch zum richtigen Endpunkt"
+Cohesion: 0.22
+Nodes (8): 1) Kandidatentabelle, 2) Empfehlung: offene Mitte, wenige weiche Endpunkte, 3) Schnittstelle: `endpoints.json`, 4) RAG: nein, 5) Evaluationsplan mit den 13 Pathways, 6) P1–P3, 7) Owner-Fragen (nur Produkt), Agent AB — Vom Gespräch zum richtigen Endpunkt
 
-### Community 233 - "agents/dist/voice/workers-ai.js"
-Cohesion: 0.40
-Nodes (5): agents/dist/voice/workers-ai.js, WorkersAIFluxSTT, WorkersAINova3STT, WorkersAITTS, language support
+### Community 233 - "report-r1.md"
+Cohesion: 0.22
+Nodes (8): 1) Kernprinzipien (mit Quelle), 2) Prompt-Regeln (Englisch, direkt einsetzbar), 3) Gegenbeispiele aus dem Repo, 4) Zusammenspiel mit den 12 Parametern, 5) Messung, 6) Upstream, 7) Empfehlung, Befund vorab
 
-### Community 234 - "UI-8 A11y-, Viewport- und Regressionslauf"
-Cohesion: 0.40
-Nodes (5): K-5 Mobile-Pflicht, Open decision OD-01, PV-7 A11y-Entscheid zu Dauerbewegung, Stufe H · UI-8, UI-8 A11y-, Viewport- und Regressionslauf
+### Community 234 - "Reaktive Gesprächsführung für agentfähig.de — Prior-Art-Bericht"
+Cohesion: 0.22
+Nodes (8): 1) Kernprinzipien des Feldes, 2) Prompt-Regeln (Englisch, direkt einsetzbar), 3) Gegenbeispiele (was lenkend wirkt), 4) Zusammenspiel mit den 12 Parametern, 5) Messung, 6) Upstream, 7) Empfehlung, Reaktive Gesprächsführung für agentfähig.de — Prior-Art-Bericht
 
-### Community 235 - "U22 — Readiness-Audit und Q1–Q4 nur in graphify-out/"
-Cohesion: 0.40
-Nodes (5): graphify-out/prebuild/S7-technische-grenzen.md, PROJEKTPFADE.md, U22 — Readiness-Audit und Q1–Q4 nur in graphify-out/, U26 — Nova-3-Turn-Erkennung widersprüchlich, S8
+### Community 235 - "Reaktive statt lenkende Gesprächsführung — Bericht (nur gelesen, nichts geändert)"
+Cohesion: 0.22
+Nodes (8): 1) Kernprinzipien des Feldes, 2) Prompt-Regeln (Englisch, für 1–3 Sätze), 3) Gegenbeispiele aus den Pathways, 4) Zusammenspiel mit den 12 Parametern, 5) Messung, 6) Upstream, 7) Empfehlung, Reaktive statt lenkende Gesprächsführung — Bericht (nur gelesen, nichts geändert)
 
 ### Community 236 - "fast / slow Architektur"
 Cohesion: 0.50
 Nodes (5): Background agents: Analysing, Looking up, Front agent fast and real, Silent results via State-Sync, T4: agent continues speaking when slow path done, fast / slow Architektur
 
-### Community 237 - "Idle behaviors"
-Cohesion: 0.40
-Nodes (5): Attention shifts, Breathing, Idle behaviors, Irregular blinking, Subtle gaze wandering
+### Community 237 - "Serendipität und unterschwellige Führung im Interface — Bericht (nur gelesen, nichts geändert)"
+Cohesion: 0.22
+Nodes (8): 1) Sieben Prinzipien, die Reagieren statt Führen erzeugen, 2) Prompt-Regeln (English, additiv zu `prompt.js`), 3) Gegenbeispiele — was heute tatsächlich lenkt, 4) Zusammenspiel mit den 12 Parametern, 5) Wie man misst, ob es wirkt, 6) Upstream (mit Lizenz), 7) Empfehlung, Serendipität und unterschwellige Führung im Interface — Bericht (nur gelesen, nichts geändert)
 
 ### Community 238 - "Slider Thumb"
 Cohesion: 0.40
@@ -1685,13 +1701,13 @@ Nodes (5): Slider Thumb, Slider Thumb Drag State, Slider Thumb Hover State, Slid
 Cohesion: 0.50
 Nodes (5): One agent architecture, Second stage candidate: product inquiry, show_waypoint(id), Prior two-stage routing, Waypoints data list
 
-### Community 240 - "client-sdk.md"
-Cohesion: 0.40
-Nodes (4): AgentClient, agentFetch, useAgent, useAgentChat
+### Community 240 - "Streaming Chat with AIChatAgent"
+Cohesion: 0.14
+Nodes (16): Streaming Chat with AIChatAgent, request abort signal, AIChatAgent, Callable methods, callable streaming RPC, Chat agent example, Chat agents, client reconnection (+8 more)
 
-### Community 241 - "onEmail"
-Cohesion: 0.40
-Nodes (5): getRaw, isAutoReplyEmail, onEmail, PostalMime, replyToEmail
+### Community 241 - "Stabilisierung 20.11.2026 — gesicherter Stand und eine echte Agentenantwort"
+Cohesion: 0.22
+Nodes (8): 1. Gesicherter Stand, 2. Live-Stand der beiden Worker, 3. Die abgeschlossene vertikale Funktion, 4. Warum `no_provider` kam — echte Ursache, 5. Tests (reproduzierbar), 6. Offene Blocker, 7. Ein nächster Schritt, Stabilisierung 20.11.2026 — gesicherter Stand und eine echte Agentenantwort
 
 ### Community 242 - "onTurn"
 Cohesion: 0.40
@@ -1705,9 +1721,9 @@ Nodes (5): PushSubscription, sendNotification, sendReminder, setState, subscribe
 Cohesion: 0.50
 Nodes (5): Agent, AgentWorkflow, Workflow, Workflows documentation, Workflows Integration
 
-### Community 245 - "handleRooms"
-Cohesion: 0.40
-Nodes (5): getByName, getMessages, handleRooms, sendMessage, zod
+### Community 245 - "Routing"
+Cohesion: 0.31
+Nodes (9): Routing, default URL pattern, getAgentByName, onRequest, onStart, props, routeAgentRequest, Routing documentation (+1 more)
 
 ### Community 246 - "serverMapping"
 Cohesion: 0.40
@@ -1721,9 +1737,9 @@ Nodes (5): expression, modelIds, note, resolvedModelId, serverMapping
 Cohesion: 0.40
 Nodes (5): expression, modelIds, note, resolvedModelId, serverMapping
 
-### Community 249 - "OpenAI TTS"
-Cohesion: 0.40
-Nodes (5): OpenAI gpt-4o-mini-tts, OpenAI Realtime API Audio-Out, OpenAI TTS, OpenAI tts-1, OpenAI tts-1-hd
+### Community 249 - "UI-7 Voice nach Klick"
+Cohesion: 0.29
+Nodes (8): UI component C-05, UI component C-13, Decision D4, K-1 Voice im Erstbau vs. Text-first, Milestone M1, Stufe G · UI-7, UI-7 Voice nach Klick, Workflow WF-09
 
 ### Community 250 - "Fallback: external TTS"
 Cohesion: 0.50
@@ -1741,9 +1757,9 @@ Nodes (4): Direkte CLI-Aufrufe funktionieren, KnowledgeGraph-Zugriff aus OpenCod
 Cohesion: 0.50
 Nodes (4): docs/wireframes/04-open-decisions.md, U-02 Open decisions list (18 ODs, 7 P0), U-05 Text field visibility before wake, WF-01
 
-### Community 254 - "Microphone Button"
-Cohesion: 0.50
-Nodes (4): Microphone Button, Microphone Disabled State, Microphone Hover State, Microphone Recording State
+### Community 254 - "UNSOLVED — Handoff-Ergänzungen (19.11.2026, Abend)"
+Cohesion: 0.25
+Nodes (8): Bewusst verworfen (DISCARD) — nicht wieder aufnehmen, U01 · Der Wissensgraph ist kein Beleg, U02 · `graphify-out/` ist nicht in `.gitignore`, U03 · AG-UI als Zustandskanal (Upstream-Option), U04 · Graphify verwirft alle Asset-Links, U05 · Zwei Kollisionen aus der Anforderungsprüfung sind noch offen, U06 · Gedächtnis ist strukturell und technisch nicht tragfähig, UNSOLVED — Handoff-Ergänzungen (19.11.2026, Abend)
 
 ### Community 255 - "Single amorphous field metaphor"
 Cohesion: 0.50
@@ -1773,17 +1789,17 @@ Nodes (3): Audio-Lane-Lock, Player, TTS-Backend (edge/piper/openai/elevenlabs)
 Cohesion: 0.67
 Nodes (3): 500 ms standard silence timeout, flux model-supported turn detection, Silence detection: 500 ms timeout vs flux turn detection?
 
-### Community 262 - "U8 — „Agentic Behaviour Dynamic“ kein etablierter Begriff"
-Cohesion: 0.67
-Nodes (3): Agentfähig/GreateWriting.txt, U8 — „Agentic Behaviour Dynamic“ kein etablierter Begriff, graphify-out/prebuild/UPSTREAM-SEARCH-generative-ui.md
+### Community 262 - "Agent E — Gesprächsmetriken: Konzept, Abbildung, erster Durchstich"
+Cohesion: 0.25
+Nodes (7): 1. Metrik-Katalog (nur Browser, nur Text), 2. Signal → Oberfläche, 3. Zustandsschema, 4. Kleinster erster Durchstich, 5. Anti-Muster, 6. Upstreams (Browser, englisch), Agent E — Gesprächsmetriken: Konzept, Abbildung, erster Durchstich
 
-### Community 263 - "U15 — Agent hat keinen definierten Inhalt"
-Cohesion: 0.67
-Nodes (3): docs/DESIGN-DECISIONS.md, docs/VISION-samuel.md, U15 — Agent hat keinen definierten Inhalt
+### Community 263 - "Agent Z — Prosodie-Ebene (Recherche/Planung, keine Datei geändert)"
+Cohesion: 0.25
+Nodes (7): 1) Kandidaten, 2) Die 12 Parameter als Prosodie-Hebel, 3) Laut-Katalog, 4) Architektur Phase 2, 5) Top-2 + Messplan, 6) Owner-Fragen (nur Produkt), Agent Z — Prosodie-Ebene (Recherche/Planung, keine Datei geändert)
 
-### Community 264 - "U6 — Zwei Modelle laufen am 20.11.2026 ab"
-Cohesion: 0.67
-Nodes (3): U6 — Zwei Modelle laufen am 20.11.2026 ab, fleet/10-pi-durable/wrangler.jsonc, fleet/11-explain/wrangler.jsonc
+### Community 264 - "M-20261119T220518-4585e9fd-GESPRAECHS-ENDPUNKTE.md"
+Cohesion: 0.25
+Nodes (7): 1) Kandidatentabelle, 2) Empfehlung: offene Mitte, wenige weiche Endpunkte, 3) Schnittstelle: `endpoints.json`, 4) RAG: nein, 5) Evaluationsplan mit den 13 Pathways, 6) P1–P3, 7) Owner-Fragen (nur Produkt)
 
 ### Community 265 - "@cloudflare/voice"
 Cohesion: 0.67
@@ -1797,34 +1813,94 @@ Nodes (3): fetch, getAgentByName, routeAgentRequest
 Cohesion: 1.00
 Nodes (3): E6 — Hintergrundresultat nie entdeckt, S7 — Hintergrundresultat entdeckt (≥4/5), T5 — Hintergrundaufgabe und Ergebnis finden
 
-### Community 268 - "Microsoft Azure Speech"
+### Community 268 - "UI-2 Text-Turn end-to-end"
+Cohesion: 0.29
+Nodes (7): UI component C-03, UI component C-04, UI component C-11, PV-2 D5 Textsprache, PV-8 OD-04 Eingabe während der Antwort, Stufe B · UI-2, UI-2 Text-Turn end-to-end
+
+### Community 284 - "report-ac.md"
+Cohesion: 0.29
+Nodes (6): 1) Definition: „gutes Gespräch" in sieben Dimensionen, 2) Messbarkeit auf drei Ebenen, 3) Zwei Zielgruppen, zwei Signalsätze, 4) Score-Modell: zwei getrennte Zahlen, 5) Vorschlag `src/eval/good-conversation.json`, 6) Owner-Fragen (Produkt)
+
+### Community 424 - "Neue Kandidaten (geprüft 19.11.2026, GitHub-API über `smlfg`)"
+Cohesion: 0.29
+Nodes (6): 1. Agent *ist* die Oberfläche (kein Chat-Widget), 2. Generative/adaptive UI aus Gesprächssignalen, 3. Typewriter + auflösender Text, 4. Gesprächsmetriken im Browser, Neue Kandidaten (geprüft 19.11.2026, GitHub-API über `smlfg`), Top-3
+
+### Community 449 - "Server-Driven Messages"
+Cohesion: 0.48
+Nodes (7): Server-Driven Messages, Autonomous responses, onChatResponse, persistMessages, saveMessages, submitMessages, waitUntilStable
+
+### Community 450 - "K-7 18 ODs, 7 davon P0"
+Cohesion: 0.33
+Nodes (6): K-7 18 ODs, 7 davon P0, Open decision OD-00, Open decision OD-06, Open decision OD-07, Open decision OD-08, Open decision OD-11
+
+### Community 451 - "report-n7.md"
+Cohesion: 0.33
+Nodes (5): 1) Befunde, 2) Schnittstellen (andocken, ohne Bruch), 3) Was in der bestehenden UI vorbereitet/geändert werden muss, 4) Reihenfolge / Priorität, 5) Owner-Fragen (Produkt)
+
+### Community 452 - "ADR-Besprechung 19.11.2026 — Mission M-20261119T212224-5bca4784"
+Cohesion: 0.40
+Nodes (4): ADR-Besprechung 19.11.2026 — Mission M-20261119T212224-5bca4784, c1 — Zusammenfassung, c2 — Widersprüche und Lücken, c3 — Owner-Entscheidungen (Samuel)
+
+### Community 453 - "Evolving CSS: das wachsende Oberflächen-Genom"
+Cohesion: 0.40
+Nodes (4): Bausteine, Evolving CSS: das wachsende Oberflächen-Genom, Idee, Problem (Owner, 23:33)
+
+### Community 454 - "Metrik → Parameter → Oberfläche: Vertrag (Entwurf)"
+Cohesion: 0.40
+Nodes (4): Metrik → Parameter → Oberfläche: Vertrag (Entwurf), Schicht 1 — Eintragsformat je Metrik (JSON), Schicht 2 — die 12 Parameter (fest, Werte 0…1, Ruhewert 0.5), Schicht 3 — Eintragsformat je Parameter
+
+### Community 455 - "Prior Art Decision B: INTEGRATE"
+Cohesion: 0.40
+Nodes (5): 5-bucket prompt modifier vector, Prior Art Decision B: INTEGRATE, MDN Variable Fonts, Native input range + CSS Custom Properties + Variable Fonts, Residual risk: Kopplung eines Sliders an visuelles Gefuehl und LLM-Ausgabestil
+
+### Community 456 - "Falle 1: Theme-Switcher-Gimmick"
+Cohesion: 0.50
+Nodes (4): DESIGN-DECISIONS.md, Falle 1: Theme-Switcher-Gimmick, Agentfähig/GreateWriting.txt, Text-first, Voice später
+
+### Community 457 - "report-i3.md"
+Cohesion: 0.50
+Nodes (3): Kurz-Tabelle, Metric catalog — interaction + discourse (36 entries), Parameters fed (coverage check)
+
+### Community 458 - "Cloudflare Worker agentfaehig mit /api/explain/* und Service Binding EXPLAIN"
+Cohesion: 0.50
+Nodes (4): Cloudflare Worker agentfaehig mit /api/explain/* und Service Binding EXPLAIN, Cloudflare Service Bindings fuer Pathways, Service Binding EXPLAIN zu cwh-11-explain-20261008, selbst gehostete Variable Fonts (fraunces, newsreader, bricolage, plex-mono, caveat, special-elite)
+
+### Community 459 - "KONKURRENZ_LEKTIONEN.md"
+Cohesion: 0.50
+Nodes (4): Alltagsmetapher neuer Mitarbeiter/Praktikant mit Auftrag, KONKURRENZ_LEKTIONEN.md, niederschwelliger Direkt-Einstieg ohne Termin-Huerde, Start beim konkreten Schmerz statt bei der Methode
+
+### Community 461 - "DESIGN_RETHINK_2026-09-25.md"
 Cohesion: 0.67
-Nodes (3): Azure Neural TTS, Azure Neural HD TTS, Microsoft Azure Speech
+Nodes (3): DESIGN_RETHINK_2026-09-25.md, 5-stufige Faehigkeits-Treppe, HAI auf Stufe 4/5
+
+### Community 462 - "MDN DeviceOrientationEvent.requestPermission"
+Cohesion: 0.67
+Nodes (3): MDN DeviceOrientationEvent.requestPermission(), PointerEvent ohne Berechtigung, TouchEvent ohne Berechtigung
 
 ## Ambiguous Edges - Review These
 - `first_audio_ms` → `finalInputToFirstAudioMs`  [AMBIGUOUS]
   tech/MESSLAUF-PLAN.md · relation: semantically_similar_to
 
 ## Knowledge Gaps
-- **2324 isolated node(s):** `Cloudflare Realtime Agents (WebRTC, offene Beta)`, `English language`, `Latenz-Kriterien aus Messwerten abgeleitet (Entscheidung 5, 19.11.)`, `ob der lokale Voice-Lauf funktioniert`, `model-to-first-text` (+2319 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2628 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **180 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2321 isolated node(s):** `ADR-0009`, `ADR-0009`, `Cloudflare Realtime Agents (WebRTC, offene Beta)`, `English language`, `Latenz-Kriterien aus Messwerten abgeleitet (Entscheidung 5, 19.11.)` (+2316 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 3234 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **257 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Projektstand — Agentfähig` connect `validate.yml` to `HANDOFF — Voice ist Slice 2 (Owner-Entscheidung 19.11., 3. Runde)`, `Brief Cloudflare-Bausteine`, `project_domain_portfolio_2026_09.md`, `Notion README Status Document`, `Agentfähig Technical Intent`, `Research README Document`, `Scout Plaud-2 (ses_e2df081f7ffeFcNgsEKS78z4as)`, `KI-DIALOG-2026-11-19.md`, `screenshot`, `1 · Im Projekt`, `Verhaltenstests README`, `Fast/Slow`?**
-  _High betweenness centrality (0.104) - this node is a cross-community bridge._
+- **Why does `MESSLAUF-PLAN` connect `Agentfähig Sketch` to `Cloudflare-Bausteine Research`, `surface.js`, `validate.yml`, `Review-Punkt 4: Reproduzierbarkeit des Messlaufs`, `Agentfähig Technical Intent`, `Notion README Status Document`, `Samuel (Owner)`, `Invalid run`, `Steps & Research Sketch`, `Verhaltenstests README`, `ElevenLabs`, `HANDOFF — Voice ist Slice 2 (Owner-Entscheidung 19.11., 3. Runde)`, `README`, `Audit A-20261119T161858-753a2d1e`, `Technische Konkurrenz-Recherche`, `Cloudflare Machbarkeit Audit 2026-11-19`, `KI-DIALOG-2026-11-19.md`, `HANDOFF-gespraechsfuehrung.md`, `Prior Art Report`, `Agentfähig — technischer Intent`?**
+  _High betweenness centrality (0.177) - this node is a cross-community bridge._
 - **Are the 9 inferred relationships involving `Agentfähig Wireframe` (e.g. with `Fast/Slow-Demo (A/B)` and `Reduzierte Bewegung`) actually correct?**
   _`Agentfähig Wireframe` has 9 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Cloudflare Realtime Agents (WebRTC, offene Beta)`, `English language`, `Latenz-Kriterien aus Messwerten abgeleitet (Entscheidung 5, 19.11.)` to the rest of the system?**
-  _2324 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `ADR-0009`, `ADR-0009`, `Cloudflare Realtime Agents (WebRTC, offene Beta)` to the rest of the system?**
+  _2321 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Agentfähig Sketch` be split into smaller, more focused modules?**
-  _Cohesion score 0.035211267605633804 - nodes in this community are weakly interconnected._
-- **Why does `Agentfähig Wireframe` connect `Konkurrenz Recherche` to `PRESENT`, `Typografie und Antwortdarstellung (Deliverable E)`, `Wireframe-System V1 README`, `Bewegungskatalog (Motion Table)`, `Offene Entscheidungen`, `PROCESSING`, `wireframe-prototype-interactive.md`, `Antwortet`, `Control Plane: DEGRADED`, `WORKING`, `Rive`, `DISCONNECTED`, `Latenzbudget (<1s)`, `Typewriter Feature`, `render`?**
-  _High betweenness centrality (0.087) - this node is a cross-community bridge._
+  _Cohesion score 0.034061458718992965 - nodes in this community are weakly interconnected._
+- **Why does `Projektstand — Agentfähig` connect `validate.yml` to `Agentfähig Sketch`, `Upstream Search Document`, `Brief Cloudflare-Bausteine`, `Notion README Status Document`, `Agentfähig Technical Intent`, `Research README Document`, `validate.sh`, `screenshot`, `Steps & Research Sketch`, `Application Code README`, `Verhaltenstests README`, `Integration First — What this is`, `HANDOFF — Voice ist Slice 2 (Owner-Entscheidung 19.11., 3. Runde)`, `README`, `wireframe-prototype-interactive.md`, `Audit A-20261119T161858-753a2d1e`, `SCOUT-SYNTHESIS`, `PLAN — Audio-Ausgabe des Agenten`, `1 · Im Projekt`, `Fast/Slow`, `Wireframe-System V1 README`, `EyeFace.js`, `Scout Plaud-2 (ses_e2df081f7ffeFcNgsEKS78z4as)`, `Cloudflare Machbarkeit Audit 2026-11-19`, `Handoffs — nicht anwendbare Änderungen (README)`, `KI-DIALOG-2026-11-19.md`, `PLAN-STUFEN-0-5.md`, `project_domain_portfolio_2026_09.md`, `UNSOLVED — Entscheidungswarteschlange (Technik)`, `Fremdtest-Plan (fünf Personen, erste explorative Runde)`, `Visual Concept — Idle / Presence State`?**
+  _High betweenness centrality (0.170) - this node is a cross-community bridge._
 - **Should `Cloudflare-Bausteine Research` be split into smaller, more focused modules?**
-  _Cohesion score 0.0392156862745098 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.046992481203007516 - nodes in this community are weakly interconnected._
 
 ### Low-confidence Hints
 _AMBIGUOUS edges — the extractor was unsure. Verify before acting on these._

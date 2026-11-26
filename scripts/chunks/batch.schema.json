@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "required": [
+    "chunks"
+  ],
+  "properties": {
+    "chunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "text",
+          "topics",
+          "aliases",
+          "waypoints",
+          "link"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "waypoints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "what-this-is",
+                "creator",
+                "product-for-x",
+                "*"
+              ]
+            }
+          },
+          "link": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

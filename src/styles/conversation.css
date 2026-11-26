@@ -41,6 +41,28 @@
   color: var(--text);
 }
 
+.pair-answer a.answer-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: currentColor;
+  border-radius: 3px;
+  transition:
+    color 180ms var(--ease),
+    text-decoration-thickness 180ms var(--ease);
+}
+
+.pair-answer a.answer-link:hover {
+  color: var(--focus-ring);
+  text-decoration-thickness: 1.5px;
+}
+
+.pair-answer a.answer-link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 .thinking-dots {
   display: none;
   align-items: center;
@@ -246,6 +268,11 @@
     opacity: 1;
     border: 1px solid var(--text);
   }
+
+  .pair-answer a.answer-link {
+    color: var(--text);
+    text-decoration-thickness: 1.5px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -264,7 +291,8 @@
 @media (prefers-reduced-motion: reduce) {
   .pair-entry,
   .pair-entry.is-leaving,
-  .pair-answer .thinking-dots span {
+  .pair-answer .thinking-dots span,
+  .pair-answer a.answer-link {
     animation: none;
     transition: none;
   }

@@ -224,6 +224,37 @@ test('cleanAnswer handles empty input', () => {
   assert.equal(cleanAnswer(null), '');
 });
 
+test('cleanAnswer keeps URLs and domains intact and preserves <surface> blocks while stripping them from history', async () => {
+  const urlReply = cleanAnswer(
+    'Besuche https://www.human-agent-interface.com und agentfähig.de für Details. Zweiter Satz. Dritter Satz. Vierter Satz.',
+  );
+  assert.equal(
+    urlReply,
+    'Besuche https://www.human-agent-interface.com und agentfähig.de für Details. Zweiter Satz. Dritter Satz.',
+  );
+
+  const bodies = [];
+  const replies = [
+    'Ich passe mich an. Zwei. Drei. Vier. <surface>{"motion":{"energy":0.2}}</surface>',
+    'Gerne.',
+  ];
+  const a = agent(async (url, init) => {
+    bodies.push(JSON.parse(init.body));
+    return jsonResponse(chatBody(replies[bodies.length - 1]));
+  });
+
+  const first = await a.respond('Sei ruhiger');
+  assert.equal(first.text, 'Ich passe mich an. Zwei. Drei. <surface>{"motion":{"energy":0.2}}</surface>');
+
+  await a.respond('Und jetzt?');
+  assert.deepEqual(bodies[1].messages, [
+    { role: 'system', content: DEFAULT_SYSTEM },
+    { role: 'user', content: 'Sei ruhiger' },
+    { role: 'assistant', content: 'Ich passe mich an. Zwei. Drei.' },
+    { role: 'user', content: 'Und jetzt?' },
+  ]);
+});
+
 test('parseModelParam reads model and llm', () => {
   assert.deepEqual(parseModelParam(new URLSearchParams('?model=qwen3:8b')), {
     model: 'qwen3:8b',

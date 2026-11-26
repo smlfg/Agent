@@ -19,6 +19,7 @@ export const PHASE_MOOD = Object.freeze({
   speaking: 'happy',
   responding: 'happy',
   adapting: 'neutral',
+  error: 'neutral',
 });
 
 const BLINK_CLOSE_MS = 95;
@@ -578,6 +579,11 @@ export function mountPresence({ root, store, reducedMotion = false } = {}) {
 
     if (phase === 'speaking') {
       applyEngineState('responding');
+      return;
+    }
+
+    if (phase === 'error') {
+      applyEngineState('error');
       return;
     }
 

@@ -1,0 +1,49 @@
+/* Source chips below the answer (src/conversation/sources.js). */
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.sources li { max-width: 100%; }
+
+.source-chip {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+a.source-chip {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+a.source-chip:hover { border-color: var(--accent); }
+
+a.source-chip:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Dissolve only animates prompt and answer; the chips leave with them. */
+.pair .pair-entry.is-dissolving .sources {
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pair .pair-entry.is-dissolving .sources { transition: none; }
+}

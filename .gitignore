@@ -50,3 +50,6 @@
 /graphify-out/manifest.json
 /graphify-out/cost.json
 
+
+# Eval-Ausgabe mit Modellantworten
+evals/promptfoo/eval-last-run.html

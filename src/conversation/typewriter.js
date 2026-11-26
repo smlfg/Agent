@@ -32,6 +32,18 @@ const JITTER_SPAN = 0.56;
 const CLAUSE_END = new Set([',', ';', ':', '—', '–']);
 const SENTENCE_END = new Set(['.', '!', '?', '…', '。', '！', '？']);
 const CLOSERS = new Set(['"', "'", '”', '’', ')', ']', '}', '»']);
+const WORD_CHAR = /[\p{L}\p{N}]/u;
+
+function isSentenceEndAt(units, pos) {
+  const unit = units[pos];
+  if (!SENTENCE_END.has(unit)) return false;
+  if (unit === '.') {
+    const prev = units[pos - 1] ?? '';
+    const next = units[pos + 1] ?? '';
+    if (WORD_CHAR.test(prev) && WORD_CHAR.test(next)) return false;
+  }
+  return true;
+}
 
 // xmur3-style string hash + mulberry32 PRNG.
 // mulberry32 is a widely circulated public-domain (CC0) generator by Tommy
@@ -137,9 +149,9 @@ export function findSentenceRest(units, fromIndex = 0) {
       end = i;
       break;
     }
-    if (SENTENCE_END.has(unit)) {
+    if (isSentenceEndAt(list, i)) {
       end = i + 1;
-      while (end < total && (SENTENCE_END.has(list[end]) || CLOSERS.has(list[end]))) {
+      while (end < total && (isSentenceEndAt(list, end) || CLOSERS.has(list[end]))) {
         end += 1;
       }
       break;
@@ -294,12 +306,12 @@ export function createTypewriter({
     // Closing quotes/brackets and runs like "..." belong to the same pause:
     // wait for the last mark instead of pausing several times in a row.
     if (CLOSERS.has(current)) {
-      if (SENTENCE_END.has(previous)) return SENTENCE_PAUSE_MS;
+      if (isSentenceEndAt(units, position - 1)) return SENTENCE_PAUSE_MS;
       if (CLAUSE_END.has(previous)) return CLAUSE_PAUSE_MS;
     }
 
-    if (SENTENCE_END.has(current)) {
-      const defer = SENTENCE_END.has(next) || CLOSERS.has(next);
+    if (isSentenceEndAt(units, position)) {
+      const defer = isSentenceEndAt(units, position + 1) || CLOSERS.has(next);
       return defer ? baseDelay() : SENTENCE_PAUSE_MS;
     }
     if (CLAUSE_END.has(current)) {

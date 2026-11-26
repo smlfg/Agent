@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "mode": "live",
+  "provider": "ollama",
+  "execution": "sequential",
+  "models": [
+    "gemma4:26b",
+    "qwen3.6:35b-a3b",
+    "qwen3:8b"
+  ],
+  "plan_path": "/Users/samuelfleig/Projects/03_HAI/Agentfaehig/Agent/PLAN-SLICE-A.md",
+  "plan_sha256": "653e0b461b7dbc890a5461027a6a3cc67c577309e6dfc60a284daa145da3b3fe",
+  "threshold": 0.75,
+  "overall": 0.854,
+  "per_metric": {
+    "intelligence": 0.833,
+    "feasibility": 0.917,
+    "ease": 0.75,
+    "efficiency": 0.917
+  },
+  "verdict": "SCORE_OK",
+  "judges": 3,
+  "judge_results": [
+    {
+      "model": "gemma4:26b",
+      "scores": {
+        "intelligence": 1.0,
+        "feasibility": 1.0,
+        "ease": 0.75,
+        "efficiency": 1.0
+      },
+      "reasons": {
+        "intelligence": "Goal is clearly defined, edge cases like stale turns and empty inputs are explicitly addressed, and drift is prevented via strict non-goals.",
+        "feasibility": "Boundaries are strictly limited to specific files, and the DoD includes comprehensive verification via existing test suites and smoke tests.",
+        "ease": "The slice is small and focused on a single state, though the complexity of the eye-motion profile parameters is high.",
+        "efficiency": "The plan avoids write-fanout by restricting changes to existing state logic and adding a single profile entry; no new dependencies are introduced."
+      },
+      "overall": 0.938,
+      "total_duration_ns": 20717425291,
+      "eval_count": 190
+    },
+    {
+      "model": "qwen3.6:35b-a3b",
+      "scores": {
+        "intelligence": 0.75,
+        "feasibility": 1.0,
+        "ease": 0.75,
+        "efficiency": 1.0
+      },
+      "reasons": {
+        "intelligence": "Goal is precise and assumptions are explicitly checked (e.g., existing conversation logic correctness). However, it lacks explicit handling for edge cases like concurrent rapid inputs during the error state transition.",
+        "feasibility": "Boundaries are strictly defined with specific file paths. The DoD includes concrete verification steps (unit tests, smoke tests) and clear stop criteria, ensuring measurable success.",
+        "ease": "The slice is small and focused on adding a single state. It is resume-able as it modifies isolated modules, but the tight coupling between store, presence, and eye-motion profiles requires careful integration testing.",
+        "efficiency": "Budget is bounded by limiting changes to specific files and avoiding new dependencies. No write-fanout explosion; updates are localized to state management and rendering logic."
+      },
+      "overall": 0.875,
+      "total_duration_ns": 19721626875,
+      "eval_count": 234
+    },
+    {
+      "model": "qwen3:8b",
+      "scores": {
+        "intelligence": 0.75,
+        "feasibility": 0.75,
+        "ease": 0.75,
+        "efficiency": 0.75
+      },
+      "reasons": {
+        "intelligence": "Clear goal to implement a distinct 'error' state with precise phase guards and drift detection in state transitions.",
+        "feasibility": "Boundaries are strictly defined, and measurable DoD is present with test coverage and verification steps.",
+        "ease": "Smallest sensible slice with resume capability via INPUT/SUBMIT, and no external dependencies or changes to unrelated code.",
+        "efficiency": "Budget is bounded with no write-fanout, and state transitions are controlled to prevent unnecessary side effects."
+      },
+      "overall": 0.75,
+      "total_duration_ns": 16381859583,
+      "eval_count": 167
+    }
+  ],
+  "aggregation": "mean-across-distinct-models",
+  "ordinal_aggregation": "mean",
+  "completion_cost": 0.0,
+  "note": "live local Ollama council; plan body graded sequentially",
+  "graded_at": "20261125T175717Z"
+}

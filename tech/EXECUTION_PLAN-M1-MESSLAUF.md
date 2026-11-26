@@ -1,10 +1,18 @@
-# Execution Plan — Agentfähig v1
+# Execution Plan — Agentfähig v1 (historisches M1-Task-Protokoll)
 
-Stand: 19.11.2026. Status: **PLAN — nicht ausgeführt.**
-Bindet sich an [`docs/PROJECT_CONTRACT.md`](../docs/PROJECT_CONTRACT.md).
-Kein Anwendungscode in `src/`.
+Ursprünglicher Stand: 19.11.2026. Status am Reality Sync 25.11.2026:
+**HISTORISCH — nur Task-Protokoll für den Voice-Messlauf, kein aktueller
+Gesamt-Execution-Plan und keine aktuelle Build-Freigabe.**
 
-## 0 · Geltungsbereich dieses Plans
+Der alleinige vorgeschlagene Gesamtplan steht in
+[`docs/EXECUTION_PLAN-M0-M5.md`](../docs/EXECUTION_PLAN-M0-M5.md). Diese Datei
+bleibt unverändert in ihrer historischen Begründung erhalten. Der Voice-Lauf
+wurde im Reality Sync **nicht erneut ausgeführt** und gilt nicht als bestanden.
+Seine historischen Voraussetzungen werden nicht pauschal auf unabhängige
+UI-/Spatial-Slices übertragen; eine Reaktivierung erfolgt nur mit eigenem Plan
+und den dann gültigen Owner-Gates.
+
+## 0 · Historischer Geltungsbereich dieses Plans (19.11.2026)
 
 Der Contract existiert, ist aber **`VORSCHLAG — nicht genehmigt`**
 (`PROJECT_CONTRACT.md:3`, Sign-off `:331–337` leer, O1–O11 unbeantwortet).

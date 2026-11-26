@@ -13,6 +13,8 @@ import {
   computeResponsiveBounds,
   createEyeMotionEngine,
 } from '../src/presence/eye-motion-engine.js';
+import { createStore } from '../src/state/store.js';
+import { mountPresence, PHASE_MOOD } from '../src/presence/presence.js';
 
 const DESKTOP = Object.freeze({
   viewportWidth: 1280,
@@ -49,7 +51,7 @@ function runSteps(engine, count, dtMs = 16) {
   return frame;
 }
 
-test('exposes all 8 required states and resolves aliases cleanly', () => {
+test('exposes all 9 required states and resolves aliases cleanly', () => {
   assert.deepEqual([...EYE_STATES], [
     'dormant',
     'awakening',
@@ -59,6 +61,7 @@ test('exposes all 8 required states and resolves aliases cleanly', () => {
     'responding',
     'adapting',
     'idle',
+    'error',
   ]);
   for (const state of EYE_STATES) {
     assert.ok(EYE_STATE_PROFILES[state], `missing profile for ${state}`);
@@ -71,7 +74,7 @@ test('exposes all 8 required states and resolves aliases cleanly', () => {
   assert.equal(normalizeEyeState('unknown-state'), 'present');
 });
 
-test('all 8 states produce distinct resting/settled motion characteristics', () => {
+test('all 9 states produce distinct resting/settled motion characteristics', () => {
   const signatures = new Set();
   for (const state of EYE_STATES) {
     const engine = createEyeMotionEngine({ state, viewport: DESKTOP });
@@ -317,4 +320,161 @@ test('3D volumetric orientation, perspective Z, and scene parallax stay bounded 
   assert.equal(redFrame.scene.x, 0);
   assert.equal(redFrame.scene.y, 0);
   assert.ok(redFrame.pair.zPx > 10, 'static approach Z depth remains legible under reducedMotion');
+});
+
+test('error profile is calm, symmetric, static under reducedMotion, and distinct from idle and present', () => {
+  const errProfile = EYE_STATE_PROFILES.error;
+  const idleProfile = EYE_STATE_PROFILES.idle;
+  assert.deepEqual(Object.keys(errProfile), Object.keys(idleProfile));
+  assert.equal(errProfile.asymmetry, 0);
+  assert.equal(errProfile.asymmetryBias, 0);
+  assert.equal(errProfile.lidAsymmetryPct, 0);
+  assert.ok(errProfile.intensity < idleProfile.intensity);
+  assert.ok(errProfile.driftAmpX < idleProfile.driftAmpX);
+  assert.ok(errProfile.microShiftAmpX < idleProfile.microShiftAmpX);
+
+  const signature = (frame) => [
+    frame.pair.scale.toFixed(3),
+    frame.effectiveGapPx.toFixed(2),
+    frame.pupilDilation.toFixed(3),
+    frame.left.pupilY.toFixed(2),
+    frame.left.lidTopPct.toFixed(2),
+    frame.left.lidBottomPct.toFixed(2),
+  ].join('|');
+
+  const normalErr = runSteps(createEyeMotionEngine({ state: 'error', viewport: DESKTOP }), 120, 16);
+  const normalIdle = runSteps(createEyeMotionEngine({ state: 'idle', viewport: DESKTOP }), 120, 16);
+  const normalPresent = runSteps(createEyeMotionEngine({ state: 'present', viewport: DESKTOP }), 120, 16);
+
+  assert.ok(Math.abs(normalErr.pair.tiltDeg) < Math.abs(normalIdle.pair.tiltDeg));
+  assert.ok(Math.abs(normalErr.pair.x) < Math.abs(normalIdle.pair.x) + 1);
+  assert.ok(Math.abs(normalErr.left.scaleY - normalErr.right.scaleY) < 1e-6);
+  assert.ok(Math.abs(normalErr.left.y - normalErr.right.y) < 1e-6);
+  assert.equal(normalErr.left.lidTopPct, normalErr.right.lidTopPct);
+  assert.notEqual(signature(normalErr), signature(normalIdle));
+  assert.notEqual(signature(normalErr), signature(normalPresent));
+
+  const reducedEngine = createEyeMotionEngine({ state: 'error', viewport: DESKTOP, reducedMotion: true });
+  const red1 = reducedEngine.step(16);
+  const red2 = runSteps(reducedEngine, 180, 16);
+  assert.equal(red1.pair.x, red2.pair.x);
+  assert.equal(red1.pair.y, red2.pair.y);
+  assert.equal(red1.effectiveGapPx, red2.effectiveGapPx);
+  assert.equal(red1.left.pupilY, red2.left.pupilY);
+  assert.equal(red1.left.lidTopPct, red2.left.lidTopPct);
+
+  const reducedIdle = createEyeMotionEngine({ state: 'idle', viewport: DESKTOP, reducedMotion: true }).settle();
+  const reducedPresent = createEyeMotionEngine({ state: 'present', viewport: DESKTOP, reducedMotion: true }).settle();
+  assert.notEqual(signature(red1), signature(reducedIdle));
+  assert.notEqual(signature(red1), signature(reducedPresent));
+});
+
+function createPresenceDomStub() {
+  const vars = new Map();
+  const classes = new Set();
+  let nextTimerId = 1;
+
+  const win = {
+    innerWidth: 1280,
+    innerHeight: 800,
+    getComputedStyle: () => ({ columnGap: '30px', gap: '30px' }),
+    matchMedia: () => ({ matches: false, addEventListener() {}, removeEventListener() {} }),
+    setTimeout: () => nextTimerId++,
+    clearTimeout() {},
+    requestAnimationFrame: () => nextTimerId++,
+    cancelAnimationFrame() {},
+    addEventListener() {},
+    removeEventListener() {},
+  };
+
+  const doc = {
+    defaultView: win,
+    documentElement: {
+      clientWidth: 1280,
+      clientHeight: 800,
+      dataset: {},
+      style: { setProperty() {}, removeProperty() {} },
+    },
+    getElementById: () => null,
+    createElement: () => ({ className: '', innerHTML: '', append() {}, remove() {} }),
+    addEventListener() {},
+    removeEventListener() {},
+  };
+
+  const root = {
+    ownerDocument: doc,
+    clientWidth: 1248,
+    dataset: {},
+    classList: {
+      contains: (c) => classes.has(c),
+      add: (c) => classes.add(c),
+      remove: (...cs) => cs.forEach((c) => classes.delete(c)),
+      toggle: (c, force) => {
+        if (force === undefined) {
+          if (classes.has(c)) classes.delete(c);
+          else classes.add(c);
+        } else if (force) classes.add(c);
+        else classes.delete(c);
+      },
+    },
+    style: {
+      setProperty: (name, value) => vars.set(name, value),
+      removeProperty: (name) => vars.delete(name),
+    },
+    querySelector: (selector) => {
+      if (selector === '.face-box') {
+        return { getBoundingClientRect: () => ({ left: 540, top: 80, width: 200, height: 140 }) };
+      }
+      if (selector === '.eyes-container') return {};
+      if (selector === '#left-eye' || selector === '.left-eye') return { offsetWidth: 100, offsetHeight: 115 };
+      if (selector === '#right-eye' || selector === '.right-eye') return { offsetWidth: 100, offsetHeight: 115 };
+      return null;
+    },
+    querySelectorAll: () => [],
+  };
+
+  return { root, vars };
+}
+
+test('mountPresence maps error phase to neutral mood, error eye-state, recovery, and reducedMotion settlement', () => {
+  assert.equal(PHASE_MOOD.error, 'neutral');
+
+  for (const reducedMotion of [false, true]) {
+    const { root, vars } = createPresenceDomStub();
+    const store = createStore();
+    const mounted = mountPresence({ root, store, reducedMotion });
+
+    try {
+      store.dispatch({ type: 'AWAKE' });
+      store.dispatch({ type: 'SUBMIT', prompt: 'hello' });
+      assert.equal(root.dataset.phase, 'thinking');
+      assert.equal(root.dataset.eyeState, 'thinking');
+
+      const turn = store.getState().turn;
+      store.dispatch({ type: 'RESPONSE_ERROR', turn });
+      assert.equal(root.dataset.phase, 'error');
+      assert.equal(root.dataset.eyeState, 'error');
+
+      if (reducedMotion) {
+        assert.equal(vars.get('--eye-left-lid-top'), '7.56%');
+        assert.equal(vars.get('--eye-left-lid-bottom'), '3%');
+        assert.equal(vars.get('--pupil-state'), '0.8758');
+        assert.equal(vars.get('--eye-pair-scale'), '0.97');
+      }
+
+      store.dispatch({ type: 'INPUT', value: '' });
+      assert.equal(root.dataset.phase, 'error');
+      assert.equal(root.dataset.eyeState, 'error');
+
+      store.dispatch({ type: 'INPUT', value: 'retry' });
+      assert.equal(root.dataset.phase, 'listening');
+      assert.equal(root.dataset.eyeState, 'listening');
+
+      store.dispatch({ type: 'SUBMIT', prompt: 'retry' });
+      assert.equal(root.dataset.phase, 'thinking');
+      assert.equal(root.dataset.eyeState, 'thinking');
+    } finally {
+      mounted.destroy();
+    }
+  }
 });

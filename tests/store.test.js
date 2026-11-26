@@ -10,7 +10,7 @@ test('initial state is dormant with an empty pair', () => {
   assert.equal(initialState.answer, '');
   assert.equal(initialState.turn, 0);
   assert.equal(initialState.dev, false);
-  assert.deepEqual([...PHASES], ['dormant', 'idle', 'listening', 'thinking', 'speaking']);
+  assert.deepEqual([...PHASES], ['dormant', 'idle', 'listening', 'thinking', 'speaking', 'error']);
 });
 
 test('AWAKE wakes only from dormant', () => {
@@ -18,7 +18,7 @@ test('AWAKE wakes only from dormant', () => {
   assert.equal(awake.phase, 'idle');
   assert.notEqual(awake, initialState);
 
-  for (const phase of ['idle', 'listening', 'thinking', 'speaking']) {
+  for (const phase of ['idle', 'listening', 'thinking', 'speaking', 'error']) {
     const state = at({ phase });
     assert.equal(reduce(state, { type: 'AWAKE' }), state);
   }
@@ -112,10 +112,45 @@ test('RESPONSE_END without text keeps the visible answer', () => {
   assert.equal(next.answer, 'partial');
 });
 
-test('RESPONSE_ERROR returns to idle for the current turn only', () => {
-  const state = at({ phase: 'speaking', turn: 2 });
-  assert.equal(reduce(state, { type: 'RESPONSE_ERROR', turn: 2 }).phase, 'idle');
-  assert.equal(reduce(state, { type: 'RESPONSE_ERROR', turn: 1 }), state);
+test('RESPONSE_ERROR moves thinking or speaking into error for the current turn only', () => {
+  for (const phase of ['thinking', 'speaking']) {
+    const state = at({ phase, turn: 2 });
+    const next = reduce(state, { type: 'RESPONSE_ERROR', turn: 2 });
+    assert.equal(next.phase, 'error');
+    assert.equal(reduce(state, { type: 'RESPONSE_ERROR', turn: 1 }), state);
+  }
+
+  for (const phase of ['dormant', 'idle', 'listening', 'error']) {
+    const state = at({ phase, turn: 2 });
+    assert.equal(reduce(state, { type: 'RESPONSE_ERROR', turn: 2 }), state);
+  }
+});
+
+test('error holds on empty INPUT and recovers via non-empty INPUT or SUBMIT', () => {
+  const errored = at({ phase: 'error', prompt: 'failed', answer: 'partial', turn: 2, dev: true });
+
+  assert.equal(reduce(errored, { type: 'INPUT', value: '' }), errored);
+  assert.equal(reduce(errored, { type: 'INPUT', value: undefined }), errored);
+
+  const typing = reduce(errored, { type: 'INPUT', value: 'try again' });
+  assert.equal(typing.phase, 'listening');
+
+  const submittedDirect = reduce(errored, { type: 'SUBMIT', prompt: '  retry  ' });
+  assert.equal(submittedDirect.phase, 'thinking');
+  assert.equal(submittedDirect.prompt, 'retry');
+  assert.equal(submittedDirect.answer, '');
+  assert.equal(submittedDirect.turn, 3);
+  assert.equal(submittedDirect.dev, false);
+
+  const submittedAfterInput = reduce(typing, { type: 'SUBMIT', prompt: 'retry 2' });
+  assert.equal(submittedAfterInput.phase, 'thinking');
+  assert.equal(submittedAfterInput.turn, 3);
+  assert.equal(submittedAfterInput.answer, '');
+
+  assert.equal(reduce(errored, { type: 'RESPONSE_START', turn: 2, dev: false }), errored);
+  assert.equal(reduce(errored, { type: 'RESPONSE_PROGRESS', turn: 2, text: 'late' }), errored);
+  assert.equal(reduce(errored, { type: 'RESPONSE_END', turn: 2, text: 'late' }), errored);
+  assert.equal(reduce(errored, { type: 'RESPONSE_ERROR', turn: 2 }), errored);
 });
 
 test('RESPONSE events are ignored outside their expected phase', () => {

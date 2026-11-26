@@ -44,18 +44,15 @@ const search = new URLSearchParams(location.search);
 function currentParams() {
   return surfaceStore.toLegacyParams();
 }
-// Persona and knowledge base (released by Samuel on 19.11.2026, decision 9).
+// Persona is loaded for the local prompt; factual knowledge is retrieved by the server.
 let persona = null;
-let knowledge = null;
 const loadJson = (path) => fetch(new URL(path, import.meta.url))
   .then((r) => (r.ok ? r.json() : null))
   .catch(() => null);
 loadJson('./agent/persona.json').then((p) => { persona = p; });
-loadJson('./agent/knowledge.json').then((k) => { knowledge = k; });
 const getSystem = () => {
   const basePrompt = buildSystemPrompt({
     persona,
-    knowledge,
     style: deriveStyle(currentParams()),
   });
   const adaptationNote = buildAdaptationPromptBlock(
@@ -71,7 +68,7 @@ const adapters = [...parseFailureKinds(search).map((kind) => createFailingAgent(
 if (isProductionHost(location.hostname)) {
   // Production speaks only to the real endpoint. If every provider fails, the
   // surface shows an honest error instead of a canned answer that looks live.
-  adapters.push(createRemoteAgent({ getSystem }));
+  adapters.push(createRemoteAgent({ getParams: currentParams }));
 } else {
   const local = parseModelParam(search);
   if (local.enabled) {

@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRemoteAgent, isProductionHost } from '../src/agent/remoteAgent.js';
 import { classifyError } from '../src/agent/chain.js';
+import { createStore } from '../src/state/store.js';
 
 const ENDPOINT = 'https://example.test/api/agent';
 
@@ -30,7 +31,7 @@ test('adapter exposes id "remote" and posts the prompt to the endpoint', async (
   assert.equal(agent.id, 'remote');
   const result = await agent.respond('hello');
 
-  assert.deepEqual(result, { text: 'hi back', dev: false, provider: 'workers-ai', model: 'llama' });
+  assert.deepEqual(result, { text: 'hi back', dev: false, provider: 'workers-ai', model: 'llama', sources: [], contact_card: false, coverage: null });
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, ENDPOINT);
   assert.equal(calls[0].init.method, 'POST');
@@ -38,7 +39,7 @@ test('adapter exposes id "remote" and posts the prompt to the endpoint', async (
 
   const body = JSON.parse(calls[0].init.body);
   assert.equal(body.prompt, 'hello');
-  assert.equal(body.system, 'stay quiet');
+  assert.equal('system' in body, false);
   assert.equal('history' in body, false);
 });
 
@@ -190,4 +191,74 @@ test('isProductionHost accepts the production spellings only', () => {
   for (const host of ['localhost', '127.0.0.1', 'localhost:5173', '127.0.0.1:5173', '', null, undefined, 'example.com', 'evilagentfähig.de']) {
     assert.equal(isProductionHost(host), false, `expected non-production host: ${host}`);
   }
+});
+
+test('503 error flow enters error phase, ignores stale turns and aborts, and recovers via INPUT/SUBMIT', async () => {
+  const store = createStore();
+  let mode = '503';
+  const agent = createRemoteAgent({
+    endpoint: ENDPOINT,
+    timeoutMs: 5000,
+    fetchImpl: async (url, init) => {
+      if (mode === '503') return jsonResponse({ error: 'no provider' }, 503);
+      if (mode === 'abort') {
+        return new Promise((resolve, reject) => {
+          init.signal.addEventListener('abort', () => {
+            const err = new Error('aborted');
+            err.name = 'AbortError';
+            reject(err);
+          }, { once: true });
+        });
+      }
+      return jsonResponse({ text: 'recovered answer', provider: 'workers-ai', model: 'llama' }, 200);
+    },
+  });
+
+  async function runTurn(prompt, signal) {
+    store.dispatch({ type: 'SUBMIT', prompt });
+    const { turn } = store.getState();
+    try {
+      const result = await agent.respond(prompt, { signal });
+      if (turn === store.getState().turn) {
+        store.dispatch({ type: 'RESPONSE_START', turn, dev: Boolean(result.dev) });
+        store.dispatch({ type: 'RESPONSE_END', turn, text: result.text });
+      }
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      if (turn !== store.getState().turn) return;
+      store.dispatch({ type: 'RESPONSE_ERROR', turn });
+    }
+  }
+
+  store.dispatch({ type: 'AWAKE' });
+  store.dispatch({ type: 'INPUT', value: 'first try' });
+  await runTurn('first try');
+  assert.equal(store.getState().phase, 'error');
+  assert.equal(store.getState().turn, 1);
+
+  // Stale RESPONSE_ERROR for turn 0 leaves error state untouched.
+  const errored = store.getState();
+  assert.equal(store.dispatch({ type: 'RESPONSE_ERROR', turn: 0 }), errored);
+
+  // Empty INPUT stays in error; non-empty INPUT transitions to listening.
+  store.dispatch({ type: 'INPUT', value: '' });
+  assert.equal(store.getState().phase, 'error');
+  store.dispatch({ type: 'INPUT', value: 'second try' });
+  assert.equal(store.getState().phase, 'listening');
+
+  // AbortError never dispatches RESPONSE_ERROR or enters error phase.
+  mode = 'abort';
+  const controller = new AbortController();
+  const pendingAbort = runTurn('second try', controller.signal);
+  setTimeout(() => controller.abort(), 5);
+  await pendingAbort;
+  assert.equal(store.getState().phase, 'thinking');
+  assert.equal(store.getState().turn, 2);
+
+  // Re-submit succeeds and completes to idle.
+  mode = 'ok';
+  await runTurn('third try');
+  assert.equal(store.getState().phase, 'idle');
+  assert.equal(store.getState().turn, 3);
+  assert.equal(store.getState().answer, 'recovered answer');
 });

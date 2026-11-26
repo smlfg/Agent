@@ -323,7 +323,9 @@ html:root:root .pair {
 @media (prefers-reduced-motion: no-preference) {
   html:root:root:has(.composer-input:focus) .pair,
   html:root:root .stage[data-phase="listening"] .pair,
-  html:root:root .stage[data-phase="speaking"] .pair {
+  html:root:root .stage[data-phase="speaking"] .pair,
+  html:root:root .pair:hover,
+  html:root:root .pair:focus-within {
     translate: 0px calc(var(--depth-gravity, 0) * 3px);
   }
 }

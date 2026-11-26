@@ -11,21 +11,13 @@ export const STYLE_PARAMS = Object.freeze([
   'attention', 'certainty', 'playfulness', 'formality', 'depth', 'energy',
 ]);
 
-const WARMTH_PHRASES = Object.freeze([
-  'I hear you.',
-  'No rush.',
-  'I am here.',
-  'Take your time.',
-  'Glad you said it.',
-  'With you.',
-]);
-
-const HEDGE_PHRASES = Object.freeze([
-  'maybe',
-  'I think',
-  'probably',
-  'as far as I can tell',
-  'I am not certain',
+// Warmth is described as behaviour, never as sample sentences: a phrase quoted in
+// the prompt on every turn comes back verbatim on every turn.
+const WARMTH_BEHAVIOUR = Object.freeze([
+  'answer only',
+  'let word choice be gentle',
+  'when the visitor shares something personal, respond to that specific detail',
+  'stay close to what is specific in the visitor\'s words',
 ]);
 
 /**
@@ -40,10 +32,10 @@ const HEDGE_PHRASES = Object.freeze([
  * - questionAllowed openness is the only permission. Below 0.66 the agent does
  *                  not ask; at or above it may ask exactly one question.
  * - register       formality bands: < 0.34 casual, < 0.67 neutral, else formal.
- * - warmthMarkers  warmth selects 0..3 acknowledgement phrases ("I hear you",
- *                  "No rush"). High warmth speaks first about the person.
- * - hedging        certainty inverted: low certainty allows "maybe"/"I think";
- *                  high certainty removes all softeners.
+ * - warmthMarkers  warmth selects a level 0..3 that describes behaviour. It never
+ *                  supplies stock phrases, so nothing can be repeated verbatim.
+ * - hedging        certainty inverted: low certainty allows softening unsure
+ *                  claims; high certainty removes all softeners.
  * - punctuation    formality decides contractions and semicolons; calm allows an
  *                  ellipsis; energy plus playfulness may allow an exclamation.
  *                  Emoji are never allowed.
@@ -82,7 +74,6 @@ export function deriveStyle(params) {
 
   const warmthLevel = Math.round(clamp((p.warmth - 0.15) / 0.85 * 3, 0, 3));
   const hedgeLevel = clamp((1 - p.certainty) * 0.8 + (1 - p.calm) * 0.2, 0, 1);
-  const hedgeCount = hedgeLevel < 0.25 ? 0 : hedgeLevel < 0.5 ? 1 : hedgeLevel < 0.75 ? 2 : 3;
 
   const register = p.formality < 0.34 ? 'casual' : p.formality < 0.67 ? 'neutral' : 'formal';
   const precision = 0.5 * p.formality + 0.5 * p.depth;
@@ -97,12 +88,10 @@ export function deriveStyle(params) {
     register,
     warmthMarkers: {
       level: warmthLevel,
-      phrases: WARMTH_PHRASES.slice(0, warmthLevel),
-      soften: warmthLevel >= 2 ? 'acknowledge the person before the answer' : 'answer only',
+      soften: WARMTH_BEHAVIOUR[warmthLevel],
     },
     hedging: {
       level: Number(hedgeLevel.toFixed(3)),
-      phrases: HEDGE_PHRASES.slice(0, hedgeCount),
       stance: hedgeLevel >= 0.66 ? 'hedged' : hedgeLevel >= 0.34 ? 'even' : 'plain assertion',
     },
     punctuation: {
@@ -140,8 +129,8 @@ export function styleFragment(style) {
   const s = style || deriveStyle({});
   const words = s.targetWords || [6, 30];
   const sentences = s.sentences || [1, 4];
-  const warmth = s.warmthMarkers || { level: 0, phrases: [] };
-  const hedging = s.hedging || { level: 0, phrases: [] };
+  const warmth = s.warmthMarkers || { level: 0 };
+  const hedging = s.hedging || { level: 0 };
   const punctuation = s.punctuation || {};
   const vocabulary = s.vocabulary || {};
   const rhythm = s.rhythm || 'even';
@@ -155,10 +144,10 @@ export function styleFragment(style) {
       : 'none.'}`,
     `Register: ${register}.`,
     `Warmth: ${warmth.level > 0
-      ? `${warmth.level} short warmth marker(s), e.g. ${warmth.phrases.join(', ')}; ${warmth.soften}.`
-      : 'answer only, no warmth markers.'}`,
+      ? `level ${warmth.level} of 3; ${warmth.soften}. No stock acknowledgement or reassurance; most replies start directly with the content.`
+      : 'answer only, no acknowledgement or reassurance.'}`,
     `Hedging: ${hedging.level > 0
-      ? `soften with ${hedging.phrases.join(', ')}.`
+      ? `${hedging.stance}; soften only a claim you are unsure of, in your own words.`
       : 'plain assertion, no softeners.'}`,
     `Punctuation: ${punctuation.contractions ? 'contractions allowed' : 'no contractions'};`
       + `${punctuation.emDash ? ' an em dash is allowed' : ' no em dash'};`

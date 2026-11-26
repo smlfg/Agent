@@ -1,23 +1,103 @@
 # EXECUTION_PLAN — Agentfähig
 
-Stand: 19.11.2026 · Status: **ENTWURF zur Owner-Abnahme.** Kein Anwendungscode,
-kein Commit, kein Deploy. Vertrag: [`PROJECT_CONTRACT.md`](PROJECT_CONTRACT.md).
+Stand: 25.11.2026, Reality Sync · Status: **VORSCHLAG REBASELINE — einziger
+Gesamtplan für den aktuellen Produktstand; Ratifizierung durch Samuel offen.**
+Vertragshistorie: [`PROJECT_CONTRACT.md`](PROJECT_CONTRACT.md) bleibt ein
+Entwurf und wird nicht rückwirkend als genehmigt behandelt.
 
-> **Control-Plane-Status: DEGRADED (sichtbar).** Kein Schreibpfad für dieses
-> Projekt: zwei aktive Lanes bei Limit 2, `~/Control/ACTIVE_PROJECTS.md` fehlt,
-> Orphan-Mission `M-20261119T194948-3db0ab44` blockiert `hai_open_mission`
-> (`active_mission_exists`), Supersede braucht Owner-Gate. Dieses Dokument ist
-> Planung ohne Mission/Lease. Backfill siehe `PROJECT_CONTRACT.md`, Kopf.
->
-> **Abgrenzung:** [`tech/EXECUTION_PLAN-M1-MESSLAUF.md`](../tech/EXECUTION_PLAN-M1-MESSLAUF.md) bleibt
-> gültig und unverändert — es ist der **Task-Ebene-Plan für M1** (T1–T5,
-> Vertical Slice, Stop-Kriterien). Dieses Dokument ist der **Programm-Ebene-Plan
-> M0–M5**. Bei Widerspruch gilt für M1 das Task-Dokument, für alles andere
-> dieses.
+> **Abgrenzung:** [`tech/EXECUTION_PLAN-M1-MESSLAUF.md`](../tech/EXECUTION_PLAN-M1-MESSLAUF.md)
+> ist ab diesem Sync ausschließlich das historische Task-Protokoll für den
+> Voice-Messlauf. Es ist kein zweiter Gesamtplan. Die nachfolgenden M0–M5-
+> Abschnitte bleiben als Begründung und Entscheidungsgeschichte erhalten.
+
+## 0 · Verifizierte Ausgangsbasis
+
+- Integrierter Produktstand: adaptive Living Surface, reaktive Augen,
+  Surface-State und Regler, echte Agentenantwort, ruhiger `error`-Zustand und
+  aktivierte 2.5D-Tiefe.
+- Integrations-HEAD beim Sync: `ea3bd2e` auf
+  `integration/spatial-depth-error-state`.
+- Nachweise: 279/279 Node-Tests, 43/43 Slice-A-Tests, lokale Fehler- und
+  Spatial-Browserprüfungen inklusive Reduced Motion, grünes `validate.sh` und
+  öffentlich sichtbare echte `PONG`-Antwort ohne DEV-DATA-Badge.
+- Slice A ist in `a6a8a00` umgesetzt und durch den kanonischen ACCEPT-Report
+  sowie einen zusätzlichen unabhängigen mcode-Validator bestätigt.
+
+## 1 · Einziger vorgeschlagener Ausführungspfad
+
+| Stufe | Ergebnis | Aktueller Status / Austritt |
+| --- | --- | --- |
+| **R0 — Reality Sync** | Git-, Code-, Cloudflare- und Teststand verifiziert; kanonische Dokumente widerspruchsfrei; fremde Arbeit klassifiziert | Dieser Auftrag. Abnahme durch `tech/REALITY-SYNC-2026-11-25.md`; kein neues Feature |
+| **R1 — Slice A abschließen** | Ruhiger Fehlerzustand durch Store, Augen und Tests | Umgesetzt in `a6a8a00`; 43/43 gezielte Tests und Browser-Smoke grün. Kein rückwirkender Ersatz für die dokumentierte Build-Reihenfolge |
+| **R2 — Genau ein Spatial Vertical Slice** | Eine fachlich begrenzte Erweiterung der vorhandenen 2.5D-Surface auf dem integrierten Stand | Nächster Produkt-Schritt. Vorher: Scope von Samuel, Upstream-First, Plan-Council und unabhängiges ACCEPT. Danach: Node-Suite, Default-/Bones-/Mobile-/Reduced-Motion-Browser und Diff-Review |
+| **R3 — Produktevidence statt Politur-Glaube** | Nachweis des Kernversprechens mit Fremdbeobachtung und reproduzierbaren Produktionschecks | Fremdtest bleibt offen. Für Stable und vor weiterer Expansion erneut Owner-Entscheidung; nicht rückwirkend als bestanden markieren |
+| **R4 — Voice / DPPM getrennt weiterentwickeln** | Voice-Messung, Multi-Agent-Verhalten und Persistenz mit eigenen technischen Gates | Nicht Bestandteil von R2. Start nur bei tatsächlichem Bedarf und eigenem Plan; Datenschutz/Kosten/Owner-Freigaben bleiben eigene Gates |
+| **K1 — Wissen (eigene Linie, parallel zu R2)** | Der Agent spricht belegt über Samuel und seine Arbeiten: freigegebene Chunks, Pre-Retrieval im Worker, Quellen-Chips, Kontakt-Karte, Offline-Gate | Owner-Entscheidung 25.11.2026, [`ADR-0007`](adr/ADR-0007-wissen-per-pre-retrieval.md), HAI-Mission `M-20261125T212109-5dd54792`. Phasen A (Chunks) + B (Wissenspaket) umgesetzt, C/E (Suche, Gate) in Arbeit, D (UI) offen. **Gate-Schuld:** Plan-Council + unabhängiger ACCEPT-Report vor Produktions-Deploy nachholen. Abnahme live durch Samuel; Fremdtest bleibt in R3 |
+
+R2 darf nicht mit Voice, DPPM, neuen Agenten, neuen Modalitäten oder einem
+Architekturwechsel erweitert werden. Ein Zusammenhang ist erst dann ein Blocker,
+wenn er für den konkret gewählten Spatial-Slice technisch belegt ist.
+
+K1 berührt die Surface nur an zwei Stellen (Quellen-Chips und Kontakt-Karte unter der
+Antwort) und ändert weder Spatial-Ebenen noch Regler; R2 und K1 kollidieren deshalb nicht.
+
+## 2 · Gate-Klassifikation nach dem Rebaseline
+
+### Weiterhin sicherheitskritisch / verbindlich
+
+- Owner-Freigabe für Commits, Push, Deploy, Secrets und kostenpflichtige Dienste.
+- Upstream-First vor Feature-/App-Code; kein stiller Eigenbau.
+- Plan-Council plus unabhängiges `PLAN_VALIDATION_REPORT.md` mit `ACCEPT` vor
+  einer neuen Build-Lane. `SCORE_OK` allein reicht nicht.
+- Continuous Authorize bei Methodenwechsel, Scope-Drift und Pflicht-Triggern.
+- Ein Writer pro Integrationsstelle; fremde Arbeit nicht überschreiben.
+- Keine alten Gates nachträglich bestanden, keine Owner-Entscheidungen erfunden.
+
+### Technisch notwendig für R2
+
+- Integrierter Ausgangs-HEAD bleibt reproduzierbar testbar.
+- Betroffene Node-Tests plus Gesamt-Suite und `validate.sh` grün.
+- Browserprüfung der konkret veränderten Spatial-Eigenschaften auf Desktop,
+  Mobile und Reduced Motion; DEV DATA und echte Agentenantworten unterscheiden.
+- Nachweisbare Plan-/Council-/Validator-Artefakte für den neuen Slice.
+
+### Evidence Debt, kein pauschaler UI-Blocker
+
+- Voice-20-Turn-Messung und aktuelle STT-Stabilität.
+- Fremdtest und Produkterkenntnis über Verständlichkeit und Kontrolle.
+- DPPM, Zwei-Tab-Synchronisation und langfristige Zustandsevolution.
+- Vollständige Spatial-Browser-Matrix auf der Produktions-URL statt nur lokal.
+
+Diese Punkte bleiben sichtbar offen. Sie blockieren R2 nur, wenn der gewählte
+Slice sie direkt verändert oder Samuel sie ausdrücklich zum Gate erklärt.
+
+### Historisch, nicht automatisch auf neue UI-Arbeit übertragbar
+
+- „M0 = kein Code“ und die alte Reihenfolge, nach der jede UI-Arbeit auf den
+  Voice-Messlauf warten muss.
+- Die alten D1–D9-/O-Listen als angebliche aktuelle Freigaben oder Blocker.
+- Die Task-Reihenfolge des historischen Voice-Plans als Gesamtarchitektur.
+
+## 3 · OPEN OWNER DECISIONS
+
+1. **Ratifizierung:** Gilt dieser Rebaseline-Plan als einziger Gesamtplan?
+2. **R2-Scope:** Welche eine räumliche Verbesserung bildet den nächsten Vertical
+   Slice? Ohne diese Festlegung wird kein neuer Feature-Code geschrieben.
+3. **Fremdtest-Gate:** Ist der Fremdtest weiterhin Gate vor jeder Expansion oder
+   verbindlich vor Stable? Die Antwort ändert den Plan, nicht den Ist-Nachweis.
+4. **Voice/DPPM:** Wann werden diese getrennten Linien reaktiviert, und mit
+   welchen Datenschutz-, Kosten- und Abnahmegrenzen?
+
+Bis Punkt 1 und 2 entschieden sind, ist R2 ein Vorschlag, keine Build-Freigabe.
 
 ---
 
-## 1 · Ausgangszustand — was belegbar ist (nicht geschätzt)
+## Historischer M0–M5-Plan (19.11.2026)
+
+Die folgenden Abschnitte dokumentieren die damalige Planung. Ihre Ist-Zahlen und
+Gates sind weder aktualisierte Produktwahrheit noch rückwirkend bestanden.
+
+## H1 · Ausgangszustand — was damals belegbar war
 
 | Befund | Wert | Beleg |
 |---|---|---|

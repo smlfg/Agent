@@ -12,6 +12,7 @@ import {
 } from '../src/surface/surface-state.js';
 import {
   parseAdaptationIntent,
+  stripSurfaceTags,
   extractModelSurfacePatch,
   enforceResponseLength,
   buildAdaptationPromptBlock,
@@ -280,4 +281,71 @@ test('enforceResponseLength preserves balanced replies and trims verbose brief r
   const twoSentences = 'Erster Satz. Zweiter Satz.';
   assert.equal(enforceResponseLength(twoSentences, 'balanced'), twoSentences);
   assert.equal(enforceResponseLength(twoSentences, 'brief'), 'Erster Satz.');
+});
+
+test('extractModelSurfacePatch merges multiple <surface> blocks per dimension and preserves newlines and prose after stray </surface>', () => {
+  const multi = extractModelSurfacePatch(
+    'Erster Absatz.\n\n<surface>{"motion":{"energy":0.2,"speed":0.4}}</surface>\n\n' +
+    '<surface>["ignored"]</surface>' +
+    '<surface>{"motion":{"energy":0.6},"atmosphere":{"background":"warm"}}</surface>\n\n' +
+    '</surface>   Zweiter   Absatz.',
+  );
+  assert.equal(multi.text, 'Erster Absatz.\n\nZweiter Absatz.');
+  assert.deepEqual(multi.modelPatch, {
+    motion: { energy: 0.6, speed: 0.4 },
+    atmosphere: { background: 'warm' },
+  });
+  assert.equal(stripSurfaceTags('</surface> Normale Prosa bleibt.'), 'Normale Prosa bleibt.');
+});
+
+test('createAdaptiveAgent handles bare stray </surface> without tag leak and fires onAdapted for modelPatch', async () => {
+  const store = createSurfaceStore();
+  const events = [];
+  const bareTagAgent = createAdaptiveAgent({
+    innerAgent: {
+      async respond() {
+        return { text: '</surface>', dev: false };
+      },
+    },
+    surfaceStore: store,
+    onAdapted: (adaptation, state) => events.push({ adaptation, state }),
+  });
+
+  const bareRes = await bareTagAgent.respond('Bitte etwas ruhiger.');
+  assert.equal(bareRes.text.includes('</surface>'), false);
+  assert.equal(bareRes.text, 'Verstanden, ist angepasst.');
+  assert.equal(events.length, 1);
+
+  const modelEvents = [];
+  const modelStore = createSurfaceStore();
+  const modelAgent = createAdaptiveAgent({
+    innerAgent: {
+      async respond() {
+        return { text: 'Ich dämpfe das Licht. <surface>{"atmosphere":{"background":"warm"}}</surface>', dev: false };
+      },
+    },
+    surfaceStore: modelStore,
+    onAdapted: (adaptation, state) => modelEvents.push({ adaptation, state }),
+  });
+
+  const modelRes = await modelAgent.respond('Wie geht es dir?');
+  assert.equal(modelRes.text, 'Ich dämpfe das Licht.');
+  assert.equal(modelRes.adaptation.action, 'model-patch');
+  assert.equal(modelRes.adaptation.changed, true);
+  assert.equal(modelEvents.length, 1);
+  assert.equal(modelEvents[0].adaptation.action, 'model-patch');
+  assert.equal(modelEvents[0].state.atmosphere.background, 'warm');
+});
+
+test('enforceResponseLength keeps URLs and domains intact in brief mode', () => {
+  const withUrls = 'Schau auf https://www.human-agent-interface.com und agentfähig.de vorbei. Zweiter Satz folgt.';
+  assert.equal(
+    enforceResponseLength(withUrls, 'brief'),
+    'Schau auf https://www.human-agent-interface.com und agentfähig.de vorbei.',
+  );
+
+  const longWithUrl14 =
+    'Eins zwei drei vier fünf sechs sieben acht neun zehn elf zwölf dreizehn https://www.human-agent-interface.com fünfzehn sechzehn.';
+  const trimmed = enforceResponseLength(longWithUrl14, 'brief');
+  assert.ok(trimmed.includes('https://www.human-agent-interface.com'));
 });

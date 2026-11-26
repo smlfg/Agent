@@ -2,6 +2,8 @@
 // quality is not the metric yet — speed is. In-memory session memory only, so
 // a reload starts fresh.
 
+import { limitSentences, stripSurfaceTags } from '../surface/surface-adapter.js';
+
 export const DEFAULT_SYSTEM =
   "You are the presence on agentfähig.de, a website that behaves like an agent. " +
   'Answer in one to three short sentences. React to what the visitor says. ' +
@@ -28,17 +30,19 @@ function stripThinking(text) {
     .trim();
 }
 
-function limitSentences(text, limit = 3) {
-  const matches = String(text).match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g);
-  if (!matches) return String(text).trim();
-  const sentences = matches.map((part) => part.trim()).filter(Boolean);
-  return sentences.slice(0, limit).join(' ').trim();
-}
+const SURFACE_BLOCK_RE = /<surface\b[^>]*>[\s\S]*?<\/surface>/gi;
 
 export function cleanAnswer(raw) {
   const stripped = stripThinking(raw);
   if (!stripped) return '';
-  return limitSentences(stripped, 3);
+
+  const surfaceBlocks = stripped.match(SURFACE_BLOCK_RE) ?? [];
+  const prose = stripSurfaceTags(stripped);
+  const limitedProse = prose ? limitSentences(prose, 3) : '';
+
+  if (!surfaceBlocks.length) return limitedProse;
+  if (!limitedProse) return surfaceBlocks.join(' ');
+  return `${limitedProse} ${surfaceBlocks.join(' ')}`;
 }
 
 /**
@@ -171,7 +175,8 @@ export function createOllamaAgent({
     const text = cleanAnswer(data?.message?.content ?? data?.response ?? '');
     if (!text) throw providerError('empty answer from ollama', 'server');
 
-    remember(prompt, text);
+    const historyText = stripSurfaceTags(text);
+    remember(prompt, historyText);
     return { text, dev: true, provider: 'ollama', model };
   }
 

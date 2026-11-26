@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createTypewriter } from '../src/conversation/typewriter.js';
+import { createTypewriter, findSentenceRest } from '../src/conversation/typewriter.js';
 
 function createFakeScheduler() {
   let nextId = 1;
@@ -420,4 +420,55 @@ test('finishSentence after normal completion resolves finished and is idempotent
   assert.equal(await typewriter.finishSentence(), 'finished');
   assert.equal(scheduler.size, 0);
 });
+
+// --- URL / domain / version dots are not sentence ends --------------------
+
+test('dots inside URLs, domains, and versions do not trigger sentence pauses', () => {
+  const text = 'See https://agentfaehig.de and www.human-agent-interface.com (v1.2). Next.';
+  const { scheduler, events, typewriter } = setup(text, {
+    charDelayMs: 30,
+    random: () => 0.5,
+  });
+
+  typewriter.start();
+  scheduler.flush();
+
+  const insideUrl = events.find((event) => event.visible === 'See https://agentfaehig.');
+  assert.ok(insideUrl, 'expected event ending at domain dot in https://agentfaehig.');
+  assert.equal(insideUrl.state, 'typing');
+  assert.equal(insideUrl.delayMs, 30);
+
+  const firstWwwDot = events.find((event) => event.visible.endsWith('www.'));
+  assert.ok(firstWwwDot, 'expected event ending at www.');
+  assert.equal(firstWwwDot.state, 'typing');
+  assert.equal(firstWwwDot.delayMs, 30);
+
+  const secondWwwDot = events.find((event) => event.visible.endsWith('human-agent-interface.'));
+  assert.ok(secondWwwDot, 'expected event ending at interface.');
+  assert.equal(secondWwwDot.state, 'typing');
+  assert.equal(secondWwwDot.delayMs, 30);
+
+  const versionDot = events.find((event) => event.visible.endsWith('v1.'));
+  assert.ok(versionDot, 'expected event ending at v1.');
+  assert.equal(versionDot.state, 'typing');
+  assert.equal(versionDot.delayMs, 30);
+
+  const realEnd = events.find((event) => event.visible.endsWith('(v1.2).'));
+  assert.ok(realEnd, 'expected event at closing bracket after sentence-ending dot');
+  assert.equal(realEnd.state, 'pausing');
+  assert.ok(realEnd.delayMs >= 320);
+});
+
+test('findSentenceRest does not stop prematurely at dots inside URLs or domains', () => {
+  const urlText = 'See https://agentfaehig.de for details. Next.';
+  const urlUnits = Array.from(urlText);
+  const urlRest = findSentenceRest(urlUnits, 0);
+  assert.equal(urlUnits.slice(0, urlRest.end).join(''), 'See https://agentfaehig.de for details.');
+
+  const wwwText = 'Visit www.human-agent-interface.com. More.';
+  const wwwUnits = Array.from(wwwText);
+  const wwwRest = findSentenceRest(wwwUnits, 0);
+  assert.equal(wwwUnits.slice(0, wwwRest.end).join(''), 'Visit www.human-agent-interface.com.');
+});
+
 

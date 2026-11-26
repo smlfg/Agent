@@ -63,6 +63,9 @@ als Pflichtnachweis:
   außerhalb des Git-Trees (z. B. im Session-Artefaktordner), sofern sie nicht
   ausdrücklich als Repo-Evidenz abgelegt werden sollen.
 
+Wer Prompt, Persona, Wissen, Suche oder Modell ändert, fährt vor dem Commit
+`npm run eval`; Regeln in [`evals/promptfoo/README.md`](evals/promptfoo/README.md).
+
 Der Abschluss folgt [`skills/task-closure/SKILL.md`](skills/task-closure/SKILL.md):
 Kriterien einzeln prüfen, Verifikation ausführen, Belege zeigen, Projektstand
 fortschreiben, Blocker mit Pfad festhalten, und genau eine Abschlussformulierung

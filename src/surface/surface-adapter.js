@@ -397,28 +397,76 @@ export function parseAdaptationIntent(utterance, currentState = DEFAULT_SURFACE_
 }
 
 /**
- * Safely parse and strip an optional <surface>{...}</surface> JSON block emitted
+ * Strip complete, unclosed, and stray <surface> markup from model text while
+ * preserving deliberate paragraph newlines.
+ */
+export function stripSurfaceTags(rawText) {
+  return String(rawText ?? '')
+    .replace(/<surface\b[^>]*>[\s\S]*?<\/surface>/gi, '')
+    .replace(/<surface\b[^>]*>[\s\S]*$/gi, '')
+    .replace(/<\/?surface\b[^>]*>/gi, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/[ \t]*\n[ \t]*/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+/**
+ * Safely parse and strip optional <surface>{...}</surface> JSON blocks emitted
  * by an LLM. Never leaks raw markup or throws on malformed JSON.
  */
 export function extractModelSurfacePatch(rawText) {
   const source = String(rawText ?? '');
-  const match = /<surface>\s*([\s\S]*?)\s*<\/surface>/i.exec(source);
-  const cleaned = source
-    .replace(/<surface>[\s\S]*?<\/surface>/gi, '')
-    .replace(/<\/?surface>[\s\S]*$/gi, '')
-    .replace(/\s{2,}/g, ' ')
-    .trim();
-  if (!match) return { text: cleaned, modelPatch: null };
+  const cleaned = stripSurfaceTags(source);
+  let modelPatch = null;
 
-  try {
-    const parsed = JSON.parse(match[1]);
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
-      return { text: cleaned, modelPatch: null };
+  for (const match of source.matchAll(/<surface\b[^>]*>([\s\S]*?)<\/surface>/gi)) {
+    try {
+      const parsed = JSON.parse(match[1]);
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) continue;
+      if (!modelPatch) modelPatch = {};
+      for (const [dim, fields] of Object.entries(parsed)) {
+        if (fields && typeof fields === 'object' && !Array.isArray(fields)) {
+          if (!modelPatch[dim] || typeof modelPatch[dim] !== 'object' || Array.isArray(modelPatch[dim])) {
+            modelPatch[dim] = {};
+          }
+          Object.assign(modelPatch[dim], fields);
+        } else {
+          modelPatch[dim] = fields;
+        }
+      }
+    } catch {
+      // Ignore malformed JSON blocks; valid blocks still apply.
     }
-    return { text: cleaned, modelPatch: parsed };
-  } catch {
-    return { text: cleaned, modelPatch: null };
   }
+
+  return { text: cleaned, modelPatch };
+}
+
+/**
+ * Truncate prose to at most `limit` sentences without splitting on dots inside
+ * URLs, domain names, or alphanumeric pairs such as `a.d`.
+ */
+export function limitSentences(text, limit = 3) {
+  const clean = String(text ?? '').trim();
+  if (!clean || limit <= 0) return '';
+
+  const ends = [];
+  const re = /[.!?]+["')\]»”’]*(?=\s|$)/g;
+  for (const match of clean.matchAll(re)) {
+    const idx = match.index;
+    const end = idx + match[0].length;
+    const before = idx > 0 ? clean[idx - 1] : '';
+    const after = end < clean.length ? clean[end] : '';
+    if (before && after && /[\p{L}\p{N}]/u.test(before) && /[\p{L}\p{N}]/u.test(after)) {
+      continue;
+    }
+    ends.push(end);
+    if (ends.length >= limit) break;
+  }
+
+  if (ends.length < limit) return clean;
+  return clean.slice(0, ends[limit - 1]).trim();
 }
 
 /**
@@ -429,8 +477,7 @@ export function enforceResponseLength(text, responseLength = 'balanced') {
   const clean = String(text ?? '').trim();
   if (!clean || responseLength !== 'brief') return clean;
 
-  const sentences = clean.match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g) || [clean];
-  const first = sentences[0].trim();
+  const first = limitSentences(clean, 1);
   const words = first.split(/\s+/).filter(Boolean);
   if (words.length <= 15) return first;
 
@@ -554,11 +601,14 @@ export function createAdaptiveAgent({
             changedPaths: modelRes.changedPaths,
             summary: 'Oberfläche im Gespräch angepasst',
           };
+          if (typeof onAdapted === 'function') {
+            try { onAdapted(adaptation, surfaceStore.getState()); } catch { /* non-fatal */ }
+          }
         }
       }
 
       const activeLength = surfaceStore.getState().communication.responseLength;
-      const safeVisible = stripped || (result?.text && /<surface>/i.test(result.text) ? emptyReplyFallback(prompt) : (result?.text || ''));
+      const safeVisible = stripped || (result?.text && /<\/?surface\b/i.test(result.text) ? emptyReplyFallback(prompt) : (result?.text || ''));
       const finalText = enforceResponseLength(safeVisible, activeLength);
 
       return {
